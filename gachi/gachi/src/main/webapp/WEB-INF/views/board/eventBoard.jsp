@@ -6,11 +6,11 @@ h3, li, button, input[type=button], select option {
 	font-family: 'OSeongandHanEum';
 }
 
-#eventBtnDiv {
+#CEventBtnDiv {
 	float: right;
 }
 
-#eventBtnDiv input[type=button] {
+#CEventBtnDiv input[type=button] {
 	text-align: center;
 	border: 0;
 	height: 30px;
@@ -22,30 +22,28 @@ h3, li, button, input[type=button], select option {
 .boardDiv{
 }
 
-#ul3 {
-	margin: 0 auto;
+#CEventList {
+	margin: 50px auto;
 	clear: right;
-	background-color: pink;
 	overflow: auto;
 	text-align: center;
 }
 
-#ul3 li{
+#CEventList li{
 	float:left;
-	width:30%;
-	margin: 10px;
-	
-	background-color: yellow;
+	width:32%;
+	margin: 10px 8px ;
+	padding: 10px;
 }
-#ul3 li>a>img{
-	width:150px;
-	height:100px; 
+#CEventList li>a>img{
+	width:430px;
+	height:400px; 
 }
-.imgtxt {
+#CEventList .imgtxt {
 	font-weight: bold;
 }
 
-span {
+#CEventList span {
 	font-weight: normal;
 	font-size: 8px;
 }
@@ -61,21 +59,21 @@ span {
 
 	});
 </script>
-<div class="boardDiv">
-	<div class="boardBtnDiv">
+<div class="CboardDiv">
+	<div class="CboardBtnDiv">
 		<input type="button" id="noticeBtn" value="공지사항" /> <input
 			type="button" id="eventBtn" value="이벤트" />
 	</div>
 	<!-- 내용 표시 -->
 	<div>
 		<h3>이벤트</h3>
-		<div id="eventBtnDiv">
+		<div id="CEventBtnDiv">
 			<input type="button" id="ingEvent" value="진행중인 이벤트" /> <input
 				type="button" id="endEvent" value="종료된 이벤트" />
 		</div>
 
 		<!-- 이벤트 리스트 -->
-		<ul id="ul3">
+		<ul id="CEventList">
 			<li><a href="#"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
@@ -102,7 +100,17 @@ span {
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-		</ul>
-
+		</ul>		
 	</div>
+	<!-- paging -->
+		<hr/>
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
 </div>
