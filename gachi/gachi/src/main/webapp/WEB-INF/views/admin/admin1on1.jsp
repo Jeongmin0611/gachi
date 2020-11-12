@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="container text-center">
+<div class="container text-center cfont">
 <h1>1:1문의</h1>
 <!-- 1:1문의 영역 -->
 
@@ -22,7 +22,7 @@
 <input type="submit" class="btn btn-info" value="검색"/>
 </form>
 </div>
-<ul id="lst">
+<ul id="ad_1on1_lst">
 	<li>선택</li>
 	<li>번호</li>
 	<li>구분</li>
@@ -39,6 +39,10 @@
 	<li>2020-10-29</li>
 	<li><button>답변하기</button></li>
 </ul>
+<div class="ad_list_menu">
+	<button class="btn btn-info">글쓰기</button>
+	<button class="btn btn-info">삭제</button> 
+</div>
 <div id="paging">
 	<ul>
 		<li>prev</li>

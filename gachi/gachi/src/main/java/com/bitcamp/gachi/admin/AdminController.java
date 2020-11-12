@@ -25,6 +25,10 @@ public class AdminController {
 	public String adminNotice() {
 		return "admin/adminNotice";
 	}
+	@RequestMapping("/adminNoticeWrite")
+	public String adminNoticeWrite() {
+		return "admin/adminNoticeWrite";
+	}
 	@RequestMapping("/adminEvent")
 	public String adminEvent() {
 		return "admin/adminEvent";
@@ -69,4 +73,9 @@ public class AdminController {
 	public String adminStatMember() {
 		return "admin/adminStatMember";
 	}
+	@RequestMapping("/adminSettle")
+	public String adminSettle() {
+		return "admin/adminSettle";
+	}
+
 }

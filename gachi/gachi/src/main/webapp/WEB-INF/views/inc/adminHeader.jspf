@@ -12,7 +12,6 @@
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
 
 <style>
-
 #admintop img{widht:150px; height:100px; padding:15px;}
 
 #adminMenu>li a {color: white;}
