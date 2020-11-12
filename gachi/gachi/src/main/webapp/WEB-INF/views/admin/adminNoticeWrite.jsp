@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
 $(function(){
-	CKEDITOR.replace('content');
+	CKEDITOR.replace("content");
 });
 </script>
 <div class="container text-center cfont">

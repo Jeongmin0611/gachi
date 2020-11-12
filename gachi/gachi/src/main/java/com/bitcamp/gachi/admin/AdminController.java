@@ -25,6 +25,10 @@ public class AdminController {
 	public String adminNotice() {
 		return "admin/adminNotice";
 	}
+	@RequestMapping("/adminNoticeView")
+	public String adminNoticeView() {
+		return "admin/adminNoticeView";
+	}
 	@RequestMapping("/adminNoticeWrite")
 	public String adminNoticeWrite() {
 		return "admin/adminNoticeWrite";
