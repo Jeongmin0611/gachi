@@ -26,7 +26,7 @@
 	
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
-	<li><a href="">동영상이 나오지 않을 때 해결방법</a></li>
+	<li><a href="/gachi/adminNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
 	<li>같이가치</li>
 	<li>2020-10-29</li>
 	<li>25</li>
