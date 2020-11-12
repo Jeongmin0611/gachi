@@ -100,8 +100,9 @@ h3, li, button, input[type=button], select option {
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-		</ul>
-		
+		</ul>		
+	</div>
+	<!-- paging -->
 		<hr/>
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
@@ -112,6 +113,4 @@ h3, li, button, input[type=button], select option {
 			<li class="page-item"><a class="page-link" href="#">5</a></li>
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
-
-	</div>
 </div>
