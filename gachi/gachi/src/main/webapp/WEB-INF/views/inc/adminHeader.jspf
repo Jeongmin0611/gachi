@@ -10,7 +10,7 @@
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
-
+<script src="<%=request.getContextPath()%>/resources/ckeditor.js"></script>
 <style>
 #admintop img{widht:150px; height:100px; padding:15px;}
 
@@ -51,6 +51,7 @@ a{font-family: 'OSeongandHanEum';}
 </style>
 
 <title>관리자페이지 헤더</title>
+
 </head>
 <body>
 <div id="admintop">
@@ -86,7 +87,7 @@ a{font-family: 'OSeongandHanEum';}
 	            <li><a href="/gachi/adminGoodsEnroll">상품 등록</a></li>
 			</ul>
 		</li>
-		<li><a href="/gachi/adminsettle">정산 관리</a></li>
+		<li><a href="/gachi/adminSettle">정산 관리</a></li>
 		<li><a href="">통계</a>
 			<ul class="submenu">
 				<li><a href="/gachi/adminStatStore">스토어</a></li>
