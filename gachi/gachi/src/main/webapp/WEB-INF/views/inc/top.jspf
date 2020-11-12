@@ -23,10 +23,28 @@
 
 a{text-decoration:none; color: black;}
 
-#menu {width:100%; height:100px; line-height:100px;}
+/* ============== 메뉴 ============== */
+
+#menu {width:100%; height:100px; line-height:100px; background-color: yellow;}
 #menu img{widht:150px; height:100px; padding:15px;}
 #menu ul{text-decoration:none;}
-#menu li{float:left;width:16%; text-align:center; font-size:1.5em;}
+#navi>li{float:left; width:16.6%; text-align:center; font-size:1.5em;}
+
+#navi{
+	border-bottom:2px solid gray;
+}
+.sub>li{
+	float:left;
+	width:20%;
+}
+.sub{
+	display:none;
+	border-bottom: 1px solid gray;
+	position:relative;
+	z-index:100px;
+	background-color:#fff; 
+}
+/* ============== 메뉴 ============== */
 
 @font-face {
     font-family: 'OSeongandHanEum';
@@ -142,6 +160,16 @@ a{font-family: 'OSeongandHanEum';}
 	}
 	
 </style>
+<script>
+	//메뉴 숨김효과
+	$(function(){
+		$('#navi>li').hover(function(){
+			$(this).children('ul').css('display','block');
+		}, function(){
+			$(this).children('ul').css('display','none');
+		});
+	});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -157,10 +185,11 @@ a{font-family: 'OSeongandHanEum';}
 	</ul>
 </div>
 <div id="menu">
-	<ul>
+	<ul id = "navi">
 		<li><a href="#"><img src ="img/logo.png"/></a></li>
 		<li><a href="#">카테고리</a>
-			<ul id="meunBM" style="display:none">
+			<!-- 서브메뉴 -->
+			<ul class="sub">
 				<li><a href="#">공예/창작</a></li>
 				<li><a href="#">미술</a></li>
 				<li><a href="#">사진/영상</a></li>
@@ -172,7 +201,13 @@ a{font-family: 'OSeongandHanEum';}
 		</li>
 		<li><a href="#">크리에이터소개 </a></li>
 		<li><a href="#">스토어</a></li>
-		<li><a href="/gachi/noticeBoard">공지사항</a></li>
+		<li><a href="/gachi/noticeBoard">공지사항</a>
+			<!-- 서브메뉴 -->
+			<ul>
+				<li><a href="/gachi/noticeBoard">공지사항</a></li>
+				<li><a href="/gachi/eventBoard">이벤트</a></li>
+			</ul>
+		</li>
 		<li><a href="/gachi/companyBoard">회사소개</a></li>
 	</ul>
 </div>
