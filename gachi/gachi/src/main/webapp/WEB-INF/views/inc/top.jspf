@@ -132,13 +132,13 @@ a{font-family: 'OSeongandHanEum';}
 	}
 	#meunBM{
 		list-style-type:none;
-		width:70%;
+		width:1000px;
 		height:50px;
 	}
-	#meunBM li,#meunBM ul{
-		float:left;
-		font-size:0.5em;
+	#meunBM li{
+		font-size:0.7em;
 		background-color:red;
+		
 	}
 	
 </style>
@@ -160,14 +160,14 @@ a{font-family: 'OSeongandHanEum';}
 	<ul>
 		<li><a href="#"><img src ="img/logo.png"/></a></li>
 		<li><a href="#">카테고리</a>
-				<ul id="meunBM" style="display:none">
-					<li><a href="#">공예/창작</a></li>
-					<li><a href="#">미술</a></li>
-					<li><a href="#">사진/영상</a></li>
-					<li><a href="#">요리</a></li>
-					<li><a href="#">운동</a></li>
-					<li><a href="#">음악</a></li>
-					<li><a href="#">라이프스타일</a></li>
+			<ul id="meunBM" style="display:none">
+				<li><a href="#">공예/창작</a></li>
+				<li><a href="#">미술</a></li>
+				<li><a href="#">사진/영상</a></li>
+				<li><a href="#">요리</a></li>
+				<li><a href="#">운동</a></li>
+				<li><a href="#">음악</a></li>
+				<li><a href="#">라이프스타일</a></li>
 			</ul>
 		</li>
 		<li><a href="#">크리에이터소개 </a></li>
@@ -177,7 +177,7 @@ a{font-family: 'OSeongandHanEum';}
 	</ul>
 </div>
 
-<div id="md">
+<div id="md" style="display:none">
 	<div id="loginFrm">
 		<form method="post" action="">
 			<h1>로그인</h1>
@@ -194,7 +194,7 @@ a{font-family: 'OSeongandHanEum';}
 		</form>
 	</div>
 </div>
-<div>
+<div style="display:none">
 	<div id="idF1">
 		<form>
 			<h1>아이디찾기</h1>
@@ -209,7 +209,7 @@ a{font-family: 'OSeongandHanEum';}
 		</form>
 	</div>
 </div>
-<div>
+<div style="display:none">
 	<div id="pwdF1">
 		<form>
 			<div>
@@ -226,7 +226,7 @@ a{font-family: 'OSeongandHanEum';}
 		</form>
 	</div>
 </div>
-<div>
+<div style="display:none">
 	<div id="pwdF2">
 		<form>
 			<div>
@@ -244,7 +244,7 @@ a{font-family: 'OSeongandHanEum';}
 		</form>
 	</div>
 </div>
-<div>
+<div style="display:none">
 	<div id="memberJoin">
 		<form>
 			<div>
@@ -264,7 +264,7 @@ a{font-family: 'OSeongandHanEum';}
 		</form>
 	</div>
 </div>
-<div>
+<div style="display:none">
 	<div id="memberJoin">
 		<form>
 			<div>
