@@ -9,11 +9,11 @@
 </head>
 <body>
 <h1>
-	홈페이지 테스트
+	<a href="/gachi/adminDashboard">어드민</a>
+	<a href="/gachi/mypage">마이페이지</a>
 </h1>
 
 
-<P>  테스트
-</P>
+<P>  테스트테스트테스트 </P>
 </body>
 </html>
