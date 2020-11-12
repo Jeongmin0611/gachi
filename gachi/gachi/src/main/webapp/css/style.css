@@ -19,59 +19,26 @@ a{text-decoration:none; color: black;}
 
 /*  admin */
 
-#adminMenu>li a {
-   color: white;
-}
+#admintop img {widht:150px; height:100px; padding:15px;}
 
-#adminMenu>li a:hover {
-   text-decoration: none;
-   color: red;
-}
+#adminMenu>li a {color: white;}
 
-#adminMenu {
-   text-align: center;
-}
+#adminMenu>li a:hover {text-decoration: none;color: red;}
 
-#headerDiv>ul>li {
-   width: 10%;
-   line-height: 50px;
-   text-align: center;
-}
-#headerDiv>ul>li>ul>li {
-   width: 160px;
-   line-height: 50px;
-   text-align: center;
-}
+#adminMenu {text-align: center;}
 
-.submenu li {
-   line-height: 10px;
-   background-color: #48679C;
-}
+#headerDiv>ul>li {width: 10%;line-height: 50px;text-align: center;}
 
-#headerDiv, #adminMenu {
-   background-color: #48679C;
-   height: 50px;
-   width: 100%;
-   font-size: 20px;
-}
+#headerDiv>ul>li>ul>li {width: 160px;line-height: 50px;text-align: center;}
 
-#headerDiv {
-   z-index: 1000;
-   position: relative;
-}
+.submenu li {line-height: 10px;background-color: #48679C;}
 
-#adminMenu>li {
-   float: left;
-   line-height: 50px;
-}
+#headerDiv, #adminMenu {background-color: #48679C;height: 50px;width: 100%;font-size: 20px;}
 
-.submenu {
-   position: absolute;
-   opacity: 0;
-   visibility: hidden;
-}
+#headerDiv {z-index: 1000;position: relative;}
 
-#adminMenu>li:hover .submenu {
-   opacity: 1;
-   visibility: visible;
-}
+#adminMenu>li {float: left;line-height: 50px;}
+
+.submenu {position: absolute;opacity: 0;visibility: hidden;}
+
+#adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
