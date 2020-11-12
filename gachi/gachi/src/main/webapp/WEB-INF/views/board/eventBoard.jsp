@@ -102,6 +102,7 @@ h3, li, button, input[type=button], select option {
 				</div></li>
 		</ul>
 		
+		<hr/>
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
 			<li class="page-item"><a class="page-link" href="#">1</a></li>
