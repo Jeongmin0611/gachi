@@ -57,26 +57,7 @@
 	
 </style>
 <div class="container">
-	<div id="profileDiv">
-		<div id="profileBox">
-			<img src="/gachi/img/userProfileIcon.png" id="profileIcon"/>
-		</div>
-		<label>홍길동 님</label>
-		<label>내 클래스</label>
-		<label><a href="#">3</a></label>
-		<label>적립금</label>
-		<label><a href="#">1,000p</a></label>
-	</div>
-	<div>
-		<ul id="mypageNavi">
-			<li><a href="#">결제내역</a></li>
-			<li><a href="#">회원정보</a></li>
-			<li><a href="#">장바구니</a></li>
-			<li><a href="#">내 학습표</a></li>
-			<li><a href="#">질문&답변</a></li>
-			<li><a href="#">❤좋아요 목록</a></li>
-		</ul>
-	</div>
+	<%@ include file="../inc/userProfile.jspf"%>
 	<div id="content">
 		<p><input type="radio" name="searchKey" value="전체"/>전체
 			<input type="radio" name="searchKey" value="상품"/>상품
