@@ -10,12 +10,32 @@
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
-<link href="<c:url value="/img/slide1.jpeg" />" rel="stylesheet">
-<link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
-
-
 
 <style>
+
+#admintop img{widht:150px; height:100px; padding:15px;}
+
+#adminMenu>li a {color: white;}
+
+#adminMenu>li a:hover {text-decoration: none;color: red;}
+
+#adminMenu {text-align: center;}
+
+#headerDiv>ul>li {width: 10%;line-height: 50px;text-align: center;}
+
+#headerDiv>ul>li>ul>li {width: 160px;line-height: 50px;text-align: center;}
+
+.submenu li {line-height: 10px; background-color: #F4BFA9;}
+
+#headerDiv, #adminMenu {background-color: #F4BFA9;height: 50px;width: 100%;font-size: 20px;}
+
+#headerDiv {z-index: 1000;position: relative;}
+
+#adminMenu>li {float: left;line-height: 50px;}
+
+.submenu {position: absolute;opacity: 0;visibility: hidden;}
+
+#adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
 
 @font-face {
     font-family: 'OSeongandHanEum';
@@ -30,7 +50,9 @@ a{font-family: 'OSeongandHanEum';}
 </head>
 <body>
 <div id="admintop">
-<a href="#"><img src ="img/logo.png"/></a>
+<a href="/gachi"><img src ="img/logo.png"/></a>
+<a href="/gachi">홈페이지 이동</a>
+<a href="/gachi">나가기</a>
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">

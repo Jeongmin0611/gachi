@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>
-	<a href="/gachi/adminDashboard">어드민</a>
+	홈페이지 테스트
 </h1>
 
 
