@@ -9,4 +9,5 @@ public class AdminController {
 	public String adminDashboard() {
 		return "admin/adminDashboard";
 	}
+	
 }

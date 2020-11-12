@@ -34,6 +34,59 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 
 
 /*  admin */
-
-
+/*관리자 대시보드*/
+	#ad_header{
+		height:150px;
+	}
+	#ad_header img{
+		width: 300px;
+		height:150px;
+	}
+	#ad_header_nav>li{
+		width:20%;
+		float:left;
+		text-align: center;
+		font-size: 24px;
+		height:50px;
+	}
+	#ad_header_nav>li ul{
+		display: none;
+		padding:0px;
+		position:relative;
+		display:none;
+		z-index:1000;
+		
+	}
+	#search_area{
+		text-align: right;
+	}
+	#lst li{
+		float: left;
+		width:12%;
+		text-align: center;
+		border:1px solid gray;
+		line-height:30px;
+		height:50px;
+	}
+	#lst>li:nth-of-type(7n+1){
+		width:5%;
+	}
+	#lst>li:nth-of-type(7n+2){
+		width:6%;
+	}
+	#lst>li:nth-of-type(7n+4){
+		width:45%;
+	}
+	#lst>li:nth-of-type(7n+7){
+		width:8%;
+	}
+	#paging{
+		width:50%;
+		margin:0 auto;
+		font-size: 1.5em;
+	}
+	#paging li{
+		width:12%;
+		float:left;
+	}
 /*  creator */
