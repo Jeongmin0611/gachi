@@ -58,37 +58,37 @@ a{font-family: 'OSeongandHanEum';}
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">
-		<li><a href="">대쉬보드</a></li>
-		<li><a href="">크리에이터 관리</a></li>
-		<li><a href="">클래스 관리</a></li>
-		<li><a href="">회원관리</a></li>
+		<li><a href="/gachi/adminDashboard">대시보드</a></li>
+		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
+		<li><a href="/gachi/adminClass">클래스 관리</a></li>
+		<li><a href="/gachi/adminMember">회원관리</a></li>
 		<li><a href="">게시글 관리</a>
 			<ul class="submenu">
-				<li><a href="#">공지사항</a></li>
-	            <li><a href="#">이벤트</a></li>
-	            <li><a href="#">1:1문의</a></li>
+				<li><a href="/gachi/adminNotice">공지사항</a></li>
+	            <li><a href="/gachi/adminEvent">이벤트</a></li>
+	            <li><a href="/gachi/1on1">1:1문의</a></li>
 			</ul>		
 		</li>
 		<li><a href="">주문 배송 관리</a>
 			<ul class="submenu">
-				<li><a href="#">주문</a></li>
-	            <li><a href="#">스토어</a></li>
-	            <li><a href="#">배송</a></li>
+				<li><a href="/gachi/adminOrder">주문</a></li>
+	            <li><a href="/gachi/adminStore">스토어</a></li>
+	            <li><a href="/gachi/adminDelivery">배송</a></li>
 			</ul>
 		</li>
 		<li><a href="">스토어 관리</a>
 			<ul class="submenu">
-				<li><a href="#">상품 리스트</a></li>
-	            <li><a href="#">상품 등록</a></li>
+				<li><a href="/gachi/adminGoodsList">상품 리스트</a></li>
+	            <li><a href="/gachi/adminGoodsEnroll">상품 등록</a></li>
 			</ul>
 		</li>
-		<li><a href="">정산 관리</a></li>
+		<li><a href="/gachi/adminsettle">정산 관리</a></li>
 		<li><a href="">통계</a>
 			<ul class="submenu">
-				<li><a href="#">스토어</a></li>
-	            <li><a href="#">클래스</a></li>
-	            <li><a href="#">크리에이터</a></li>
-	            <li><a href="#">회원</a></li>
+				<li><a href="/gachi/adminStatStore">스토어</a></li>
+	            <li><a href="/gachi/adminStatClass">클래스</a></li>
+	            <li><a href="/gachi/adminStatCreator">크리에이터</a></li>
+	            <li><a href="/gachi/adminStatMember">회원</a></li>
 			</ul>			
 		</li>
 		
