@@ -11,23 +11,23 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 .carousel-inner img{width: 100%; height: 400px;}
 
 /* board*/
-.boardDiv {
+.CboardDiv {
 	width: 90%;
 	margin: 50px auto;
 	overflow: auto;
 }
-.boardBtnDiv {
+.CboardBtnDiv {
 	text-align: center;
 	padding: 0 0 40px ;
 }
-.boardBtnDiv input[type=button]{
+.CboardBtnDiv input[type=button]{
 	text-align: center;
 	border:0;
 	height: 40px;
 	width:100px;
 	margin: 0 20px;
 }
-.boardDiv h3 {
+.CboardDiv h3 {
 	text-align: center;
 	clear: right;
 }
