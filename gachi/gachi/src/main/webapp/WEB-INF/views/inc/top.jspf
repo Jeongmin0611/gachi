@@ -172,8 +172,8 @@ a{font-family: 'OSeongandHanEum';}
 		</li>
 		<li><a href="#">크리에이터소개 </a></li>
 		<li><a href="#">스토어</a></li>
-		<li><a href="#">공지사항</a></li>
-		<li><a href="#">회사소개</a></li>
+		<li><a href="/gachi/noticeBoard">공지사항</a></li>
+		<li><a href="/gachi/companyBoard">회사소개</a></li>
 	</ul>
 </div>
 
