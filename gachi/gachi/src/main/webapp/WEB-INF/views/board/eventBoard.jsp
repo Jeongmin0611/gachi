@@ -60,10 +60,7 @@ h3, li, button, input[type=button], select option {
 	});
 </script>
 <div class="CboardDiv">
-	<div class="CboardBtnDiv">
-		<input type="button" id="noticeBtn" value="공지사항" /> <input
-			type="button" id="eventBtn" value="이벤트" />
-	</div>
+
 	<!-- 내용 표시 -->
 	<div>
 		<h3>이벤트</h3>

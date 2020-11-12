@@ -45,7 +45,8 @@ a {
 	line-height:100px;  
 	width: 100%;       /* [변경] 하위 메뉴와 동일하게 맞춤 */
 	position: relative;
-	background-color: pink; /* [추가] 늘어난만큼 배경색도 보이도록 수정 */
+	background-color: white; /* [추가] 늘어난만큼 배경색도 보이도록 수정 */
+	margin: 10px 0;
 }
 #topMenu img{
     height: 100px;
@@ -63,8 +64,7 @@ a {
 #topMenu ul>li{
 }
 #topMenu ul li {            /* 메인 메뉴 안에 ul 태그 안에 있는 li 태그의 스타일 적용(상위/하위메뉴 모두) */
-        color: white;               
-        background-color: yellow;  
+        color: white;             
         float: left;              
         vertical-align: middle;     
         text-align: center;         
@@ -80,14 +80,15 @@ a {
     }
     
     .topMenuLi:hover .menuLink {    /* 상위 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
-        color: red;                
+        color: gray;                
     }
     .longLink {     /* 좀 더 긴 메뉴 스타일 설정 */
         width: 190px;   
     }
 .submenuLink {          /* 하위 메뉴의 a 태그 스타일 설정 */
-        color: #2d2d2d;             
-        background-color: #DDD;      /* [변경] 배경색 변경 */
+        color: black;    
+        line-height:40px;         
+        background-color: white;      /* [변경] 배경색 변경 */
         -border: solid 1px white;    /* [삭제] 테두리 삭제 */
         -margin-right: -1px;         /* [삭제] 공백 보정 삭제 */
     }
@@ -101,7 +102,7 @@ a {
         -o-transition: height .2s; 
         width: 100%;           
         left: 0;                
-        background-color: #fff;        
+        background-color: white;        
         line-height: 30px;          
         -position: relative;  
         z-index:1000;
@@ -110,12 +111,13 @@ a {
         display: inline-block;
     }
     .topMenuLi:hover .submenu { 
-        height: 32px;           
-        border-bottom: 2px solid black;
+        height: 40px;           
+        border-top:2px solid #eee;
+        border-bottom: 2px solid #eee;
     }
     .submenuLink:hover {        
         color: red;                 
-        background-color: #ddd;  
+        background-color: white;  
     }
 /* ============== 메뉴 ============== */
 @font-face {
@@ -274,7 +276,7 @@ a {
 	<div id="top">
 
 		<ul>
-			<li><a href="#">고객센터</a></li>
+			<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
 			<li><a href="#">회원가입</a></li>
 			<li><a href="#">로그인</a></li>
 			<li><a href="/gachi/adminDashboard">어드민</a></li>
@@ -295,18 +297,14 @@ a {
 					<li><a href="#" class="submenuLink longLink">운동</a></li>
 					<li><a href="#" class="submenuLink longLink">음악</a></li>
 					<li><a href="#" class="submenuLink longLink">라이프스타일</a></li>
-				</ul></li>			
-			<li>|</li>
+				</ul></li>	
 			<li class="topMenuLi"><a href="#" class="menuLink" >크리에이터 소개</a></li>
-			<li>|</li>
 			<li class="topMenuLi"><a href="#" class="menuLink" >스토어</a></li>
-			<li>|</li>
 			<li class="topMenuLi"><a href="/gachi/noticeBoard" class="menuLink" >공지사항</a>
 				<ul class="submenu"><!-- 서브메뉴 -->
 					<li><a href="/gachi/noticeBoard" class="submenuLink longLink">공지사항</a></li>
 					<li><a href="/gachi/eventBoard" class="submenuLink longLink">이벤트</a></li>
 				</ul></li>
-			<li>|</li>
 			<li class="topMenuLi"><a href="/gachi/companyBoard" class="menuLink" >회사소개 </li>
 		</ul>
 	</nav>

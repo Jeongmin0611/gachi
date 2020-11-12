@@ -16,17 +16,7 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 	margin: 50px auto;
 	overflow: auto;
 }
-.CboardBtnDiv {
-	text-align: center;
-	padding: 0 0 40px ;
-}
-.CboardBtnDiv input[type=button]{
-	text-align: center;
-	border:0;
-	height: 40px;
-	width:100px;
-	margin: 0 20px;
-}
+
 .CboardDiv h3 {
 	text-align: center;
 	clear: right;
