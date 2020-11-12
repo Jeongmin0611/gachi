@@ -3,30 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- 공지 사항 -->
 <style>
-h3, li, button, select option {
+h3, li, button,input[type=button], select option {
 	font-family: 'OSeongandHanEum';
 }
 
-#noticeDiv {
-	width: 90%;
-	margin: 50px auto;
-	overflow: auto;
-}
-
-#noticeBtnDiv {
-	text-align: center;
-	padding: 0 0 40px ;
-}
-#noticeBtnDiv button{
-	text-align: center;
-	border:0;
-	height: 40px;
-	width:100px;
-	margin: 0 20px;
-}
-
 #noticeUl {
-	margin: 50px 150px;
+	margin: 60px 150px;
 }
 
 #noticeUl li {
@@ -59,11 +41,6 @@ h3, li, button, select option {
 	background-color: #EDE9E9;
 }
 
-#noticeDiv h3 {
-	text-align: center;
-	clear: right;
-}
-
 #noticeSearch {	
 	float: right;
 }
@@ -85,12 +62,20 @@ h3, li, button, select option {
 }
 </style>
 <script>
-	
+	$(function(){
+		$('#noticeBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/noticeBoard";
+		});
+		$('#eventBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/eventBoard";
+		});
+		
+	});
 </script>
-<div id="noticeDiv">
-	<div id="noticeBtnDiv">
-		<button>공지사항</button>
-		<button>이벤트</button>
+<div class="boardDiv">
+	<div class="boardBtnDiv">
+		<input type="button" id="noticeBtn" value="공지사항"/>
+		<input type="button" id="eventBtn" value="이벤트"/>
 	</div>
 	<!-- 내용 표시 -->
 	<div>
@@ -127,21 +112,7 @@ h3, li, button, select option {
 			<li>작성자</li>
 			<li>작성일</li>
 			<li>조회수</li>
-			<li>번호</li>
-			<li>제목</li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
-			<li>번호</li>
-			<li>제목</li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
-			<li>번호</li>
-			<li>제목</li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			
 
 		</ul>
 	</div>
