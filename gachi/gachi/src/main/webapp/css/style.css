@@ -19,7 +19,10 @@ a{text-decoration:none; color: black;}
 
 /*  admin */
 
-#admintop img {widht:150px; height:100px; padding:15px;}
+/* 같이 배경색 = #F4BFA9 
+   가치 배경색 = #ABCEE3 */
+
+#admintop img{widht:150px; height:100px; padding:15px;}
 
 #adminMenu>li a {color: white;}
 
@@ -31,9 +34,9 @@ a{text-decoration:none; color: black;}
 
 #headerDiv>ul>li>ul>li {width: 160px;line-height: 50px;text-align: center;}
 
-.submenu li {line-height: 10px;background-color: #48679C;}
+.submenu li {line-height: 10px;background-color: #F4BFA9;}
 
-#headerDiv, #adminMenu {background-color: #48679C;height: 50px;width: 100%;font-size: 20px;}
+#headerDiv, #adminMenu {background-color: #F4BFA9;height: 50px;width: 100%;font-size: 20px;}
 
 #headerDiv {z-index: 1000;position: relative;}
 
