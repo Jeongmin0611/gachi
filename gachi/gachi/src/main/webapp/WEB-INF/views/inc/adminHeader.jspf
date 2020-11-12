@@ -21,7 +21,7 @@
 
 #adminMenu {text-align: center;}
 
-#headerDiv>ul>li {width: 10%;line-height: 50px;text-align: center;}
+#headerDiv>ul>li {width: 11%;line-height: 50px;text-align: center;}
 
 #headerDiv>ul>li>ul {width: 100%;height:50px;line-height: 50px;text-align: center;  position: relative;}
 
@@ -39,6 +39,9 @@
 
 #adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
 
+
+#ad_headtop>li{}
+
 @font-face {
     font-family: 'OSeongandHanEum';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OSeongandHanEum.woff') format('woff');
@@ -52,9 +55,11 @@ a{font-family: 'OSeongandHanEum';}
 </head>
 <body>
 <div id="admintop">
-<a href="/gachi"><img src ="img/logo.png"/></a>
-<a href="/gachi">홈페이지 이동</a>
-<a href="/gachi">나가기</a>
+		
+		<a href="/gachi"><img src ="img/logo.png"/></a>
+		<a href="/gachi">홈페이지 이동</a>
+		<a href="/gachi">마이페이지</a>
+		<a href="/gachi">고객센터</a>
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">
@@ -66,7 +71,7 @@ a{font-family: 'OSeongandHanEum';}
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
 	            <li><a href="/gachi/adminEvent">이벤트</a></li>
-	            <li><a href="/gachi/1on1">1:1문의</a></li>
+	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
 			</ul>		
 		</li>
 		<li><a href="">주문 배송 관리</a>
