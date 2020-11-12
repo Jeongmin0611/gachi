@@ -40,9 +40,9 @@
                <a href="#">주말,공휴일 제외</a>
       <li class="mMeun"><a href="#">고객안내</a></li>
             <li class="sMeun">
-               <a href="#">공지사항</a><br/>
+               <a href="noticeBoard">공지사항</a><br/>
                <a href="#">자주묻는질문</a><br/>
-               <a href="#">회사소개</a><br/>
+               <a href="companyBoard">회사소개</a><br/>
                <a href="#">이용약관</a>
             </li>
       <li class="mMeun"><a href="#">크리에이터 지원</a><br/><a href="#">채용</a></li>
