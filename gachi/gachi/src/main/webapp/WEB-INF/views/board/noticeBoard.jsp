@@ -7,56 +7,56 @@ h3, li, button,input[type=button], select option {
 	font-family: 'OSeongandHanEum';
 }
 
-#noticeUl {
+#CnoticeUl {
 	margin: 60px 150px;
 }
 
-#noticeUl li {
+#CnoticeUl li {
 	width: 10%;
 	float: left;
 	border-bottom: 1px solid gray;
 }
 
-#noticeUl li:nth-child(5n+2) {
+#CnoticeUl li:nth-child(5n+2) {
 	width: 60%;
 }
 
-#noticeUl li:nth-child(1) {
+#CnoticeUl li:nth-child(1) {
 	background-color: #EDE9E9;
 }
 
-#noticeUl li:nth-child(2) {
+#CnoticeUl li:nth-child(2) {
 	background-color: #EDE9E9;
 }
 
-#noticeUl li:nth-child(3) {
+#CnoticeUl li:nth-child(3) {
 	background-color: #EDE9E9;
 }
 
-#noticeUl li:nth-child(4) {
+#CnoticeUl li:nth-child(4) {
 	background-color: #EDE9E9;
 }
 
-#noticeUl li:nth-child(5) {
+#CnoticeUl li:nth-child(5) {
 	background-color: #EDE9E9;
 }
 
-#noticeSearch {	
+#CnoticeSearch {	
 	float: right;
 }
 
-#noticeSearchTxt {
+#CnoticeSearchTxt {
 	border: 0;
 	border-bottom: 1px solid black;
 	outline: none;
 }
 
-#noticeSearch button {
+#CnoticeSearch button {
 	background-color: white;
 	color: black;
 	border:0;
 }
-#noticeSearch button:focus{
+#CnoticeSearch button:focus{
 	outline: none;
 	color: #888;
 }
@@ -72,15 +72,15 @@ h3, li, button,input[type=button], select option {
 		
 	});
 </script>
-<div class="boardDiv">
-	<div class="boardBtnDiv">
+<div class="CboardDiv">
+	<div class="CboardBtnDiv">
 		<input type="button" id="noticeBtn" value="공지사항"/>
 		<input type="button" id="eventBtn" value="이벤트"/>
 	</div>
 	<!-- 내용 표시 -->
 	<div>
 		<h3>공지사항</h3>
-		<div id="noticeSearch">
+		<div id="CnoticeSearch">
 			<select name="noticeSubject">
 				<option value='Nall'>전체</option>
 				<option value='Nsubject'>제목</option>
@@ -89,7 +89,7 @@ h3, li, button,input[type=button], select option {
 			<input type="text" name="noticeSearchTxt" id="noticeSearchTxt" />
 			<button name="noticeSearchBtn">검색하기</button>
 		</div>
-		<ul id="noticeUl">
+		<ul id="CnoticeUl">
 			<li>번호</li>
 			<li>제목</li>
 			<li>작성자</li>
@@ -114,6 +114,17 @@ h3, li, button,input[type=button], select option {
 			<li>조회수</li>
 			
 
+		</ul>
+		
+		<!-- paging -->
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
 	</div>
 </div>
