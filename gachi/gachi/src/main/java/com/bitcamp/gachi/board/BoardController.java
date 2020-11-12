@@ -10,6 +10,10 @@ public class BoardController {
 	public String noticeBoard() {
 		return "board/noticeBoard";
 	}
+	@RequestMapping("/eventBoard")
+	public String eventBoard() {
+		return "board/eventBoard";
+	}
 	
 	@RequestMapping("/companyBoard")
 	public String companyBoard() {
