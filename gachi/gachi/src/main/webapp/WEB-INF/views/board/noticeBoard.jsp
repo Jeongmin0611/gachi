@@ -72,8 +72,7 @@ h3, li, button, input[type=button], select option {
 			location.href="<%=request.getContextPath()%>/noticeBoard";
 		});
 		$('#eventBtn').click(function(){
-			location.href="<%=request.getContextPath()%>
-	/eventBoard";
+			location.href="<%=request.getContextPath()%>/eventBoard";
 		});
 
 	});
