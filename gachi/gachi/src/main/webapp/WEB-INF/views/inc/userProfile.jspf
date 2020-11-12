@@ -3,7 +3,6 @@
 <style>
 	a:link, a:visited{text-decoration:none;}
 	a:hover{text-decoration:none;font-weight:bold;}
-	.mainDiv{width:90%;margin:100px auto;}
 	
 	/*프로필 영역*/
 	#profileDiv{

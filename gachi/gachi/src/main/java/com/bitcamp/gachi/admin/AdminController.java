@@ -9,5 +9,8 @@ public class AdminController {
 	public String adminDashboard() {
 		return "admin/adminDashboard";
 	}
-	
+	@RequestMapping ("/admin1on1")
+	public String admin1on1() {
+		return "admin/admin1on1";
+	}
 }
