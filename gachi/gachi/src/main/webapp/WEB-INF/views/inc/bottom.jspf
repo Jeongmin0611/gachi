@@ -5,9 +5,6 @@
    #bottom{
       height:80px;
       background-color: #F4BFA9;
-      position: relative;
-      min-height: 100%;
-      margin :0 ;
    }
    #bottom ul {
        list-style:none;
@@ -39,19 +36,19 @@
 	}
 </style>
 
-<div id="bottom">
-	<ul>
-		<li class="mMeun"><a href="#">고객센터</a></li>
-		<li class="sMeun"><a href="#">운행시간</a><br /> <a href="#">평일09:00~18:00</a><br />
-			<a href="#">(점심시간12:00~12:30)</a><br /> <a href="#">주말,공휴일 제외</a>
-		<li class="mMeun"><a href="#">고객안내</a></li>
-		<li class="sMeun"><a href="noticeBoard">공지사항</a><br /> <a
-			href="#">자주묻는질문</a><br /> <a href="companyBoard">회사소개</a><br /> <a
-			href="#">이용약관</a></li>
-		<li class="mMeun"><a href="#">크리에이터 지원</a><br />
-		<a href="#">채용</a></li>
-		<li class="mMeun"><a href="#">SNS계정</a></li>
-	</ul>
-</div>
+	<div id="bottom">
+		<ul>
+			<li class="mMeun"><a href="#">고객센터</a></li>
+			<li class="sMeun"><a href="#">운행시간</a><br /> <a href="#">평일09:00~18:00</a><br />
+				<a href="#">(점심시간12:00~12:30)</a><br /> <a href="#">주말,공휴일 제외</a>
+			<li class="mMeun"><a href="#">고객안내</a></li>
+			<li class="sMeun"><a href="noticeBoard">공지사항</a><br /> <a
+				href="#">자주묻는질문</a><br /> <a href="companyBoard">회사소개</a><br /> <a
+				href="#">이용약관</a></li>
+			<li class="mMeun"><a href="#">크리에이터 지원</a><br />
+			<a href="#">채용</a></li>
+			<li class="mMeun"><a href="#">SNS계정</a></li>
+		</ul>
+	</div>
 </body>
 </html>

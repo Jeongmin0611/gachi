@@ -68,7 +68,7 @@ a {
         float: left;              
         vertical-align: middle;     
         text-align: center;         
-        -position: relative;      
+        position: relative;      
     }
     .menuLink, .submenuLink {           /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
         text-decoration:none;               

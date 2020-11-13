@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
 <style>
 	#ad_dash_board_ul>li{float:left; width: 20%; text-align:center; margin-left:100px;}
-	.ad_dash_board {border: 2px solid #F4BFA9; width:250px; height:200px; padding:20px;}
+	.ad_dash_board {border: 2px solid #F4BFA9; width:250px; height:200px; padding:20px; margin-bottom:50px;}
 </style>    
     
+<h1 style="text-align:center;"> 관리자 대시보드 </h1>
+	<br/>
+<div class="container ad_dash_center text-center">
 
-<div class="container ad_dash_center">
 	<div>
 		<ul id="ad_dash_board_ul">
 			<li><div class="ad_dash_board"><input type="radio" name="ad_dash_User" value="전체" checked/>전체
@@ -21,8 +23,10 @@
 					</div></li>
 			<li><div class="ad_dash_board"><b>답변 대기 문의</b><br/></div></li>							
 		</ul>
-	</div>	
-	<canvas id="ad_dash_chart" style="margin-top:200px"></canvas>
+		
+	</div>
+	
+	<canvas id="ad_dash_chart" style="margin:100px 0 ;"></canvas>
 	<script type="text/javascript" src="resources/Chart.js"></script>
 	<script type="text/javascript">
 	var ad_dash_context = document.getElementById('ad_dash_chart').getContext('2d');
