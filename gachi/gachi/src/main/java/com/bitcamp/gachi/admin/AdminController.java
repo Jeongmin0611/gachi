@@ -25,6 +25,7 @@ public class AdminController {
 	public String adminNotice() {
 		return "admin/adminNotice";
 	}
+	
 	@RequestMapping("/adminNoticeView")
 	public String adminNoticeView() {
 		return "admin/adminNoticeView";
@@ -37,9 +38,21 @@ public class AdminController {
 	public String adminEvent() {
 		return "admin/adminEvent";
 	}
+	@RequestMapping("/adminEventView")
+	public String adminEventView() {
+		return "admin/adminEventView";
+	}
+	@RequestMapping("/adminEventWrite")
+	public String adminEventWrite() {
+		return "admin/adminEventWrite";
+	}
 	@RequestMapping("/admin1on1")
 	public String admin1on1() {
 		return "admin/admin1on1";
+	}
+	@RequestMapping("/admin1on1View")
+	public String admin1on1View() {
+		return "admin/admin1on1View";
 	}
 	@RequestMapping("/adminOrder")
 	public String adminOrder() {

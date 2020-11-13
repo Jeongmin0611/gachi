@@ -30,13 +30,13 @@
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
 	<li><img src="<%=request.getContextPath()%>/img/147.jpg"></li>
-	<li class="wordCut"><a href="#">신규회원 이벤트 3만원할인!</a></li>
+	<li class="wordCut"><a href="/gachi/adminEventView">신규회원 이벤트 3만원할인!</a></li>
 	<li>2020-10-21</li>
 	<li>2020-10-29</li>
 	<li>123</li>
 </ul>
 <div class="ad_list_menu">
-	<button class="btn btn-info">글쓰기</button>
+	<button class="btn btn-info" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
 	<button class="btn btn-info">삭제</button> 
 </div>
 <div id="paging">
