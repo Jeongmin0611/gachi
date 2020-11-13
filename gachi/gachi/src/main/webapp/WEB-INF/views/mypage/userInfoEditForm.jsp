@@ -14,8 +14,8 @@
 	#infoEditLst li:nth-child(2n){width:70%;}
 	#infoEditLst li:nth-child(10)>input {width:80%;float:left;}
 	#infoEditLst li:nth-child(10)>button {width:20%;}
-	#infoEditLst li:nth-child(12)>input:first-child{width:20%;float:left;}
-	#infoEditLst li:nth-child(12)>input:last-child{width:80%;}
+	#infoEditLst li:nth-child(12)>input:first-child{width:15%;float:left;}
+	#infoEditLst li:nth-child(12)>input:last-child{width:70%;}
 	
 	#infoEditLst input{width:100%;text-align:center;}
 	
@@ -47,10 +47,11 @@
 				<input type="text" name="tel" value="010-9999-8888"/>
 				<button type="button" class="btn btn-outline-primary btn-sm">인증</button>
 			</li>
-			<li>우편번호</li>
+			<li>주소</li>
 			<li>
-				<input type="text" name="zipcode" value="01234"/>
-				<input type="text" name="addr" value="서울시 마포구 백범로"/>
+				<input type="text" name="zipcode" value="01234" readonly/>
+				<button type="button" class="btn btn-outline-primary btn-sm">검색</button>
+				<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
 			</li>
 			<li>상세주소</li>
 			<li><input type="text" name="addrDetail" value="11111112222222"/></li>
