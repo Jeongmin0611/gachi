@@ -49,8 +49,8 @@
 </div>
 <div>
 	<ul id="mypageNavi">
-		<li><a href="#">결제내역</a></li>
-		<li><a href="#">회원정보</a></li>
+		<li><a href="/gachi/mypage">결제내역</a></li>
+		<li><a href="/gachi/userInfoEdit">회원정보</a></li>
 		<li><a href="#">장바구니</a></li>
 		<li><a href="#">내 학습표</a></li>
 		<li><a href="#">질문&답변</a></li>
