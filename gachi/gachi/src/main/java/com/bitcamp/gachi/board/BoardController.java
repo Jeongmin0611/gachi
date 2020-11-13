@@ -24,5 +24,12 @@ public class BoardController {
 	public String serviceCenterBoard() {
 		return "board/serviceCenterBoard";
 	}
-	
+	@RequestMapping("/deliveryBoard")
+	public String deliveryBoard(){
+		return "board/deliveryBoard";
+	}
+	@RequestMapping("/introCreate")
+	public String introCreate() {
+		return "board/introCreate";
+	}
 }
