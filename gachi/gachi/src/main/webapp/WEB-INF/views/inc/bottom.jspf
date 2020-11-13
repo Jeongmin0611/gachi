@@ -5,39 +5,38 @@
    #bottom{
       height:80px;
       background-color: #F4BFA9;
-      
+      position: relative;
+      min-height: 100%;
+      margin :0 ;
    }
    #bottom ul {
        list-style:none;
        margin:15px;
        padding:15px;
-   }
+       list-style: none;
+       margin: 15px;
+       padding: 15px;
+	}
 
-#bottom ul {
-	list-style: none;
-	margin: 15px;
-	padding: 15px;
-}
-
-#bottom li {
-	margin: 0;
-	padding: 0;
-	float: left;
-}
-
-#bottom>ul>li {
-	width: 16%;
-}
-
-.sMeun {
-	font-size: 0.5em;
-	float: left;
-}
-
-#bottom a {
-	text-decoration: none;
-	color: black;
-}
+	#bottom li {
+		margin: 0;
+		padding: 0;
+		float: left;
+	}
+	
+	#bottom>ul>li {
+		width: 16%;
+	}
+	
+	.sMeun {
+		font-size: 0.5em;
+		float: left;
+	}
+	
+	#bottom a {
+		text-decoration: none;
+		color: black;
+	}
 </style>
 
 <div id="bottom">
