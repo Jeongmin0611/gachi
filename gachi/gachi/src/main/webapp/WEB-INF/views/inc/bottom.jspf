@@ -5,7 +5,6 @@
    #bottom{
       height:80px;
       background-color: #F4BFA9;
-      
    }
    #bottom ul {
        list-style:none;

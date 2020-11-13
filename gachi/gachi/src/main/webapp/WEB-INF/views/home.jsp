@@ -33,7 +33,7 @@
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">인기클래스</li>
-		<li class="lMeun2">more</li>
+		<li class="lMeun2"><a href="/gachi/classPage">more</a></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
@@ -42,7 +42,7 @@
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">신규클래스</li>
-		<li class="lMeun2">more</li>
+		<li class="lMeun2"><a href="/gachi/classPage2">more</a></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
@@ -51,7 +51,7 @@
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">추천클래스</li>
-		<li class="lMeun2">more</li>
+		<li class="lMeun2"><a href="/gachi/classPage3">more</a></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
 		<li class="listMain"><div class="a"></div></li>
