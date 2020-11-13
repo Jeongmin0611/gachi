@@ -3,12 +3,11 @@
 <style>
 
    #bottom{
-      height:80px;
       background-color: #F4BFA9;
-
-      position: relative;
-      min-height: 100%;
-      margin :0 ;
+      
+      bottom:0;
+      width:100%;
+      height:85px;
 
    }
    #bottom ul {
@@ -39,11 +38,12 @@
 		text-decoration: none;
 		color: black;
 	}
+	 
 </style>
 
 <div id="bottom">
 	<ul>
-		<li class="mMeun"><a href="#">고객센터</a></li>
+		<li class="mMeun"><a href="/gachi/serviceCenterBoard">고객센터</a></li>
 		<li class="sMeun"><a href="#">운행시간</a><br /> <a href="#">평일09:00~18:00</a><br />
 			<a href="#">(점심시간12:00~12:30)</a><br /> <a href="#">주말,공휴일 제외</a>
 		<li class="mMeun"><a href="#">고객안내</a></li>
