@@ -5,9 +5,11 @@
    #bottom{
       height:80px;
       background-color: #F4BFA9;
+
       position: relative;
       min-height: 100%;
       margin :0 ;
+
    }
    #bottom ul {
        list-style:none;
