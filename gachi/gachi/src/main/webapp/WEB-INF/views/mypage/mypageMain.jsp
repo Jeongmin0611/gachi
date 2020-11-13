@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	a:link, a:visited{text-decoration:none;}
-	a:hover{text-decoration:none;font-weight:bold;}
-	.mainDiv{width:90%;margin:100px auto;}
-	
 	/*내용*/
 	#mypageMainContent{float:clear;margin-bottom:100px;}
-	#mypageMainContent p{margin:20px 0 50px;}
+	#mypageMainContent p{margin:20px;}
+	#mypageMainContent label{width:5%;}
 	#mypageMainLst>li{margin:0 50px;line-height:25px;}
 	#mypageMainLst>li:first-child{text-align:center;font-size:1.5em;margin-top:50px;}
 	#mypageMainLst>li:nth-child(2){margin-top:20px;float:left;}
 	#mypageMainLst>li:nth-child(3){margin-top:30px;}
-	#mypageMainLst>li:nth-child(4){}
-	#mypageMainLst>li:nth-child(5){}
 	#mypageMainLst>li:nth-child(7){margin:0 50px 0 0;}
+	
 	/*클래스썸네일*/
 	#mypageMainLst img{width:200px;height:150px;object-fit:cover;}
 	
@@ -27,10 +23,9 @@
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div id="mypageMainContent">
-		<p><input type="radio" name="searchKey" value="전체"/>전체
-			<input type="radio" name="searchKey" value="상품"/>상품
-			<input type="radio" name="searchKey" value="클래스"/>클래스
-
+		<p><input type="radio" name="searchKey" value="전체"/><label>전체</label>
+			<input type="radio" name="searchKey" value="상품"/><label>상품</label>
+			<input type="radio" name="searchKey" value="클래스"/><label>클래스</label>
 			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>
 			<input type="date" value="2020-11-11"/>
 			-
@@ -47,8 +42,8 @@
 			<li>강사명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
-			<li id="testBtn1"><button type="button" class="btn btn-outline-dark btn-sm">배송조회</button></li>
-			<li id="testBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
+			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
+			<li id="mypageMainBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
 		</ul>
 		<hr/>
 		<ul id="mypageMainLst">
@@ -60,8 +55,8 @@
 			<li>강사명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
-			<li id="testBtn1"><button type="button" class="btn btn-outline-dark btn-sm">배송조회</button></li>
-			<li id="testBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
+			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
+			<li id="mypageMainBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
 		</ul>
 		<hr/>
 		<ul id="mypageMainLst">
@@ -73,8 +68,8 @@
 			<li>강사명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
-			<li id="testBtn1"><button type="button" class="btn btn-outline-dark btn-sm">배송조회</button></li>
-			<li id="testBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
+			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
+			<li id="mypageMainBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
 		</ul>
 		<hr/>
 		<ul id="mypageMainLst">
@@ -86,8 +81,8 @@
 			<li>강사명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
-			<li id="testBtn1"><button type="button" class="btn btn-outline-dark btn-sm">배송조회</button></li>
-			<li id="testBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
+			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
+			<li id="mypageMainBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
 		</ul>
 		<hr/>
 		<ul id="mypageMainLst">
@@ -99,8 +94,8 @@
 			<li>강사명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
-			<li id="testBtn1"><button type="button" class="btn btn-outline-dark btn-sm">배송조회</button></li>
-			<li id="testBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
+			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
+			<li id="mypageMainBtn2"><button type="button" class="btn btn-outline-dark btn-sm">결제취소</button></li>
 		</ul>
 		<hr/>
 		<ul class="pagination justify-content-center">
