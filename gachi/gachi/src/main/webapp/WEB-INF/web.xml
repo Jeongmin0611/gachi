@@ -74,6 +74,7 @@
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/admin/*</url-pattern>
 			<include-prelude>/WEB-INF/views/inc/adminHeader.jspf</include-prelude>
+			<include-coda>/WEB-INF/views/inc/bottom.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/mypage/*</url-pattern>

@@ -1,6 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div> 
+
     <div id="slideimage" class="carousel slide" data-ride="carousel" data-interval="4000"><!-- carousel -->
         <!-- 하단 컨트롤러 -->
         <ul class="carousel-indicators">
@@ -47,4 +47,3 @@
         <a href="#slideimage" class="carousel-control-next" data-slide="next">
             <span class="carousel-control-next-icon"></span></a>
     </div><!-- /carousel -->
-</div>

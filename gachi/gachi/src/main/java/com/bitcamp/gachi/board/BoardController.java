@@ -20,5 +20,9 @@ public class BoardController {
 		
 		return "board/companyBoard";
 	}
+	@RequestMapping("/serviceCenterBoard")
+	public String serviceCenterBoard() {
+		return "board/serviceCenterBoard";
+	}
 	
 }

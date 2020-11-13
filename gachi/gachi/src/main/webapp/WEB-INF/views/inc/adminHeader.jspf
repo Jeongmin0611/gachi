@@ -10,9 +10,8 @@
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
-
+<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 <style>
-
 #admintop img{widht:150px; height:100px; padding:15px;}
 
 #adminMenu>li a {color: white;}
@@ -21,7 +20,7 @@
 
 #adminMenu {text-align: center;}
 
-#headerDiv>ul>li {width: 10%;line-height: 50px;text-align: center;}
+#headerDiv>ul>li {width: 11%;line-height: 50px;text-align: center;}
 
 #headerDiv>ul>li>ul {width: 100%;height:50px;line-height: 50px;text-align: center;  position: relative;}
 
@@ -39,6 +38,9 @@
 
 #adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
 
+
+#ad_headtop>li{}
+
 @font-face {
     font-family: 'OSeongandHanEum';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OSeongandHanEum.woff') format('woff');
@@ -49,46 +51,49 @@ a{font-family: 'OSeongandHanEum';}
 </style>
 
 <title>관리자페이지 헤더</title>
+
 </head>
 <body>
 <div id="admintop">
-<a href="/gachi"><img src ="img/logo.png"/></a>
-<a href="/gachi">홈페이지 이동</a>
-<a href="/gachi">나가기</a>
+		
+		<a href="/gachi"><img src ="img/logo.png"/></a>
+		<a href="/gachi">홈페이지 이동</a>
+		<a href="/gachi">마이페이지</a>
+		<a href="/gachi">고객센터</a>
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">
-		<li><a href="">대쉬보드</a></li>
-		<li><a href="">크리에이터 관리</a></li>
-		<li><a href="">클래스 관리</a></li>
-		<li><a href="">회원관리</a></li>
+		<li><a href="/gachi/adminDashboard">대시보드</a></li>
+		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
+		<li><a href="/gachi/adminClass">클래스 관리</a></li>
+		<li><a href="/gachi/adminMember">회원관리</a></li>
 		<li><a href="">게시글 관리</a>
 			<ul class="submenu">
-				<li><a href="#">공지사항</a></li>
-	            <li><a href="#">이벤트</a></li>
-	            <li><a href="admin1on1">1:1문의</a></li>
+				<li><a href="/gachi/adminNotice">공지사항</a></li>
+	            <li><a href="/gachi/adminEvent">이벤트</a></li>
+	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
 			</ul>		
 		</li>
 		<li><a href="">주문 배송 관리</a>
 			<ul class="submenu">
-				<li><a href="#">주문</a></li>
-	            <li><a href="#">스토어</a></li>
-	            <li><a href="#">배송</a></li>
+				<li><a href="/gachi/adminOrder">주문</a></li>
+	            <li><a href="/gachi/adminStore">스토어</a></li>
+	            <li><a href="/gachi/adminDelivery">배송</a></li>
 			</ul>
 		</li>
 		<li><a href="">스토어 관리</a>
 			<ul class="submenu">
-				<li><a href="#">상품 리스트</a></li>
-	            <li><a href="#">상품 등록</a></li>
+				<li><a href="/gachi/adminGoodsList">상품 리스트</a></li>
+	            <li><a href="/gachi/adminGoodsEnroll">상품 등록</a></li>
 			</ul>
 		</li>
-		<li><a href="">정산 관리</a></li>
+		<li><a href="/gachi/adminSettle">정산 관리</a></li>
 		<li><a href="">통계</a>
 			<ul class="submenu">
-				<li><a href="#">스토어</a></li>
-	            <li><a href="#">클래스</a></li>
-	            <li><a href="#">크리에이터</a></li>
-	            <li><a href="#">회원</a></li>
+				<li><a href="/gachi/adminStatStore">스토어</a></li>
+	            <li><a href="/gachi/adminStatClass">클래스</a></li>
+	            <li><a href="/gachi/adminStatCreator">크리에이터</a></li>
+	            <li><a href="/gachi/adminStatMember">회원</a></li>
 			</ul>			
 		</li>
 		
