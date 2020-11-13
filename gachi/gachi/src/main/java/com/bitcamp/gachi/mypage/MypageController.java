@@ -21,4 +21,12 @@ public class MypageController {
 	public String userLeave() {
 		return "mypage/userLeave";
 	}
+	@RequestMapping("/cart")
+	public String cart() {
+		return "mypage/cart";
+	}
+	@RequestMapping("/orderSheet")
+	public String orderSheet() {
+		return "mypage/orderSheet";
+	}
 }
