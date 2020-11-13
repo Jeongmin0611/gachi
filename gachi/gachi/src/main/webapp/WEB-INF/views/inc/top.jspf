@@ -370,22 +370,11 @@ a{font-family: 'OSeongandHanEum';}
 <div id="top">
 	
 	<ul>
-					<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
+		<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
 		<li><a href="#">회원가입</a></li>
 		<li><a href="#">로그인</a></li>
 		<li><a href="/gachi/adminDashboard">어드민</a></li>
 		
-	</ul>
-</div>
-<div id="menu">
-	<ul id="meunnavi">
-		<li><a href="#"><img src ="img/logo.png"/></a></li>
-		<li><a href="/gachi/classMain">카테고리</a>
-		</li>
-		<li><a href="#">크리에이터소개 </a></li>
-		<li><a href="#">스토어</a></li>
-		<li><a href="/gachi/noticeBoard">공지사항</a></li>
-		<li><a href="/gachi/companyBoard">회사소개</a></li>
 	</ul>
 </div>
 
@@ -405,8 +394,9 @@ a{font-family: 'OSeongandHanEum';}
 			</div>
 		</form>
 	</div>
+	</div>
 	<!-- 메뉴 -->
-	<nav id="topMenu">
+	<div id="topMenu">
 		<ul>
 			<li><a class="menuLink" href="/gachi"><img src="img/logo.png" /></a></li>
 			<li class="topMenuLi"><a class="menuLink" href="#">카테고리</a>
@@ -427,9 +417,9 @@ a{font-family: 'OSeongandHanEum';}
 					<li><a href="/gachi/noticeBoard" class="submenuLink longLink">공지사항</a></li>
 					<li><a href="/gachi/eventBoard" class="submenuLink longLink">이벤트</a></li>
 				</ul></li>
-			<li class="topMenuLi"><a href="/gachi/companyBoard" class="menuLink" >회사소개 </li>
+			<li class="topMenuLi"><a href="/gachi/companyBoard" class="menuLink" >회사소개</a></li>
 		</ul>
-	</nav>
+	</div>
 
 	<!-- 메뉴 -->
 
