@@ -43,7 +43,7 @@
 	</div>
 	<label>홍길동 님</label>
 	<label>내 클래스</label>
-	<label><a href="#">3</a></label>
+	<label><a href="#">1</a></label>
 	<label>적립금</label>
 	<label><a href="#">1,000p</a></label>
 </div>
@@ -52,8 +52,8 @@
 		<li><a href="/gachi/mypage">결제내역</a></li>
 		<li><a href="/gachi/userInfoEdit">회원정보</a></li>
 		<li><a href="/gachi/cart">장바구니</a></li>
-		<li><a href="#">내 학습표</a></li>
-		<li><a href="#">질문&답변</a></li>
+		<li><a href="/gachi/myclassList">내 학습표</a></li>
+		<li><a href="#">질문/문의내역</a></li>
 		<li><a href="#">❤좋아요 목록</a></li>
 	</ul>
 </div>

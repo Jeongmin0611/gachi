@@ -29,4 +29,16 @@ public class MypageController {
 	public String orderSheet() {
 		return "mypage/orderSheet";
 	}
+	@RequestMapping("/myclassList")
+	public String myclassList() {
+		return "mypage/myclassList";
+	}
+	@RequestMapping("/myclassView")
+	public String myclassView() {
+		return "mypage/myclassView";
+	}
+	@RequestMapping("/myclassVideo")
+	public String myclassVideo() {
+		return "myclass/myclassVideo";
+	}
 }
