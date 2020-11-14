@@ -4,7 +4,7 @@
 
    #bottom{
       background-color: #F4BFA9;
-
+       overflow:auto;
    }
    #bottom ul {
        list-style:none;
@@ -13,12 +13,14 @@
        list-style: none;
        margin: 15px;
        padding: 15px;
+       overflow:auto;
 	}
 
 	#bottom li {
 		margin: 0;
 		padding: 0;
 		float: left;
+		
 	}
 	
 	#bottom>ul>li {
