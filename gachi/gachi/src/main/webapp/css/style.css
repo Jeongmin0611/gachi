@@ -102,7 +102,6 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 	#ad_1on1_view li,#ad_1on1_writeForm li{
 		text-align:left;
 		float:left;
-		
 	}
 	#ad_1on1_view>li:last-child{
 		overflow:auto;
@@ -112,10 +111,22 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		text-align: center;
 	}
 	/*관리자 1:1문의 보기 end*/
+	
+	/*관리자 이벤트 글쓰기 start*/
+	/*bottom 내리기*/
+	.container{
+		overflow:auto;
+	}
 	#ad_event_writeForm li{
 		float:left;
 	}
+	#ad_event_writeForm>li>ul>li{
+		left: 20px;
+	}
+	/*관리자 이벤트 글쓰기 end*/
+	
 	/*관리자 이벤트 리스트 start*/
+	
 	#ad_event_header li{
 		float: left;
 		width:10%;
@@ -163,7 +174,26 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		line-height:30px;
 		height:50px;
 	}
-
+	/*관리자 정산관리 리스트 start*/
+	.textSize{
+		font-size: 24px;
+	}
+	#ad_settle_lst{
+		width:90%;
+		margin:0 auto;
+	}
+	#ad_settle_lst li{
+		border:1px solid gray;
+		float:left;
+		width:12%;
+		height:50px;
+		font-size:15px;
+		line-height:36px;
+	}
+	#ad_settle_lst li:nth-of-type(7n+1){
+		width:20%;
+	}
+	/*관리자 정산관리 리스트 end*/
 
 	/*관리자 리스트 페이징 start*/
 	#paging{
