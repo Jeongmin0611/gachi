@@ -38,7 +38,7 @@
 		<li>크리에이터명 <a href="#">홍길동</a></li>
 		<li><label>진도율 : 0.00%</label></li>
 		<li><label>기한 : 20.11.01 ~ 21.01.31</label></li>
-		<li><button type="button" class="btn btn-primary btn-block">수강하기</button></li>
+		<li><button type="button" class="btn btn-primary btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></li>
 		<li>
 			<button type="button" class="btn btn-outline-primary btn-block">수강후기</button>
 			<button type="button" class="btn btn-outline-primary btn-block">질문게시판</button>

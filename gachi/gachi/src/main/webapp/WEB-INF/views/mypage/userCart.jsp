@@ -3,10 +3,10 @@
 <style>
 	/*장바구니 상단*/
 	/*01 장바구니 > 02 주문/결제 > 03 주문완료*/
-	#cartTop{overflow:auto;}
+	#cartTop{overflow:auto;margin:20px 50px 10px;}
 	#cartTop li{
 		float:left;
-		margin:20px 10px 10px;
+		margin:0 10px;
 	}
 	#cartTop li:first-child{font-weight:bold;}
 	#cartTop li:not(:first-child){color:gray;}
@@ -48,7 +48,7 @@
 			<li><input type="checkbox" name="selectAll" checked/></li>
 			<li>클래스/상품명</li>
 			<li>수량</li>
-			<li>적립금</li>
+			<li>마일리지</li>
 			<li>가격</li>
 			<li>배송비</li>
 			<li>삭제</li>
@@ -61,7 +61,7 @@
 				<label>카모마일 프랑스 자수</label>
 			</li>
 			<li>1</li>
-			<li>150</li>
+			<li>150p</li>
 			<li>15,000원</li>
 			<li>2,500원</li>
 			<li><label class="badge badge-secondary">X</label></li>

@@ -21,9 +21,9 @@ public class MypageController {
 	public String userLeave() {
 		return "mypage/userLeave";
 	}
-	@RequestMapping("/cart")
-	public String cart() {
-		return "mypage/cart";
+	@RequestMapping("/userCart")
+	public String userCart() {
+		return "mypage/userCart";
 	}
 	@RequestMapping("/orderSheet")
 	public String orderSheet() {
@@ -40,5 +40,13 @@ public class MypageController {
 	@RequestMapping("/myclassVideo")
 	public String myclassVideo() {
 		return "myclass/myclassVideo";
+	}
+	@RequestMapping("/userMileage")
+	public String userMileage() {
+		return "mypage/userMileage";
+	}
+	@RequestMapping("/userWishList")
+	public String userWishList() {
+		return "mypage/userWishList";
 	}
 }
