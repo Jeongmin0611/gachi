@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <style>
+ #ad_1on1_lst li{vertical-align:middle; line-height:50px;}
+ #search_area{margin-bottom:20px;}
+ select{height:30px;}
+ 
+ </style> 
 <div class="container text-center cfont">
 <h1>1:1문의</h1>
 <!-- 1:1문의 영역 -->
@@ -22,6 +29,7 @@
 <input type="submit" class="btn btn-info" value="검색"/>
 </form>
 </div>
+<div>
 <ul id="ad_1on1_lst">
 	<li>선택</li>
 	<li>번호</li>

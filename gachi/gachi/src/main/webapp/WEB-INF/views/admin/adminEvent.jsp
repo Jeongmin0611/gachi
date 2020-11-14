@@ -1,22 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+ <style>
+ #search_area{margin-bottom:20px;}
+ #ad_event_lst li{vertical-align:middle;}
+ #ad_event_header li{vertical-align:middle;line-height:50px;}
+ select{height:30px;}
+ </style> 
 <div class="container text-center cfont">
 <h1>이벤트관리</h1>
-<form method="get" action="">
-	<ul class="ad_list_menu">
-		<li>
-			기간 <input type="date" id="ad_event_date1" name="date1"/>~
-			<input type="date" id="ad_event_date2" name="date2"/>
-		</li>
-		<li>
-			<select>
-				<option>제목</option>
-				<option>내용</option>
-			</select>
-			<input type="text" id="searchWord" name="searchWord"/>
-			<input type="submit" value="검색"/>
-		</li>
-	</ul>
-</form>
+<div id="search_area">
+	<form method="get" action="">
+		<ul class="ad_list_menu">
+			<li>
+				기간 <input type="date" id="ad_event_date1" name="date1"/>~
+				<input type="date" id="ad_event_date2" name="date2"/>
+			</li>
+			<li>
+				<select>
+					<option>제목</option>
+					<option>내용</option>
+				</select>
+				<input type="text" id="searchWord" name="searchWord"/>
+				<input type="submit" value="검색"/>
+			</li>
+		</ul>
+	</form>
+</div>
 <ul id="ad_event_header">
 <li>선택</li>
 	<li>번호</li>
