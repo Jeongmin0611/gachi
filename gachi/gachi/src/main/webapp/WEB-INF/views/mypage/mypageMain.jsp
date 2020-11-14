@@ -4,7 +4,7 @@
 	/*내용*/
 	#mypageMainContent{float:clear;margin-bottom:100px;}
 	#mypageMainContent p{margin:20px;}
-	#mypageMainContent label{width:5%;}
+	#mypageMainContent>p>label{width:5%;}
 	#mypageMainLst>li{margin:0 50px;line-height:25px;}
 	#mypageMainLst>li:first-child{text-align:center;font-size:1.5em;margin-top:50px;}
 	#mypageMainLst>li:nth-child(2){margin-top:20px;float:left;}
@@ -39,7 +39,7 @@
 			<li><span class="badge badge-info">공예/창작</span></li>
 			<li><span class="badge badge-light"><a href="#">주문번호 10101010</a></span></li>
 			<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-			<li>강사명 <a href="#">홍길동</a></li>
+			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
 			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
@@ -52,7 +52,7 @@
 			<li><span class="badge badge-info">공예/창작</span></li>
 			<li><span class="badge badge-light"><a href="#">주문번호 10101010</a></span></li>
 			<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-			<li>강사명 <a href="#">홍길동</a></li>
+			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
 			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
@@ -65,7 +65,7 @@
 			<li><span class="badge badge-info">공예/창작</span></li>
 			<li><span class="badge badge-light"><a href="#">주문번호 10101010</a></span></li>
 			<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-			<li>강사명 <a href="#">홍길동</a></li>
+			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
 			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
@@ -78,7 +78,7 @@
 			<li><span class="badge badge-info">공예/창작</span></li>
 			<li><span class="badge badge-light"><a href="#">주문번호 10101010</a></span></li>
 			<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-			<li>강사명 <a href="#">홍길동</a></li>
+			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
 			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
@@ -91,7 +91,7 @@
 			<li><span class="badge badge-info">공예/창작</span></li>
 			<li><span class="badge badge-light"><a href="#">주문번호 10101010</a></span></li>
 			<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-			<li>강사명 <a href="#">홍길동</a></li>
+			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li>결제가격 15000원</li>
 			<li>결제일시 20.11.06 19:30:34</li>
 			<li id="mypageMainBtn1"><button type="button" class="btn btn-outline-primary btn-sm">배송조회</button></li>
