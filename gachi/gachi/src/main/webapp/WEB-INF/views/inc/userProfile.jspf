@@ -10,6 +10,7 @@
 		padding:50px 125px 0;
 		border:1px solid #ddd;
 		margin-top:50px;	
+		overflow:auto;
 	}
 	
 	/*프사*/
@@ -25,15 +26,16 @@
 	    height: 100%;
 	    object-fit: cover;
 	}
-	#profileDiv label:nth-child(2){position:relative;left:50px;top:35px;font-size:1.5em;}
-	#profileDiv label:nth-child(3){position:relative;left:300px;top:20px;}
-	#profileDiv label:nth-child(4){position:relative;left:255px;top:50px;}
-	#profileDiv label:nth-child(5){position:relative;left:500px;top:20px;}
-	#profileDiv label:nth-child(6){position:relative;left:450px;top:50px;}
+	#profileName{padding-left:5%;width:40%;line-height:100px;float:left;overflow:auto;font-size:1.5em;}
+	#profileClass{width:20%;line-height:50px;float:left;text-align:center;overflow:auto;}
+	#profileMileage{line-height:50px;overflow:auto;text-align:center;}
+	
+	#profileClass>label, #profileMileage>label{width:100%;}
+	#profileClass>label:last-child, #profileMileage>label:last-child{font-weight:bold;}
 
 	/*마이페이지 메뉴*/
 	#mypageNavi{height:50px;background-color:#ddd;overflow:auto;}
-	#mypageNavi li{float:left;width:10%;line-height:50px;text-align:center;}
+	#mypageNavi li{float:left;width:15%;line-height:50px;text-align:center;}
 	#mypageNavi li:last-child{float:right;width:15%;background-color:pink;}
 	
 </style>
@@ -41,19 +43,25 @@
 	<div id="profileBox">
 		<img src="/gachi/img/userProfileIcon.png" id="profileIcon"/>
 	</div>
-	<label>홍길동 님</label>
-	<label>내 클래스</label>
-	<label><a href="#">1</a></label>
-	<label>적립금</label>
-	<label><a href="#">1,000p</a></label>
+	<div id="profileName">
+		<label><a href="#">홍길동 님</a></label>
+	</div>
+	<div id="profileClass">
+		<label>내 클래스</label>
+		<label><a href="/gachi/myclassList">1</a></label>
+	</div>
+	<div id="profileMileage">
+		<label>마일리지</label>
+		<label><a href="/gachi/userMileage">1,000p</a></label>
+	</div>
 </div>
 <div>
 	<ul id="mypageNavi">
 		<li><a href="/gachi/mypage">결제내역</a></li>
 		<li><a href="/gachi/userInfoEdit">회원정보</a></li>
-		<li><a href="/gachi/cart">장바구니</a></li>
+		<li><a href="/gachi/userCart">장바구니</a></li>
 		<li><a href="/gachi/myclassList">내 학습표</a></li>
 		<li><a href="#">질문/문의내역</a></li>
-		<li><a href="#">❤좋아요 목록</a></li>
+		<li><a href="/gachi/userWishList">❤좋아요 목록</a></li>
 	</ul>
 </div>

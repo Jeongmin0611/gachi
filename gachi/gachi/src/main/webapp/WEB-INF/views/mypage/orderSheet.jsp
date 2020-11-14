@@ -44,11 +44,14 @@
 	#orderSheetPay li:nth-child(4)>input{width:50%;}
 	
 	/*가격정보*/
-	#orderSheetPrice{margin-bottom:50px;line-height:100px;text-align:center;overflow:auto;background-color:#eee;}
-	#orderSheetPrice>label{width:25%;}
-	#orderSheetPrice>label:nth-child(4){width:40%;}
+	#orderSheetPrice{text-align:center;overflow:auto;background-color:#eee;}
+	#orderSheetPrice>label{line-height:100px;width:25%;}
+	#orderSheetPrice>label:nth-child(4){font-size:1.5em;}
+	#orderSheetPrice>label:nth-child(5){}
 	
-	#orderSheetAgree{}
+	/*하단 - 버튼*/
+	#orderSheetBtm{text-align:center;margin-bottom:50px;}
+	#orderSheetBtm>button{margin:10px 5px;}
 </style>
 <div class="container" id="orderSheetMain">
 	<div id="cartTop">
@@ -67,7 +70,7 @@
 		<ul id="orderSheetTtl">
 			<li>클래스/상품명</li>
 			<li>수량</li>
-			<li>적립금</li>
+			<li>마일리지</li>
 			<li>가격</li>
 		</ul>
 		<hr/>
@@ -77,7 +80,7 @@
 				<label>카모마일 프랑스 자수</label>
 			</li>
 			<li>1</li>
-			<li>150원</li>
+			<li>150p</li>
 			<li>15,000원</li>
 		</ul>
 	</div>
@@ -113,8 +116,9 @@
 			<li><input type="radio" name="creditCard" value="신용카드" checked/><label>신용카드</label></li>
 			<li>적립금사용</li>
 			<li>
-				<input type="text" name="useMileage"/>
+				<input type="text" name="useMileage" value="1000"/>
 				<button type="button" class="btn btn-primary btn-sm">적용</button>
+				<label>(현재 마일리지 1,000p)</label>
 			</li>
 		</ul>
 	</div>
@@ -123,10 +127,14 @@
 		+
 		<label>배송비 2,500원</label>
 		-
-		<label>적립금사용 0원</label>
-		<label><b>총 금액 17,500원</b>(적립금 150원)</label>
-		
+		<label>마일리지 사용 0원</label>
+		<label>총 금액 17,500원</label>
+		<label>(발생 마일리지 150p)</label>
 	</div>
-	<label><input type="checkbox" name="orderAgree" id="orderSheetAgree"/>구매진행에 동의합니다.</label>
-	<button type="button" class="btn btn-primary" id="orderSheetBtn">주문하기</button>
+	<div id="orderSheetBtm">
+		<label><input type="checkbox" name="orderAgree" id="orderSheetAgree"/>구매진행에 동의합니다.</label>
+		<button type="button" class="btn btn-primary" id="orderSheetBtn">결제하기</button>
+		<button type="button" class="btn btn-secondary" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
+	</div>
+	
 </div>

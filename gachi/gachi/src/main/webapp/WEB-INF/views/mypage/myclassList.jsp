@@ -7,7 +7,7 @@
 	#myclassTop>li{float:left;margin:0 5px;}
 	#myclassTop>li:last-child{float:right;}
 	
-	#myclassLst{overflow:auto;margin-bottom:40px;}
+	#myclassLst{overflow:auto;margin-bottom:40px;width:70%;float:left;}
 	#myclassLst>li{margin:0 50px;line-height:25px;}
 	#myclassLst>li:first-child{margin-top:20px;float:left;}
 	#myclassLst>li:nth-child(2){margin-top:30px;}
@@ -16,6 +16,8 @@
 	
 	/*클래스썸네일*/
 	#myclassLst img{width:200px;height:150px;object-fit:cover;}
+	
+	#myclassLstBtn{overflow:auto;height:180px;text-align:center;padding-top:5%;}
 	
 </style>
 <div class="container" id="myclassMain">
@@ -47,7 +49,9 @@
 		<li>크리에이터명 <a href="#">홍길동</a></li>
 		<li>진도율 : 0.00%</li>
 		<li>기한 : 20.11.01 ~ 21.01.31</li>
-		<li id="mypageMainBtn1"><button type="button" class="btn btn-primary btn-sm">▶</button></li>
 	</ul>
+	<div id="myclassLstBtn">
+		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button>
+	</div>
 	<hr/>
 </div>
