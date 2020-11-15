@@ -21,6 +21,14 @@ public class MypageController {
 	public String userLeave() {
 		return "mypage/userLeave";
 	}
+	@RequestMapping("/userLeaveChk")
+	public String userLeaveChk() {
+		return "mypage/userLeaveChk";
+	}
+	@RequestMapping("/userLeaveOk")
+	public String userLeaveOk() {
+		return "mypage/userLeaveOk";
+	}
 	@RequestMapping("/userCart")
 	public String userCart() {
 		return "mypage/userCart";
@@ -28,6 +36,10 @@ public class MypageController {
 	@RequestMapping("/orderSheet")
 	public String orderSheet() {
 		return "mypage/orderSheet";
+	}
+	@RequestMapping("/orderConfirmed")
+	public String orderConfirmed() {
+		return "mypage/orderConfirmed";
 	}
 	@RequestMapping("/myclassList")
 	public String myclassList() {

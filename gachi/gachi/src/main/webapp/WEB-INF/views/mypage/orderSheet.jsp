@@ -7,15 +7,16 @@
 	
 	/*장바구니 상단*/
 	/*01 장바구니 > 02 주문/결제 > 03 주문완료*/
-	#cartTop{overflow:auto;}
+	#cartTop{overflow:auto;border:3px solid #ABCEE3;margin-bottom:20px;}
 	#cartTop li{
+		color:#ABCEE3;
 		float:left;
-		margin:20px 10px 10px;
+		margin:10px;
 	}
 	#cartTop li:nth-child(3){font-weight:bold;}
 	#cartTop li:not(:nth-child(3)){color:gray;}
 	
-	#orderSheetContent{}
+	#orderSheetContent{margin-bottom:20px;}
 	
 	/*주문신청서 목록 제목*/
 	#orderSheetTtl, #orderSheetTtl{overflow:auto;}
@@ -29,28 +30,36 @@
 	#orderSheetLst img{width:200px;height:150px;object-fit:cover;margin-top:5%;}
 	
 	/*주문자정보*/
+	#orderSheetUserInfo{overflow:auto;margin-bottom:40px;}
 	#orderSheetUserInfo li{overflow:auto;text-align:center;margin-bottom:20px;}
 	#orderSheetUserInfo li:nth-child(2n+1){width:30%;float:left;}
 	#orderSheetUserInfo li:nth-child(2n){width:70%;}
 	#orderSheetUserInfo li>input{width:100%;padding:0 10px;}
 	#orderSheetUserInfo li:nth-child(8)>input:first-child{width:15%;}
 	#orderSheetUserInfo li:nth-child(8)>input:last-child{width:70%;}
-	#orderMsg{width:100%;height:60px;}
 	
 	/*결제정보*/
+	#orderSheetPay{margin-bottom:40px;overflow:auto;}
 	#orderSheetPay li{text-align:center;margin-bottom:20px;overflow:auto;}
 	#orderSheetPay li:nth-child(2n+1){width:30%;float:left;}
 	#orderSheetPay li:nth-child(2n){width:70%;text-align:left;}
 	#orderSheetPay li:nth-child(4)>input{width:50%;}
+	#orderMsg{width:100%;height:60px;}
 	
 	/*가격정보*/
-	#orderSheetPrice{text-align:center;overflow:auto;background-color:#eee;}
-	#orderSheetPrice>label{line-height:100px;width:25%;}
-	#orderSheetPrice>label:nth-child(4){font-size:1.5em;}
-	#orderSheetPrice>label:nth-child(5){}
+	#orderSheetPrice{margin:0 10px;width:48%;height:170px;overflow:hidden;background-color:#eee;padding:20px;float:left;}
+	#orderSheetPrice>li{width:50%;overflow:auto;float:left;margin:10px 0;}
+	#orderSheetPrice>li:nth-child(2n+1){font-weight:bold;}
+	#orderSheetPrice>li:nth-child(2n){text-align:right;}
+	
+	
+	#orderSheetPriceFinal{margin:0 10px;width:48%;height:170px;overflow:hidden;padding:20px;border:3px solid #ABCEE3;}
+	#orderSheetPriceFinal>li{font-size:1.5em;text-align:center;margin:10px;}
+	#orderSheetPriceFinal>li:nth-child(2){font-size:1.2em;}
+	#orderSheetPriceFinal>li:nth-child(3){width:100%;text-align:right;font-size:0.8em;}
 	
 	/*하단 - 버튼*/
-	#orderSheetBtm{text-align:center;margin-bottom:50px;}
+	#orderSheetBtm{overflow:auto;text-align:center;width:100%;margin:10px 0 50px;}
 	#orderSheetBtm>button{margin:10px 5px;}
 </style>
 <div class="container" id="orderSheetMain">
@@ -63,7 +72,6 @@
 			<li>03 주문완료</li>
 		</ul>
 	</div>
-	<hr/>
 	<div id="orderSheetContent">
 		<label>주문내역</label>
 		<hr/>
@@ -84,7 +92,6 @@
 			<li>15,000원</li>
 		</ul>
 	</div>
-	<hr/>
 	<label>주문자 정보</label>
 	<hr/>
 	<div id="orderSheetUserInfo">
@@ -107,7 +114,6 @@
 			<li><textarea name="orderMsg" id="orderMsg"></textarea></li>
 		</ul>
 	</div>
-	<hr/>
 	<label>결제정보</label>
 	<hr/>
 	<div id="orderSheetPay">
@@ -122,18 +128,24 @@
 			</li>
 		</ul>
 	</div>
-	<div id="orderSheetPrice">
-		<label>총 구매금액 15,000원</label>
-		+
-		<label>배송비 2,500원</label>
-		-
-		<label>마일리지 사용 0원</label>
-		<label>총 금액 17,500원</label>
-		<label>(발생 마일리지 150p)</label>
-	</div>
+	<label>총 결제금액</label>
+	<hr/>
+	<ul id="orderSheetPrice">
+		<li>총 구매금액</li>
+		<li>15,000원</li>
+		<li>배송비 </li>
+		<li>2500원</li>
+		<li>마일리지 사용</li>
+		<li>-0원</li>
+	</ul>
+	<ul id="orderSheetPriceFinal">
+		<li>최종결제금액</li>
+		<li>17,500원</li>
+		<li>(마일리지 150p)</li>
+	</ul>
 	<div id="orderSheetBtm">
 		<label><input type="checkbox" name="orderAgree" id="orderSheetAgree"/>구매진행에 동의합니다.</label>
-		<button type="button" class="btn btn-primary" id="orderSheetBtn">결제하기</button>
+		<button type="button" class="btn btn-primary" id="orderSheetBtn" onclick="location.href='/gachi/orderConfirmed'">결제하기</button>
 		<button type="button" class="btn btn-secondary" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
 	</div>
 	
