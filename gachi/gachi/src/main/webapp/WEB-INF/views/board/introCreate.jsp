@@ -97,24 +97,24 @@ font-family:'OSeongandHanEum';
 	<ul id="CcreateList">
 		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
 		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
 		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="#"><img src="/gachi/img/client.png"/></a><br/>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
 		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
 		
+		
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
+		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/client.png"/></a><br/>
+		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
 	</ul>
 	
 	<!-- 페이징 -->

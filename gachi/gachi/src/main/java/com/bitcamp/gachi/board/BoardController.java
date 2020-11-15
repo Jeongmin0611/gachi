@@ -14,6 +14,10 @@ public class BoardController {
 	public String eventBoard() {
 		return "board/eventBoard";
 	}
+	@RequestMapping("/eventBordDetail")
+	public String eventBordDetail() {
+		return "board/eventBordDetail";
+	}
 	
 	@RequestMapping("/companyBoard")
 	public String companyBoard() {
@@ -24,6 +28,28 @@ public class BoardController {
 	public String serviceCenterBoard() {
 		return "board/serviceCenterBoard";
 	}
+	@RequestMapping("/serviceCenterBoard_TopFAQ")
+	public String serviceCenterBoard_TopFAQ() {
+		return "board/serviceCenterBoard_TopFAQ";
+	}
+	@RequestMapping("/serviceCenterBoard_order")
+	public String serviceCenterBoard_order() {
+		return "board/serviceCenterBoard_order";
+	}
+	@RequestMapping("/serviceCenterBoard_refund")
+	public String serviceCenterBoard_refund(){
+		return "board/serviceCenterBoard_refund";
+	}
+	@RequestMapping("/serviceCenterBoard_class")
+	public String serviceCenterBoard_class(){
+		return "board/serviceCenterBoard_class";
+	}
+	@RequestMapping("/serviceCenterBoard_etc")
+	public String serviceCenterBoard_etc(){
+		return "board/serviceCenterBoard_etc";
+	}
+	
+	
 	@RequestMapping("/deliveryBoard")
 	public String deliveryBoard(){
 		return "board/deliveryBoard";
@@ -36,4 +62,6 @@ public class BoardController {
 	public String introCreateDetail() {
 		return "board/introCreateDetail";
 	}
+	
+	
 }

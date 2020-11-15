@@ -8,7 +8,7 @@
 
 #createDetailSub1 {
 	width: 20%;
-	background: pink;
+	background: #FCE8E6;
 	padding: 0px 5%;
 	float: left;
 	height: 100vh;
@@ -19,7 +19,7 @@
 }
 
 #createDetailSub1+div {
-	background-color: #eee;
+	background-color: #F2F2F2;
 	height: 100vh;
 }
 /* 개설한 클래스 */
@@ -62,8 +62,8 @@
 			<li>클래스명</li>
 			<li>가격</li>
 			
-			<li><img src="/gachi/img/art1.jpg"/></li>
-			<li>곰인형 만들기</li>
+			<li><a href="#"><img src="/gachi/img/art1.jpg"/></a></li>
+			<li><a href="#">곰인형 만들기</a></li>
 			<li>100,000원</li>
 		</ul>
 	</div>
