@@ -279,7 +279,14 @@ a {
 	#memberJoin{
 		border:1px solid gray;
 		width:600px;
-		height:1200px;
+		height:1000px;
+		margin:5px;	
+		background-color:white;
+	}
+	#member2Join{
+		border:1px solid gray;
+		width:600px;
+		height:1100px;
 		margin:5px;	
 		background-color:white;
 	}
@@ -352,6 +359,29 @@ a {
 		height:40px;
 		float:left;
 		background-color:red;
+	}
+	.textBoxJ{
+		width:30%;
+		float:left;
+		height:40px;
+		margin: 20px 0;
+		text-align:center;
+	}
+	#mJuserid,#mJuserpwd,#mJuserpwdOk,#mJusername,#mJuserNname,#mJuserB,#mJusertel,#mJuseraddr{
+		width:70%;
+		height:40px;
+		background-color: #e2e2e2;
+		margin: 20px 0;
+	}
+	#loginJOk button,#loginJ2Ok button{	
+		 width:300px;
+		 height:50px;
+	}
+	#mJ2userid,#mJ2userpwd,#mJ2userpwdOk,#mJ2username,#mJ2userNname,#mJ2userB,#mJ2usertel,#mJ2usernum,#mJ2userM{
+		width:70%;
+		height:40px;
+		background-color: #e2e2e2;
+		margin: 20px 0;
 	}
 </style>
 <meta charset="UTF-8">
@@ -561,15 +591,49 @@ a {
 			</form>
 		</div>
 	</div>
-	<div style="display: none">
-		<div id="memberJoin">
+	<div>
+		<div id="memberJoin" style="display:none">
 			<form>
 				<div>
 					<h1 class="mJH">회원가입</h1>
 					<div id="prImg"></div>
-					<span class="radioBtn2"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br />
-
+					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+					<div class="textBoxJ">이메일	:</div><input type="text" id="mJuserid">
+					<div class="textBoxJ">비밀번호	:</div><input type="text" id="mJuserpwd">
+					<div class="textBoxJ">비밀번호확인	:</div><input type="text" id="mJuserpwdOk">
+					<div class="textBoxJ">이름	:</div><input type="text" id="mJusername">
+					<div class="textBoxJ">닉네임	:</div><input type="text" id="mJuserNname">
+					<div class="textBoxJ">생년월일	:</div><input type="text" id="mJuserB">
+					<div class="textBoxJ">전화번호	:</div><input type="text" id="mJusertel">
+					<div class="textBoxJ">주소	:</div><input type="text" id="mJuseraddr">
+					광고수신 동의 여부<br/>
+					<span class="radioBtn3"><input type="radio" />이메일수신<input type="radio" />문자수신</span><br />
+					<div id="loginJOk"><button>가입하기</button></div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+	<div>
+		<div id="member2Join" style="display:none">
+			<form>
+				<div>
+					<h1 class="mJH">회원가입</h1>
+					<div id="prImg"></div>
+					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+					<div class="textBoxJ">이메일	:</div><input type="text" id="mJ2userid">
+					<div class="textBoxJ">비밀번호	:</div><input type="text" id="mJ2userpwd">
+					<div class="textBoxJ">비밀번호확인	:</div><input type="text" id="mJ2userpwdOk">
+					<div class="textBoxJ">이름	:</div><input type="text" id="mJ2username">
+					<div class="textBoxJ">닉네임	:</div><input type="text" id="mJ2userNname">
+					<div class="textBoxJ">생년월일	:</div><input type="text" id="mJ2userB">
+					<div class="textBoxJ">전화번호	:</div><input type="text" id="mJ2usertel">
+					<div class="textBoxJ">사업자번호	:</div><input type="text" id="mJ2usernum">
+					<div class="textBoxJ">계좌	:</div><input type="text" id="mJ2userM">
+					광고수신 동의 여부<br/>
+					<span class="radioBtn3"><input type="radio" />이메일수신<input type="radio" />문자수신</span><br />
+					<div id="loginJ2Ok"><button>가입하기</button></div>
+					
 				</div>
 			</form>
 		</div>

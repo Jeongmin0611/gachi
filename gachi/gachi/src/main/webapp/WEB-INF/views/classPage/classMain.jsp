@@ -96,9 +96,11 @@
 		</div>
 		<div>
 			클래스 질문&댓글
+			<div></div>
 		</div>
 		<div>
 			클래스 수강평
+			<div>보고 만들기</div>
 		</div>
 	<%@ include file="../inc/bottom.jspf"%>
 </body>
