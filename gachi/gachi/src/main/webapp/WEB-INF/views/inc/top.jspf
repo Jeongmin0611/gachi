@@ -354,16 +354,6 @@ a {
 		background-color:red;
 	}
 </style>
-<script>
-	//메뉴 숨김효과
-	$(function() {
-		$('#navi>li').hover(function() {
-			$(this).children('ul').css('display', 'block');
-		}, function() {
-			$(this).children('ul').css('display', 'none');
-		});
-	});
-</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
