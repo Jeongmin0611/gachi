@@ -66,13 +66,17 @@ public class AdminController {
 	public String adminDelivery() {
 		return "admin/adminDelivery";
 	}
-	@RequestMapping("/adminGoodsList")
+	@RequestMapping("/adminGoods")
 	public String adminGoodsList() {
-		return "admin/adminGoodsList";
+		return "admin/adminGoods";
 	}
-	@RequestMapping("/adminGoodsEnroll")
+	@RequestMapping("adminGoodsView")
+	public String adminGoodsView() {
+		return "/admin/adminGoodsView";
+	}
+	@RequestMapping("/adminGoodsWrite")
 	public String adminGoodsEnroll() {
-		return "admin/adminGoodsEnroll";
+		return "admin/adminGoodsWrite";
 	}
 	@RequestMapping("/adminStatStore")
 	public String adminStatStore() {
