@@ -43,7 +43,7 @@
 	<button style="text-align:right">일괄정산</button>
 	<ul id="ad_settle_lst" class="text-center">
 		
-		<li>크리에이터닉네임</li>
+		<li>크리에이터아이디</li>
 		<li>카테고리</li>
 		<li>크리에이터명</li>
 		<li>정산예정금액</li>
