@@ -375,6 +375,8 @@ a {
 		<li><a href="#">회원가입</a></li>
 		<li><a href="#">로그인</a></li>
 		<li><a href="/gachi/adminDashboard">어드민</a></li>
+		<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
+		
 		
 	</ul>
 </div>
