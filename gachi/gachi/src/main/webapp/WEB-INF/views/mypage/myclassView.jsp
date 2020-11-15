@@ -53,9 +53,18 @@
 	#myclassQna>ul>li:last-child{padding:10px;}
 	#myclassQna>ul>li:last-child label{font-size:1em;color:#ABCEE3;font-weight:bold;margin-right:10px;}
 	#myclassQna li:last-child{width:100%;text-align:left;float:left;padding:0 10px;}
+	#myclassQna>ul>li>ul>li:last-child{font-size:1em;}
+	
+	/*모달*/
+	#myclassModalR,#myclassModalQ{display:none;position:absolute;width:100%;height:100%;z-index:1;}
+	.myclassModal_content{width:500px;height:500px;margin:100px auto;padding:20px 10px;background-color:#fff;border:2px solid #eee;}
+	.myclassModal_content input{width:100%;margin-bottom:10px;}
+	.myclassModal_content textarea{width:100%;height:250px;margin-bottom:30px;}
+	.myclassModal_layer{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);z-index:-1;}
 	
 </style>
 <script>
+	//스크롤이동
 	function moveToReview(){
 		var locaR = document.querySelector("#myclassReview").offsetTop;
 		window.scrollTo({top:locaR, behavior:'smooth'});
@@ -64,6 +73,35 @@
 		var locaQ = document.querySelector("#myclassQna").offsetTop;
 		window.scrollTo({top:locaQ, behavior:'smooth'});
 	}
+	$(function(){
+		//모달창 띄우기(수강평)
+	    $("#myclassReviewFrm").click(function(){
+    		$("#myclassModalR").css({
+               "top": (($(window).height()-$("#myclassModalR").outerHeight())/2+$(window).scrollTop())+"px",
+               "left": (($(window).width()-$("#myclassModalR").outerWidth())/2+$(window).scrollLeft())+"px"
+               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+            
+            });
+	        $("#myclassModalR").fadeIn();
+	    });
+	    $("#myclassReviewWrite").click(function(){
+	       $("#myclassModalR").fadeOut();
+	    });  
+	  //모달창 띄우기(질문)
+	    $("#myclassQnaFrm").click(function(){
+    		$("#myclassModalQ").css({
+               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
+               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
+               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+            
+            });
+	        $("#myclassModalQ").fadeIn();
+	    });
+	    $("#myclassQnaWrite").click(function(){
+	       $("#myclassModalQ").fadeOut();
+	    });  
+	});
+
 </script>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf" %>
@@ -127,8 +165,8 @@
 	</div>
 	
 	<div id="myclassReview">
-		<label>수강후기</label>
-		<button type="button" class="btn btn-outline-light">후기작성</button>
+		<label>수강평</label>
+		<button type="button" class="btn btn-outline-light" id="myclassReviewFrm">수강평작성</button>
 		<hr/>
 		<ul>
 			<li>★★★★★</li>
@@ -182,7 +220,7 @@
 	</ul>
 	<div id="myclassQna">
 		<label>질문&답변</label>
-		<button type="button" class="btn btn-outline-light">질문작성</button>
+		<button type="button" class="btn btn-outline-light" id="myclassQnaFrm">질문작성</button>
 		<hr/>
 		<ul>
 			<li><label class="badge badge-light">Q</label>질문입니다</li>
@@ -239,4 +277,24 @@
 		<li class="page-item"><a class="page-link" href="#">5</a></li>
 		<li class="page-item"><a class="page-link" href="#">Next</a></li>
 	</ul>
+</div>
+<div id="myclassModalR">
+	<div class="myclassModal_content">
+		<h2>수강평작성</h2>
+		<hr/>
+		<input type="text"/>
+		<textarea></textarea>
+		<button type="button" class="btn btn-primary" id="myclassReviewWrite">등록</button>
+	</div>
+	<div class="myclassModal_layer"></div>
+</div>
+<div id="myclassModalQ">
+	<div class="myclassModal_content">
+		<h2>질문작성</h2>
+		<hr/>
+		<input type="text"/>
+		<textarea></textarea>
+		<button type="button" class="btn btn-primary" id="myclassQnaWrite">등록</button>
+	</div>
+	<div class="myclassModal_layer"></div>
 </div>

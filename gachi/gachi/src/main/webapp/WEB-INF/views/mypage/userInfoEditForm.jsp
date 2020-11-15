@@ -12,10 +12,10 @@
 	#infoEditLst li{overflow:auto;margin-bottom:20px;text-align:center;}
 	#infoEditLst li:nth-child(2n+1){width:30%;float:left;}
 	#infoEditLst li:nth-child(2n){width:70%;}
-	#infoEditLst li:nth-child(10)>input {width:80%;float:left;}
-	#infoEditLst li:nth-child(10)>button {width:20%;}
-	#infoEditLst li:nth-child(12)>input:first-child{width:15%;float:left;}
-	#infoEditLst li:nth-child(12)>input:last-child{width:70%;}
+	#infoEditLst li:nth-child(14)>input {width:80%;float:left;}
+	#infoEditLst li:nth-child(14)>button {width:20%;}
+	#infoEditLst li:nth-child(16)>input:first-child{width:15%;float:left;}
+	#infoEditLst li:nth-child(16)>input:last-child{width:70%;}
 	
 	#infoEditLst input{width:100%;text-align:center;}
 	
@@ -34,6 +34,10 @@
 	<div id="infoEditView">
 		<label>회원정보수정</label>
 		<ul id="infoEditLst">
+			<li>이름</li>
+			<li>김유미</li>
+			<li>생년월일</li>
+			<li>1990.12.31</li>
 			<li>아이디</li>
 			<li>userid@bitcamp.com</li>
 			<li>변경할 비밀번호</li>
@@ -41,7 +45,7 @@
 			<li>비밀번호 확인</li>
 			<li><input type="password"/></li>
 			<li>닉네임</li>
-			<li><input type="text" name="nickname" value="홍길동"/></li>
+			<li><input type="text" name="nickname" value="김유미"/></li>
 			<li>연락처</li>
 			<li>
 				<input type="text" name="tel" value="010-9999-8888"/>
