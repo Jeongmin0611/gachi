@@ -43,7 +43,9 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 #ad_member_lst li{
 	width:10%;
 	float:left;
-	height:30px;
+	height:40px;
+	line-height:40px;
+	border:1px solid gray;
 }
 #ad_member_lst li:nth-child(8n+1){
 	width:5%;
@@ -62,6 +64,30 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 }
 #ad_member_lst li:nth-child(8n+8){
 	width:5%;
+}
+#ad_member_View{
+	width:80%;
+	margin:0 auto;
+	overflow: auto;
+}
+#ad_member_View>li{
+	float:left;
+	width:50%;
+	border:1px solid gray;
+	font-size: 1.2em;
+	line-height:50px;
+	height:50px;
+}
+#ad_member_View>li:nth-child(2n+1){
+	width:30%;
+}
+#ad_member_View>li:nth-child(2n){
+	text-align:left;
+	width:70%;
+}
+.ad_member_Box{
+	height:300px;
+	border:3px solid #F4BFA9;
 }
 /*관리자 회원관리 end*/
 
@@ -209,8 +235,8 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		font-size: 24px;
 	}
 	#ad_settle_lst{
-		width:90%;
-		margin:0 auto;
+		margin-left:5%;
+		text-align: center;
 	}
 	#ad_settle_lst li{
 		border:1px solid gray;
@@ -218,7 +244,7 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		width:12%;
 		height:50px;
 		font-size:15px;
-		line-height:36px;
+		line-height:50px;
 	}
 	#ad_settle_lst li:nth-of-type(7n+1){
 		width:20%;
@@ -285,7 +311,12 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 	#paging li{
 		width:12%;
 		float:left;
+		text-align:center;
 	}
+	#paging li:first-child,#paging li:last-child{
+		width:20%;
+	}
+	
 	/*관리자 리스트 페이징 end*/
 	.container h1{
 		text-align: center;

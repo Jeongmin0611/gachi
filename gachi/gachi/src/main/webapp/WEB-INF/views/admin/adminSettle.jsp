@@ -39,10 +39,11 @@
 		<h1>총 매출액</h1>
 		<h1>154,4540원</h1>
 	</div>
-	<div>
-	<button style="text-align:right">일괄정산</button>
-	<ul id="ad_settle_lst" class="text-center">
-		
+
+	<div style="text-align:right">
+	<button>일괄정산</button>
+	</div>
+	<ul id="ad_settle_lst">
 		<li>크리에이터아이디</li>
 		<li>카테고리</li>
 		<li>크리에이터명</li>
@@ -59,7 +60,6 @@
 		<li>2020-11-14</li>
 		<li><button>정산처리</button></li>
 	</ul>
-	</div>
 <div id="paging">
 	<ul>
 		<li>prev</li>
