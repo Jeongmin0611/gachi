@@ -49,4 +49,8 @@ public class MypageController {
 	public String userWishList() {
 		return "mypage/userWishList";
 	}
+	@RequestMapping("/myqna")
+	public String myqna() {
+		return "mypage/myqna";
+	}
 }

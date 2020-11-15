@@ -8,7 +8,7 @@
 	#mypageMainContent>p>label{width:5%;}
 	#mypageMainContent>label{width:100%;height:50px;line-height:50px;text-align:center;font-size:1.5em;margin:50px 0 30px;background-color:#eee;}
 	
-	#mypageMainLst{width:70%;float:left;}
+	#mypageMainLst{width:80%;float:left;}
 	#mypageMainLst>li{margin:10px 30px;line-height:25px;}
 	#mypageMainLst>li:first-child{margin:20px 30px 20px 50px;float:left;}
 	#mypageMainLst>li:nth-child(2){margin:0;}
@@ -18,7 +18,10 @@
 	#mypageMainLst img{width:200px;height:150px;object-fit:cover;}
 	
 	/*버튼*/
-	#mypageMainLstBtn{height:180px;overflow:auto;text-align:center;padding-top:5%;}
+	#mypageMainLstBtn{height:180px;overflow:auto;text-align:center;padding-top:3%;}
+	#mypageMainLstBtn>button{width:50%;float:clear;margin:5px;}
+	#mypageMainLstBtn>button:first-child{background-color:#ABCEE3;}
+	#mypageMainLstBtn>button:last-child{background-color:#eee;color:#000;}
 	
 	#mypageMainPage{margin-top:100px;width:100%;}
 	
@@ -48,8 +51,8 @@
 			<li>결제일시 20.11.06 19:30:34</li>
 		</ul>
 		<div id="mypageMainLstBtn">
-			<button type="button" class="btn btn-outline-primary">배송조회</button>
-			<button type="button" class="btn btn-outline-dark">결제취소</button>
+			<button type="button" class="btn btn-outline-light">배송조회</button>
+			<button type="button" class="btn btn-outline-light">결제취소</button>
 		</div>
 		<label>2020-11-06</label>
 		<ul id="mypageMainLst">
@@ -64,8 +67,8 @@
 			<li>결제일시 20.11.06 19:30:34</li>
 		</ul>
 		<div id="mypageMainLstBtn">
-			<button type="button" class="btn btn-outline-primary">배송조회</button>
-			<button type="button" class="btn btn-outline-dark">결제취소</button>
+			<button type="button" class="btn btn-outline-light">배송조회</button>
+			<button type="button" class="btn btn-outline-light">결제취소</button>
 		</div>
 		<label>2020-11-06</label>
 		<ul id="mypageMainLst">
@@ -80,8 +83,8 @@
 			<li>결제일시 20.11.06 19:30:34</li>
 		</ul>
 		<div id="mypageMainLstBtn">
-			<button type="button" class="btn btn-outline-primary">배송조회</button>
-			<button type="button" class="btn btn-outline-dark">결제취소</button>
+			<button type="button" class="btn btn-outline-light">배송조회</button>
+			<button type="button" class="btn btn-outline-light">결제취소</button>
 		</div>
 		<label>2020-11-06</label>
 		<ul id="mypageMainLst">
@@ -96,8 +99,8 @@
 			<li>결제일시 20.11.06 19:30:34</li>
 		</ul>
 		<div id="mypageMainLstBtn">
-			<button type="button" class="btn btn-outline-primary">배송조회</button>
-			<button type="button" class="btn btn-outline-dark">결제취소</button>
+			<button type="button" class="btn btn-outline-light">배송조회</button>
+			<button type="button" class="btn btn-outline-light">결제취소</button>
 		</div>
 		<label>2020-11-06</label>
 		<ul id="mypageMainLst">
@@ -112,8 +115,8 @@
 			<li>결제일시 20.11.06 19:30:34</li>
 		</ul>
 		<div id="mypageMainLstBtn">
-			<button type="button" class="btn btn-outline-primary">배송조회</button>
-			<button type="button" class="btn btn-outline-dark">결제취소</button>
+			<button type="button" class="btn btn-outline-light">배송조회</button>
+			<button type="button" class="btn btn-outline-light">결제취소</button>
 		</div>
 		<ul class="pagination justify-content-center" id="mypageMainPage">
 			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
