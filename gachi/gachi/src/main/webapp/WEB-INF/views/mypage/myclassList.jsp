@@ -18,6 +18,7 @@
 	#myclassLst img{width:200px;height:150px;object-fit:cover;}
 	
 	#myclassLstBtn{overflow:auto;height:180px;text-align:center;padding-top:5%;}
+	#myclassLstBtn>button{background-color:#ABCEE3;}
 	
 </style>
 <div class="container" id="myclassMain">
@@ -51,7 +52,7 @@
 		<li>기한 : 20.11.01 ~ 21.01.31</li>
 	</ul>
 	<div id="myclassLstBtn">
-		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button>
+		<button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button>
 	</div>
 	<hr/>
 </div>
