@@ -32,4 +32,8 @@ public class BoardController {
 	public String introCreate() {
 		return "board/introCreate";
 	}
+	@RequestMapping("/introCreateDetail")
+	public String introCreateDetail() {
+		return "board/introCreateDetail";
+	}
 }
