@@ -37,7 +37,7 @@
 	<li>상태</li>
 	
 	<li>001</li>
-	<li>honggildong@naver.com</li>
+	<li><a href="/gachi/adminMemberView">honggildong@naver.com</a></li>
 	<li>길동짱</li>
 	<li>홍길동</li>
 	<li>010-1234-1234</li>
