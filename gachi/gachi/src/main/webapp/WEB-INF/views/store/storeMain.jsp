@@ -50,14 +50,14 @@
 		<li class="lMeun2"><a href="/gachi/classPage">more</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/musicEx/musicEx01.png"/></div>음악	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx01.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx01.PNG"/></div>미술	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/artEx/artEx01.PNG"/></div>미술	작성자<br/>제목</a></li>
 	</ul>
 </div>
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">신규상품</li>
 		<li class="lMeun2"><a href="/gachi/classPage2">more</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx02.PNG"/></div>미술	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/artEx/artEx02.PNG"/></div>미술	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx02.jpg"/></div>요리	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx05.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
@@ -67,7 +67,7 @@
 		<li class="lMeun1">추천상품</li>
 		<li class="lMeun2"><a href="/gachi/classPage3">more</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx03.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx03.PNG"/></div>미술	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/artEx/artEx03.PNG"/></div>미술	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx06.PNG"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
 </div>
