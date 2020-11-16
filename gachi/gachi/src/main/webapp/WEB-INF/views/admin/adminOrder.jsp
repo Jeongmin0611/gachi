@@ -29,32 +29,29 @@
 		</form>
 </div>
 <ul id="ad_order_lst" class="text-center">
-	<li>번호</li>
+	<li>주문번호</li>
 	<li>카테고리</li>
 	<li>클래스명</li>
 	<li>상품명</li>
 	<li>구매자</li>
-	<li>상품번호</li>
 	<li>가격</li>
 	<li>적립금액</li>
 	<li>결제일</li>
 	
-	<li>041</li>
+	<li><a href="/gachi/adminOrderView">1234567891234</a></li>
 	<li>미술</li>
 	<li>드로잉기초</li>
 	<li>해당사항없음</li>
 	<li>김구매</li>
-	<li>C12341234</li>
 	<li>15,000원</li>
 	<li>150원</li>
 	<li>2020-11-16</li>
 	
-	<li>039</li>
+	<li>1234567891234</li>
 	<li>라이프 스타일</li>
 	<li>해당사항없음</li>
 	<li>요가 매트</li>
 	<li>박구매</li>
-	<li>S999911231</li>
 	<li>9,900원</li>
 	<li>99원</li>
 	<li>2020-11-14</li>
