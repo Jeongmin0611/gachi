@@ -35,7 +35,9 @@
 	.mainClass li{
 		margin-bottom:10px;
 	}
-	
+	.mainClass{
+		margin:50px auto;
+	}
 	</style>
 </head>
 <body>
@@ -57,7 +59,7 @@
 		<li class="lMeun2"><a href="/gachi/classPage2">more</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx02.PNG"/></div>미술	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx02.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx5.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx05.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
 </div>
 <div class="mainClass">
@@ -66,7 +68,7 @@
 		<li class="lMeun2"><a href="/gachi/classPage3">more</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx03.jpg"/></div>요리	작성자<br/>제목</a></li>
 		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx03.PNG"/></div>미술	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx6.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx06.PNG"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
 </div>
 </div>
