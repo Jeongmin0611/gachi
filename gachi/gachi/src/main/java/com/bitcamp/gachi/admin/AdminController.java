@@ -17,6 +17,10 @@ public class AdminController {
 	public String adminClass() {
 		return "admin/adminClass";
 	}
+	@RequestMapping("/adminClassView")
+	public String adminClassView() {
+		return "admin/adminClassView";
+	}
 	@RequestMapping("/adminMember")
 	public String adminMember() {
 		return "admin/adminMember";

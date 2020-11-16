@@ -2,9 +2,16 @@
     pageEncoding="UTF-8"%>
     
  <style>
- #ad_1on1_lst li{vertical-align:middle; line-height:50px;}
- #search_area{margin-bottom:20px;}
- select{height:30px;}
+ #ad_1on1_lst li{
+ 	vertical-align:middle;
+ 	line-height:50px;
+ }
+ #search_area{
+ 	margin-bottom:20px;
+ }
+ select{
+ 	height:30px;
+ }
  
  </style> 
 <div class="container text-center cfont">

@@ -35,6 +35,22 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 
 /*관리자 대시보드*/
 
+/*관리자 클래스관리 start*/
+#ad_class_lst li{
+	float:left;
+	width:10%;
+	text-align:center;
+	border:1px solid gray;
+}
+#ad_class_lst li:nth-child(7n+2),#ad_class_lst li:nth-child(7n+6){
+	width:15%;
+}
+#ad_class_lst li:nth-child(7n+3){
+	width:30%;
+}
+
+/*관리자 클래스관리 end*/
+
 /*관리자 회원관리 start*/	
 #ad_member_info li{
 	float:left;
@@ -267,6 +283,8 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		width:20%;
 	}	
 	#ad_goods_viewForm{
+		width:70%;
+		margin:0 auto;
 		overflow:auto;
 		font-size: 1.2em;
 	}
