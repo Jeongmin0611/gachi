@@ -2,16 +2,27 @@
     pageEncoding="UTF-8"%>
 <div class="container">
 <h1>주문조회</h1>
-<ul id="">
+<form method="post" action="#">
+<ul id="ad_order_View">
 	<li>주문번호</li><li>1234567891234</li>
-	<li>카테고리</li><li>번호</li>
-	<li>상품번호</li><li>번호</li>
-	<li>상품명</li><li>번호</li>
-	<li>구매자</li><li>번호</li>
-	<li>주문번호</li><li>번호</li>
-	<li>가격</li><li>번호</li>
-	<li>가격</li><li>번호</li>
-	<li>가격</li><li>번호</li>
-	
+	<li>카테고리</li><li>미술</li>
+	<li>클래스명</li><li>밥선생님의 낙서 참쉽죠? 클래스</li>
+	<li>상품명</li><li>미술 div키트</li>
+	<li>구매자</li><li>홍길동</li>
+	<li>가격</li><li>15000원</li>
+	<li>수량</li><li>1개</li>
+	<li>사용 마일리지</li><li>150원</li>
+	<li>반품사유</li><li><textarea>잘못주문함</textarea></li>
+	<li>구매일</li><li>2020-08-01</li>
+	<li>반품신청일</li><li>2020-08-04</li>
+	<li>상태</li>
+	<li>
+		<select>
+			<option>반품대기</option>
+			<option>반품완료</option>
+		</select>
+	</li>
 </ul>
+<input type="submit" value="저장하기">
+</form>
 </div>
