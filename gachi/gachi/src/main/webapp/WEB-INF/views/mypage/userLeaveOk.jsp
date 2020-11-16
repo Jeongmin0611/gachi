@@ -1,19 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#mypageNaviSub{margin:20px auto;margin-left:50px;overflow:auto;text-align:center;}
-	#mypageNaviSub li{float:left;}
-	#mypageNaviSub li:nth-child(2){width:3%;}
+	/* 회원탈퇴완료 */
 	
-	#userLeaveOkView{width:50%;position:relative;left:25%;margin:50px 0 200px;text-align:center;}
-	#userLeaveOkView label{width:100%;}
-	#userLeaveOkView label:first-child{font-size:2em;margin-bottom:100px;}
-	#userLeaveOkView label:nth-child(4){margin-bottom:30px;}
+	/*****************/
+	/* 상단 */
+	#userLeaveOkTop{
+		margin:20px auto;
+		margin-left:50px;
+		overflow:auto;
+		text-align:center;
+	}
+	#userLeaveOkTop li{
+		float:left;
+	}
+	#userLeaveOkTop li:nth-child(2){
+		width:3%;
+	}
+	
+	/*****************/
+	/* 내용 */
+	#userLeaveOkContent{
+		width:50%;
+		position:relative;
+		left:25%;
+		margin:50px 0 200px;
+		text-align:center;
+	}
+	#userLeaveOkContent label{
+		width:100%;
+	}
+	#userLeaveOkContent label:first-child{
+		font-size:2em;
+		margin-bottom:100px;
+	}
+	#userLeaveOkContent label:nth-child(4){
+		margin-bottom:30px;
+	}
 	
 </style>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="mypageNaviSub">
+	<div id="userLeaveOkTop">
 		<ul>
 			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
 			<li>|</li>
@@ -21,7 +49,7 @@
 		</ul>
 	</div>
 	<hr/>
-	<div id="userLeaveOkView">
+	<div id="userLeaveOkContent">
 		<label>회원 탈퇴가 완료되었습니다.</label>
 		<hr/>
 		<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>

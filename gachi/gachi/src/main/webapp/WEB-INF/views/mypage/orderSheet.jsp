@@ -1,26 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	a:link, a:visited{color:#000;text-decoration:none;}
-	a:hover{text-decoration:none;font-weight:bold;}
-	#orderSheetMain{margin:50px auto 0;width:50%;}
+
+	/* 주문신청서 */
+	a:link, a:visited{
+		color:#000;
+		text-decoration:none;
+	}
+	a:hover{
+		text-decoration:none;
+		font-weight:bold;
+	}
 	
-	/*장바구니 상단*/
-	/*01 장바구니 > 02 주문/결제 > 03 주문완료*/
-	#cartTop{overflow:auto;border:3px solid #ABCEE3;margin-bottom:20px;}
-	#cartTop li{
+	#orderSheetContainer{
+		margin:50px auto 0;
+		width:50%;
+	}
+	
+	/**************/
+	/* 상단 */
+	/* 01 장바구니 > 02 주문/결제 > 03 주문완료 */
+	#orderSheetTop{
+		overflow:auto;
+		border:3px solid #ABCEE3;
+		margin-bottom:20px;
+	}
+	#orderSheetTop li{
 		color:#ABCEE3;
 		float:left;
 		margin:10px;
 	}
-	#cartTop li:nth-child(3){font-weight:bold;}
-	#cartTop li:not(:nth-child(3)){color:gray;}
+	#orderSheetTop li:nth-child(3){
+		font-weight:bold;
+	}
+	#orderSheetTop li:not(:nth-child(3)){
+		color:gray;
+	}
 	
-	#orderSheetContent{margin-bottom:20px;}
+	/**************/
+	/* 내용 */
+	#orderSheetContent{
+		margin-bottom:20px;
+	}
 	
 	/*주문신청서 목록 제목*/
-	#orderSheetTtl, #orderSheetTtl{overflow:auto;}
-	#orderSheetTtl li, #orderSheetLst li{float:left;width:10%;text-align:center;}
+	#orderSheetTtl, #orderSheetTtl{
+		overflow:auto;
+	}
+	#orderSheetTtl li, #orderSheetLst li{
+		float:left;width:10%;text-align:center;}
 	#orderSheetTtl li:first-child{width:70%;}
 	
 	/*주문신청서 목록*/
@@ -62,8 +90,8 @@
 	#orderSheetBtm{overflow:auto;text-align:center;width:100%;margin:10px 0 50px;}
 	#orderSheetBtm>button{margin:10px 5px;}
 </style>
-<div class="container" id="orderSheetMain">
-	<div id="cartTop">
+<div class="container" id="orderSheetContainer">
+	<div id="orderSheetTop">
 		<ul>
 			<li>01 장바구니</li>
 			<li>></li>
@@ -148,5 +176,4 @@
 		<button type="button" class="btn btn-primary" id="orderSheetBtn" onclick="location.href='/gachi/orderConfirmed'">결제하기</button>
 		<button type="button" class="btn btn-secondary" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
 	</div>
-	
 </div>
