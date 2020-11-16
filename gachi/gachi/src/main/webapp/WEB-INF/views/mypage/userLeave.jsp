@@ -1,29 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#mypageNaviSub{margin:20px auto;margin-left:50px;overflow:auto;text-align:center;}
-	#mypageNaviSub li{float:left;}
-	#mypageNaviSub li:nth-child(2){width:3%;}
-		
-	#userLeaveView{width:50%;position:relative;left:25%;margin:50px 0 200px;}
-	#userLeaveView>label{font-size:1.5em;}
 	
-	/*회원탈퇴 내용*/
-	#userLeaveInfo{background-color:#eee;padding:30px;text-align:center;margin-bottom:20px;}
-	#userLeaveInfo>label{width:100%;}
+	/* 회원탈퇴 - 약관동의 */
 	
-	#userLeaveChkLst{border:3px solid #eee;padding:20px;}
-	#userLeaveChkLst>li{margin:20px;}
-	#userLeaveChkLst>li>label:first-child{font-weight:bold;}
-	#userLeaveChkLst>li>label:nth-child(2){font-size:0.9em;}
-	#userLeaveChkLst>li:nth-child(2){margin-bottom:50px;}
-	#userLeaveChkLst>li:last-child{text-align:center;}
+	/**************/
+	/* 상단- 서브메뉴 */
+	#userLeaveTop{
+		margin:20px auto;
+		margin-left:50px;
+		overflow:auto;
+		text-align:center;
+	}
+	#userLeaveTop li{
+		float:left;
+	}
+	#userLeaveTop li:nth-child(2){
+		width:3%;
+	}
+	
+	
+	/**************/
+	/* 내용 */	
+	#userLeaveContent{
+		width:50%;
+		position:relative;
+		left:25%;
+		margin:50px 0 200px;
+	}
+	#userLeaveContent>label{
+		font-size:1.5em;
+	}
+	/* 회원정보 */
+	#userLeaveInfo{
+		background-color:#eee;
+		padding:30px;
+		text-align:center;
+		margin-bottom:20px;
+	}
+	#userLeaveInfo>label{
+		width:100%;
+	}
+	/* 약관내용 */
+	#userLeaveNotice{
+		border:3px solid #eee;
+		padding:20px;
+	}
+	#userLeaveNotice>li{
+		margin:20px;
+	}
+	#userLeaveNotice>li>label:first-child{
+		font-weight:bold;
+	}
+	#userLeaveNotice>li>label:nth-child(2){
+		font-size:0.9em;
+	}
+	#userLeaveNotice>li:nth-child(2){
+		margin-bottom:50px;
+	}
+	#userLeaveNotice>li:last-child{
+		text-align:center;
+	}
 	
 	
 </style>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="mypageNaviSub">
+	<div id="userLeaveTop">
 		<ul>
 			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
 			<li>|</li>
@@ -31,13 +74,13 @@
 		</ul>
 	</div>
 	<hr/>
-	<div id="userLeaveView">
+	<div id="userLeaveContent">
 		<label>회원탈퇴</label>
 		<div id="userLeaveInfo">
 			<label>탈퇴할 아이디 : user</label>
 			<label>이름 : 김유미</label>
 		</div>
-		<ul id="userLeaveChkLst">
+		<ul id="userLeaveNotice">
 			<li>
 				<label>*사용하고 계신 아이디는 탈퇴 후 재사용 및 복구가 불가능합니다.</label>
 				<label>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</label>

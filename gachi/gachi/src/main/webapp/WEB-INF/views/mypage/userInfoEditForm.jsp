@@ -1,29 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-	#mypageNaviSub{margin:20px auto;margin-left:80px;overflow:auto;text-align:center;}
-	#mypageNaviSub li{float:left;}
-	#mypageNaviSub li:nth-child(2){width:3%;}
+<style>	
 	
-	#infoEditView{width:50%;position:relative;left:25%;margin:50px 0 200px;}
-	#infoEditView label{font-size:1.5em;}
+	/* 회원정보수정 폼 */
 	
-	#infoEditLst{margin:50px 0 100px;}
-	#infoEditLst li{overflow:auto;margin-bottom:20px;text-align:center;}
-	#infoEditLst li:nth-child(2n+1){width:30%;float:left;}
-	#infoEditLst li:nth-child(2n){width:70%;}
-	#infoEditLst li:nth-child(14)>input {width:80%;float:left;}
-	#infoEditLst li:nth-child(14)>button {width:20%;}
-	#infoEditLst li:nth-child(16)>input:first-child{width:15%;float:left;}
-	#infoEditLst li:nth-child(16)>input:last-child{width:70%;}
+	/****************/
+	/* 상단 - 메뉴바*/
+	#userInfoEditFormTop{
+		margin:20px auto;
+		margin-left:80px;
+		overflow:auto;
+		text-align:center;
+	}
+	#userInfoEditFormTop li{
+		float:left;
+	}
+	#userInfoEditFormTop li:nth-child(2){
+		width:3%;
+	}
 	
-	#infoEditLst input{width:100%;text-align:center;}
-	
+	/****************/
+	/* 내용 */
+	#userInfoEditFormContent{
+		width:50%;
+		position:relative;
+		left:25%;
+		margin:50px 0 200px;
+	}
+	#userInfoEditFormContent label{
+		font-size:1.5em;
+	}
+	/* 정보수정 리스트 */
+	#userInfoEditFormLst{
+		margin:50px 0 100px;
+	}
+	#userInfoEditFormLst li{
+		overflow:auto;
+		margin-bottom:20px;
+		text-align:center;
+	}
+	#userInfoEditFormLst li:nth-child(2n+1){
+		width:30%;
+		float:left;
+	}
+	#userInfoEditFormLst li:nth-child(2n){
+		width:70%;
+	}
+	#userInfoEditFormLst li:nth-child(14)>input {
+		width:80%;
+		float:left;
+	}
+	#userInfoEditFormLst li:nth-child(14)>button {
+		width:20%;
+	}
+	#userInfoEditFormLst li:nth-child(16)>input:first-child{
+		width:15%;
+		float:left;
+	}
+	#userInfoEditFormLst li:nth-child(16)>input:last-child{
+		width:70%;
+	}
+	#userInfoEditFormLst input{
+		width:100%;
+		text-align:center;
+	}
 	
 </style>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="mypageNaviSub">
+	<div id="userInfoEditFormTop">
 		<ul>
 			<li><a href="/gachi/userInfoEdit"><b>회원정보수정</b></a></li>
 			<li>|</li>
@@ -31,9 +76,9 @@
 		</ul>
 	</div>
 	<hr/>
-	<div id="infoEditView">
+	<div id="userInfoEditFormContent">
 		<label>회원정보수정</label>
-		<ul id="infoEditLst">
+		<ul id="userInfoEditFormLst">
 			<li>이름</li>
 			<li>김유미</li>
 			<li>생년월일</li>
