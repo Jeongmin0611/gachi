@@ -51,22 +51,22 @@
 			
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/P/공예-창작/니트양말.PNG"/>
+                <img src="img/craftsEx/craftsEx01.PNG"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/P/공예-창작/레진공예.PNG"/>
+                <img src="img/craftsEx/craftsEx02.jpg"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/P/공예-창작/비즈.jpg"/>
+                <img src="img/craftsEx/craftsEx03.jpg"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/P/공예-창작/철사.jpg"/>
+                <img src="img/craftsEx/craftsEx04.jpg"/>
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -88,7 +88,7 @@
 			차시	:112차	총 896시간
 		</div>
 		<div id="idbslideitemImg">
-			<img src="img/클래스img.PNG"/>
+			<img src="img/classimgEx.PNG"/>
 		</div>
 		<div>
 			클래스 질문&댓글
