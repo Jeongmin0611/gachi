@@ -9,4 +9,8 @@ public class CreatorController {
 	public String creatorDashboard() {
 		return "creator/creatorDashboard";
 	}
+	@RequestMapping ("/creatorStatClass")
+	public String creatorStatClass() {
+		return "creator/creatorStatClass";
+	}
 }
