@@ -110,5 +110,9 @@ public class AdminController {
 	public String adminSettle() {
 		return "admin/adminSettle";
 	}
+	@RequestMapping("/adminReturn")
+	public String adminReturn() {
+		return "admin/adminReturn";
+	}
 
 }

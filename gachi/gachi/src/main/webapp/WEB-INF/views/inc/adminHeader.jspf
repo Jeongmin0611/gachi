@@ -16,6 +16,7 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <style>
+
 #admintop img{widht:150px; height:100px; padding:15px;}
 
 #adminMenu>li a {color: white;}
@@ -81,8 +82,8 @@ a , h1, li {font-family: 'OSeongandHanEum'; }
 		<li><span style="color : white">주문 배송 관리</span>
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>
-	            <li><a href="/gachi/adminStore">스토어</a></li>
 	            <li><a href="/gachi/adminDelivery">배송</a></li>
+	            <li><a href="/gachi/adminReturn">반품</a></li>
 			</ul>
 		</li>
 		<li><a href="/gachi/adminGoods">스토어 관리</a>
