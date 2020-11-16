@@ -22,5 +22,9 @@ public class ClassPageController {
 	public String classMain() {
 		return "classPage/classMain";
 	}
+	@RequestMapping("/oneClassPage")
+	public String oneclasspage() {
+		return "classPage/oneClassPage";
+	}
 
 }

@@ -425,7 +425,7 @@ a {
 
 #mJuserid, #mJuserpwd, #mJuserpwdOk, #mJusername, #mJuserNname, #mJuserB,
 	#mJusertel, #mJuseraddr {
-	width: 70%;
+	width: 68%;
 	height: 40px;
 	background-color: #e2e2e2;
 	margin: 20px 0;
@@ -434,11 +434,12 @@ a {
 #loginJOk button, #loginJ2Ok button {
 	width: 300px;
 	height: 50px;
+	margin:0 160px;
 }
 
 #mJ2userid, #mJ2userpwd, #mJ2userpwdOk, #mJ2username, #mJ2userNname,
 	#mJ2userB, #mJ2usertel, #mJ2usernum, #mJ2userM {
-	width: 70%;
+	width: 68%;
 	height: 40px;
 	background-color: #e2e2e2;
 	margin: 20px 0;
@@ -454,6 +455,7 @@ a {
 			<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
 			<li><a href="#">회원가입</a></li>
 			<li><a href="#">로그인</a></li>
+			<li><a href="/gachi/mypage">마이페이지</a></li>
 			<li><a href="/gachi/adminDashboard">어드민</a></li>
 			<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
 
@@ -491,17 +493,17 @@ a {
 				<ul class="submenu">
 					<!-- 서브메뉴 -->
 					<li></li>
-					<li><a href="#" class="submenuLink longLink">공예/창작</a></li>
-					<li><a href="#" class="submenuLink longLink">미술</a></li>
-					<li><a href="#" class="submenuLink longLink">사진/영상</a></li>
-					<li><a href="#" class="submenuLink longLink">요리</a></li>
-					<li><a href="#" class="submenuLink longLink">운동</a></li>
-					<li><a href="#" class="submenuLink longLink">음악</a></li>
-					<li><a href="#" class="submenuLink longLink">라이프스타일</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">공예/창작</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">미술</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">사진/영상</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">요리</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">운동</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">음악</a></li>
+					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">라이프스타일</a></li>
 				</ul></li>
 			<li class="topMenuLi"><a href="/gachi/introCreate"
 				class="menuLink">크리에이터 소개</a></li>
-			<li class="topMenuLi"><a href="#" class="menuLink">스토어</a></li>
+			<li class="topMenuLi"><a href="/gachi/storeMain" class="menuLink">스토어</a></li>
 			<li class="topMenuLi"><a href="/gachi/noticeBoard"
 				class="menuLink">공지사항</a>
 				<ul class="submenu">
@@ -662,7 +664,7 @@ a {
 		</div>
 	</div>
 	<div>
-		<div id="memberJoin" style="display: none">
+		<div id="memberJoin" style="display:none">
 			<form>
 				<div>
 					<h1 class="mJH">회원가입</h1>
