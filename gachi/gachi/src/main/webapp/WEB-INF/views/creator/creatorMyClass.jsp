@@ -43,7 +43,7 @@
 	<ul class="cr_MyClass_lst">
 		<li><input type="checkbox" id="" name=""/></li>
 		<li>10</li>
-		<li><img src="<%=request.getContextPath()%>/img/147.jpg"></li>
+		<li><img src="img/artEx/artEx03.PNG"></li>
 		<li>미술</li>
 		<li>초보자도 하기 쉬운 미술</li>
 		<li>2020-10-29</li>
@@ -51,7 +51,7 @@
 		
 		<li><input type="checkbox" id="" name=""/></li>
 		<li>9</li>
-		<li><img src="<%=request.getContextPath()%>/img/147.jpg"></li>
+		<li><img src="img/artEx/artEx04.PNG"></li>
 		<li>미술</li>
 		<li>초보자는 하기 어려운 미술</li>
 		<li>2020-10-15</li>
