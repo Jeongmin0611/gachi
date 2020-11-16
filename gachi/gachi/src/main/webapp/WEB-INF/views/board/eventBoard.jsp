@@ -71,29 +71,29 @@ h3, li, button, input[type=button], select option {
 
 		<!-- 이벤트 리스트 -->
 		<ul id="CEventList">
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
 			
 			
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBordDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>

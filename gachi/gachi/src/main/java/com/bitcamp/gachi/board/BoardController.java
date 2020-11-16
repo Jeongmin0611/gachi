@@ -18,9 +18,9 @@ public class BoardController {
 	public String eventBoard() {
 		return "board/eventBoard";
 	}
-	@RequestMapping("/eventBordDetail")
-	public String eventBordDetail() {
-		return "board/eventBordDetail";
+	@RequestMapping("/eventBoardDetail")
+	public String eventBoardDetail() {
+		return "board/eventBoardDetail";
 	}
 	
 	@RequestMapping("/companyBoard")
