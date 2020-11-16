@@ -18,6 +18,7 @@
 	width:100%;
 	margin-bottom: 20px;
 	min-height: 500px;
+	border-bottom: 1px solid black;
 	
 }
 /* 버튼 */
