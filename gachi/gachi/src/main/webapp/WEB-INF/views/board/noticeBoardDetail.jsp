@@ -25,6 +25,7 @@
 	margin: 20px 0;
 }
 
+
 </style>
 <script>
 	$('#noticeDetaillistBtn').click(function(){
