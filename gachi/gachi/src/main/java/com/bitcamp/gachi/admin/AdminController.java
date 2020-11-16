@@ -2,6 +2,7 @@ package com.bitcamp.gachi.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Controller
 public class AdminController {
@@ -69,6 +70,10 @@ public class AdminController {
 	@RequestMapping("/adminOrder")
 	public String adminOrder() {
 		return "admin/adminOrder";
+	}
+	@RequestMapping("/adminOrderView")
+	public String adminOrderView() {
+		return "admin/adminOrderView";
 	}
 	@RequestMapping("/adminStore")
 	public String adminStore() {
