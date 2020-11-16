@@ -1,66 +1,226 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	ol>li{list-style-type:decimal;}
 	
-	#myclassView{overflow:auto;margin:10px 50px 40px;}
-	#myclassView>li{height:30px;overflow:hidden;margin:20px 10px;line-height:25px;}
-	#myclassView>li:first-child{height:300px;float:left;}
-	#myclassView>li:nth-child(2){float:left;}
-	#myclassView>li:nth-child(3){font-size:2em;margin-left:0;}
-	#myclassView>li:nth-child(4){float:clear;}
-	#myclassView>li:nth-child(4){float:clear;}
-	#myclassView>li:nth-child(7){height:50px;}
-	#myclassView>li:nth-child(7)>button{background-color:#ABCEE3;}
-	#myclassView>li:last-child{height:50px;}
-	#myclassView>li:last-child>button{width:50%;margin:0;}
-	#myclassView>li:last-child>button:first-child{float:left;}
+	/* 클래스 보기 */
+	#myclassView{
+		overflow:auto;
+		margin:10px 50px 40px;
+	}
+	#myclassView>li{
+		height:30px;
+		overflow:hidden;
+		margin:20px 10px;
+		line-height:25px;
+	}
+	#myclassView>li:first-child{
+		height:300px;
+		float:left;
+	}
+	#myclassView>li:nth-child(2){
+		float:left;
+	}
+	#myclassView>li:nth-child(3){
+		font-size:2em;
+		margin-left:0;
+	}
+	#myclassView>li:nth-child(4){
+		float:clear;
+	}
+	#myclassView>li:nth-child(7){
+		height:50px;
+	}
+	#myclassView>li:nth-child(7)>button{
+		background-color:#ABCEE3;
+	}
+	#myclassView>li:last-child{
+		height:50px;
+	}
+	#myclassView>li:last-child>button{
+		width:50%;
+		margin:0;
+	}
+	#myclassView>li:last-child>button:first-child{
+		float:left;
+	}
 
-	/*클래스썸네일*/
-	#myclassView img{width:400px;height:300px;object-fit:cover;}
+	/* 클래스썸네일 */
+	#myclassView img{
+		width:400px;
+		height:300px;
+		object-fit:cover;
+	}
 	
-	/*클래스 목차*/
-	#myclassVideoLst label{font-size:1.5em;}
-	#myclassVideoLst ul{overflow:auto;margin-bottom:50px;}
-	#myclassVideoLst>ul>li>label{padding:0 20px;color:gray;width:100%;background-color:#F4BFA9;}
-	#myclassVideoLst ol>li{line-height:20px;margin:20px 0;}
-	#myclassVideoLst ol>li:last-child{margin-bottom:40px;}
-	#myclassVideoLst ol label{float:right;color:gray;font-size:1em;margin-right:20px;}
+	/* 클래스 목차 */
+	ol>li{
+		list-style-type:decimal;
+	}
+	#myclassVideoLst label{
+		font-size:1.5em;
+	}
+	#myclassVideoLst ul{
+		overflow:auto;
+		margin-bottom:50px;
+	}
+	#myclassVideoLst>ul>li>label{
+		padding:0 20px;
+		color:gray;
+		width:100%;
+		background-color:#F4BFA9;
+	}
+	#myclassVideoLst ol>li{
+		line-height:20px;
+		margin:20px 0;
+	}
+	#myclassVideoLst ol>li:last-child{
+		margin-bottom:40px;
+	}
+	#myclassVideoLst ol label{
+		float:right;
+		color:gray;
+		font-size:1em;
+		margin-right:20px;
+	}
 	
-	/*수강후기*/
-	#myclassReview{margin-bottom:50px;overflow:auto;}
-	#myclassReview ul{overflow:auto;}
-	#myclassReview>label{font-size:1.5em;}	
-	#myclassReview>button{float:right;background-color:#ABCEE3;}	
-	#myclassReview li{float:left;text-align:center;padding:0 10px;}
-	#myclassReview li:first-child{color:#F4BFA9;}
-	#myclassReview li:nth-child(2){text-align:left;font-weight:bold;color:gray;}
-	#myclassReview li:nth-child(3),#myclassReview li:nth-child(4){font-size:0.8em;}
-	#myclassReview li:last-child{width:100%;text-align:left;padding:15px;}
+	/* 수강후기 */
+	#myclassReview{
+		margin-bottom:50px;
+		overflow:auto;
+	}
+	#myclassReview ul{
+		overflow:auto;
+	}
+	#myclassReview>label{
+		font-size:1.5em;
+	}	
+	#myclassReview>button{
+		float:right;
+		background-color:#ABCEE3;
+	}	
+	#myclassReview li{
+		float:left;
+		text-align:center;
+		padding:0 10px;
+	}
+	#myclassReview li:first-child{
+		color:#F4BFA9;
+	}
+	#myclassReview li:nth-child(2){
+		text-align:left;
+		font-weight:bold;
+		color:gray;
+	}
+	#myclassReview li:nth-child(3),#myclassReview li:nth-child(4){
+		font-size:0.8em;
+	}
+	#myclassReview li:last-child{
+		width:100%;
+		text-align:left;
+		padding:15px;
+	}
 	
-	#myclassReviewPg a{color:#ABCEE3;margin-bottom:50px;}
+	#myclassReviewPg a{
+		color:#ABCEE3;
+		margin-bottom:50px;
+	}
 	
-	/*질문게시판*/
-	#myclassQna{margin-bottom:50px;overflow:auto;}
-	#myclassQna>ul{overflow:auto;margin-bottom:20px;border:3px solid #eee;padding:15px;}
-	#myclassQna>label{font-size:1.5em;}
-	#myclassQna>button{float:right;background-color:#ABCEE3;}	
-	#myclassQna li{float:left;text-align:center;padding:0 10px;}
-	#myclassQna>ul>li:first-child{float:left;text-align:left;padding:0 15px;font-weight:bold;color:gray;}
-	#myclassQna>ul>li:first-child>label{font-size:1em;color:#F4BFA9;font-weight:bold;margin-right:10px;}
-	#myclassQna li:nth-child(2),#myclassQna li:nth-child(3){font-size:0.8em;}
-	#myclassQna li:nth-child(4){width:100%;text-align:left;padding:0 15px;}
-	#myclassQna>ul>li:last-child{padding:10px;}
-	#myclassQna>ul>li:last-child label{font-size:1em;color:#ABCEE3;font-weight:bold;margin-right:10px;}
-	#myclassQna li:last-child{width:100%;text-align:left;float:left;padding:0 10px;}
-	#myclassQna>ul>li>ul>li:last-child{font-size:1em;}
+	/* 질문게시판 */
+	#myclassQna{
+		margin-bottom:50px;
+		overflow:auto;
+	}
+	#myclassQna>ul{
+		overflow:auto;
+		margin-bottom:20px;
+		border:3px solid #eee;
+		padding:15px;
+	}
+	#myclassQna>label{
+		font-size:1.5em;
+	}
+	#myclassQna>button{
+		float:right;
+		background-color:#ABCEE3;
+	}	
+	#myclassQna li{
+		float:left;
+		text-align:center;
+		padding:0 10px;
+	}
+	#myclassQna>ul>li:first-child{
+		float:left;
+		text-align:left;
+		padding:0 15px;
+		font-weight:bold;
+		color:gray;
+	}
+	#myclassQna>ul>li:first-child>label{
+		font-size:1em;
+		color:#F4BFA9;
+		font-weight:bold;
+		margin-right:10px;
+	}
+	#myclassQna li:nth-child(2),#myclassQna li:nth-child(3){
+		font-size:0.8em;
+	}
+	#myclassQna li:nth-child(4){
+		width:100%;
+		text-align:left;
+		padding:0 15px;
+	}
+	#myclassQna>ul>li:last-child{
+		padding:10px;
+	}
+	#myclassQna>ul>li:last-child label{
+		font-size:1em;
+		color:#ABCEE3;
+		font-weight:bold;
+		margin-right:10px;
+	}
+	#myclassQna li:last-child{
+		width:100%;
+		text-align:left;
+		float:left;
+		padding:0 10px;
+	}
+	#myclassQna>ul>li>ul>li:last-child{
+		font-size:1em;
+	}
 	
-	/*모달*/
-	#myclassModalR,#myclassModalQ{display:none;position:absolute;width:100%;height:100%;z-index:1;}
-	.myclassModal_content{width:500px;height:500px;margin:100px auto;padding:20px 10px;background-color:#fff;border:2px solid #eee;}
-	.myclassModal_content input{width:100%;margin-bottom:10px;}
-	.myclassModal_content textarea{width:100%;height:250px;margin-bottom:30px;}
-	.myclassModal_layer{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);z-index:-1;}
+	/* 모달 */
+	#myclassModalR,#myclassModalQ{
+		display:none;
+		position:absolute;
+		width:100%;
+		height:100%;
+		z-index:1;
+	}
+	.myclassModal_content{
+		width:500px;
+		height:500px;
+		margin:100px auto;
+		padding:20px 10px;
+		background-color:#fff;
+		border:2px solid #eee;
+	}
+	.myclassModal_content input{
+		width:100%;
+		margin-bottom:10px;
+	}
+	.myclassModal_content textarea{
+		width:100%;
+		height:250px;
+		margin-bottom:30px;
+	}
+	.myclassModal_layer{
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:rgba(0,0,0,0.5);
+		z-index:-1;
+	}
 	
 </style>
 <script>

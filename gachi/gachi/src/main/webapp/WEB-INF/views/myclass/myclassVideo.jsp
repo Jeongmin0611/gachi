@@ -7,40 +7,134 @@
 <link rel="stylesheet" href="resources/bootstrap.css" type="text/css" />
 <title>Insert title here</title>
 <style>
- 	a:link, a:visited, a:hover{text-decoration:none;color:#000;}
- 	a:hover{font-weight:bold;}
- 	ul{margin:0;padding:0;list-style-type:none;}
-	body{margin:0;padding:0;}
+
+	/* 클래스 수강하기(동영상 창) */
 	
-	#myclassVideoMain{width:70%;height:100vh;overflow:auto;float:left;	}
-	#myclassVideoLst{width:30%;height:100vh;overflow:auto;border-left:1px solid gray;overflow-x:hidden;}
+ 	a:link, a:visited, a:hover{
+ 		text-decoration:none;
+ 		color:#000;
+ 	}
+ 	a:hover{
+ 		font-weight:bold;
+ 	}
+ 	ul{
+ 		margin:0;
+ 		padding:0;
+ 		list-style-type:none;
+ 	}
+	body{
+		margin:0;
+		padding:0;
+	}
 	
-	/*상단 - 제목*/
-	#myclassVideoTop{padding:0;margin:0;height:7.5%;font-size:1.5em;line-height:50px;}
-	#myclassVideoTop>div:first-child{height:100%;margin:0;width:15%;background-color:#F4BFA9;float:left;text-align:center;}
-	#myclassVideoTop>div:last-child{height:100%;margin:0;width:85%;background-color:#eee;float:left;overflow:auto;padding-left:20px;}
+	/****************/
+	/* 메인창 */
+	#myclassVideoMain{
+		width:70%;
+		height:100vh;
+		overflow:auto;
+		float:left;	
+	}
+
+	/* 메인창 상단 - 동영상 제목 */
+	#myclassVideoTop{
+		padding:0;
+		margin:0;
+		height:7.5%;
+		font-size:1.5em;
+		line-height:50px;
+	}
+	#myclassVideoTop>div:first-child{
+		height:100%;
+		margin:0;
+		width:15%;
+		background-color:#F4BFA9;
+		float:left;
+		text-align:center;
+	}
+	#myclassVideoTop>div:last-child{
+		height:100%;
+		margin:0;
+		width:85%;
+		background-color:#eee;
+		float:left;
+		overflow:auto;
+		padding-left:20px;
+	}
 	
-	/*영상재생*/
-	#myclassVideoView{padding:10px;height:85%;overflow:hidden;}
-	#myclassVideoView img{width:100%;height:100%;object-fit:cover;}
+	/* 메인창 - 영상재생창 */
+	#myclassVideoView{
+		padding:10px;
+		height:85%;
+		overflow:hidden;
+	}
+	#myclassVideoView img{
+		width:100%;
+		height:100%;
+		object-fit:cover;
+	}
 	
-	/*하단 - 버튼*/
-	#myclassVideoBtm{height:7.5%;background-color:#F4BFA9;text-align:center;}
-	#myclassVideoBtm>button{margin:5px 10px;}
+	/* 메인창 하단 - 버튼 */
+	#myclassVideoBtm{
+		height:7.5%;
+		background-color:#F4BFA9;
+		text-align:center;
+	}
+	#myclassVideoBtm>button{
+		margin:5px 10px;
+	}
 	
-	/*목차*/
-	#myclassVideoLst>label:first-child{font-size:1.5em;margin:10px 20px;}
-	#myclassVideoLst>label:nth-child(2){width:30px;height:30px;float:right;margin:10px;font-size:1.3em;}
-	#myclassVideoLst>label:nth-child(3){width:100%;font-size:1.5em;margin:10px 20px;}
-	#myclassVideoLst>label:nth-child(4){width:100%;margin-left:20px;}
-	#myclassVideoLst>label:nth-child(5){margin-left:20px;}
-	
-	#myclassVideoLst>ul>li>label{line-height:40px;padding:0 20px;width:100%;background-color:#eee;}
-	#myclassVideoLst ol>li{line-height:20px;margin:20px 0;}
-	#myclassVideoLst ol>li:last-child{margin-bottom:40px;}
-	#myclassVideoLst ol label{padding-right:10px;float:right;color:gray;font-size:1em;}
-	
-	
+	/****************/
+	/* 목차 */
+	#myclassVideoLst{
+		width:30%;
+		height:100vh;
+		overflow:auto;
+		border-left:1px solid gray;
+		overflow-x:hidden;
+	}
+	#myclassVideoLst>label:first-child{
+		font-size:1.5em;
+		margin:10px 20px;
+	}
+	#myclassVideoLst>label:nth-child(2){
+		width:30px;
+		height:30px;
+		float:right;
+		margin:10px;
+		font-size:1.3em;
+	}
+	#myclassVideoLst>label:nth-child(3){
+		width:100%;
+		font-size:1.5em;
+		margin:10px 20px;
+	}
+	#myclassVideoLst>label:nth-child(4){
+		width:100%;
+		margin-left:20px;
+	}
+	#myclassVideoLst>label:nth-child(5){
+		margin-left:20px;
+	}
+	#myclassVideoLst>ul>li>label{
+		line-height:40px;
+		padding:0 20px;
+		width:100%;
+		background-color:#eee;
+	}
+	#myclassVideoLst ol>li{
+		line-height:20px;
+		margin:20px 0;
+	}
+	#myclassVideoLst ol>li:last-child{
+		margin-bottom:40px;
+	}
+	#myclassVideoLst ol label{
+		padding-right:10px;
+		float:right;
+		color:gray;
+		font-size:1em;
+	}
 </style>
 </head>
 <body>
