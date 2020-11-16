@@ -329,6 +329,7 @@ select{height:30px}
 		height:50px;
 		font-size:15px;
 		line-height:50px;
+		
 	}
 	#ad_settle_lst li:nth-of-type(7n+1){
 		width:20%;

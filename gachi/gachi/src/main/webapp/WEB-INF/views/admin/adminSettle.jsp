@@ -39,10 +39,8 @@
 		<h1>총 매출액</h1>
 		<h1>154,4540원</h1>
 	</div>
-<div style="width:90%; margin:0 auto;">
-	<div>
-	<button>일괄정산</button>
-	</div>
+<div style="margin-left:10%;">
+	<button style="text-align:right">일괄정산</button>
 	<ul id="ad_settle_lst">
 		<li>크리에이터아이디</li>
 		<li>카테고리</li>
