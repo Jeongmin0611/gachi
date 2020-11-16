@@ -34,7 +34,63 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 }
 
 /*관리자 대시보드*/
-	
+
+/*관리자 회원관리 start*/	
+#ad_member_info li{
+	float:left;
+	width:15%;
+}
+#ad_member_lst li{
+	width:10%;
+	float:left;
+	height:40px;
+	line-height:40px;
+	border:1px solid gray;
+}
+#ad_member_lst li:nth-child(8n+1){
+	width:5%;
+}
+#ad_member_lst li:nth-child(8n+2){
+	width:20%;
+}
+#ad_member_lst li:nth-child(8n+5){
+	width:20%;
+}
+#ad_member_lst li:nth-child(8n+6){
+	width:15%;
+}
+#ad_member_lst li:nth-child(8n+7){
+	width:15%;
+}
+#ad_member_lst li:nth-child(8n+8){
+	width:5%;
+}
+#ad_member_View{
+	width:80%;
+	margin:0 auto;
+	overflow: auto;
+}
+#ad_member_View>li{
+	float:left;
+	width:50%;
+	border:1px solid gray;
+	font-size: 1.2em;
+	line-height:50px;
+	height:50px;
+}
+#ad_member_View>li:nth-child(2n+1){
+	width:30%;
+}
+#ad_member_View>li:nth-child(2n){
+	text-align:left;
+	width:70%;
+}
+.ad_member_Box{
+	height:300px;
+	border:3px solid #F4BFA9;
+}
+/*관리자 회원관리 end*/
+
 /*관리자 공지사항 리스트 start*/
 	#ad_notice_lst li{
 		float: left;
@@ -95,7 +151,38 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		width:8%;
 	}
 	/*관리자 1:1문의 리스트 end*/
+	/*관리자 1:1문의 보기 start*/
+	#ad_1on1_view,#ad_1on1_writeForm{
+		overflow:auto;
+	}
+	#ad_1on1_view li,#ad_1on1_writeForm li{
+		text-align:left;
+		float:left;
+	}
+	#ad_1on1_view>li:last-child{
+		overflow:auto;
+		float:none;
+	}
+	.content_center{
+		text-align: center;
+	}
+	/*관리자 1:1문의 보기 end*/
+	
+	/*관리자 이벤트 글쓰기 start*/
+	/*bottom 내리기*/
+	.container{
+		overflow:auto;
+	}
+	#ad_event_writeForm li{
+		float:left;
+	}
+	#ad_event_writeForm>li>ul>li{
+		left: 20px;
+	}
+	/*관리자 이벤트 글쓰기 end*/
+	
 	/*관리자 이벤트 리스트 start*/
+	
 	#ad_event_header li{
 		float: left;
 		width:10%;
@@ -143,8 +230,77 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 		line-height:30px;
 		height:50px;
 	}
-
-
+	/*관리자 정산관리 리스트 start*/
+	.textSize{
+		font-size: 24px;
+	}
+	#ad_settle_lst{
+		margin-left:5%;
+		text-align: center;
+	}
+	#ad_settle_lst li{
+		border:1px solid gray;
+		float:left;
+		width:12%;
+		height:50px;
+		font-size:15px;
+		line-height:50px;
+	}
+	#ad_settle_lst li:nth-of-type(7n+1){
+		width:20%;
+	}
+	/*관리자 정산관리 리스트 end*/
+	
+	/*관리자 스토어관리 start*/
+	.ad_right_align{
+		text-align:right;
+	}
+	#ad_goods_lst>li{
+		float:left;
+		width:10%;
+		border:1px solid gray;
+	}	
+	#ad_goods_lst>li:nth-child(8n+2){
+		width:20%;
+	}
+	#ad_goods_lst>li:nth-child(8n+3){
+		width:20%;
+	}	
+	#ad_goods_viewForm{
+		overflow:auto;
+		font-size: 1.2em;
+	}
+	#ad_goods_viewForm>li:first-child{
+		float:left;
+		width:60%;
+	}
+	#ad_goods_info,#ad_goods_inquiry,#ad_goods_review{
+		height:300px;
+		border:3px solid #F4BFA9; 
+	}
+	#ad_goods_inquiry>li{
+		float:left;
+		width:10%;
+	}
+	#ad_goods_inquiry>li:nth-child(7n+1){
+		width:5%;
+	}
+	#ad_goods_inquiry>li:nth-child(7n+3){
+		width:45%;
+	}
+	#ad_goods_review>li{
+		float:left;
+		width:10%;
+	}
+	#ad_goods_review>li:nth-child(8n+1){
+		width:5%;
+	}
+	#ad_goods_review>li:nth-child(8n+3){
+		width:35%;
+	}
+	
+	/*관리자 스토어관리 end*/
+	
 	/*관리자 리스트 페이징 start*/
 	#paging{
 		width:50%;
@@ -155,6 +311,14 @@ ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 	#paging li{
 		width:12%;
 		float:left;
+		text-align:center;
 	}
+	#paging li:first-child,#paging li:last-child{
+		width:20%;
+	}
+	
 	/*관리자 리스트 페이징 end*/
+	.container h1{
+		text-align: center;
+	}
 /*  creator */

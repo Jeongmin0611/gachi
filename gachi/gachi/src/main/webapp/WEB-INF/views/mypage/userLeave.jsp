@@ -1,18 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#mypageNaviSub{margin:20px auto;margin-left:80px;overflow:auto;text-align:center;}
+	#mypageNaviSub{margin:20px auto;margin-left:50px;overflow:auto;text-align:center;}
 	#mypageNaviSub li{float:left;}
 	#mypageNaviSub li:nth-child(2){width:3%;}
+		
+	#userLeaveView{width:50%;position:relative;left:25%;margin:50px 0 200px;}
+	#userLeaveView>label{font-size:1.5em;}
 	
-	#infoEditView{width:50%;position:relative;left:25%;margin:50px 0 200px;}
-	#infoEditView label{font-size:1.5em;}
+	/*회원탈퇴 내용*/
+	#userLeaveInfo{background-color:#eee;padding:30px;text-align:center;margin-bottom:20px;}
+	#userLeaveInfo>label{width:100%;}
 	
-	#infoEditLst{margin:50px 0;}
-	#infoEditLst li{overflow:auto;margin-bottom:10px;}
-	#infoEditLst li:nth-child(2n+1){width:30%;float:left;}
-	#infoEditLst li:nth-child(2n){width:70%;}
-	#infoEditUserpwd{width:100%;}
+	#userLeaveChkLst{border:3px solid #eee;padding:20px;}
+	#userLeaveChkLst>li{margin:20px;}
+	#userLeaveChkLst>li>label:first-child{font-weight:bold;}
+	#userLeaveChkLst>li>label:nth-child(2){font-size:0.9em;}
+	#userLeaveChkLst>li:nth-child(2){margin-bottom:50px;}
+	#userLeaveChkLst>li:last-child{text-align:center;}
+	
 	
 </style>
 <div class="container">
@@ -25,14 +31,27 @@
 		</ul>
 	</div>
 	<hr/>
-	<div id="infoEditView">
-		<label>비밀번호확인</label>
-		<ul id="infoEditLst">
-			<li>아이디</li>
-			<li>userid@bitcamp.com</li>
-			<li>비밀번호</li>
-			<li><input type="password" name="userpwd" id="infoEditUserpwd"/></li>
+	<div id="userLeaveView">
+		<label>회원탈퇴</label>
+		<div id="userLeaveInfo">
+			<label>탈퇴할 아이디 : user</label>
+			<label>이름 : 김유미</label>
+		</div>
+		<ul id="userLeaveChkLst">
+			<li>
+				<label>*사용하고 계신 아이디는 탈퇴 후 재사용 및 복구가 불가능합니다.</label>
+				<label>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</label>
+				<input type="checkbox"/><label>동의합니다.</label>
+			</li>
+			<li>
+				<label>*탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.</label>
+				<label>회원정보 및 서비스 이용기록은 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.<br/>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</label> 
+				<input type="checkbox"/><label>동의합니다.</label>
+			</li>
+			<li>
+				<button type="button" class="btn btn-outline-primary" onclick="location.href='/gachi/mypage'">탈퇴취소</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/gachi/userLeaveChk'">확인</button>
+			</li>
 		</ul>
-		<button type="button" class="btn btn-outline-dark	 btn-block" onclick="location.href='#'">회원탈퇴</button>
 	</div>
 </div>

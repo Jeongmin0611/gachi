@@ -11,6 +11,10 @@
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <style>
 #admintop img{widht:150px; height:100px; padding:15px;}
 
@@ -47,10 +51,10 @@
     font-weight: normal;
     font-style: normal;
 }
-a{font-family: 'OSeongandHanEum';}
+a , h1, li {font-family: 'OSeongandHanEum';}
 </style>
 
-<title>관리자페이지 헤더</title>
+<title>관리자페이지</title>
 
 </head>
 <body>
@@ -81,9 +85,9 @@ a{font-family: 'OSeongandHanEum';}
 	            <li><a href="/gachi/adminDelivery">배송</a></li>
 			</ul>
 		</li>
-		<li><a href="">스토어 관리</a>
+		<li><a href="/gachi/adminGoods">스토어 관리</a>
 			<ul class="submenu">
-				<li><a href="/gachi/adminGoodsList">상품 리스트</a></li>
+				<li><a href="#">상품 리스트</a></li>
 	            <li><a href="/gachi/adminGoodsEnroll">상품 등록</a></li>
 			</ul>
 		</li>

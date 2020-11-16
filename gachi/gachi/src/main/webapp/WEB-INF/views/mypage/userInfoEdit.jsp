@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#mypageNaviSub{margin:20px auto;margin-left:80px;overflow:auto;text-align:center;}
+	#mypageNaviSub{margin:20px 50px 10px;overflow:auto;text-align:center;}
 	#mypageNaviSub li{float:left;}
 	#mypageNaviSub li:nth-child(2){width:3%;}
 	

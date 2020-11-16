@@ -21,10 +21,19 @@ public class AdminController {
 	public String adminMember() {
 		return "admin/adminMember";
 	}
+	@RequestMapping("/adminMemberView")
+	public String adminMemberView() {
+		return "admin/adminMemberView";
+	}
+	@RequestMapping("/adminMemberEdit")
+	public String adminMemberEdit() {
+		return "admin/adminMemberEdit";
+	}
 	@RequestMapping("/adminNotice")
 	public String adminNotice() {
 		return "admin/adminNotice";
 	}
+	
 	@RequestMapping("/adminNoticeView")
 	public String adminNoticeView() {
 		return "admin/adminNoticeView";
@@ -37,9 +46,21 @@ public class AdminController {
 	public String adminEvent() {
 		return "admin/adminEvent";
 	}
+	@RequestMapping("/adminEventView")
+	public String adminEventView() {
+		return "admin/adminEventView";
+	}
+	@RequestMapping("/adminEventWrite")
+	public String adminEventWrite() {
+		return "admin/adminEventWrite";
+	}
 	@RequestMapping("/admin1on1")
 	public String admin1on1() {
 		return "admin/admin1on1";
+	}
+	@RequestMapping("/admin1on1View")
+	public String admin1on1View() {
+		return "admin/admin1on1View";
 	}
 	@RequestMapping("/adminOrder")
 	public String adminOrder() {
@@ -53,13 +74,17 @@ public class AdminController {
 	public String adminDelivery() {
 		return "admin/adminDelivery";
 	}
-	@RequestMapping("/adminGoodsList")
+	@RequestMapping("/adminGoods")
 	public String adminGoodsList() {
-		return "admin/adminGoodsList";
+		return "admin/adminGoods";
 	}
-	@RequestMapping("/adminGoodsEnroll")
+	@RequestMapping("adminGoodsView")
+	public String adminGoodsView() {
+		return "/admin/adminGoodsView";
+	}
+	@RequestMapping("/adminGoodsWrite")
 	public String adminGoodsEnroll() {
-		return "admin/adminGoodsEnroll";
+		return "admin/adminGoodsWrite";
 	}
 	@RequestMapping("/adminStatStore")
 	public String adminStatStore() {
