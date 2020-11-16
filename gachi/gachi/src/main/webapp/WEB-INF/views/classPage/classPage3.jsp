@@ -7,7 +7,8 @@
 </head>
 <style>
 	#classForm img{
-		width:100%;
+		width:350px;
+		height:250px;
 	}
 	#classForm li{
 		float:left;
@@ -16,9 +17,8 @@
 		overflow: auto;
 	}
 	.classList1{
-		width:350px;
-		height:250px;
-		margin:9px;
+		width:30%;
+		margin: auto 15px;
 	}
 </style>
 <body>
@@ -37,9 +37,18 @@
 		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
 		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
 	</ul>
-	<br/>
-	<span id="classPageBtn">이전/1/2/3/4/5다음</span>
 	</div>
+	<!-- paging -->
+		<hr/>
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
 	<%@ include file="../inc/bottom.jspf"%>
 </body>
 </html>

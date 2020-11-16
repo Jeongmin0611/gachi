@@ -48,12 +48,7 @@
 	<div class="container">
 	<div id="slideitemMain">
 		<div id="classSlide" class="classSlideDiv" data-ride="carousel" data-interval="4000">
-			<ul class="carousel-indicators">
-            <li data-target="#slideimage" data-slide-to="0" class="active"></li>
-            <li data-target="#slideimage" data-slide-to="1"></li>
-            <li data-target="#slideimage" data-slide-to="2"></li>
-            <li data-target="#slideimage" data-slide-to="3"></li>
-        </ul>
+			
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="img/P/공예-창작/니트양말.PNG"/>
