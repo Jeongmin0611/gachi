@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container">
-<h1>배송관리</h1>
+<h1>반품관리</h1>
 <div>
-	<ul id="ad_delivery_info">
-		<li>●배송대기 : 5개</li>
-		<li>●배송중 : 10개</li>
-		<li>●배송완료 : 90개</li>
+	<ul id="ad_return_info">
+		<li>●반품대기 : 5개</li>
+		<li>●반품완료 : 90개</li>
 	</ul>
 </div>
 <div class="ad_right_align">
@@ -15,11 +14,11 @@
 			<option>전체</option>
 			<option>상품명</option>
 			<option>구매자명</option>
+			<option>주문번호</option>
 		</select>
 		<select name="#">
 			<option>전체</option>
-			<option>배송대기</option>
-			<option>배송중</option>
+			<option>반품대기</option>
 			<option>배송완료</option>
 			
 		</select>
@@ -27,33 +26,34 @@
 		<input type="submit" value="검색" />
 		</form>
 </div>
-<ul id="ad_delivery_lst" class="text-center">
-	<li>번호</li>
+<ul id="ad_return_lst" class="text-center">
+	<li>주문번호</li>
 	<li>카테고리</li>
-	<li>상품번호</li>
 	<li>상품명</li>
 	<li>구매자</li>
-	<li>구매상태</li>
-	<li>운송장번호</li>
-	<li>배송상태</li>
+	<li>결제금액</li>
+	<li>구매일</li>
+	<li>반품 신청일</li>
+	<li>상태</li>
 	
-	<li>041</li>
-	<li>창작/공예</li>
-	<li>S5124123</li>
-	<li>공예,비즈용품</li>
-	<li>박구매</li>
-	<li>결제완료</li>
-	<li><a href="#">15-12352-1234</a></li>
-	<li><a href="#">배송완료</a></li>
+	<li><a href="">34812312397359</a></li>
+	<li>스포츠</li>
+	<li>5kg 아령세트</li>
+	<li>박멸치</li>
+	<li>15,000원</li>
+	<li>2020-11-09</li>
+	<li>2020-11-10</li>
+	<li>반품완료</li>
 	
-	<li>030</li>
+	<li><a href="">1453123123559</a></li>
 	<li>미술</li>
-	<li>S5623123</li>
-	<li>드로잉용품</li>
-	<li>김구매</li>
-	<li>결제대기</li>
-	<li><a href="#">운송장번호 입력하기</a></li>
-	<li><a href="#">배송대기</a></li>
+	<li>드로잉세트</li>
+	<li>김카소</li>
+	<li>23,000원</li>
+	<li>2020-11-11</li>
+	<li>2020-11-13</li>
+	<li>반품대기</li>
+	
 </ul>	
 <div id="paging">
 	<ul>

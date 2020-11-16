@@ -7,7 +7,7 @@
 ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 
 select{height:30px}
-
+input{text-align:center;}
 /* 폰트설정시  클래스 지정후 폰트적용시키기 */
 .cfont{font-family:'OSeongandHanEum';}
 .carousel-inner img{width: 100%; height: 400px;}
@@ -176,6 +176,216 @@ select{height:30px}
 	}
 
 /*관리자 크리에이터관리 end*/
+
+
+
+/* 관리자 주문 관리 start*/
+
+
+#ad_order_info li{
+	float:left;
+	width:15%;
+}
+#ad_order_lst li{
+	width:10%;
+	float:left;
+	height:40px;
+	line-height:40px;
+	border:1px solid gray;
+}
+#ad_order_lst li:nth-child(9n+1){
+	width:5%;
+}
+#ad_order_lst li:nth-child(9n+2){
+	width:10%;
+}
+#ad_order_lst li:nth-child(9n+3){
+	width:15%;
+}
+#ad_order_lst li:nth-child(9n+4){
+	width:15%;
+}
+#ad_order_lst li:nth-child(9n+5){
+	width:10%;
+}
+#ad_order_lst li:nth-child(9n+6){
+	width:15%;
+}
+#ad_order_lst li:nth-child(9n+7){
+	width:10%;
+}
+#ad_order_lst li:nth-child(9n+8){
+	width:10%;
+}
+#ad_order_lst li:nth-child(9n+9){
+	width:10%;
+}
+#ad_order_View{
+	width:80%;
+	margin:0 auto;
+	overflow: auto;
+}
+#ad_order_View>li{
+	float:left;
+	width:50%;
+	border:1px solid gray;
+	font-size: 1.2em;
+	line-height:50px;
+	height:50px;
+}
+#ad_order_View>li:nth-child(2n+1){
+	width:30%;
+}
+#ad_order_View>li:nth-child(2n){
+	text-align:left;
+	width:70%;
+}
+.ad_order_Box{
+	height:300px;
+	border:3px solid #F4BFA9;
+}
+
+
+/*관리자 주문 end*/
+
+
+/* 관리자 배송 관리 start*/
+
+
+#ad_delivery_info li{
+	float:left;
+	width:15%;
+}
+#ad_delivery_lst li{
+	width:10%;
+	float:left;
+	height:40px;
+	line-height:40px;
+	border:1px solid gray;
+}
+#ad_delivery_lst li:nth-child(8n+1){
+	width:10%;
+}
+#ad_delivery_lst li:nth-child(8n+2){
+	width:10%;
+}
+#ad_delivery_lst li:nth-child(8n+3){
+	width:15%;
+}
+#ad_delivery_lst li:nth-child(8n+4){
+	width:15%;
+}
+#ad_delivery_lst li:nth-child(8n+5){
+	width:10%;
+}
+#ad_delivery_lst li:nth-child(8n+6){
+	width:7%;
+}
+#ad_delivery_lst li:nth-child(8n+7){
+	width:23%;
+}
+#ad_delivery_lst li:nth-child(8n+8){
+	width:10%;
+}
+
+#ad_delivery_View{
+	width:80%;
+	margin:0 auto;
+	overflow: auto;
+}
+#ad_delivery_View>li{
+	float:left;
+	width:50%;
+	border:1px solid gray;
+	font-size: 1.2em;
+	line-height:50px;
+	height:50px;
+}
+#ad_delivery_View>li:nth-child(2n+1){
+	width:30%;
+}
+#ad_delivery_View>li:nth-child(2n){
+	text-align:left;
+	width:70%;
+}
+.ad_delivery_Box{
+	height:300px;
+	border:3px solid #F4BFA9;
+}
+
+
+/*관리자 배송 end*/
+
+
+/* 관리자 반품 관리 start*/
+
+
+#ad_return_info li{
+	float:left;
+	width:15%;
+}
+#ad_return_lst li{
+	width:10%;
+	float:left;
+	height:40px;
+	line-height:40px;
+	border:1px solid gray;
+}
+#ad_return_lst li:nth-child(8n+1){
+	width:20%;
+}
+#ad_return_lst li:nth-child(8n+2){
+	width:10%;
+}
+#ad_return_lst li:nth-child(8n+3){
+	width:15%;
+}
+#ad_return_lst li:nth-child(8n+4){
+	width:15%;
+}
+#ad_return_lst li:nth-child(8n+5){
+	width:10%;
+}
+#ad_return_lst li:nth-child(8n+6){
+	width:10%;
+}
+#ad_return_lst li:nth-child(8n+7){
+	width:10%;
+}
+#ad_return_lst li:nth-child(8n+8){
+	width:10%;
+}
+
+#ad_return_View{
+	width:80%;
+	margin:0 auto;
+	overflow: auto;
+}
+#ad_return_View>li{
+	float:left;
+	width:50%;
+	border:1px solid gray;
+	font-size: 1.2em;
+	line-height:50px;
+	height:50px;
+}
+#ad_return_View>li:nth-child(2n+1){
+	width:30%;
+}
+#ad_return_View>li:nth-child(2n){
+	text-align:left;
+	width:70%;
+}
+.ad_return_Box{
+	height:300px;
+	border:3px solid #F4BFA9;
+}
+
+
+/*관리자 반품 end*/
+
+
+
 /*관리자 공지사항 리스트 start*/
 	#ad_notice_lst li{
 		float: left;
