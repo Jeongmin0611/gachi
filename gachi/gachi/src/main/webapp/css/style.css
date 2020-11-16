@@ -482,8 +482,8 @@ input{text-align:center;}
 		height:120px;
 	}
 	#ad_event_lst img{
-		width:100px;
-		height:100px;
+		width:100%;
+		height:100%;
 	}
 	#ad_event_lst li:nth-of-type(7n+1){
 		width:5%;
@@ -629,8 +629,8 @@ input{text-align:center;}
 		height:120px;
 	}
 	.cr_MyClass_lst img{
-		width:100px;
-		height:100px;
+		width:100%;
+		height:100%;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+1){
 		width:5%;
@@ -677,8 +677,8 @@ input{text-align:center;}
 		height:120px;
 	}
 	.cr_Create_lst img{
-		width:100px;
-		height:100px;
+		width:100%;
+		height:100%;
 	}
 	.cr_Create_lst li:nth-of-type(7n+1){
 		width:5%;

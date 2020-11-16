@@ -39,7 +39,7 @@
 <ul id="ad_event_lst">
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
-	<li><img src="<%=request.getContextPath()%>/img/147.jpg"></li>
+	<li><img src="img/musicEx/musicEx01.png"></li>
 	<li class="wordCut"><a href="/gachi/adminEventView">신규회원 이벤트 3만원할인!</a></li>
 	<li>2020-10-21</li>
 	<li>2020-10-29</li>
