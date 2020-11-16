@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+
 #eventDetailUl li{
 	float: left;
 	margin-top:10px;
@@ -14,8 +15,11 @@
 #eventDetailUl li:nth-child(5){
 	width:100%;
 	margin-bottom: 20px;
-	
+	min-height: 500px;
+	overflow:auto;
+	border-bottom: 1px solid black;
 }
+
 form{
 	margin: 20px 0; 
 	float: left;
@@ -29,6 +33,27 @@ form [type=button]{
 	clear: both;
 	margin: 20px 0;
 	background-color: oragin;
+}
+/*댓글 리스트*/
+#eventDetailReplyDiv{
+	clear: both;
+	overflow: auto;
+}
+#eventDetailReplyDiv li{
+	float:left;
+	min-height: 100px;
+}
+#eventDetailReplyDiv li:nth-child(4n+1){
+	width: 15%;
+}
+#eventDetailReplyDiv li:nth-child(4n+3){
+	width: 10%;
+}
+#eventDetailReplyDiv li:nth-child(4n+4){
+	width: 15%;
+}
+#eventDetailReplyDiv li:nth-child(4n+2){
+	width: 60%;
 }
 </style>
 <div class="container">
@@ -56,4 +81,29 @@ form [type=button]{
 		댓글 <textarea rows="3" cols="120"></textarea>
 		<input type="button" value="등록" style="height: 50px; text-align: center;"/>
 	</form>
+	<!-- 댓글 리스트 -->
+	<div>
+		<ul id="eventDetailReplyDiv">
+			<li>홍길동</li>
+			<li>댓글 내용 이벤트 댓글</li>
+			<li>2020-10-11</li>
+			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			
+			
+			<li>홍길동</li>
+			<li>댓글 내용 이벤트 댓글</li>
+			<li>2020-10-11</li>
+			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			<li>홍길동</li>
+			<li>댓글 내용 이벤트 댓글</li>
+			<li>2020-10-11</li>
+			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			<li>홍길동</li>
+			<li>댓글 내용 이벤트 댓글</li>
+			<li>2020-10-11</li>
+			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			
+			
+		</ul>
+	</div>
 </div>

@@ -63,9 +63,8 @@ h3, li, button, input[type=button], select option {
 }
 
 #CnoticePaging {
-	clear: both;
-	margin-top: 20px;
-	background-color: pink;
+	clear:both;
+	padding-top: 20px;
 }
 </style>
 <script>
