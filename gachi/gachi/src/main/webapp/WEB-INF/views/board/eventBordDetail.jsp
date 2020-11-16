@@ -14,7 +14,7 @@
 #eventDetailUl li:nth-child(5){
 	width:100%;
 	margin-bottom: 20px;
-	
+	height:500px;
 }
 form{
 	margin: 20px 0; 
