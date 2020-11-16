@@ -51,7 +51,7 @@
     font-weight: normal;
     font-style: normal;
 }
-a , h1, li {font-family: 'OSeongandHanEum';}
+a , h1, li {font-family: 'OSeongandHanEum'; }
 </style>
 
 <title>관리자페이지</title>
@@ -71,14 +71,14 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
 		<li><a href="/gachi/adminClass">클래스 관리</a></li>
 		<li><a href="/gachi/adminMember">회원관리</a></li>
-		<li><a href="">게시글 관리</a>
+		<li><span style="color : white">게시글 관리</span>
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
 	            <li><a href="/gachi/adminEvent">이벤트</a></li>
 	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
 			</ul>		
 		</li>
-		<li><a href="">주문 배송 관리</a>
+		<li><span style="color : white">주문 배송 관리</span>
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>
 	            <li><a href="/gachi/adminStore">스토어</a></li>
@@ -92,7 +92,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 			</ul>
 		</li>
 		<li><a href="/gachi/adminSettle">정산 관리</a></li>
-		<li><a href="">통계</a>
+		<li><span style="color : white">통계</span>
 			<ul class="submenu">
 				<li><a href="/gachi/adminStatStore">스토어</a></li>
 	            <li><a href="/gachi/adminStatClass">클래스</a></li>

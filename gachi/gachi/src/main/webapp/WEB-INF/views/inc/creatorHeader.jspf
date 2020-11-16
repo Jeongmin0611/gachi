@@ -68,7 +68,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 		<li><a href="/gachi/creatorClass">클래스 관리</a>
 			<ul class="submenu">
 				<li><a href="/gachi/creatorCreate">클래스 개설신청</a></li>
-	            <li><a href="/gachi/cratorStatClass">클래스 통계</a></li>
+	            <li><a href="/gachi/creatorStatClass">클래스 통계</a></li>
 			</ul>
 		</li>
 		<li><a href="/gachi/creatorInformation">개인정보 수정</a>
@@ -84,7 +84,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 	            <li><a href="/gachi/creatorClassQuestion">클래스문의 </a></li>
 			</ul>
 		</li>
-		<li><a href="">이용안내</a></li>
+		<li><a href="#">이용안내</a></li>
 		
 	</ul>
 </div>

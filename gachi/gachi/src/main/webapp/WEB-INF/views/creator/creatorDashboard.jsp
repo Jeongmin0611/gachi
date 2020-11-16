@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	#cr_dash_board_ul>li{float:left; width: 20%; text-align:center; margin-left:100px;}
-	.cr_dash_board {border: 2px solid #F4BFA9; width:250px; height:200px; padding:20px; margin-bottom:50px;}
-</style>    
-    
+#cr_dash_board_ul>li {
+	float: left;
+	width: 20%;
+	text-align: center;
+	margin-left: 100px;
+}
+
+.cr_dash_board {
+	border: 2px solid #F4BFA9;
+	width: 250px;
+	height: 200px;
+	padding: 20px;
+	margin-bottom: 50px;
+}
+</style>
+
+
+<div class="container cr_dash_center text-center">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
-<div class="container cr_dash_center text-center">
 
 	<div>
 		<ul id="cr_dash_board_ul">

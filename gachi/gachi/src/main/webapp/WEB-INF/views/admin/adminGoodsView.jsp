@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <script type="text/javascript">
 	$(function(){
 		$("#ad_goods_inquiry>li:lt(7)").css("border","1px solid #F4BFA9");
