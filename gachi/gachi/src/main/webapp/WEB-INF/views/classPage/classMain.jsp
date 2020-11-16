@@ -23,7 +23,7 @@
 	}
 	#slideitem input{
 		margin:10px;
-		width:200px;
+		width:175px;
 		height:40px;
 	}
 	.itemListEx{
@@ -45,6 +45,7 @@
 </style>
 <body>
 	<%@ include file="../inc/top.jspf"%>
+	<div class="container">
 	<div id="slideitemMain">
 		<div id="classSlide" class="classSlideDiv" data-ride="carousel" data-interval="4000">
 			<ul class="carousel-indicators">
@@ -55,22 +56,22 @@
         </ul>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/classmaintest1.jpg"/>
+                <img src="img/P/공예-창작/니트양말.PNG"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/classmaintest2.jpg"/>
+                <img src="img/P/공예-창작/레진공예.PNG"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/classmaintest3.jpg"/>
+                <img src="img/P/공예-창작/비즈.jpg"/>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/classmaintest4.jpg"/>
+                <img src="img/P/공예-창작/철사.jpg"/>
                 <div class="carousel-caption">
                 </div>
             </div>
@@ -92,7 +93,7 @@
 			차시	:112차	총 896시간
 		</div>
 		<div id="idbslideitemImg">
-			<img src="img/classImg.jpg"/>
+			<img src="img/클래스img.PNG"/>
 		</div>
 		<div>
 			클래스 질문&댓글
@@ -102,6 +103,7 @@
 			클래스 수강평
 			<div>보고 만들기</div>
 		</div>
+	</div>
 	<%@ include file="../inc/bottom.jspf"%>
 </body>
 </html>

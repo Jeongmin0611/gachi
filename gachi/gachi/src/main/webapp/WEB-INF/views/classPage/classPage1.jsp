@@ -7,7 +7,8 @@
 </head>
 <style>
 	#classForm img{
-		width:100%;
+		width:350px;
+		height:250px;
 	}
 	#classForm li{
 		float:left;
@@ -16,9 +17,11 @@
 		overflow: auto;
 	}
 	.classList1{
-		width:350px;
-		height:250px;
-		margin:9px;
+		width:30%;
+		margin: auto 15px;
+	}
+	#classPageBtn{
+		text-align:center;
 	}
 </style>
 <body>
@@ -38,6 +41,7 @@
 		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
 	</ul>
 	<br/>
+	<hr/>
 	<span id="classPageBtn">이전/1/2/3/4/5다음</span>
 	</div>
 	<%@ include file="../inc/bottom.jspf"%>
