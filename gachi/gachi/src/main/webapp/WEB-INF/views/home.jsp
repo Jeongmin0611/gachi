@@ -44,27 +44,27 @@
 	<ul>
 		<li class="lMeun1">인기클래스</li>
 		<li class="lMeun2"><a href="/gachi/classPage">more</a></li>
-		<li class="listMain"><div class="a"><img src="img/P/음악/Dj.png"/></div>음악	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/요리/포케.jpg"/></div>요리	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/미술/색연필 반려동물 .PNG"/></div>미술	작성자<br/>제목</li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/musicEx/musicEx01.png"/></div>음악	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx01.jpg"/></div>요리	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx01.PNG"/></div>미술	작성자<br/>제목</a></li>
 	</ul>
 </div>
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">신규클래스</li>
 		<li class="lMeun2"><a href="/gachi/classPage2">more</a></li>
-		<li class="listMain"><div class="a"><img src="img/P/미술/건축물.PNG"/></div>미술	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/요리/나베.jpg"/></div>요리	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/공예-창작/알공예.jpg"/></div>공예-창작	작성자<br/>제목</li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx02.PNG"/></div>미술	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx02.jpg"/></div>요리	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx5.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
 </div>
 <div class="mainClass">
 	<ul>
 		<li class="lMeun1">추천클래스</li>
 		<li class="lMeun2"><a href="/gachi/classPage3">more</a></li>
-		<li class="listMain"><div class="a"><img src="img/P/요리/스페인식문어요리.jpg"/></div>요리	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/미술/손글씨.PNG"/></div>미술	작성자<br/>제목</li>
-		<li class="listMain"><div class="a"><img src="img/P/공예-창작/민화.jpg"/></div>공예-창작	작성자<br/>제목</li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/cookingEx/cookingEx03.jpg"/></div>요리	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/ArtEx/ArtEx03.PNG"/></div>미술	작성자<br/>제목</a></li>
+		<li class="listMain"><div class="a"><a href="/gachi/classMain"><img src="img/craftsEx/craftsEx6.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
 	</ul>
 </div>
 </div>

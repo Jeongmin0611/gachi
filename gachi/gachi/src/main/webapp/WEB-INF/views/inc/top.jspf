@@ -444,6 +444,9 @@ a {
 	background-color: #e2e2e2;
 	margin: 20px 0;
 }
+#dbCMLI{
+	color:black;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -488,8 +491,7 @@ a {
 		<ul>
 			<li><a class="menuLink" href="/gachi"><img
 					src="img/logo.png" /></a></li>
-			<li class="topMenuLi"><a class="menuLink"
-				href="/gachi/classMain">카테고리</a>
+			<li class="topMenuLi"><a class="menuLink" id="dbCMLI">카테고리</a>
 				<ul class="submenu">
 					<!-- 서브메뉴 -->
 					<li></li>
