@@ -1,23 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	#userMileageView{margin:50px 10px 5px;padding:10px;height:150px;border:5px solid #ABCEE3;}
-	#userMileageView>div{width:33%;float:left;text-align:center;}
-	#userMileageView label{width:100%;line-height:50px;}
-	#userMileageView label:nth-child(2n){font-size:1.5em;}
+
+	/* 마일리지 */
 	
-	#userMileageLst{margin-bottom:100px;}
-	#userMileageLst>label:first-child{width:100%;font-size:0.8em;text-align:right;}
-	#userMileageLst>label:nth-child(2){margin-top:20px;font-size:1.5em;}
+	/*******************/
+	/* 상단 */
+	#userMileageTop{
+		margin:50px 10px 5px;
+		padding:10px;
+		height:150px;
+		border:5px solid #ABCEE3;
+	}
+	#userMileageTop>div{
+		width:33%;
+		float:left;
+		text-align:center;
+	}
+	#userMileageTop label{
+		width:100%;
+		line-height:50px;
+	}
+	#userMileageTop label:nth-child(2n){
+		font-size:1.5em;
+	}
 	
-	#userMileageLst ul{overflow:auto;}
-	#userMileageLst li{width:33%;line-height:50px;float:left;text-align:center;}
-	#userMileageTtl li{line-height:30px;}
+	/*******************/
+	/* 내용 */
+	#userMileageContent{
+		margin-bottom:100px;
+	}
+	#userMileageContent>label:first-child{
+		width:100%;
+		font-size:0.8em;
+		text-align:right;
+	}
+	#userMileageContent>label:nth-child(2){
+		margin-top:20px;
+		font-size:1.5em;
+	}
+	#userMileageContent ul{
+		overflow:auto;
+	}
+	#userMileageContent li{
+		width:33%;
+		line-height:50px;
+		float:left;
+		text-align:center;
+	}
+	/* 리스트 제목 */
+	#userMileageTtl li{
+		line-height:30px;
+	}
 	
 </style>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf" %>
-	<div id="userMileageView">
+	<div id="userMileageTop">
 		<div>
 			<label>현재 마일리지</label>
 			<label>1,000p</label>
@@ -31,7 +70,7 @@
 			<label>0p</label>
 		</div>
 	</div>
-	<div id="userMileageLst">
+	<div id="userMileageContent">
 		<label>*마일리지는 적립(충전)된 달로부터 12개월 이내에 사용하셔야 합니다</label>
 		<label>마일리지 적립/사용 내역</label>
 		<hr/>
