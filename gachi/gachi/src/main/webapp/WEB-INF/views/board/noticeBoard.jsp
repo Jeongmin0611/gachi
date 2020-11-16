@@ -99,17 +99,17 @@ h3, li, button, input[type=button], select option {
 
 
 			<li>번호</li>
-			<li>제목</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
 			<li>작성일</li>
 			<li>조회수</li>
 			<li>번호</li>
-			<li>제목</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
 			<li>작성일</li>
 			<li>조회수</li>
 			<li>번호</li>
-			<li>제목</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
 			<li>작성일</li>
 			<li>조회수</li>
