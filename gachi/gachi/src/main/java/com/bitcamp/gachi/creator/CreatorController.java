@@ -13,4 +13,12 @@ public class CreatorController {
 	public String creatorStatClass() {
 		return "creator/creatorStatClass";
 	}
+	@RequestMapping ("/creatorCreate")
+	public String creatorCreate() {
+		return "creator/creatorCreate";
+	}
+	@RequestMapping ("/creatorMyClass")
+	public String creatorMyClass() {
+		return "creator/creatorMyClass";
+	}
 }

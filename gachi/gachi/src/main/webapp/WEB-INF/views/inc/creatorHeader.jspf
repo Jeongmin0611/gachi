@@ -68,6 +68,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 		<li><a href="/gachi/creatorClass">클래스 관리</a>
 			<ul class="submenu">
 				<li><a href="/gachi/creatorCreate">클래스 개설신청</a></li>
+				<li><a href="/gachi/creatorMyClass">나의 클래스</a></li>
 	            <li><a href="/gachi/creatorStatClass">클래스 통계</a></li>
 			</ul>
 		</li>
