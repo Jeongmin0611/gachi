@@ -29,7 +29,7 @@
 	<li>작성자</li>
 	<li>등록일</li>
 	<li>조회수</li>
-	
+
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
 	<li><a href="/gachi/adminNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
