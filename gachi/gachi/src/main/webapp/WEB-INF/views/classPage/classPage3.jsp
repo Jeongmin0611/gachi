@@ -15,6 +15,7 @@
 	}
 	#classForm{
 		overflow: auto;
+		margin:50px auto;
 	}
 	.classList1{
 		width:30%;
