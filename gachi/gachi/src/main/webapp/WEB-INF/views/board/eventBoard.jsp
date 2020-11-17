@@ -46,7 +46,7 @@ h3{
 
 #CEventList span {
 	font-weight: normal;
-	font-size: 8px;
+	font-size: 15px;
 }
 .pagination{
 	margin-bottom:50px;
