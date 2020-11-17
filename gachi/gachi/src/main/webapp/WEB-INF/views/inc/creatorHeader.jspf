@@ -70,6 +70,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 				<li><a href="/gachi/creatorApproval">미승인 클래스</a></li>
 				<li><a href="/gachi/creatorMyClass">나의 클래스</a></li>
 	            <li><a href="/gachi/creatorStatClass">클래스 통계</a></li>
+	             <li><a href="/gachi/creatorClassQuestion">클래스문의 </a></li>
 			</ul>
 		</li>
 		<li><a href="/gachi/creatorInformation">개인정보 수정</a>
@@ -82,7 +83,6 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 			<ul class="submenu">
 				<li><a href="/gachi/creatorSubnotice">공지사항 </a></li>
 	            <li><a href="/gachi/creator1on1">1:1문의 </a></li>
-	            <li><a href="/gachi/creatorClassQuestion">클래스문의 </a></li>
 			</ul>
 		</li>
 		<li><a href="/gachi/creatorGuide">이용안내</a></li>

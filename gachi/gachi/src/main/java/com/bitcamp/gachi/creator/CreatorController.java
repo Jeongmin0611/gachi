@@ -25,5 +25,8 @@ public class CreatorController {
 	public String creatorGuide() {
 		return "creator/creatorGuide";
 	}
-	
+	@RequestMapping("/creatorSubnotice")
+	public String creatorSubnotice() {
+		return "creator/creatorSubnotice";
+	}	
 }
