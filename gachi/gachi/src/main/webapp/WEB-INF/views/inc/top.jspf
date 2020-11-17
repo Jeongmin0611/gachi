@@ -17,7 +17,6 @@
 <link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
 
 
-
 <%-- <script src="<c:url value="/resources/js/common.js" />"></script> --%>
 <style>
 #top {

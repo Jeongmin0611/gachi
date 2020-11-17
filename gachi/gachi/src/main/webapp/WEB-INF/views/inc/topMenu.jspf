@@ -109,6 +109,8 @@
 	color: gray;
 	text-decoration: none;
 }
+
+
 </style>
 <div class="cfont" id="homeTopMenu">
 	<nav id="gachi-topMenu">
