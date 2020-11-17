@@ -4,7 +4,7 @@
 		.ad_StatClass_Piechart {float:left;width:33%;height:30%; margin:50px 0px; font-size:1.5em;}
 	canvas {width:100%; margin-bottom:20px;}
 </style>
-<div class="container ad_StatClass_center text-center">
+<div class="container store_StatClass_center text-center">
 	<h1 style="text-align:center;"> 스토어 통계 </h1><br/>
 		<p><input type="radio" name="searchKey" value="전체"/>전체
 			<input type="radio" name="searchKey" value="상품"/>상품

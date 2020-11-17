@@ -9,7 +9,7 @@
  </style> 
  
  <div class="container text-center cfont">
-<h1 style="margin:50px 0;"> 내 클래스 </h1>
+<h1 style="margin:50px 0;"> 나의 클래스 </h1>
 	<div id="cr_MyClass_area">
 		<form method="get" action="">
 			<ul class="cr_Classlist_menu">
@@ -58,6 +58,7 @@
 		<li>종료</li>
 	</ul>
 	<div class="cr_MyClass_list_menu">
+		<button class="btn btn-info">수강등록</button>
 		<button class="btn btn-info">종료신청</button>
 	</div>
 	<div id="paging">
