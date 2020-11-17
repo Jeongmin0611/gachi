@@ -619,7 +619,7 @@ input{text-align:center;}
 		float: left;
 		width:10%;
 		border:1px solid gray;
-		line-height:30px;
+		line-height:50px;
 		height:50px;
 	}
 	.cr_MyClass_header li:nth-of-type(7n+1){
@@ -643,14 +643,16 @@ input{text-align:center;}
 		height:120px;
 	}
 	.cr_MyClass_lst img{
-		width:100%;
-		height:100%;
+		
+		width:90%;
+		height:90%;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+1){
 		width:5%;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+3){
 		width:15%;
+		padding:7px;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+4){
 		width:10%;
@@ -707,6 +709,13 @@ input{text-align:center;}
 		width:40%;
 	}
 	/*크리에이터 클래스신청 리스트 end*/
+	
+	/*크리에이터 클래스신청 글쓰기 start*/
+	#ps{
+		font-size:0.5em;
+		color:red;
+	}
+	/*크리에이터 클래스신청 글쓰기 end*/
 	
 
 

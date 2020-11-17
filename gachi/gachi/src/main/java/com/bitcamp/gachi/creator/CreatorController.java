@@ -21,6 +21,11 @@ public class CreatorController {
 	public String creatorMyClass() {
 		return "creator/creatorMyClass";
 	}
+	@RequestMapping ("/creatorMyClassWrite")
+	public String creatorMyClassWrite() {
+		return "creator/creatorMyClassWrite";
+	}
+	
 	@RequestMapping ("/creatorGuide")
 	public String creatorGuide() {
 		return "creator/creatorGuide";
