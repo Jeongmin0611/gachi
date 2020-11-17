@@ -53,6 +53,10 @@
 		line-height:30px;
 	}
 	
+	/*******************/
+	/* 하단 */
+	.userMileageBtm{margin:100px 0;width:100%;}
+	
 </style>
 <div class="container">
 	<%@ include file="../inc/userProfile.jspf" %>
@@ -106,5 +110,16 @@
 			<li>+1,000p</li>
 		</ul>
 		<hr/>
+	</div>
+	<div class="userMileageBtm">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
 	</div>
 </div>

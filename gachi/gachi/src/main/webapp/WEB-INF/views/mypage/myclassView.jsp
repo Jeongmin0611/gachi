@@ -244,7 +244,7 @@
             });
 	        $("#myclassModalR").fadeIn();
 	    });
-	    $("#myclassReviewWrite").click(function(){
+	    $("#myclassReviewWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalR").fadeOut();
 	    });  
 	  //모달창 띄우기(질문)
@@ -257,7 +257,7 @@
             });
 	        $("#myclassModalQ").fadeIn();
 	    });
-	    $("#myclassQnaWrite").click(function(){
+	    $("#myclassQnaWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalQ").fadeOut();
 	    });  
 	});
