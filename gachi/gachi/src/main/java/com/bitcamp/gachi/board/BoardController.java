@@ -22,6 +22,10 @@ public class BoardController {
 	public String eventBoardDetail() {
 		return "board/eventBoardDetail";
 	}
+	@RequestMapping("/eventBoardEnd")
+	public String eventBoardEnd() {
+		return "board/eventBoardEnd";
+	}
 	
 	@RequestMapping("/companyBoard")
 	public String companyBoard() {

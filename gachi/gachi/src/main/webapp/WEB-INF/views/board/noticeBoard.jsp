@@ -18,11 +18,16 @@ h3{
 	border-bottom: 1px solid gray;
 	padding: 10px 0px;
 }
-
+#CnoticeUl li:nth-child(5n+1){
+	padding-left: 10px;
+}
 #CnoticeUl li:nth-child(5n+2) {
-	width: 60%;
+	width: 65%;
 }
 
+#CnoticeUl li:nth-child(5n+5){
+	width: 5%;
+}
 #CnoticeUl li:nth-child(1) {
 	background-color: #EDE9E9;
 }
@@ -105,46 +110,38 @@ h3{
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li><li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li><li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 			<li>번호</li>
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
+			<li>10-05</li>
+			<li>11</li>
 
 
 		</ul>
