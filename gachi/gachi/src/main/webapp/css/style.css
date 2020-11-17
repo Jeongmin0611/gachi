@@ -12,18 +12,6 @@ input{text-align:center;}
 .cfont{font-family:'OSeongandHanEum';}
 .carousel-inner img{width: 100%; height: 400px;}
 
-/* board*/
-.CboardDiv {
-	width: 90%;
-	margin: 50px auto;
-	overflow: auto;
-}
-
-.CboardDiv h3 {
-	text-align: center;
-	clear: right;
-}
-
 
 /*  admin */
 

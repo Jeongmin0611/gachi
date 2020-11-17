@@ -42,7 +42,7 @@
 	height: 150px;
 }
 </style>
-<div class="container">
+<div class="container cfont">
 	<div id="createDetailDiv">
 		<ul id="createDetailSub1">
 			<li><img src="/gachi/img/client.png" /></li>
