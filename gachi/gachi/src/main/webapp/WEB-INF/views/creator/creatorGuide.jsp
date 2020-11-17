@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> 
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     
 <script>
 	//스크롤이동
@@ -33,7 +35,7 @@
 	.aos-animate-div {margin: 50px 0 ;}
 	.aos-animate-div img {width:100%;}
 	.aos-animate-harf {float:left;width:50%;}
-	.aos-animate-harf h3 {vertical-align:middle; line-height:50px;}
+	.aos-animate-harf h3 {vertical-align:middle; line-height:50px; padding-top :100px}
 	.aos-animate-harf button {width:50%;margin: auto;}
 	
 </style>
@@ -54,7 +56,7 @@
 			<h3>클래스 관리를 통하여 <br/>나만의 클래스를 쉽게 관리 할수있습니다.</h3>
 			<button type="button" class="btn btn-outline-primary btn-block" onclick="location.href='/gachi/creatorMyClass'">신청하러가기</button>	
 		</div>
-		<div class="aos-animate-harf" data-aos="fade-down" data-aos-duration="2000">
+		<div class="aos-animate-harf" data-aos="fade-down" data-aos-duration="1000">
 			<img src ="/gachi/img/guide1.png"/>
 		</div>
 	</div>	
