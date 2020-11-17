@@ -41,6 +41,19 @@
 		width:90%;
 		margin:0 60px;
 	}
+	#QNADiv ul,#dbEndDiv ul{
+		border:1px solid gray;
+		height:200px;
+	}
+	#QNADiv li,#dbEndDiv li{
+		float:left;
+		margin:0;
+		padding:0;
+		width:10%;
+		
+	}
+	#QNADiv li:nth-child(6n+2),#dbEndDiv li:nth-child(6n+2){width:50%;}
+	#dbEndDiv{margin:0 0 50px 0;}
 
 </style>
 <body>
@@ -92,11 +105,29 @@
 		</div>
 		<div>
 			클래스 질문&댓글
-			<div></div>
+			<div id="QNADiv">
+				<ul>
+					<li>번호</li>
+					<li>제목</li>
+					<li>작성자</li>
+					<li>작성일</li>
+					<li>조회수</li>
+					<li>상태</li>
+				</ul>		
+			</div>
 		</div>
 		<div>
 			클래스 수강평
-			<div>보고 만들기</div>
+			<div id="dbEndDiv">
+				<ul>
+					<li>번호</li>
+					<li>제목</li>
+					<li>작성자</li>
+					<li>작성일</li>
+					<li>조회수</li>
+					<li>상태</li>
+				</ul>		
+			</div>
 		</div>
 	</div>
 	<%@ include file="../inc/bottom.jspf"%>

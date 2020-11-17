@@ -11,23 +11,23 @@
         <!-- 이미지 목록 (컨텐츠) -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/bximg1.jpg"/>
+               <a href="#"> <img src="img/bximg1.jpg"/></a>
                 <!-- 이미지 위의 설명쓰기-->
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/bximg2.jpg"/>
+                <a href=""><img src="img/bximg2.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/bximg3.jpg"/>
+                <a href=""><img src="img/bximg3.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/bximg4.jpg"/>
+                <a href=""><img src="img/bximg4.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>

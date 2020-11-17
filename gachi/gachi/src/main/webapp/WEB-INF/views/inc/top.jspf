@@ -22,7 +22,7 @@
 <style>
 #top {
 	width: 100%;
-	height: 50px;
+	height: 55px;
 	line-height: 50px;
 	background-color: #F4BFA9;
 }
@@ -127,7 +127,7 @@
 	-webkit-transition: height .2s;
 	-moz-transition: height .2s;
 	-o-transition: height .2s;
-	width: 500px;
+	width: 1200px;/*  ====================================================================  */
 	left: 0;
 	background-color: white;
 	line-height: 30px;
@@ -444,10 +444,14 @@ a {
 	background-color: #e2e2e2;
 	margin: 20px 0;
 }
-#dbCMLI{
+#listFontColor{
 	color:black;
 }
+
+
 </style>
+<script>
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -461,6 +465,7 @@ a {
 			<li><a href="/gachi/mypage">마이페이지</a></li>
 			<li><a href="/gachi/adminDashboard">어드민</a></li>
 			<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
+			<!--<li id="topSearchList"><input type="text" placeholder="검색어를 입력하세요"/><input type="button" value="검색"/></li>-->
 
 
 		</ul>
@@ -491,7 +496,7 @@ a {
 		<ul>
 			<li><a class="menuLink" href="/gachi"><img
 					src="img/logo.png" /></a></li>
-			<li class="topMenuLi"><a class="menuLink" id="dbCMLI">카테고리</a>
+			<li class="topMenuLi"><a class="menuLink" id="listFontColor">카테고리</a>
 				<ul class="submenu">
 					<!-- 서브메뉴 -->
 					<li></li>

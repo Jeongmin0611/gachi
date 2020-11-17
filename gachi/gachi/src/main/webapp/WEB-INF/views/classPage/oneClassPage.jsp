@@ -26,17 +26,16 @@
 	<%@ include file="../inc/top.jspf"%>
 	<%@ include file="../inc/top2.jspf"%>
 	<div class="container" id="classForm">
-	인기순
 	<ul>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>	
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
-		<li class="classList1"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/artEx/artEx20.PNG"><br/>인물실사화<br/>모죠</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>	
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
+		<li class="classList1"><a href="#" style="text-decoration:none"><img src="/gachi/img/classtest.PNG"><br/>제목<br/>작성자</a></li>
 	</ul>
 	
 	</div>
