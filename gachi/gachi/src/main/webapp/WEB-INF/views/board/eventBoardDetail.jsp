@@ -20,13 +20,18 @@
 	border-bottom: 1px solid black;
 }
 
-form{
+#eventReplyForm{
 	margin: 20px 0; 
 	float: left;
 }
-form [type=button]{
+
+#eventReplyForm [type=button]{
 	border: 0px;
 	background-color: #f2f2f2;
+	align-items: center;
+}
+3eventReplyForm>textarea{
+	resize:none;
 }
 /*버튼*/
 #eventDetailBtnDiv{
@@ -77,9 +82,9 @@ form [type=button]{
 	<button type="button" class="btn btn-light">목록</button>
 	</div>
 	<!-- 댓글 -->
-	<form>
-		댓글 <textarea rows="3" cols="120"></textarea>
-		<input type="button" value="등록" style="height: 50px; text-align: center;"/>
+	<form id="eventReplyForm">
+		댓글<br/> <textarea rows="3" cols="90%"></textarea>
+		<input type="button" value="등록"/>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>

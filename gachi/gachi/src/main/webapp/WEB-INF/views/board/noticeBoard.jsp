@@ -3,18 +3,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- 공지 사항 -->
 <style>
-h3, li, button, input[type=button], select option {
-	font-family: 'OSeongandHanEum';
-}
 
+h3{
+	margin-top:50px;
+	text-align: center;
+}
 #CnoticeUl {
-	margin: 60px 150px;
+	margin: 60px auto;
 }
 
 #CnoticeUl li {
 	width: 10%;
 	float: left;
 	border-bottom: 1px solid gray;
+	padding: 10px 0px;
 }
 
 #CnoticeUl li:nth-child(5n+2) {
@@ -64,8 +66,8 @@ h3, li, button, input[type=button], select option {
 
 #CnoticePaging {
 	clear: both;
-	margin-top: 20px;
-	background-color: pink;
+	padding-top: 20px;
+	margin-bottom: 50px;
 }
 </style>
 <script>
@@ -79,17 +81,17 @@ h3, li, button, input[type=button], select option {
 
 	});
 </script>
-<div class="CboardDiv">
+<div class="container cfont">
 
 	<!-- 내용 표시 -->
-	<div>
+	
 		<h3>공지사항</h3>
 		<div id="CnoticeSearch">
 			<select name="noticeSubject">
 				<option value='Nall'>전체</option>
 				<option value='Nsubject'>제목</option>
 				<option value='Ncontent'>내용</option>
-			</select> <input type="text" name="noticeSearchTxt" id="noticeSearchTxt" />
+			</select> <input type="text" name="CnoticeSearchTxt" id="CnoticeSearchTxt" />
 			<button name="noticeSearchBtn">검색하기</button>
 		</div>
 		<ul id="CnoticeUl">
@@ -114,11 +116,38 @@ h3, li, button, input[type=button], select option {
 			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
 			<li>작성자</li>
 			<li>작성일</li>
+			<li>조회수</li><li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
+			<li>조회수</li>
+			<li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
+			<li>조회수</li>
+			<li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
+			<li>조회수</li><li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
+			<li>조회수</li>
+			<li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
+			<li>조회수</li>
+			<li>번호</li>
+			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
+			<li>작성자</li>
+			<li>작성일</li>
 			<li>조회수</li>
 
 
 		</ul>
-	</div>
 	<br />
 	<!-- paging -->
 	<div id="CnoticePaging">

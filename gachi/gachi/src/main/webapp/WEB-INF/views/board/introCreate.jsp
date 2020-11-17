@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 #introCreateTopDiv{
+	margin-top:50px;
 	height: 300px;
 	line-height:300px;
 	width:100%;
@@ -47,13 +48,12 @@ font-family:'OSeongandHanEum';
 
 #CcreateList li{
 	float: left;
-	width: 32%;
-	margin: 10px 8px;
-	padding: 10px;
+	width: 33%;
+	margin: 10px quto;
 }
 #CcreateList li>a>img{
-	width: 100%;
-	height: 400px;	
+	width: 300px;
+	height: 250px;	
 }
 
 #CcreateList span:next(){
@@ -65,10 +65,12 @@ font-family:'OSeongandHanEum';
 	background-color: lightblue;
 	color:white;
 }
-
 /*======= 크리에이터 리스트 ==========*/
+.pagination{
+	margin-bottom:50px;
+}
 </style>
-<div class="CboardDiv">
+<div class="container cfont">
 	<div id="introCreateTopDiv">
 		크리에이터 소개
 	</div>
