@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-h3, li, button, input[type=button], select option {
-	font-family: 'OSeongandHanEum';
+
+h3{
+	margin-top:50px;
+	text-align: center;
 }
 
 #CEventBtnDiv {
@@ -31,13 +33,12 @@ h3, li, button, input[type=button], select option {
 
 #CEventList li{
 	float:left;
-	width:32%;
-	margin: 10px 8px ;
-	padding: 10px;
+	width:33%;
+	margin: 10px auto;
 }
 #CEventList li>a>img{
-	width:430px;
-	height:400px; 
+	width:300px;
+	height:250px; 
 }
 #CEventList .imgtxt {
 	font-weight: bold;
@@ -46,6 +47,9 @@ h3, li, button, input[type=button], select option {
 #CEventList span {
 	font-weight: normal;
 	font-size: 8px;
+}
+.pagination{
+	margin-bottom:50px;
 }
 </style>
 <script>
@@ -59,7 +63,7 @@ h3, li, button, input[type=button], select option {
 
 	});
 </script>
-<div class="CboardDiv">
+<div class="container cfont">
 
 	<!-- 내용 표시 -->
 	<div>
@@ -100,7 +104,6 @@ h3, li, button, input[type=button], select option {
 		</ul>		
 	</div>
 	<!-- paging -->
-		<hr/>
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
 			<li class="page-item"><a class="page-link" href="#">1</a></li>
