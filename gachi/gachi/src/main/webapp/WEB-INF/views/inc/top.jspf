@@ -17,7 +17,6 @@
 <link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
 
 
-
 <%-- <script src="<c:url value="/resources/js/common.js" />"></script> --%>
 <style>
 #top {
@@ -474,36 +473,7 @@ a {
 		</div>
 	</div>
 	<!-- 메뉴 -->
-	<div id="topMenu">
-		<ul>
-			<li><a class="menuLink" href="/gachi"><img
-					src="img/logo.png" /></a></li>
-			<li class="topMenuLi"><a class="menuLink" id="listFontColor">카테고리</a>
-				<ul class="submenu">
-					<!-- 서브메뉴 -->
-					<li></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">공예/창작</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">미술</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">사진/영상</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">요리</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">운동</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">음악</a></li>
-					<li><a href="/gachi/oneClassPage" class="submenuLink longLink">라이프스타일</a></li>
-				</ul></li>
-			<li class="topMenuLi"><a href="/gachi/introCreate"
-				class="menuLink">크리에이터 소개</a></li>
-			<li class="topMenuLi"><a href="/gachi/storeMain" class="menuLink">스토어</a></li>
-			<li class="topMenuLi"><a href="/gachi/noticeBoard"
-				class="menuLink">공지사항</a>
-				<ul class="submenu">
-					<!-- 서브메뉴 -->
-					<li><a href="/gachi/noticeBoard" class="submenuLink longLink">공지사항</a></li>
-					<li><a href="/gachi/eventBoard" class="submenuLink longLink">이벤트</a></li>
-				</ul></li>
-			<li class="topMenuLi"><a href="/gachi/companyBoard"
-				class="menuLink">회사소개</a></li>
-		</ul>
-	</div>
+	
 	<%@ include file="topMenu.jspf"  %>
 
 	<!-- 메뉴 -->
