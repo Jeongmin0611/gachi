@@ -69,7 +69,7 @@
 }
 </style>
 
-<div class="CboardDiv">
+<div class="container">
 	<div id="CserviceSearchDiv">
 		<select name="CserviceSelect">
 			<option value="CSall">전체</option>

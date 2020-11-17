@@ -12,13 +12,13 @@
 	width:100%;
 	background-color: #eee;
 	padding: 40px 20%;
-	
+	margin-bottom: 50px;
 }
 /* ============== 내용 표시 끝 ============== */
 
 </style>
 
-<div class="CboardDiv">
+<div class="container">
 	<!-- 자주묻는 질문, 배송정책 메뉴 -->
 	<%@ include file="../inc/serviceboardMenu.jspf" %>
 	
