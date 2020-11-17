@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<script type="text/javascript" src="resources/Chart.js"></script>
 <style>
-	canvas {float:left; height:180px; width:330px}
-	#ad_chartname li{float:left; text-align:center; width:32%; font-size:1.5em}
+		.ad_StatClass_Piechart {float:left;width:33%;height:30%; margin:50px 0px; font-size:1.5em;}
+	canvas {width:100%; margin-bottom:20px;}
 </style>
-	<h1 style="text-align:center;"> 크리에이터 통계 </h1>
-	<br/>
 
 <div class="container ad_StatClass_center text-center">
+	<h1 style="text-align:center;"> 크리에이터 통계 </h1><br/>
 		<p><input type="radio" name="searchKey" value="전체"/>전체
 			<input type="radio" name="searchKey" value="상품"/>상품
 			<input type="radio" name="searchKey" value="클래스"/>클래스
@@ -18,13 +17,11 @@
 			<input type="date" value="2020-11-11"/>
 			<button type="button" class="btn btn-outline-dark btn-sm">▶</button>
 			<button type="button" class="btn btn-outline-dark btn-sm">이번달</button></p>
-	<div style="height:1300px">
 		<div>
-			<canvas id="ad_StatClass_chart" style="margin-top:50px"></canvas>
-			<script type="text/javascript" src="resources/Chart.js"></script>
+			<canvas id="ad_cr_StatClass_chart" style="margin-top:50px"></canvas>
 			<script type="text/javascript">
-			var ad_StatClass_context = document.getElementById('ad_StatClass_chart').getContext('2d');
-			var ad_StatClass_chart = new Chart(ad_StatClass_context, {
+			var ad_cr_StatClass_context = document.getElementById('ad_cr_StatClass_chart').getContext('2d');
+			var ad_cr_StatClass_chart = new Chart(ad_cr_StatClass_context, {
 			    type: 'line',
 			    data: {
 			        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -64,12 +61,11 @@
 		
 	</script>
 	</div>
-	
-		<canvas id="ad_StatClass_gender_chart" style="margin:15% 1% 5% 1%;"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
+	<div class="ad_StatClass_Piechart cfont" >
+		<canvas id="ad_cr_StatClass_gender_chart"></canvas>
 		<script type="text/javascript">
-		var ad_StatClass_gender_context = document.getElementById('ad_StatClass_gender_chart').getContext('2d');
-		var ad_StatClass_gender_chart = new Chart(ad_StatClass_gender_context, {
+		var ad_cr_StatClass_gender_context = document.getElementById('ad_cr_StatClass_gender_chart').getContext('2d');
+		var ad_cr_StatClass_gender_chart = new Chart(ad_cr_StatClass_gender_context, {
 		    type: 'pie',
 		    data: {
 			labels : ["Man" , "Woman"],
@@ -85,12 +81,14 @@
 			});
 		
 		</script>
+		성별
+		</div>
+		<div class="ad_StatClass_Piechart cfont" >
 		
-		<canvas id="ad_StatClass_age_chart" style="margin:15% 1% 5% 1%;"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
+		<canvas id="ad_cr_StatClass_age_chart"></canvas>
 		<script type="text/javascript">
-		var ad_StatClass_age_context = document.getElementById('ad_StatClass_age_chart').getContext('2d');
-		var ad_StatClass_age_chart = new Chart(ad_StatClass_age_context, {
+		var ad_cr_StatClass_age_context = document.getElementById('ad_cr_StatClass_age_chart').getContext('2d');
+		var ad_cr_StatClass_age_chart = new Chart(ad_cr_StatClass_age_context, {
 		    type: 'pie',
 		    data: {
 			labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
@@ -106,34 +104,31 @@
 			});
 		
 		</script>
-		
-		
-		<canvas id="ad_StatClass_star_chart" style="margin:15% 1% 5% 1%;"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
-		<script type="text/javascript">
-		var ad_StatClass_star_context = document.getElementById('ad_StatClass_star_chart').getContext('2d');
-		var ad_StatClass_star_chart = new Chart(ad_StatClass_star_context, {
-		    type: 'pie',
-		    data: {
-			labels : ["창작/공예" ,"미술" , "사진/영상", "요리", "운동", "음악", "라이프스타일"],
-			datasets : [{
-			backgroundColor : ["#2ecc71","#3498dd","pink","yellow","orange","pink","lightblue"],
-			hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","orange","black","lightblue"],
-			data : [10,5,7,3,7,5,1]
-				}]
-			},
-			options : {
-				responsive: false
-				}
-				});	
+		연령별
+		</div>
+		<div class="ad_StatClass_Piechart cfont" >
+			<canvas id="ad_cr_StatClass_star_chart"></canvas>
+			<script type="text/javascript">
+			var ad_cr_StatClass_star_context = document.getElementById('ad_cr_StatClass_star_chart').getContext('2d');
+			var ad_cr_StatClass_star_chart = new Chart(ad_cr_StatClass_star_context, {
+			    type: 'pie',
+			    data: {
+				labels : ["창작/공예" ,"미술" , "사진/영상", "요리", "운동", "음악", "라이프스타일"],
+				datasets : [{
+				backgroundColor : ["#2ecc71","#3498dd","pink","yellow","orange","pink","lightblue"],
+				hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","orange","black","lightblue"],
+				data : [10,5,7,3,7,5,1]
+					}]
+				},
+				options : {
+					responsive: false
+					}
+					});	
 			</script>
-			<div>
-			<ul id="ad_chartname">
-				<li>성별</li>
-				<li>연령별</li>
-				<li>카테고리</li>
-			</ul>
-			</div>
-	</div>
-</div>	
+			카테고리
+		</div>
+</div>
+
+
+
 	
