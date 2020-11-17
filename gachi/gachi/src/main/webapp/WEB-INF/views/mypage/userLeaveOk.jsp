@@ -32,11 +32,12 @@
 	}
 	#userLeaveOkContent label:first-child{
 		font-size:2em;
-		margin-bottom:100px;
+		margin-bottom:50px;
 	}
-	#userLeaveOkContent label:nth-child(4){
-		margin-bottom:30px;
+	#userLeaveOkContent label:nth-child(3),#userLeaveOkContent label:nth-child(4){
+		margin:15px 0;
 	}
+	#userLeaveOkContent Button{margin-top:50px;}
 	
 </style>
 <div class="container">
@@ -54,7 +55,7 @@
 		<hr/>
 		<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>
 		<label>보다 나은 서비스로 다시 찾아 뵙겠습니다.</label>
-		<button type="button" class="btn btn-primary">홈으로</button>
 		<hr/>
+		<button type="button" class="btn btn-primary">홈으로</button>
 	</div>
 </div>
