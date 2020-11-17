@@ -197,8 +197,6 @@ input{text-align:center;}
 	width:50%;
 	border:1px solid gray;
 	font-size: 1.2em;
-	line-height:50px;
-	height:50px;
 }
 #ad_order_View>li:nth-child(2n+1){
 	width:30%;

@@ -8,7 +8,7 @@
 	<li>카테고리</li><li>미술</li>
 	<li>클래스명</li><li>밥선생님의 낙서 참쉽죠? 클래스</li>
 	<li>상품명</li><li>미술 div키트</li>
-	<li>구매자</li><li>홍길동</li>
+	<li>구매자아이디</li><li>honggildong@naver.com</li>
 	<li>가격</li><li>15000원</li>
 	<li>수량</li><li>1개</li>
 	<li>사용 마일리지</li><li>150원</li>
