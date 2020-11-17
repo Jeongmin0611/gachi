@@ -93,12 +93,13 @@
 	#orderSheetUserInfo li:nth-child(2n){
 		width:70%;
 	}
-	#orderSheetUserInfo li>input{
+	#orderSheetUserInfo li input{
 		width:100%;
-		padding:0 10px;
+		padding:0 20px;
+		text-align:left;
 	}
 	#orderSheetUserInfo li:nth-child(8)>input:first-child{
-		width:15%;
+		width:19%;
 	}
 	#orderSheetUserInfo li:nth-child(8)>input:last-child{
 		width:70%;

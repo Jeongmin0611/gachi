@@ -20,7 +20,7 @@
 
 .CservicetopMenuLi{
 	width: 20%;
-	height: 30px;   
+	height: 40px;   
 }
 
 #CservicemenuDiv ul li {	/* 메인 메뉴 안에 ul 태그 안에 있는 li 태그의 스타일 적용(상위/하위메뉴 모두) */
@@ -46,7 +46,7 @@
 }
 .CserviceSubmenuLink {          /* 하위 메뉴의 a 태그 스타일 설정 */
 	color: black;    
-	line-height:30px;         
+	line-height:40px;         
 	background-color: white;      /* [변경] 배경색 변경 */
 	-border: solid 1px white;    /* [삭제] 테두리 삭제 */
 	-margin-right: -1px;         /* [삭제] 공백 보정 삭제 */
@@ -70,7 +70,7 @@
 	display: inline-block;
 }
 .CservicetopMenuLi:hover .CserviceSubmenu { 
-	height: 30px;           
+	height: 40px;           
 	border-top:2px solid #eee;
 	border-bottom: 2px solid #eee;
 }

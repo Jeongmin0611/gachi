@@ -25,6 +25,7 @@
 	height: 55px;
 	line-height: 50px;
 	background-color: #F4BFA9;
+	overflow: hidden;
 }
 
 #top li {
@@ -135,22 +136,6 @@
 	z-index: 1000;
 }
 
-.submenu li {
-	display: inline-block;
-	padding: 0 10px;
-}
-
-.topMenuLi:hover .submenu {
-	height: 40px;
-	border-top: 2px solid #eee;
-	border-bottom: 2px solid #eee;
-}
-
-.submenuLink:hover {
-	color: red;
-	background-color: white;
-}
-/* ============== 메뉴 ============== */
 @font-face {
 	font-family: 'OSeongandHanEum';
 	src:
@@ -465,9 +450,6 @@ a {
 			<li><a href="/gachi/mypage">마이페이지</a></li>
 			<li><a href="/gachi/adminDashboard">어드민</a></li>
 			<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
-			<!--<li id="topSearchList"><input type="text" placeholder="검색어를 입력하세요"/><input type="button" value="검색"/></li>-->
-
-
 		</ul>
 	</div>
 
@@ -522,6 +504,7 @@ a {
 				class="menuLink">회사소개</a></li>
 		</ul>
 	</div>
+	<%@ include file="topMenu.jspf"  %>
 
 	<!-- 메뉴 -->
 

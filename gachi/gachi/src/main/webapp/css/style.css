@@ -14,6 +14,7 @@ input{text-align:center;}
 
 
 /*  admin */
+
 #adminMenu{
 	position: relative;
 }
@@ -168,24 +169,23 @@ input{text-align:center;}
 
 
 /* 관리자 주문 관리 start*/
-
-
-#ad_order_info li{
-	float:left;
-	width:15%;
+#ad_order_lst{
+	margin-top:20px;
+	margin-bottom:20px;
 }
 #ad_order_lst li{
-	width:10%;
+	width:8%;
 	float:left;
 	height:40px;
 	line-height:40px;
 	border:1px solid gray;
+	font-size:0.8em;
 }
-#ad_order_lst>li:nth-child(8n+1),#ad_order_lst>li:nth-child(8n+3){
-	width:15%;
+#ad_order_lst>li:nth-child(10n+1){
+	width:10%;
 }
-#ad_order_lst>li:nth-child(8n+4){
-	width:20%;
+#ad_order_lst>li:nth-child(10n+3){
+	width:26%;
 }
 #ad_order_View{
 	width:80%;
@@ -211,8 +211,24 @@ input{text-align:center;}
 	height:300px;
 	border:3px solid #F4BFA9;
 }
-
-
+#ad_order_searchForm>li{
+	float:left;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#ad_order_searchForm>li:nth-child(2n+1){
+	width:10%;
+	text-align:center;
+}
+#ad_order_searchForm>li:nth-child(2n){
+	width:90%;
+}
+#ad_order_Area{
+	border:1px solid #ABCEE3;
+	border-radius: 0.7;
+	padding-top:5px;
+	padding-bottom:10px;
+}
 /*관리자 주문 end*/
 
 
@@ -389,9 +405,6 @@ input{text-align:center;}
 	/*관리자 공지사항 글쓰기 end*/
 	
 	/*관리자 1:1문의 리스트 start*/
-	#search_area{
-		text-align: right;
-	}
 	#ad_1on1_lst li{
 		float: left;
 		width:12%;
@@ -562,11 +575,26 @@ input{text-align:center;}
 	#ad_goods_review>li:nth-child(8n+3){
 		width:35%;
 	}
-	
+	#ad_goods_writeForm{
+		width:80%;
+		margin:0 auto;
+	}
+	#ad_goods_writeForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	#ad_goods_writeForm>li{
+		width:50%;
+	}
+	#ad_goods_writeForm ul>li:nth-child(2n+1){
+		width:50%;
+	}
 	/*관리자 스토어관리 end*/
 	
 	/*관리자 리스트 페이징 start*/
 	#paging{
+		margin-top:20px;
 		width:50%;
 		margin:0 auto;
 		font-size: 1.5em;

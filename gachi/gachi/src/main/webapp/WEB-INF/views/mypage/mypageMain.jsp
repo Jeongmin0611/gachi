@@ -86,17 +86,95 @@
 	/*******/
 	/* 하단 */
 	/* 페이징 */
-	.mypageMainBtm{margin:100px 0;width:100%;background-color:pin}
+	.mypageMainBtm{margin:100px 0;width:100%;}
+	
+	/* 모달 */
+	#mypageModal{
+		display:none;
+		position:absolute;
+		width:100%;
+		height:100%;
+		z-index:1;
+	}
+	.mypageModal_content{
+		width:500px;
+		height:500px;
+		margin:100px auto;
+		padding:20px 10px;
+		background-color:#fff;
+		border:2px solid #eee;
+	}
+	.mypageModal_content>div:nth-child(3){
+		height:100px;
+		text-align:center;
+		background-color:#eee;
+		font-size:1.5em;
+		line-height:100px;
+	}
+	.mypageModal_content>label{
+		font-size:1.3em;
+	}
+	.mypageModal_content ul{
+		width:80%;
+		margin:0 auto;
+		overflow:auto;
+		border-top:1px solid gray;
+		margin-bottom:50px;
+	}
+	.mypageModal_content li{
+		width:50%;
+		float:left;
+		border-bottom:1px solid gray;
+		text-align:center;
+		padding:0 20px;
+	}
+	.mypageModal_content li:nth-child(2n+1){
+		text-align:left;
+		background-color:#eee;
+	}
+	.mypageModal_layer{
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:rgba(0,0,0,0.5);
+		z-index:-1;
+	}
+	#mypageModalClose{
+		margin:0 auto;
+	}
+	#mypageModalBtm{
+		text-align:center;
+	}
 	
 </style>
+<script>
+	$(function(){
+		//모달창 띄우기
+	    $(".mypageDelivery").click(function(){
+    		$("#mypageModal").css({
+               "top": (($(window).height()-$("#mypageModal").outerHeight())/2+$(window).scrollTop())+"px",
+               "left": (($(window).width()-$("#mypageModal").outerWidth())/2+$(window).scrollLeft())+"px"
+               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+            
+            });
+	        $("#mypageModal").fadeIn();
+	    });
+	    $("#mypageModalClose, .mypageModal_layer").click(function(){
+	       $("#mypageModal").fadeOut();
+	    });   
+	});
+
+</script>
 <div class="container" id="myclassMainContainer">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<!-- 마이페이지(메인) - 상단 -->
 	<div id="mypageMainTop">
 		<form id="mypageMainTopFrm">
-			<input type="radio" value="전체"/><label>전체</label>
-			<input type="radio" value="상품"/><label>상품</label>
-			<input type="radio" value="클래스"/><label>클래스</label>
+			<input type="radio" name="option"/><label>전체</label>
+			<input type="radio" name="option"/><label>상품</label>
+			<input type="radio" name="option"/><label>클래스</label>
 			<button type="button" class="btn btn-outline-dark btn-sm">◀</button><!-- 이전달 -->
 			<input type="date" id="mypageMainDate1"/>
 			-
@@ -120,7 +198,7 @@
 				<li>결제일시 20.11.06 19:30:34</li>
 			</ul>
 			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light">배송조회</button>
+				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
 				<button type="button" class="btn btn-outline-light">결제취소</button>
 			</div>
 		</div>
@@ -138,7 +216,7 @@
 				<li>결제일시 20.11.06 19:30:34</li>
 			</ul>
 			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light">배송조회</button>
+				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
 				<button type="button" class="btn btn-outline-light">결제취소</button>
 			</div>
 		</div>
@@ -156,7 +234,7 @@
 				<li>결제일시 20.11.06 19:30:34</li>
 			</ul>
 			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light">배송조회</button>
+				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
 				<button type="button" class="btn btn-outline-light">결제취소</button>
 			</div>
 		</div>
@@ -174,7 +252,7 @@
 				<li>결제일시 20.11.06 19:30:34</li>
 			</ul>
 			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light">배송조회</button>
+				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
 				<button type="button" class="btn btn-outline-light">결제취소</button>
 			</div>
 		</div>
@@ -192,7 +270,7 @@
 				<li>결제일시 20.11.06 19:30:34</li>
 			</ul>
 			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light">배송조회</button>
+				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
 				<button type="button" class="btn btn-outline-light">결제취소</button>
 			</div>
 		</div>
@@ -208,4 +286,24 @@
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
 	</div>
+</div>
+<div id="mypageModal">
+	<div class="mypageModal_content">
+		<h2>배송조회</h2>
+		<hr/>
+		<div>상품이 배송진행중 상태입니다.</div>
+		<label>송장정보</label>
+		<ul>
+			<li>송장번호</li>
+			<li>10101010</li>
+			<li>택배사</li>
+			<li>한진택배</li>
+			<li>대표번호</li> 
+			<li>1588-0011</li>
+		</ul>
+		<div id="mypageModalBtm">
+			<button type="button" class="btn btn-primary" id="mypageModalClose">확인</button>
+		</div>
+	</div>
+	<div class="mypageModal_layer"></div>
 </div>

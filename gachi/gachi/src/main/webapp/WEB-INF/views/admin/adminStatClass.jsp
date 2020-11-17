@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<script type="text/javascript" src="resources/Chart.js"></script>
 <style>
-	canvas {float:left; height:180px; width:330px}
-	#ad_chartname li{float:left; text-align:center; width:32%; font-size:1.5em}
+		.ad_StatClass_Piechart {float:left;width:33%;height:30%; margin:50px 0px; font-size:1.5em;}
+	canvas {width:100%; margin-bottom:20px;}
+	
 </style>
-	<h1 style="text-align:center;"> 클래스 통계 </h1>
-	<br/>
 
 <div class="container ad_StatClass_center text-center">
+	<h1 style="text-align:center;"> 클래스 통계 </h1><br/>
 		<p><input type="radio" name="searchKey" value="전체"/>전체
 			<input type="radio" name="searchKey" value="상품"/>상품
 			<input type="radio" name="searchKey" value="클래스"/>클래스
@@ -18,10 +18,8 @@
 			<input type="date" value="2020-11-11"/>
 			<button type="button" class="btn btn-outline-dark btn-sm">▶</button>
 			<button type="button" class="btn btn-outline-dark btn-sm">이번달</button></p>
-	<div style="height:1300px">
 		<div>
 			<canvas id="ad_StatClass_chart" style="margin-top:50px"></canvas>
-			<script type="text/javascript" src="resources/Chart.js"></script>
 			<script type="text/javascript">
 			var ad_StatClass_context = document.getElementById('ad_StatClass_chart').getContext('2d');
 			var ad_StatClass_chart = new Chart(ad_StatClass_context, {
@@ -64,10 +62,9 @@
 		
 	</script>
 	</div>
-	
-		<canvas id="ad_StatClass_gender_chart" style="margin:15% 1% 5% 1%;" data-aos="fade-up"
-     data-aos-anchor-placement="top-center"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
+	<div class="ad_StatClass_Piechart cfont" >
+		<canvas id="ad_StatClass_gender_chart" data-aos="fade-up"
+     	data-aos-anchor-placement="top-center"></canvas>
 		<script type="text/javascript">
 		var ad_StatClass_gender_context = document.getElementById('ad_StatClass_gender_chart').getContext('2d');
 		var ad_StatClass_gender_chart = new Chart(ad_StatClass_gender_context, {
@@ -86,10 +83,11 @@
 			});
 		
 		</script>
-		
-		<canvas id="ad_StatClass_age_chart" style="margin:15% 1% 5% 1%;" data-aos="fade-up"
+		성별
+	</div>
+	<div class="ad_StatClass_Piechart cfont">	
+		<canvas id="ad_StatClass_age_chart" data-aos="fade-up"
      data-aos-anchor-placement="top-center"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
 		<script type="text/javascript">
 		var ad_StatClass_age_context = document.getElementById('ad_StatClass_age_chart').getContext('2d');
 		var ad_StatClass_age_chart = new Chart(ad_StatClass_age_context, {
@@ -108,11 +106,11 @@
 			});
 		
 		</script>
-		
-		
-		<canvas id="ad_StatClass_star_chart" style="margin:15% 1% 5% 1%;" data-aos="fade-up"
+		연령별
+		</div>
+		<div class="ad_StatClass_Piechart cfont">
+		<canvas id="ad_StatClass_star_chart" data-aos="fade-up"
      data-aos-anchor-placement="top-center"></canvas>
-		<script type="text/javascript" src="resources/Chart.js"></script>
 		<script type="text/javascript">
 		var ad_StatClass_star_context = document.getElementById('ad_StatClass_star_chart').getContext('2d');
 		var ad_StatClass_star_chart = new Chart(ad_StatClass_star_context, {
@@ -130,13 +128,7 @@
 				}
 				});	
 			</script>
-			<div>
-			<ul id="ad_chartname">
-				<li>성별</li>
-				<li>연령별</li>
-				<li>평점</li>
-			</ul>
-			</div>
-	</div>
+			평점
+		</div>
 </div>	
 	
