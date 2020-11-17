@@ -34,7 +34,6 @@
 	margin-right: 15px;
 }
 
-
 #gachi-topMenu ul li {
 	/* 메인 메뉴 안에 ul 태그 안에 있는 li 태그의 스타일 적용(상위/하위메뉴 모두) */
 	color: white;
@@ -100,10 +99,6 @@
 .gachi-submenu li {
 	display: inline-block;
 }
-#gachi-submenu-category li{
-	width:10%;
-	background-color: pink;
-}
 .gachi-topMenuLi:hover .gachi-submenu {
 	height: 35px;
 	border-top: 2px solid #eee;
@@ -152,8 +147,8 @@
 						class="gachi-submenuLink gachi-longLink">이벤트</a></li>
 				</ul></li>
 
-			<li class="gachi-topMenuLi"><a
-				href="http://unikys.tistory.com/guestbook" class="gachi-menuLink">회사소개</a></li>
+			<li class="gachi-topMenuLi">
+				<a href="/gachi/companyBoard" class="gachi-menuLink">회사소개</a></li>
 		</ul>
 	</nav>
 
