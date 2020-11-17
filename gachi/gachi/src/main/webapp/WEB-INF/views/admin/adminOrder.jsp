@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container">
-<h1>주문 관리</h1>
-<div>
-	<ul id="ad_order_info">
-		<li>●판매중 : 99개</li>
-		<li>●판매완료 : 99개</li>
-		<li>●판매취소 : 0개</li>
-	</ul>
-</div>
-<div>
+<div id="ad_order_Area">
 <form method="post" action="">
 	<ul id="ad_order_searchForm">
 		<li>주문검색</li>
@@ -34,10 +26,12 @@
 			 <button>1개월</button>
 			 <button>3개월</button>
 			 <button>6개월</button>
+			 <input type="date"/>~
+			 <input type="date"/>
 		</li>
 		<li>결제수단</li>
 		<li>
-			<input type="checkbox" name="" value=""/>전체
+			<input type="checkbox" name="" value="" checked/>전체
 			<input type="checkbox" name="" value=""/>무통장입금
 			<input type="checkbox" name="" value=""/>카드결제
 			<input type="checkbox" name="" value=""/>네이버페이
@@ -47,7 +41,7 @@
 		</li>
 		<li>주문상태</li>
 		<li>
-			<input type="radio" name=""/>전체
+			<input type="radio" name="" checked/>전체
 			<input type="radio" name=""/>입금대기
 			<input type="radio" name=""/>입금완료
 			<input type="radio" name=""/>배송준비
@@ -56,7 +50,7 @@
 			<input type="radio" name=""/>주문확정
 		</li>
 	</ul>
-	<div>
+	<div style="text-align:center">
 		<input type="submit" value="검색">
 		<input type="reset" value="초기화">
 	</div>
