@@ -24,7 +24,7 @@
 			<option>음악</option>
 			<option>라이프스타일</option>
 			<option>운동</option>
-			<option>사진영상</option>
+			<option>사진/영상</option>
 		</select>
 		<input type="text" name="" placeholder="크리에이터명"/>
 		<input type="submit" value="검색"/> 

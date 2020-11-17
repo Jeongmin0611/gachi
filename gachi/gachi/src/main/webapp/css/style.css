@@ -575,7 +575,21 @@ input{text-align:center;}
 	#ad_goods_review>li:nth-child(8n+3){
 		width:35%;
 	}
-	
+	#ad_goods_writeForm{
+		width:80%;
+		margin:0 auto;
+	}
+	#ad_goods_writeForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	#ad_goods_writeForm>li{
+		width:50%;
+	}
+	#ad_goods_writeForm ul>li:nth-child(2n+1){
+		width:50%;
+	}
 	/*관리자 스토어관리 end*/
 	
 	/*관리자 리스트 페이징 start*/
