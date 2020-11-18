@@ -122,7 +122,7 @@
 		margin-bottom:50px;
 	}
 	.mypageModal_content li{
-		width:50%;
+		width:70%;
 		float:left;
 		border-bottom:1px solid gray;
 		text-align:center;
@@ -131,6 +131,7 @@
 	.mypageModal_content li:nth-child(2n+1){
 		text-align:left;
 		background-color:#eee;
+		width:30%;
 	}
 	.mypageModal_layer{
 		position:fixed;

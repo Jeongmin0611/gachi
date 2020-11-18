@@ -70,7 +70,7 @@
 		<ul>
 			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
 			<li>|</li>
-			<li><a href="#"><b>회원탈퇴</b></a></li>
+			<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
 		</ul>
 	</div>
 	<hr/>
@@ -92,8 +92,8 @@
 				<input type="checkbox"/><label>동의합니다.</label>
 			</li>
 			<li>
-				<button type="button" class="btn btn-outline-primary" onclick="location.href='/gachi/mypage'">탈퇴취소</button>
-				<button type="button" class="btn btn-primary" onclick="location.href='/gachi/userLeaveChk'">확인</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/gachi/mypage'">탈퇴취소</button>
+				<button type="button" class="btn btn-outline-primary" onclick="location.href='/gachi/userLeaveChk'">다음</button>
 			</li>
 		</ul>
 	</div>
