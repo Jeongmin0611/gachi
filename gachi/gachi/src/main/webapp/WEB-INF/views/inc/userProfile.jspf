@@ -3,15 +3,21 @@
 <style>
 
 	/* 유저프로필 - 마이페이지 top */
-	a:link, a:visited{color:#000;text-decoration:none;}
-	a:hover{text-decoration:none;font-weight:bold;}
+	a:link, a:visited{
+		color:#000;
+		text-decoration:none;
+	}
+	a:hover{
+		text-decoration:none;
+		font-weight:bold;
+	}
 	
 	/************/
 	/* 프로필 영역 */
 	#userProfile{
+		box-shadow:5px 5px 5px 5px gray;
 		height:200px;
 		padding:50px 125px 0;
-		border:1px solid #ddd;
 		margin-top:50px;	
 		overflow:auto;
 	}
@@ -53,26 +59,30 @@
 		text-align:center;
 	}
 	/* 클래스, 마일리지 라벨 */
-	#userProfile>div:nth-child(3)>label, #userProfile>div:last-child>label{width:100%;}
-	#userProfile>div:nth-child(3)>label:last-child, #userProfile>div:last-child>label:last-child{font-weight:bold;}
+	#userProfile>div:nth-child(3)>label, #userProfile>div:last-child>label{
+		width:100%;
+	}
+	#userProfile>div:nth-child(3)>label:last-child, #userProfile>div:last-child>label:last-child{
+		font-weight:bold;
+	}
 
 	/************/
 	/*마이페이지 메뉴*/
 	#userProfileNavi{
-		height:50px;
-		background-color:#ddd;
-		overflow:auto;
+		height:40px;
+		background-color:#fde9e2;
+		overflow:hidden;
 	}
 	#userProfileNavi li{
 		float:left;
 		width:15%;
-		line-height:50px;
+		line-height:40px;
 		text-align:center;
 	}
 	#userProfileNavi li:last-child{
 		float:right;
 		width:15%;
-		background-color:pink;
+		background-color:#fdc3c4;
 	}
 	
 </style>
