@@ -3,6 +3,7 @@
 <style>
 	
 	/* 클래스 보기 */
+	
 	#myclassView{
 		overflow:auto;
 		margin:10px 50px 40px;
@@ -21,7 +22,7 @@
 		float:left;
 	}
 	#myclassView>li:nth-child(3){
-		font-size:2em;
+		font-size:1.8em;
 		margin-left:0;
 	}
 	#myclassView>li:nth-child(4){
@@ -195,6 +196,12 @@
 		height:100%;
 		z-index:1;
 	}
+	#myclassModalR input, #myclassModalR textarea{
+		border:none;
+		border-bottom:2px solid #ddd;
+		text-align:left;
+		margin-top:10px;
+	}
 	.myclassModal_content{
 		width:500px;
 		height:500px;
@@ -260,10 +267,13 @@
 	    $("#myclassQnaWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalQ").fadeOut();
 	    });  
+	    
+	    $("#classRating").raty({path:"img/images",half:true,});
+	    
 	});
 
 </script>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<hr/>
 	<ul id="myclassView">
@@ -438,17 +448,18 @@
 		<li class="page-item"><a class="page-link" href="#">Next</a></li>
 	</ul>
 </div>
-<div id="myclassModalR">
+<div id="myclassModalR" class="cfont">
 	<div class="myclassModal_content">
-		<h2>수강평작성</h2>
+		<label>수강평작성</label>
 		<hr/>
-		<input type="text"/>
-		<textarea></textarea>
+		<label>별점</label><div id="classRating"></div>
+		<input type="text" placeholder="제목"/>
+		<textarea placeholder="내용 작성"></textarea>
 		<button type="button" class="btn btn-primary" id="myclassReviewWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>
-<div id="myclassModalQ">
+<div id="myclassModalQ" class="cfont">
 	<div class="myclassModal_content">
 		<h2>질문작성</h2>
 		<hr/>
