@@ -36,15 +36,19 @@
 	}
 	#userInfoEditFormLst li{
 		overflow:auto;
-		margin-bottom:20px;
+		padding:10px 0;
 		text-align:center;
+		border-bottom:1px solid #ddd;
+		margin-bottom:2%;
+		margin:0 10px;
+		
 	}
 	#userInfoEditFormLst li:nth-child(2n+1){
 		width:30%;
 		float:left;
 	}
 	#userInfoEditFormLst li:nth-child(2n){
-		width:70%;
+		width:65%;
 	}
 	#userInfoEditFormLst li:nth-child(14)>input {
 		width:80%;
@@ -61,8 +65,9 @@
 		width:70%;
 	}
 	#userInfoEditFormLst input{
-		width:100%;
+		width:80%;
 		text-align:center;
+		border:none;
 	}
 	
 </style>
