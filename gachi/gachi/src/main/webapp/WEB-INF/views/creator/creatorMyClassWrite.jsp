@@ -11,9 +11,9 @@
 		let ckeditor=CKEDITOR.replace("content");
 	});
 </script>
-<div class="container cfont">
+<div class="container cfont" style="border:2px solid black; margin-bottom:50px;">
 <form method="post" action="" enctype="multipart/form-data">
-<ul id="cre_myclass_writeForm">
+<ul id="cre_myclass_writeForm" style="margin-top :50px">
 	<li>카테고리</li>
 	<li>
 		<select>
