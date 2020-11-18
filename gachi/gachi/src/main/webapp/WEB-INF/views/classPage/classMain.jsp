@@ -21,6 +21,9 @@
 	#slideitemMain img{
 		width:100%;
 	}
+	#slideitemMain{
+		margin:50px 0 0 0;
+	}
 	#slideitem input{
 		margin:10px;
 		width:175px;
