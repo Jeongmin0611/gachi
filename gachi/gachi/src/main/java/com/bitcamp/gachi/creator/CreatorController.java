@@ -34,4 +34,8 @@ public class CreatorController {
 	public String creatorSubnotice() {
 		return "creator/creatorSubnotice";
 	}	
+	@RequestMapping("/creatorEdit")
+	public String creatorEdit() {
+		return "creator/creatorEdit";
+	}
 }
