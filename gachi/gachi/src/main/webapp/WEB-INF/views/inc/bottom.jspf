@@ -3,7 +3,7 @@
 <style>
 
    #bottom{
-      background-color: #F4BFA9;
+      background-color: #ABCEE3;
        overflow:auto;
    }
    #bottom ul {

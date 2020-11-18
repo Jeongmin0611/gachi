@@ -10,6 +10,7 @@
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 <!-- Resources -->
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
@@ -18,6 +19,18 @@
 <style>
 
 #admintop img{widht:150px; height:100px; padding:15px;}
+
+#admintop{
+	overflow: auto;
+	background-color: #6e8999;
+}
+
+#admintop>a{
+	width:10%;
+	text-decoration:none;
+	color:white;
+	float:right;
+}
 
 #adminMenu>li a {color: white;}
 
@@ -31,9 +44,9 @@
 
 #headerDiv>ul>li>ul>li {height:50px; line-height: 50px;text-align: center;}
 
-.submenu li {line-height: 10px; background-color: #F4BFA9;}
+.submenu li {line-height: 10px; background-color: #ABCEE3;}
 
-#headerDiv, #adminMenu {background-color: #F4BFA9;height: 50px;width: 100%;font-size: 20px;}
+#headerDiv, #adminMenu {background-color: #ABCEE3;height: 50px;width: 100%;font-size: 20px;}
 
 #headerDiv {z-index: 1000;position: relative;}
 
@@ -43,28 +56,25 @@
 
 #adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
 
-
 #ad_headtop>li{}
 
 @font-face {
-    font-family: 'OSeongandHanEum';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OSeongandHanEum.woff') format('woff');
+    font-family: 'NanumBarunpen';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-a , h1, li {font-family: 'OSeongandHanEum'; }
+a , h1, li { font-family: 'NanumBarunpen';}
 </style>
 
 <title>관리자페이지</title>
 
 </head>
-<body>
+<body style="background-color:#E6E6E6">
 <div id="admintop">
+		<a href="/gachi">로그아웃</a>
+		<a href="/gachi">사용자웹 이동</a>
 		
-		<a href="/gachi"><img src ="img/logo.png"/></a>
-		<a href="/gachi">홈페이지 이동</a>
-		<a href="/gachi">마이페이지</a>
-		<a href="/gachi">고객센터</a>
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">
