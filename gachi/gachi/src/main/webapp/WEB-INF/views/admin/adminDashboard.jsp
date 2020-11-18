@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <style>
 	#ad_dash_board_ul>li{float:left; width: 20%; text-align:center; margin-left:100px;}
-	.ad_dash_board {border: 2px solid #F4BFA9; width:250px; height:200px; padding:20px; margin-bottom:50px;}
+	.ad_dash_board {border: 2px solid #4aa8d8; width:250px; height:200px; padding:20px; margin-bottom:50px;}
 </style>    
     
 <h1 style="text-align:center;"> 관리자 대시보드 </h1>

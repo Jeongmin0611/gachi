@@ -9,16 +9,19 @@
 }
 
 .cr_dash_board {
-	border: 2px solid #F4BFA9;
+	border: 2px solid #4aa8d8;
 	width: 250px;
 	height: 200px;
 	padding: 20px;
 	margin-bottom: 50px;
 }
 </style>
-
-
-<div class="container cr_dash_center text-center">
+<script type="text/javascript">
+	$(()=>{
+		$(".container").css("z-index","300").css("backgroundColor","white");
+	})
+</script>
+<div class="container cr_dash_center text-center card">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
 
