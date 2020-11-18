@@ -2,16 +2,16 @@
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 
  <style>
- #cr_Create_area{margin-bottom:20px;}
- #cr_Create_lst li{vertical-align:middle;}
- #cr_Create_header li{vertical-align:middle;line-height:50px;}
+ #cr_Approval_area{margin-bottom:20px;}
+ #cr_Approval_lst li{vertical-align:middle;}
+ #cr_Approval_header li{vertical-align:middle;line-height:50px;}
  select{height:30px;}
  </style> 
 <div class="container text-center cfont">
 <h3> 미승인 클래스</h3>
-	<div id="cr_Create_area">
+	<div id="cr_Approval_area">
 		<form method="get" action="">
-			<ul class="cr_Classlist_menu">
+			<ul class="cr_Approval_menu">
 				<li>
 					<select>
 						<option>전체</option>
@@ -31,7 +31,7 @@
 	</div>
 
 	<div style="margin:50px 0;">
-		<ul class="cr_Create_header">
+		<ul class="cr_Approval_header">
 			<li>선택</li>
 			<li>번호</li>
 			<li>이미지</li>
@@ -40,7 +40,7 @@
 			<li>신청일</li>
 			<li>승인여부</li>
 		</ul>
-		<ul class="cr_Create_lst">
+		<ul class="cr_Approval_lst">
 			<li><input type="checkbox" id="" name=""/></li>
 			<li>10</li>
 			<li><img src="img/artEx/artEx01.PNG"></li>

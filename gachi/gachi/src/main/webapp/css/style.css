@@ -169,24 +169,23 @@ input{text-align:center;}
 
 
 /* 관리자 주문 관리 start*/
-
-
-#ad_order_info li{
-	float:left;
-	width:15%;
+#ad_order_lst{
+	margin-top:20px;
+	margin-bottom:20px;
 }
 #ad_order_lst li{
-	width:10%;
+	width:8%;
 	float:left;
 	height:40px;
 	line-height:40px;
 	border:1px solid gray;
+	font-size:0.8em;
 }
-#ad_order_lst>li:nth-child(8n+1),#ad_order_lst>li:nth-child(8n+3){
-	width:15%;
+#ad_order_lst>li:nth-child(10n+1){
+	width:10%;
 }
-#ad_order_lst>li:nth-child(8n+4){
-	width:20%;
+#ad_order_lst>li:nth-child(10n+3){
+	width:26%;
 }
 #ad_order_View{
 	width:80%;
@@ -198,8 +197,6 @@ input{text-align:center;}
 	width:50%;
 	border:1px solid gray;
 	font-size: 1.2em;
-	line-height:50px;
-	height:50px;
 }
 #ad_order_View>li:nth-child(2n+1){
 	width:30%;
@@ -212,8 +209,24 @@ input{text-align:center;}
 	height:300px;
 	border:3px solid #F4BFA9;
 }
-
-
+#ad_order_searchForm>li{
+	float:left;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#ad_order_searchForm>li:nth-child(2n+1){
+	width:10%;
+	text-align:center;
+}
+#ad_order_searchForm>li:nth-child(2n){
+	width:90%;
+}
+#ad_order_Area{
+	border:1px solid #ABCEE3;
+	border-radius: 0.7;
+	padding-top:5px;
+	padding-bottom:10px;
+}
 /*관리자 주문 end*/
 
 
@@ -390,9 +403,6 @@ input{text-align:center;}
 	/*관리자 공지사항 글쓰기 end*/
 	
 	/*관리자 1:1문의 리스트 start*/
-	#search_area{
-		text-align: right;
-	}
 	#ad_1on1_lst li{
 		float: left;
 		width:12%;
@@ -563,11 +573,26 @@ input{text-align:center;}
 	#ad_goods_review>li:nth-child(8n+3){
 		width:35%;
 	}
-	
+	#ad_goods_writeForm{
+		width:80%;
+		margin:0 auto;
+	}
+	#ad_goods_writeForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	#ad_goods_writeForm>li{
+		width:50%;
+	}
+	#ad_goods_writeForm ul>li:nth-child(2n+1){
+		width:50%;
+	}
 	/*관리자 스토어관리 end*/
 	
 	/*관리자 리스트 페이징 start*/
 	#paging{
+		margin-top:20px;
 		width:50%;
 		margin:0 auto;
 		font-size: 1.5em;
@@ -594,7 +619,7 @@ input{text-align:center;}
 		float: left;
 		width:10%;
 		border:1px solid gray;
-		line-height:30px;
+		line-height:50px;
 		height:50px;
 	}
 	.cr_MyClass_header li:nth-of-type(7n+1){
@@ -618,14 +643,16 @@ input{text-align:center;}
 		height:120px;
 	}
 	.cr_MyClass_lst img{
-		width:100%;
-		height:100%;
+		
+		width:90%;
+		height:90%;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+1){
 		width:5%;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+3){
 		width:15%;
+		padding:7px;
 	}
 	.cr_MyClass_lst li:nth-of-type(7n+4){
 		width:10%;
@@ -638,26 +665,26 @@ input{text-align:center;}
 	
 	/*크리에이터 신청클래스 리스트 start*/
 	
-	.cr_Create_header li{
+	.cr_Approval_header li{
 		float: left;
 		width:10%;
 		border:1px solid gray;
 		line-height:30px;
 		height:50px;
 	}
-	.cr_Create_header li:nth-of-type(7n+1){
+	.cr_Approval_header li:nth-of-type(7n+1){
 		width:5%;
 	}
-	.cr_Create_header li:nth-of-type(7n+3){
+	.cr_Approval_header li:nth-of-type(7n+3){
 		width:15%;
 	}
-	.cr_Create_header li:nth-of-type(7n+4){
+	.cr_Approval_header li:nth-of-type(7n+4){
 		width:10%;
 	}
-	.cr_Create_header li:nth-of-type(7n+5){
+	.cr_Approval_header li:nth-of-type(7n+5){
 		width:40%;
 	}
-	.cr_Create_lst li{
+	.cr_Approval_lst li{
 		overflow:auto;
 		float: left;
 		width:10%;
@@ -665,23 +692,30 @@ input{text-align:center;}
 		line-height:100px;
 		height:120px;
 	}
-	.cr_Create_lst img{
+	.cr_Approval_lst img{
 		width:100%;
 		height:100%;
 	}
-	.cr_Create_lst li:nth-of-type(7n+1){
+	.cr_Approval_lst li:nth-of-type(7n+1){
 		width:5%;
 	}
-	.cr_Create_lst li:nth-of-type(7n+3){
+	.cr_Approval_lst li:nth-of-type(7n+3){
 		width:15%;
 	}
-	.cr_Create_lst li:nth-of-type(7n+4){
+	.cr_Approval_lst li:nth-of-type(7n+4){
 		width:10%;
 	}
-	.cr_Create_lst li:nth-of-type(7n+5){
+	.cr_Approval_lst li:nth-of-type(7n+5){
 		width:40%;
 	}
 	/*크리에이터 클래스신청 리스트 end*/
+	
+	/*크리에이터 클래스신청 글쓰기 start*/
+	#ps{
+		font-size:0.5em;
+		color:red;
+	}
+	/*크리에이터 클래스신청 글쓰기 end*/
 	
 
 

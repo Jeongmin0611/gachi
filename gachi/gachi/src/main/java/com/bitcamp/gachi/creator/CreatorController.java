@@ -13,12 +13,25 @@ public class CreatorController {
 	public String creatorStatClass() {
 		return "creator/creatorStatClass";
 	}
-	@RequestMapping ("/creatorCreate")
-	public String creatorCreate() {
-		return "creator/creatorCreate";
+	@RequestMapping ("/creatorApproval")
+	public String creatorApproval() {
+		return "creator/creatorApproval";
 	}
 	@RequestMapping ("/creatorMyClass")
 	public String creatorMyClass() {
 		return "creator/creatorMyClass";
 	}
+	@RequestMapping ("/creatorMyClassWrite")
+	public String creatorMyClassWrite() {
+		return "creator/creatorMyClassWrite";
+	}
+	
+	@RequestMapping ("/creatorGuide")
+	public String creatorGuide() {
+		return "creator/creatorGuide";
+	}
+	@RequestMapping("/creatorSubnotice")
+	public String creatorSubnotice() {
+		return "creator/creatorSubnotice";
+	}	
 }

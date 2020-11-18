@@ -46,22 +46,22 @@ h3{
 
 #CEventList span {
 	font-weight: normal;
-	font-size: 15px;
+	font-size: 8px;
 }
 .pagination{
 	margin-bottom:50px;
 }
 </style>
 <script>
-	$(function(){
-		$('#ingEvent').click(function(){
-			location.href="<%=request.getContextPath()%>/eventBoard";
-		});
-		$('#endEvent').click(function(){
-			location.href="<%=request.getContextPath()%>/eventBoardEnd";
-		});
-
+$(function(){
+	$('#ingEvent').click(function(){
+		location.href="<%=request.getContextPath()%>/eventBoard";
 	});
+	$('#endEvent').click(function(){
+		location.href="<%=request.getContextPath()%>/eventBoardEnd";
+	});
+
+});
 </script>
 <div class="container cfont">
 
@@ -69,35 +69,35 @@ h3{
 	<div>
 		<h3>이벤트</h3>
 		<div id="CEventBtnDiv">
-			<input type="button" id="ingEvent" value="진행중인 이벤트" /> 
-			<input type="button" id="endEvent" value="종료된 이벤트"/>
+			<input type="button" id="ingEvent" value="진행중인 이벤트" /> <input
+				type="button" id="endEvent" value="종료된 이벤트" />
 		</div>
 
 		<!-- 이벤트 리스트 -->
 		<ul id="CEventList">
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
 			
 			
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
+			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx01.PNG" /></a><br />
 				<div class="imgtxt">
 					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
 				</div></li>

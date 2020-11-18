@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<div class="container">
 <script type="text/javascript">
 	$(function(){
 		CKEDITOR.replace("content");
@@ -50,9 +51,10 @@
 	<li>상품설명 <textarea name="content"></textarea></li>
 		<li>첨부파일 <input type="file" name="no"/> </li>
 		<li class="content_center">
-			<input type="submit" value="등록"/>
+			<input type="submit" value="수정"/>
 			<input type="reset" value="다시쓰기"/>
 		</li>
 </ul>
 </form>
+</div>
 </div>

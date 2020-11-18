@@ -52,7 +52,7 @@ font-family:'OSeongandHanEum';
 	margin: 10px quto;
 }
 #CcreateList li>a>img{
-	width: 300px;
+	width: 350px;
 	height: 250px;	
 }
 

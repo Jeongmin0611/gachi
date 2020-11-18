@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="resources/bootstrap.css" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/bootstrap.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -58,9 +60,18 @@
 		width:85%;
 		background-color:#eee;
 		float:left;
-		overflow:auto;
+		overflow:hidden;
 		padding-left:20px;
 	}
+	/* 목차열기,닫기 버튼 */
+	#videoLstOpen, #videoLstClose{
+		width:40px;
+		float:right;
+		margin:10px;
+		font-size:1em;
+		padding:0;
+	}
+	#videoLstOpen{display:none;}
 	
 	/* 메인창 - 영상재생창 */
 	#myclassVideoView{
@@ -97,13 +108,6 @@
 		font-size:1.5em;
 		margin:10px 20px;
 	}
-	#myclassVideoLst>label:nth-child(2){
-		width:30px;
-		height:30px;
-		float:right;
-		margin:10px;
-		font-size:1.3em;
-	}
 	#myclassVideoLst>label:nth-child(3){
 		width:100%;
 		font-size:1.5em;
@@ -136,12 +140,32 @@
 		font-size:1em;
 	}
 </style>
+<script>
+	$(function(){
+		$('#videoLstClose').click(function(){
+			$('#myclassVideoLst').hide();
+			$('#myclassVideoMain').css('width','100%');
+			$('#videoLstClose').hide();
+			$('#videoLstOpen').show();
+		});
+		$('#videoLstOpen').click(function(){
+			$('#myclassVideoLst').show();
+			$('#myclassVideoMain').css('width','70%');
+			$('#videoLstOpen').hide();
+			$('#videoLstClose').show();
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
 			<div><a href="/gachi/myclassView">내 학습표</a></div>
-			<div>프랑스 자수 클래스를 소개합니다!</div>
+			<div>
+				프랑스 자수 클래스를 소개합니다!
+				<button class="btn btn-light" id="videoLstClose">></button>
+				<button class="btn btn-light" id="videoLstOpen"><</button>
+			</div>
 		</div>
 		<div id="myclassVideoView">
 			<img src="/gachi/img/video_test_image.png"/>
@@ -153,7 +177,6 @@
 	</div>
 	<div id="myclassVideoLst">
 		<label>목차</label>
-		<label class="badge badge-secondary">X</label>
 		<label>카모마일 프랑스 자수</label>
 		<label>수강기한 : 20.11.01 ~ 21.01.31</label>
 		<label>진도율 : 0.00%</label>
@@ -170,32 +193,32 @@
 			<li>
 				<label>01 프랑스 자수의 기초</label>
 				<ol>
-					<li><a href="#">실을 다루는 방법과 매듭짓는 방법</a></li>
-					<li><a href="#">작품에 사용될 5가지 스티치 연습하기</a></li>
+					<li><a href="#">실을 다루는 방법과 매듭짓는 방법<label>00:00</label></a></li>
+					<li><a href="#">작품에 사용될 5가지 스티치 연습하기<label>00:00</label></a></li>
 				</ol>
 			</li>
 			<li>
 				<label>02 베개 커버에 수놓기</label>
 				<ol>
-					<li><a href="#">곰돌이 수놓기1</a></li>
-					<li><a href="#">곰돌이 수놓기2</a></li>
+					<li><a href="#">곰돌이 수놓기1<label>00:00</label></a></li>
+					<li><a href="#">곰돌이 수놓기2<label>00:00</label></a></li>
 				</ol>
 			</li>
 			<li>
 				<label>03 자수 블랭킷 만들기</label>
 				<ol>
-					<li><a href="#">블랭킷 도안선 그리고 위치잡기</a></li>
-					<li><a href="#">달모양 수놓기</a></li>
-					<li><a href="#">가글 보틀 수놓기</a></li>
-					<li><a href="#">잠옷입은 곰돌이 수놓기</a></li>
-					<li><a href="#">탁상조명 수놓기</a></li>
+					<li><a href="#">블랭킷 도안선 그리고 위치잡기<label>00:00</label></a></li>
+					<li><a href="#">달모양 수놓기<label>00:00</label></a></li>
+					<li><a href="#">가글 보틀 수놓기<label>00:00</label></a></li>
+					<li><a href="#">잠옷입은 곰돌이 수놓기<label>00:00</label></a></li>
+					<li><a href="#">탁상조명 수놓기<label>00:00</label></a></li>
 				</ol>
 			</li>
 			<li>
 				<label>04 완성</label>
 				<ol>
-					<li><a href="#">세탁방법 알아보기</a></li>
-					<li><a href="#">상쾌한 아침을 기다려요!</a></li>
+					<li><a href="#">세탁방법 알아보기<label>00:00</label></a></li>
+					<li><a href="#">상쾌한 아침을 기다려요!<label>00:00</label></a></li>
 				</ol>
 			</li>
 		</ul>
