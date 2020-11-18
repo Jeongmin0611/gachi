@@ -368,10 +368,10 @@ a {
     border-radius: 0;
 }
 .navbar-new-top{
-    background: #fff;
+    background: #f1f7fa;
 }
 .navbar-new-bottom{
-	margin-top:85px;
+	margin-top:83px;
 	margin-bottom:5px;
 }
 </style>

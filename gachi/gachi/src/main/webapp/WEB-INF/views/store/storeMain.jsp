@@ -38,6 +38,24 @@
 	.mainClass{
 		margin:50px auto;
 	}
+	/*이미지 오버효과*/
+	.listMain img{
+max-width: 100%;
+  position: relative;
+  opacity: 1;	
+	}
+	.listMain:hover img{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+	
+	}
+	.listMain *{
+ -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+  }
+	
 	</style>
 </head>
 <body>
