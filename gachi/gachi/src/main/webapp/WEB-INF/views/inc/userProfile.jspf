@@ -3,19 +3,15 @@
 <style>
 
 	/* 유저프로필 - 마이페이지 top */
-	a:link, a:visited{
+	a:link, a:visited, a:hover{
 		color:#000;
 		text-decoration:none;
-	}
-	a:hover{
-		text-decoration:none;
-		font-weight:bold;
 	}
 	
 	/************/
 	/* 프로필 영역 */
 	#userProfile{
-		box-shadow:5px 5px 5px 5px gray;
+		box-shadow:0px 0px 10px 1px #eee;
 		height:200px;
 		padding:50px 125px 0;
 		margin-top:50px;	
@@ -70,8 +66,8 @@
 	/*마이페이지 메뉴*/
 	#userProfileNavi{
 		height:40px;
-		background-color:#fde9e2;
 		overflow:hidden;
+		background-color:#fef4f0;
 	}
 	#userProfileNavi li{
 		float:left;
@@ -82,7 +78,43 @@
 	#userProfileNavi li:last-child{
 		float:right;
 		width:15%;
-		background-color:#fdc3c4;
+	}
+	
+	/* 메뉴 hover 효과 */
+	.userProfileHover{
+	  background:#fef4f0;
+	  color:#fff;
+	  border:none;
+	  position:relative;
+	  height:60px;
+	  padding:0 2em;
+	  cursor:pointer;
+	  transition:800ms ease all;
+	  outline:none;
+	}
+	.userProfileHover:hover{
+	  background:#fde9e2;
+	  color:#000;
+	}
+	.userProfileHover:before,.userProfileHover:after{
+	  content:'';
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  height:2px;
+	  width:0;
+	  background:#f4bfa9;
+	  transition:400ms ease all;
+	}
+	.userProfileHover:after{
+	  right:inherit;
+	  top:inherit;
+	  left:0;
+	  bottom:0;
+	}
+	.userProfileHover:hover:before,.userProfileHover:hover:after{
+	  width:100%;
+	  transition:800ms ease all;
 	}
 	
 </style>
@@ -105,12 +137,12 @@
 	</div>
 	<div>
 		<ul id="userProfileNavi">
-			<li><a href="/gachi/mypage">결제내역</a></li>
-			<li><a href="/gachi/userInfoEdit">회원정보</a></li>
-			<li><a href="/gachi/userCart">장바구니</a></li>
-			<li><a href="/gachi/myclassList">내 학습표</a></li>
-			<li><a href="/gachi/myqna">질문/문의</a></li>
-			<li><a href="/gachi/userWishList">❤좋아요 목록</a></li>
+			<li class="userProfileHover"><a href="/gachi/mypage">결제내역</a></li>
+			<li class="userProfileHover"><a href="/gachi/userInfoEdit">회원정보</a></li>
+			<li class="userProfileHover"><a href="/gachi/userCart">장바구니</a></li>
+			<li class="userProfileHover"><a href="/gachi/myclassList">내 학습표</a></li>
+			<li class="userProfileHover"><a href="/gachi/myqna">질문/문의</a></li>
+			<li class="userProfileHover"><a href="/gachi/userWishList">❤좋아요 목록</a></li>
 		</ul>
 	</div>
 </div>
