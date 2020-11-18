@@ -338,11 +338,28 @@ a {
 	background-color: #e2e2e2;
 	margin: 20px 0;
 }
-
-#listFontColor {
-	color: black;
+#listFontColor{
+	color:black;
 }
-/**/
+#mdBtm{
+	float:right;
+}
+.md_layer{
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:rgba(0,0,0,0.5);
+		z-index:-1;
+	}
+	#md{
+		display:none;
+		position:absolute;
+		width:40%;
+		height:70%;
+		z-index:1;
+	}
 .navbar-new-bottom{
     background-color: #f7f7f7;
     box-shadow: 0 5px 6px -2px rgba(0,0,0,.3);
@@ -376,14 +393,27 @@ a {
 }
 </style>
 <script>
-	
+$(function(){
+	//모달창 띄우기
+    $("#loginFormBtn").click(function(){
+		$("#md").css({
+           "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
+           "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
+           //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+        
+        });
+        $("#md").fadeIn();
+    });
+    $("#mdClose, .md_layer").click(function(){
+       $("#md").fadeOut();
+    });   
+});
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 메뉴 -->
-<nav class="navbar navbar-expand-sm fixed-top navbar-new-top">
+<nav class="navbar navbar-expand-sm fixed-top navbar-new-top" >
   <a href="/gachi">
 		 <img src="img/logo.png" style="width:25%;" alt="logo" /></a>
 		<ul class="nav navbar-nav mr-auto"></ul>
@@ -394,7 +424,7 @@ a {
 				href="/gachi/creatorDashboard">크리에이터</a></li>
 			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/mypage">마이페이지</a></li>
-			 <li class="nav-item"><a class="nav-link px-2"
+			 <li class="nav-item" id="loginFormBtn"><a class="nav-link px-2" 
 				href="#">로그인</a></li>
 			<li class="nav-item"><a class="nav-link px-2"
 				href="#">회원가입</a></li>
@@ -436,11 +466,15 @@ a {
 
 	<!-- 메뉴 끝 -->
 
-	<div id="md" style="display: none">
+	<div id="md">
 		<div id="loginFrm">
 			<form method="post" action="">
 				<h1>로그인</h1>
 				<div>
+				<div id="mdBtm">
+					<button type="button" class="btn btn-primary" id="mdClose"></button>
+				</div>
+				<div class="md_layer"></div>
 					<span class="radioBtn"><input type="radio" value="회원" />회원<input
 						type="radio" value="크리에이터" />크리에이터</span><br /> <input type="text"
 						placeholder="아이디(이메일)" id="userid" name="userid"
