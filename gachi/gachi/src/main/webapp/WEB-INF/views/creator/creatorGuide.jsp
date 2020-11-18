@@ -14,20 +14,21 @@
 	}
 	myAOS();
 	//스크롤이동
-	function moveToReview() {
-		var loca1 = document.querySelector("#").offsetTop;
+	function moveToCreateClass() {
+		var locaR = document.querySelector("#guide_scroll_Classcreate").offsetTop;
 		window.scrollTo({
 			top : locaR,
 			behavior : 'smooth'
 		});
 	}
-	function moveToQna() {
-		var loca2 = document.querySelector("#").offsetTop;
+	function moveToStatClass() {
+		var locaQ = document.querySelector("#guide_scroll_Statclass").offsetTop;
 		window.scrollTo({
 			top : locaQ,
 			behavior : 'smooth'
 		});
 	}
+	
 </script>	
 
 
@@ -40,15 +41,21 @@
 	
 	#cr_guide_navi{
 		height:50px;
-		background-color:#ddd;
 		overflow:auto;
+		margin:0 auto;
 	}
 	#cr_guide_navi li{
 		float:left;
-		width:25%;
+		width:33%;
 		line-height:50px;
 		text-align:center;
 	}
+	#cr_guide_navi button{
+		margin:0 auto;
+		width:50%;
+		}
+	#guide_navi_div ul{margin:0 auto; width:50%;}
+	
 	.cr_guide {margin : 0 auto; }
 	.aos-animate-div {margin: 0px auto; background:#E4E6DA }
 	.aos-animate-half {float:left; width:50%; padding:10%;}
@@ -61,15 +68,15 @@
 </style>
 
 <div class="cr_guide text-center " style="margin-bottom:50px;">
-<!--   
-	 	<div>
+
+	 	<div id="guide_navi_div">
 			<ul id="cr_guide_navi">
-				<li><a href="#">클래스관리</a></li>
-				<li><a href="#">개인정보수정</a></li>
-				<li><a href="#">정산관리</a></li>
-				<li><a href="#">공지/문의하기</a></li>
+				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToCreateClass()">클래스관리</button></li>
+				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToStatClass()">클래스통계</button></li>
+				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveTo()">정산관리</button></li>
+
 			</ul>
-		</div> -->
+		</div> 
 		<div class="aos-animate-half" style="margin-bottom:200px;"data-aos="fade-down" data-aos-duration="10000">
 				<img src ="/gachi/img/guideTitle.PNG"/>
 		</div>
@@ -78,21 +85,25 @@
 		</div>	
 		
 		<div class="aos-animate-div ">	
-			<div class="aos-animate-guide" style="margin-bottom:100px;"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
-				<img src ="/gachi/img/guide1.png"/>
+			<div class="aos-animate-guide" id ="guide_scroll_Classcreate"style="margin-bottom:100px;"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
+				<img src ="/gachi/img/guide01.png"/>
+			</div>
+			<div class="aos-animate-guide" style="width:50%"data-aos="fade-left" data-aos-easing="ease-out-cubic" data-aos-duration="3000">
+				<img src ="/gachi/img/guide03.png"/>
 			</div>
 			<div class="aos-animate-guide" data-aos="zoom-in" data-aos-duration="3000">
 				<h3><b> 클래스관리 <br/>클래스 관리를 통하여 <br/>나만의 클래스를 쉽게 관리 할수있습니다.</b></h3>
 				<button type="button" class="btn btn-outline-primary btn-block" onclick="location.href='/gachi/creatorMyClass'">신청하러가기</button>	
 			</div>
 			
-			<div class="aos-animate-guide" style="width:50%"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
-				<img src ="/gachi/img/guide2.png"/>
+			<div class="aos-animate-guide" id ="guide_scroll_Statclass" style="width:50%"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
+				<img src ="/gachi/img/guide02.png"/>
 			</div>
-			<div class="aos-animate-guide" data-aos="flip-right" data-aos-duration="3000">
+			<div class="aos-animate-guide" data-aos="zoom-in" data-aos-duration="3000">
 				<h3><b>  클래스통계 <br/>나의 통계를 한눈에!</b></h3>
 				<button type="button" class="btn btn-outline-info btn-block" onclick="location.href='/gachi/creatorStatClass'">통계 확인하기</button>	
 			</div>
+
 		</div>		
 	</div>
 
