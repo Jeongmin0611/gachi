@@ -13,26 +13,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript" src="resources/jquery.raty.js"></script>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
 <link href="<c:url value="/img/slide1.jpeg" />" rel="stylesheet">
 <link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
 
 <%-- <script src="<c:url value="/resources/js/common.js" />"></script> --%>
 <style>
-#top {
-	width: 100%;
-	height: 55px;
-	line-height: 50px;
-	background-color: #F4BFA9;
-	overflow: hidden;
-}
-
-#top li {
-	float: right;
-	width: 7%;
-	text-decoration: none;
-	text-align: center;
-}
 
 #menu {
 	width: 100%;
@@ -57,7 +44,6 @@
 	text-align: center;
 	font-size: 1.5em;
 }
-
 
 @font-face {
 	font-family: 'OSeongandHanEum';
@@ -342,7 +328,7 @@ a {
 #loginJOk button, #loginJ2Ok button {
 	width: 300px;
 	height: 50px;
-	margin:0 160px;
+	margin: 0 160px;
 }
 
 #mJ2userid, #mJ2userpwd, #mJ2userpwdOk, #mJ2username, #mJ2userNname,
@@ -370,10 +356,45 @@ a {
 	#md{
 		display:none;
 		position:absolute;
-		width:35%;
+		width:40%;
 		height:70%;
 		z-index:1;
 	}
+	#listFontColor {
+	color: black;
+}
+
+.navbar-new-bottom{
+    background-color: #f7f7f7;
+    box-shadow: 0 5px 6px -2px rgba(0,0,0,.3);
+    border-top: 1px solid #e0e0e0;
+    margin-top: 4%;
+    height: 40px;
+}
+.navbar-new-bottom ul li{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.navbar-nav .nav-item a {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 1s ease;
+}
+.navbar-nav .nav-item a:hover{
+    color: #0062cc;
+}
+.dropdown-menu.show{
+    background: #f8f9fa;
+    border-radius: 0;
+}
+.navbar-new-top{
+    background: #fff;
+}
+.navbar-new-bottom{
+	margin-top:85px;
+	margin-bottom:5px;
+}
 </style>
 <script>
 $(function(){
@@ -396,17 +417,59 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="top">
+	
+<nav class="navbar navbar-expand-sm fixed-top navbar-new-top" >
+  <a href="/gachi">
+		 <img src="img/logo.png" style="width:25%;" alt="logo" /></a>
+		<ul class="nav navbar-nav mr-auto"></ul>
+  <ul class="navbar-nav justify-content-end">
+    <li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/adminDashboard">어드민</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/creatorDashboard">크리에이터</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/mypage">마이페이지</a></li>
+			 <li class="nav-item" id="loginFormBtn"><a class="nav-link px-2"
+				href="#">로그인</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="#">회원가입</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/serviceCenterBoard">고객센터</a></li>	
+    </li>
+  </ul>
+</nav>
+<nav class="navbar  navbar-expand-sm navbar-new-bottom">
+		<div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
 
-		<ul>
-			<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
-			<li><a href="#">회원가입</a></li>
-			<li id="loginFormBtn">로그인</li>
-			<li><a href="/gachi/mypage">마이페이지</a></li>
-			<li><a href="/gachi/adminDashboard">어드민</a></li>
-			<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
-		</ul>
-	</div>
+			<ul class="navbar-nav w-100 justify-content-center px-3">
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
+						<a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/introCreate">크리에이터 소개</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/storeMain">스토어</a></li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">공지사항</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a> 
+						<a class="dropdown-item" href="/gachi/eventBoard">이벤트</a> 
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/companyBoard">회사소개</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- 메뉴 끝 -->
 
 	<div id="md">
 		<div id="loginFrm">
@@ -420,8 +483,8 @@ $(function(){
 					<span class="radioBtn"><input type="radio" value="회원" />회원<input
 						type="radio" value="크리에이터" />크리에이터</span><br /> <input type="text"
 						placeholder="아이디(이메일)" id="userid" name="userid"
-						style="background-color: #e2e2e2;" /><br /> <input type="password"
-						placeholder="비밀번호" id="userpwd" name="userpwd"
+						style="background-color: #e2e2e2;" /><br /> <input
+						type="password" placeholder="비밀번호" id="userpwd" name="userpwd"
 						style="background-color: #e2e2e2;" /><br /> <span id="idPwd"><a
 						href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
 					<button id="loginBtn">로그인</button>
@@ -432,11 +495,6 @@ $(function(){
 			</form>
 		</div>
 	</div>
-	<!-- 메뉴 -->
-	
-	<%@ include file="topMenu.jspf"  %>
-
-	<!-- 메뉴 -->
 
 
 
@@ -584,7 +642,7 @@ $(function(){
 		</div>
 	</div>
 	<div>
-		<div id="memberJoin" style="display:none">
+		<div id="memberJoin" style="display: none">
 			<form>
 				<div>
 					<h1 class="mJH">회원가입</h1>

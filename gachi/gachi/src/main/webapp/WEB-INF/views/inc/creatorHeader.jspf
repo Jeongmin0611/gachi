@@ -16,7 +16,12 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <style>
-#creatortop img{widht:150px; height:100px; padding:15px;}
+#creatortop img{widht:100px; height:50px; padding:15px;}
+
+#creatortop a{
+	text-decoration:none;
+	color:white;
+}
 
 #creatorMenu>li a {color: white;}
 
@@ -32,7 +37,7 @@
 
 .submenu li {line-height: 10px; background-color: #F4BFA9;}
 
-#headerDiv, #adminMenu {background-color: #F4BFA9;height: 50px;width: 100%;font-size: 20px;}
+#headerDiv, #adminMenu {background-color: #ABCEE3;height: 50px;width: 100%;font-size: 20px;}
 
 #headerDiv {z-index: 1000;position: relative;}
 
@@ -48,19 +53,19 @@
     font-weight: normal;
     font-style: normal;
 }
-a , h1, li {font-family: 'OSeongandHanEum';}
+a , h1, li ,h3 {font-family: 'OSeongandHanEum';}
 </style>
 
 <title>크리에이터 관리 페이지</title>
 
 </head>
 <body>
-<div id="creatortop">
-		
-		<a href="/gachi"><img src ="img/logo.png"/></a>
+<div id="creatortop" style="background-color:#E0E0E0">
+		<a href="/gachi"><img src="/gachi/img/logo.png"></a>
 		<a href="/gachi">홈페이지 이동</a>
 		<a href="/gachi">마이페이지</a>
 		<a href="/gachi">고객센터</a>
+		<a href="/gachi">로그아웃</a>
 </div>
 <div id="headerDiv">
 	<ul id="creatorMenu">
@@ -74,7 +79,7 @@ a , h1, li {font-family: 'OSeongandHanEum';}
 		</li>
 		<li><a href="/gachi/creatorInformation">개인정보 수정</a>
 			<ul class="submenu">
-				<li><a href="/gachi/creatorSubInformation">개인정보 수정</a></li>
+				<li><a href="/gachi/creatorEdit">개인정보 수정</a></li>
 	            <li><a href="/gachi/creatorOut">회원 탈퇴</a></li>
 			</ul>
 		</li>

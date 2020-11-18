@@ -48,6 +48,30 @@ h3{
 	font-weight: normal;
 	font-size: 15px;
 }
+
+/* 이미지 오버 효과 */
+
+#CEventList img{
+max-width: 100%;
+  position: relative;
+  opacity: 1;
+}
+
+
+#CEventList li:hover img, #CEventList li.hover img{
+  opacity: 0.5;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+#CEventList *{
+ -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+  }
+
+/* 이미지 오버 효과 끝 */
+
 .pagination{
 	margin-bottom:50px;
 }
@@ -60,8 +84,13 @@ h3{
 		$('#endEvent').click(function(){
 			location.href="<%=request.getContextPath()%>/eventBoardEnd";
 		});
-
 	});
+	
+	$(".hover").mouseleave(
+		function () {
+			$(this).removeClass("hover");
+		}
+	);
 </script>
 <div class="container cfont">
 
