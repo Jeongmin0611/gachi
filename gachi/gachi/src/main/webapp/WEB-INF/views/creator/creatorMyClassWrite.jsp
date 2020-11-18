@@ -34,7 +34,7 @@
 <div id="img_area" style="margin:10px 0px;">
 	<div>
 		이미지등록<br/>
-		<img src="/gachi/img/147.jpg"><br/>
+		<img src="/gachi/img/cookingEx/cookingEx01.jpg"><br/>
 		<input type="file"/>
 	</div>
 	<div>
@@ -50,7 +50,7 @@
 		클래스 상세정보 <span id="ps">*클래스 내용과 함께 강좌개설 시 반영될 의견을 기입해주세요.</span>
 		<textarea name="content"></textarea>
 	</div>
-	<div style="text-align:center">
+	<div style="text-align:center; margin-bottom:50px">
 		<input type="submit" value="개설신청"/>
 		<input type="reset" value="다시쓰기"/>
 	</div>

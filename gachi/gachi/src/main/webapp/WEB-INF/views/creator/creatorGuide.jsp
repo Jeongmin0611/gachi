@@ -49,12 +49,12 @@
 		line-height:50px;
 		text-align:center;
 	}
-	.cr_guide {margin : 0 auto;}
-	.aos-animate-div {margin:0 auto ; background:#E4E6DA }
+	.cr_guide {margin : 0 auto; }
+	.aos-animate-div {margin: 0px auto; background:#E4E6DA }
 	.aos-animate-half {float:left; width:50%; padding:10%;}
-	.aos-animate-half img{width: 100%}
+	.aos-animate-half img {width: 100%; }
 	.aos-animate-div img {width:70%;}
-	.aos-animate-guide {width:70%;}
+	.aos-animate-guide {width:70%; margin:0 auto;}
 	.aos-animate-guide h3 {vertical-align:middle; line-height:50px; padding-top :30px}
 	.aos-animate-guide button {width:20%; margin:50px auto;}
 	
@@ -87,13 +87,12 @@
 			</div>
 			
 			<div class="aos-animate-guide" style="width:50%"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
-				<img src ="/gachi/img/guide2.PNG"/>
+				<img src ="/gachi/img/guide2.png"/>
 			</div>
 			<div class="aos-animate-guide" data-aos="flip-right" data-aos-duration="3000">
 				<h3><b>  클래스통계 <br/>나의 통계를 한눈에!</b></h3>
-				<button type="button" class="btn btn-outline-info btn-block" onclick="location.href='/gachi/creatorMyClass'">통계 확인하기</button>	
+				<button type="button" class="btn btn-outline-info btn-block" onclick="location.href='/gachi/creatorStatClass'">통계 확인하기</button>	
 			</div>
-
 		</div>		
 	</div>
 
