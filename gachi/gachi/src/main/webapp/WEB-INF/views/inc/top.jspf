@@ -62,27 +62,10 @@ a {
 	float: right;
 	margin: 5px 60px 0px 35px;
 }
-
-#loginFrm {
-	border: 1px solid gray;
-	width: 600px;
-	height: 450px;
-	margin: 5px;
-	background-color: white;
-}
-
 #idF1, #pwdF1, #pwdF2 {
 	border: 1px solid gray;
 	width: 600px;
 	height: 350px;
-	margin: 5px;
-	background-color: white;
-}
-
-#memberJoin {
-	border: 1px solid gray;
-	width: 600px;
-	height: 1200px;
 	margin: 5px;
 	background-color: white;
 }
@@ -192,7 +175,7 @@ a {
 
 #loginFrm {
 	border: 1px solid gray;
-	width: 600px;
+	width: 550px;
 	height: 450px;
 	margin: 5px;
 	background-color: white;
@@ -205,11 +188,10 @@ a {
 	margin: 5px;
 	background-color: white;
 }
-
-#memberJoin {
+#memberJoinFrm {
 	border: 1px solid gray;
 	width: 600px;
-	height: 1000px;
+	height: 1050px;
 	margin: 5px;
 	background-color: white;
 }
@@ -267,12 +249,15 @@ a {
 	text-align: center;
 }
 
-#prImg {
+.prImg {
 	float: center;
 	width: 170px;
-	height: 170px;
-	background-color: red;
+	height: 170px; 
 	margin: 0 0 0 213px;
+}
+.prImg>img{
+	width:170px;
+	height:170px;
 }
 
 .radioBtn2 {
@@ -306,7 +291,7 @@ a {
 	width: 150px;
 	height: 40px;
 	float: left;
-	background-color: red;
+	
 }
 
 .textBoxJ {
@@ -391,10 +376,40 @@ a {
 	margin-top:85px;
 	margin-bottom:5px;
 }
+#mdBtm,#memberJoinBtn{
+	float:right;
+}
+.memberJoin_layer{
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:rgba(0,0,0,0.5);
+		z-index:-1;
+	}
+	#memberJoin{
+		border:1px solid gray;
+		display:none;
+		position:absolute;
+		width:40%;
+		height:70%;
+		z-index:1;
+	}
+#mdClose{
+	background-color:white;
+	border:0;
+	outline:0;
+}
+#memberJoinClose{
+	background-color:white;
+	border:0;
+	outline:0;
+}
 </style>
 <script>
 $(function(){
-	//모달창 띄우기
+	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
 		$("#md").css({
            "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
@@ -406,6 +421,19 @@ $(function(){
     });
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
+    });
+    //회원가입모달
+    $("#joinFormBtn").click(function(){
+		$("#memberJoin").css({
+           "top": (($(window).height()-$("#memberJoin").outerHeight())/2+$(window).scrollTop())+"px",
+           "left": (($(window).width()-$("#memberJoin").outerWidth())/2+$(window).scrollLeft())+"px"
+           //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+        
+        });
+        $("#memberJoin").fadeIn();
+    });
+    $("#memberJoinClose, .memberJoin_layer").click(function(){
+       $("#memberJoin").fadeOut();
     });   
 });
 </script>
@@ -426,11 +454,10 @@ $(function(){
 				href="/gachi/mypage">마이페이지</a></li>
 			 <li class="nav-item" id="loginFormBtn"><a class="nav-link px-2" 
 				href="#">로그인</a></li>
-			<li class="nav-item"><a class="nav-link px-2"
+			<li class="nav-item" id="joinFormBtn"><a class="nav-link px-2"
 				href="#">회원가입</a></li>
 			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/serviceCenterBoard">고객센터</a></li>	
-    </li>
   </ul>
 </nav>
 <nav class="navbar  navbar-expand-sm navbar-new-bottom">
@@ -475,40 +502,14 @@ $(function(){
 					<button type="button" class="btn btn-primary" id="mdClose"></button>
 				</div>
 				<div class="md_layer"></div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br /> <input type="text"
-						placeholder="아이디(이메일)" id="userid" name="userid"
-						style="background-color: #e2e2e2;" /><br /> <input
-						type="password" placeholder="비밀번호" id="userpwd" name="userpwd"
-						style="background-color: #e2e2e2;" /><br /> <span id="idPwd"><a
-						href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
-					<button id="loginBtn">로그인</button>
-					<br /> <span id="or">or</span><br />
-					<button id="kokoBtn">카카오톡으로 로그인</button>
-					<br /> <span id="logbtm">아직같이가치의 회원이 아니신가요? <a href="#">회원가입하기</a></span>
-				</div>
-			</form>
-		</div>
-	</div>
-
-
-
-	<div id="md" style="display: none">
-		<div id="loginFrm">
-			<form method="post" action="">
-				<h1>로그인</h1>
-				<div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br /> <input type="text"
-						placeholder="아이디(이메일)" id="userid" name="userid"
-						style="background-color: #e2e2e2;" /><br /> <input
-						type="password" placeholder="비밀번호" id="userpwd" name="userpwd"
-						style="background-color: #e2e2e2;" /><br /> <span id="idPwd"><a
-						href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
-					<button id="loginBtn">로그인</button>
-					<br /> <span id="or">or</span><br />
-					<button id="kokoBtn">카카오톡으로 로그인</button>
-					<br /> <span id="logbtm">아직같이가치의 회원이 아니신가요? <a href="#">회원가입하기</a></span>
+					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+						<input type="text" placeholder="아이디(이메일)" id="userid" name="userid" style="background-color: #e2e2e2;"/><br />
+						<input type="password" placeholder="비밀번호" id="userpwd" name="userpwd" style="background-color: #e2e2e2;" /><br />
+						<span id="idPwd"><a href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
+					<button id="loginBtn">로그인</button><br />
+					<span id="or">or</span><br />
+					<button id="kokoBtn">카카오톡으로 로그인</button><br />
+					<span id="logbtm">아직같이가치의 회원이 아니신가요?<a href="#">회원가입하기</a></span>
 				</div>
 			</form>
 		</div>
@@ -518,14 +519,11 @@ $(function(){
 			<form>
 				<h1>아이디찾기</h1>
 				<div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br /> <span id="idFF">회원정보에
-						등록된 이메일을 통해 아이디를 찾을 수 있습니다</span> <input type="text"
-						placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel"
-						style="background-color: #e2e2e2;" />
-					<button class="autBtn">인증</button>
-					<br /> <input type="text" placeholder="인증번호" id="idFNo"
-						name="idFNo" style="background-color: #e2e2e2;" />
+					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
+						<input type="text" placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel" style="background-color: #e2e2e2;" />
+					<button class="autBtn">인증</button><br />
+					<input type="text" placeholder="인증번호" id="idFNo" name="idFNo" style="background-color: #e2e2e2;" />
 					<button id="idFNoBtn">확인</button>
 				</div>
 			</form>
@@ -537,14 +535,11 @@ $(function(){
 				<div>
 					<h1>비밀번호찾기</h1>
 					<div>
-						<span class="radioBtn"><input type="radio" value="회원" />회원<input
-							type="radio" value="크리에이터" />크리에이터</span><br /> <span id="pwdFF1">회원정보에
-							등록된이메일을 통해 비밀번호를 찾을수있습니다</span> <input type="text"
-							placeholder="연락처를 입력해주세요" id="pwdFTel1" name="pwdFTel1"
-							style="background-color: #e2e2e2;" />
-						<button class="autBtn">인증</button>
-						<br /> <input type="text" placeholder="인증번호" id="pwdFNo1"
-							name="pwdFNo1" style="background-color: #e2e2e2;" />
+						<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+							<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다</span>
+							<input type="text" placeholder="연락처를 입력해주세요" id="pwdFTel1" name="pwdFTel1" style="background-color: #e2e2e2;" />
+						<button class="autBtn">인증</button><br />
+						<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" style="background-color: #e2e2e2;" />
 						<button id="pwdFNoBtn">확인</button>
 					</div>
 				</div>
@@ -557,113 +552,48 @@ $(function(){
 				<div>
 					<h1>비밀번호찾기</h1>
 					<div>
-						<span class="radioBtn"><input type="radio" value="회원" />회원<input
-							type="radio" value="크리에이터" />크리에이터</span><br /> <span id="pwdFF2">회원정보에
-							등록된이메일을 통해 비밀번호를 찾을수있습니다</span> <input type="text"
-							placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"
-							style="background-color: #e2e2e2;" /><br /> <input type="text"
-							placeholder="연락처를 입력해주세요" id="pwdFTel2" name="pwdFTel2"
-							style="background-color: #e2e2e2;" />
+						<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+							<span id="pwdFF2">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다</span>
+							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail" style="background-color: #e2e2e2;" /><br />
+							<input type="text" placeholder="연락처를 입력해주세요" id="pwdFTel2" name="pwdFTel2" style="background-color: #e2e2e2;" />
 						<button class="autBtn">인증</button>
-						<br /> <input type="text" placeholder="인증번호" id="pwdFNo2"
-							name="pwdFNo2" style="background-color: #e2e2e2;" />
+						<br /> <input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2" style="background-color: #e2e2e2;" />
 						<button id="pwdFNoBtn">확인</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-	<div style="display: none">
 		<div id="memberJoin">
-			<form>
-				<div>
-					<h1 class="mJH">회원가입</h1>
-					<div id="prImg"></div>
-					<span class="radioBtn2"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br />
-					<div class="ipbox">이메일:</div>
-					<div class="ipbox1">
-						<input type="text" id="useridJ" name="useridJ"
-							style="background-color: #e2e2e2;" />
+			<div id="memberJoinFrm">
+				<form>
+					<div>
+					<div id="memberJoinBtm">
+						<button type="button" class="btn btn-primary" id="memberJoinClose"></button>
 					</div>
-					<br />
-					<div class="ipbox">비밀번호:</div>
-					<div class="ipbox1">
-						<input type="password" id="userpwdJ" name="userpwdJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">비밀번호확인:</div>
-					<div class="ipbox1">
-						<input type="password" id="userpwdJ" name="userpwdJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">이름:</div>
-					<div class="ipbox1">
-						<input type="text" id="userNameNJ" name="userNameNJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">닉네임:</div>
-					<div class="ipbox1">
-						<input type="text" id="userNNJ" name="userNNJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">생년월일:</div>
-					<div class="ipbox1">
-						<input type="text" id="userDobNJ" name="userDobNJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">연락처:</div>
-					<div class="ipbox1">
-						<input type="text" id="userTelJ" name="userTelJ"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-					<div class="ipbox">우편번호:</div>
-					<div id="ipbox"></div>
-					<input type="text" id="" /><br />
-					<div class="ipbox">상세주소:</div>
-					<div class="ipbox1">
-						<input type="text" id="userAddr2J" name="userAddr2J"
-							style="background-color: #e2e2e2;" />
-					</div>
-					<br />
-				</div>
-			</form>
-		</div>
-	</div>
-	<div>
-		<div id="memberJoin" style="display: none">
-			<form>
-				<div>
-					<h1 class="mJH">회원가입</h1>
-					<div id="prImg"></div>
-					<span class="radioBtn2"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br />
-					<div class="textBoxJ">이메일 :</div>
-					<input type="text" id="mJuserid">
-					<div class="textBoxJ">비밀번호 :</div>
-					<input type="text" id="mJuserpwd">
-					<div class="textBoxJ">비밀번호확인 :</div>
-					<input type="text" id="mJuserpwdOk">
-					<div class="textBoxJ">이름 :</div>
-					<input type="text" id="mJusername">
-					<div class="textBoxJ">닉네임 :</div>
-					<input type="text" id="mJuserNname">
-					<div class="textBoxJ">생년월일 :</div>
-					<input type="text" id="mJuserB">
-					<div class="textBoxJ">전화번호 :</div>
-					<input type="text" id="mJusertel">
-					<div class="textBoxJ">주소 :</div>
-					<input type="text" id="mJuseraddr"> 광고수신 동의 여부<br /> <span
-						class="radioBtn3"><input type="radio" />이메일수신<input
-						type="radio" />문자수신</span><br />
-					<div id="loginJOk">
-						<button>가입하기</button>
+					<div class="memberJoin_layer"></div>
+						<h1 class="mJH">회원가입</h1>
+						<div class="prImg"><img src="img/client.png"/></div>
+						<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+						<div class="textBoxJ">이메일 :</div>
+						<input type="text" id="mJuserid">
+						<div class="textBoxJ">비밀번호 :</div>
+						<input type="text" id="mJuserpwd">
+						<div class="textBoxJ">비밀번호확인 :</div>
+						<input type="text" id="mJuserpwdOk">
+						<div class="textBoxJ">이름 :</div>
+						<input type="text" id="mJusername">
+						<div class="textBoxJ">닉네임 :</div>
+						<input type="text" id="mJuserNname">
+						<div class="textBoxJ">생년월일 :</div>
+						<input type="text" id="mJuserB">
+						<div class="textBoxJ">전화번호 :</div>
+						<input type="text" id="mJusertel">
+						<div class="textBoxJ">주소 :</div>
+						<input type="text" id="mJuseraddr"> 광고수신 동의 여부<br /> 
+						<span class="radioBtn3"><input type="radio" />이메일수신<input type="radio" />문자수신</span><br />
+						<div id="loginJOk">
+							<button>가입하기</button>
 					</div>
 
 				</div>
@@ -675,9 +605,8 @@ $(function(){
 			<form>
 				<div>
 					<h1 class="mJH">회원가입</h1>
-					<div id="prImg"></div>
-					<span class="radioBtn2"><input type="radio" value="회원" />회원<input
-						type="radio" value="크리에이터" />크리에이터</span><br />
+					<div class="prImg"><img src="img/client.png"/></div>
+					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
 					<div class="textBoxJ">이메일 :</div>
 					<input type="text" id="mJ2userid">
 					<div class="textBoxJ">비밀번호 :</div>
@@ -695,9 +624,8 @@ $(function(){
 					<div class="textBoxJ">사업자번호 :</div>
 					<input type="text" id="mJ2usernum">
 					<div class="textBoxJ">계좌 :</div>
-					<input type="text" id="mJ2userM"> 광고수신 동의 여부<br /> <span
-						class="radioBtn3"><input type="radio" />이메일수신<input
-						type="radio" />문자수신</span><br />
+					<input type="text" id="mJ2userM"> 광고수신 동의 여부<br />
+					<span class="radioBtn3"><input type="radio" />이메일수신<input type="radio" />문자수신</span><br />
 					<div id="loginJ2Ok">
 						<button>가입하기</button>
 					</div>
