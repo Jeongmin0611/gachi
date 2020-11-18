@@ -5,16 +5,33 @@
 
     
 <script>
-	//스크롤이동
-	function moveToReview(){
-		var loca1 = document.querySelector("#").offsetTop;
-		window.scrollTo({top:locaR, behavior:'smooth'});
+	// AOS
+	var myAOS = function() {
+		AOS.init({
+			easing : 'ease-out-back',
+			duration : 1500
+		});
 	}
-	function moveToQna(){
+	myAOS();
+	//스크롤이동
+	function moveToReview() {
+		var loca1 = document.querySelector("#").offsetTop;
+		window.scrollTo({
+			top : locaR,
+			behavior : 'smooth'
+		});
+	}
+	function moveToQna() {
 		var loca2 = document.querySelector("#").offsetTop;
-		window.scrollTo({top:locaQ, behavior:'smooth'});
+		window.scrollTo({
+			top : locaQ,
+			behavior : 'smooth'
+		});
 	}
 </script>	
+
+
+
 
 <style>
 	
@@ -35,7 +52,7 @@
 	.aos-animate-div {margin: 50px 0 ;}
 	.aos-animate-div img {width:100%;}
 	.aos-animate-harf {float:left;width:50%;}
-	.aos-animate-harf h3 {vertical-align:middle; line-height:50px; padding-top :100px}
+	.aos-animate-harf h3 {vertical-align:middle; line-height:50px; padding-top :50px}
 	.aos-animate-harf button {width:50%;margin: auto;}
 	
 </style>
@@ -52,13 +69,24 @@
 		</div>
 		
 	<div class="aos-animate-div">	
-		<div class="aos-animate-harf">
-			<h3>클래스 관리를 통하여 <br/>나만의 클래스를 쉽게 관리 할수있습니다.</h3>
+		<div class="aos-animate-harf" data-aos="zoom-in" data-aos-duration="3000">
+			<h3> - 클래스관리 - <br/>클래스 관리를 통하여 <br/>나만의 클래스를 쉽게 관리 할수있습니다.</h3>
 			<button type="button" class="btn btn-outline-primary btn-block" onclick="location.href='/gachi/creatorMyClass'">신청하러가기</button>	
 		</div>
-		<div class="aos-animate-harf" data-aos="fade-down" data-aos-duration="1000">
+		<div class="aos-animate-harf" data-aos="fade-down" data-aos-duration="3000">
 			<img src ="/gachi/img/guide1.png"/>
 		</div>
 	</div>	
 		
 </div>	
+
+
+
+
+
+
+
+
+
+
+
