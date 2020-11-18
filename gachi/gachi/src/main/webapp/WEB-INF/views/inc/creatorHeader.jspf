@@ -48,7 +48,7 @@
     font-weight: normal;
     font-style: normal;
 }
-a , h1, li {font-family: 'OSeongandHanEum';}
+a , h1, li ,h3 {font-family: 'OSeongandHanEum';}
 </style>
 
 <title>크리에이터 관리 페이지</title>
