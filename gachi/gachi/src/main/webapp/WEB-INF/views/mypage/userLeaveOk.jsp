@@ -46,7 +46,7 @@
 		<ul>
 			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
 			<li>|</li>
-			<li><a href="#"><b>회원탈퇴</b></a></li>
+			<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
 		</ul>
 	</div>
 	<hr/>
