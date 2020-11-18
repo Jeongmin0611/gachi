@@ -16,15 +16,9 @@
 	margin-bottom: 50px;
 }
 </style>
-<script type="text/javascript">
-	$(()=>{
-		$(".container").css("z-index","300").css("backgroundColor","white");
-	})
-</script>
-<div class="container cr_dash_center text-center card">
+<div class="container cr_dash_center text-center">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
-
 	<div>
 		<ul id="cr_dash_board_ul">
 			<li><div class="cr_dash_board"><input type="radio" name="cr_dash_User" value="전체" checked/>전체
