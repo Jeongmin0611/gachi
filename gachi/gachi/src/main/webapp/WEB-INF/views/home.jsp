@@ -40,9 +40,40 @@
 	.mainClass{
 		margin:50px auto;
 	}
-	
+	/* 이미지 오버 효과 */
+
+.mainClass img{
+max-width: 100%;
+  position: relative;
+  opacity: 1;
+}
+
+
+.mainClass li:hover img, .mainClass li.hover img{
+  opacity: 0.5;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.mainClass *{
+ -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+  }
+
+/* 이미지 오버 효과 끝 */
 	</style>
 </head>
+
+<script>
+//이미지 오버 효과
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+);
+
+</script>
 <body>
 <div class="container">
 <div class="mainClass">
