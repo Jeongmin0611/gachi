@@ -69,7 +69,10 @@ font-family:'OSeongandHanEum';
 .pagination{
 	margin-bottom:50px;
 }
+
+
 </style>
+
 <div class="container cfont">
 	<div id="introCreateTopDiv">
 		크리에이터 소개
