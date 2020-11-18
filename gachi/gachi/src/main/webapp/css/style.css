@@ -717,5 +717,15 @@ input{text-align:center;}
 	}
 	/*크리에이터 클래스신청 글쓰기 end*/
 	
+	/*크리에이터 질문/답변 목록 start*/
+	#cre_classQuestion_lst li{
+		width:15%;
+		float:left;
+	}
+	#cre_classQuestion_lst li:nth-child(6n+2){
+		width:25%;
+		float:left;
+	}
+	/*크리에이터 질문/답변 목록 end*/
 
 

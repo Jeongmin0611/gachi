@@ -53,12 +53,13 @@
 #creatorMenu>li:hover .submenu {opacity: 1;visibility: visible;}
 
 @font-face {
-    font-family: 'OSeongandHanEum';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OSeongandHanEum.woff') format('woff');
+    font-family: 'NanumBarunpen';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-a , h1, li ,h3 {font-family: 'OSeongandHanEum';}
+
+a , h1, li { font-family: 'NanumBarunpen';}
 </style>
 
 <title>크리에이터 관리 페이지</title>

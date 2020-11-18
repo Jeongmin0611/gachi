@@ -14,6 +14,7 @@
 	height: 200px;
 	padding: 20px;
 	margin-bottom: 50px;
+	border-radius: 10px;
 }
 </style>
 <div class="container cr_dash_center text-center">
@@ -33,10 +34,9 @@
 					</div></li>
 			<li><div class="cr_dash_board"><b>클래스 답변 대기</b><br/></div></li>							
 		</ul>
-		
 	</div>
-	
 	<canvas id="cr_dash_chart" style="margin:100px 0 ;"></canvas>
+	
 	<script type="text/javascript" src="resources/Chart.js"></script>
 	<script type="text/javascript">
 	var cr_dash_context = document.getElementById('cr_dash_chart').getContext('2d');
