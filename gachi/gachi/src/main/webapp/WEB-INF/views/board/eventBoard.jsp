@@ -59,7 +59,6 @@ max-width: 100%;
 
 
 #CEventList li:hover img, #CEventList li.hover img{
-  opacity: 0.5;
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }

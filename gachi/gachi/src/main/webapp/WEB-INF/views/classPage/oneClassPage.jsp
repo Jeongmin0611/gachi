@@ -21,7 +21,27 @@
 		width:30%;
 		margin: auto 15px;
 	}
+	/* 이미지 오버 효과 */
+.classList1 img{
+max-width: 100%;
+  position: relative;
+  opacity: 1;
+}
+	
+.classList1:hover img, .classList1.hover img{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.classList1 *{
+ -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+
+}
+	/* 이미지 오버 효과 끝*/
 </style>
+
 <body>
 	<%@ include file="../inc/top.jspf"%>
 	<%@ include file="../inc/top2.jspf"%>

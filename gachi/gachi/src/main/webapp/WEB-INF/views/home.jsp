@@ -50,7 +50,6 @@ max-width: 100%;
 
 
 .mainClass li:hover img, .mainClass li.hover img{
-  opacity: 0.5;
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
@@ -62,7 +61,7 @@ max-width: 100%;
   }
 
 /* 이미지 오버 효과 끝 */
-	</style>
+</style>
 </head>
 
 <script>
