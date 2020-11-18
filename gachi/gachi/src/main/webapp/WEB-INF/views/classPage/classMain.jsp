@@ -91,7 +91,7 @@
 				<span class="itemListEx">크리에이터 명	: 홍길동</span><br/>
 				<br/>
 				<span class="itemListEx">가격	:199999원</span><br/>
-				<span class="itemListEx">적립금	:2원</span><br/>
+				<span class="itemListEx">적립금	:199 원</span><br/>
 				<span class="itemListEx"><input type="button" value="장바구니에 담기"/><input type="button" value="구매"/></span>
 			</div>
 		</div>
