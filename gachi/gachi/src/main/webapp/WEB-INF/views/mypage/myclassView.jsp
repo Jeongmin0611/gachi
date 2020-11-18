@@ -189,26 +189,38 @@
 	}
 	
 	/* 모달 */
-	#myclassModalR,#myclassModalQ{
+	#myclassModalR, #myclassModalQ{
 		display:none;
 		position:absolute;
 		width:100%;
 		height:100%;
 		z-index:1;
 	}
-	#myclassModalR input, #myclassModalR textarea{
+	#myclassModalR input, #myclassModalR textarea, #myclassModalQ input, #myclassModalQ textarea{
 		border:none;
-		border-bottom:2px solid #ddd;
+		border-bottom:2px solid #ABCEE3;
 		text-align:left;
 		margin-top:10px;
+		padding:10px;
 	}
 	.myclassModal_content{
 		width:500px;
-		height:500px;
+		height:600px;
 		margin:100px auto;
 		padding:20px 10px;
 		background-color:#fff;
-		border:2px solid #eee;
+		border:3px solid #ABCEE3;
+	}
+	.myclassModal_content>div{
+		padding:5px 10px;
+	}
+	.myclassModal_content>label{
+		width:100%;
+		padding:10px;
+		font-weight:bold;
+		background-color:#e3eef6;
+		text-align:center;
+		color:gray;
 	}
 	.myclassModal_content input{
 		width:100%;
@@ -216,8 +228,17 @@
 	}
 	.myclassModal_content textarea{
 		width:100%;
-		height:250px;
+		height:300px;
 		margin-bottom:30px;
+	}
+	#myclassReviewWrite,#myclassQnaWrite{
+		background-color:#ABCEE3;
+		margin:0 auto;
+		margin-top:20px;
+		border:none;
+	}
+	#myclassQnaWrite{
+		margin-top:50px;
 	}
 	.myclassModal_layer{
 		position:fixed;
@@ -268,7 +289,11 @@
 	       $("#myclassModalQ").fadeOut();
 	    });  
 	    
-	    $("#classRating").raty({path:"img/images",half:true,});
+	    $("#classRating").raty({
+	    		score:5,
+	    		path:"img/images",
+	    		half:true,
+	    		width:"100%"});
 	    
 	});
 
@@ -451,21 +476,19 @@
 <div id="myclassModalR" class="cfont">
 	<div class="myclassModal_content">
 		<label>수강평작성</label>
-		<hr/>
-		<label>별점</label><div id="classRating"></div>
+		<div id="classRating"></div>
 		<input type="text" placeholder="제목"/>
-		<textarea placeholder="내용 작성"></textarea>
-		<button type="button" class="btn btn-primary" id="myclassReviewWrite">등록</button>
+		<textarea placeholder="내용을 입력해주세요."></textarea>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassReviewWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>
 <div id="myclassModalQ" class="cfont">
 	<div class="myclassModal_content">
-		<h2>질문작성</h2>
-		<hr/>
-		<input type="text"/>
-		<textarea></textarea>
-		<button type="button" class="btn btn-primary" id="myclassQnaWrite">등록</button>
+		<label>질문작성</label>
+		<input type="text" placeholder="제목"/>
+		<textarea placeholder="내용을 입력해주세요."></textarea>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassQnaWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>
