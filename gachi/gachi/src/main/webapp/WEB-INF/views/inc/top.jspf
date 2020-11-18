@@ -19,21 +19,68 @@
 
 <%-- <script src="<c:url value="/resources/js/common.js" />"></script> --%>
 <style>
-#top {
-	width: 100%;
-	height: 55px;
-	line-height: 50px;
-	background-color: #F4BFA9;
-	overflow: hidden;
+/* 상단바 고정 */
+.navbar-new-top {
+	background: #fff;
 }
 
-#top li {
-	float: right;
-	width: 7%;
-	text-decoration: none;
-	text-align: center;
+.navbar-brand {
+	font-weight: 600;
 }
 
+.navbar-brand img {
+	width: 30%;
+}
+
+.navbar-new-top ul {
+	margin-right: 9%;
+}
+
+.navbar-new-top ul li {
+	margin-right: 8%;
+}
+
+.navbar-new-bottom {
+	background-color: #f7f7f7;
+	box-shadow: 0 5px 6px -2px rgba(0, 0, 0, .3);
+	border-top: 1px solid #e0e0e0;
+	margin-top: 4%;
+	height: 40px;
+}
+
+.navbar-new-bottom ul li {
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.navbar-nav .nav-item a {
+	color: #333;
+	font-size: 14px;
+	font-weight: 600;
+	transition: 1s ease;
+}
+
+.navbar-nav .nav-item a:hover {
+	color: #0062cc;
+}
+
+.dropdown-menu.show {
+	background: #f8f9fa;
+	border-radius: 0;
+}
+
+.header-btn {
+	width: 161%;
+	border: none;
+	border-radius: 1rem;
+	padding: 8%;
+	background: #0062cc;
+	color: #fff;
+	font-weight: 700;
+	font-size: 13px;
+	cursor: pointer;
+}
+/* 상단바 고정 끝*/
 #menu {
 	width: 100%;
 	height: 100px;
@@ -57,7 +104,6 @@
 	text-align: center;
 	font-size: 1.5em;
 }
-
 
 @font-face {
 	font-family: 'OSeongandHanEum';
@@ -342,7 +388,7 @@ a {
 #loginJOk button, #loginJ2Ok button {
 	width: 300px;
 	height: 50px;
-	margin:0 160px;
+	margin: 0 160px;
 }
 
 #mJ2userid, #mJ2userpwd, #mJ2userpwdOk, #mJ2username, #mJ2userNname,
@@ -352,29 +398,75 @@ a {
 	background-color: #e2e2e2;
 	margin: 20px 0;
 }
-#listFontColor{
-	color:black;
+
+#listFontColor {
+	color: black;
 }
-
-
 </style>
 <script>
+	
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="top">
+	<!-- 메뉴 -->
 
-		<ul>
-			<li><a href="/gachi/serviceCenterBoard">고객센터</a></li>
-			<li><a href="#">회원가입</a></li>
-			<li><a href="#">로그인</a></li>
-			<li><a href="/gachi/mypage">마이페이지</a></li>
-			<li><a href="/gachi/adminDashboard">어드민</a></li>
-			<li><a href="/gachi/creatorDashboard">크리에이터</a></li>
+
+	<nav
+		class="navbar fixed-top navbar-expand-md flex-nowrap navbar-new-top">
+		<a href="/gachi" class="navbar-brand"><img src="img/logo.png"
+			alt="logo" /></a>
+		<ul class="nav navbar-nav mr-auto"></ul>
+		<ul class="navbar-nav flex-row">
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/adminDashboard">어드민</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/creatorDashboard">크리에이터</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/mypage">마이페이지</a></li>
+			<li class="nav-item"><a class="nav-link px-2">로그인</a></li>
+			<li class="nav-item"><a class="nav-link px-2">회원가입</a></li>
+			<li class="nav-item"><a class="nav-link px-2"
+				href="/gachi/serviceCenterBoard">고객센터</a></li>
+			<li class="nav-item">
+				<button type="button" class="header-btn">Button</button>
+			</li>
+
+
 		</ul>
-	</div>
+		<button class="navbar-toggler ml-auto" type="button"
+			data-toggle="collapse" data-target="#navbar2">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<nav class="navbar  navbar-expand-md navbar-new-bottom">
+		<div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+
+			<ul class="navbar-nav w-100 justify-content-center px-3">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Action</a> <a
+							class="dropdown-item" href="#">Another action</a> <a
+							class="dropdown-item" href="#">Something else here</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/introCreate">크리에이터 소개</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/storeMain">스토어</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/noticeBoard">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/companyBoard">회사소개</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- 메뉴 끝 -->
 
 	<div id="md" style="display: none">
 		<div id="loginFrm">
@@ -384,8 +476,8 @@ a {
 					<span class="radioBtn"><input type="radio" value="회원" />회원<input
 						type="radio" value="크리에이터" />크리에이터</span><br /> <input type="text"
 						placeholder="아이디(이메일)" id="userid" name="userid"
-						style="background-color: #e2e2e2;" /><br /> <input type="password"
-						placeholder="비밀번호" id="userpwd" name="userpwd"
+						style="background-color: #e2e2e2;" /><br /> <input
+						type="password" placeholder="비밀번호" id="userpwd" name="userpwd"
 						style="background-color: #e2e2e2;" /><br /> <span id="idPwd"><a
 						href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
 					<button id="loginBtn">로그인</button>
@@ -396,11 +488,6 @@ a {
 			</form>
 		</div>
 	</div>
-	<!-- 메뉴 -->
-	
-	<%@ include file="topMenu.jspf"  %>
-
-	<!-- 메뉴 -->
 
 
 
@@ -548,7 +635,7 @@ a {
 		</div>
 	</div>
 	<div>
-		<div id="memberJoin" style="display:none">
+		<div id="memberJoin" style="display: none">
 			<form>
 				<div>
 					<h1 class="mJH">회원가입</h1>
