@@ -11,14 +11,12 @@
 	font-size: 100px;
 	color:white;
 }
-#introCreateTopDiv *{
-font-family:'OSeongandHanEum';
-}
 
 /*======= 검색 ==========*/
 #CintroCreateSearch {
 	margin: 10px auto;
-	float: right;
+	text-align: right;
+	width: 100%;
 }
 
 #createSearchTxt{
@@ -39,35 +37,38 @@ font-family:'OSeongandHanEum';
 }
 /*======= 검색 ==========*/
 /*======= 크리에이터 리스트 ==========*/
-#CcreateList{
-	margin: 50px auto;
-	clear: right;
-	overflow: auto;
+.homeClassListImg {/*이미지 사이즈 조절*/
+	width: 100%;
+	margin: 10px auto;
+	height: 250px;
+}
+
+.homeClassListTxt {
 	text-align: center;
+	overflow: auto;
+	margin-bottom: 10px;
+	padding: 0;
 }
 
-#CcreateList li{
-	float: left;
-	width: 33%;
-	margin: 10px quto;
-}
-#CcreateList li>a>img{
-	width: 350px;
-	height: 250px;	
+.homeClassListTxt p {
+	margin: 0;
 }
 
-#CcreateList span:next(){
-	font-weight: bold;
-}
-
-#CcreateList span{
-	font-size: 10px;
+.homeClassListTxt p>span { /* 클래스 리스트 카테고리 */
+	width: 100%;
 	background-color: lightblue;
-	color:white;
+	color: white;
+}
+
+/*a태그 설정*/
+.col-sm-4 a {
+	text-decoration: none;
+	color: black;
 }
 /*======= 크리에이터 리스트 ==========*/
+
 .pagination{
-	margin-bottom:50px;
+	margin:50px 0;
 }
 
 
@@ -80,47 +81,91 @@ font-family:'OSeongandHanEum';
 	
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-	<select name="introCreateSelect1">
-		<option value="Iall">전체</option>
-		<option value="Inew">최신순</option>
-		<option value="Ipopular">인기순</option>
-	</select>
-	<select name="IntroCreateSelect2">
-		<option value="Iall">전체</option>
-		<option value="Icreation">공예/창작</option>
-		<option value="Ifood">요리</option>
-		<option value="Iart">미술</option>
-		<option value="Imusic">음악</option>
-		<option value="IlifeStyle">라이프스타일</option>
-		<option value="Isport">운동</option>
-		<option value="Iphoto">사진/영상</option>
-	</select>
-	<input type="text" name="createSearchTxt" id="createSearchTxt" />
-	<button name="createSearchBtn">검색하기</button>
+		<select name="introCreateSelect1">
+			<option value="Iall">전체</option>
+			<option value="Inew">최신순</option>
+			<option value="Ipopular">인기순</option>
+		</select>
+		<select name="IntroCreateSelect2">
+			<option value="Iall">전체</option>
+			<option value="Icreation">공예/창작</option>
+			<option value="Ifood">요리</option>
+			<option value="Iart">미술</option>
+			<option value="Imusic">음악</option>
+			<option value="IlifeStyle">라이프스타일</option>
+			<option value="Isport">운동</option>
+			<option value="Iphoto">사진/영상</option>
+		</select>
+		<input type="text" name="createSearchTxt" id="createSearchTxt" />
+		<button name="createSearchBtn">검색하기</button>
 	</div>
+
 	<!-- 리스트 -->
-	<ul id="CcreateList">
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		
-		
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-		<li><a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png"/></a><br/>
-		<div class="CCreateImgtxt"><span>공예/창작</span><br/>크리에이터 명</div></li>
-	</ul>
+	<div class="row">
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/introCreateDetail"><img src="/gachi/img/business-woman.png" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/introCreateDetail">크리에이터 명</a>
+			</div>				
+		</div>		
+	</div>
 	
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center" id="mypageMainPage">

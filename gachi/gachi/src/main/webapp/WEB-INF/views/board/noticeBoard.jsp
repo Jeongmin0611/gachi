@@ -8,48 +8,10 @@ h3{
 	margin-top:50px;
 	text-align: center;
 }
-#CnoticeUl {
-	margin: 60px auto;
-}
-
-#CnoticeUl li {
-	width: 10%;
-	float: left;
-	border-bottom: 1px solid gray;
-	padding: 10px 0px;
-}
-#CnoticeUl li:nth-child(5n+1){
-	padding-left: 10px;
-}
-#CnoticeUl li:nth-child(5n+2) {
-	width: 65%;
-}
-
-#CnoticeUl li:nth-child(5n+5){
-	width: 5%;
-}
-#CnoticeUl li:nth-child(1) {
-	background-color: #EDE9E9;
-}
-
-#CnoticeUl li:nth-child(2) {
-	background-color: #EDE9E9;
-}
-
-#CnoticeUl li:nth-child(3) {
-	background-color: #EDE9E9;
-}
-
-#CnoticeUl li:nth-child(4) {
-	background-color: #EDE9E9;
-}
-
-#CnoticeUl li:nth-child(5) {
-	background-color: #EDE9E9;
-}
 
 #CnoticeSearch {
-	float: right;
+	text-align: right;
+	width: 100%;
 }
 
 #CnoticeSearchTxt {
@@ -68,7 +30,13 @@ h3{
 	outline: none;
 	color: #888;
 }
+/* 테이블 */
+table {
+	margin-top:20px;
+}
 
+
+/* 페이징 */
 #CnoticePaging {
 	clear: both;
 	padding-top: 20px;
@@ -99,53 +67,49 @@ h3{
 			</select> <input type="text" name="CnoticeSearchTxt" id="CnoticeSearchTxt" />
 			<button name="noticeSearchBtn">검색하기</button>
 		</div>
-		<ul id="CnoticeUl">
-			<li>번호</li>
-			<li>제목</li>
-			<li>작성자</li>
-			<li>작성일</li>
-			<li>조회수</li>
-
-
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-			<li>번호</li>
-			<li><a href="/gachi/noticeBoardDetail">제목</a></li>
-			<li>작성자</li>
-			<li>10-05</li>
-			<li>11</li>
-
-
-		</ul>
-	<br />
+	<!-- 표 -->
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td>번호</td>
+				<td>제목</td>
+				<td>작성자</td>
+				<td>작성일</td>
+				<td>조회수</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>10</td>
+				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다 공지사항 제목 입니다</a></td>
+				<td>관리자</td>
+				<td>10-30</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
+				<td>관리자</td>
+				<td>10-30</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
+				<td>관리자</td>
+				<td>10-30</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
+				<td>관리자</td>
+				<td>10-30</td>
+				<td>50</td>
+			</tr>
+		</tbody>
+	</table>
+	
 	<!-- paging -->
 	<div id="CnoticePaging">
 		<ul class="pagination justify-content-center">

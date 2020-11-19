@@ -26,6 +26,8 @@
 #admintop {
 	overflow: auto;
 	background-color: #2d383f;
+	height : 50px;
+	line-height: 50px;
 }
 
 #admintop>a {
@@ -126,7 +128,7 @@ a, h1, li {
 		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
 		<li><a href="/gachi/adminClass">클래스 관리</a></li>
 		<li><a href="/gachi/adminMember">회원관리</a></li>
-		<li data-target="#menu1" data-toggle="collapse">게시글 관리
+		<li data-target="#menu1" data-toggle="collapse"><a href="#">게시글관리</a>
 		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
@@ -135,7 +137,7 @@ a, h1, li {
 			</ul>
 		</div>		
 		</li>
-		<li data-target="#menu2" data-toggle="collapse">주문 배송 관리
+		<li data-target="#menu2" data-toggle="collapse"><a href="#">주문 배송관리</a>
 			<div id="menu2" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>

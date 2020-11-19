@@ -15,6 +15,7 @@
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
 <link href="<c:url value="/img/slide1.jpeg" />" rel="stylesheet">
 <link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
+
 <style>
 
 #menu {
@@ -54,23 +55,7 @@ a {
 	font-family: 'OSeongandHanEum';
 }
 
-.radioBtn {
-	float: right;
-	margin: 5px 60px 0px 35px;
-}
-#idF1, #pwdF1, #pwdF2 {
-	border: 1px solid gray;
-	width: 600px;
-	height: 350px;
-	margin: 5px;
-	background-color: white;
-}
 
-#userid, #userpwd, #loginBtn, #kokoBtn {
-	width: 300px;
-	height: 40px;
-	margin: 5px 130px 15px 130px;
-}
 
 #idFTel, #idFNo, #pwdFTel1, #pwdFNo1 {
 	width: 300px;
@@ -87,20 +72,7 @@ a {
 #idFNoBtn, .autBtn, #pwdFNoBtn {
 	height: 50px;
 	width: 80px;
-}
-
-#idPwd {
-	margin: 5px 130px 15px 130px;
-}
-
-#or {
-	margin: 5px 270px 15px 270px;
-}
-
-#logbtm {
-	margin: 5px 150px 15px 150px;
-	font-Size: 0.7em;
-}
+	}
 
 #idFF, #idFF2, #pwdFF1, #pwdFF2 {
 	margin: 5px 0px 15px 60px;
@@ -163,17 +135,10 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-
-.radioBtn {
-	float: right;
-	margin: 5px 60px 0px 35px;
-}
-
-#loginFrm {
+#loginFrm,#joinForm{
 	border: 1px solid gray;
-	width: 550px;
-	height: 450px;
-	margin: 5px;
+	width: 100%;
+	height: 100%;
 	background-color: white;
 }
 
@@ -184,13 +149,6 @@ a {
 	margin: 5px;
 	background-color: white;
 }
-#memberJoinFrm {
-	border: 1px solid gray;
-	width: 600px;
-	height: 1050px;
-	margin: 5px;
-	background-color: white;
-}
 
 #member2Join {
 	border: 1px solid gray;
@@ -198,12 +156,6 @@ a {
 	height: 1100px;
 	margin: 5px;
 	background-color: white;
-}
-
-#userid, #userpwd, #loginBtn, #kokoBtn {
-	width: 300px;
-	height: 40px;
-	margin: 5px 130px 15px 130px;
 }
 
 #idFTel, #idFNo, #pwdFTel1, #pwdFNo1 {
@@ -221,19 +173,6 @@ a {
 #idFNoBtn, .autBtn, #pwdFNoBtn {
 	height: 50px;
 	width: 80px;
-}
-
-#idPwd {
-	margin: 5px 130px 15px 130px;
-}
-
-#or {
-	margin: 5px 270px 15px 270px;
-}
-
-#logbtm {
-	margin: 5px 150px 15px 150px;
-	font-Size: 0.7em;
 }
 
 #idFF, #idFF2, #pwdFF1, #pwdFF2 {
@@ -322,10 +261,10 @@ a {
 #listFontColor{
 	color:black;
 }
-#mdBtm{
+#mdBtm,#mdJBtm{
 	float:right;
 }
-.md_layer{
+.md_layer,.mdJ_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -334,7 +273,7 @@ a {
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
 	}
-	#md{
+	#md,#mdJ{
 		display:none;
 		position:absolute;
 		width:40%;
@@ -372,37 +311,46 @@ a {
 	margin-top:83px;
 	margin-bottom:5px;
 }
-#mdBtm,#memberJoinBtn{
+#mdBtm,#mdJBtm{
 	float:right;
 }
-.memberJoin_layer{
-		position:fixed;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background-color:rgba(0,0,0,0.5);
-		z-index:-1;
-	}
-	#memberJoin{
-		border:1px solid gray;
-		display:none;
-		position:absolute;
-		width:40%;
-		height:70%;
-		z-index:1;
-	}
-#mdClose{
+#mdClose,#mdJClose{
 	background-color:white;
 	border:0;
 	outline:0;
 }
-#memberJoinClose{
-	background-color:white;
-	border:0;
-	outline:0;
-}
-
+/* 로그인폼*/
+	#loginBtn{
+		width: 240px;
+		height: 50px;
+		border: none;
+		background: linear-gradient(to right, rgb(171, 206, 227), rgb(244, 191, 169));
+		color: rgb(63, 84, 251);
+		font-weight:bold;
+		font-size: 16px;
+		border-radius: 50px;
+		margin-top:25px;
+	}
+	#md{
+		width:350px;
+		height:600px;
+		border-radius:10px;
+	}
+	#mdJ{
+		width:350px;
+		height:750px;
+		border-radius:10px;
+	}
+	#kokoBtn{
+		width: 240px;
+		height: 50px;
+		border: none;
+		background-color:yellow;
+		font-weight:bold;
+		font-size: 16px;
+		border-radius: 50px;
+		margin-top:25px;
+	}
 /* 회원가입 스타일 */
 
 	.join{
@@ -530,18 +478,27 @@ $(function(){
        $("#md").fadeOut();
     });
 });
-
-
-
-
-
-
+$(function(){
+	//회원가입모달창 띄우기
+    $("#joinFormBtn").click(function(){
+        
+		$("#mdJ").css({
+           "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
+           "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
+        
+        });
+        $("#mdJ").fadeIn();
+    });
+    $("#mdJClose, .mdJ_layer").click(function(){
+       $("#mdJ").fadeOut();
+    });
+});
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm fixed-top navbar-new-top" >
+<nav class="navbar navbar-expand-sm fixed-top navbar-new-top">
   <a href="/gachi">
 		 <img src="img/logo.png" style="width:25%;" alt="logo" /></a>
 		<ul class="nav navbar-nav mr-auto"></ul>
@@ -591,34 +548,64 @@ $(function(){
 	</nav>
 
 	<!-- 메뉴 끝 -->
-
-	<div id="md">
-		<div id="loginFrm">
+	<!-- 로그인폼 -->
+	<div id="md" class="join">
+		<div id="loginFrm" class="col-xs-12 col-md-12">
 			<form method="post" action="">
-				<h1>로그인</h1>
-				<div>
+			<div>
+				<img src="/gachi/img/logo.png"/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn"/>크리에이터<br/>
 				<div id="mdBtm">
 					<button type="button" class="btn btn-primary" id="mdClose"></button>
 				</div>
 				<div class="md_layer"></div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
-						<input type="text" placeholder="아이디(이메일)" id="userid" name="userid" style="background-color: #e2e2e2;"/><br />
-						<input type="password" placeholder="비밀번호" id="userpwd" name="userpwd" style="background-color: #e2e2e2;" /><br />
+						<input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
+						<input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
 						<span id="idPwd"><a href="#">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
-					<button id="loginBtn">로그인</button><br />
-					<span id="or">or</span><br />
+					<button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
+					<span>or</span><br />
 					<button id="kokoBtn">카카오톡으로 로그인</button><br />
-					<span id="logbtm">아직같이가치의 회원이 아니신가요?<a href="#">회원가입하기</a></span>
+					<span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span>
 				</div>
 			</form>
 		</div>
 	</div>
+	<!-- 로그인폼 끝 -->
+	<!-- 회원가입 -->
+	<div id="mdJ" class="join">
+	<div id="joinForm" class="col-xs-12 col-md-12">
+		<form method="post" id="">	
+				<img src="/gachi/img/logo.png"/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn"/>크리에이터<br/>
+			 	<div id="mdJBtm">
+					<button type="button" class="btn btn-primary" id="mdJClose"></button>
+				</div>
+				<div class="mdJ_layer"></div>
+			 	<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
+			 	<input type="hidden" id="emailChk" value="false" />
+			 	<button type="button" id="emailChkBtn" style="display: none;">중복확인</button>
+			 	<input type="password" placeholder="비밀번호" name="password" id="password" /><span id="passwordMessage" class="message"></span>
+			 	<input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
+			 	<input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
+			 	<input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
+			 	<input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 	<input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 	<input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+			 	<span id="telMessage" class="message"></span>
+			 	<input type="text" id="addrJ" name="addrJ" placeholder="주소"/>
+			 	<input type="text" id="addrJDetail" name="addrJDetail" placeholder="상세주소"/>
+				<button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
+		</form>
+	</div>
+	</div>
+	<!-- 회원가입 끝 -->
+	<!-- 아이디찾기 클릭시 나오는 아이디찾는폼 -->
 	<div style="display: none">
 		<div id="idF1">
 			<form>
 				<h1>아이디찾기</h1>
 				<div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
+					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br/>
 						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
 						<input type="text" placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel" style="background-color: #e2e2e2;" />
 					<button class="autBtn">인증</button><br />
@@ -628,6 +615,7 @@ $(function(){
 			</form>
 		</div>
 	</div>
+	<!-- 아이디찾기 클릭시 나오는 아이디찾는폼 끝 -->
 	<div style="display: none">
 		<div id="pwdF1">
 			<form>
@@ -662,26 +650,7 @@ $(function(){
 				</div>
 			</form>
 		</div>
-	</div>
-<div class="join">
-	<div class="col-xs-12 col-md-12">
-		<form method="post" id="joinForm">	
-				<img src="/gachi/img/logo.png"/>
-			 	<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
-			 	<input type="hidden" id="emailChk" value="false" />
-			 	<button type="button" id="emailChkBtn" style="display: none;">중복확인</button>
-			 	<input type="password" placeholder="비밀번호" name="password" id="password" /><span id="passwordMessage" class="message"></span>
-			 	<input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
-			 	<input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
-			 	<input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-			 	<input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 	<input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 	<input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
-			 	<span id="telMessage" class="message"></span>
-				<button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
-		</form>
-	</div>
-</div>	
+	</div>	
 		<div id="member2Join" style="display: none">
 			<div>
 			<form>

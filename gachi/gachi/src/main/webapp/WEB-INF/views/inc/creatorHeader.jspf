@@ -23,6 +23,8 @@
 
 #creatortop {
 	overflow: auto;
+	height : 50px;
+	line-height: 50px;
 }
 
 #creatortop a {
@@ -135,7 +137,7 @@ a, h1, li {
 <div id="headerDiv">
 	<ul id="creatorMenu">
 		<li><a href="/gachi/creatorDashboard">대시보드</a></li>
-		<li data-target="#menu1" data-toggle="collapse">클래스 관리
+		<li data-target="#menu1" data-toggle="collapse"><a href="#">클래스 관리</a>
 		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorMyClass">내 클래스 관리</a></li>
@@ -143,7 +145,7 @@ a, h1, li {
 	             <li><a href="/gachi/creatorClassQuestion">클래스 문의 </a></li>
 			</ul>
 		</div>
-		<li data-target="#menu2" data-toggle="collapse">개인정보 관리
+		<li data-target="#menu2" data-toggle="collapse"><a href="#">개인정보 관리</a>
 		<div id="menu2" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorSettle">정산관리</a></li>
@@ -152,7 +154,7 @@ a, h1, li {
 			</ul>
 		</div>
 		</li>
-		<li data-target="#menu3" data-toggle="collapse">공지/문의하기
+		<li data-target="#menu3" data-toggle="collapse"><a href="#">공지/문의하기</a>
 		<div id="menu3" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorNotice">공지사항 </a></li>
