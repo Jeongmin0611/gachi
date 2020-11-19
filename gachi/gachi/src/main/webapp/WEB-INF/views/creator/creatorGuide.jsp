@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    
 <script>
 	// AOS
 	var myAOS = function() {
@@ -35,7 +33,9 @@
 			behavior : 'smooth'
 		});
 	}
-	
+	$(()=>{
+		$("#headerDiv").css("display","none");
+	});
 </script>	
 
 

@@ -15,69 +15,116 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <style>
-#creatortop img{widht:100px; height:50px; padding:15px;}
-#creatortop{
+#creatortop img {
+	widht: 100px;
+	height: 50px;
+	padding: 15px;
+}
+
+#creatortop {
 	overflow: auto;
 	height : 50px;
 	line-height: 50px;
 }
 
-#creatortop a{
-	width:10%;
-	text-decoration:none;
-	color:white;
-	float:right;
+#creatortop a {
+	width: 10%;
+	text-decoration: none;
+	color: white;
+	float: right;
 }
 
-#creatorMenu>li a {color: white;}
-#creatorMenu>li {color: white;}
+#creatorMenu>li, #creatorMenu>li a {
+	color: white;
+	text-decoration: none;
+}
 /*
 #creatorMenu>li a:hover {text-decoration: none;color: red;}
 */
-#creatorMenu {text-align: center; height:auto;}
+#creatorMenu {
+	height: auto;
+}
 
-#headerDiv>ul>li {line-height: 50px;text-align: center;}
+#headerDiv>ul>li {
+	line-height: 50px;
+}
 
-#headerDiv>ul>li>ul {width: 100%;height:50px;line-height: 50px;text-align: center;  position: relative;}
+#headerDiv>ul>li>ul {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	position: relative;
+}
 
-#headerDiv>ul>li>ul>li {height:50px; line-height: 50px;text-align: center;}
+#headerDiv>ul>li>ul>li {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
 
-.submenu li {line-height: 50px; background-color: #437299;}
+.submenu li {
+	line-height: 50px;
+	background-color: #437299;
+	margin-left: 25px;
+}
 
-#headerDiv, #adminMenu {background-color: #437299;height: 50px;width: 100%;font-size: 20px;}
+#headerDiv, #adminMenu {
+	background-color: #437299;
+	height: 50px;
+	width: 100%;
+	font-size: 20px;
+}
 
 #headerDiv {
 	z-index: 1000;
-	position: relative; 
-	width:15%; 
-	float:left;
-	overflow:hidden;
-    height:auto;
+	position: relative;
+	width: 15%;
+	float: left;
+	overflow: hidden;
+	height: auto;
 }
 
-#creatorMenu>li {line-height: 50px;}
+#creatorMenu>li {
+	line-height: 50px;
+	color: white;
+	margin-left: 15px;
+}
 
+.submenu {
+	position: relative;
+}
 
-.submenu {position: relative;}
+.container {
+	margin-top: 20px;
+	padding: 20px;
+	animation: fadein 3s;
+}
 
 @font-face {
-    font-family: 'NanumBarunpen';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'NanumBarunpen';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-a , h1, li { font-family: 'NanumBarunpen';}
+a, h1, li {
+	font-family: 'NanumBarunpen';
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 </style>
 
 <title>크리에이터 관리 페이지</title>
-<script type="text/javascript">
-	$(()=>{
-		let height=$(window).innerHeight();
-		$("#headerDiv").height(height);
-		
-	});
-</script>
+
 </head>
 <body style="background-color:#E4E6DA">
 <div id="creatortop" style="background-color:#2d383f">
