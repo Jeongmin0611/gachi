@@ -64,9 +64,13 @@
 	#userLeaveContent>div:last-child button{
 		background-color:#abcee3;
 	}
+	#userLeaveContent>div:last-child button:last-child{
+		background-color:#eee;
+		color:#000;
+	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div id="userLeaveTop">

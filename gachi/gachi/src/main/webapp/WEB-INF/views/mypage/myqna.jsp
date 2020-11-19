@@ -22,6 +22,9 @@
 	}
 	
 	/* 내용 */
+	#myqnaContent>div:first-child{
+		margin:50px 0;
+	}
 	#myqnaContent>label{
 		margin:10px 30px;
 		padding:5px;
@@ -83,45 +86,46 @@
 	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
-	<ul id="myqnaTop">
-		<li><a href="/gachi/myqna">클래스</a></li>
-		<li>|</li>
-		<li><a href="#">스토어</a></li>
-		<li>|</li>
-		<li><a href="#">1:1문의</a></li>
-		<li>|</li>
-		<li><a href="#">이벤트</a></li>
-	</ul>
-	<hr/>
-	<div id="myqnaContent">
-		<div>
-			<select name="searchKeyClassName">
-				<option value="클래스명">클래스명</option>
-				<option value="카모마일 프랑스 자수">카모마일 프랑스 자수</option>
-			</select>
-			<select name="searchKeyQnaStatus">
-				<option value="답변상태">답변상태</option>
-				<option value="답변완료">답변완료</option>
-				<option value="미답변">미답변</option>
-			</select>
-		</div>
-		<label><a href="#">카모마일 프랑스 자수</a></label>
-		<ul id="myqnaClass">
-			<li><label class="badge badge-light">Q</label>질문입니다</li>
-			<li>김유미</li>
-			<li>20.11.15</li>
-			<li>답변완료</li>
-			<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
-			<li>
-			<hr/>
-				<ul>
-					<li><label class="badge badge-light">A</label>홍길동</li>
-					<li>20.11.15</li>
-					<li>네 처음 시작하시는 분들도 무리없이 따라오시는 난이도의 수업입니다 :)</li>
-				</ul>
-			</li>
+	<div class="userMainDiv">
+		<ul id="myqnaTop">
+			<li><a href="/gachi/myqna">클래스</a></li>
+			<li>|</li>
+			<li><a href="#">스토어</a></li>
+			<li>|</li>
+			<li><a href="#">1:1문의</a></li>
+			<li>|</li>
+			<li><a href="#">이벤트</a></li>
 		</ul>
+		<div id="myqnaContent">
+			<div>
+				<select name="searchKeyClassName">
+					<option value="클래스명">클래스명</option>
+					<option value="카모마일 프랑스 자수">카모마일 프랑스 자수</option>
+				</select>
+				<select name="searchKeyQnaStatus">
+					<option value="답변상태">답변상태</option>
+					<option value="답변완료">답변완료</option>
+					<option value="미답변">미답변</option>
+				</select>
+			</div>
+			<label><a href="#">카모마일 프랑스 자수</a></label>
+			<ul id="myqnaClass">
+				<li><label class="badge badge-light">Q</label>질문입니다</li>
+				<li>김유미</li>
+				<li>20.11.15</li>
+				<li>답변완료</li>
+				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
+				<li>
+				<hr/>
+					<ul>
+						<li><label class="badge badge-light">A</label>홍길동</li>
+						<li>20.11.15</li>
+						<li>네 처음 시작하시는 분들도 무리없이 따라오시는 난이도의 수업입니다 :)</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>

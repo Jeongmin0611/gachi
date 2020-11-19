@@ -25,18 +25,19 @@
 		width:50%;
 		position:relative;
 		left:25%;
-		margin:50px 0 200px;
+		margin:50px 0;
 	}
 	#userLeaveChkContent label{
 		font-size:1.3em;
 	}
 	/* 비번확인 리스트 */
 	#userLeaveChkLst{
-		margin:50px 0;
+		margin:50px 0 100px;
 	}
 	#userLeaveChkLst li{
 		overflow:auto;
 		margin-bottom:10px;
+		text-align:center;
 	}
 	#userLeaveChkLst li:nth-child(2n+1){
 		width:30%;
@@ -54,7 +55,7 @@
 	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div id="userLeaveChkTop">

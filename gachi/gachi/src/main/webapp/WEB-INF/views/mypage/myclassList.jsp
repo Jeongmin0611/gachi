@@ -3,10 +3,6 @@
 <style>
 
 	/* 내학습표 */
-	#myclassContainer{
-		overflow:auto;
-		margin-bottom:200px;
-	}
 	
 	/*************/
 	/* 상단 */
@@ -21,9 +17,19 @@
 	#myclassTop li:last-child{
 		float:right;
 	}
+	#myclassTop li:last-child input{
+		border:none;
+		border-bottom:1px solid #ddd;
+	}
+	#myclassTop li:last-child button{
+		background-color:#ABCEE3;
+	}
 	
 	/*************/
 	/* 내용 */
+	#myclassContent{
+		margin-bottom:100px;
+	}
 	
 	/* 클래스 목록 */
 	#myclassLst{
@@ -69,42 +75,44 @@
 	}
 	
 </style>
-<div class="container" id="myclassContainer">
+<div class="container cfont" id="myclassContainer">
 	<%@ include file="../inc/userProfile.jspf" %>
-	<div id="myclassTop">
-		<ul>
-			<li>
-				<select name="sortKey1">
-					<option value="최근순">최근순</option>
-					<option value="제목순">제목순</option>
-				</select>
-			</li>
-			<li>
-				<select name="sortKey2">
-					<option value="전체">전체</option>
-					<option value="수강중" selected>수강중</option>
-					<option value="수강완료">수강완료</option>
-				</select>
-			</li>
-			<li>
-				<input type="text" name="searchWord"/>
-				<button type="button" class="btn btn-outline-primary btn-sm">검색</button>
-			</li>
-		</ul>
-	</div>
-	<hr/>
-	<div id="myclassContent">
-		<ul id="myclassLst">
-			<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
-			<li><span class="badge badge-info">공예/창작</span></li>
-			<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
-			<li>진도율 : 0.00%</li>
-			<li>기한 : 20.11.01 ~ 21.01.31</li>
-		</ul>
-		<div id="myclassLstBtn">
-			<button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button>
+	<div class="userMainDiv">
+		<div id="myclassTop">
+			<ul>
+				<li>
+					<select name="sortKey1">
+						<option value="최근순">최근순</option>
+						<option value="제목순">제목순</option>
+					</select>
+				</li>
+				<li>
+					<select name="sortKey2">
+						<option value="전체">전체</option>
+						<option value="수강중" selected>수강중</option>
+						<option value="수강완료">수강완료</option>
+					</select>
+				</li>
+				<li>
+					<input type="text" name="searchWord"/>
+					<button type="button" class="btn btn-outline-light btn-sm">검색</button>
+				</li>
+			</ul>
 		</div>
 		<hr/>
+		<div id="myclassContent">
+			<ul id="myclassLst">
+				<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
+				<li><span class="badge badge-info">공예/창작</span></li>
+				<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
+				<li>크리에이터명 <a href="#">홍길동</a></li>
+				<li>진도율 : 0.00%</li>
+				<li>기한 : 20.11.01 ~ 21.01.31</li>
+			</ul>
+			<div id="myclassLstBtn">
+				<button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button>
+			</div>
+			<hr/>
+		</div>
 	</div>
 </div>
