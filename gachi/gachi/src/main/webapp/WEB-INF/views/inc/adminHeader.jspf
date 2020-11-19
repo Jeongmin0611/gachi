@@ -22,7 +22,7 @@
 
 #admintop{
 	overflow: auto;
-	background-color: #465863;
+	background-color: #2d383f;
 }
 
 #admintop>a{
@@ -38,25 +38,19 @@
 
 #adminMenu {text-align: center;}
 
-#headerDiv>ul>li {width: 11%;line-height: 50px;text-align: center;}
+#headerDiv>ul>li {line-height: 50px;text-align: center;}
 
 #headerDiv>ul>li>ul {width: 100%;height:50px;line-height: 50px;text-align: center;  position: relative;}
 
 #headerDiv>ul>li>ul>li {height:50px; line-height: 50px;text-align: center;}
 
-.submenu li {line-height: 10px; background-color: #ABCEE3;}
+.submenu li {line-height: 50px; background-color: #437299;}
 
-#headerDiv, #adminMenu {background-color: #ABCEE3;height: 50px;width: 100%;font-size: 20px;}
+#headerDiv, #adminMenu {background-color: #437299;width: 100%;font-size: 20px;}
 
-#headerDiv {z-index: 1000;position: relative;}
+#headerDiv {z-index: 1000;position: relative; width:15%; overflow:hidden; height:auto;float:left}
 
-#adminMenu>li {float: left;line-height: 50px;}
-
-.submenu {position: absolute;opacity: 0;visibility: hidden;}
-
-#adminMenu>li:hover .submenu {opacity: 1;visibility: visible;}
-
-#ad_headtop>li{}
+#adminMenu>li {line-height: 50px; color:white; }
 
 @font-face {
     font-family: 'NanumBarunpen';
@@ -70,7 +64,7 @@ a , h1, li { font-family: 'NanumBarunpen';}
 <title>관리자페이지</title>
 
 </head>
-<body style="background-color:#E6E6E6">
+<body style="background-color:#E4E6DA">
 <div id="admintop">
 		<a href="/gachi">로그아웃</a>
 		<a href="/gachi">사용자웹 이동</a>
@@ -82,31 +76,37 @@ a , h1, li { font-family: 'NanumBarunpen';}
 		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
 		<li><a href="/gachi/adminClass">클래스 관리</a></li>
 		<li><a href="/gachi/adminMember">회원관리</a></li>
-		<li><span style="color : white">게시글 관리</span>
+		<li data-target="#menu1" data-toggle="collapse">게시글 관리
+		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
-	            <li><a href="/gachi/adminEvent">이벤트</a></li>
+	            <li><a href="/gachi/admindata-target="#menu1" data-toggle="collapse"Event">이벤트</a></li>
 	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
-			</ul>		
+			</ul>
+		</div>		
 		</li>
-		<li><span style="color : white">주문 배송 관리</span>
+		<li data-target="#menu2" data-toggle="collapse">주문 배송 관리
+			<div id="menu2" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>
 	            <li><a href="/gachi/adminDelivery">배송</a></li>
 	            <li><a href="/gachi/adminReturn">반품</a></li>
 			</ul>
+			</div>
 		</li>
 		<li>
 			<a href="/gachi/adminGoods">스토어 관리</a>
 		</li>
 		<li><a href="/gachi/adminSettle">정산 관리</a></li>
-		<li><span style="color : white">통계</span>
+		<li data-target="#menu3" data-toggle="collapse">통계
+			<div id="menu3" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminStatStore">스토어</a></li>
 	            <li><a href="/gachi/adminStatClass">클래스</a></li>
 	            <li><a href="/gachi/adminStatCreator">크리에이터</a></li>
 	            <li><a href="/gachi/adminStatMember">회원</a></li>
-			</ul>			
+			</ul>		
+			</div>	
 		</li>
 		
 	</ul>

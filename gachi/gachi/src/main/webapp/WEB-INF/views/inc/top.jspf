@@ -456,12 +456,16 @@ a {
 		margin-top: 150px;
 		color: black;
 	}
+	.join{
+		display: none;
+	}
 </style>
 <script>
 $(function(){
+	
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
-
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#md").css({
            "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -646,11 +650,10 @@ $(function(){
 				</div>
 			</form>
 		</div>
-	</div>
-		<div id="member2Join"  style="display: none">
+	</div>	
+		<div id="member2Join" style="display: none">
 			<div>
 			<form>
-				
 					<h1 class="mJH">회원가입</h1>
 					<div class="prImg"><img src="img/client.png"/></div>
 					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />

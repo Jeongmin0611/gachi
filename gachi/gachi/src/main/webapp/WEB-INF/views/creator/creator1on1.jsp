@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
  <style>
- #ad_1on1_lst li{
+ #cr_1on1_lst li{
  	vertical-align:middle;
  	line-height:50px;
  }
@@ -37,7 +37,7 @@
 	</form>
 	</div>
 		<div>
-		<ul id="ad_1on1_lst">
+		<ul id="cr_1on1_lst">
 			<li>선택</li>
 			<li>번호</li>
 			<li>구분</li>
@@ -49,14 +49,14 @@
 			<li><input type="checkbox" id="" name=""/></li>
 			<li>10</li>
 			<li>상품/클래스</li>
-			<li><a href="/gachi/admin1on1View">배송문의입니다</a></li>
+			<li><a href="/gachi/creator1on1View">배송문의입니다</a></li>
 			<li>홍길동</li>
 			<li>2020-10-29</li>
 			<li><button>답변하기</button></li>
 		</ul>
 		</div>
-			<div class="ad_list_menu">
-				<button class="btn btn-info" onclick="location.href='/gachi/admin1on1Write'">글쓰기</button>
+			<div class="cr_list_menu">
+				<button class="btn btn-info"onclick="location.href='/gachi/creator1on1Write'">글쓰기</button>
 				<button class="btn btn-info">삭제</button> 
 			</div>
 				<div id="paging">

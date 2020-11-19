@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="resources/Chart.js"></script>
 <style>
-	.ad_StatClass_Piechart {float:left;width:33%; margin:50px 0px; font-size:1.5em;}
+	.ad_StatClass_Piechart {float:left;width:50%; margin:50px 0px; font-size:1.5em;}
 	canvas {width:100%; margin-bottom:20px;}
 </style>
 
@@ -32,7 +32,7 @@
 			                'rgba(255, 206, 86, 0.2)',
 			                'rgba(75, 192, 192, 0.2)',
 			                'rgba(153, 120, 252, 0.2)',
-			                'rgba(180, 111, 220, 0.2)',
+			                'rgba(180, 111, 220, 0.2)', 
 			 
 			            ],
 			            borderColor: [
