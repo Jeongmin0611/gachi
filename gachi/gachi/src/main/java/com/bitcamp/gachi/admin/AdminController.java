@@ -67,6 +67,10 @@ public class AdminController {
 	public String admin1on1View() {
 		return "admin/admin1on1View";
 	}
+	@RequestMapping("/admin1on1Write")
+	public String admin1on1Write() {
+		return "admin/admin1on1Write";
+	}
 	@RequestMapping("/adminOrder")
 	public String adminOrder() {
 		return "admin/adminOrder";

@@ -63,4 +63,8 @@ public class CreatorController {
 	public String creator1on1View() {
 		return "creator/creator1on1View";
 	}
+	@RequestMapping("/creator1on1Write")
+	public String creator1on1Write() {
+		return "creator/creator1on1Write";
+	}
 }

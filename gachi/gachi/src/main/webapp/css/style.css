@@ -426,14 +426,14 @@ input{text-align:center;}
 	}
 	/*관리자 1:1문의 리스트 end*/
 	/*관리자 1:1문의 보기 start*/
-	#ad_1on1_view,#ad_1on1_writeForm{
+	#ad_1on1_write,#ad_1on1_writeForm{
 		overflow:auto;
 	}
-	#ad_1on1_view li,#ad_1on1_writeForm li{
+	#ad_1on1_write li,#ad_1on1_writeForm li{
 		text-align:left;
 		float:left;
 	}
-	#ad_1on1_view>li:last-child{
+	#ad_1on1_write>li:last-child{
 		overflow:auto;
 		float:none;
 	}
@@ -813,14 +813,14 @@ input{text-align:center;}
 	}
 	/*크리에이터 1:1문의 리스트 end*/
 	/*크리에이터 1:1문의 보기 start*/
-	#cr_1on1_view,#cr_1on1_writeForm{
+	#cr_1on1_write,#cr_1on1_writeForm{
 		overflow:auto;
 	}
-	#cr_1on1_view li,#cr_1on1_writeForm li{
+	#cr_1on1_write li,#cr_1on1_writeForm li{
 		text-align:left;
 		float:left;
 	}
-	#cr_1on1_view>li:last-child{
+	#cr_1on1_write>li:last-child{
 		overflow:auto;
 		float:none;
 	}
