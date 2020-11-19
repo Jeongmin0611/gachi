@@ -677,10 +677,10 @@ $(function(){
 				<button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
 		</form>
 	</div>
+</div>	
 		<div id="member2Join" style="display: none">
 			<div>
 			<form>
-				
 					<h1 class="mJH">회원가입</h1>
 					<div class="prImg"><img src="img/client.png"/></div>
 					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
