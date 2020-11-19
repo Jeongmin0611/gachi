@@ -71,4 +71,8 @@ public class CreatorController {
 	public String creatorVideo(){
 		return "creator/creatorVideo";
 	}
+	@RequestMapping("/creatorVideoRequest")
+	public String creatorVideoEdit() {
+		return "creator/creatorVideoRequest";
+	} 
 }
