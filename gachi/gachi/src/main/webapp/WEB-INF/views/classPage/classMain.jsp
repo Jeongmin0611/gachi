@@ -41,8 +41,8 @@
 		wdith:100%;
 	}
 	#idbslideitemImg img{
-		width:90%;
-		margin:0 60px;
+		width:100%;
+		margin:0px;
 	}
 	#QNADiv ul,#dbEndDiv ul{
 		border:1px solid gray;
