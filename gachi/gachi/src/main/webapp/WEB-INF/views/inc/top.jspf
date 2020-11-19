@@ -7,18 +7,14 @@
 <head>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="resources/bootstrap.css" type="text/css" />
-<link href="<c:url value="/css/style.css" />" rel="stylesheet"
-	type=text/css>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="text/javascript" src="resources/jquery.raty.js"></script>
 <link href="<c:url value="/img/logo.png" />" rel="stylesheet">
 <link href="<c:url value="/img/slide1.jpeg" />" rel="stylesheet">
 <link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
-
-<%-- <script src="<c:url value="/resources/js/common.js" />"></script> --%>
 <style>
 
 #menu {
@@ -479,8 +475,7 @@ $(function(){
 					href="/gachi/introCreate">크리에이터 소개</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/gachi/storeMain">스토어</a></li>
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">공지사항</a>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">공지사항</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a> 
 						<a class="dropdown-item" href="/gachi/eventBoard">이벤트</a> 
@@ -600,10 +595,10 @@ $(function(){
 			</form>
 		</div>
 	</div>
-	<div>
 		<div id="member2Join" style="display: none">
+			<div>
 			<form>
-				<div>
+				
 					<h1 class="mJH">회원가입</h1>
 					<div class="prImg"><img src="img/client.png"/></div>
 					<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
@@ -629,8 +624,6 @@ $(function(){
 					<div id="loginJ2Ok">
 						<button>가입하기</button>
 					</div>
-
-				</div>
 			</form>
 		</div>
-	</div>
+		</div>
