@@ -109,6 +109,7 @@ table {
 			</tr>
 		</tbody>
 	</table>
+	
 	<!-- paging -->
 	<div id="CnoticePaging">
 		<ul class="pagination justify-content-center">
