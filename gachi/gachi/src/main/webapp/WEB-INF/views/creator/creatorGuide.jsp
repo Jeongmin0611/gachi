@@ -28,6 +28,13 @@
 			behavior : 'smooth'
 		});
 	}
+	function moveToSettleClass() {
+		var locaW = document.querySelector("#guide_scroll_SettleClass").offsetTop;
+		window.scrollTo({
+			top : locaW,
+			behavior : 'smooth'
+		});
+	}
 	
 </script>	
 
@@ -63,7 +70,7 @@
 	.aos-animate-div img {width:70%;}
 	.aos-animate-guide {width:70%; margin:0 auto;}
 	.aos-animate-guide h3 {vertical-align:middle; line-height:50px; padding-top :30px}
-	.aos-animate-guide button {width:20%; margin:50px auto;}
+	.aos-animate-guide button {width:20%; margin:50px auto; margin-bottom:100px;}
 	
 </style>
 
@@ -73,7 +80,7 @@
 			<ul id="cr_guide_navi">
 				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToCreateClass()">클래스관리</button></li>
 				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToStatClass()">클래스통계</button></li>
-				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveTo()">정산관리</button></li>
+				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToSettleClass()">정산관리</button></li>
 
 			</ul>
 		</div> 
@@ -103,7 +110,14 @@
 				<h3><b>  클래스통계 <br/>나의 통계를 한눈에!</b></h3>
 				<button type="button" class="btn btn-outline-info btn-block" onclick="location.href='/gachi/creatorStatClass'">통계 확인하기</button>	
 			</div>
-
+			
+			<div class="aos-animate-guide" id ="guide_scroll_SettleClass" style="width:50%"data-aos="flip-left"data-aos-easing="ease-out-cubic" data-aos-duration="3000">
+				<img src ="/gachi/img/guide04.PNG"/>
+			</div>
+			<div class="aos-animate-guide" data-aos="zoom-in" data-aos-duration="3000">
+				<h3><b>  정산관리 <br/> 나의 수익을 정리하여 간편하게 !</b></h3>
+				<button type="button" class="btn btn-outline-primary btn-block" onclick="location.href='/gachi/creatorSettle'">정산 확인하기</button>	
+			</div>
 		</div>		
 	</div>
 

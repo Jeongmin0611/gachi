@@ -727,5 +727,27 @@ input{text-align:center;}
 		float:left;
 	}
 	/*크리에이터 질문/답변 목록 end*/
+	
+	
+	/*관리자 크리에이터 리스트 start*/
+	.textSize{
+		font-size: 24px;
+	}
+	#cr_settle_lst{
+		text-align: center;
+	}
+	#cr_settle_lst li{
+		border:1px solid gray;
+		float:left;
+		width:12%;
+		height:50px;
+		font-size:15px;
+		line-height:50px;
+		
+	}
+	#cr_settle_lst li:nth-of-type(8n+1){
+		width:15%;
+	}
+	/*크리에이터 정산관리 리스트 end*/
 
 

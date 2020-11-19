@@ -42,4 +42,9 @@ public class CreatorController {
 	public String creatorEdit() {
 		return "creator/creatorEdit";
 	}
+	
+	@RequestMapping("/creatorSettle")
+	public String creatorSettle() {
+		return "creator/creatorSettle";
+	}
 }
