@@ -34,9 +34,17 @@ public class CreatorController {
 	public String creatorGuide() {
 		return "creator/creatorGuide";
 	}
-	@RequestMapping("/creatorSubnotice")
-	public String creatorSubnotice() {
-		return "creator/creatorSubnotice";
+	@RequestMapping("/creatorNotice")
+	public String creatorNotice() {
+		return "creator/creatorNotice";
+	}	
+	@RequestMapping("/creatorNoticeView")
+	public String creatorNoticeView() {
+		return "creator/creatorNoticeView";
+	}	
+	@RequestMapping("/creatorNoticeWrite")
+	public String creatorNoticeWrite() {
+		return "creator/creatorNoticeWrite";
 	}	
 	@RequestMapping("/creatorEdit")
 	public String creatorEdit() {
@@ -46,5 +54,13 @@ public class CreatorController {
 	@RequestMapping("/creatorSettle")
 	public String creatorSettle() {
 		return "creator/creatorSettle";
+	}
+	@RequestMapping("/creator1on1")
+	public String creator1on1() {
+		return "creator/creator1on1";
+	}
+	@RequestMapping("/creator1on1View")
+	public String creator1on1View() {
+		return "creator/creator1on1View";
 	}
 }

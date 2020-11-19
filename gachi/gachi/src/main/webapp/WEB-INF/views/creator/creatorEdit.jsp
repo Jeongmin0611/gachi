@@ -26,10 +26,12 @@
 				<li>비밀번호확인</li>
 				<li><input class="form-control" type="text"/></li>
 				<li>생년월일</li>
-				<li><input class="form-control" type="text"/></li>
+				<li><input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="8"/></li>
 				<li>연락처</li>
 				<li>
-					<input class="form-control" type="text"/>-<input class="form-control" type="text"/>-<input class="form-control" type="text"/>
+					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>-
+					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>-
+					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
 				</li>
 				<li>사업자번호</li>
 				<li>192-02-12455</li>
