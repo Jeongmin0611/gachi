@@ -20,21 +20,26 @@
 	border-radius: 0.5rem;
 }
 </style>
-<div class="container cr_dash_center text-center card">
+<div class="container cr_dash_center text-center">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
-	<div>
+	<div style="height:200px;">
 		<ul id="cr_dash_board_ul">
 			<li><div class="cr_dash_board">
-						<b>승인 대기 클래스</b>
+						<b>승인 대기 클래스</b><br/>
+						<span style="font-size:50px;line-height:120px">0 명</span>
 					</div></li>
 			<li><div class="cr_dash_board">
-						<b>전월 총 매출</b>
+						<b>전월 총 매출</b><br/>
+						<span style="font-size:50px;line-height:120px">0 원</span>
 					</div></li>
-			<li><div class="cr_dash_board"><b>클래스 답변 대기</b><br/></div></li>							
+			<li><div class="cr_dash_board">
+						<b>클래스 답변 대기</b><br/>
+						<span style="font-size:50px;line-height:120px">0 건</span>
+					</div></li>							
 		</ul>
 	</div>
-	<canvas id="cr_dash_chart" style="margin:100px 0 ;"></canvas>
+	<canvas id="cr_dash_chart" style="margin:30px 0 ;"></canvas>
 	
 	<script type="text/javascript" src="resources/Chart.js"></script>
 	<script type="text/javascript">

@@ -17,52 +17,102 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <style>
+#admintop img {
+	widht: 150px;
+	height: 100px;
+	padding: 15px;
+}
 
-#admintop img{widht:150px; height:100px; padding:15px;}
-
-#admintop{
+#admintop {
 	overflow: auto;
 	background-color: #2d383f;
 }
 
-#admintop>a{
-	width:10%;
-	text-decoration:none;
-	color:white;
-	float:right;
+#admintop>a {
+	width: 10%;
+	text-decoration: none;
+	color: white;
+	float: right;
 }
 
-#adminMenu>li a {color: white;}
+#adminMenu>li a {
+	color: white;
+	text-decoration: none;
+}
 
-#adminMenu>li a:hover {text-decoration: none;color: red;}
+#headerDiv>ul>li {
+	line-height: 50px;
+}
 
-#adminMenu {text-align: center;}
+#headerDiv>ul>li>ul {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	position: relative;
+}
 
-#headerDiv>ul>li {line-height: 50px;text-align: center;}
+#headerDiv>ul>li>ul>li {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
 
-#headerDiv>ul>li>ul {width: 100%;height:50px;line-height: 50px;text-align: center;  position: relative;}
+.submenu li {
+	line-height: 50px;
+	background-color: #437299;
+	margin-left: 25px;
+}
 
-#headerDiv>ul>li>ul>li {height:50px; line-height: 50px;text-align: center;}
+#headerDiv, #adminMenu {
+	background-color: #437299;
+	width: 100%;
+	font-size: 20px;
+}
 
-.submenu li {line-height: 50px; background-color: #437299;}
+#headerDiv {
+	z-index: 1000;
+	position: relative;
+	width: 15%;
+	overflow: hidden;
+	height: auto;
+	float: left
+}
 
-#headerDiv, #adminMenu {background-color: #437299;width: 100%;font-size: 20px;}
-
-#headerDiv {z-index: 1000;position: relative; width:15%; overflow:hidden; height:auto;float:left}
-
-#adminMenu>li {line-height: 50px; color:white; }
+#adminMenu>li {
+	line-height: 50px;
+	color: white;
+	margin-left: 15px;
+}
 
 @font-face {
-    font-family: 'NanumBarunpen';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'NanumBarunpen';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-a , h1, li { font-family: 'NanumBarunpen';}
+
+a, h1, li {
+	font-family: 'NanumBarunpen';
+}
+
+.container {
+	animation: fadein 3s;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 </style>
 
 <title>관리자페이지</title>
-
 </head>
 <body style="background-color:#E4E6DA">
 <div id="admintop">
@@ -80,7 +130,7 @@ a , h1, li { font-family: 'NanumBarunpen';}
 		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
-	            <li><a href="/gachi/admindata-target="#menu1" data-toggle="collapse"Event">이벤트</a></li>
+	            <li><a href="/gachi/adminEvent">이벤트</a></li>
 	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
 			</ul>
 		</div>		
