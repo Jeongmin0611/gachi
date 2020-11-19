@@ -7,72 +7,112 @@ h3{
 	margin-top:50px;
 	text-align: center;
 }
-
+/* 진행중 , 완료 이벤트 버튼*/
 #CEventBtnDiv {
-	float: right;
+	text-align: right;
+	width: 100%;
+	margin-bottom: 10px;
 }
-
-#CEventBtnDiv input[type=button] {
+button:focus, button:active{
+	outline: none;
+}
+#ingEvent {
 	text-align: center;
-	border: 0;
+	border: 2px solid lightblue;
+	background-color: lightblue;
+	color:white;
 	height: 30px;
+	border-radius:5px;
 	line-height: 20px;
 	width: 150px;
 	margin: 0 10px;
 }
-
-.boardDiv{
-}
-
-#CEventList {
-	margin: 50px auto;
-	clear: right;
-	overflow: auto;
+#endEvent {
 	text-align: center;
+	border: 2px solid lightblue;
+	background-color: white;
+	height: 30px;
+	border-radius:5px;
+	line-height: 20px;
+	width: 150px;
+	margin: 0 10px;
+}
+/* 진행중 , 완료 이벤트 끝*/
+/* 이벤트 리스트 */
+
+.homeClassListImg {/*이미지 사이즈 조절*/
+	width: 100%;
+	margin: 10px auto;
+	height: 250px;
 }
 
-#CEventList li{
-	float:left;
-	width:33%;
-	margin: 10px auto;
+.homeClassListTxt {
+	text-align: center;
+	overflow: auto;
+	margin-bottom: 10px;
+	padding: 0;
 }
-#CEventList li>a>img{
-	width:350px;
-	height:250px; 
-}
-#CEventList .imgtxt {
+#eventdate{/*이벤트 날짜*/
 	font-weight: bold;
 }
 
-#CEventList span {
-	font-weight: normal;
-	font-size: 15px;
+.homeClassListTxt p {
+	margin: 0;
 }
+
+#eventNew { /* new 스타일 지정 */
+	background-color: lightblue;
+	color: white;
+}
+.col-sm-4 a { /*a태그 설정*/
+	text-decoration: none;
+	color: black;
+}
+/* 이벤트 리스트 끝*/
+
+/*버튼 오버 효과*/
+#CEventBtnDiv button {
+	max-width: 100%;
+	position: relative;
+	opacity: 1;
+}
+
+#CEventBtnDiv button:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+#CEventBtnDiv * {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all ease-in-out;
+	transition: all ease-in-out;
+}
+/*버튼 오버 효과 끝 */
 
 /* 이미지 오버 효과 */
-
-#CEventList img{
-max-width: 100%;
-  position: relative;
-  opacity: 1;
+.row img {
+	max-width: 100%;
+	position: relative;
+	opacity: 1;
 }
 
-
-#CEventList li:hover img, #CEventList li.hover img{
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
+.row img:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
 }
-#CEventList *{
- -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.45s ease-in-out;
-  transition: all 0.45s ease-in-out;
-  }
+
+.row * {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.45s ease-in-out;
+	transition: all 0.45s ease-in-out;
+}
 
 /* 이미지 오버 효과 끝 */
 
 .pagination{
-	margin-bottom:50px;
+	margin:50px 0;
 }
 </style>
 <script>
@@ -97,40 +137,56 @@ max-width: 100%;
 	<div>
 		<h3>이벤트</h3>
 		<div id="CEventBtnDiv">
-			<input type="button" id="ingEvent" value="진행중인 이벤트" /> 
-			<input type="button" id="endEvent" value="종료된 이벤트"/>
+			<button id="ingEvent">진행중인 이벤트</button>
+			<button id="endEvent">종료된 이벤트</button>
 		</div>
-
-		<!-- 이벤트 리스트 -->
-		<ul id="CEventList">
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-			
-			
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-			<li><a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" /></a><br />
-				<div class="imgtxt">
-					2020-10-01~2020-10-31<br /> <span>신규회원 이벤트 3만원 지원!</span>
-				</div></li>
-		</ul>		
 	</div>
+
+	<!-- 이벤트 리스트 -->
+	<div class="row">
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span class="badge " id="eventNew">new</span>&nbsp; <span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span class="badge " id="eventNew">new</span>&nbsp; <span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span class="badge " id="eventNew">new</span>&nbsp; <span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
+				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
+			</div>				
+		</div>
+	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="#">Prev</a></li>

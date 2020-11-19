@@ -8,7 +8,7 @@
 	line-height:40px;  
 	width: 100%;       /* [변경] 하위 메뉴와 동일하게 맞춤 */
 	position: relative;
-	background-color: #F4BFA9; /* [추가] 늘어난만큼 배경색도 보이도록 수정 */
+	background-color: #F1F7FA; /* [추가] 늘어난만큼 배경색도 보이도록 수정 */
 	margin: 40px 0;
 }
 
