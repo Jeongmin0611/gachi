@@ -65,7 +65,7 @@
 	
 	.cr_guide {margin : 0 auto; }
 	.aos-animate-div {margin: 0px auto; background:#E4E6DA }
-	.aos-animate-half {float:left; width:50%; padding:10%;}
+	.aos-animate-half {float:left; width:40%; padding:10%;}
 	.aos-animate-half img {width: 100%; }
 	.aos-animate-div img {width:70%;}
 	.aos-animate-guide {width:70%; margin:0 auto;}
