@@ -24,10 +24,10 @@
 		width:50%;
 		position:relative;
 		left:25%;
-		margin:50px 0 200px;
+		margin:50px 0 50px;
 	}
 	#userInfoEditContent label{
-		font-size:1.5em;
+		font-size:1.3em;
 	}
 	/* 비번입력 리스트 */
 	#userInfoEditLst{
@@ -45,29 +45,38 @@
 	#userInfoEditLst li:nth-child(2n){
 		width:70%;
 	}
+	#userInfoEditLst li:last-child{
+		border-bottom:1px solid #ddd;
+	}
 	#infoEditUserpwd{
 		width:100%;
+		border:none;
+	}
+	#userInfoEditContent button{
+		background-color:#ABCEE3;
 	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="userInfoEditTop">
-		<ul>
-			<li><a href="/gachi/userInfoEdit"><b>회원정보수정</b></a></li>
-			<li>|</li>
-			<li><a href="/gachi/userLeave">회원탈퇴</a></li>
-		</ul>
-	</div>
-	<hr/>
-	<div id="userInfoEditContent">
-		<label>비밀번호확인</label>
-		<ul id="userInfoEditLst">
-			<li>아이디</li>
-			<li>userid@bitcamp.com</li>
-			<li>비밀번호</li>
-			<li><input type="password" name="userpwd" id="infoEditUserpwd"/></li>
-		</ul>
-		<button type="button" class="btn btn-outline-primary btn-block" onclick="location.href='/gachi/userInfoEditForm'">확인</button>
+	<div class="userMainDiv">
+		<div id="userInfoEditTop">
+			<ul>
+				<li><a href="/gachi/userInfoEdit"><b>회원정보수정</b></a></li>
+				<li>|</li>
+				<li><a href="/gachi/userLeave">회원탈퇴</a></li>
+			</ul>
+		</div>
+		<div id="userInfoEditContent">
+			<label>비밀번호확인</label>
+			<hr style="background-color:#000"/>
+			<ul id="userInfoEditLst">
+				<li>아이디</li>
+				<li>userid@bitcamp.com</li>
+				<li>비밀번호</li>
+				<li><input type="password" name="userpwd" id="infoEditUserpwd"/></li>
+			</ul>
+			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEditForm'">확인</button>
+		</div>
 	</div>
 </div>
