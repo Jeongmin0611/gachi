@@ -508,12 +508,16 @@ a {
 		margin-top: 150px;
 		color: black;
 	}
-
+	.join{
+		display: none;
+	}
 </style>
 <script>
 $(function(){
+	
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#md").css({
            "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
