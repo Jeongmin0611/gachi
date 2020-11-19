@@ -67,4 +67,8 @@ public class CreatorController {
 	public String creator1on1Write() {
 		return "creator/creator1on1Write";
 	}
+	@RequestMapping("/creatorVideo")
+	public String creatorVideo(){
+		return "creator/creatorVideo";
+	}
 }
