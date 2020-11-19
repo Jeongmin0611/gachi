@@ -128,7 +128,6 @@ a, h1, li {
 </head>
 <body style="background-color:#E4E6DA">
 <div id="creatortop" style="background-color:#2d383f">
-		<!--<a href="/gachi"><img src="/gachi/img/logo.png"></a>-->
 		<a href="/gachi">고객센터</a>
 		<a href="/gachi">홈페이지 이동</a>
 		<a href="/gachi">마이페이지</a>
@@ -141,6 +140,7 @@ a, h1, li {
 		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorMyClass">내 클래스 관리</a></li>
+				<li><a href="/gachi/creatorVideo">동영상 관리</a></li>
 	            <li><a href="/gachi/creatorStatClass">클래스 통계</a></li>
 	             <li><a href="/gachi/creatorClassQuestion">클래스 문의 </a></li>
 			</ul>

@@ -477,11 +477,10 @@ $(function(){
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
     });
-});
-$(function(){
-	//회원가입모달창 띄우기
+    
+  //회원가입모달창 띄우기
     $("#joinFormBtn").click(function(){
-        
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#mdJ").css({
            "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
