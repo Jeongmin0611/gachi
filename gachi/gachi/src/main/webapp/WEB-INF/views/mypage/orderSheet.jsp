@@ -3,6 +3,7 @@
 <style>
 
 	/* 주문신청서 */
+	
 	a:link, a:visited{
 		color:#000;
 		text-decoration:none;
@@ -11,9 +12,10 @@
 		text-decoration:none;
 		font-weight:bold;
 	}
-	
-	#orderSheetContainer{
-		margin:50px auto 0;
+	.userMainDiv{
+		box-shadow:0px 0px 10px 1px #eee;
+		padding:20px;
+		margin:50px auto;
 		width:50%;
 	}
 	
@@ -94,15 +96,22 @@
 		width:70%;
 	}
 	#orderSheetUserInfo li input{
-		width:100%;
+		width:70%;
 		padding:0 20px;
-		text-align:left;
+		text-align:center;
 	}
 	#orderSheetUserInfo li:nth-child(8)>input:first-child{
-		width:19%;
+		width:15%;
+		padding:0;
 	}
 	#orderSheetUserInfo li:nth-child(8)>input:last-child{
 		width:70%;
+	}
+	#orderSheetUserInfo li:nth-child(10)>input{
+		width:100%;
+	}
+	#orderSheetUserInfo textarea{
+		border:1px solid #ddd;
 	}
 	
 	/* 결제정보 */
@@ -176,13 +185,33 @@
 		text-align:right;
 		font-size:0.8em;
 	}
+	#orderSheetContent input{
+		border:none;
+		border-bottom:1px solid #ddd;
+	}
 	
 	/**************/
 	/* 하단 */
-	#orderSheetBtm{overflow:auto;text-align:center;width:100%;margin:10px 0 50px;}
-	#orderSheetBtm>button{margin:10px 5px;}
+	#orderSheetBtm{
+		overflow:auto;
+		text-align:center;
+		width:100%;
+		margin:100px 0 50px;
+	}
+	/* 버튼 */
+	#orderSheetBtm>button{
+		margin:10px 5px;
+	}
+	#orderSheetContent button,
+	#orderSheetBtm button{
+		background-color:#ABCEE3;
+	}
+	#orderSheetBtm button:last-child{
+		background-color:#eee;
+		color:#000;
+	}
 </style>
-<div class="container" id="orderSheetContainer">
+<div class="container userMainDiv cfont" id="orderSheetContainer">
 	<div id="orderSheetTop">
 		<ul>
 			<li>01 장바구니</li>
@@ -194,7 +223,7 @@
 	</div>
 	<div id="orderSheetContent">
 		<label>주문내역</label>
-		<hr/>
+		<hr style="background:#000"/>
 		<ul id="orderSheetTtl">
 			<li>클래스/상품명</li>
 			<li>수량</li>
@@ -212,7 +241,7 @@
 			<li>15,000원</li>
 		</ul>
 		<label>주문자 정보</label>
-		<hr/>
+		<hr style="background:#000"/>
 		<div id="orderSheetUserInfo">
 			<ul>
 				<li>이름</li>
@@ -224,7 +253,7 @@
 				<li>주소</li>
 				<li>
 					<input type="text" name="zipcode" value="01234" readonly/>
-					<button type="button" class="btn btn-primary btn-sm">검색</button>
+					<button type="button" class="btn btn-outline-light btn-sm">검색</button>
 					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
 				</li>
 				<li>상세주소</li>
@@ -234,7 +263,7 @@
 			</ul>
 		</div>
 		<label>결제정보</label>
-		<hr/>
+		<hr style="background:#000"/>
 		<div id="orderSheetPay">
 			<ul>
 				<li>결제수단</li>
@@ -242,13 +271,13 @@
 				<li>적립금사용</li>
 				<li>
 					<input type="text" name="useMileage" value="1000"/>
-					<button type="button" class="btn btn-primary btn-sm">적용</button>
+					<button type="button" class="btn btn-outline-light btn-sm">적용</button>
 					<label>(현재 마일리지 1,000p)</label>
 				</li>
 			</ul>
 		</div>
 		<label>총 결제금액</label>
-		<hr/>
+		<hr style="background:#000"/>
 		<ul id="orderSheetPrice">
 			<li>총 구매금액</li>
 			<li>15,000원</li>
@@ -265,7 +294,7 @@
 	</div>
 	<div id="orderSheetBtm">
 		<label><input type="checkbox" name="orderAgree""/>구매진행에 동의합니다.</label>
-		<button type="button" class="btn btn-primary" id="orderSheetBtn" onclick="location.href='/gachi/orderConfirmed'">결제하기</button>
-		<button type="button" class="btn btn-secondary" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
+		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/orderConfirmed'">결제하기</button>
+		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
 	</div>
 </div>

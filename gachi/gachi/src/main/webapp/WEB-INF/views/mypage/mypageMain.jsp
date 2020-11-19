@@ -183,7 +183,7 @@
 	});
 
 </script>
-<div class="container"style="overflow-x:hidden;">
+<div class="container cfont" style="overflow-x:hidden;">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<!-- 마이페이지(메인) - 상단 -->
 	<div class="userMainDiv">

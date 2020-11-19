@@ -12,8 +12,10 @@
 		font-weight:bold;
 	}
 	
-	#orderConfirmedContainer{
-		margin:50px auto 0;
+	.userMainDiv{
+		box-shadow:0px 0px 10px 1px #eee;
+		padding:20px;
+		margin:50px auto;
 		width:50%;
 	}
 	
@@ -69,11 +71,19 @@
 	#orderConfirmedBtm{
 		text-align:center;
 		overflow:auto;
-		margin:20px 0 100px;
+		margin:100px 0 50px;
+	}
+	#orderConfirmedBtm button:first-child{
+		background-color:#eee;
+		color:#000;
+		
+	}
+	#orderConfirmedBtm button:last-child{
+		background-color:#ABCEE3;
 	}
 	
 </style>
-<div class="container" id="orderConfirmedContainer">
+<div class="container userMainDiv cfont">
 	<div id="orderConfirmedTop">
 		<ul>
 			<li>01 장바구니</li>
@@ -97,7 +107,7 @@
 		</ul>
 	</div>
 	<div id="orderConfirmedBtm">
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='/gachi/mypage'">결제내역보기</button>
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='/gachi'">홈으로</button>
+		<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/mypage'">결제내역보기</button>
+		<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi'">홈으로</button>
 	</div>
 </div>

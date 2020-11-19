@@ -24,7 +24,7 @@
 		width:50%;
 		position:relative;
 		left:25%;
-		margin:50px 0 200px;
+		margin:50px 0;
 		text-align:center;
 	}
 	#userLeaveOkContent label{
@@ -37,25 +37,29 @@
 	#userLeaveOkContent label:nth-child(3),#userLeaveOkContent label:nth-child(4){
 		margin:15px 0;
 	}
-	#userLeaveOkContent Button{margin-top:50px;}
+	#userLeaveOkContent Button{
+		margin-top:100px;
+		background-color:#ABCEE3;
+	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="userLeaveOkTop">
-		<ul>
-			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
-			<li>|</li>
-			<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
-		</ul>
-	</div>
-	<hr/>
-	<div id="userLeaveOkContent">
-		<label>회원 탈퇴가 완료되었습니다.</label>
-		<hr/>
-		<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>
-		<label>보다 나은 서비스로 다시 찾아 뵙겠습니다.</label>
-		<hr/>
-		<button type="button" class="btn btn-primary">홈으로</button>
+	<div class="userMainDiv">
+		<div id="userLeaveOkTop">
+			<ul>
+				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
+				<li>|</li>
+				<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
+			</ul>
+		</div>
+		<div id="userLeaveOkContent">
+			<label>회원 탈퇴가 완료되었습니다.</label>
+			<hr/>
+			<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>
+			<label>보다 나은 서비스로 다시 찾아 뵙겠습니다.</label>
+			<hr/>
+			<button type="button" class="btn btn-outline-light">홈으로</button>
+		</div>
 	</div>
 </div>
