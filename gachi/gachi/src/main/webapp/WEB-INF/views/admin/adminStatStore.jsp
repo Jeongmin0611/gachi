@@ -6,10 +6,7 @@
 </style>
 <div class="container store_StatClass_center text-center">
 	<h1 style="text-align:center;"> 스토어 통계 </h1><br/>
-		<p><input type="radio" name="searchKey" value="전체"/>전체
-			<input type="radio" name="searchKey" value="상품"/>상품
-			<input type="radio" name="searchKey" value="클래스"/>클래스
-
+		<p>
 			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>
 			<input type="date" value="2020-11-11"/>
 			-
