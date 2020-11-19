@@ -3,9 +3,16 @@
 <style>
 
 	/* 유저프로필 - 마이페이지 top */
+	
 	a:link, a:visited, a:hover{
 		text-decoration:none;
 		color:#000;
+	}
+	
+	.userMainDiv{
+		box-shadow:0px 0px 10px 1px #eee;
+		padding:20px;
+		margin-bottom:50px;
 	}
 	
 	/************/
@@ -19,46 +26,68 @@
 	}
 	/* 프사박스 */
 	#profileBox {
-	    width: 100px;
-	    height: 100px; 
+	    width: 80px;
+	    height: 80px; 
 	    border-radius: 30%;
 	    overflow: hidden;
 	    float:left;
+	    background-color:#e3eef6;
 	}
 	/* 프사 */
 	#profileIcon {
 	    width: 100%;
-	    height: 100%;
+	    height:100%;
 	    object-fit: cover;
+	}
+	#userProfile>div{
+		margin:0 20px;
 	}
 	/* 닉네임 */
 	#userProfile>div:nth-child(2){
 		padding-left:5%;
-		width:40%;
-		line-height:100px;
+		width:25%;
+		line-height:80px;
 		float:left;
 		overflow:auto;
 		font-size:1.5em;
 	}
 	/* 클래스 */
 	#userProfile>div:nth-child(3){
-		width:20%;
+		width:15%;
 		line-height:50px;
 		float:left;
 		text-align:center;
 		overflow:auto;
 	}
-	/*마일리지*/
+	/* 마일리지 */
+	#userProfile>div:nth-child(4){
+		width:15%;
+		line-height:50px;
+		overflow:auto;
+		text-align:center;
+		float:left;
+	}
+	/* 좋아요 */
 	#userProfile>div:last-child{
+		width:15%;
 		line-height:50px;
 		overflow:auto;
 		text-align:center;
 	}
-	/* 클래스, 마일리지 라벨 */
-	#userProfile>div:nth-child(3)>label, #userProfile>div:last-child>label{
+	/* 클래스, 마일리지, 좋아요 라벨 */
+	#userProfile>div:nth-child(3)>label, 
+	#userProfile>div:nth-child(4)>label,
+	#userProfile>div:last-child>label{
 		width:100%;
 	}
-	#userProfile>div:nth-child(3)>label:last-child, #userProfile>div:last-child>label:last-child{
+	#userProfile>div:nth-child(3)>label:first-child, 
+	#userProfile>div:nth-child(4)>label:first-child,
+	#userProfile>div:last-child>label:first-child{
+		border-bottom:2px solid #ffccb6;
+	}
+	#userProfile>div:nth-child(3)>label:last-child, 
+	#userProfile>div:nth-child(4)>label:last-child,
+	#userProfile>div:last-child>label:last-child{
 		font-weight:bold;
 	}
 
@@ -66,63 +95,49 @@
 	/*마이페이지 메뉴*/
 	
 	/* 메뉴 hover 효과 */
-	nav {
-	  width: 80%;
-	  margin: 0 auto;
-	  padding: 50px 0;
+	
+	#userProfileNavi{width:100%;overflow:auto;}
+	#userProfileNavi li{
+		width:20%;
+		float:left;
 	}
-	nav ul {
-	  list-style: none;
-	  text-align: center;
-	}
-	nav ul li {
-	  display: inline-block;
-	}
-	nav ul li a {
-	  display: block;
-	  padding: 15px;
-	  text-decoration: none;
-	  color: #aaa;
-	  font-weight: 800;
-	  text-transform: uppercase;
-	  margin: 0 10px;
-	}
-	nav ul li a,
-	nav ul li a:after,
-	nav ul li a:before {
-	  transition: all .5s;
-	}
-	nav ul li a:hover {
-	  color: #555;
-	}
-
-
-	/* stroke */
-	nav #userProfileNavi ul li a {
+	.userProfileHover{
 	  position: relative;
+	  color: white;
+	  font-size: 14px;
+	  text-decoration: none;
+	  margin: 30px 0;
+	  padding: 10px;
+	  text-transform: uppercase;
+	  overflow: hidden;
+	  transition: 1s all ease;
+	  text-align:center;
 	}
-	nav #userProfileNavi ul li a:after{
+	.userProfileHover::before{
+	  background: #fde9e2;
+	  content: "";
 	  position: absolute;
-	  bottom: 0;
-	  left: 0;
-	  right: 0;
-	  margin: auto;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%,-50%);
+	  z-index: -1;
+	  transition: all 0.6s ease;
 	  width: 0%;
-	  content: '.';
-	  color: transparent;
-	  background: #aaa;
-	  height: 2px;
+	  height: 100%;
+	 
+	}
+	.userProfileHover:hover::before{
+	  width: 60%;
+	  border-left:1px solid #aaa;
+	  border-right:1px solid #aaa;
 	}
 
-	nav #userProfileNavi ul li a:hover:after {
-	  width: 100%;
-	}
 	
 </style>
 <div>
-	<div id="userProfile">
+	<div id="userProfile" class="cfont">
 		<div id="profileBox">
-			<img src="/gachi/img/userProfileImage.png" id="profileIcon"/>
+			<img src="/gachi/img/usericon.png" id="profileIcon"/>
 		</div>
 		<div>
 			<label><a href="#">김유미 님</a></label>
@@ -135,15 +150,18 @@
 			<label>마일리지</label>
 			<label><a href="/gachi/userMileage">1,000p</a></label>
 		</div>
+		<div>
+			<label>좋아요</label>
+			<label><a href="/gachi/userWishList">4</a></label>
+		</div>
 	</div>
-	<nav id="userProfileNavi">
+	<div id="userProfileNavi">
 		<ul>
 			<li class="userProfileHover"><a href="/gachi/mypage">결제내역</a></li>
 			<li class="userProfileHover"><a href="/gachi/userInfoEdit">회원정보</a></li>
 			<li class="userProfileHover"><a href="/gachi/userCart">장바구니</a></li>
 			<li class="userProfileHover"><a href="/gachi/myclassList">내 학습표</a></li>
 			<li class="userProfileHover"><a href="/gachi/myqna">질문/문의</a></li>
-			<li class="userProfileHover"><a href="/gachi/userWishList">❤좋아요 목록</a></li>
 		</ul>
-	</nav>
+	</div>
 </div>
