@@ -97,7 +97,7 @@ a , h1, li { font-family: 'NanumBarunpen';}
 		</li>
 		<li><a href="/gachi/creatorNotice">공지/문의하기</a>
 			<ul class="submenu">
-				<li><a href="/gachi/creatorSubnotice">공지사항 </a></li>
+				<li><a href="/gachi/creatorNotice">공지사항 </a></li>
 	            <li><a href="/gachi/creator1on1">1:1문의 </a></li>
 			</ul>
 		</li>

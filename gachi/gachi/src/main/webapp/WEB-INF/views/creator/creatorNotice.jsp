@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
  <style>
- #ad_notice_lst li{vertical-align:middle;line-height:50px;}
+ #cr_notice_lst li{vertical-align:middle;line-height:50px;}
  #search_area{margin-bottom:20px;}
  select{height:30px;}
  </style> 
@@ -22,7 +22,7 @@
 <input type="submit" class="btn btn-info" value="검색"/>
 </form>
 </div>
-<ul id="ad_notice_lst">
+<ul id="cr_notice_lst">
 	<li>선택</li>
 	<li>번호</li>
 	<li>제목</li>
@@ -32,13 +32,13 @@
 
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
-	<li><a href="/gachi/adminNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
+	<li><a href="/gachi/creatorNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
 	<li>같이가치</li>
 	<li>2020-10-29</li>
 	<li>25</li>
 </ul>
-<div class="ad_list_menu">
-	<button class="btn btn-info" onclick="location.href='/gachi/adminNoticeWrite'">글쓰기</button>
+<div class="cr_list_menu">
+	<button class="btn btn-info" onclick="location.href='/gachi/creatorNoticeWrite'">글쓰기</button>
 	<button class="btn btn-info">삭제</button> 
 </div>
 <div id="paging">

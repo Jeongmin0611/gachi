@@ -402,6 +402,7 @@ input{text-align:center;}
 	
 	/*관리자 공지사항 글쓰기 end*/
 	
+	
 	/*관리자 1:1문의 리스트 start*/
 	#ad_1on1_lst li{
 		float: left;
@@ -611,7 +612,7 @@ input{text-align:center;}
 	.container h1{
 		text-align: center;
 	}
-/*  creator */
+	/*  creator */
 
 	/*크리에이터 마이클래스 리스트 start*/
 	
@@ -718,7 +719,7 @@ input{text-align:center;}
 	/*크리에이터 클래스신청 글쓰기 end*/
 	
 	/*크리에이터 질문/답변 목록 start*/
-	#cre_classQuestion_lst li{
+	#cr_classQuestion_lst li{
 		width:15%;
 		float:left;
 	}
@@ -750,4 +751,81 @@ input{text-align:center;}
 	}
 	/*크리에이터 정산관리 리스트 end*/
 
+/*크리에이터 공지사항 리스트 start*/
+	#cr_notice_lst li{
+		float: left;
+		width:10%;
+		text-align: center;
+		border:1px solid gray;
+		line-height:30px;
+		height:50px;
+	}
+	#cr_notice_lst>li:nth-of-type(6n+1){
+		width:7%;
+	}
+	#cr_notice_lst>li:nth-of-type(6n+3){
+		width:50%;
+	}
+	#cr_notice_lst>li:nth-of-type(6n+5){
+		width:13%;
+	}
+	.cr_list_menu{
+		text-align: right;
+	}
+	/*관리자 공지사항 리스트 end*/
+	
+	/*크리에이터  공지사항 글쓰기 start*/
+	#cr_notice_WriteForm{
+		margin-top:30px;
+		text-align: left;
+	}
+	#cr_notice_WriteForm li{
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+	
+	/*크리에이터 공지사항 글쓰기 end*/
+
+
+
+
+
+	/*크리에이터 1:1문의 리스트 start*/
+	#cr_1on1_lst li{
+		float: left;
+		width:12%;
+		text-align: center;
+		border:1px solid gray;
+		line-height:30px;
+		height:50px;
+	}
+	#cr_1on1_lst>li:nth-of-type(7n+1){
+		width:5%;
+	}
+	#cr_1on1_lst>li:nth-of-type(7n+2){
+		width:6%;
+	}
+	#cr_1on1_lst>li:nth-of-type(7n+4){
+		width:45%;
+	}
+	#cr_1on1_lst>li:nth-of-type(7n+7){
+		width:8%;
+	}
+	/*크리에이터 1:1문의 리스트 end*/
+	/*크리에이터 1:1문의 보기 start*/
+	#cr_1on1_view,#cr_1on1_writeForm{
+		overflow:auto;
+	}
+	#cr_1on1_view li,#cr_1on1_writeForm li{
+		text-align:left;
+		float:left;
+	}
+	#cr_1on1_view>li:last-child{
+		overflow:auto;
+		float:none;
+	}
+	.content_center{
+		text-align: center;
+	}
+	/*크리에이터 1:1문의 보기 end*/
 
