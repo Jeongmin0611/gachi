@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
 	$(function(){
 		$(".cr_settle_searchDate").css("text-align","right");
-		$("#ad_settle_info").css("border","3px solid #F4BFA9");
-		$("#ad_settle_info").css("padding","20px");
+		$("#cr_settle_info").css("border","3px solid #F4BFA9");
+		$("#cr_settle_info").css("padding","20px");
 	});
 </script>
 <div class="container">
@@ -25,7 +23,7 @@
 		<h1>544,540원</h1>
 	</div>
 <div style="margin-left:10%;">
-	<ul id="cr_settle_lst">
+	<ul id="cr_settle_lst" style="margin-top:50px">
 		<li>크리에이터아이디</li>
 		<li>카테고리</li>
 		<li>크리에이터명</li>
@@ -55,7 +53,7 @@
 	</ul>
 </div>
 <div id="paging">
-	<ul>
+	<ul style="margin-top:50px">
 		<li>prev</li>
 		<li>1</li>
 		<li>2</li>
