@@ -402,6 +402,113 @@ a {
 	border:0;
 	outline:0;
 }
+
+/* 회원가입 스타일 */
+
+	.join{
+		display: flex;
+		margin: 0px auto;
+		width: 300px;
+		text-align: center;
+		overflow: hidden;
+		margin-top: 100px;
+	}
+	.join img {width:100%; margin-bottom:25px;}
+	.join input {
+		margin-bottom:12px;
+		border:none;
+		border-bottom:1px solid #ccc;
+		border-radius:2px;
+		width:100%;
+		height:40px;
+		padding-left:12px;
+		background-color:transparent;
+		color:black;
+		font-size:16px;
+	}
+	.join input::-webkit-input-placeholder{
+		color:#999;
+		font-size:16px
+	}
+	.join input::placeholder{
+		color:#999;
+		font-size:16px
+	}
+	.tel{
+		margin: 0px auto;
+		float: left;
+		margin-right:10px;
+		text-align: center;
+	}
+	#emailChkBtn{
+		text-align:center;
+		margin: 0px auto;
+		width: 150px;
+		height: 25px;
+		border: none;
+		background:linear-gradient(to right, rgb(19, 78, 94), rgb(113, 178, 128));
+		color: rgb(193, 207, 178);
+		font-size: 12px;
+		border-radius: 50px;
+	}
+	#signupBtn {
+		width: 240px;
+		height: 50px;
+		border: none;
+		background: linear-gradient(to right, rgb(171, 206, 227), rgb(244, 191, 169));
+		color: rgb(63, 84, 251);
+		font-weight:bold;
+		font-size: 16px;
+		border-radius: 50px;
+		margin-top:25px;
+	}
+	#signupBtn:hover{
+		border: solid 1px #e4e4e4;
+		color: white;
+	}
+	#emailChkBtn:hover{
+		border: solid 1px #e4e4e4;
+		color: white;
+	}
+	.message{
+		color: #FC5B57;
+		display: inherit;
+	}
+	#passwordChkMessage{
+		font-size:12px;
+	}
+	#cover{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+		opacity: 0.7;
+		text-align: center;
+		display: none;
+	}
+	iframe{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	#cover_contents{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		background-color: #999;
+		text-align: center;
+	}
+	h2{
+		margin-top: 150px;
+		color: black;
+	}
+
 </style>
 <script>
 $(function(){
@@ -418,20 +525,13 @@ $(function(){
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
     });
-    //회원가입모달
-    $("#joinFormBtn").click(function(){
-		$("#memberJoin").css({
-           "top": (($(window).height()-$("#memberJoin").outerHeight())/2+$(window).scrollTop())+"px",
-           "left": (($(window).width()-$("#memberJoin").outerWidth())/2+$(window).scrollLeft())+"px"
-           //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-        
-        });
-        $("#memberJoin").fadeIn();
-    });
-    $("#memberJoinClose, .memberJoin_layer").click(function(){
-       $("#memberJoin").fadeOut();
-    });   
 });
+
+
+
+
+
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -559,41 +659,23 @@ $(function(){
 			</form>
 		</div>
 	</div>
-		<div id="memberJoin">
-			<div id="memberJoinFrm">
-				<form>
-					<div>
-					<div id="memberJoinBtm">
-						<button type="button" class="btn btn-primary" id="memberJoinClose"></button>
-					</div>
-					<div class="memberJoin_layer"></div>
-						<h1 class="mJH">회원가입</h1>
-						<div class="prImg"><img src="img/client.png"/></div>
-						<span class="radioBtn2"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
-						<div class="textBoxJ">이메일 :</div>
-						<input type="text" id="mJuserid">
-						<div class="textBoxJ">비밀번호 :</div>
-						<input type="text" id="mJuserpwd">
-						<div class="textBoxJ">비밀번호확인 :</div>
-						<input type="text" id="mJuserpwdOk">
-						<div class="textBoxJ">이름 :</div>
-						<input type="text" id="mJusername">
-						<div class="textBoxJ">닉네임 :</div>
-						<input type="text" id="mJuserNname">
-						<div class="textBoxJ">생년월일 :</div>
-						<input type="text" id="mJuserB">
-						<div class="textBoxJ">전화번호 :</div>
-						<input type="text" id="mJusertel">
-						<div class="textBoxJ">주소 :</div>
-						<input type="text" id="mJuseraddr"> 광고수신 동의 여부<br /> 
-						<span class="radioBtn3"><input type="radio" />이메일수신<input type="radio" />문자수신</span><br />
-						<div id="loginJOk">
-							<button>가입하기</button>
-					</div>
-
-				</div>
-			</form>
-		</div>
+<div class="join">
+	<div class="col-xs-12 col-md-12">
+		<form method="post" id="joinForm">	
+				<img src="/gachi/img/logo.png"/>
+			 	<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
+			 	<input type="hidden" id="emailChk" value="false" />
+			 	<button type="button" id="emailChkBtn" style="display: none;">중복확인</button>
+			 	<input type="password" placeholder="비밀번호" name="password" id="password" /><span id="passwordMessage" class="message"></span>
+			 	<input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
+			 	<input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
+			 	<input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
+			 	<input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 	<input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 	<input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 80px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+			 	<span id="telMessage" class="message"></span>
+				<button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
+		</form>
 	</div>
 		<div id="member2Join" style="display: none">
 			<div>

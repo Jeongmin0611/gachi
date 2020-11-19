@@ -16,20 +16,19 @@
 	margin-bottom: 50px;
 	border-radius: 10px;
 }
+.card{
+	border-radius: 0.5rem;
+}
 </style>
-<div class="container cr_dash_center text-center">
+<div class="container cr_dash_center text-center card">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
 	<div>
 		<ul id="cr_dash_board_ul">
-			<li><div class="cr_dash_board"><input type="radio" name="cr_dash_User" value="전체" checked/>전체
-					<input type="radio" name="cr_dash_User" value="회원"/>회원
-					<input type="radio" name="cr_dash_User" value="크리에이터"/>크리에이터<br/><br/>
+			<li><div class="cr_dash_board">
 						<b>승인 대기 클래스</b>
 					</div></li>
-			<li><div class="cr_dash_board"><input type="radio" name="cr_dash_pay" value="전체" checked/>전체
-					<input type="radio" name="cr_dash_pay" value="스토어"/>스토어
-					<input type="radio" name="cr_dash_pay" value="클래스"/>클래스<br/><br/>
+			<li><div class="cr_dash_board">
 						<b>전월 총 매출</b>
 					</div></li>
 			<li><div class="cr_dash_board"><b>클래스 답변 대기</b><br/></div></li>							
