@@ -18,6 +18,7 @@
 #creatortop img{widht:100px; height:50px; padding:15px;}
 #creatortop{
 	overflow: auto;
+	
 }
 
 #creatortop a{
@@ -28,9 +29,10 @@
 }
 
 #creatorMenu>li a {color: white;}
-
+#creatorMenu>li {color: white;}
+/*
 #creatorMenu>li a:hover {text-decoration: none;color: red;}
-
+*/
 #creatorMenu {text-align: center; height:auto;}
 
 #headerDiv>ul>li {line-height: 50px;text-align: center;}
@@ -39,23 +41,23 @@
 
 #headerDiv>ul>li>ul>li {height:50px; line-height: 50px;text-align: center;}
 
-.submenu li {line-height: 10px; background-color: #437299;}
+.submenu li {line-height: 50px; background-color: #437299;}
 
 #headerDiv, #adminMenu {background-color: #437299;height: 50px;width: 100%;font-size: 20px;}
 
-#headerDiv {z-index: 1000;position: relative; width:15%; height:100%; float:left;}
+#headerDiv {
+	z-index: 1000;
+	position: relative; 
+	width:15%; 
+	float:left;
+	overflow:hidden;
+    height:auto;
+}
 
 #creatorMenu>li {line-height: 50px;}
 
-/*
-.submenu {position: absolute;opacity: 0;visibility: hidden;}
 
-#creatorMenu>li:hover .submenu {opacity: 1;visibility: visible;}
-*/
-html, body {
-      height: 100%;
-      width: 100%;
-}
+.submenu {position: relative;}
 
 @font-face {
     font-family: 'NanumBarunpen';
@@ -68,10 +70,16 @@ a , h1, li { font-family: 'NanumBarunpen';}
 </style>
 
 <title>크리에이터 관리 페이지</title>
-
+<script type="text/javascript">
+	$(()=>{
+		let height=$(window).innerHeight();
+		$("#headerDiv").height(height);
+		
+	});
+</script>
 </head>
 <body style="background-color:#E4E6DA">
-<div id="creatortop" style="background-color:#6e8999">
+<div id="creatortop" style="background-color:#2d383f">
 		<!--<a href="/gachi"><img src="/gachi/img/logo.png"></a>-->
 		<a href="/gachi">고객센터</a>
 		<a href="/gachi">홈페이지 이동</a>
@@ -81,25 +89,30 @@ a , h1, li { font-family: 'NanumBarunpen';}
 <div id="headerDiv">
 	<ul id="creatorMenu">
 		<li><a href="/gachi/creatorDashboard">대시보드</a></li>
-		<li><a href="#">클래스 관리</a>
+		<li data-target="#menu1" data-toggle="collapse">클래스 관리
+		<div id="menu1" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorMyClass">내 클래스 관리</a></li>
 	            <li><a href="/gachi/creatorStatClass">클래스 통계</a></li>
 	             <li><a href="/gachi/creatorClassQuestion">클래스 문의 </a></li>
 			</ul>
-		</li>
-		<li><a href="/gachi/creatorInformation">개인정보 관리</a>
+		</div>
+		<li data-target="#menu2" data-toggle="collapse">개인정보 관리
+		<div id="menu2" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorSettle">정산관리</a></li>
 				<li><a href="/gachi/creatorEdit">개인정보 수정</a></li>
 	            <li><a href="/gachi/creatorOut">회원 탈퇴</a></li>
 			</ul>
+		</div>
 		</li>
-		<li><a href="/gachi/creatorNotice">공지/문의하기</a>
+		<li data-target="#menu3" data-toggle="collapse">공지/문의하기
+		<div id="menu3" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorNotice">공지사항 </a></li>
 	            <li><a href="/gachi/creator1on1">1:1문의 </a></li>
 			</ul>
+		</div>
 		</li>
 		<li><a href="/gachi/creatorGuide">이용안내</a></li>
 		
