@@ -10,7 +10,6 @@
 #createDetailSub1 {
 	background: #FCE8E6;
 	float: left;
-	height: 100vh;
 	
 }
 #createDetailSub1>li>img{
@@ -18,7 +17,6 @@
 }
 #createDetailSub1+div {
 	background-color: #F2F2F2;
-	height: 100vh;
 }
 #createDetailSub1>li>a{
 	text-decoration: none;
@@ -57,15 +55,13 @@
 	<div id="createDetailDiv" class="row">
 		<ul id="createDetailSub1" class="col-sm-4">
 			<li><img src="/gachi/img/business-woman.png" /></li>
-			<li style="text-align: center; border-bottom: 1px solid gray">크리에이트 명</li>
-			<li><img src="/gachi/img/business-woman.png" /></li>
+			<li style="text-align: center; border-bottom: 1px solid #bbb; margin:2px 0;">크리에이트 명</li>
 			<li><a href="#">create@instagram</a></li>
 			<li><a href="#">create@facebook</a></li>
 		</ul>
 		
 		<!-- 크리에이터 소개글 -->
 		<div id="CcreateMent" class="col-sm-8">크리에이터 소개글</div>
-		
 	</div>
 	<!-- 개설한 클래스 -->
 	<div id="createClass" >
