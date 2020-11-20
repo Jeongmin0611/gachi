@@ -26,6 +26,21 @@
 		overflow:auto;
 		margin:20px 50px 10px;
 	}
+	
+	/* 로고사이즈 */
+	#orderConfirmedTop>ul>li img{
+		margin:0 5px;
+	}
+	#orderConfirmedTop>ul>li:first-child img{
+		width:30px;
+	}
+	#orderConfirmedTop>ul>li:nth-child(3) img{
+		width:22px;
+	}
+	#orderConfirmedTop>ul>li:nth-child(5) img{
+		width:25px;
+	}
+	
 	#orderConfirmedTop li{
 		float:left;
 		margin:0 10px;
@@ -39,10 +54,20 @@
 	
 	/**************/
 	/* 내용 */
+	
+	#orderConfirmedContent>div{
+		margin:30px auto 0;
+		width:100px;
+		height:100px;
+		text-align:center;
+	}
+	#orderConfirmedContent>div img{
+		width:80%;
+	}
 	#orderConfirmedContent>label{
 		width:100%;
 		text-align:center;
-		margin:20px 0 100px;
+		margin:10px 0 100px;
 		font-size:1.5em;
 	}
 	/* 주문내역 리스트 */
@@ -84,15 +109,18 @@
 <div class="container userMainDiv cfont">
 	<div id="orderConfirmedTop">
 		<ul>
-			<li>01 장바구니</li>
+			<li><img src="/gachi/img/icon_cart.png"/>장바구니</li>
 			<li>></li>
-			<li>02 주문/결제</li>
+			<li><img src="/gachi/img/icon_ordersheet.png"/>주문/결제</li>
 			<li>></li>
-			<li>03 주문완료</li>
+			<li><img src="/gachi/img/icon_check.png"/>주문완료</li>
 		</ul>
 	</div>
 	<hr style="background:#000"/>
 	<div id="orderConfirmedContent">
+		<div>
+			<img src="/gachi/img/icon_check.png"/>
+		</div>
 		<label>주문이 완료되었습니다.</label>
 		<ul id="orderConfirmedLst">
 			<li>주문번호</li>

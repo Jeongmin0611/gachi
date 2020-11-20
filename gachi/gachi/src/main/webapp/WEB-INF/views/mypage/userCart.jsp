@@ -11,7 +11,23 @@
 		overflow:auto;
 		margin:20px 50px 10px;
 	}
+	
+	/* 로고사이즈 */
+	#userCartTop>ul>li img{
+		margin:0 5px;
+	}
+	#userCartTop>ul>li:first-child img{
+		width:30px;
+	}
+	#userCartTop>ul>li:nth-child(3) img{
+		width:22px;
+	}
+	#userCartTop>ul>li:nth-child(5) img{
+		width:25px;
+	}
+	
 	#userCartTop li{
+		line-height:50px;
 		float:left;
 		margin:0 10px;
 	}
@@ -105,11 +121,11 @@
 	<div class="userMainDiv">
 		<div id="userCartTop">
 			<ul>
-				<li>01 장바구니</li>
+				<li><img src="/gachi/img/icon_cart.png"/>장바구니</li>
 				<li>></li>
-				<li>02 주문/결제</li>
+				<li><img src="/gachi/img/icon_ordersheet.png"/>주문/결제</li>
 				<li>></li>
-				<li>03 주문완료</li>
+				<li><img src="/gachi/img/icon_check.png"/>주문완료</li>
 			</ul>
 		</div>
 		<hr style="background:#000"/>

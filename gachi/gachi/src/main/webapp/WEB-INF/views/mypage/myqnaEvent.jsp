@@ -61,10 +61,19 @@
 		font-weight:bold;
 		margin-right:10px;
 	}
-	#myqnaClass li:nth-child(2),#myqnaClass>li:nth-child(3){
+	#myqnaClass li:nth-child(2),
+	#myqnaClass>li:nth-child(3),
+	#myqnaClass>li:nth-child(4),
+	#myqnaClass>li:nth-child(5){
 		font-size:0.8em;
 	}
-	#myqnaClass li:nth-child(4){
+	#myqnaClass>li:nth-child(4) a{
+		color:#1b3da7;
+	}
+	#myqnaClass>li:nth-child(5) a{
+		color:#aaa;
+	}
+	#myqnaClass li:nth-child(6){
 		width:100%;
 		text-align:left;
 		padding:0 15px;
@@ -111,6 +120,8 @@
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
+				<li><a href="#">수정</a></li>
+				<li><a href="#">삭제</a></li>
 				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
 				<li>
 				<hr/>

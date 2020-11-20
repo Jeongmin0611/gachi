@@ -26,14 +26,24 @@
 		left:25%;
 		text-align:center;
 	}
+	#userLeaveOkContent>div{
+		margin:30px auto 0;
+		width:100px;
+		height:100px;
+		text-align:center;
+	}
+	#userLeaveOkContent>div img{
+		width:80%;
+	}
 	#userLeaveOkContent label{
 		width:100%;
 	}
-	#userLeaveOkContent label:first-child{
+	#userLeaveOkContent label:nth-child(2){
 		font-size:1.5em;
-		margin:50px 0;
+		margin:20px 0;
 	}
-	#userLeaveOkContent label:nth-child(3),#userLeaveOkContent label:nth-child(4){
+	#userLeaveOkContent label:nth-child(4),
+	#userLeaveOkContent label:nth-child(5){
 		margin:15px 0;
 	}
 	#userLeaveOkContent Button{
@@ -53,6 +63,9 @@
 			</ul>
 		</div>
 		<div id="userLeaveOkContent">
+			<div>
+				<img src="/gachi/img/icon_check.png"/>
+			</div>
 			<label>회원 탈퇴가 완료되었습니다.</label>
 			<hr/>
 			<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>

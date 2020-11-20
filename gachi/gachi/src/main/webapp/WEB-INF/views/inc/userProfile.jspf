@@ -20,17 +20,28 @@
 	#userProfile{
 		box-shadow:0px 0px 10px 1px #eee;
 		height:200px;
-		padding:5% 5% 0;
+		padding:5%;
 		margin-top:50px;	
+	}
+	#userProfile>div{
+		width:20%;
+		height:80%;
+		background-color:cyan;
 		overflow:visible;
+		float:left;
+		text-align:center;
+	}
+	#userProfile>div:first-child{
+		height:100px;
+		padding:2% 0;
 	}
 	/* 프사박스 */
 	#profileBox {
+		float:right;
 	    width: 80px;
 	    height: 80px; 
 	    border-radius: 30%;
 	    overflow: hidden;
-	    float:left;
 	    background-color:#e3eef6;
 	}
 	/* 프사 */
@@ -39,42 +50,22 @@
 	    height:100%;
 	    object-fit: cover;
 	}
-	#userProfile>div{
-		margin:auto 20px;
-	}
 	/* 닉네임 */
 	#userProfile>div:nth-child(2){
-		padding-left:5%;
-		width:25%;
-		line-height:80px;
-		float:left;
-		overflow:auto;
-		font-size:1.5em;
-		margin-left:0;
+		
+		font-size:1.2em;
 	}
 	/* 클래스 */
 	#userProfile>div:nth-child(3){
-		margin-left:50px;
-		width:15%;
 		line-height:50px;
-		float:left;
-		text-align:center;
-		overflow:auto;
 	}
 	/* 마일리지 */
 	#userProfile>div:nth-child(4){
-		width:15%;
 		line-height:50px;
-		overflow:auto;
-		text-align:center;
-		float:left;
 	}
 	/* 좋아요 */
 	#userProfile>div:last-child{
-		width:15%;
 		line-height:50px;
-		overflow:auto;
-		text-align:center;
 	}
 	/* 클래스, 마일리지, 좋아요 라벨 */
 	#userProfile>div:nth-child(3)>label, 
@@ -139,8 +130,10 @@
 </style>
 <div>
 	<div id="userProfile" class="cfont">
-		<div id="profileBox">
-			<img src="/gachi/img/usericon.png" id="profileIcon"/>
+		<div>
+			<div id="profileBox">
+				<img src="/gachi/img/icon_user.png" id="profileIcon"/>
+			</div>
 		</div>
 		<div>
 			<label><a href="/gachi/userInfo">김유미 님</a></label>

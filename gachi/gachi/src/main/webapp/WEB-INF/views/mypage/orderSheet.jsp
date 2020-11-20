@@ -26,6 +26,19 @@
 		overflow:auto;
 		margin:20px 50px 10px;
 	}
+	/* 로고사이즈 */
+	#orderSheetTop>ul>li img{
+		margin:0 5px;
+	}
+	#orderSheetTop>ul>li:first-child img{
+		width:30px;
+	}
+	#orderSheetTop>ul>li:nth-child(3) img{
+		width:22px;
+	}
+	#orderSheetTop>ul>li:nth-child(5) img{
+		width:25px;
+	}
 	#orderSheetTop li{
 		float:left;
 		margin:0 10px;
@@ -216,11 +229,11 @@
 <div class="container userMainDiv cfont" id="orderSheetContainer">
 	<div id="orderSheetTop">
 		<ul>
-			<li>01 장바구니</li>
+			<li><img src="/gachi/img/icon_cart.png"/>장바구니</li>
 			<li>></li>
-			<li>02 주문/결제</li>
+			<li><img src="/gachi/img/icon_ordersheet.png"/>주문/결제</li>
 			<li>></li>
-			<li>03 주문완료</li>
+			<li><img src="/gachi/img/icon_check.png"/>주문완료</li>
 		</ul>
 	</div>
 	<hr style="background:#000"/>
