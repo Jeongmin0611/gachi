@@ -746,9 +746,8 @@ $(function(){
 
 	<!-- 비밀번호 찾기 끝 -->
 	<!-- 비밀번호 찾기 2-->
-	<div id="pwdF2" class="join">
+	<div id="pwdF2" class="join" style="display:none">
 		<div id="pwdF2Form" class="col-xs-12 col-md-12">
-
 			<form>
 				<div>
 					<h1>비밀번호찾기</h1>
