@@ -13,6 +13,7 @@
 		box-shadow:0px 0px 10px 1px #eee;
 		padding:20px;
 		margin-bottom:50px;
+		overflow:auto;
 	}
 	
 	/************/
@@ -40,7 +41,7 @@
 	    object-fit: cover;
 	}
 	#userProfile>div{
-		margin:0 20px;
+		margin:auto 20px;
 	}
 	/* 닉네임 */
 	#userProfile>div:nth-child(2){
@@ -50,9 +51,11 @@
 		float:left;
 		overflow:auto;
 		font-size:1.5em;
+		margin-left:0;
 	}
 	/* 클래스 */
 	#userProfile>div:nth-child(3){
+		margin-left:50px;
 		width:15%;
 		line-height:50px;
 		float:left;
@@ -83,7 +86,7 @@
 	#userProfile>div:nth-child(3)>label:first-child, 
 	#userProfile>div:nth-child(4)>label:first-child,
 	#userProfile>div:last-child>label:first-child{
-		border-bottom:2px solid #ffccb6;
+		border-bottom:2px solid #e3eef6;
 	}
 	#userProfile>div:nth-child(3)>label:last-child, 
 	#userProfile>div:nth-child(4)>label:last-child,
@@ -141,7 +144,7 @@
 			<img src="/gachi/img/usericon.png" id="profileIcon"/>
 		</div>
 		<div>
-			<label><a href="#">김유미 님</a></label>
+			<label><a href="/gachi/userInfo">김유미 님</a></label>
 		</div>
 		<div>
 			<label>내 클래스</label>
@@ -159,10 +162,10 @@
 	<div id="userProfileNavi">
 		<ul>
 			<li class="userProfileHover"><a href="/gachi/mypage">결제내역</a></li>
-			<li class="userProfileHover"><a href="/gachi/userInfoEdit">회원정보</a></li>
+			<li class="userProfileHover"><a href="/gachi/userInfo">회원정보</a></li>
 			<li class="userProfileHover"><a href="/gachi/userCart">장바구니</a></li>
 			<li class="userProfileHover"><a href="/gachi/myclassList">내 학습표</a></li>
-			<li class="userProfileHover"><a href="/gachi/myqna">질문/문의</a></li>
+			<li class="userProfileHover"><a href="/gachi/myqnaClass">질문/문의</a></li>
 		</ul>
 	</div>
 </div>

@@ -1,94 +1,205 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	<style>
-	h1{font-family:'OSeongandHanEum';}
-	.a{
-		margin:auto;
-		width:100%;
-	}
-	.listMain{
-		float:left;
-	}
-	.mainClass ul{
-		overflow: auto;
-	}
-	.mainClass a{
-		width:4%;
-		
-	}
-	.lMeun1{
-		width:100%;
-		font-size:1.3em;
-		
-	}
-	.lMeun2{
-		float:right;
-		width:100%;
-	}
-	.lMeun2 a{
-		float:right;
-	}
-	.mainClass img{
-		width:350px;
-		margin:auto 10px;
-		height:250px;
-	}
-	.mainClass li{
-		margin-bottom:10px;
-	}
-	.mainClass{
-		margin:50px auto;
-	}
-	/*이미지 오버효과*/
-	.listMain img{
-max-width: 100%;
-  position: relative;
-  opacity: 1;	
-	}
-	.listMain:hover img{
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
-	
-	}
-	.listMain *{
- -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.45s ease-in-out;
-  transition: all 0.45s ease-in-out;
-  }
-	
-	</style>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ include file="../inc/top.jspf"%>
 <%@ include file="../inc/top2.jspf"%>
-<div class="container">
-<div class="mainClass">
-	<ul>
-		<li class="lMeun1">인기상품</li>
-		<li class="lMeun2"><a href="/gachi/storePage1">more</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/musicEx/musicEx01.png"/></div>음악	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/cookingEx/cookingEx01.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/artEx/artEx01.PNG"/></div>미술	작성자<br/>제목</a></li>
-	</ul>
-</div>
-<div class="mainClass">
-	<ul>
-		<li class="lMeun1">신규상품</li>
-		<li class="lMeun2"><a href="/gachi/storePage2">more</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/artEx/artEx02.PNG"/></div>미술	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/cookingEx/cookingEx02.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/craftsEx/craftsEx05.jpg"/></div>공예-창작	작성자<br/>제목</a></li>
-	</ul>
-</div>
-<div class="mainClass">
-	<ul>
-		<li class="lMeun1">추천상품</li>
-		<li class="lMeun2"><a href="/gachi/storePage3">more</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/cookingEx/cookingEx03.jpg"/></div>요리	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/artEx/artEx03.PNG"/></div>미술	작성자<br/>제목</a></li>
-		<li class="listMain"><div class="a"><a href="/gachi/classMain" style="text-decoration:none"><img src="img/craftsEx/craftsEx06.PNG"/></div>공예-창작	작성자<br/>제목</a></li>
-	</ul>
-</div>
-</div>
-<%@ include file="../inc/bottom.jspf"%>
+<style>
 
+
+/*======= 검색 ==========*/
+#CintroCreateSearch {
+	margin: 50px auto;
+	text-align: right;
+	width: 100%;
+}
+#CintroCreateSearch span{
+	float: left;
+}
+#CintroCreateSearch span a{
+	text-decoration: none;
+	color:black;
+}
+#createSearchTxt{
+	border: 0;
+	border-bottom: 1px solid black;
+	outline: none;
+}
+
+#CintroCreateSearch button {
+	background-color: white;
+	color: black;
+	border: 0;
+}
+
+#CintroCreateSearch button:focus {
+	outline: none;
+	color: #888;
+}
+/*======= 검색 ==========*/
+/*======= 스토어 리스트 ==========*/
+.homeClassListImg {/*이미지 사이즈 조절*/
+	width: 100%;
+	margin: 10px auto;
+	height: 250px;
+}
+
+.homeClassListTxt {
+	text-align: center;
+	overflow: auto;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.homeClassListTxt p {
+	margin: 0;
+}
+
+.homeClassListTxt p>span { /* 스토어 리스트 카테고리 */
+	width: 100%;
+	background-color: lightblue;
+	color: white;
+}
+
+/*a태그 설정*/
+.col-sm-4 a {
+	text-decoration: none;
+	color: black;
+}
+/*======= 스토어 리스트 ==========*/
+/* 이미지 오버 효과 */
+.row img {
+	max-width: 100%;
+	position: relative;
+	opacity: 1;
+}
+
+.row img:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+.row * {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.45s ease-in-out;
+	transition: all 0.45s ease-in-out;
+}
+
+/* 이미지 오버 효과 끝 */
+.pagination{
+	margin:50px 0;
+}
+
+
+</style>
+<script>
+$(".hover").mouseleave(
+	function () {
+		$(this).removeClass("hover");
+	}
+);
+</script>
+
+<div class="container cfont">
+	<!-- 검색 -->
+	<div id="CintroCreateSearch">
+	<span>
+		<a href="#"  style="font-weight: bold;">전체</a> &nbsp; <a href="#">공예/창작</a> &nbsp; 
+		<a href="#">요리</a> &nbsp; <a href="#">미술</a> &nbsp; 
+		<a href="#">음악</a> &nbsp; <a href="#">라이프스타일</a> &nbsp; 
+		<a href="#">운동</a> &nbsp; <a href="#">사진/영상</a> &nbsp; 
+	</span>
+	<select name="introCreateSelect1">
+		<option value="Iall">전체</option>
+		<option value="Inew">최신순</option>
+		<option value="Ipopular">인기순</option>
+	</select>
+		
+		<input type="text" name="createSearchTxt" id="createSearchTxt" />
+		<button name="createSearchBtn">검색하기</button>
+	</div>
+
+	<!-- 리스트 -->
+	<div class="row">
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx11.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx13.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx14.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx02.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx03.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx06.PNG" class="homeClassListImg"/></a><br/>
+			<div class="homeClassListTxt">
+				<p><span>공예/창작</span></p>
+				<a href="/gachi/classMain">상품명</a>
+			</div>				
+		</div>
+	</div>
+	
+	<!-- 페이징 -->
+	<ul class="pagination justify-content-center" id="mypageMainPage">
+		<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#">4</a></li>
+		<li class="page-item"><a class="page-link" href="#">5</a></li>
+		<li class="page-item"><a class="page-link" href="#">Next</a></li>
+	</ul>
+
+</div>
+
+
+<%@ include file="../inc/bottom.jspf"%>

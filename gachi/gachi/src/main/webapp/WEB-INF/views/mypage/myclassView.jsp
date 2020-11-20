@@ -11,7 +11,7 @@
 	#myclassView>li{
 		height:30px;
 		overflow:hidden;
-		margin:20px 10px;
+		margin:15px 20px;
 		line-height:25px;
 	}
 	#myclassView>li:first-child{
@@ -19,30 +19,39 @@
 		float:left;
 	}
 	#myclassView>li:nth-child(2){
-		float:left;
-	}
-	#myclassView>li:nth-child(3){
 		font-size:1.8em;
 		margin-left:0;
+	}
+	#myclassView>li:nth-child(3){
+		
 	}
 	#myclassView>li:nth-child(4){
 		float:clear;
 	}
-	#myclassView>li:nth-child(7){
-		height:50px;
+	#myclassView>li:nth-child(5){
+		float:left;
 	}
-	#myclassView>li:nth-child(7)>button{
+	#myclassView>li:nth-child(8){
+		height:40px;
+		margin-top:30px;
+	}
+	#myclassView>li:nth-child(8)>button{
 		background-color:#ABCEE3;
 	}
 	#myclassView>li:last-child{
-		height:50px;
+		height:40px;
+		magrin:0;
+		padding:0;
 	}
 	#myclassView>li:last-child>button{
-		width:50%;
+		width:49%;
+		background-color:#eee;
+		color:#000;
 		margin:0;
 	}
 	#myclassView>li:last-child>button:first-child{
 		float:left;
+		margin-right:5px;
 	}
 
 	/* 클래스썸네일 */
@@ -57,7 +66,7 @@
 		list-style-type:decimal;
 	}
 	#myclassVideoLst label{
-		font-size:1.5em;
+		font-size:1.3em;
 	}
 	#myclassVideoLst ul{
 		overflow:auto;
@@ -67,7 +76,7 @@
 		padding:0 20px;
 		color:gray;
 		width:100%;
-		background-color:#F4BFA9;
+		background-color:#fbdfd3;
 	}
 	#myclassVideoLst ol>li{
 		line-height:20px;
@@ -92,7 +101,7 @@
 		overflow:auto;
 	}
 	#myclassReview>label{
-		font-size:1.5em;
+		font-size:1.3em;
 	}	
 	#myclassReview>button{
 		float:right;
@@ -111,7 +120,8 @@
 		font-weight:bold;
 		color:gray;
 	}
-	#myclassReview li:nth-child(3),#myclassReview li:nth-child(4){
+	#myclassReview li:nth-child(3),
+	#myclassReview li:nth-child(4){
 		font-size:0.8em;
 	}
 	#myclassReview li:last-child{
@@ -137,10 +147,21 @@
 		padding:15px;
 	}
 	#myclassQna>label{
-		font-size:1.5em;
+		font-size:1.3em;
 	}
-	#myclassQna>button{
+	#myclassQnaSearch{
 		float:right;
+	}
+	#myclassQnaSearch input{
+		border:none;
+		outline:none;
+		border-bottom:1px solid #000;
+	}
+	#myclassQnaSearch button:nth-child(2){
+		background-color:#eee;
+		color:#000;
+	}
+	#myclassQnaFrm{
 		background-color:#ABCEE3;
 	}	
 	#myclassQna li{
@@ -161,7 +182,8 @@
 		font-weight:bold;
 		margin-right:10px;
 	}
-	#myclassQna li:nth-child(2),#myclassQna li:nth-child(3){
+	#myclassQna li:nth-child(2),
+	#myclassQna li:nth-child(3){
 		font-size:0.8em;
 	}
 	#myclassQna li:nth-child(4){
@@ -189,14 +211,18 @@
 	}
 	
 	/* 모달 */
-	#myclassModalR, #myclassModalQ{
+	#myclassModalR, 
+	#myclassModalQ{
 		display:none;
 		position:absolute;
 		width:100%;
 		height:100%;
 		z-index:1;
 	}
-	#myclassModalR input, #myclassModalR textarea, #myclassModalQ input, #myclassModalQ textarea{
+	#myclassModalR input, 
+	#myclassModalR textarea, 
+	#myclassModalQ input, 
+	#myclassModalQ textarea{
 		border:none;
 		border-bottom:2px solid #ABCEE3;
 		text-align:left;
@@ -214,13 +240,17 @@
 	.myclassModal_content>div{
 		padding:5px 10px;
 	}
+	.myclassModal_content>div:nth-child(2){
+		float:left;
+	}
 	.myclassModal_content>label{
 		width:100%;
 		padding:10px;
-		font-weight:bold;
+		font-weight:;
 		background-color:#e3eef6;
 		text-align:center;
-		color:gray;
+		color:;
+		font-size:1.3em;
 	}
 	.myclassModal_content input{
 		width:100%;
@@ -252,6 +282,7 @@
 	
 </style>
 <script>
+
 	//스크롤이동
 	function moveToReview(){
 		var locaR = document.querySelector("#myclassReview").offsetTop;
@@ -289,11 +320,20 @@
 	       $("#myclassModalQ").fadeOut();
 	    });  
 	    
-	    $("#classRating").raty({
+	    //평점에 별넣기 https://www.wbotelhos.com/raty 참고
+	    $(".classRating").raty({
 	    		score:5,
-	    		path:"img/images",
+	    		path:"img/starImages",
 	    		half:true,
-	    		width:"100%"});
+	    		width:"100%"
+	    });
+	    $(".myclassStars").raty({
+    		score:5,
+    		path:"img/starImages",
+    		half:true,
+    		width:"100%",
+    		readOnly:true
+   		});
 	    
 	});
 
@@ -303,20 +343,20 @@
 	<div class="userMainDiv">
 		<ul id="myclassView">
 			<li><img src="/gachi/img/test_image.jpg"/></li>
-			<li><label class="badge badge-info">공예/창작</label></li>
-			<li><label>카모마일 프랑스 자수</label></li>
+			<li><label class="badge badge-info">공예/창작</label><label>카모마일 프랑스 자수</label></li>
 			<li>크리에이터명 <a href="#">홍길동</a></li>
 			<li><label>진도율 : 0.00%</label></li>
 			<li><label>기한 : 20.11.01 ~ 21.01.31</label></li>
+			<li><progress value="50" max="100"></progress></li>
 			<li><button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></li>
 			<li>
-				<button type="button" class="btn btn-outline-primary btn-block" onclick="moveToReview()">수강후기</button>
-				<button type="button" class="btn btn-outline-primary btn-block" onclick="moveToQna()">질문&답변</button>
+				<button type="button" class="btn btn-outline-light btn-block" onclick="moveToReview()">수강후기</button>
+				<button type="button" class="btn btn-outline-light btn-block" onclick="moveToQna()">질문&답변</button>
 			</li>
 		</ul>
 		<div id="myclassVideoLst">
 			<label>클래스 목차</label>
-			<hr/>
+			<hr style="background:#000"/>
 			<ul>
 				<li>
 					<label>프랑스 자수 클래스 소개</label>
@@ -362,9 +402,9 @@
 		<div id="myclassReview">
 			<label>수강평</label>
 			<button type="button" class="btn btn-outline-light" id="myclassReviewFrm">수강평작성</button>
-			<hr/>
+			<hr style="background:#000"/>
 			<ul>
-				<li>★★★★★</li>
+				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
@@ -372,7 +412,7 @@
 			</ul>
 			<hr/>
 			<ul>
-				<li>★★★★★</li>
+				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
@@ -380,7 +420,7 @@
 			</ul>
 			<hr/>
 			<ul>
-				<li>★★★★★</li>
+				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
@@ -388,7 +428,7 @@
 			</ul>
 			<hr/>
 			<ul>
-				<li>★★★★★</li>
+				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
@@ -396,7 +436,7 @@
 			</ul>
 			<hr/>
 			<ul>
-				<li>★★★★★</li>
+				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
@@ -415,8 +455,12 @@
 		</ul>
 		<div id="myclassQna">
 			<label>질문&답변</label>
-			<button type="button" class="btn btn-outline-light" id="myclassQnaFrm">질문작성</button>
-			<hr/>
+			<div id="myclassQnaSearch">
+				<input type="text" name="searchWord"/>
+				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
+				<button type="button" class="btn btn-outline-light" id="myclassQnaFrm">질문작성</button>
+			</div>
+			<hr style="background:#000"/>
 			<ul>
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
@@ -477,7 +521,8 @@
 <div id="myclassModalR" class="cfont">
 	<div class="myclassModal_content">
 		<label>수강평작성</label>
-		<div id="classRating"></div>
+		<div>만족도 : </div>
+		<div class="classRating"></div>
 		<input type="text" placeholder="제목"/>
 		<textarea placeholder="내용을 입력해주세요."></textarea>
 		<button type="button" class="btn btn-outline-light btn-block" id="myclassReviewWrite">등록</button>
