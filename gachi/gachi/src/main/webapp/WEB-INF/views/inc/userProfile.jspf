@@ -13,7 +13,6 @@
 		box-shadow:0px 0px 10px 1px #eee;
 		padding:20px;
 		margin-bottom:50px;
-		overflow:auto;
 	}
 	
 	/************/
@@ -21,9 +20,9 @@
 	#userProfile{
 		box-shadow:0px 0px 10px 1px #eee;
 		height:200px;
-		padding:50px 125px 0;
+		padding:5% 5% 0;
 		margin-top:50px;	
-		overflow:auto;
+		overflow:visible;
 	}
 	/* 프사박스 */
 	#profileBox {
