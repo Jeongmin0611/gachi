@@ -4,6 +4,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 	// AOS
+
 	var myAOS = function() {
 		AOS.init({
 			easing : 'ease-out-back',
@@ -11,6 +12,20 @@
 		});
 	}
 	myAOS();
+
+	$(()=>{
+		$("#headerDiv").css("display","none");
+		
+		$('.class-img-list').each(function(){
+			$(this).mouseenter(function(){
+				$(this).css('z-index','10');
+			});
+			$(this).mouseleave(function(){
+				$(this).css('z-index','2');
+			});
+		});//each
+	});
+	
 	//스크롤이동
 	function moveToCreateClass() {
 		var locaR = document.querySelector("#guide_scroll_Classcreate").offsetTop;
@@ -33,9 +48,19 @@
 			behavior : 'smooth'
 		});
 	}
+	$('.class-img-list').each(function(){
+		$(this).mouseenter(function(){
+			$(this).css('z-index','10');
+		});
+		$(this).mouseleave(function(){
+			$(this).css('z-index','2');
+		});
+	});//each
+	
 	$(()=>{
 		$("#headerDiv").css("display","none");
 	});
+
 </script>	
 
 
