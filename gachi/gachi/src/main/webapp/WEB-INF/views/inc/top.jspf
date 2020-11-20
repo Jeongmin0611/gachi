@@ -395,7 +395,7 @@ a {
 .dropdown-menu{
     -webkit-box-shadow: none;
     box-shadow:none;
-    background-color:rgb(255,255,255,0.7);
+    background-color:rgb(255,255,255);
 }
 .dropdown-menu a:hover:nth-child(7n+1), .dropdown-menu a.active:nth-child(7n+1) {
   border-bottom: #C4E17F 3px solid;
