@@ -52,38 +52,31 @@
 	#userInfoEditFormLst li:nth-child(2),
 	#userInfoEditFormLst li:nth-child(4),
 	#userInfoEditFormLst li:nth-child(6),
-	#userInfoEditFormLst li:nth-child(16){	
+	#userInfoEditFormLst li:nth-child(12){	
 		border:none;
 	}
-	#userInfoEditFormLst li:nth-child(14)>input {
+	#userInfoEditFormLst li:nth-child(10)>input {
 		width:15%;
 		margin:0 5px;
 	}
-	#userInfoEditFormLst li:nth-child(14)>button {
+	#userInfoEditFormLst li:nth-child(10)>button {
 		width:15%;
 	}
-	#userInfoEditFormLst li:nth-child(16)>input:first-child{
+	#userInfoEditFormLst li:nth-child(12)>input:first-child{
 		width:15%;
 		float:left;
-		border:none;
-		outline:none;
 	}
-	#userInfoEditFormLst li:nth-child(16)>input:last-child{
+	#userInfoEditFormLst li:nth-child(12)>input:last-child{
 		width:70%;
-		border:none;
-		outline:none;
 	}
-	#userInfoEditFormLst li:nth-child(18)>input{
+	#userInfoEditFormLst li:nth-child(14)>input{
 		width:90%;
 	}
 	#userInfoEditFormLst input{
 		width:70%;
 		text-align:center;
 		border:none;
-		border-bottom:1px solid #ddd;
-	}
-	#userInfoEditFormLst input:focus{
-		outline:2px solid #fde9e2;
+		outline:none;
 	}
 	#userInfoEditFormContent button{
 		background-color:#abcee3;
@@ -95,13 +88,13 @@
 	<div class="userMainDiv">
 		<div id="userInfoEditFormTop">
 			<ul>
-				<li><a href="/gachi/userInfoEdit"><b>회원정보수정</b></a></li>
+				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
 				<li>|</li>
 				<li><a href="/gachi/userLeave">회원탈퇴</a></li>
 			</ul>
 		</div>
 		<div id="userInfoEditFormContent">
-			<label>회원정보수정</label>
+			<label>회원정보확인</label>
 			<hr style="background:#000"/>
 			<ul id="userInfoEditFormLst">
 				<li>이름</li>
@@ -110,17 +103,13 @@
 				<li>1990.12.31</li>
 				<li>아이디</li>
 				<li>userid@bitcamp.com</li>
-				<li>변경할 비밀번호</li>
-				<li><input type="password" name="userpwd"/></li>
-				<li>비밀번호 확인</li>
-				<li><input type="password"/></li>
 				<li>닉네임</li>
-				<li><input type="text" name="nickname" value="김유미"/></li>
+				<li><input type="text" name="nickname" value="김유미" readonly/></li>
 				<li>연락처</li>
 				<li>
-					<input type="text" name="tel" value="010"/>
-					<input type="text" name="tel" value="9999"/>
-					<input type="text" name="tel" value="8888"/>
+					<input type="text" name="tel" value="010" readonly/>
+					<input type="text" name="tel" value="9999" readonly/>
+					<input type="text" name="tel" value="8888" readonly/>
 					<button type="button" class="btn btn-outline-light btn-sm">인증</button>
 				</li>
 				<li>주소</li>
@@ -130,10 +119,10 @@
 					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
 				</li>
 				<li>상세주소</li>
-				<li><input type="text" name="addrDetail" value="11111112222222"/></li>
+				<li><input type="text" name="addrDetail" value="11111112222222" readonly/></li>
 				
 			</ul>
-			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfo'">수정완료</button>
+			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEdit'">수정하기</button>
 		</div>
 	</div>
 </div>

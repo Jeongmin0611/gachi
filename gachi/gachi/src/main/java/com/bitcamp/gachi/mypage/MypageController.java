@@ -9,6 +9,10 @@ public class MypageController {
 	public String Mypage() {
 		return "mypage/mypageMain";
 	}
+	@RequestMapping("/userInfo")
+	public String userInfo() {
+		return "mypage/userInfo";
+	}
 	@RequestMapping("/userInfoEdit")
 	public String userInfoEdit() {
 		return "mypage/userInfoEdit";
@@ -61,8 +65,20 @@ public class MypageController {
 	public String userWishList() {
 		return "mypage/userWishList";
 	}
-	@RequestMapping("/myqna")
-	public String myqna() {
-		return "mypage/myqna";
+	@RequestMapping("/myqnaClass")
+	public String myqnaClass() {
+		return "mypage/myqnaClass";
+	}
+	@RequestMapping("/myqnaStore")
+	public String myqnaStore() {
+		return "mypage/myqnaStore";
+	}
+	@RequestMapping("/myqna1on1")
+	public String myqna1on1() {
+		return "mypage/myqna1on1";
+	}
+	@RequestMapping("/myqnaEvent")
+	public String myqnaEvent() {
+		return "mypage/myqnaEvent";
 	}
 }

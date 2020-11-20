@@ -8,11 +8,16 @@
 	/* 상단 */
 	/* 라디오, 버튼(이전달,다음달), 날짜, 조회 */
 	#mypageMainTop{
-		margin:0 20px;
+		margin:20px;
 		text-align:right;
 	}
 	#mypageMainTop label{
 		margin:5px;
+	}
+	#mypagePrev,
+	#mypageNext{
+		background-color:#eee;
+		color:#000;
 	}
 	#mypageMainTopFrm>button:last-child{
 		margin:5px;
@@ -192,11 +197,11 @@
 			<input type="radio" name="option"/><label>전체</label>
 			<input type="radio" name="option"/><label>상품</label>
 			<input type="radio" name="option"/><label>클래스</label>
-			<button type="button" class="btn btn-outline-dark btn-sm">◀</button><!-- 이전달 -->
+			<button type="button" class="btn btn-outline-light btn-sm" id="mypagePrev">◀</button><!-- 이전달 -->
 			<input type="date" id="mypageMainDate1"/>
 			-
 			<input type="date" id="mypageMainDate2"/>
-			<button type="button" class="btn btn-outline-dark btn-sm">▶</button><!-- 다음달 -->
+			<button type="button" class="btn btn-outline-light btn-sm" id="mypageNext">▶</button><!-- 다음달 -->
 			<button type="button" class="btn btn-outline-light btn-sm">조회</button>
 		</form>
 		</div>

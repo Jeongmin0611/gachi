@@ -24,13 +24,11 @@
 	/*01 장바구니 > 02 주문/결제 > 03 주문완료*/
 	#orderConfirmedTop{
 		overflow:auto;
-		border:3px solid #ABCEE3;
-		margin-bottom:20px;
+		margin:20px 50px 10px;
 	}
 	#orderConfirmedTop li{
-		color:#ABCEE3;
 		float:left;
-		margin:10px;
+		margin:0 10px;
 	}
 	#orderConfirmedTop li:nth-child(5){
 		font-weight:bold;
@@ -38,15 +36,15 @@
 	#orderConfirmedTop li:not(:nth-child(5)){
 		color:gray;
 	}
-	#orderConfirmedContent>label{
-		width:100%;
-		font-size:2em;
-		text-align:center;
-		margin:50px 0;
-	}
 	
 	/**************/
 	/* 내용 */
+	#orderConfirmedContent>label{
+		width:100%;
+		text-align:center;
+		margin:20px 0 100px;
+		font-size:1.5em;
+	}
 	/* 주문내역 리스트 */
 	#orderConfirmedLst{
 		overflow:auto;
@@ -93,6 +91,7 @@
 			<li>03 주문완료</li>
 		</ul>
 	</div>
+	<hr style="background:#000"/>
 	<div id="orderConfirmedContent">
 		<label>주문이 완료되었습니다.</label>
 		<ul id="orderConfirmedLst">

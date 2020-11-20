@@ -112,7 +112,7 @@
 				<li>03 주문완료</li>
 			</ul>
 		</div>
-		<hr/>
+		<hr style="background:#000"/>
 		<div id="userCartContent">
 			<ul id="userCartLstTtl">
 				<li><input type="checkbox" name="selectAll" checked/></li>

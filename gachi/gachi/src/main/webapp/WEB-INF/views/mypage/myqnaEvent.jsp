@@ -17,18 +17,24 @@
 	#myqnaTop li:nth-child(2n){
 		width:3%;
 	}
-	#myqnaTop li:first-child{
+	#myqnaTop li:nth-child(7){
 		font-weight:bold;
 	}
 	
 	/* 내용 */
 	#myqnaContent>div:first-child{
-		margin:50px 0;
+		text-align:right;
+		width:100%;
+		overflow:auto;
+		height:50px;
 	}
 	#myqnaContent>label{
 		margin:10px 30px;
 		padding:5px;
-		background-color:#eee;
+		background-color:#fde9e2;
+	}
+	#myqnaContent>label a:hover{
+		font-weight:bold;
 	}
 	/* 클래스 질문답변 */
 	#myqnaClass{
@@ -59,12 +65,6 @@
 		font-size:0.8em;
 	}
 	#myqnaClass li:nth-child(4){
-		float:right;
-		color:#ABCEE3;
-		font-weight:bold;
-		font-size:1.5em;
-	}
-	#myqnaClass li:nth-child(5){
 		width:100%;
 		text-align:left;
 		padding:0 15px;
@@ -90,32 +90,27 @@
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
 		<ul id="myqnaTop">
-			<li><a href="/gachi/myqna">클래스</a></li>
+			<li><a href="/gachi/myqnaClass">클래스</a></li>
 			<li>|</li>
-			<li><a href="#">스토어</a></li>
+			<li><a href="/gachi/myqnaStore">스토어</a></li>
 			<li>|</li>
-			<li><a href="#">1:1문의</a></li>
+			<li><a href="/gachi/myqna1on1">1:1문의</a></li>
 			<li>|</li>
-			<li><a href="#">이벤트</a></li>
+			<li><a href="/gachi/myqnaEvent">이벤트</a></li>
 		</ul>
 		<div id="myqnaContent">
 			<div>
-				<select name="searchKeyClassName">
-					<option value="클래스명">클래스명</option>
-					<option value="카모마일 프랑스 자수">카모마일 프랑스 자수</option>
-				</select>
-				<select name="searchKeyQnaStatus">
-					<option value="답변상태">답변상태</option>
-					<option value="답변완료">답변완료</option>
-					<option value="미답변">미답변</option>
+				<select>
+					<option>전체</option>
+					<option>진행중</option>
+					<option>종료</option>
 				</select>
 			</div>
-			<label><a href="#">카모마일 프랑스 자수</a></label>
+			<label><a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원</a></label>
 			<ul id="myqnaClass">
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
-				<li>답변완료</li>
 				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
 				<li>
 				<hr/>

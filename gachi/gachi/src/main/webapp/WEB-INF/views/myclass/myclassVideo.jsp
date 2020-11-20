@@ -12,6 +12,9 @@
 
 	/* 클래스 수강하기(동영상 창) */
 	
+	.cfont{
+		font-family:'OSeongandHanEum';
+	}
  	a:link, a:visited, a:hover{
  		text-decoration:none;
  		color:#000;
@@ -50,7 +53,7 @@
 		height:100%;
 		margin:0;
 		width:15%;
-		background-color:#F4BFA9;
+		background-color:#b8dbf0;
 		float:left;
 		text-align:center;
 	}
@@ -58,7 +61,7 @@
 		height:100%;
 		margin:0;
 		width:85%;
-		background-color:#eee;
+		background-color:#e3eef6;
 		float:left;
 		overflow:hidden;
 		padding-left:20px;
@@ -71,13 +74,16 @@
 		font-size:1em;
 		padding:0;
 	}
-	#videoLstOpen{display:none;}
+	#videoLstOpen{
+		display:none;
+	}
 	
 	/* 메인창 - 영상재생창 */
 	#myclassVideoView{
 		padding:10px;
 		height:85%;
 		overflow:hidden;
+		background-color:#f1f7fa;
 	}
 	#myclassVideoView img{
 		width:100%;
@@ -88,11 +94,12 @@
 	/* 메인창 하단 - 버튼 */
 	#myclassVideoBtm{
 		height:7.5%;
-		background-color:#F4BFA9;
+		background-color:#f1f7fa;
 		text-align:center;
 	}
 	#myclassVideoBtm>button{
 		margin:5px 10px;
+		background-color:#b8dbf0;
 	}
 	
 	/****************/
@@ -104,27 +111,27 @@
 		border-left:1px solid gray;
 		overflow-x:hidden;
 	}
-	#myclassVideoLst>label:first-child{
-		font-size:1.5em;
+	#myclassVideoLst>label{
+		font-size:1.3em;
+		margin:10px 20px 0;
+	}
+	#myclassVideoLst>ul:nth-child(3)>li{
 		margin:10px 20px;
 	}
-	#myclassVideoLst>label:nth-child(3){
+	#myclassVideoLst>ul:nth-child(3)>li:nth-child(1){
 		width:100%;
-		font-size:1.5em;
+		font-size:1.3em;
 		margin:10px 20px;
 	}
-	#myclassVideoLst>label:nth-child(4){
+	#myclassVideoLst>ul:nth-child(3)>li:nth-child(2){
 		width:100%;
 		margin-left:20px;
 	}
-	#myclassVideoLst>label:nth-child(5){
-		margin-left:20px;
-	}
-	#myclassVideoLst>ul>li>label{
+	#myclassVideoLst>ul:last-child>li>label{
 		line-height:40px;
 		padding:0 20px;
 		width:100%;
-		background-color:#eee;
+		background-color:#fde9e2;
 	}
 	#myclassVideoLst ol>li{
 		line-height:20px;
@@ -158,6 +165,7 @@
 </script>
 </head>
 <body>
+<div class="cfont">
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
 			<div><a href="/gachi/myclassView">내 학습표</a></div>
@@ -177,11 +185,13 @@
 	</div>
 	<div id="myclassVideoLst">
 		<label>목차</label>
-		<label>카모마일 프랑스 자수</label>
-		<label>수강기한 : 20.11.01 ~ 21.01.31</label>
-		<label>진도율 : 0.00%</label>
-		<label>수강시간 : 0분</label>
-		<hr/>
+		<hr style="background:#000"/>
+		<ul>
+			<li>카모마일 프랑스 자수</li>
+			<li>수강기한 : 20.11.01 ~ 21.01.31</li>
+			<li>진도율 : 0.00%</li>
+			<li>수강시간 : 0분</li>
+		</ul>
 		<ul>
 			<li>
 				<label>프랑스 자수 클래스 소개</label>
@@ -223,5 +233,6 @@
 			</li>
 		</ul>
 	</div>
+</div>
 </body>
 </html>

@@ -45,12 +45,11 @@
 	#userInfoEditLst li:nth-child(2n){
 		width:70%;
 	}
-	#userInfoEditLst li:last-child{
-		border-bottom:1px solid #ddd;
-	}
 	#infoEditUserpwd{
-		width:100%;
+		width:70%;
 		border:none;
+		outline:none;
+		border-bottom:1px solid #ddd;
 	}
 	#userInfoEditContent button{
 		background-color:#ABCEE3;

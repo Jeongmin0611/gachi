@@ -46,12 +46,15 @@
 	#userLeaveChkLst li:nth-child(2n){
 		width:70%;
 	}
-	#userLeaveChkLst li:last-child{
+	#leaveUserpwd{
+		width:70%;
+		border:none;
+		outline:none;
 		border-bottom:1px solid #ddd;
 	}
-	#userLeaveChkLst input{
-		width:100%;
-		border:none;
+	#userLeaveChkContent button{
+		background-color:#eee;
+		color:#000;
 	}
 	
 </style>
@@ -72,9 +75,9 @@
 				<li>아이디</li>
 				<li>userid@bitcamp.com</li>
 				<li>비밀번호</li>
-				<li><input type="password" name="userpwd"/></li>
+				<li><input type="password" name="userpwd" id="leaveUserpwd"/></li>
 			</ul>
-			<button type="button" class="btn btn-outline-dark btn-block" onclick="location.href='/gachi/userLeaveOk'">회원탈퇴</button>
+			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userLeaveOk'">회원탈퇴</button>
 		</div>
 	</div>
 </div>

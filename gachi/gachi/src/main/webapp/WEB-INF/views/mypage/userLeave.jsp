@@ -100,7 +100,7 @@
 				</li>
 			</ul>
 			<div>
-				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/mypage'">탈퇴취소</button>
+				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/userInfo'">탈퇴취소</button>
 				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/userLeaveChk'">다음</button>
 			</div>
 		</div>
