@@ -23,8 +23,7 @@
 	min-height: 500px;
 	overflow:auto;
 	text-align:center;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding: 20px;
 	width: 100%;
 }
 #eventDetailContent img{
@@ -89,7 +88,7 @@
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				<img src="/gachi/img/event_sample.png"/>
+				<img src="/gachi/img/event_sample.png"/><br/>
 			</div>
 		</div>
 		

@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-.container {
-	margin-top: 40px;
-}
 
+/* 크리에이터 소개 ul*/
 #createDetailSub1 {
 	width: 20%;
 	background: #FCE8E6;
@@ -15,13 +13,14 @@
 }
 #createDetailSub1>li>img{
 	margin: 10px;
- 	width: 100px;
+ 	width: 100%;
 }
 
 #createDetailSub1+div {
 	background-color: #F2F2F2;
 	height: 100vh;
 }
+/* 크리에이터 소개 ul 끝*/
 /* 개설한 클래스 */
 #createClass{
 	clear:left;
@@ -44,7 +43,7 @@
 </style>
 <div class="container cfont">
 	<div id="createDetailDiv">
-		<ul id="createDetailSub1">
+		<ul id="createDetailSub1" class="col-sm-12">
 			<li><img src="/gachi/img/client.png" /></li>
 			<li>크리에이트 명</li>
 			<li><a href="#">create@instagram</a></li>
@@ -57,7 +56,7 @@
 	<!-- 개설한 클래스 -->
 	<div id="createClass">
 		<h4>개설한 클래스</h4>
-		<ul>
+		<ul class="col-sm">
 			<li>&nbsp;</li>
 			<li>클래스명</li>
 			<li>가격</li>

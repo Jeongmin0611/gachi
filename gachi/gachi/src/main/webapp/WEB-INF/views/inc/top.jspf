@@ -622,7 +622,7 @@ $(function(){
 				href="#">회원가입</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/gachi/serviceCenterBoard">고객센터</a></li>	
-  </ul>
+  		</ul>
 	  </div>
 </nav>
 	<!-- 메뉴 끝 -->
