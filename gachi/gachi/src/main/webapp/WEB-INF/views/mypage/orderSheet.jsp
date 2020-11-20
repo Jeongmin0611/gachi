@@ -24,13 +24,11 @@
 	/* 01 장바구니 > 02 주문/결제 > 03 주문완료 */
 	#orderSheetTop{
 		overflow:auto;
-		border:3px solid #ABCEE3;
-		margin-bottom:20px;
+		margin:20px 50px 10px;
 	}
 	#orderSheetTop li{
-		color:#ABCEE3;
 		float:left;
-		margin:10px;
+		margin:0 10px;
 	}
 	#orderSheetTop li:nth-child(3){
 		font-weight:bold;
@@ -38,11 +36,15 @@
 	#orderSheetTop li:not(:nth-child(3)){
 		color:gray;
 	}
+
 	
 	/**************/
 	/* 내용 */
 	#orderSheetContent{
 		margin-bottom:20px;
+	}
+	#orderSheetContent>label{
+		margin-left:20px;
 	}
 	
 	/* 주문신청서 내역 제목 */
@@ -221,6 +223,7 @@
 			<li>03 주문완료</li>
 		</ul>
 	</div>
+	<hr style="background:#000"/>
 	<div id="orderSheetContent">
 		<label>주문내역</label>
 		<hr style="background:#000"/>
