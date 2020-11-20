@@ -9,7 +9,7 @@
 		margin:10px 50px 40px;
 	}
 	#myclassView>li{
-		width:40%;
+		width:45%;
 		float:left;
 		height:30px;
 		overflow:hidden;
@@ -18,7 +18,11 @@
 	}
 	#myclassView>li:first-child{
 		height:300px;
-		float:left;
+	}
+	#myclassView>li:first-child img{
+		width:100%;
+		height:100%;
+		object-fit: cover;
 	}
 	#myclassView>li:nth-child(2){
 		margin-top:20px;
@@ -41,7 +45,6 @@
 	}
 	#myclassView>li:nth-child(7){
 		height:40px;
-		margin-top:30px;	
 	}
 	#myclassView>li:nth-child(7)>button{
 		background-color:#ABCEE3;
@@ -224,7 +227,7 @@
 		display:none;
 		position:absolute;
 		width:100%;
-		height:100%;
+		height:100vh;
 		z-index:1;
 	}
 	#myclassModalR input, 
@@ -335,14 +338,16 @@
 	    		score:5,
 	    		path:"img/starImages",
 	    		half:true,
-	    		width:"100%"
+	    		width:"100%",
+	    		space:false
 	    });
 	    $(".myclassStars").raty({
     		score:5,
     		path:"img/starImages",
     		half:true,
     		width:"100%",
-    		readOnly:true
+    		readOnly:true,
+    		space:false
    		});
 	    
 	});

@@ -318,7 +318,7 @@
 <div id="mypageModal" class="cfont">
 	<div class="mypageModal_content">
 		<div>
-			<img src="/gachi/img/delivery_icon.png">
+			<img src="/gachi/img/icon_delivery.png">
 		</div>
 		<div>상품이 <label>배송진행중</label> 상태입니다.</div>
 		<label>송장정보</label>
