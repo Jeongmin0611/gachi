@@ -66,12 +66,10 @@
 		width:15%;
 		float:left;
 		border:none;
-		outline:none;
 	}
 	#userInfoEditFormLst li:nth-child(16)>input:last-child{
 		width:70%;
 		border:none;
-		outline:none;
 	}
 	#userInfoEditFormLst li:nth-child(18)>input{
 		width:90%;
@@ -81,9 +79,7 @@
 		text-align:center;
 		border:none;
 		border-bottom:1px solid #ddd;
-	}
-	#userInfoEditFormLst input:focus{
-		outline:2px solid #fde9e2;
+		outline:none;
 	}
 	#userInfoEditFormContent button{
 		background-color:#abcee3;

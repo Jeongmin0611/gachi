@@ -56,6 +56,10 @@
 	#orderSheetContent{
 		margin-bottom:20px;
 	}
+	#orderSheetContent input,
+	#orderSheetContent textarea{
+		outline:none;
+	}
 	#orderSheetContent>label{
 		margin-left:20px;
 	}
@@ -118,9 +122,11 @@
 	#orderSheetUserInfo li:nth-child(8)>input:first-child{
 		width:15%;
 		padding:0;
+		border:none;
 	}
 	#orderSheetUserInfo li:nth-child(8)>input:last-child{
 		width:70%;
+		border:none;
 	}
 	#orderSheetUserInfo li:nth-child(10)>input{
 		width:100%;

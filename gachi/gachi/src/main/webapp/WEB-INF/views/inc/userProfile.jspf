@@ -20,20 +20,20 @@
 	#userProfile{
 		box-shadow:0px 0px 10px 1px #eee;
 		height:200px;
-		padding:5%;
+		padding:3%;
 		margin-top:50px;	
 	}
 	#userProfile>div{
 		width:20%;
-		height:80%;
-		background-color:cyan;
-		overflow:visible;
+		overflow:auto;
 		float:left;
 		text-align:center;
+		position:relative;
+		top:50%; 
+		margin-top:-50px;
 	}
 	#userProfile>div:first-child{
-		height:100px;
-		padding:2% 0;
+		margin-top:-40px;
 	}
 	/* 프사박스 */
 	#profileBox {
@@ -43,6 +43,7 @@
 	    border-radius: 30%;
 	    overflow: hidden;
 	    background-color:#e3eef6;
+	   
 	}
 	/* 프사 */
 	#profileIcon {
@@ -52,8 +53,8 @@
 	}
 	/* 닉네임 */
 	#userProfile>div:nth-child(2){
-		
 		font-size:1.2em;
+		margin-top:-20px;
 	}
 	/* 클래스 */
 	#userProfile>div:nth-child(3){
