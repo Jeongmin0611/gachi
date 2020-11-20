@@ -28,7 +28,7 @@
 			<li><input type="file" name="no"/></li>
 			</ul>
 		</li>
-		<li>내용 <textarea name="content"></textarea></li>
+		<li><textarea name="content"></textarea></li>
 		<li>첨부파일 <input type="file" name="no"/> </li>
 		<li class="content_center">
 			<input type="submit" value="등록"/>

@@ -23,7 +23,7 @@
 	<ul id="cr_1on1_writeForm">
 		<input type="hidden" name="no" value="no"/>
 		<li> &nbsp;&nbsp;제목 &nbsp;&nbsp; &nbsp;&nbsp;<input type="text" name="no" style="text-align:center; width:400px;"/></li>
-		<li> &nbsp;&nbsp;내용 <textarea name="content"></textarea></li>
+		<li> <textarea name="content"></textarea></li>
 		<li> &nbsp;&nbsp;첨부파일 <input type="file" name="inputFile"/> </li>
 	</ul>
 	</form>
@@ -32,5 +32,4 @@
 	<input type="submit" value="등록"/>
 	<input type="reset" value="다시쓰기"/>
 </div>
-</form>
 </div>
