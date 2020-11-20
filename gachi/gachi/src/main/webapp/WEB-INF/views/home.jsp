@@ -11,7 +11,9 @@
 .homeClassListTitle { /*클래스 리스트 제목(인기, 신규, 추천)*/
 	font-weight: 600px;
 }
-.homeClassListTitle:nth-child(2), 
+h3 :nth-child(2), h3:nth-child(3){
+	margin-top: 50px;
+}
 .homeClassListTitle+p{
 	margin: 0;
 }
