@@ -857,12 +857,12 @@ input{text-align:center;}
 		width:19%;
 	}
 	.class-guide-image:nth-child(5n+1){
-		margin-left:5%;
+		margin-left:8%;
 	}
 	#guide-btn{
 		margin-bottom:100px;
 		margin-top:20px;
-		width:50%;
+		width:100%;
 	}
 	#guide-font{
 		font-size:2.5em;
