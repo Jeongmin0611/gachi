@@ -24,6 +24,11 @@
 	overflow:auto;
 	text-align:center;
 	padding: 20px;
+	width: 100%;
+}
+#eventDetailContent img{
+	width: 100%;
+
 }
 /* 이벤트 상세 내용 끝*/
 /* 댓글 입력 폼*/
@@ -83,7 +88,7 @@
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				<img src="/gachi/img/event_sample.png"/>
+				<img src="/gachi/img/event_sample.png"/><br/>
 			</div>
 		</div>
 		

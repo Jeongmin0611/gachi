@@ -26,9 +26,9 @@
 		object-fit:cover;
 	}
 </style>
-<div class="container cfont">
+<div class="container cfont" id="userWishListContainer">
 	<%@ include file="../inc/userProfile.jspf" %>
-	<div class="userMainDiv">
+	<div class="userMainDiv" style="overflow:auto">
 		<div id="userWishTop">
 			<select>
 				<option>전체</option>

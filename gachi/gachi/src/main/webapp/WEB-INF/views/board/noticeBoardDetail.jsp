@@ -25,6 +25,9 @@
 	text-align:center;
 	padding: 20px;
 }
+#noticeDetailContent img{
+	width: 100%;
+}
 /* 공지사항 상세 내용 끝*/
 
 /*버튼*/

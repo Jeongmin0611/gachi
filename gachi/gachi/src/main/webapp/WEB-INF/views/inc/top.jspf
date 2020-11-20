@@ -483,6 +483,7 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
 			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/serviceCenterBoard">고객센터</a></li>	
   </ul>
+	  </div>
 </nav>
 <nav class="navbar  navbar-expand-sm navbar-new-bottom">
 		<div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">

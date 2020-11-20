@@ -118,14 +118,13 @@
 	#myclassVideoLst>ul:nth-child(3)>li{
 		margin:10px 20px;
 	}
-	#myclassVideoLst>ul:nth-child(3)>li:nth-child(1){
+	#myclassVideoLst>ul:nth-child(3)>li>progress{
+		width:100%;
+	}
+	#myclassVideoLst>ul:nth-child(3)>li:first-child{
 		width:100%;
 		font-size:1.3em;
 		margin:10px 20px;
-	}
-	#myclassVideoLst>ul:nth-child(3)>li:nth-child(2){
-		width:100%;
-		margin-left:20px;
 	}
 	#myclassVideoLst>ul:last-child>li>label{
 		line-height:40px;
@@ -188,9 +187,10 @@
 		<hr style="background:#000"/>
 		<ul>
 			<li>카모마일 프랑스 자수</li>
-			<li>수강기한 : 20.11.01 ~ 21.01.31</li>
 			<li>진도율 : 0.00%</li>
 			<li>수강시간 : 0분</li>
+			<li>수강기한 : 20.11.01 ~ 21.01.31</li>
+			<li><progress value="50" max="100"></progress></li>
 		</ul>
 		<ul>
 			<li>

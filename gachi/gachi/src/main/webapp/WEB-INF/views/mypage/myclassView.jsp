@@ -9,9 +9,11 @@
 		margin:10px 50px 40px;
 	}
 	#myclassView>li{
+		width:40%;
+		float:left;
 		height:30px;
 		overflow:hidden;
-		margin:15px 20px;
+		margin:5px 20px;
 		line-height:25px;
 	}
 	#myclassView>li:first-child{
@@ -19,23 +21,29 @@
 		float:left;
 	}
 	#myclassView>li:nth-child(2){
-		font-size:1.8em;
-		margin-left:0;
+		margin-top:20px;
+		font-size:1.5em;
 	}
-	#myclassView>li:nth-child(3){
-		
+	#myclassView>li:nth-child(2)>label:first-child{
+		font-size:0.5em;
+		margin-right:10px;
 	}
+
 	#myclassView>li:nth-child(4){
-		float:clear;
-	}
-	#myclassView>li:nth-child(5){
+		width:15%;
 		float:left;
 	}
-	#myclassView>li:nth-child(8){
-		height:40px;
-		margin-top:30px;
+	#myclassView>li:nth-child(5){
+		width:30%;
 	}
-	#myclassView>li:nth-child(8)>button{
+	#myclassView>li:nth-child(6) progress{
+		width:100%;
+	}
+	#myclassView>li:nth-child(7){
+		height:40px;
+		margin-top:30px;	
+	}
+	#myclassView>li:nth-child(7)>button{
 		background-color:#ABCEE3;
 	}
 	#myclassView>li:last-child{
@@ -249,19 +257,21 @@
 		font-weight:;
 		background-color:#e3eef6;
 		text-align:center;
-		color:;
 		font-size:1.3em;
 	}
 	.myclassModal_content input{
 		width:100%;
 		margin-bottom:10px;
+		outline:none;
 	}
 	.myclassModal_content textarea{
 		width:100%;
 		height:300px;
 		margin-bottom:30px;
+		outline:none;
 	}
-	#myclassReviewWrite,#myclassQnaWrite{
+	#myclassReviewWrite,
+	#myclassQnaWrite{
 		background-color:#ABCEE3;
 		margin:0 auto;
 		margin-top:20px;
