@@ -18,30 +18,6 @@
 
 <style>
 
-#menu {
-	width: 100%;
-	height: 100px;
-	line-height: 100px;
-	margin: 0px auto;
-}
-
-#menu img {
-	widht: 150px;
-	height: 100px;
-	padding: 15px;
-}
-
-#menu ul {
-	text-decoration: none;
-}
-
-#menu li {
-	float: left;
-	width: 16%;
-	text-align: center;
-	font-size: 1.5em;
-}
-
 @font-face {
 	font-family: 'OSeongandHanEum';
 	src:
@@ -131,24 +107,15 @@ a {
 		height:100%;
 		z-index:1;
 	}
-.navbar-new-bottom{
-    background-color: #f7f7f7;
-    box-shadow: 0 5px 6px -2px rgba(0,0,0,.3);
-    border-top: 1px solid #e0e0e0;
-    margin-top: 4%;
-    height: 40px;
-}
-.navbar-new-bottom ul li{
-    margin-left: 2%;
-    margin-right: 2%;
-}
-.navbar-nav .nav-item a {
+
+
+.nav-item a {
     color: #333;
     font-size: 14px;
     font-weight: 600;
     transition: 1s ease;
 }
-.navbar-nav .nav-item a:hover{
+.nav-item a:hover{
     color: #0062cc;
 }
 .dropdown-menu.show{
@@ -166,6 +133,10 @@ a {
 	background-color:white;
 	border:0;
 	outline:0;
+}
+#mdBtm,#mdJBtm{
+
+	float:right;
 }
 /* 로그인폼*/
 	#loginBtn{
@@ -374,7 +345,86 @@ a {
 .logRadioBtnInterval{
 	margin:0 0 0 10px;
 }
+/* 메뉴 */
+.nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
+  border-bottom: 3px solid transparent;
+}
+.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
+  border-bottom: 3px solid transparent;
+  background: none;
+}
+.navbar a, .dropdown-menu>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .navbar-toggle{
+ color: black;
+}
+.dropdown-menu{
+    -webkit-box-shadow: none;
+    box-shadow:none;
+    background-color:rgb(255,255,255,0.7);
+}
+.dropdown-menu a:hover:nth-child(7n+1), .dropdown-menu a.active:nth-child(7n+1) {
+  border-bottom: #C4E17F 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
+  border-bottom: #F7FDCA 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
+  border-bottom: #F7FDCA 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+3), .dropdown-menu a.active:nth-child(7n+3) {
+  border-bottom: #FECF71 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+4), .dropdown-menu a.active:nth-child(7n+4) {
+  border-bottom: #F0776C 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+5), .dropdown-menu a.active:nth-child(7n+5) {
+  border-bottom: #DB9DBE 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+6), .dropdown-menu a.active:nth-child(7n+6) {
+  border-bottom: #C49CDE 3px solid;
+}
+.dropdown-menu a:hover:nth-child(7n+7), .dropdown-menu a.active:nth-child(7n+7) {
+  border-bottom: #669AE1 3px solid;
+}
 
+
+
+.nav li:hover:nth-child(11n+1), .nav li.active:nth-child(11n+1){
+  border-bottom: #C4E17F 3px solid;
+}
+.nav li:hover:nth-child(11n+2), .nav li.active:nth-child(11n+2){
+  border-bottom: #F7FDCA 3px solid;
+}
+.nav li:hover:nth-child(11n+3), .nav li.active:nth-child(11n+3){
+  border-bottom: #FECF71 3px solid;
+}
+.nav li:hover:nth-child(11n+4), .nav li.active:nth-child(11n+4){
+  border-bottom: #F0776C 3px solid;
+}
+.nav li:hover:nth-child(11n+5), .nav li.active:nth-child(11n+5){
+  border-bottom: #DB9DBE 3px solid;
+}
+.nav li:hover:nth-child(11n+6), .nav li.active:nth-child(11n+6){
+  border-bottom: #C49CDE 3px solid;
+}
+.nav li:hover:nth-child(11n+7), .nav li.active:nth-child(11n+7){
+  border-bottom: #669AE1 3px solid;
+}
+.nav li:hover:nth-child(11n+8), .nav li.active:nth-child(11n+8){
+  border-bottom: #62C2E4 3px solid;
+}
+.nav li:hover:nth-child(11n+9), .nav li.active:nth-child(11n+9){
+  border-bottom: #C4E17F 3px solid;
+}
+.nav li:hover:nth-child(11n+10), .nav li.active:nth-child(11n+10){
+  border-bottom: #F7FDCA 3px solid;
+}
+.nav li:hover:nth-child(11n+11), .nav li.active:nth-child(11n+11){
+  border-bottom: #FECF71 3px solid;
+}
+/* 메뉴 끝 */
+.container{
+margin-top: 50px;
+}
 </style>
 <script>
 $(function(){
@@ -460,60 +510,71 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
    $("#pwdF1").fadeOut();
 });
 });
+ 
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm fixed-top navbar-new-top">
-  <a href="/gachi">
-		 <img src="img/logo.png" style="width:25%;" alt="logo" /></a>
-		<ul class="nav navbar-nav mr-auto"></ul>
-  <ul class="navbar-nav justify-content-end">
-    <li class="nav-item"><a class="nav-link px-2"
+	<!-- 메뉴 -->
+	<nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
+	<a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="nav navbar-nav mr-auto">
+	     <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          카테고리
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        <a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
+				<a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
+				<a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
+				<a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
+				<a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
+				<a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
+				<a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
+	        </div>
+	      </li>
+	      <li class="nav-item ">
+	        <a class="nav-link" href="/gachi/storeMain">스토어 </a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/gachi/introCreate">크리에이터 소개</a>
+	      </li>
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          공지사항
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a>
+	          <a class="dropdown-item" href="/gachi/eventBoard">이벤트</a>
+	        </div>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/gachi/companyBoard">회사 소개</a>
+	      </li>
+	    </ul>
+	    
+	     <ul class="nav navbar-nav pull-right">
+   			 <li class="nav-item"><a class="nav-link "
 				href="/gachi/adminDashboard">어드민</a></li>
-			<li class="nav-item"><a class="nav-link px-2"
+			<li class="nav-item"><a class="nav-link"
 				href="/gachi/creatorDashboard">크리에이터</a></li>
-			<li class="nav-item"><a class="nav-link px-2"
+			<li class="nav-item"><a class="nav-link"
 				href="/gachi/mypage">마이페이지</a></li>
-			 <li class="nav-item" id="loginFormBtn"><a class="nav-link px-2" 
+			 <li class="nav-item" id="loginFormBtn"><a class="nav-link" 
 				href="#">로그인</a></li>
-			<li class="nav-item" id="joinFormBtn"><a class="nav-link px-2"
+			<li class="nav-item" id="joinFormBtn"><a class="nav-link"
 				href="#">회원가입</a></li>
-			<li class="nav-item"><a class="nav-link px-2"
+			<li class="nav-item"><a class="nav-link"
 				href="/gachi/serviceCenterBoard">고객센터</a></li>	
   </ul>
+	  </div>
 </nav>
-<nav class="navbar  navbar-expand-sm navbar-new-bottom">
-		<div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
-
-			<ul class="navbar-nav w-100 justify-content-center px-3">
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
-						<a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
-						<a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
-						<a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
-						<a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
-						<a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
-						<a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
-					</div></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/gachi/introCreate">크리에이터 소개</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/gachi/storeMain">스토어</a></li>
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">공지사항</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a> 
-						<a class="dropdown-item" href="/gachi/eventBoard">이벤트</a> 
-					</div></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/gachi/companyBoard">회사소개</a></li>
-			</ul>
-		</div>
-	</nav>
-
 	<!-- 메뉴 끝 -->
 	<!-- 로그인폼 -->
 	<div id="md" class="join">

@@ -12,7 +12,7 @@ $(function(){
 			제목 <input type="text" id="subject" name="subject" placeholder="제목입력" size="70"/> 
 		</li>
 		<li>
-			내용 <textarea name="content" id="content" style="width:70%; height:300px"></textarea> 
+			<textarea name="content" id="content" style="width:70%; height:300px"></textarea> 
 		</li>
 		<li>
 			첨부파일 <input type="file" name="filename" /> 
