@@ -163,6 +163,6 @@ a, h1, li {
 		</div>
 		</li>
 		<li><a href="/gachi/creatorGuide">이용안내</a></li>
-		
+		<li><a href="/gachi/testdb">데이터베이스테스트</a></li>
 	</ul>
 </div>
