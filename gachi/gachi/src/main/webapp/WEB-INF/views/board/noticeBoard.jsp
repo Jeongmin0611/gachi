@@ -35,6 +35,10 @@ table {
 	margin-top:20px;
 }
 
+table a, table a:hover{
+	text-decoration: none;
+	color:black;
+}
 
 /* 페이징 */
 #CnoticePaging {
@@ -68,9 +72,9 @@ table {
 			<button name="noticeSearchBtn">검색하기</button>
 		</div>
 	<!-- 표 -->
-	<table class="table table-hover">
+	<table class="table ">
 		<thead>
-			<tr>
+			<tr class="table-active">
 				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>

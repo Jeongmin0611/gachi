@@ -506,8 +506,10 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
 });
 });
 </script>
+<!-- font awesome -->
+<script src="https://kit.fontawesome.com/9a15be1bb8.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>같이가치</title>
 </head>
 <body>
    <!-- 메뉴 -->

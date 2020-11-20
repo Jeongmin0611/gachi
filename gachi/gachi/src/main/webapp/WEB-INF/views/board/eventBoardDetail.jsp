@@ -65,17 +65,18 @@
 }
 #eventDetailReplyDiv li:nth-child(4n+1){
 	padding-left:5px;
-	width: 13%;
-}
-#eventDetailReplyDiv li:nth-child(4n+3){
 	width: 10%;
-}
-#eventDetailReplyDiv li:nth-child(4n+4){
-	width: 7%;
 }
 #eventDetailReplyDiv li:nth-child(4n+2){
 	width: 70%;
 }
+#eventDetailReplyDiv li:nth-child(4n+3){
+	width: 15%;
+}
+#eventDetailReplyDiv li:nth-child(4n+4){
+	width: 5%;
+}
+
 </style>
 <div class="container cfont">
 	<div >
@@ -110,23 +111,21 @@
 			<li>홍길동</li>
 			<li>댓글 내용 이벤트 댓글</li>
 			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			<li><a href="#">삭제</a></li>
 			
 			
 			<li>홍길동</li>
 			<li>댓글 내용 이벤트 댓글</li>
 			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			<li><a href="#">삭제</a></li>
 			<li>홍길동</li>
 			<li>댓글 내용 이벤트 댓글</li>
 			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
+			<li><a href="#">삭제</a></li>
 			<li>홍길동</li>
 			<li>댓글 내용 이벤트 댓글</li>
 			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
+			<li><a href="#">삭제</a></li>
 		</ul>
 	</div>
 </div>
