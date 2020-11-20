@@ -348,7 +348,7 @@ a {
 /* 메뉴 */
 .nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
   border-bottom: 3px solid transparent;
-}
+  }
 .nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
   border-bottom: 3px solid transparent;
   background: none;
@@ -428,10 +428,11 @@ margin-top: 50px;
 </style>
 <script>
 $(function(){
-	
+
+//============================================로그인 관련 모달============================================//
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
-    	$(".nav-item a").css({ 'pointer-events': 'none' });
+    	$(".nav-item a").css({ 'pointer-events':'none' });
 		$("#md").css({
            "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -443,11 +444,9 @@ $(function(){
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
     });
-
-
   //회원가입모달창 띄우기
     $("#joinFormBtn").click(function(){
-    	$(".nav-item a").css({ 'pointer-events': 'none' });
+    	$(".nav-item a").css({ 'pointer-events':'none' });
 		$("#mdJ").css({
            "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -506,11 +505,26 @@ $(function(){
     });
     $("#pwdF1").fadeIn();
 });
-$("#pwdF1Close, .pwdF1_layer").click(function(){
-   $("#pwdF1").fadeOut();
+	$("#pwdF1Close, .pwdF1_layer").click(function(){
+   		$("#pwdF1").fadeOut();
+	});
+	//라디오버튼 클릭시 크리에이터 폼이뜨도록하는이벤트
+//	$("input:radio[id=join2RadioCreatorBtn]").click(function(){
+//		$("#mdJ").css({'display':'none'});
+//		$("#mdJ2").css({
+//	           "top": (($(window).height()-$("#mdJ2").outerHeight())/2+$(window).scrollTop())+"px",
+//	           "left": (($(window).width()-$("#mdJ2").outerWidth())/2+$(window).scrollLeft())+"px"
+//	        });
+//	        $("#mdJ2").fadeIn();
+//	    });
+//	    $("#mdJ2Close, .mdJ2_layer").click(function(){
+//	       $("#mdJ2").fadeOut();
+//	    });
+//	});
+
+			
+//============================================로그인 관련 모달============================================//
 });
-});
- 
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -633,7 +647,7 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
 					<button type="button" class="btn btn-primary" id="mdJ2Close">X</button>
 				</div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-				<input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 				<div class="mdJ2_layer"></div>
 					<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
 			 		<input type="hidden" id="emailChk" value="false" />
@@ -700,6 +714,7 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
 		</div>
 	</div>
 	<!-- 비밀번호 찾기 끝 -->
+	<!-- 비밀번호 찾기 2-->
 	<div id="pwdF2" class="join">
 		<div id="pwdF2Form" class="col-xs-12 col-md-12">
 			<form>
@@ -721,3 +736,4 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
 			</form>
 		</div>
 	</div>	
+	<!-- 비밀번호 찾기 2끝-->
