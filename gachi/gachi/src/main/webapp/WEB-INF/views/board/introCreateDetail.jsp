@@ -3,24 +3,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 
-/* 크리에이터 소개 ul*/
+/* 크리에이터 사진, sns계정 ul*/
+#createDetailDiv{	
+	min-height: 500px;
+}
 #createDetailSub1 {
-	width: 20%;
 	background: #FCE8E6;
-	padding: 0px 5%;
 	float: left;
 	height: 100vh;
+	
 }
 #createDetailSub1>li>img{
-	margin: 10px;
  	width: 100%;
 }
-
 #createDetailSub1+div {
 	background-color: #F2F2F2;
 	height: 100vh;
 }
+#createDetailSub1>li>a{
+	text-decoration: none;
+	color:black;
+}
+#createDetailSub1>li>a:hover, #createDetailSub1>li>a:active, #createDetailSub1>li>a:focus{
+	font-weight: bold;
+}
+
 /* 크리에이터 소개 ul 끝*/
+#CcreateMent{/*크리에이터 소개글*/
+	padding: 20px;
+}
+
 /* 개설한 클래스 */
 #createClass{
 	clear:left;
@@ -37,25 +49,26 @@
 	width: 70%;
 }
 #createClass li img{
-	width: 150px;
+	width: 100%;
 	height: 150px;
 }
 </style>
 <div class="container cfont">
-	<div id="createDetailDiv">
-		<ul id="createDetailSub1" class="col-sm-12">
-			<li><img src="/gachi/img/client.png" /></li>
-			<li>크리에이트 명</li>
+	<div id="createDetailDiv" class="row">
+		<ul id="createDetailSub1" class="col-sm-4">
+			<li><img src="/gachi/img/business-woman.png" /></li>
+			<li style="text-align: center; border-bottom: 1px solid gray">크리에이트 명</li>
+			<li><img src="/gachi/img/business-woman.png" /></li>
 			<li><a href="#">create@instagram</a></li>
 			<li><a href="#">create@facebook</a></li>
 		</ul>
 		
 		<!-- 크리에이터 소개글 -->
-		<div id="CcreateMent">크리에이터 소개글</div>
+		<div id="CcreateMent" class="col-sm-8">크리에이터 소개글</div>
 		
 	</div>
 	<!-- 개설한 클래스 -->
-	<div id="createClass">
+	<div id="createClass" >
 		<h4>개설한 클래스</h4>
 		<ul class="col-sm">
 			<li>&nbsp;</li>
