@@ -1,10 +1,26 @@
 package com.bitcamp.gachi.creator;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CreatorController {
+	SqlSession sqlSession;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
 	@RequestMapping ("/creatorDashboard")
 	public String creatorDashboard() {
 		return "creator/creatorDashboard";
@@ -74,5 +90,15 @@ public class CreatorController {
 	@RequestMapping("/creatorVideoRequest")
 	public String creatorVideoEdit() {
 		return "creator/creatorVideoRequest";
-	} 
+	}
+	@RequestMapping("/testdb")
+	public ModelAndView testdb() {
+		TestDaoImp dao=sqlSession.getMapper(TestDaoImp.class);
+		List<TestVO> list=dao.selectMember();
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("creator/testdb");
+		return mav;
+	}
 }
