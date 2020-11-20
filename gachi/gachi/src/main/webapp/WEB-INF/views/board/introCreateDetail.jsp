@@ -49,6 +49,7 @@
 			<li><a href="#">create@instagram</a></li>
 			<li><a href="#">create@facebook</a></li>
 		</ul>
+		
 		<!-- 크리에이터 소개글 -->
 		<div id="CcreateMent">크리에이터 소개글</div>
 		
