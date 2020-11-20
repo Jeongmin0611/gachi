@@ -23,7 +23,13 @@
 	min-height: 500px;
 	overflow:auto;
 	text-align:center;
-	padding: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+}
+#eventDetailContent img{
+	width: 100%;
+
 }
 /* 이벤트 상세 내용 끝*/
 /* 댓글 입력 폼*/
