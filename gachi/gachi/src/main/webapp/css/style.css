@@ -829,3 +829,50 @@ input{text-align:center;}
 	}
 	/*크리에이터 1:1문의 보기 end*/
 
+	/* 크리에이터 가이드 start*/
+		
+	.class-guide-image{
+		box-shadow: 2px 2px 6px rgba(0,0,0,.1), 0 0 2px rgba(0,0,0,.2); width:100%; height:auto;
+	}
+	.class-guide-image:hover{
+		box-shadow: 2px 2px 6px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.7);
+	}
+	
+	.class-guide-title{
+		margin-left:2em;
+		font-size:3em;
+		margin-bottom:20px;
+	}
+	.class-img-list{
+		width:10%;
+		float:left;
+		list-style:none;
+		margin:5px;
+		height:200px;
+		position:relative;
+		z-index:2;
+	}
+	.class-img-list{
+		text-align:center;
+		width:19%;
+	}
+	.class-guide-image:nth-child(5n+1){
+		margin-left:5%;
+	}
+	#guide-btn{
+		margin-bottom:100px;
+		margin-top:20px;
+		width:100%;
+	}
+	#guide-font{
+		font-size:2.5em;
+	}
+	#guide-font-sub{
+		color:#253629;
+		font-weight:bold;
+		font-size:1.3em;
+		margin-top:100px;
+	}
+	
+	/*크리에이터 가이드 end*/
+	
