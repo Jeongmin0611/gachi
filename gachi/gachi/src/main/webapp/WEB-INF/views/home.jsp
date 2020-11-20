@@ -9,9 +9,9 @@
 }
 
 .homeClassListTitle { /*클래스 리스트 제목(인기, 신규, 추천)*/
-	margin-top: 50px;
 	font-weight: 600px;
 }
+.homeClassListTitle:nth-child(2), 
 .homeClassListTitle+p{
 	margin: 0;
 }

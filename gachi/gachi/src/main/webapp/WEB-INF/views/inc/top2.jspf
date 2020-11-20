@@ -26,6 +26,11 @@
 		});
 	}
 </script>	
+<style>
+#slideimage{
+	margin-top: 50px;
+}
+</style>
     <div id="slideimage" class="carousel slide" data-ride="carousel" data-interval="3000" 
     data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000"><!-- carousel -->
         <!-- 하단 컨트롤러 -->
