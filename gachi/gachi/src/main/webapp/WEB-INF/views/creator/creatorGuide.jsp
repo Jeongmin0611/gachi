@@ -247,7 +247,7 @@
 	</div>
 	<div class="row end text-center">
 		<div class="col-xs-12 col-md-2"></div>
-		<div class="col-xs-12 col-md-8" data-aos="zoom-out" >
+		<div class="col-xs-12 col-md-8" data-aos="zoom-out" style="margin-top:100px" >
 			<div id="guide-font-sub ">
 				크리에이터 관리기능을 알아보았습니다.
 			</div><!-- font-sub -->

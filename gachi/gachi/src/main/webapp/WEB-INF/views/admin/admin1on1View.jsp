@@ -78,7 +78,7 @@
 	<div >
 		<h3>1:1문의내역</h3>
 		<div id="admin1on1View_Div">
-			<div id=admin1on1View_Subject">
+			<div id="admin1on1View_Subject">
 				<h3>[동영상] 소리만 나오고 동영상 화면이 나오지 않아요.</h3>
 				<div id="admin1on1View_DateDiv"><span>작성자</span> <span>2020-10-30</span></div>
 			</div>

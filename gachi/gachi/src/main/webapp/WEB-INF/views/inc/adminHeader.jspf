@@ -101,6 +101,8 @@ a, h1, li {
 }
 
 .container {
+	margin-top: 50px;
+	padding: 20px;
 	animation: fadein 3s;
 }
 

@@ -20,10 +20,10 @@ b{
 }
 </style>    
     
+
+<div class="container ad_dash_center text-center">
 <h1 style="text-align:center;"> 관리자 대시보드 </h1>
 <br/>
-<div class="container ad_dash_center text-center">
-
 	<div>
 		<ul id="ad_dash_board_ul">
 			<li><div class="ad_dash_board"><input type="radio" name="ad_dash_User" value="전체" checked/>전체
