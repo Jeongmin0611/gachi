@@ -49,7 +49,7 @@
 			<li><input type="checkbox" id="" name=""/></li>
 			<li>10</li>
 			<li>상품/클래스</li>
-			<li><a href="/gachi/admin1on1View">배송문의입니다</a></li>
+			<li><a href="/gachi/admin1on1View">[동영상] 소리만 나오고 동영상 화면이 나오지 않아요.</a></li>
 			<li>홍길동</li>
 			<li>2020-10-29</li>
 			<li><button>답변하기</button></li>

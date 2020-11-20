@@ -57,7 +57,7 @@ a {
 
 
 
-#idFTel, #idFNo, #pwdFTel1, #pwdFNo1 {
+#pwdFTel1, #pwdFNo1 {
 	width: 300px;
 	height: 50px;
 	margin: 30px 30px 15px 70px;
@@ -69,7 +69,7 @@ a {
 	margin: 10px 30px 10px 70px;
 }
 
-#idFNoBtn, .autBtn, #pwdFNoBtn {
+#pwdFNoBtn {
 	height: 50px;
 	width: 80px;
 	}
@@ -135,14 +135,14 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#joinForm{
+#loginFrm,#joinForm,#idF1{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
 	background-color: white;
 }
 
-#idF1, #pwdF1, #pwdF2 {
+ #pwdF1, #pwdF2 {
 	border: 1px solid gray;
 	width: 600px;
 	height: 350px;
@@ -157,8 +157,7 @@ a {
 	margin: 5px;
 	background-color: white;
 }
-
-#idFTel, #idFNo, #pwdFTel1, #pwdFNo1 {
+#pwdFTel1, #pwdFNo1 {
 	width: 300px;
 	height: 50px;
 	margin: 30px 30px 15px 70px;
@@ -170,7 +169,7 @@ a {
 	margin: 10px 30px 10px 70px;
 }
 
-#idFNoBtn, .autBtn, #pwdFNoBtn {
+#pwdFNoBtn {
 	height: 50px;
 	width: 80px;
 }
@@ -204,45 +203,6 @@ a {
 	width: 400px;
 	height: 40px;
 	margin: 0;
-}
-
-.ipbox {
-	width: 20%;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	float: left;
-	margin: 0 10px 0 10px;
-}
-
-.ipbox1 {
-	width: 65%;
-	margin: 0 10px 0 10px;
-	float: left;
-	margin: 10px;
-}
-
-#ipbox {
-	width: 150px;
-	height: 40px;
-	float: left;
-	
-}
-
-.textBoxJ {
-	width: 30%;
-	float: left;
-	height: 40px;
-	margin: 20px 0;
-	text-align: center;
-}
-
-#mJuserid, #mJuserpwd, #mJuserpwdOk, #mJusername, #mJuserNname, #mJuserB,
-	#mJusertel, #mJuseraddr {
-	width: 68%;
-	height: 40px;
-	background-color: #e2e2e2;
-	margin: 20px 0;
 }
 
 #loginJOk button, #loginJ2Ok button {
@@ -329,16 +289,17 @@ a {
 		font-weight:bold;
 		font-size: 16px;
 		border-radius: 50px;
-		margin-top:25px;
+		margin-top:10px;
+		margin-bottom:10px;
 	}
 	#md{
 		width:350px;
-		height:600px;
+		height:640px;
 		border-radius:10px;
 	}
 	#mdJ{
 		width:350px;
-		height:750px;
+		height:790px;
 		border-radius:10px;
 	}
 	#kokoBtn{
@@ -349,7 +310,8 @@ a {
 		font-weight:bold;
 		font-size: 16px;
 		border-radius: 50px;
-		margin-top:25px;
+		margin-top:10px;
+		margin-bottom:10px;
 	}
 /* 회원가입 스타일 */
 
@@ -408,7 +370,8 @@ a {
 		font-weight:bold;
 		font-size: 16px;
 		border-radius: 50px;
-		margin-top:25px;
+		margin-top:10px;
+		margin-bottom:10px;
 	}
 	#signupBtn:hover{
 		border: solid 1px #e4e4e4;
@@ -456,9 +419,51 @@ a {
 		margin-top: 150px;
 		color: black;
 	}
-	.join{
-		display: none;
-	}
+/* 버튼 css*/
+.autBtn,.idFNoBtn{
+  width:100%;
+  background:rgb(243,191,169);
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.autBtn:hover,.idFNoBtn:hover{
+  background:rgb(241,247,250);
+  color:rgb(171,206,226);
+}
+.autBtn:before,.autBtn:after,.idFNoBtn:before,.idFNoBtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:rgb(171,206,226);
+  transition:400ms ease all;
+}
+.autBtn:after,.idFNoBtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.autBtn:hover:before,.autBtn:hover:after,.idFNoBtn:hover:before,.idFNoBtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+.mainLogoImg{
+	margin:50px 0;
+}
+.logRadioBtnInterval{
+	margin:0 0 0 10px;
+}
+
 </style>
 <script>
 $(function(){
@@ -477,11 +482,10 @@ $(function(){
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
     });
-});
-$(function(){
-	//회원가입모달창 띄우기
+    
+  //회원가입모달창 띄우기
     $("#joinFormBtn").click(function(){
-        
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#mdJ").css({
            "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -553,8 +557,8 @@ $(function(){
 		<div id="loginFrm" class="col-xs-12 col-md-12">
 			<form method="post" action="">
 			<div>
-				<img src="/gachi/img/logo.png"/>
-				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn"/>크리에이터<br/>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 				<div id="mdBtm">
 					<button type="button" class="btn btn-primary" id="mdClose"></button>
 				</div>
@@ -574,9 +578,9 @@ $(function(){
 	<!-- 회원가입 -->
 	<div id="mdJ" class="join">
 	<div id="joinForm" class="col-xs-12 col-md-12">
-		<form method="post" id="">	
-				<img src="/gachi/img/logo.png"/>
-				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn"/>크리에이터<br/>
+		<form method="post" action="">	
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 			 	<div id="mdJBtm">
 					<button type="button" class="btn btn-primary" id="mdJClose"></button>
 				</div>
@@ -600,17 +604,17 @@ $(function(){
 	</div>
 	<!-- 회원가입 끝 -->
 	<!-- 아이디찾기 클릭시 나오는 아이디찾는폼 -->
-	<div style="display: none">
+	<div class="join" style="display: none">
 		<div id="idF1">
 			<form>
-				<h1>아이디찾기</h1>
 				<div>
-					<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br/>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
-						<input type="text" placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel" style="background-color: #e2e2e2;" />
+						<input type="text" placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel"/>
 					<button class="autBtn">인증</button><br />
-					<input type="text" placeholder="인증번호" id="idFNo" name="idFNo" style="background-color: #e2e2e2;" />
-					<button id="idFNoBtn">확인</button>
+					<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
+					<button class="idFNoBtn">확인</button>
 				</div>
 			</form>
 		</div>

@@ -25,18 +25,19 @@
 		width:50%;
 		position:relative;
 		left:25%;
-		margin:50px 0 200px;
+		margin:50px 0;
 	}
 	#userLeaveChkContent label{
-		font-size:1.5em;
+		font-size:1.3em;
 	}
 	/* 비번확인 리스트 */
 	#userLeaveChkLst{
-		margin:50px 0;
+		margin:50px 0 100px;
 	}
 	#userLeaveChkLst li{
 		overflow:auto;
 		margin-bottom:10px;
+		text-align:center;
 	}
 	#userLeaveChkLst li:nth-child(2n+1){
 		width:30%;
@@ -45,29 +46,35 @@
 	#userLeaveChkLst li:nth-child(2n){
 		width:70%;
 	}
+	#userLeaveChkLst li:last-child{
+		border-bottom:1px solid #ddd;
+	}
 	#userLeaveChkLst input{
 		width:100%;
+		border:none;
 	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<div id="userLeaveChkTop">
-		<ul>
-			<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
-			<li>|</li>
-			<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
-		</ul>
-	</div>
-	<hr/>
-	<div id="userLeaveChkContent">
-		<label>비밀번호확인</label>
-		<ul id="userLeaveChkLst">
-			<li>아이디</li>
-			<li>userid@bitcamp.com</li>
-			<li>비밀번호</li>
-			<li><input type="password" name="userpwd"/></li>
-		</ul>
-		<button type="button" class="btn btn-outline-dark btn-block" onclick="location.href='/gachi/userLeaveOk'">회원탈퇴</button>
+	<div class="userMainDiv">
+		<div id="userLeaveChkTop">
+			<ul>
+				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
+				<li>|</li>
+				<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
+			</ul>
+		</div>
+		<div id="userLeaveChkContent">
+			<label>비밀번호확인</label>
+			<hr style="background:#000;"/>
+			<ul id="userLeaveChkLst">
+				<li>아이디</li>
+				<li>userid@bitcamp.com</li>
+				<li>비밀번호</li>
+				<li><input type="password" name="userpwd"/></li>
+			</ul>
+			<button type="button" class="btn btn-outline-dark btn-block" onclick="location.href='/gachi/userLeaveOk'">회원탈퇴</button>
+		</div>
 	</div>
 </div>

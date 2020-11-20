@@ -44,8 +44,7 @@
 		<li>2020-11-11</li>
 		<li>등록대기</li>
 	</ul>
-</div>
-<div id="paging">
+	<div id="paging">
 	<ul>
 		<li>prev</li>
 		<li>1</li>
@@ -55,4 +54,5 @@
 		<li>5</li>
 		<li>next</li>
 	</ul>
+</div>
 </div>

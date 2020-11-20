@@ -3,23 +3,20 @@
 <style>	
 	
 	/* 마이페이지(메인) - 컨테이너 */
-	#myclassMainContainer{
-		overflow-x:hidden; /* 가로 스크롤 숨기기 */
-	}
 	
 	/*******/
 	/* 상단 */
 	/* 라디오, 버튼(이전달,다음달), 날짜, 조회 */
 	#mypageMainTop{
-		margin:20px;
+		margin:0 20px;
 		text-align:right;
 	}
 	#mypageMainTop label{
 		margin:5px;
 	}
-	#mypageMainTopFrm
-	#mypageMainTopFrm>button{
+	#mypageMainTopFrm>button:last-child{
 		margin:5px;
+		background-color:#ABCEE3;
 	}
 	
 	/*******/	
@@ -35,8 +32,7 @@
 		line-height:50px;
 		text-align:center;
 		font-size:1.5em;
-		margin:50px 0 30px;
-		background-color:#eee;
+		margin-top:50px;
 	}
 	/* 주문리스트 */
 	.mypageMainLst{
@@ -86,7 +82,7 @@
 	/*******/
 	/* 하단 */
 	/* 페이징 */
-	.mypageMainBtm{margin:100px 0;width:100%;}
+	.mypageMainBtm{margin:100px 0 50px;width:100%;}
 	
 	/* 모달 */
 	#mypageModal{
@@ -104,18 +100,36 @@
 		background-color:#fff;
 		border:2px solid #eee;
 	}
-	.mypageModal_content>div:nth-child(3){
+	.mypageModal_content>div:first-child{
+		margin:0 auto;
+		width:100px;
+		height:100px;
+		background-color:#ffdac3;
+		border-radius: 50%;
+		text-align:center;
+	}
+	.mypageModal_content>div:first-child img{
+		width:80%;
+	}
+	.mypageModal_content>div:nth-child(2){
+		margin-top:20px;
 		height:100px;
 		text-align:center;
-		background-color:#eee;
-		font-size:1.5em;
+		border:2px solid #eee;
+		font-size:1.3em;
 		line-height:100px;
 	}
-	.mypageModal_content>label{
-		font-size:1.3em;
+	.mypageModal_content>div:nth-child(2) label{
+		color:#ABCEE3;
 	}
+	.mypageModal_content>label{
+		font-size:1em;
+	}
+	.mypageModal_content>label:nth-child(3){
+		margin-top:30px;
+	}
+	/* 송장정보 */
 	.mypageModal_content ul{
-		width:80%;
 		margin:0 auto;
 		overflow:auto;
 		border-top:1px solid gray;
@@ -144,6 +158,7 @@
 	}
 	#mypageModalClose{
 		margin:0 auto;
+		background-color:#abcee3;
 	}
 	#mypageModalBtm{
 		text-align:center;
@@ -168,10 +183,11 @@
 	});
 
 </script>
-<div class="container" id="myclassMainContainer">
+<div class="container cfont" style="overflow-x:hidden;">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<!-- 마이페이지(메인) - 상단 -->
-	<div id="mypageMainTop">
+	<div class="userMainDiv">
+		<div id="mypageMainTop">
 		<form id="mypageMainTopFrm">
 			<input type="radio" name="option"/><label>전체</label>
 			<input type="radio" name="option"/><label>상품</label>
@@ -181,118 +197,125 @@
 			-
 			<input type="date" id="mypageMainDate2"/>
 			<button type="button" class="btn btn-outline-dark btn-sm">▶</button><!-- 다음달 -->
-			<button type="button" class="btn btn-primary btn-sm">조회</button>
+			<button type="button" class="btn btn-outline-light btn-sm">조회</button>
 		</form>
-	</div>
-	<div id="mypageMainContent">
-		<div>
-			<label>2020-11-06</label>
-			<ul class="mypageMainLst">
-				<li><img src="/gachi/img/test_image.jpg"/></li>
-				<li>
-					<label class="badge badge-info">공예/창작</label>
-					<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-				</li>
-				<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-				<li>크리에이터명 <a href="#">홍길동</a></li>
-				<li>결제가격 15000원</li>
-				<li>결제일시 20.11.06 19:30:34</li>
-			</ul>
-			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-				<button type="button" class="btn btn-outline-light">결제취소</button>
+		</div>
+		<div id="mypageMainContent">
+			<div>
+				<label>2020.11.06</label>
+				<hr style="background:#000"/>
+				<ul class="mypageMainLst">
+					<li><img src="/gachi/img/test_image.jpg"/></li>
+					<li>
+						<label class="badge badge-info">공예/창작</label>
+						<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
+					</li>
+					<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
+					<li>크리에이터명 <a href="#">홍길동</a></li>
+					<li>결제가격 15000원</li>
+					<li>결제일시 20.11.06 19:30:34</li>
+				</ul>
+				<div class="mypageMainLstBtn">
+					<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+					<button type="button" class="btn btn-outline-light">결제취소</button>
+				</div>
+			</div>
+			<div>
+				<label>2020.11.06</label>
+				<hr style="background:#000"/>
+				<ul class="mypageMainLst">
+					<li><img src="/gachi/img/test_image.jpg"/></li>
+					<li>
+						<label class="badge badge-info">공예/창작</label>
+						<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
+					</li>
+					<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
+					<li>크리에이터명 <a href="#">홍길동</a></li>
+					<li>결제가격 15000원</li>
+					<li>결제일시 20.11.06 19:30:34</li>
+				</ul>
+				<div class="mypageMainLstBtn">
+					<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+					<button type="button" class="btn btn-outline-light">결제취소</button>
+				</div>
+			</div>
+			<div>
+				<label>2020.11.06</label>
+				<hr style="background:#000"/>
+				<ul class="mypageMainLst">
+					<li><img src="/gachi/img/test_image.jpg"/></li>
+					<li>
+						<label class="badge badge-info">공예/창작</label>
+						<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
+					</li>
+					<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
+					<li>크리에이터명 <a href="#">홍길동</a></li>
+					<li>결제가격 15000원</li>
+					<li>결제일시 20.11.06 19:30:34</li>
+				</ul>
+				<div class="mypageMainLstBtn">
+					<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+					<button type="button" class="btn btn-outline-light">결제취소</button>
+				</div>
+			</div>
+			<div>
+				<label>2020.11.06</label>
+				<hr style="background:#000"/>
+				<ul class="mypageMainLst">
+					<li><img src="/gachi/img/test_image.jpg"/></li>
+					<li>
+						<label class="badge badge-info">공예/창작</label>
+						<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
+					</li>
+					<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
+					<li>크리에이터명 <a href="#">홍길동</a></li>
+					<li>결제가격 15000원</li>
+					<li>결제일시 20.11.06 19:30:34</li>
+				</ul>
+				<div class="mypageMainLstBtn">
+					<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+					<button type="button" class="btn btn-outline-light">결제취소</button>
+				</div>
+			</div>
+			<div>
+				<label>2020.11.06</label>
+				<hr style="background:#000"/>
+				<ul class="mypageMainLst">
+					<li><img src="/gachi/img/test_image.jpg"/></li>
+					<li>
+						<label class="badge badge-info">공예/창작</label>
+						<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
+					</li>
+					<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
+					<li>크리에이터명 <a href="#">홍길동</a></li>
+					<li>결제가격 15000원</li>
+					<li>결제일시 20.11.06 19:30:34</li>
+				</ul>
+				<div class="mypageMainLstBtn">
+					<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+					<button type="button" class="btn btn-outline-light">결제취소</button>
+				</div>
 			</div>
 		</div>
-		<div>
-			<label>2020-11-06</label>
-			<ul class="mypageMainLst">
-				<li><img src="/gachi/img/test_image.jpg"/></li>
-				<li>
-					<label class="badge badge-info">공예/창작</label>
-					<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-				</li>
-				<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-				<li>크리에이터명 <a href="#">홍길동</a></li>
-				<li>결제가격 15000원</li>
-				<li>결제일시 20.11.06 19:30:34</li>
+		<div class="mypageMainBtm">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">4</a></li>
+				<li class="page-item"><a class="page-link" href="#">5</a></li>
+				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
-			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-				<button type="button" class="btn btn-outline-light">결제취소</button>
-			</div>
 		</div>
-		<div>
-			<label>2020-11-06</label>
-			<ul class="mypageMainLst">
-				<li><img src="/gachi/img/test_image.jpg"/></li>
-				<li>
-					<label class="badge badge-info">공예/창작</label>
-					<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-				</li>
-				<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-				<li>크리에이터명 <a href="#">홍길동</a></li>
-				<li>결제가격 15000원</li>
-				<li>결제일시 20.11.06 19:30:34</li>
-			</ul>
-			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-				<button type="button" class="btn btn-outline-light">결제취소</button>
-			</div>
-		</div>
-		<div>
-			<label>2020-11-06</label>
-			<ul class="mypageMainLst">
-				<li><img src="/gachi/img/test_image.jpg"/></li>
-				<li>
-					<label class="badge badge-info">공예/창작</label>
-					<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-				</li>
-				<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-				<li>크리에이터명 <a href="#">홍길동</a></li>
-				<li>결제가격 15000원</li>
-				<li>결제일시 20.11.06 19:30:34</li>
-			</ul>
-			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-				<button type="button" class="btn btn-outline-light">결제취소</button>
-			</div>
-		</div>
-		<div>
-			<label>2020-11-06</label>
-			<ul class="mypageMainLst">
-				<li><img src="/gachi/img/test_image.jpg"/></li>
-				<li>
-					<label class="badge badge-info">공예/창작</label>
-					<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-				</li>
-				<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-				<li>크리에이터명 <a href="#">홍길동</a></li>
-				<li>결제가격 15000원</li>
-				<li>결제일시 20.11.06 19:30:34</li>
-			</ul>
-			<div class="mypageMainLstBtn">
-				<button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-				<button type="button" class="btn btn-outline-light">결제취소</button>
-			</div>
-		</div>
-	</div>
-	<div class="mypageMainBtm">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
 	</div>
 </div>
-<div id="mypageModal">
+<div id="mypageModal" class="cfont">
 	<div class="mypageModal_content">
-		<h2>배송조회</h2>
-		<hr/>
-		<div>상품이 배송진행중 상태입니다.</div>
+		<div>
+			<img src="/gachi/img/delivery_icon.png">
+		</div>
+		<div>상품이 <label>배송진행중</label> 상태입니다.</div>
 		<label>송장정보</label>
 		<ul>
 			<li>송장번호</li>
@@ -303,7 +326,7 @@
 			<li>1588-0011</li>
 		</ul>
 		<div id="mypageModalBtm">
-			<button type="button" class="btn btn-primary" id="mypageModalClose">확인</button>
+			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
 		</div>
 	</div>
 	<div class="mypageModal_layer"></div>
