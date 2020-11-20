@@ -18,6 +18,30 @@
 
 <style>
 
+#menu {
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	margin: 0px auto;
+}
+
+#menu img {
+	widht: 150px;
+	height: 100px;
+	padding: 15px;
+}
+
+#menu ul {
+	text-decoration: none;
+}
+
+#menu li {
+	float: left;
+	width: 16%;
+	text-align: center;
+	font-size: 1.5em;
+}
+
 @font-face {
 	font-family: 'OSeongandHanEum';
 	src:
@@ -31,7 +55,7 @@ a {
 	font-family: 'OSeongandHanEum';
 }
 
-#idFF, #idFF2, #pwdFF1, #pwdFF2 {
+#idFF, #idFF2, #pwdFF1, #pwdFF2,#pwdFF3,#pwdFF4 {
 	font-Size: 0.7em;
 }
 
@@ -39,23 +63,9 @@ a {
 	text-align: center;
 }
 
-#prImg {
-	float: center;
-	width: 170px;
-	height: 170px;
-	background-color: red;
-	margin: 0 0 0 213px;
-}
 
 .radioBtn2 {
 	margin: 10px 130px 10px 235px;
-}
-
-#useridJ, #userpwdJ, #userNameNJ, #userNNJ, #userDobNJ, #userTelJ,
-	#userAddr2J {
-	width: 400px;
-	height: 40px;
-	margin: 0;
 }
 
 .ipbox {
@@ -91,66 +101,21 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#joinForm,#idF1Form{
+#loginFrm,#joinForm,#idF1Form,#pwdF1Form,#pwdF2Form{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
 	background-color: white;
 }
 
- #pwdF1, #pwdF2 {
-	border: 1px solid gray;
-	width: 600px;
-	height: 350px;
-	margin: 5px;
-	background-color: white;
-}
 
-#member2Join {
-	border: 1px solid gray;
-	width: 600px;
-	height: 1100px;
-	margin: 5px;
-	background-color: white;
-}
-#pwdFTel1, #pwdFNo1 {
-	width: 300px;
-	height: 50px;
-	margin: 30px 30px 15px 70px;
-}
-
-#pwdFTel2, #pwdFNo2, #pwdFEmail {
-	width: 300px;
-	height: 50px;
-	margin: 10px 30px 10px 70px;
-}
-
-#pwdFNoBtn {
-	height: 50px;
-	width: 80px;
-}
-
-
-#loginJOk button, #loginJ2Ok button {
-	width: 300px;
-	height: 50px;
-	margin: 0 160px;
-}
-
-#mJ2userid, #mJ2userpwd, #mJ2userpwdOk, #mJ2username, #mJ2userNname,
-	#mJ2userB, #mJ2usertel, #mJ2usernum, #mJ2userM {
-	width: 68%;
-	height: 40px;
-	background-color: #e2e2e2;
-	margin: 20px 0;
-}
 #listFontColor{
 	color:black;
 }
-#mdBtm,#mdJBtm{
+#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#pwdF1Btm,#pwdF2Btm{
 	float:right;
 }
-.md_layer,.mdJ_layer{
+.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.pwdF1_layer,.pwdF2_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -159,32 +124,45 @@ a {
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
 	}
-	#md,#mdJ,#idF1{
+	#md,#mdJ,#mdJ2,#idF1,#pwdF1,#pwdF2{
 		display:none;
 		position:absolute;
-		width:40%;
-		height:70%;
+		width:100%;
+		height:100%;
 		z-index:1;
 	}
-
-
-.nav-item a {
+.navbar-new-bottom{
+    background-color: #f7f7f7;
+    box-shadow: 0 5px 6px -2px rgba(0,0,0,.3);
+    border-top: 1px solid #e0e0e0;
+    margin-top: 4%;
+    height: 40px;
+}
+.navbar-new-bottom ul li{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.navbar-nav .nav-item a {
     color: #333;
     font-size: 14px;
     font-weight: 600;
     transition: 1s ease;
 }
-.nav-item a:hover{
+.navbar-nav .nav-item a:hover{
     color: #0062cc;
 }
-
-
-
-#mdBtm,#mdJBtm{
-
-	float:right;
+.dropdown-menu.show{
+    background: #f8f9fa;
+    border-radius: 0;
 }
-#mdClose,#mdJClose,#idF1Close{
+.navbar-new-top{
+    background: #f1f7fa;
+}
+.navbar-new-bottom{
+	margin-top:83px;
+	margin-bottom:5px;
+}
+#mdClose,#mdJClose,#mdJClose,#idF1Close,#pwdF1Close,#pwdF2Close{
 	background-color:white;
 	border:0;
 	outline:0;
@@ -212,7 +190,22 @@ a {
 		height:790px;
 		border-radius:10px;
 	}
+	#mdJ2{
+		width:350px;
+		height:790px;
+		border-radius:10px;
+	}
 	#idF1{
+		width:350px;
+		height:640px;
+		border-radius:10px;
+	}
+	#pwdF1{
+		width:350px;
+		height:640px;
+		border-radius:10px;
+	}
+	#pwdF2{
 		width:350px;
 		height:640px;
 		border-radius:10px;
@@ -335,7 +328,7 @@ a {
 		color: black;
 	}
 /* 버튼 css*/
-.autBtn,.idFNoBtn{
+.autBtn,.idFNoBtn,.pwdFNoBtn{
   width:100%;
   background:rgb(243,191,169);
   color:#fff;
@@ -348,11 +341,11 @@ a {
   transition:800ms ease all;
   outline:none;
 }
-.autBtn:hover,.idFNoBtn:hover{
+.autBtn:hover,.idFNoBtn:hover,.pwdFNoBtn:hover{
   background:rgb(241,247,250);
   color:rgb(171,206,226);
 }
-.autBtn:before,.idFNoBtn:brfore,.autBtn:after,.idFNoBtn:after{
+.autBtn:before,.idFNoBtn:before,,.pwdFNoBtn:before.autBtn:after,.idFNoBtn:after,.pwdFNoBtn:after{
   content:'';
   position:absolute;
   top:0;
@@ -362,17 +355,17 @@ a {
   background:rgb(171,206,226);
   transition:400ms ease all;
 }
-.autBtn:after,.idFNoBtn:after{
+.autBtn:after,.idFNoBtn:after,.pwdFNoBtn:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
-.autBtn:hover:before,.idFNoBtn:hover:brfore,.autBtn:hover:after,.idFNoBtn:hover:after{
+.autBtn:hover:before,.idFNoBtn:hover:brfore,.pwdFNoBtn:hover:brfore,.autBtn:hover:after,.idFNoBtn:hover:after,.pwdFNoBtn:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-#idF1 button{
+#idF1 button,#pwdF1 button ,#pwdF1 button{
 	margin:10px 0;
 }
 .mainLogoImg{
@@ -381,94 +374,14 @@ a {
 .logRadioBtnInterval{
 	margin:0 0 0 10px;
 }
-/* 메뉴 */
-.nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
-  border-bottom: 3px solid transparent;
-  }
-.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
-  border-bottom: 3px solid transparent;
-  background: none;
-}
-.navbar a, .dropdown-menu>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .navbar-toggle{
- color: black;
-}
-.dropdown-menu{
-    -webkit-box-shadow: none;
-    box-shadow:none;
-    background-color:rgb(255,255,255);
-}
-.dropdown-menu a:hover:nth-child(7n+1), .dropdown-menu a.active:nth-child(7n+1) {
-  border-bottom: #C4E17F 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+3), .dropdown-menu a.active:nth-child(7n+3) {
-  border-bottom: #FECF71 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+4), .dropdown-menu a.active:nth-child(7n+4) {
-  border-bottom: #F0776C 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+5), .dropdown-menu a.active:nth-child(7n+5) {
-  border-bottom: #DB9DBE 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+6), .dropdown-menu a.active:nth-child(7n+6) {
-  border-bottom: #C49CDE 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+7), .dropdown-menu a.active:nth-child(7n+7) {
-  border-bottom: #669AE1 3px solid;
-}
 
-
-
-.nav li:hover:nth-child(11n+1), .nav li.active:nth-child(11n+1){
-  border-bottom: #C4E17F 3px solid;
-}
-.nav li:hover:nth-child(11n+2), .nav li.active:nth-child(11n+2){
-  border-bottom: #F7FDCA 3px solid;
-}
-.nav li:hover:nth-child(11n+3), .nav li.active:nth-child(11n+3){
-  border-bottom: #FECF71 3px solid;
-}
-.nav li:hover:nth-child(11n+4), .nav li.active:nth-child(11n+4){
-  border-bottom: #F0776C 3px solid;
-}
-.nav li:hover:nth-child(11n+5), .nav li.active:nth-child(11n+5){
-  border-bottom: #DB9DBE 3px solid;
-}
-.nav li:hover:nth-child(11n+6), .nav li.active:nth-child(11n+6){
-  border-bottom: #C49CDE 3px solid;
-}
-.nav li:hover:nth-child(11n+7), .nav li.active:nth-child(11n+7){
-  border-bottom: #669AE1 3px solid;
-}
-.nav li:hover:nth-child(11n+8), .nav li.active:nth-child(11n+8){
-  border-bottom: #62C2E4 3px solid;
-}
-.nav li:hover:nth-child(11n+9), .nav li.active:nth-child(11n+9){
-  border-bottom: #C4E17F 3px solid;
-}
-.nav li:hover:nth-child(11n+10), .nav li.active:nth-child(11n+10){
-  border-bottom: #F7FDCA 3px solid;
-}
-.nav li:hover:nth-child(11n+11), .nav li.active:nth-child(11n+11){
-  border-bottom: #FECF71 3px solid;
-}
-/* 메뉴 끝 */
-.container{
-margin-top: 50px;
-}
 </style>
 <script>
 $(function(){
-
-//============================================로그인 관련 모달============================================//
+	
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
-    	$(".nav-item a").css({ 'pointer-events':'none' });
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#md").css({
            "top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -480,9 +393,11 @@ $(function(){
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
     });
+
+
   //회원가입모달창 띄우기
     $("#joinFormBtn").click(function(){
-    	$(".nav-item a").css({ 'pointer-events':'none' });
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#mdJ").css({
            "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -494,7 +409,7 @@ $(function(){
     });
     //아이디찾기
     $("#idFindBtn").click(function(){
-    	$(".nav-item a").css({ 'pointer-events': 'none' });
+    	$("#md").css({'display':'none'});
 		$("#idF1").css({
            "top": (($(window).height()-$("#idF1").outerHeight())/2+$(window).scrollTop())+"px",
            "left": (($(window).width()-$("#idF1").outerWidth())/2+$(window).scrollLeft())+"px"
@@ -531,7 +446,7 @@ $(function(){
     $("#pwdF2Close, .pwdF2_layer").click(function(){
        $("#pwdF2").fadeOut();
     });
-    //비밀번호찾기2에서 1로이동하는 모달
+  	//
     $("#pwd1FindReturnBtn").click(function(){
 		$("#pwdF2").css({'display':'none'});
 	$("#pwdF1").css({
@@ -541,105 +456,80 @@ $(function(){
     });
     $("#pwdF1").fadeIn();
 });
-	$("#pwdF1Close, .pwdF1_layer").click(function(){
-   		$("#pwdF1").fadeOut();
-	});
-	//라디오버튼 클릭시 크리에이터 폼이뜨도록하는이벤트
-//	$("input:radio[id=join2RadioCreatorBtn]").click(function(){
-//		$("#mdJ").css({'display':'none'});
-//		$("#mdJ2").css({
-//	           "top": (($(window).height()-$("#mdJ2").outerHeight())/2+$(window).scrollTop())+"px",
-//	           "left": (($(window).width()-$("#mdJ2").outerWidth())/2+$(window).scrollLeft())+"px"
-//	        });
-//	        $("#mdJ2").fadeIn();
-//	    });
-//	    $("#mdJ2Close, .mdJ2_layer").click(function(){
-//	       $("#mdJ2").fadeOut();
-//	    });
-//	});
-
-			
-//============================================로그인 관련 모달============================================//
+$("#pwdF1Close, .pwdF1_layer").click(function(){
+   $("#pwdF1").fadeOut();
+});
 });
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 메뉴 -->
-	<nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
-	<a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="nav navbar-nav mr-auto">
-	     <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          카테고리
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		        <a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
-				<a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
-				<a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
-				<a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
-				<a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
-				<a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
-				<a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
-	        </div>
-	      </li>
-	      <li class="nav-item ">
-	        <a class="nav-link" href="/gachi/storeMain">스토어 </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="/gachi/introCreate">크리에이터 소개</a>
-	      </li>
-	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          공지사항
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a>
-	          <a class="dropdown-item" href="/gachi/eventBoard">이벤트</a>
-	        </div>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="/gachi/companyBoard">회사 소개</a>
-	      </li>
-	    </ul>
-	    
-	     <ul class="nav navbar-nav pull-right">
-   			 <li class="nav-item"><a class="nav-link "
+<nav class="navbar navbar-expand-sm fixed-top navbar-new-top">
+  <a href="/gachi">
+		 <img src="img/logo.png" style="width:25%;" alt="logo" /></a>
+		<ul class="nav navbar-nav mr-auto"></ul>
+  <ul class="navbar-nav justify-content-end">
+    <li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/adminDashboard">어드민</a></li>
-			<li class="nav-item"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/creatorDashboard">크리에이터</a></li>
-			<li class="nav-item"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/mypage">마이페이지</a></li>
-			 <li class="nav-item" id="loginFormBtn"><a class="nav-link" 
+			 <li class="nav-item" id="loginFormBtn"><a class="nav-link px-2" 
 				href="#">로그인</a></li>
-			<li class="nav-item" id="joinFormBtn"><a class="nav-link"
+			<li class="nav-item" id="joinFormBtn"><a class="nav-link px-2"
 				href="#">회원가입</a></li>
-			<li class="nav-item"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link px-2"
 				href="/gachi/serviceCenterBoard">고객센터</a></li>	
-  		</ul>
+  </ul>
 	  </div>
 </nav>
+<nav class="navbar  navbar-expand-sm navbar-new-bottom">
+		<div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+
+			<ul class="navbar-nav w-100 justify-content-center px-3">
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
+						<a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
+						<a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/introCreate">크리에이터 소개</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/storeMain">스토어</a></li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">공지사항</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a> 
+						<a class="dropdown-item" href="/gachi/eventBoard">이벤트</a> 
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/gachi/companyBoard">회사소개</a></li>
+			</ul>
+		</div>
+	</nav>
+
 	<!-- 메뉴 끝 -->
 	<!-- 로그인폼 -->
 	<div id="md" class="join">
 		<div id="loginFrm" class="col-xs-12 col-md-12">
 			<form method="post" action="">
-			<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 			<div id="mdBtm">
 					<button type="button" class="btn btn-primary" id="mdClose">X</button>
 				</div>
 			<div>
+			<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 				<input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 				<div class="md_layer"></div>
 						<input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
 						<input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
-						<span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#">비밀번호찾기</a></span><br />
+						<span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
 					<button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
 					<span>or</span><br />
 					<button id="kokoBtn">카카오톡으로 로그인</button><br />
@@ -653,10 +543,10 @@ $(function(){
 	<div id="mdJ" class="join">
 	<div id="joinForm" class="col-xs-12 col-md-12">
 		<form method="post" action="">	
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 				<div id="mdJBtm">
 					<button type="button" class="btn btn-primary" id="mdJClose">X</button>
 				</div>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 				<input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 				<div class="mdJ_layer"></div>
 			 	<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
@@ -676,15 +566,14 @@ $(function(){
 		</form>
 	</div>
 	</div>
-	<div id="mdJ2" class="join" style="display:none">
+	<div id="mdJ2" class="join">
 		<div id="joinForm2" class="col-xs-12 col-md-12">
 			<form>
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 				<div id="mdJ2Btm">
 					<button type="button" class="btn btn-primary" id="mdJ2Close">X</button>
 				</div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-				<input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+				<input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 				<div class="mdJ2_layer"></div>
 					<input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
 			 		<input type="hidden" id="emailChk" value="false" />
@@ -693,11 +582,10 @@ $(function(){
 			 		<input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
 			 		<input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
 			 		<input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-			 		<input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+			 		<input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 			 		<span id="telMessage" class="message"></span>
-					<div class="textBoxJ">사업자번호 :</div>
 					<input type="text" placeholder="사업자번호" name="" id=""/>
 					<input type="text" placeholder="계좌" name="" id=""/>
 					<button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
@@ -717,52 +605,59 @@ $(function(){
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
 						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
-						<input type="text" placeholder="연락처를 입력해주세요" id="idFTel" name="idFTel"/>
-					<button class="autBtn">인증</button><br/>
-					<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
-					<button class="idFNoBtn">확인</button>
+						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+						<button class="autBtn">인증</button><br/>
+						<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
+						<button class="idFNoBtn">확인</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	<!-- 아이디찾기 클릭시 나오는 아이디찾는폼 끝 -->
-	<div style="display: none">
-		<div id="pwdF1">
+	<!-- 비밀번호 찾기 1-->
+	<div id="pwdF1" class="join">
+		<div id="pwdF1Form" class="col-xs-12 col-md-12">
 			<form>
-				<div>
-					<h1>비밀번호찾기</h1>
-					<div>
-						<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
-							<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다</span>
-							<input type="text" placeholder="연락처를 입력해주세요" id="pwdFTel1" name="pwdFTel1" style="background-color: #e2e2e2;" />
-						<button class="autBtn">인증</button><br />
-						<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" style="background-color: #e2e2e2;" />
-						<button id="pwdFNoBtn">확인</button>
-					</div>
+				<div id="pwdF1Btm">
+					<button type="button" class="btn btn-primary" id="pwdF1Close">X</button>
 				</div>
+				<div class="pwdF1_layer"></div>
+				<div>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
+					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
+					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+					<button class="autBtn">인증</button><br/>
+					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
+					<button class="pwdFNoBtn">확인</button>
+				</div>	
 			</form>
 		</div>
 	</div>
-
 	<!-- 비밀번호 찾기 끝 -->
-	<!-- 비밀번호 찾기 2-->
-	<div id="pwdF2" class="join" style="display:none">
+	<div id="pwdF2" class="join">
 		<div id="pwdF2Form" class="col-xs-12 col-md-12">
 			<form>
-				<div>
-					<h1>비밀번호찾기</h1>
-					<div>
-						<span class="radioBtn"><input type="radio" value="회원" />회원<input type="radio" value="크리에이터" />크리에이터</span><br />
-							<span id="pwdFF2">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다</span>
-							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail" style="background-color: #e2e2e2;" /><br />
-							<input type="text" placeholder="연락처를 입력해주세요" id="pwdFTel2" name="pwdFTel2" style="background-color: #e2e2e2;" />
-						<button class="autBtn">인증</button>
-						<br /> <input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2" style="background-color: #e2e2e2;" />
-						<button id="pwdFNoBtn">확인</button>
-					</div>
+				<div id="pwdF2Btm">
+					<button type="button" class="btn btn-primary" id="pwdF2Close">X</button>
 				</div>
+				<div class="pwdF2_layer"></div>
+					<div>
+					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
+							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
+							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
+						<button class="autBtn">인증</button>
+						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>
+						<button class="pwdFNoBtn">확인</button>
+					</div>
+				
 			</form>
 		</div>
 	</div>	
-	<!-- 비밀번호 찾기 2끝-->
-
