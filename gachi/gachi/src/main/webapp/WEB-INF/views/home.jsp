@@ -11,9 +11,6 @@
 .homeClassListTitle { /*클래스 리스트 제목(인기, 신규, 추천)*/
 	font-weight: 600px;
 }
-h3 :nth-child(2), h3:nth-child(3){
-	margin-top: 50px;
-}
 .homeClassListTitle+p{
 	margin: 0;
 }
@@ -106,7 +103,7 @@ h3 :nth-child(2), h3:nth-child(3){
 		</div>
 		
 		<!-- 신규 -->
-		<h3 class="homeClassListTitle">신규 클래스</h3>
+		<h3 class="homeClassListTitle" style="margin-top: 50px;">신규 클래스</h3>
 		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 		<div class="row">
 			<div class="col-sm-4">
@@ -132,7 +129,7 @@ h3 :nth-child(2), h3:nth-child(3){
 			</div>
 		</div>
 		<!-- 추천 -->
-		<h3 class="homeClassListTitle">추천 클래스</h3>
+		<h3 class="homeClassListTitle" style="margin-top: 50px;">추천 클래스</h3>
 		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 		<div class="row" style="margin-bottom:50px;">
 			<div class="col-sm-4">
