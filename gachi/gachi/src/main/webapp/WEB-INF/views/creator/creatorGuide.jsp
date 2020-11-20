@@ -3,15 +3,8 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-	// AOS
 
-	var myAOS = function() {
-		AOS.init({
-			easing : 'ease-out-back',
-			duration : 1500
-		});
-	}
-	myAOS();
+AOS.init();
 
 	$(()=>{
 		$("#headerDiv").css("display","none");
@@ -100,7 +93,7 @@
 
 <div class="cr_guide text-center " style="margin-bottom:50px;">
 
-	 	<div id="guide_navi_div">
+	 	<div id="guide_navi_div"style="margin-top: 100px">
 			<ul id="cr_guide_navi">
 				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToCreateClass()">클래스관리</button></li>
 				<li><button type="button" class="btn btn-outline-primary btn-block" onclick="moveToStatClass()">클래스통계</button></li>
