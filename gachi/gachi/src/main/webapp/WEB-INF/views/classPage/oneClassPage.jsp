@@ -20,22 +20,8 @@
 	text-decoration: none;
 	color:black;
 }
-#createSearchTxt{
-	border: 0;
-	border-bottom: 1px solid black;
-	outline: none;
-}
 
-#CintroCreateSearch button {
-	background-color: white;
-	color: black;
-	border: 0;
-}
 
-#CintroCreateSearch button:focus {
-	outline: none;
-	color: #888;
-}
 /*======= 검색 ==========*/
 /*======= 크리에이터 리스트 ==========*/
 .homeClassListImg {/*이미지 사이즈 조절*/
@@ -64,6 +50,9 @@
 .col-sm-4 a {
 	text-decoration: none;
 	color: black;
+}
+.fa-heart{ /*하트 색상*/
+	color:red;
 }
 /*======= 크리에이터 리스트 ==========*/
 /* 이미지 오버 효과 */
@@ -116,9 +105,6 @@ $(".hover").mouseleave(
 		<option value="Inew">최신순</option>
 		<option value="Ipopular">인기순</option>
 	</select>
-		
-		<input type="text" name="createSearchTxt" id="createSearchTxt" />
-		<button name="createSearchBtn">검색하기</button>
 	</div>
 
 	<!-- 리스트 -->
