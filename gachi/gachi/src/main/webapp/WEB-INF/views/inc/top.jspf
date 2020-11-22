@@ -360,10 +360,7 @@ a {
   border-bottom: #C4E17F 3px solid;
 }
 .dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
+  border-bottom: #C3D2FE 3px solid;
 }
 .dropdown-menu a:hover:nth-child(7n+3), .dropdown-menu a.active:nth-child(7n+3) {
   border-bottom: #FECF71 3px solid;
@@ -387,7 +384,7 @@ a {
   border-bottom: #C4E17F 3px solid;
 }
 .nav li:hover:nth-child(11n+2), .nav li.active:nth-child(11n+2){
-  border-bottom: #F7FDCA 3px solid;
+  border-bottom: #C3D2FE 3px solid;
 }
 .nav li:hover:nth-child(11n+3), .nav li.active:nth-child(11n+3){
   border-bottom: #FECF71 3px solid;
@@ -417,6 +414,12 @@ a {
   border-bottom: #FECF71 3px solid;
 }
 /* 메뉴 끝 */
+/* 검색 버튼 */
+#top-searchbtn{
+	background: none;
+	border:0;
+}
+/* 검색 버튼 끝 */
 .container{
 margin-top: 50px;
 }
@@ -569,6 +572,12 @@ $("#pwdF1Close, .pwdF1_layer").click(function(){
          <li class="nav-item"><a class="nav-link"
             href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
+        <!-- 검색버튼 -->
+        <form class="form-inline d-flex justify-content-center md-form form-sm">
+			  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+			    aria-label="Search">
+			  <button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
      </div>
 </nav>
    <!-- 메뉴 끝 -->
