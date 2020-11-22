@@ -74,17 +74,7 @@
 	$(".hover").mouseleave(function() {
 		$(this).removeClass("hover");
 	});
-	//하트 이미지 클릭시 변경
-	$(function(){
-		$('i').on('click',function(){
-			//색칠된 하트 <i class="fas fa-heart"></i>
-			if($(this).attr('class','far fa-heart fa-lg pt-2')){
-				$(this).attr('class','fas fa-heart fa-lg pt-2');
-			}else {
-				$(this).attr('class','far fa-heart fa-lg pt-2');
-			};
-		});
-	});
+	
 </script>
 <body>
 	<div class="container cfont">
