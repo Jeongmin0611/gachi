@@ -2,126 +2,81 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>	
 	
-	/* 회원정보수정 폼 */
+	/* 회원정보확인 */
 	
-	/****************/
-	/* 상단 - 메뉴바*/
-	#userInfoEditFormTop{
-		margin:20px auto;
-		margin-left:80px;
-		overflow:auto;
-		text-align:center;
+	.mypageContent div{
+		margin: 10px 0;
 	}
-	#userInfoEditFormTop li{
-		float:left;
+	.mypageContent input{
+		border:	none;
+		outline: none;
+		background-color: #eee;
 	}
-	#userInfoEditFormTop li:nth-child(2){
-		width:3%;
+	.mypageContent>button{
+		background-color: #abcee3;
+		margin-top: 100px;
 	}
-	
-	/****************/
-	/* 내용 */
-	#userInfoEditFormContent{
-		width:50%;
-		position:relative;
-		left:25%;
-		margin:50px 0;
+	.mypageContent>div:nth-child(7) input,
+	.mypageContent>div:nth-child(8) input:first-child{
+		width: 20%;
 	}
-	#userInfoEditFormContent label{
-		font-size:1.3em;
+	.mypageContent>div:nth-child(8) input:last-child{
+		width: 50%;
 	}
-	/* 정보수정 리스트 */
-	#userInfoEditFormLst{
-		margin:10px 0 100px;
-	}
-	#userInfoEditFormLst li{
-		overflow:auto;
-		padding:10px 0;
-		text-align:center;
-		margin-bottom:2%;
-		margin:0 10px;
-		
-	}
-	#userInfoEditFormLst li:nth-child(2n+1){
-		width:30%;
-		float:left;
-	}
-	#userInfoEditFormLst li:nth-child(2n){
-		width:65%;
-	}
-	#userInfoEditFormLst li:nth-child(2),
-	#userInfoEditFormLst li:nth-child(4),
-	#userInfoEditFormLst li:nth-child(6),
-	#userInfoEditFormLst li:nth-child(12){	
-		border:none;
-	}
-	#userInfoEditFormLst li:nth-child(10)>input {
-		width:15%;
-		margin:0 5px;
-	}
-	#userInfoEditFormLst li:nth-child(10)>button {
-		width:15%;
-	}
-	#userInfoEditFormLst li:nth-child(12)>input:first-child{
-		width:15%;
-		float:left;
-	}
-	#userInfoEditFormLst li:nth-child(12)>input:last-child{
-		width:70%;
-	}
-	#userInfoEditFormLst li:nth-child(14)>input{
-		width:90%;
-	}
-	#userInfoEditFormLst input{
-		width:70%;
-		text-align:center;
-		border:none;
-		outline:none;
-	}
-	#userInfoEditFormContent button{
-		background-color:#abcee3;
+	.mypageContent>div>div:last-child{
+		background-color: #eee;
 	}
 	
 </style>
-<div class="container">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div id="userInfoEditFormTop">
-			<ul>
-				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
-				<li>|</li>
-				<li><a href="/gachi/userLeave">회원탈퇴</a></li>
-			</ul>
+		<div class="mypageTop">
+			<div class="row">
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-1">|</div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
+			</div>
 		</div>
-		<div id="userInfoEditFormContent">
-			<label>회원정보확인</label>
-			<hr style="background:#000"/>
-			<ul id="userInfoEditFormLst">
-				<li>이름</li>
-				<li>김유미</li>
-				<li>생년월일</li>
-				<li>1990.12.31</li>
-				<li>아이디</li>
-				<li>userid@bitcamp.com</li>
-				<li>닉네임</li>
-				<li><input type="text" name="nickname" value="김유미" readonly/></li>
-				<li>연락처</li>
-				<li>
-					<input type="text" name="tel" value="010" readonly/>
-					<input type="text" name="tel" value="9999" readonly/>
-					<input type="text" name="tel" value="8888" readonly/>
-					<button type="button" class="btn btn-outline-light btn-sm">인증</button>
-				</li>
-				<li>주소</li>
-				<li>
+		<div class="mypageContent col-lg-8 col-md-10">
+			<h4>회원정보확인</h4>
+			<hr class="userHr"/>
+			<div class="row">
+				<div class="col-md-4">이름</div>
+				<div class="col-md-8">김유미</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">생년월일</div>
+				<div class="col-md-8">1990.12.31</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">아이디</div>
+				<div class="col-md-8">userid@bitcamp.com</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">닉네임</div>
+				<div class="col-md-8"><input type="text" name="nickname" value="김유미" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">연락처</div>
+				<div class="col-md-8">
+					<input type="text" name="tel1" value="010" readonly/>-
+					<input type="text" name="tel2" value="9999" readonly/>-
+					<input type="text" name="tel3" value="8888" readonly/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">주소</div>
+				<div class="col-md-8">
 					<input type="text" name="zipcode" value="01234" readonly/>
-					<button type="button" class="btn btn-outline-light btn-sm">검색</button>
 					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
-				</li>
-				<li>상세주소</li>
-				<li><input type="text" name="addrDetail" value="11111112222222" readonly/></li>
-				
-			</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">상세주소</div>
+				<div class="col-md-8"><input type="text" name="addrDetail" value="11111112222222" readonly/></div>
+			</div>
+			
 			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEdit'">수정하기</button>
 		</div>
 	</div>
