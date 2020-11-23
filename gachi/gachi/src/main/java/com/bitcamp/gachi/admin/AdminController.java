@@ -171,5 +171,8 @@ public class AdminController {
 	public String adminReturn() {
 		return "admin/adminReturn";
 	}
-
+	@RequestMapping("/adminVideo")
+	public String adminVideo() {
+		return "admin/adminVideo";
+	}
 }
