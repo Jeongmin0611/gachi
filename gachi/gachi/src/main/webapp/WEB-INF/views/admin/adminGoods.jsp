@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container text-center cfont">
 <h1>스토어 관리</h1>
-	<div class="ad_right_align">
+	<div style="text-align:right;margin:20px 0px;">
 	<form action="">
 		<select name="category">
 			<option>공예/창작</option>
@@ -19,7 +20,7 @@
 			<option>판매종료</option>
 		</select>
 		<input type="text" id="" name=""/>
-		<input type="submit" value="검색" />
+		<input type="submit" class="btn" value="검색" />
 		</form>
 	</div>
 	<ul id="ad_goods_lst">
@@ -41,7 +42,10 @@
 		<li>2020-08-12</li>
 		<li>판매중</li>
 	</ul>
-<button onclick="location.href='/gachi/adminGoodsWrite'">상품등록</button>
+	<div style="height:50px;">
+		<button class="btn" onclick="location.href='/gachi/adminGoodsWrite'">상품등록</button>	
+		<button class="btn" onclick="location.href='/gachi/adminGoodsWrite'">상품삭제</button>	
+	</div>
 <div id="paging">
 	<ul>
 		<li>prev</li>

@@ -67,7 +67,7 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#joinForm,#idF1Form,#pwdF1Form,#pwdF2Form{
+#loginFrm,#login2Frm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
@@ -78,10 +78,10 @@ a {
 #listFontColor{
 	color:black;
 }
-#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#pwdF1Btm,#pwdF2Btm{
+#mdBtm,#md2Btm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
 	float:right;
 }
-.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.pwdF1_layer,.pwdF2_layer{
+.md_layer,.md2_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -90,7 +90,7 @@ a {
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
 	}
-	#md,#mdJ,#mdJ2,#idF1,#pwdF1,#pwdF2{
+	#md,#md2,#mdJ,#mdJ2,#idF1,#idF2,#pwdF1,#pwdF1C,#pwdF2,#pwdF2C{
 		display:none;
 		position:absolute;
 		width:100%;
@@ -128,7 +128,7 @@ a {
 	margin-top:83px;
 	margin-bottom:5px;
 }
-#mdClose,#mdJClose,#mdJClose,#idF1Close,#pwdF1Close,#pwdF2Close{
+#mdClose,#md2Close,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
 	background-color:white;
 	border:0;
 	outline:0;
@@ -146,19 +146,19 @@ a {
 		margin-top:10px;
 		margin-bottom:10px;
 	}
-	#md{
+	#md,#md2{
 		width:350px;
 		height:640px;
 		border-radius:10px;
 	}
 	#mdJ{
 		width:350px;
-		height:790px;
+		height:920px;
 		border-radius:10px;
 	}
 	#mdJ2{
 		width:350px;
-		height:790px;
+		height:900px;
 		border-radius:10px;
 	}
 	#idF1{
@@ -166,12 +166,17 @@ a {
 		height:640px;
 		border-radius:10px;
 	}
-	#pwdF1{
+	#idF2{
 		width:350px;
 		height:640px;
 		border-radius:10px;
 	}
-	#pwdF2{
+	#pwdF1,#pwdF1C{
+		width:350px;
+		height:640px;
+		border-radius:10px;
+	}
+	#pwdF2,#pwdF2C{
 		width:350px;
 		height:640px;
 		border-radius:10px;
@@ -218,7 +223,7 @@ a {
 		color:#999;
 		font-size:16px
 	}
-	.tel{
+	.tel,.birthdata{
 		margin: 0px auto;
 		float: left;
 		margin-right:10px;
@@ -235,7 +240,7 @@ a {
 		font-size: 12px;
 		border-radius: 50px;
 	}
-	#signupBtn {
+	#signupBtn,#mdJ2signupBtn {
 		width: 240px;
 		height: 50px;
 		border: none;
@@ -247,7 +252,7 @@ a {
 		margin-top:10px;
 		margin-bottom:10px;
 	}
-	#signupBtn:hover{
+	#signupBtn:hover,#mdJ2signupBtn:hover{
 		border: solid 1px #e4e4e4;
 		color: white;
 	}
@@ -331,7 +336,7 @@ a {
   width:100%;
   transition:800ms ease all;
 }
-#idF1 button,#pwdF1 button ,#pwdF1 button{
+#idF1 button,#idF2 button,#pwdF1 button,#pwdF1C button,#pwdF1 button,#pwdF2 button,#pwdF2C button{
 	margin:10px 0;
 }
 .mainLogoImg{
@@ -339,6 +344,9 @@ a {
 }
 .logRadioBtnInterval{
 	margin:0 0 0 10px;
+}
+.genderRadioBtnInterval{
+	margin:0 0 0 20px;
 }
 /* 메뉴 */
 .nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
@@ -360,10 +368,7 @@ a {
   border-bottom: #C4E17F 3px solid;
 }
 .dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #F7FDCA 3px solid;
+  border-bottom: #C3D2FE 3px solid;
 }
 .dropdown-menu a:hover:nth-child(7n+3), .dropdown-menu a.active:nth-child(7n+3) {
   border-bottom: #FECF71 3px solid;
@@ -387,7 +392,7 @@ a {
   border-bottom: #C4E17F 3px solid;
 }
 .nav li:hover:nth-child(11n+2), .nav li.active:nth-child(11n+2){
-  border-bottom: #F7FDCA 3px solid;
+  border-bottom: #C3D2FE 3px solid;
 }
 .nav li:hover:nth-child(11n+3), .nav li.active:nth-child(11n+3){
   border-bottom: #FECF71 3px solid;
@@ -417,6 +422,13 @@ a {
   border-bottom: #FECF71 3px solid;
 }
 /* 메뉴 끝 */
+/* 검색 버튼 */
+#top-searchbtn{
+	background: none;
+	border:0;
+}
+
+/* 검색 버튼 끝 */
 .container{
 margin-top: 50px;
 }
@@ -498,13 +510,138 @@ $(function(){
        "top": (($(window).height()-$("#pwdF1").outerHeight())/2+$(window).scrollTop())+"px",
        "left": (($(window).width()-$("#pwdF1").outerWidth())/2+$(window).scrollLeft())+"px"
     
-    });
-    $("#pwdF1").fadeIn();
+   		});
+    	$("#pwdF1").fadeIn();
+	});
+	$("#pwdF1Close, .pwdF1_layer").click(function(){
+   		$("#pwdF1").fadeOut();
+	});
+	
 });
-$("#pwdF1Close, .pwdF1_layer").click(function(){
-   $("#pwdF1").fadeOut();
-});
-});
+	function mdJchange(){//회원가입폼에서 크리에이터 회원가입폼으로
+		$("#mdJ").css({'display':'none'});
+		$('#mdJ2').css({
+			"top": (($(window).height()-$("#mdJ2").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#mdJ2").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("mdJ2").fadeIn();
+			
+			$("#mdJ2Close,.mdJ2_layer").click(function(){
+		   		$("#mdJ2").fadeOut();
+		});
+	}
+	function mdJ2change(){//크리에이터에서 회원
+		$("#mdJ2").css({'display':'none'});
+		$('#mdJ').css({
+			"top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#mdJ").fadeIn();
+			
+			$("#mdJClose,.mdJ_layer").click(function(){
+		   		$("#mdJ").fadeOut();
+		});
+	}
+	function idFindChange(){
+		$("#idF1").css({'display':'none'});
+		$('#idF2').css({
+			"top": (($(window).height()-$("#idF2").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#idF2").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#idF2").fadeIn();
+			
+			$("#idF2Close,.idF2_layer").click(function(){
+		   		$("#idF2").fadeOut();
+		});
+	}
+	function idFind2Change(){
+		$("#idF2").css({'display':'none'});
+		$('#idF1').css({
+			"top": (($(window).height()-$("#idF1").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#idF1").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#idF1").fadeIn();
+			
+			$("#idF1Close,.idF1_layer").click(function(){
+		   		$("#idF1").fadeOut();
+		});
+
+	}
+	function pwdF1Change(){
+		$("#pwdF1").css({'display':'none'});
+		$('#pwdF1C').css({
+			"top": (($(window).height()-$("#pwdF1C").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#pwdF1C").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#pwdF1C").fadeIn();
+			
+			$("#pwdF1CClose,.pwdF1C_layer").click(function(){
+		   		$("#pwdF1C").fadeOut();
+		});
+	}
+	function pwdF1CChange(){
+		$("#pwdF1C").css({'display':'none'});
+		$('#pwdF1').css({
+			"top": (($(window).height()-$("#pwdF1").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#pwdF1").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#pwdF1").fadeIn();
+			
+			$("#pwdF1Close,.pwdF1_layer").click(function(){
+		   		$("#pwdF1").fadeOut();
+		});
+	}
+	function pwdF2Change(){
+		$("#pwdF2").css({'display':'none'});
+		$('#pwdF2C').css({
+			"top": (($(window).height()-$("#pwdF2C").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#pwdF2C").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#pwdF2C").fadeIn();
+			
+			$("#pwdF2CClose,.pwdF2C_layer").click(function(){
+		   		$("#pwdF2C").fadeOut();
+		});
+	}
+	function pwdF2CChange(){
+		$("#pwdF2C").css({'display':'none'});
+		$('#pwdF2').css({
+			"top": (($(window).height()-$("#pwdF2").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#pwdF2").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#pwdF2").fadeIn();
+			
+			$("#pwdF2Close,.pwdF2_layer").click(function(){
+		   		$("#pwdF2").fadeOut();
+		});
+	}
+	function loginChange(){
+		$("#md").css({'display':'none'});
+		$('#md2').css({
+			"top": (($(window).height()-$("#md2").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#md2").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#md2").fadeIn();
+			
+			$("#md2Close,.md2_layer").click(function(){
+		   		$("#md2").fadeOut();
+		});
+
+		}
+	function login2Change(){
+		$("#md2").css({'display':'none'});
+		$('#md').css({
+			"top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#md").fadeIn();
+			
+			$("#mdClose,.md_layer").click(function(){
+		   		$("#md").fadeOut();
+		});
+	}
+	
+	
 </script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/9a15be1bb8.js"></script>
@@ -600,22 +737,49 @@ Gitple('onClose', function () {
          <li class="nav-item"><a class="nav-link"
             href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
+        <!-- 검색버튼 -->
+        <form class="form-inline d-flex justify-content-center md-form form-sm">
+			  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+			    aria-label="Search">
+			  <button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
      </div>
 </nav>
    <!-- 메뉴 끝 -->
    <!-- 로그인폼 -->
    <div id="md" class="join">
       <div id="loginFrm" class="col-xs-12 col-md-12">
-         <form method="post" action="">
-         <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+         <form method="post" action="/gachi/registerInsert">
          <div id="mdBtm">
                <button type="button" class="btn btn-primary" id="mdClose">X</button>
             </div>
          <div>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="loginChange()"/>크리에이터<br/>
             <div class="md_layer"></div>
                   <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
                   <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
+                  <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
+               <button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
+               <span>or</span><br />
+               <button id="kokoBtn">카카오톡으로 로그인</button><br />
+               <span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div id="md2" class="join">
+      <div id="login2Frm" class="col-xs-12 col-md-12">
+         <form method="post" action="">
+         <div id="md2Btm">
+               <button type="button" class="btn btn-primary" id="md2Close">X</button>
+            </div>
+         <div>
+          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
+            <div class="md2_layer"></div>
+                  <input type="text" placeholder="아이디(이메일)" id="userid2" name="userid2"/><br />
+                  <input type="password" placeholder="비밀번호" id="userpwd2" name="userpwd2"/><br />
                   <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
                <button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
                <span>or</span><br />
@@ -630,11 +794,11 @@ Gitple('onClose', function () {
    <div id="mdJ" class="join">
    <div id="joinForm" class="col-xs-12 col-md-12">
       <form method="post" action="">   
-            <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <div id="mdJBtm">
                <button type="button" class="btn btn-primary" id="mdJClose">X</button>
             </div>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+            <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
             <div class="mdJ_layer"></div>
              <input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
              <input type="hidden" id="emailChk" value="false" />
@@ -643,41 +807,95 @@ Gitple('onClose', function () {
              <input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
              <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+             <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
+				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01월</option>
+					<option value="02">02월</option>
+					<option value="03">03월</option>
+					<option value="04">04월</option>
+					<option value="05">05월</option>
+					<option value="06">06월</option>
+					<option value="07">07월</option>
+					<option value="08">08월</option>
+					<option value="09">09월</option>
+					<option value="10">10월</option>
+					<option value="11">11월</option>
+					<option value="12">12월</option>
+				</select>
+				<select name="birtdate3" id="birtdate3" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01일</option>
+					<option value="02">02일</option>
+					<option value="03">03일</option>
+					<option value="04">04일</option>
+					<option value="05">05일</option>
+					<option value="06">06일</option>
+					<option value="07">07일</option>
+					<option value="08">08일</option>
+					<option value="09">09일</option>
+					<option value="10">10일</option>
+					<option value="11">11일</option>
+					<option value="12">12일</option>
+					<option value="13">13일</option>
+					<option value="14">14일</option>
+					<option value="15">15일</option>
+					<option value="16">16일</option>
+					<option value="17">17일</option>
+					<option value="18">18일</option>
+					<option value="19">19일</option>
+					<option value="20">20일</option>
+					<option value="21">21일</option>
+					<option value="22">22일</option>
+					<option value="23">23일</option>
+					<option value="24">24일</option>
+					<option value="25">25일</option>
+					<option value="26">26일</option>
+					<option value="27">27일</option>
+					<option value="28">28일</option>
+					<option value="29">29일</option>
+					<option value="30">30일</option>
+					<option value="31">31일</option>
+				</select><br/>
+             <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
+             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
              <span id="telMessage" class="message"></span>
              <input type="text" id="addrJ" name="addrJ" placeholder="주소"/>
              <input type="text" id="addrJDetail" name="addrJDetail" placeholder="상세주소"/>
+             <input type="checkbox"id="checkboxArt" style="width:15px;height:15px;"><span>그림</span>
+             <input type="checkbox"id="checkboxCooking" style="width:15px;height:15px;"><span>요리</span>
+             <input type="checkbox"id="checkboxCrafts" style="width:15px;height:15px;"><span>공예/창작</span>
+             <input type="checkbox"id="checkboxExercise" style="width:15px;height:15px;"><span>운동</span><br/>
+             <input type="checkbox"id="checkboxMusic" style="width:15px;height:15px;"><span>음악</span>
+             <input type="checkbox"id="checkboxPicture" style="width:15px;height:15px;"><span>사진/영상</span>
+             <input type="checkbox"id="checkboxLifeStyle" style="width:15px;height:15px;"><span>라이프스타일</span>
             <button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
       </form>
    </div>
    </div>
-   <div id="mdJ2" class="join" style="display:none">
+   <div id="mdJ2" class="join">
       <div id="joinForm2" class="col-xs-12 col-md-12">
          <form>
-            <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <div id="mdJ2Btm">
                <button type="button" class="btn btn-primary" id="mdJ2Close">X</button>
             </div>
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn"  class="logRadioBtnInterval" onclick="mdJ2change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
             <div class="mdJ2_layer"></div>
-               <input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
-                <input type="hidden" id="emailChk" value="false" />
-                <button type="button" id="emailChkBtn" style="display: none;">중복확인</button>
-                <input type="password" placeholder="비밀번호" name="password" id="password" /><span id="passwordMessage" class="message"></span>
-                <input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
-                <input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
-                <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-                <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-                <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-                <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+               <input type="text" placeholder="이메일" name="email2" id="email2" /><span id="email2Message" class="message"></span>
+                <input type="hidden" id="emailChk2" value="false" />
+                <button type="button" id="emailChk2Btn" style="display: none;">중복확인</button>
+                <input type="password" placeholder="비밀번호" name="password2" id="password2" /><span id="password2Message" class="message"></span>
+                <input type="password" placeholder="비밀번호 확인" name="passwordChk2" id="passwordChk2" /><span id="passwordChkMessage" class="message"></span>
+                <input type="text" placeholder="이름" name="name2" id="name2" /><span id="name2Message" class="message"></span>
+                <input type="text" placeholder="닉네임" name="nickname2" id="nickname2" /><span id="nickname2Message" class="message"></span>
+                <input type="text" placeholder="010" name="mdJ2tel1" id="mdJ2tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+                <input type="text" placeholder="1234"name="mdJ2tel2" id="mdJ2tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+                <input type="text" placeholder="5678"name="mdJ2tel3" id="mdJ2tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
                 <span id="telMessage" class="message"></span>
-               <div class="textBoxJ">사업자번호 :</div>
-               <input type="text" placeholder="사업자번호" name="" id=""/>
-               <input type="text" placeholder="계좌" name="" id=""/>
-               <button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
+               <input type="text" placeholder="사업자번호" name="Business Number" id="Business Number"/>
+               <input type="text" placeholder="계좌" name="account" id="account"/>
+               <button type="submit" class="btn btn-default signupBtn" id="mdJ2signupBtn">회원가입</button>
          </form>
       </div>
       </div>
@@ -692,13 +910,34 @@ Gitple('onClose', function () {
 				<div class="idF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFindChange()"/>크리에이터<br/>
 						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
 						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 						<button class="autBtn">인증</button><br/>
 						<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
+						<button class="idFNoBtn">확인</button>
+				</div>
+			</form>
+		</div>
+	</div>
+		<div id="idF2" class="join">
+		<div id="idF2Form" class="col-xs-12 col-md-12">
+			<form>
+				<div id="idF2Btm">
+					<button type="button" class="btn btn-primary" id="idF2Close">X</button>
+				</div>
+				<div class="idF2_layer"></div>
+				<div>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFind2Change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
+						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
+						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+						<button class="autBtn">인증</button><br/>
+						<input type="text" placeholder="인증번호" id="idF2No" name="idF2No"/>
 						<button class="idFNoBtn">확인</button>
 				</div>
 			</form>
@@ -715,7 +954,29 @@ Gitple('onClose', function () {
 				<div class="pwdF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1Change()"/>크리에이터<br/>
+					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
+					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
+					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+					<button class="autBtn">인증</button><br/>
+					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
+					<button class="pwdFNoBtn">확인</button>
+				</div>	
+			</form>
+		</div>
+	</div>
+	<div id="pwdF1C" class="join">
+		<div id="pwdF1CForm" class="col-xs-12 col-md-12">
+			<form>
+				<div id="pwdF1CBtm">
+					<button type="button" class="btn btn-primary" id="pwdF1CClose">X</button>
+				</div>
+				<div class="pwdF1C_layer"></div>
+				<div>
+				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
 					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
 					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
 					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
@@ -738,7 +999,28 @@ Gitple('onClose', function () {
 				<div class="pwdF2_layer"></div>
 					<div>
 					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" onclick="pwdF2Change()"/>크리에이터<br/>
+							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
+							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
+							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
+						<button class="autBtn">인증</button>
+						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>
+						<button class="pwdFNoBtn">확인</button>
+					</div>
+				
+			</form>
+		</div>
+	</div>	
+	<div id="pwdF2C" class="join">
+		<div id="pwdF2CForm" class="col-xs-12 col-md-12">
+			<form>
+				<div id="pwdF2CBtm">
+					<button type="button" class="btn btn-primary" id="pwdF2CClose">X</button>
+				</div>
+				<div class="pwdF2C_layer"></div>
+					<div>
+					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" onclick="pwdF2CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
 							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
 							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
 							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>

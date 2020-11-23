@@ -1,6 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	.btn{
+		background-color: #437299;
+		color:white;
+	}
+	#cre_classQuestion_lst li{
+		border:1px solid gray;
+		text-align: center;
+		height:50px;
+		line-height: 50px;
+	}
+	.container{
+		font-family: 'NanumBarunpen';
+	}
+</style>
 <div class="container">
+<h1>클래스 문의</h1>
 <form method="post" action="">
 <ul id="ad_order_searchForm">
 		<li>카테고리</li>
@@ -21,9 +37,9 @@
 			<input type="text"/>		
 		</li>
 	</ul>
-	<div style="text-align:center">
-		<input type="submit" value="검색">
-		<input type="reset" value="초기화">
+	<div style="text-align:center;margin:10px 0px;">
+		<input type="submit" class="btn" value="검색">
+		<input type="reset" class="btn" value="초기화">
 	</div>
 </form>
 	<ul id="cre_classQuestion_lst" class="table">
@@ -39,6 +55,17 @@
 		<li>홍길동</li>
 		<li>2020-07-21</li>
 		<li>122</li>
-		<li><button>답변하기</button></li>
+		<li><a href="#">답변하기</a></li>
 	</ul>
+	<div id="paging">
+	<ul style="margin-top:50px">
+		<li>prev</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>next</li>
+	</ul>
+</div>
 </div>

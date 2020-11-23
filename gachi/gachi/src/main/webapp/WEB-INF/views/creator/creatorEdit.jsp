@@ -1,9 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+ #cre_profile_imgArea{
+ 	border:1px solid gray;
+ 	border-radius:10px;
+ 	text-align:center;
+ }
+ #cre_profile_imgArea li{
+ 	padding:5px 0px;
+ }
+</style>
 <script>
 	$(()=>{
-		$("#creator_editForm2>li:nth-child(2n+1)").css("width","20%").css("text-align","center");
-		$("#creator_editForm2>li:nth-child(2n)").css("width","80%");
+		$("#creator_editForm2>li:nth-child(2n+1)").css("width","15%").css("text-align","center");
+		$("#creator_editForm2>li:nth-child(2n)").css("width","85%");
 		$("#creator_editForm2>li").css("float","left").css("margin","10px 0px");
 		$("#creator_editForm2>li:last-child").css("width","100%");
 		$(".form-control").css("width","30%").css("float","left");
@@ -11,27 +21,28 @@
 	});
 </script>
 <div class="container">
-	<div class="card">
+	<h1>프로필 수정</h1>
+	<div>
 		<form method="post" id="cre_creator_editForm" action="" enctype="multipart/form-data">
-			<ul class="card form-group" style="text-align:center;background-color:#E9ECEF">
+			<ul id="cre_profile_imgArea" style="border:1px solid gray;border-radius:10px;text-align:center">
 				<li>프로필 사진</li>
 				<li><img src="/gachi/img/147.jpg"></li>
-				<li><input type="file"/></li>
+				<li style="text-align:center;"><input type="file"/></li>
 			</ul>
-			<ul id="creator_editForm2" class="form-group" style="overflow:auto;background-color:#E9ECEF">
+			<ul id="creator_editForm2" class="form-group" style="overflow:auto">
 				<li>아이디</li>
 				<li>honggildong@naver.com</li>
 				<li>비밀번호</li>
-				<li><input class="form-control" type="text"/></li>
+				<li><input type="text"/></li>
 				<li>비밀번호확인</li>
-				<li><input class="form-control" type="text"/></li>
+				<li><input type="text"/></li>
 				<li>생년월일</li>
-				<li><input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="8"/></li>
+				<li><input type="text" onkeypress="onlyNumber();" maxlength="8"/></li>
 				<li>연락처</li>
 				<li>
-					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>-
-					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>-
-					<input class="form-control" type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+					<input type="text" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>-
+					<input type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>-
+					<input type="text" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
 				</li>
 				<li>사업자번호</li>
 				<li>192-02-12455</li>
@@ -53,16 +64,16 @@
 						<option>BNK부산은행</option>
 						<option>sc제일은행</option>
 					</select>
-					<input class="form-control" type="text"/>
+					<input type="text"/>
 				</li>
 				<li>sns계정</li>
-				<li><input class="form-control" type="text"/></li>
+				<li><input type="text"/></li>
 				<li>소개글</li>
 				<li><textarea name="creator_info"></textarea></li>
 			</ul>
 			<div style="text-align:center;">
-				<input type="submit" value="수정"/>
-				<input type="reset" value="다시쓰기"/>
+				<input type="submit" class="btn" value="수정"/>
+				<input type="reset" class="btn" value="다시쓰기"/>
 			</div>
 		</form>
 	</div>

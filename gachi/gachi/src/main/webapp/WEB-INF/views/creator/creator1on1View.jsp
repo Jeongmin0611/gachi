@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-
+.container{
+	font-family: 'NanumBarunpen';
+}
 /* 1:1문의 상단 제목, 날짜 */
 #cr_1on1View_Div{
 	border-top:2px solid black;
@@ -71,7 +73,7 @@
 	width: 70%;
 }
 </style>
-<div class="container cfont">
+<div class="container">
 	<div >
 		<h3>1:1문의내역</h3>
 		<div id="cr_1on1View_Div">
@@ -88,14 +90,14 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="cr_1on1View_BtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
-		<button type="button" class="btn btn-light">목록</button>
+		<button type="button" class="btn">이전</button>
+		<button type="button" class="btn">다음</button>
+		<button type="button" class="btn">목록</button>
 	</div>
 	<!-- 댓글 -->
 	<form id="cr_1on1View_ReplyForm">
 		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn btn-outline-primary">등록</button></div>
+		<div><button class="btn">등록</button></div>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>

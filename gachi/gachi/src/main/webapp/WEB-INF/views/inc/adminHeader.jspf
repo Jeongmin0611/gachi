@@ -146,7 +146,7 @@ a, h1, li {
 			</ul>
 		</div>		
 		</li>
-		<li data-target="#menu2" data-toggle="collapse"><a href="#">주문 배송관리</a>
+		<li data-target="#menu2" data-toggle="collapse"><a href="#">주문/배송관리</a>
 			<div id="menu2" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>

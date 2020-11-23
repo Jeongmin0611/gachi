@@ -33,6 +33,10 @@ public class AdminController {
 	public String adminCreator() {
 		return "admin/adminCreator";
 	}
+	@RequestMapping("/adminCreatorView")
+	public String adminCreatorView() {
+		return "admin/adminCreatorView";
+	}
 	@RequestMapping("/adminClass")
 	public String adminClass() {
 		return "admin/adminClass";

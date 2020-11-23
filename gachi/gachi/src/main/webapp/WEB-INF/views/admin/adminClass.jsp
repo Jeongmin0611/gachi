@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	#search_area{
+		text-align:right;
+		margin-top:20px;
+		margin-bottom:10px;
+		height:50px;
+	}
+</style>
 <div class="container">
 	<h1>클래스관리</h1>
 <div id="search_area">
 	<form method="post" action="">
-		<select>
-			<option>전체</option>
-			<option>등록대기</option>
-			<option>개설</option>
-			<option>종료</option>
-		</select>
 		<select>
 			<option>전체</option>
 			<option>공예/창작</option>
@@ -20,11 +23,19 @@
 			<option>사진/영상</option>
 		</select>
 		<select>
+			<option>전체</option>
+			<option>클래스코드</option>
 			<option>클래스명</option>
-			<option>크리에이터</option>
+			<option>크리에이터닉네임</option>
+		</select>
+		<select>
+			<option>전체</option>
+			<option>등록대기</option>
+			<option>개설</option>
+			<option>종료</option>
 		</select>
 		<input type="text" name=""/>
-		<input type="submit" value="검색"/>
+		<input type="submit" class="btn" value="검색"/>
 	</form>
 </div>
 	<ul id="ad_class_lst">

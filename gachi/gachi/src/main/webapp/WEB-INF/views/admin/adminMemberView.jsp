@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="container cfont">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div class="container">
 	<h1>회원조회</h1>
 	<ul id="ad_member_View">
 		<li>번호</li><li>001</li>
@@ -12,7 +13,6 @@
 	</ul>
 	<h3>시청 중인 클래스</h3>
 	<div class="ad_member_Box">
-
 	</div>
 	<h3>구매내역</h3>
 	<div class="ad_member_Box">
