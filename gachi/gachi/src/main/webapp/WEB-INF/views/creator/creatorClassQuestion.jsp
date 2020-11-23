@@ -1,6 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	.btn{
+	
+	}
+</style>
 <div class="container">
+<h1>클래스 문의</h1>
 <form method="post" action="">
 <ul id="ad_order_searchForm">
 		<li>카테고리</li>
@@ -22,7 +28,7 @@
 		</li>
 	</ul>
 	<div style="text-align:center">
-		<input type="submit" value="검색">
+		<input type="submit" class="btn" value="검색">
 		<input type="reset" value="초기화">
 	</div>
 </form>
@@ -39,6 +45,6 @@
 		<li>홍길동</li>
 		<li>2020-07-21</li>
 		<li>122</li>
-		<li><button>답변하기</button></li>
+		<li><a href="#">답변하기</a></li>
 	</ul>
 </div>

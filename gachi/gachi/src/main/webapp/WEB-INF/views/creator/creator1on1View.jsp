@@ -45,6 +45,10 @@
 	margin: 20px 0;
 	background-color: oragin;
 }
+.btn{
+ 	background-color: #437299;
+ 	color:white;
+ }
 /*댓글 리스트*/
 #cr_1on1View_ReplyDiv{
 	clear: both;
@@ -88,14 +92,14 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="cr_1on1View_BtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
-		<button type="button" class="btn btn-light">목록</button>
+		<button type="button" class="btn">이전</button>
+		<button type="button" class="btn">다음</button>
+		<button type="button" class="btn">목록</button>
 	</div>
 	<!-- 댓글 -->
 	<form id="cr_1on1View_ReplyForm">
 		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn btn-outline-primary">등록</button></div>
+		<div><button class="btn">등록</button></div>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>

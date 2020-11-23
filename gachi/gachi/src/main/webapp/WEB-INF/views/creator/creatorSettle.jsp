@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript">
 	$(function(){
 		$(".cr_settle_searchDate").css("text-align","right");
@@ -22,8 +23,8 @@
 		<h1>총 매출액</h1>
 		<h1>544,540원</h1>
 	</div>
-<div style="margin-left:10%;">
-	<ul id="cr_settle_lst" style="margin-top:50px">
+<div>
+	<ul id="cr_settle_lst" >
 		<li>크리에이터아이디</li>
 		<li>카테고리</li>
 		<li>크리에이터명</li>

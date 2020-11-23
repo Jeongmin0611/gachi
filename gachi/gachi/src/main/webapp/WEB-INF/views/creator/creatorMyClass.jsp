@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
  <style>
 	 #cr_MyClass_area{
 	 	margin-bottom:20px;
 	 	border:1px solid gray;
+	 	padding:5px;
 	 }
 	 
 	 .cr_MyClass_lst li{
@@ -24,9 +26,14 @@
 	 select{
 	 	height:30px;
 	 }
+	.btn{
+ 	background-color: #437299;
+ 	color:white;
+ 	 }
  </style> 
  
  <div class="container text-center cfont">
+ 	<h1>동영상 관리</h1>
 	<div id="cr_MyClass_area">
 		<form method="get" action="">
 			<ul class="cr_Classlist_menu">
@@ -37,21 +44,21 @@
 						<option>카테고리</option>
 						<option>클래스명</option>
 					</select>
-					<input type="text"/>		
+					<input type="text" />		
 				</li>
 				<li>등록기간</li>
 				<li>
 					<select>
 						<option>등록일</option>
 					</select>
-					 <button>오늘</button>
-					 <button>어제</button>
-					 <button>3일</button>
-					 <button>1주일</button>
-					 <button>15일</button>
-					 <button>1개월</button>
-					 <button>3개월</button>
-					 <button>6개월</button>
+					 <button class="btn">오늘</button>
+					 <button class="btn">어제</button>
+					 <button class="btn">3일</button>
+					 <button class="btn">1주일</button>
+					 <button class="btn">15일</button>
+					 <button class="btn">1개월</button>
+					 <button class="btn">3개월</button>
+					 <button class="btn">6개월</button>
 					 <input type="date"/>~
 					 <input type="date"/>
 				</li>
@@ -65,8 +72,8 @@
 				</li>
 			</ul>
 			<div style="text-align:center">
-				<input type="submit" value="검색">
-				<input type="reset" value="초기화">
+				<input type="submit" class="btn" value="검색">
+				<input type="reset" class="btn" value="초기화">
 			</div>
 		</form>
 	</div>
@@ -97,8 +104,8 @@
 		<li>개설완료</li>
 	</ul>
 	<div class="cr_MyClass_list_menu">
-		<button onclick="location.href='/gachi/creatorMyClassWrite'" class="btn btn-info">강좌개설신청</button>
-		<button class="btn btn-info">종료신청</button>
+		<button onclick="location.href='/gachi/creatorMyClassWrite'" class="btn">강좌개설신청</button>
+		<button class="btn">종료신청</button>
 	</div>
 	<div id="paging">
 		<ul>
