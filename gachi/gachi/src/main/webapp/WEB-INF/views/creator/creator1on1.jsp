@@ -15,13 +15,6 @@
  select{
  	height:30px;
  }
- .btn{
- 	background-color: #437299;
- 	color:white;
- }
- .container{
-	font-family: 'NanumBarunpen';
-}
  </style> 
 <div class="container text-center">
 	<h1>1:1문의</h1>

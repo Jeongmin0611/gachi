@@ -47,10 +47,6 @@
 	margin: 20px 0;
 	background-color: oragin;
 }
-.btn{
- 	background-color: #437299;
- 	color:white;
- }
 /*댓글 리스트*/
 #cr_1on1View_ReplyDiv{
 	clear: both;

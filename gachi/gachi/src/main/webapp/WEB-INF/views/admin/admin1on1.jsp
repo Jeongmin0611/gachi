@@ -32,10 +32,9 @@
 				<option>답변여부</option>
 		</select>
 	<input type="text" id="searchWord" placeholder="내용 입력"/>
-	<input type="submit" class="btn btn-info" value="검색"/>
+	<input type="submit" class="btn" value="검색"/>
 	</form>
 	</div>
-		<div>
 		<ul id="ad_1on1_lst">
 			<li>선택</li>
 			<li>번호</li>
@@ -51,12 +50,11 @@
 			<li><a href="/gachi/admin1on1View">[동영상] 소리만 나오고 동영상 화면이 나오지 않아요.</a></li>
 			<li>홍길동</li>
 			<li>2020-10-29</li>
-			<li><button>답변하기</button></li>
+			<li><a href="#">답변하기</a></li>
 		</ul>
-		</div>
 			<div class="ad_list_menu">
-				<button class="btn btn-info" onclick="location.href='/gachi/admin1on1Write'">글쓰기</button>
-				<button class="btn btn-info">삭제</button> 
+				<button class="btn" onclick="location.href='/gachi/admin1on1Write'">글쓰기</button>
+				<button class="btn">삭제</button> 
 			</div>
 				<div id="paging">
 					<ul>
