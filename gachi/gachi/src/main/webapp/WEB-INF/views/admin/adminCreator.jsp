@@ -1,22 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
-<style>
-	#ad_member_header{
-		height:38px;
-		margin:10px 0px;
-	}
-	#ad_member_header>div:first-child{
-		 width:30%;
-		 line-height: 30px;
-	}
-	#ad_member_header>div:last-child{
-		 text-align:right;
-	}
-</style>
 <div class="container">
 <h1>크리에이터 관리</h1>
-<div id="ad_member_header">
+<div id="ad_search_header">
 <div>
 	<ul id="cr_member_info">
 		<li>●활동 : 99명</li>
@@ -59,7 +46,7 @@
 	<li>041</li>
 	<li>창작/공예</li>
 	<li>박창작씨</li>
-	<li><a href="/gaghi/admin/adminCreatorView">creator@naver.com</a></li>
+	<li><a href="/gachi/adminCreatorView">creator@naver.com</a></li>
 	<li>010-1234-1234</li>
 	<li>2020-04-24</li>
 	<li>x</li>
