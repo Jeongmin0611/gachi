@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+<style>
+	#ad_member_header{
+		height:38px;
+		margin:10px 0px;
+	}
+	#ad_member_header>div:first-child{
+		 width:30%;
+		 line-height: 30px;
+	}
+	#ad_member_header>div:last-child{
+		 text-align:right;
+	}
+</style>
 <div class="container">
 <h1>크리에이터 관리</h1>
+<div id="ad_member_header">
 <div>
 	<ul id="cr_member_info">
 		<li>●활동 : 99명</li>
@@ -10,7 +24,7 @@
 		<li>●누적 : 100명</li>
 	</ul>
 </div>
-<div class="cr_right_align">
+<div>
 	<form action="">
 		<select name="#">
 			<option>전체</option>
@@ -27,9 +41,11 @@
 			
 		</select>
 		<input type="text" id="" name=""/>
-		<input type="submit" value="검색" />
+		<input type="submit" class="btn" value="검색" />
 		</form>
 </div>
+</div>
+<div style="margin-bottom:20px;">
 <ul id="cr_member_lst" class="text-center">
 	<li>번호</li>
 	<li>카테고리</li>
@@ -43,7 +59,7 @@
 	<li>041</li>
 	<li>창작/공예</li>
 	<li>박창작씨</li>
-	<li>creator@naver.com</li>
+	<li><a href="/gaghi/admin/adminCreatorView">creator@naver.com</a></li>
 	<li>010-1234-1234</li>
 	<li>2020-04-24</li>
 	<li>x</li>
@@ -57,7 +73,8 @@
 	<li>2020-01-24</li>
 	<li>x</li>
 	<li><a href="#">승인</a></li>
-</ul>	
+</ul>
+</div>	
 <div id="paging">
 	<ul>
 		<li>prev</li>

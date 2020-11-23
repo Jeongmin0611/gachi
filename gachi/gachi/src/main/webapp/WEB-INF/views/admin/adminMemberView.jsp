@@ -13,7 +13,6 @@
 	</ul>
 	<h3>시청 중인 클래스</h3>
 	<div class="ad_member_Box">
-
 	</div>
 	<h3>구매내역</h3>
 	<div class="ad_member_Box">

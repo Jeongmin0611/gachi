@@ -7,9 +7,9 @@
 	text-align: center;
 	margin-left: 100px;
 }
-
 .cr_dash_board {
-	border: 2px solid #4aa8d8;
+	border: 2px solid #437299;
+	border-radius:10px;
 	width: 250px;
 	height: 200px;
 	padding: 20px;
@@ -18,9 +18,6 @@
 }
 .card{
 	border-radius: 0.5rem;
-}
-.container{
-	font-family: 'NanumBarunpen';
 }
 </style>
 <div class="container cr_dash_center text-center">
