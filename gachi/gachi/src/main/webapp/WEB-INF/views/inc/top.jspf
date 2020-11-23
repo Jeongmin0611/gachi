@@ -645,10 +645,41 @@ $(function(){
 </script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/9a15be1bb8.js"></script>
+<script>
+
+window.GitpleConfig = {"appCode":"j2vNGCZzc42igrnPe6ofouihLQ2se3"};
+!function(){function e(){function e(){var e=t.contentDocument,a=e.createElement("script");a.type="text/javascript",a.async=!0,a.src=window[n]&&window[n].url?window[n].url+"/inapp-web/gitple-loader.js":"https://app.gitple.io/inapp-web/gitple-loader.js",a.charset="UTF-8",e.head&&e.head.appendChild(a)}var t=document.getElementById(a);t||((t=document.createElement("iframe")).id=a,t.style.display="none",t.style.width="0",t.style.height="0",t.addEventListener?t.addEventListener("load",e,!1):t.attachEvent?t.attachEvent("onload",e):t.onload=e,document.body.appendChild(t))}var t=window,n="GitpleConfig",a="gitple-loader-frame";if(!window.Gitple){document;var i=function(){i.ex&&i.ex(arguments)};i.q=[],i.ex=function(e){i.processApi?i.processApi.apply(void 0,e):i.q&&i.q.push(e)},window.Gitple=i,t.attachEvent?t.attachEvent("onload",e):t.addEventListener("load",e,!1)}}();
+Gitple('boot');
+
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  userLang: 'ko'
+		};
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  showFileUpload: false
+		};
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  enableCookie: false
+		};
+if (window.Gitple) {
+    window.Gitple('show');
+  }
+
+Gitple('onOpen', function () {
+	  console.log('onOpen event');
+	});
+Gitple('onClose', function () {
+	  console.log('onClose event');
+	});
+
+</script>
 <meta charset="UTF-8">
 <title>같이가치</title>
 </head>
 <body>
+
    <!-- 메뉴 -->
    <nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
    <a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
