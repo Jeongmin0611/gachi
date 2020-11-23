@@ -13,4 +13,8 @@ public class StoreController {
 	public String storeDetail() {
 		return "store/storeDetail";
 	}
+	@RequestMapping("/purchase")
+	public String purchase() {
+		return "store/purchase";
+	}
 }
