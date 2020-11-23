@@ -306,6 +306,7 @@
 		window.scrollTo({top:locaQ, behavior:'smooth'});
 	}
 	$(function(){
+		
 		//모달창 띄우기(수강평)
 	    $("#myclassReviewFrm").click(function(){
     		$("#myclassModalR").css({
