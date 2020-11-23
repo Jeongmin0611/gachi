@@ -419,6 +419,7 @@ a {
 	background: none;
 	border:0;
 }
+
 /* 검색 버튼 끝 */
 .container{
 margin-top: 50px;

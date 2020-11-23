@@ -82,7 +82,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -92,7 +92,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -102,7 +102,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -112,7 +112,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -122,7 +122,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -132,7 +132,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -142,7 +142,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -152,7 +152,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>
@@ -162,7 +162,7 @@ $(".hover").mouseleave(
 		<div class="col-sm-4">
 			<a href="/gachi/classMain"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
 			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg pt-2" style="float:right; height: 15px;"></i></p>
+				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 				<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
 					<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 					<span style="float: right">가격 &nbsp; 15,000원</span>

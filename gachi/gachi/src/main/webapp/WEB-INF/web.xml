@@ -84,7 +84,11 @@
 			<url-pattern>/WEB-INF/views/creator/*</url-pattern>
 			<include-prelude>/WEB-INF/views/inc/creatorHeader.jspf</include-prelude>
 		</jsp-property-group>
-		
+		<jsp-property-group>
+			<url-pattern>/WEB-INF/views/store/*</url-pattern>
+			<include-prelude>/WEB-INF/views/inc/top.jspf</include-prelude>
+			<include-coda>/WEB-INF/views/inc/bottom.jspf</include-coda>
+		</jsp-property-group>
 	</jsp-config>
 	
 </web-app>
