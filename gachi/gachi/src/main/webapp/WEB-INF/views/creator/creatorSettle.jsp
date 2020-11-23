@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	#cr_settle_info{
+		margin-top:20px;
+		border:3px solid #437299;
+		border-radius:10px;
+		padding:20px;
+	}
+</style>
 <script type="text/javascript">
 	$(function(){
-		$(".cr_settle_searchDate").css("text-align","right");
-		$("#cr_settle_info").css("border","3px solid #F4BFA9");
-		$("#cr_settle_info").css("padding","20px");
+		$(".cr_settle_searchDate").css("text-align","right");		
 	});
 </script>
 <div class="container">
@@ -14,8 +20,8 @@
 		<a href="#">전일</a>
 		<input type="date" name="date1"/>~<input type="date" name="date2"/>
 		<a href="#">다음</a>
-		<button>금월</button>
-		<button>전월</button>	
+		<button class="btn">금월</button>
+		<button class="btn">전월</button>	
 	</div>
 	</form>
 

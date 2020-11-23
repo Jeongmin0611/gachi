@@ -5,34 +5,38 @@
 	 #cr_MyClass_area{
 	 	margin-bottom:20px;
 	 	border:1px solid gray;
+	 	border-radius:10px;
 	 	padding:5px;
+	 	overflow:auto;
 	 }
 	 
 	 .cr_MyClass_lst li{
 	 	vertical-align:middle;
+	 	overflow: auto;
 	 }
-	 .cr_MyClass_header li{
- 		vertical-align:middle;
+	 .cr_MyClass_header{
+	 	height:50px;
  		line-height:50px;
+ 		vertical-align:middle;
 	 }
 	 .cr_Classlist_menu li{
 		margin-top:5px;
 		margin-bottom:5px;	 	
 	 }
 	 .cr_MyClass_list_menu{
-	 	margin-top:5px;
+	 	height:50px;
+	 	margin-top:15px;
 		margin-bottom:5px;
+	 }
+	 #paging{
+	 	overflow: auto;
 	 }
 	 select{
 	 	height:30px;
 	 }
-	.btn{
- 	background-color: #437299;
- 	color:white;
- 	 }
  </style> 
  
- <div class="container text-center cfont">
+ <div class="container text-center">
  	<h1>동영상 관리</h1>
 	<div id="cr_MyClass_area">
 		<form method="get" action="">

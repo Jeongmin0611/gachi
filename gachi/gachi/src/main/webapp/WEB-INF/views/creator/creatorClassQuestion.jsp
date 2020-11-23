@@ -2,7 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	.btn{
-	
+		background-color: #437299;
+		color:white;
+	}
+	#cre_classQuestion_lst li{
+		border:1px solid gray;
+		text-align: center;
+		height:50px;
+		line-height: 50px;
+	}
+	.container{
+		font-family: 'NanumBarunpen';
 	}
 </style>
 <div class="container">
@@ -27,9 +37,9 @@
 			<input type="text"/>		
 		</li>
 	</ul>
-	<div style="text-align:center">
+	<div style="text-align:center;margin:10px 0px;">
 		<input type="submit" class="btn" value="검색">
-		<input type="reset" value="초기화">
+		<input type="reset" class="btn" value="초기화">
 	</div>
 </form>
 	<ul id="cre_classQuestion_lst" class="table">
@@ -47,4 +57,15 @@
 		<li>122</li>
 		<li><a href="#">답변하기</a></li>
 	</ul>
+	<div id="paging">
+	<ul style="margin-top:50px">
+		<li>prev</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>next</li>
+	</ul>
+</div>
 </div>

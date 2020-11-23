@@ -12,6 +12,9 @@
   #cr_1on1_writeForm li{
   	margin-bottom:10px;
   }
+  .container{
+	font-family: 'NanumBarunpen';
+}
 </style>
 <script type="text/javascript">
 	$(function(){

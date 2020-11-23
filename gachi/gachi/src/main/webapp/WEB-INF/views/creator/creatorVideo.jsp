@@ -50,6 +50,9 @@
 		 -webkit-appearance: none;
   		 -webkit-border-radius: 0;
 	}
+	.container{
+		font-family: 'NanumBarunpen';
+	}
 </style>
 <script>
 	$(()=>{
@@ -81,7 +84,7 @@
 	<div id="cre_video_searchForm">
 		<h3>크리에이터 '밥아저씨'님의 영상강좌</h3><br/>
 		<form method="post" action="" class="form-horizontal">
-			<select name="" class="form-control">
+			<select name="">
 				<option>전체</option>
 				<option>공예/창작</option>
 				<option>요리</option>
@@ -91,16 +94,16 @@
 				<option>운동</option>
 				<option>사진/영상</option>
 			</select>
-			<select name="" class="form-control">
+			<select name="">
 				<option>이불에 지도그리기</option>
 				<option>a4용지에 지도그리기</option>
 				<option>벽에 지도그리기</option>
 			</select>
-			<input type="submit" value="검색" class="form-control"/>
+			<input type="submit" class="btn" value="검색" />
 		</form>
 		<div style="margin:10px 0px;">
-			<button onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
-			<button onclick="location.href='/gachi/creatorVideoRequest'">영상변경사항요청</button>
+			<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
+			<button class="btn" onclick="location.href='/gachi/creatorVideoRequest'">영상변경사항요청</button>
 		</div>
 	</div>
 	<div>
