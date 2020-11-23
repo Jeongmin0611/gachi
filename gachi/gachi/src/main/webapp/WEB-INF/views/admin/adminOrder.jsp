@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container">
+<h1>주문조회</h1>
 <div id="ad_order_Area">
 <form method="post" action="">
 	<ul id="ad_order_searchForm">
@@ -18,15 +19,15 @@
 			<select>
 				<option>주문일</option>
 			</select>
-			 <button>오늘</button>
-			 <button>어제</button>
-			 <button>3일</button>
-			 <button>1주일</button>
-			 <button>15일</button>
-			 <button>1개월</button>
-			 <button>3개월</button>
-			 <button>6개월</button>
-			 <input type="date"/>~
+			 <button class="btn">오늘</button>
+			 <button class="btn">어제</button>
+			 <button class="btn">3일</button>
+			 <button class="btn">1주일</button>
+			 <button class="btn">15일</button>
+			 <button class="btn">1개월</button>
+			 <button class="btn">3개월</button>
+			 <button class="btn">6개월</button>
+			 <input type="date"/>&nbsp;~
 			 <input type="date"/>
 		</li>
 		<li>결제수단</li>
@@ -51,8 +52,8 @@
 		</li>
 	</ul>
 	<div style="text-align:center">
-		<input type="submit" value="검색">
-		<input type="reset" value="초기화">
+		<input type="submit" class="btn" value="검색">
+		<input type="reset" class="btn" value="초기화">
 	</div>
 </form>
 </div>
@@ -92,14 +93,14 @@
 	
 </ul>	
 <div id="paging">
-	<ul>
-		<li>prev</li>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>next</li>
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
 	</ul>
 </div>
 </div>
