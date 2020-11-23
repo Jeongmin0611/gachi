@@ -6,6 +6,11 @@
 	width: 100%;
 }
 </style>
+<script>
+	function purchase(){
+		location.href="/gachi/purchase";
+	};
+</script>
 <div class="container cfont">
 	<div class="row">
 		<!-- bxslide -->
@@ -47,7 +52,7 @@
 			적립금 &nbsp; 150원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
 			<p><p/>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
-			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue; ">구매</button>
+			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue;" onclick="purchase()">구매</button>
 		</div>
 
 		<!-- 설명글 -->
