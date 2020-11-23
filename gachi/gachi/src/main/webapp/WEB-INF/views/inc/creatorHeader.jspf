@@ -79,7 +79,7 @@
 #headerDiv {
 	z-index: 1000;
 	position: relative;
-	width: 10%;
+	width: 15%;
 	float: left;
 	overflow: hidden;
 	height: auto;

@@ -101,4 +101,8 @@ public class CreatorController {
 		mav.setViewName("creator/testdb");
 		return mav;
 	}
+	@RequestMapping("/creatorVideoWrite")
+	public String creatorVideoWrite() {
+		return "creator/creatorVideoWrite";
+	}
 }

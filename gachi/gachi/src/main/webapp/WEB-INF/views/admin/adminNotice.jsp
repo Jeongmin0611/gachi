@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style>
  #ad_notice_lst li{vertical-align:middle;line-height:50px;}
  #search_area{margin-bottom:20px;}
