@@ -19,6 +19,9 @@
 .card{
 	border-radius: 0.5rem;
 }
+.container{
+	font-family: 'NanumBarunpen';
+}
 </style>
 <div class="container cr_dash_center text-center">
 <h1> 크리에이터 대시보드 </h1>

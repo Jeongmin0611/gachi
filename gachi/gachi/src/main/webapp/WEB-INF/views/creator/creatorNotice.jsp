@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style>
- #cr_notice_lst li{vertical-align:middle;line-height:50px;}
- #search_area{margin-bottom:20px;}
- select{height:30px;}
- </style> 
-<div class="container text-center cfont">
+#cr_notice_lst{
+	overflow: auto;
+}
+#cr_notice_lst li {
+	vertical-align: middle;
+	line-height: 50px;
+}
+#search_area {
+	margin:20px 0px;
+}
+select {
+	height: 30px;
+}
+</style> 
+<div class="container text-center">
 <h1>공지사항</h1>
 <!-- 1:1문의 영역 -->
 
@@ -19,7 +29,7 @@
 			<option>답변여부</option>
 	</select>
 <input type="text" id="searchWord" placeholder="내용 입력"/>
-<input type="submit" class="btn btn-info" value="검색"/>
+<input type="submit" class="btn" value="검색"/>
 </form>
 </div>
 <ul id="cr_notice_lst">
@@ -38,8 +48,8 @@
 	<li>25</li>
 </ul>
 <div class="cr_list_menu">
-	<button class="btn btn-info" onclick="location.href='/gachi/creatorNoticeWrite'">글쓰기</button>
-	<button class="btn btn-info">삭제</button> 
+	<button class="btn" onclick="location.href='/gachi/creatorNoticeWrite'">글쓰기</button>
+	<button class="btn">삭제</button> 
 </div>
 <div id="paging">
 	<ul>

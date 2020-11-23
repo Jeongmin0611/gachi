@@ -60,35 +60,74 @@ AOS.init();
 
 
 <style>
-	
-	a:link, a:visited{color:#000;text-decoration:none;}
-	a:hover{text-decoration:none;font-weight:bold;}
-	
-	#cr_guide_navi{
-		height:50px;
-		overflow:auto;
-		margin:0 auto;
-	}
-	#cr_guide_navi li{
-		float:left;
-		width:33%;
-		line-height:50px;
-		text-align:center;
-	}
-	#cr_guide_navi button{
-		margin:0 auto;
-		width:50%;
-		}
-	#guide_navi_div ul{margin:0 auto; width:50%;}
-	
-	.cr_guide {margin : 0 auto; }
-	.aos-animate-div {margin: 0px auto; background:#E4E6DA }
-	.aos-animate-half {float:left; width:40%; padding:10%;}
-	.aos-animate-div img {width:70%;}
-	.aos-animate-guide {width:70%; margin:0 auto;}
-	.aos-animate-guide h3 {vertical-align:middle; line-height:50px; padding-top :30px}
-	.aos-animate-guide button {width:20%; margin:50px auto; margin-bottom:100px;}
-	
+a:link, a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#cr_guide_navi {
+	height: 50px;
+	overflow: auto;
+	margin: 0 auto;
+}
+
+#cr_guide_navi li {
+	float: left;
+	width: 33%;
+	line-height: 50px;
+	text-align: center;
+}
+
+#cr_guide_navi button {
+	margin: 0 auto;
+	width: 50%;
+}
+
+#guide_navi_div ul {
+	margin: 0 auto;
+	width: 50%;
+}
+
+.cr_guide {
+	margin: 0 auto;
+}
+
+.aos-animate-div {
+	margin: 0px auto;
+	background: #E4E6DA
+}
+
+.aos-animate-half {
+	float: left;
+	width: 40%;
+	padding: 10%;
+}
+
+.aos-animate-div img {
+	width: 70%;
+}
+
+.aos-animate-guide {
+	width: 70%;
+	margin: 0 auto;
+}
+
+.aos-animate-guide h3 {
+	vertical-align: middle;
+	line-height: 50px;
+	padding-top: 30px
+}
+
+.aos-animate-guide button {
+	width: 20%;
+	margin: 50px auto;
+	margin-bottom: 100px;
+}
 </style>
 
 <div class="cr_guide text-center " style="margin-bottom:50px;">
