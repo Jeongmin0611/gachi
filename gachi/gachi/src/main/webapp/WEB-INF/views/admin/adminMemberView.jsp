@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="container cfont">
+<div class="container">
 	<h1>회원조회</h1>
 	<ul id="ad_member_View">
 		<li>번호</li><li>001</li>
