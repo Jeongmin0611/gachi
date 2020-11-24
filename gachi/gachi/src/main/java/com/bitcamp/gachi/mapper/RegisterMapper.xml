@@ -2,11 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bitcamp.gachi.creator.TestDaoImp">
-	<update id="registerInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
-			update member set userid=#{userid},userpwd=#{userpwd},grade=#{grade},
-			username=#{username},nickname=#{nickname},birthdate=#{birthdate},tel=#{tel},
-			gender=#{gender},addr=#{addr},detailaddr=#{detailaddr},signupdate=#{signupdate},
-			lnterest=#{lnterest}
-	</update>
+
+<mapper namespace="com.bitcamp.gachi.register.RegisterDaoImp">
+	<insert id="registerInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
+		insert into member(userid,,userpwd,grade,username,nickname,birthdate,tel,gender,addr,detailaddr,lnterest,deleted)
+	                values(#{userid},#{userpwd},1,#{username},#{nickname},#{birthdate},#{tel},#{gender},#{addr},#{detailaddr},sysdate,0)
+	</insert>
 </mapper>

@@ -4,8 +4,37 @@ public class RegisterVO {
 	private String userid;
 	private String userpwd;
 	
-	private String grade;//체크박스에따라서 결정
+	private int grade;//체크박스에따라서 결정
 	
+	private String username;
+	private String nickname;
+	
+	private String birthdate;
+	private String birthdate1;
+	private String birthdate2;
+	private String birthdate3;
+	
+	
+	private String tel;
+	private String tel1;
+	private String tel2;
+	private String tel3;
+	
+	private String gender;
+	private String addr;
+	private String detailaddr;
+	
+	private String signupdate;
+	private String lnterest;
+	
+	private int deleted;
+	
+	public int getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -18,10 +47,10 @@ public class RegisterVO {
 	public void setUserpwd(String userpwd) {
 		this.userpwd = userpwd;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public String getUsername() {
@@ -120,31 +149,12 @@ public class RegisterVO {
 	public void setSignupdate(String signupdate) {
 		this.signupdate = signupdate;
 	}
-	public String getInterest() {
-		return interest;
+	public String getLnterest() {
+		return lnterest;
 	}
-	public void setInterest(String interest) {
-		this.interest = interest;
+	public void setLnterest(String lnterest) {
+		this.lnterest = lnterest;
 	}
-	private String username;
-	private String nickname;
-	
-	private String birthdate;
-	private String birthdate1;
-	private String birthdate2;
-	private String birthdate3;
-	
-	
-	private String tel;
-	private String tel1;
-	private String tel2;
-	private String tel3;
-	
-	private String gender;
-	private String addr;
-	private String detailaddr;
-	
-	private String signupdate;
-	private String interest;
+
 	
 }

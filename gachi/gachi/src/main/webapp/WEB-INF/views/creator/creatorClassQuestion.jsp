@@ -11,9 +11,6 @@
 		height:50px;
 		line-height: 50px;
 	}
-	.container{
-		font-family: 'NanumBarunpen';
-	}
 </style>
 <div class="container">
 <h1>클래스 문의</h1>

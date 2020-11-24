@@ -6,11 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bitcamp.gachi.creator.TestDaoImp;
-import com.bitcamp.gachi.creator.TestVO;
 
 @Controller
 public class AdminController {
@@ -30,8 +27,19 @@ public class AdminController {
 		return "admin/adminDashboard";
 	}
 	@RequestMapping("/adminCreator")
-	public String adminCreator() {
-		return "admin/adminCreator";
+	public ModelAndView adminCreator() {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<AllVO> list = dao.selectAllCreator();
+		int countAllCreator = dao.countAllCreator();
+		int countNowCreator =dao.countNowCreator();
+		int countDeletedCreator = dao.countDeletedCreator();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("creatorList", list);
+		mav.addObject("countAllCreator", countAllCreator);
+		mav.addObject("countNowCreator", countNowCreator);
+		mav.addObject("countDeletedCreator", countDeletedCreator);
+		mav.setViewName("admin/adminCreator");
+		return mav;
 	}
 	@RequestMapping("/adminCreatorView")
 	public String adminCreatorView() {
@@ -174,5 +182,17 @@ public class AdminController {
 	@RequestMapping("/adminVideo")
 	public String adminVideo() {
 		return "admin/adminVideo";
+	}
+	@RequestMapping("/adminReply")	
+	public String adminReply() {
+		return "admin/adminReply";
+	}
+	@RequestMapping("/adminClassReview")
+	public String adminClassReview() {
+		return "admin/adminClassReview";
+	}
+	@RequestMapping("/adminAnswer")
+	public String adminAnswer() {
+		return "admin/adminAnswer";
 	}
 }

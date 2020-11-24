@@ -44,32 +44,16 @@
 	<li>상태</li>
 	
 	<c:forEach var="memberList" items="${memberList }">
-	<li>${memberList.rownum }</li>
-	<li>${memberList.userid }</li>
-	<li>${memberList.nickname }</li>
-	<li>${memberList.username }</li>
-	<li>${memberList.tel }</li>
-	<li>${memberList.signupdate }</li>
-	<li><c:if test="${memberList.withdrawdate eq null}">x</c:if><c:if test="${memberList.withdrawdate ne null}">${memberList.withdrawdate }</c:if></li>
+		<li>${memberList.rownum }</li>
+		<li>${memberList.userid }</li>
+		<li>${memberList.nickname }</li>
+		<li>${memberList.username }</li>
+		<li>${memberList.tel }</li>
+		<li>${memberList.signupdate }</li>
+		<li><c:if test="${memberList.withdrawdate eq null}">x</c:if><c:if test="${memberList.withdrawdate ne null}">${memberList.withdrawdate }</c:if></li>
 	<li><c:if test="${memberList.deleted eq 0 }">가입</c:if><c:if test="${memberList.deleted eq 1 }">탈퇴</c:if></li>	
 	</c:forEach>
-	<li>001</li>
-	<li><a href="/gachi/adminMemberView">honggildong@naver.com</a></li>
-	<li>길동짱</li>
-	<li>홍길동</li>
-	<li>010-1234-1234</li>
-	<li>2020-04-24</li>
-	<li>x</li>
-	<li>가입</li>
-	
-	<li>001</li>
-	<li>honggildong@naver.com</li>
-	<li>길동짱</li>
-	<li>홍길동</li>
-	<li>010-1234-1234</li>
-	<li>2020-04-24</li>
-	<li>x</li>
-	<li>가입</li>
+
 </ul>	
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
