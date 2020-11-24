@@ -43,13 +43,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/eventBoard")
-	public String eventBoard() {
-		return "board/eventBoard";
+	public ModelAndView eventBoard() {
+		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/eventBoard");
+		return mav;
 	}
 	@RequestMapping("/eventBoardDetail")
 	public String eventBoardDetail() {
 		return "board/eventBoardDetail";
 	}
+	
 	@RequestMapping("/eventBoardEnd")
 	public String eventBoardEnd() {
 		return "board/eventBoardEnd";
