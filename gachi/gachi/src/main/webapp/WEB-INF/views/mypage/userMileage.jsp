@@ -66,15 +66,15 @@
 		<div id="userMileageTop">
 			<div>
 				<label>현재 마일리지</label>
-				<label>1,000p</label>
+				<label>${mileageAllSum }p</label>
 			</div>
 			<div>
 				<label>총 적립 마일리지</label>
-				<label>1,000p</label>
+				<label>${mileagePosiSum }p</label>
 			</div>
 			<div>
 				<label>사용한 마일리지</label>
-				<label>0p</label>
+				<label>${mileageNegaSum }p</label>
 			</div>
 		</div>
 		<div id="userMileageContent">
@@ -91,7 +91,12 @@
 				<c:forEach var="vo" items="${list }">
 					<li>${vo.occurence_date }</li>
 					<li>${vo.breakdown }</li>
-					<li>${vo.mileage }</li>
+					<c:if test="${vo.mileage>0 }">
+						 <li style="color:#f29886">+${vo.mileage }</li>
+					</c:if>
+					<c:if test="${vo.mileage<0 }">
+						 <li style="color:#6fabcf">${vo.mileage }</li>
+					</c:if>
 				</c:forEach>
 			</ul>
 			
