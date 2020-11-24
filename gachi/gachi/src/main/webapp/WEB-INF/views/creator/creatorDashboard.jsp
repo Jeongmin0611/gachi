@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 #cr_dash_board_ul>li {
 	float: left;
@@ -7,9 +7,9 @@
 	text-align: center;
 	margin-left: 100px;
 }
-
 .cr_dash_board {
-	border: 2px solid #4aa8d8;
+	border: 2px solid #437299;
+	border-radius:10px;
 	width: 250px;
 	height: 200px;
 	padding: 20px;

@@ -1,21 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container">
 <script type="text/javascript">
 	$(function(){
 		CKEDITOR.replace("content");
+		CKEDITOR.config.height=500;
 		$("#ad_goods_writeForm>li").slice(2).css("width","100%");
-		
+		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
+		$("#ad_goods_write li").css("margin-top","10px");
+		$("textarea").css("height","800px");
 	});
 </script>
-<div class="container cfont">
+<div class="container">
+<h1>상품수정</h1>
 <form method="post" action="">
 <ul id="ad_goods_writeForm">
-	<li class="text-center">
+	<li>
 		<ul>
-			<li>클래스코드</li>
+			<li class="content_center">클래스코드</li>
 			<li>cla001</li>
-			<li>카테고리</li>
+			<li class="content_center">카테고리</li>
 			<li>
 				<select>
 					<option>공예/창작</option>
@@ -27,9 +31,9 @@
 					<option>사진/영상</option>
 				</select>
 			</li>
-			<li>상품명</li>
-			<li><input type="text" id="" name=""/></li>
-			<li>난이도</li>
+			<li class="content_center">상품명</li>
+			<li><input type="text" id="" name="" size="40"/></li>
+			<li class="content_center">난이도</li>
 			<li>
 				<select>
 					<option>초급</option>
@@ -38,9 +42,9 @@
 					<option>마스터</option>
 				</select>
 			</li>
-			<li>수업차시</li>
-			<li><input type="text" id="" name=""/></li>
-			<li>가격</li>
+			<li class="content_center">수업차시</li>
+			<li><input type="text" id="" name="" size="40"/></li>
+			<li class="content_center">가격</li>
 			<li><input type="text" id="" name=""/></li>
 		</ul>
 	</li>
@@ -48,12 +52,15 @@
 		대표이미지<br/>
 		<img src="/gachi/img/147.jpg"/>
 	</li>
-	<li>상품설명 <textarea name="content"></textarea></li>
-		<li>첨부파일 <input type="file" name="no"/> </li>
-		<li class="content_center">
-			<input type="submit" value="수정"/>
-			<input type="reset" value="다시쓰기"/>
-		</li>
+</ul>
+<ul id="ad_goods_write">
+	<li>상품설명</li>
+	<li><textarea name="content"></textarea></li>
+	<li>첨부파일 <input type="file" name="no"/> </li>
+	<li class="content_center">
+		<input type="submit" class="btn" value="수정"/>
+		<input type="reset" class="btn" value="다시쓰기"/>
+	</li>
 </ul>
 </form>
 </div>

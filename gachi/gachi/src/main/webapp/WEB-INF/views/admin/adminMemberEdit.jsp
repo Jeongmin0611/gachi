@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container text-center cfont">
 <h1>회원정보수정</h1>
 	<form action="" id="ad_memberEdit_Frm">
@@ -12,8 +12,8 @@
 		<li>가입일</li><li><input type="text" name="" value="2020-12-12"readonly/></li>
 		<li>마일리지</li><li><input type="text" name=""/></li>
 	</ul><br/>
-		<input type="submit" value="회원정보수정"/>
-		<input type="reset" value="다시쓰기"/>
+		<input type="submit" class="btn" value="회원정보수정"/>
+		<input type="reset" class="btn" value="다시쓰기"/>
 	</form>
 	<br/>
 </div>

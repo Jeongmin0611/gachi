@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ include file="../inc/top.jspf" %>
 <style>
 	#classSlide{
 		width:50%;
@@ -59,8 +54,6 @@
 	#dbEndDiv{margin:0 0 50px 0;}
 
 </style>
-<body>
-	<%@ include file="../inc/top.jspf"%>
 	<div class="container">
 	<div id="slideitemMain">
 		<div id="classSlide" class="classSlideDiv" data-ride="carousel" data-interval="4000">
@@ -133,6 +126,4 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="../inc/bottom.jspf"%>
-</body>
-</html>
+<%@ include file="../inc/bottom.jspf"%>

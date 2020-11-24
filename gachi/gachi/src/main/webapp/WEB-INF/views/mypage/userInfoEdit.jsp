@@ -3,78 +3,48 @@
 <style>
 
 	/* 회원정보수정 -비밀번호확인 */
-	
-	/*********/
-	/* 상단 */
-	#userInfoEditTop{
-		margin:20px 50px 10px;
-		overflow:auto;
-		text-align:center;
+
+	.mypageTop>div>div:first-child{
+		font-weight:bold;
 	}
-	#userInfoEditTop li{
-		float:left;
+	.mypageContent div{
+		margin: 10px 0;
 	}
-	#userInfoEditTop li:nth-child(2){
-		width:3%;
+	.mypageContent input{
+		border:	none;
+		outline: none;
+		background-color: #eee;
 	}
-	
-	/*********/
-	/* 내용 */
-	#userInfoEditContent{
-		width:50%;
-		position:relative;
-		left:25%;
-		margin:50px 0 50px;
+	.mypageContent>div>div:last-child{
+		background-color: #eee;
 	}
-	#userInfoEditContent label{
-		font-size:1.3em;
-	}
-	/* 비번입력 리스트 */
-	#userInfoEditLst{
-		margin:50px 0 100px;
-	}
-	#userInfoEditLst li{
-		overflow:auto;
-		margin-bottom:20px;
-		text-align:center;
-	}
-	#userInfoEditLst li:nth-child(2n+1){
-		width:30%;
-		float:left;
-	}
-	#userInfoEditLst li:nth-child(2n){
-		width:70%;
-	}
-	#infoEditUserpwd{
-		width:70%;
-		border:none;
-		outline:none;
-		border-bottom:1px solid #ddd;
-	}
-	#userInfoEditContent button{
-		background-color:#ABCEE3;
+	.mypageContent>button{
+		background-color: #abcee3;
+		margin-top:100px;
 	}
 	
 </style>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div id="userInfoEditTop">
-			<ul>
-				<li><a href="/gachi/userInfoEdit"><b>회원정보수정</b></a></li>
-				<li>|</li>
-				<li><a href="/gachi/userLeave">회원탈퇴</a></li>
-			</ul>
+		<div class="mypageTop">
+			<div class="row">
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-1">|</div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
+			</div>
 		</div>
-		<div id="userInfoEditContent">
-			<label>비밀번호확인</label>
-			<hr style="background-color:#000"/>
-			<ul id="userInfoEditLst">
-				<li>아이디</li>
-				<li>userid@bitcamp.com</li>
-				<li>비밀번호</li>
-				<li><input type="password" name="userpwd" id="infoEditUserpwd"/></li>
-			</ul>
+		<div class="mypageContent col-lg-8 col-md-10">
+			<h4>비밀번호확인</h4>
+			<hr class="userHr"/>
+			<div class="row">
+				<div class="col-md-4">아이디</div>
+				<div class="col-md-8">userid@bitcamp.com</div>
+			</div>
+			<div class="row">	
+				<div class="col-md-4">비밀번호</div>
+				<div class="col-md-8"><input type="password"/></div>
+			</div>
 			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEditForm'">확인</button>
 		</div>
 	</div>

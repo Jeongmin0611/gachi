@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container">
 <h1>반품관리</h1>
+<div id="ad_search_header">
 <div>
 	<ul id="ad_return_info">
 		<li>●반품대기 : 5개</li>
 		<li>●반품완료 : 90개</li>
 	</ul>
 </div>
-<div class="ad_right_align">
+<div>
 	<form action="">
 		<select name="#">
 			<option>전체</option>
@@ -23,8 +25,9 @@
 			
 		</select>
 		<input type="text" id="" name=""/>
-		<input type="submit" value="검색" />
+		<input type="submit" class="btn" value="검색" />
 		</form>
+</div>
 </div>
 <ul id="ad_return_lst" class="text-center">
 	<li>주문번호</li>
@@ -56,14 +59,14 @@
 	
 </ul>	
 <div id="paging">
-	<ul>
-		<li>prev</li>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>next</li>
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
 	</ul>
 </div>
 </div>

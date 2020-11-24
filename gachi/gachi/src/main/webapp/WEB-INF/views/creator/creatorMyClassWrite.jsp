@@ -1,4 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	#img_area{
+		border:1px solid gray;
+		border-radius:10px;
+		margin:10px 0px;
+		
+	}
+	#cre_myclass_writeForm{
+		margin-top :20px;
+	}	
+</style>
 <script>
 	$(function(){
 		$("#cre_myclass_writeForm li").css("margin-bottom","10px");
@@ -11,9 +23,10 @@
 		let ckeditor=CKEDITOR.replace("content");
 	});
 </script>
-<div class="container cfont" style="border:2px solid black; margin-bottom:50px;">
+<div class="container" style="margin-bottom:50px;">
+	<h1>클래스 신청</h1>
 <form method="post" action="" enctype="multipart/form-data">
-<ul id="cre_myclass_writeForm" style="margin-top :50px">
+<ul id="cre_myclass_writeForm">
 	<li>카테고리</li>
 	<li>
 		<select>
@@ -27,32 +40,32 @@
 		</select>
 	</li>
 	<li>클래스명</li>
-	<li><input type="text"/></li>
+	<li><input type="text" style="width:600px"/></li>
 	<li>가격</li>
-	<li><input type="text"/></li>
+	<li><input type="text" /></li>
 </ul>
-<div id="img_area" style="margin:10px 0px;">
-	<div>
+<div id="img_area">
+	<div style="margin:20px 10px;" >
 		이미지등록<br/>
 		<img src="/gachi/img/cookingEx/cookingEx01.jpg"><br/>
 		<input type="file"/>
 	</div>
-	<div>
+	<div class="cfont" style="margin:20px 10px;">
 		이미지등록<br/>
 		<input type="file"/>
 	</div>
-	<div>
+	<div class="cfont" style="margin:20px 10px;">
 		이미지등록<br/>
 		<input type="file"/>
 	</div>
 </div>
-	<div style="margin-bottom:20px">
+	<div class="cfont" style="margin-bottom:20px">
 		클래스 상세정보 <span id="ps">*클래스 내용과 함께 강좌개설 시 반영될 의견을 기입해주세요.</span>
 		<textarea name="content"></textarea>
 	</div>
 	<div style="text-align:center; margin-bottom:50px">
-		<input type="submit" value="개설신청"/>
-		<input type="reset" value="다시쓰기"/>
+		<input type="submit" class="btn" value="개설신청"/>
+		<input type="reset" class="btn" value="다시쓰기"/>
 	</div>
 </form>
 </div>

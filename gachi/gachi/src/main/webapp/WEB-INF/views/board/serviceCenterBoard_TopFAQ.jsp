@@ -47,7 +47,7 @@
 
 #CserviceContentDiv ul li:nth-child(4n+3){	/* A */
 	width:20%;
-	height:150px;
+	min-height:150px;
 	color:#FB5000;
 	font-size:100px;
 	line-height:150px;
@@ -59,7 +59,7 @@
 }
 #CserviceContentDiv ul li:nth-child(4n+4){	/* 답변 */
 	width:100%;
-	height:150px;
+	min-height:150px;
 	background-color: #eee;
 	margin: 20px 0;
 }

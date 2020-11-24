@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <script type="text/javascript">
-	$(function(){
-		$("#ad_goods_inquiry>li:lt(7)").css("border","1px solid #F4BFA9");
-		$("#ad_goods_review>li:lt(8)").css("border","1px solid #F4BFA9");
+	$(()=>{
+		$("h3").css("margin","20px 0px");
+		$("#ad_goods_viewForm>li").css("height","370px");
+		$("#ad_goods_viewForm>li:last-child").css("padding","20px 0px");
 	});
 	function goodsInquiryDel(){
 		if(confirm("해당 문의를 삭제하시겠습니까?")){
@@ -42,6 +44,10 @@
 <div id="ad_goods_info">
 
 </div>
+<div class="text-center">
+		<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
+		<button  class="btn" onclick="goodsDel()">삭제</button>
+</div>
 <h3>상품문의</h3>
 	<ul id="ad_goods_inquiry" class="text-center">
 		<li>선택</li>
@@ -58,10 +64,12 @@
 		<li>홍길동</li>
 		<li>2020-10-29</li>
 		<li>224</li>
-		<li><button>답변</button></li>
+		<li><a href="#">답변하기</a></li>
 	</ul>	
 </div>
-<button class="ad_right_align" onclick="goodsInquiryDel()">삭제</button>
+<div style="text-align:right">
+	<button class="btn" onclick="goodsInquiryDel()">삭제</button>
+</div>
 <h3>상품리뷰</h3>
 	<ul id="ad_goods_review" class="text-center">
 		<li>선택</li>
@@ -80,12 +88,9 @@
 		<li>홍길동</li>
 		<li>2020-10-29</li>
 		<li>224</li>
-		<li><button>답변</button></li>
-	
-	</ul>	
-<button class="ad_right_align" onclick="goodsInquiryDel()">삭제</button>
-<div class="text-center">
-		<button onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
-		<button onclick="goodsDel()">삭제</button>
-</div>
+		<li><a href="#">답변하기</a></li>
+	</ul>
+<div style="text-align:right">
+	<button class="btn" onclick="goodsInquiryDel()">삭제</button>
+</div>	
 </div>

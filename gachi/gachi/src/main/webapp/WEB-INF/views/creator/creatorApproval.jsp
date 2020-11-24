@@ -1,12 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 
- <style>
- #cr_Approval_area{margin-bottom:20px;}
- #cr_Approval_lst li{vertical-align:middle;}
- #cr_Approval_header li{vertical-align:middle;line-height:50px;}
- select{height:30px;}
- </style> 
+<style>
+#cr_Approval_area {
+	margin-bottom: 20px;
+}
+
+#cr_Approval_lst li {
+	vertical-align: middle;
+}
+
+#cr_Approval_header li {
+	vertical-align: middle;
+	line-height: 50px;
+}
+
+select {
+	height: 30px;
+}
+</style> 
 <div class="container text-center cfont">
 <h3> 미승인 클래스</h3>
 	<div id="cr_Approval_area">

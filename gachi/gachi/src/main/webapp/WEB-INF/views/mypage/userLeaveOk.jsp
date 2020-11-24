@@ -3,60 +3,42 @@
 <style>
 	/* 회원탈퇴완료 */
 	
-	/*****************/
-	/* 상단 */
-	#userLeaveOkTop{
-		margin:20px auto;
-		margin-left:50px;
-		overflow:auto;
-		text-align:center;
+	.mypageTop>div>div:last-child{
+		font-weight: bold;
 	}
-	#userLeaveOkTop li{
-		float:left;
+	.mypageContent div{
+		margin: 10px 0;
 	}
-	#userLeaveOkTop li:nth-child(2){
-		width:3%;
+	.mypageContent img{
+		width: 100px;
 	}
-	
-	/*****************/
-	/* 내용 */
-	#userLeaveOkContent{
-		width:50%;
-		position:relative;
-		left:25%;
-		text-align:center;
-	}
-	#userLeaveOkContent label{
-		width:100%;
-	}
-	#userLeaveOkContent label:first-child{
-		font-size:1.5em;
+	.mypageContent h4{
 		margin:50px 0;
 	}
-	#userLeaveOkContent label:nth-child(3),#userLeaveOkContent label:nth-child(4){
-		margin:15px 0;
-	}
-	#userLeaveOkContent Button{
-		margin:100px 0 50px;
-		background-color:#ABCEE3;
+	.mypageContent>button{
+		background-color: #abcee3;
+		margin-top: 100px;
 	}
 	
 </style>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div id="userLeaveOkTop">
-			<ul>
-				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
-				<li>|</li>
-				<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
-			</ul>
+		<div class="mypageTop">
+			<div class="row">
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-1">|</div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
+			</div>
 		</div>
-		<div id="userLeaveOkContent">
-			<label>회원 탈퇴가 완료되었습니다.</label>
+		<div class="mypageContent col-lg-8 col-md-10">
+			<div>
+				<img src="/gachi/img/icon_check.png"/>
+			</div>
+			<h4>회원 탈퇴가 완료되었습니다.</h4>
 			<hr/>
-			<label>그동안 같이가치를 이용해주셔서 감사합니다.</label>
-			<label>보다 나은 서비스로 다시 찾아 뵙겠습니다.</label>
+			<div>그동안 같이가치를 이용해주셔서 감사합니다.</div>
+			<div>보다 나은 서비스로 다시 찾아 뵙겠습니다.</div>
 			<hr/>
 			<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi'">홈으로</button>
 		</div>

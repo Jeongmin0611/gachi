@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	h3{
+	 margin:15px 0px;
+	}
+</style>
 <div class="container cfont">
 	<h1>클래스 조회</h1>
 <ul id="ad_goods_viewForm">
@@ -17,12 +22,13 @@
 			<li>상태 판매중</li>
 		</ul>
 	</li>
-	<li class="text-center">
-		대표이미지<br/>
-		<img src="/gachi/img/147.jpg"/>
+	<li>
+		<ul style="width:50%; margin-top:45px;">
+			<li style="text-align: center">대표이미지</li>
+			<li><img src="/gachi/img/147.jpg"/></li>
+		</ul>
 	</li>
 </ul>
-<div>
 <h3>클래스 상세정보</h3>
 <div id="ad_goods_info">
 
@@ -43,10 +49,11 @@
 		<li>홍길동</li>
 		<li>2020-10-29</li>
 		<li>224</li>
-		<li><button>답변</button></li>
-	</ul>	
-</div>
-<button class="ad_right_align" onclick="goodsInquiryDel()">삭제</button>
+		<li><a href="#">답변하기</a></li>
+	</ul>
+	<div style="height:50px;text-align:right;">	
+		<button class="ad_right_align btn" onclick="goodsInquiryDel()">삭제</button>
+	</div>
 <h3>상품리뷰</h3>
 	<ul id="ad_goods_review" class="text-center">
 		<li>선택</li>
@@ -65,12 +72,15 @@
 		<li>홍길동</li>
 		<li>2020-10-29</li>
 		<li>224</li>
-		<li><button>답변</button></li>
+		<li><a href="#">답변하기</a></li>
 	
 	</ul>	
-<button class="ad_right_align" onclick="goodsInquiryDel()">삭제</button>
+	<div style="height:50px;text-align:right;">
+		<button class="btn" onclick="goodsInquiryDel()">삭제</button>
+	</div>
 <div class="text-center">
-		<button onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
-		<button onclick="goodsDel()">삭제</button>
+		<button class="btn">등록처리</button>
+		<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
+		<button class="btn" onclick="goodsDel()">삭제</button>
 </div>
 </div>

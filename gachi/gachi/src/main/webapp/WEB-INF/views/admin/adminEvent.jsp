@@ -1,34 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 
  <style>
- #search_area{margin-bottom:20px;}
- #ad_event_lst li{vertical-align:middle;}
- #ad_event_header li{vertical-align:middle;line-height:50px;}
- select{height:30px;}
- </style> 
-<div class="container text-center cfont">
+#search_area {
+	margin:20px 0px;
+}
+#ad_event_lst{
+	overflow: auto;
+}
+#ad_event_lst li {
+	vertical-align: middle;
+}
+#ad_event_header{
+	overflow:auto;
+}
+#ad_event_header li {
+	vertical-align: middle;
+	line-height: 50px;
+}
+.ad_list_menu li{
+	float:right;
+}
+select {
+	height: 30px;
+}
+</style> 
+<div class="container text-center">
 <h1>이벤트관리</h1>
 <div id="search_area">
 	<form method="get" action="">
 		<ul class="ad_list_menu">
 			<li>
-				기간 <input type="date" id="ad_event_date1" name="date1"/>~
-				<input type="date" id="ad_event_date2" name="date2"/>
-			</li>
-			<li>
 				<select>
 					<option>제목</option>
 					<option>내용</option>
 				</select>
-				<input type="text" id="searchWord" name="searchWord"/>
-				<input type="submit" value="검색"/>
+				<input type="text" id="searchWord" name="searchWord" size="30"/>
+				<input type="submit" class="btn" value="검색"/>
+			</li>
+			<li>
+				<input type="date" id="ad_event_date2" name="date2"/>
+			</li>
+			<li>
+				~
+			</li>
+			<li>
+				기간 <input type="date" id="ad_event_date1" name="date1"/>
 			</li>
 		</ul>
 	</form>
 </div>
 <ul id="ad_event_header">
-<li>선택</li>
+	<li>선택</li>
 	<li>번호</li>
 	<li>이미지</li>
 	<li>제목</li>
@@ -46,8 +70,8 @@
 	<li>123</li>
 </ul>
 <div class="ad_list_menu">
-	<button class="btn btn-info" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
-	<button class="btn btn-info">삭제</button> 
+	<button class="btn" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
+	<button class="btn">삭제</button> 
 </div>
 <div id="paging">
 	<ul>

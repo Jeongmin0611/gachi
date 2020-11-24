@@ -3,7 +3,7 @@ package com.bitcamp.gachi;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Constants {
-	//JdbcTemplate°´Ã¼¸¦ ´ãÀ» º¯¼ö¸¦ »ý¼º
+	//JdbcTemplateï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static JdbcTemplate template = null;
 	
-}
+} 
