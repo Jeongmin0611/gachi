@@ -14,7 +14,7 @@
 	}
 </style>
 <div class="container ad_font">
-	<h1>상품리뷰관리</h1>
+	<h1>질문/답변관리</h1>
 	<div id="ad_video_searchArea">
 		<form method="post" action="">
 		<ul id="ad_video_searchList">
@@ -40,23 +40,7 @@
 			   <input type="date"/>&nbsp;~
 			   <input type="date"/>
 			</li>
-			<li>평점</li>
-			<li>
-				<select>
-					<option>5</option>
-					<option>4.5</option>
-					<option>4</option>
-					<option>3.5</option>
-					<option>3</option>
-					<option>2.5</option>
-					<option>2</option>
-					<option>2.5</option>
-					<option>2</option>
-					<option>1.5</option>
-					<option>1</option>
-				</select>
-			</li>
-			<li>리뷰검색</li>
+			<li>검색</li>
 			<li>
 				<select>
 					<option>상품코드</option>

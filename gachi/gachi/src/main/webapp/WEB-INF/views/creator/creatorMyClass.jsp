@@ -13,11 +13,13 @@
 	 .cr_MyClass_lst li{
 	 	vertical-align:middle;
 	 	overflow: auto;
+	 	
 	 }
 	 .cr_MyClass_header{
 	 	height:50px;
  		line-height:50px;
- 		vertical-align:middle;
+ 		padding-left:0px;
+ 		margin-bottom:0px
 	 }
 	 .cr_Classlist_menu li{
 		margin-top:5px;
@@ -37,7 +39,7 @@
  </style> 
  
  <div class="container text-center ad_font">
- 	<h1>동영상 관리</h1>
+ 	<h1>클래스 관리</h1>
 	<div id="cr_MyClass_area">
 		<form method="get" action="">
 			<ul class="cr_Classlist_menu">
@@ -87,6 +89,7 @@
 		<li>이미지</li>
 		<li>카테고리</li>
 		<li>클래스명</li>
+		<li>신청일</li>
 		<li>등록일</li>
 		<li>상태</li>
 	</ul>
@@ -96,6 +99,7 @@
 		<li><img src="img/artEx/artEx03.PNG"></li>
 		<li>미술</li>
 		<li>초보자도 하기 쉬운 미술</li>
+		<li>2020-10-22</li>
 		<li>2020-10-29</li>
 		<li>승인대기</li>
 		
@@ -104,6 +108,7 @@
 		<li><img src="img/artEx/artEx04.PNG"></li>
 		<li>미술</li>
 		<li>초보자는 하기 어려운 미술</li>
+		<li>2020-10-08</li>
 		<li>2020-10-15</li>
 		<li>개설완료</li>
 	</ul>
