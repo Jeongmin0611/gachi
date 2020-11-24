@@ -757,7 +757,7 @@ Gitple('onClose', function () {
       <div id="loginFrm" class="col-xs-12 col-md-12">
          <form method="post" action="/gachi/registerInsert">
          <div id="mdBtm">
-               <button type="button" class="btn btn-primary" id="mdClose">X</button>
+               <button type="button" class="btn btn-primary" id="mdClose" style="color:gray;">X</button>
             </div>
          <div>
           <img src="/gachi/img/logo.png" class="mainLogoImg"/>
@@ -778,7 +778,7 @@ Gitple('onClose', function () {
       <div id="login2Frm" class="col-xs-12 col-md-12">
          <form method="post" action="">
          <div id="md2Btm">
-               <button type="button" class="btn btn-primary" id="md2Close">X</button>
+               <button type="button" class="btn btn-primary" id="md2Close" style="color:gray">X</button>
             </div>
          <div>
           <img src="/gachi/img/logo.png" class="mainLogoImg"/>
