@@ -88,30 +88,13 @@
 			</ul>
 			<hr/>
 			<ul>
-				<li>2020-11-11</li>
-				<li>회원가입 포인트</li>
-				<li>+1,000p</li>
+				<c:forEach var="vo" items="${list }">
+					<li>${vo.occurence_date }</li>
+					<li>${vo.breakdown }</li>
+					<li>${vo.mileage }</li>
+				</c:forEach>
 			</ul>
-			<ul>
-				<li>2020-11-11</li>
-				<li>회원가입 포인트</li>
-				<li>+1,000p</li>
-			</ul>
-			<ul>
-				<li>2020-11-11</li>
-				<li>회원가입 포인트</li>
-				<li>+1,000p</li>
-			</ul>
-			<ul>
-				<li>2020-11-11</li>
-				<li>회원가입 포인트</li>
-				<li>+1,000p</li>
-			</ul>
-			<ul>
-				<li>2020-11-11</li>
-				<li>회원가입 포인트</li>
-				<li>+1,000p</li>
-			</ul>
+			
 			<hr/>
 		</div>
 		<div class="userMileageBtm">
