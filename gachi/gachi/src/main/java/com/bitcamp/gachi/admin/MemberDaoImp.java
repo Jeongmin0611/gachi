@@ -13,6 +13,4 @@ public interface MemberDaoImp {
 	public int countNowMember(); // 현재 회원 명 수
 
 	public int countDeletedMember(); // 탈퇴 회원 명 수
-
-	
 }
