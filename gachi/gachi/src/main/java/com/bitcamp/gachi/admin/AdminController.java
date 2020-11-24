@@ -183,4 +183,16 @@ public class AdminController {
 	public String adminVideo() {
 		return "admin/adminVideo";
 	}
+	@RequestMapping("/adminReply")	
+	public String adminReply() {
+		return "admin/adminReply";
+	}
+	@RequestMapping("/adminClassReview")
+	public String adminClassReview() {
+		return "admin/adminClassReview";
+	}
+	@RequestMapping("/adminAnswer")
+	public String adminAnswer() {
+		return "admin/adminAnswer";
+	}
 }

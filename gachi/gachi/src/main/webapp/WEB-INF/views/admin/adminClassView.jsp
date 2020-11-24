@@ -2,7 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	h3{
-	 margin:15px 0px;
+	 	margin:15px 0px;
+	 	width:20%;
+	}
+	.more{
+		width:80%;
+		text-align: right;
 	}
 </style>
 <div class="container cfont">
@@ -33,6 +38,40 @@
 <div id="ad_goods_info">
 
 </div>
+<h3>클래스영상정보</h3>
+	<ul id="ad_video_priview" class="text-center">
+		<li>동영상코드</li>
+		<li>차시</li>
+		<li>차시명</li>
+		<li>영상제목</li>
+		<li>파일명</li>
+		<li>영상길이</li>
+		<li>등록일</li>
+		
+		<li>vid10</li>
+		<li>1</li>
+		<li class="wordCut">바느질 기본기다지기</li>
+		<li>생선가시로 바느질 마스터하기</li>
+		<li>fishThorn.avi</li>
+		<li>15:26</li>
+		<li>2020-11-24</li>
+		
+		<li>vid10</li>
+		<li>1</li>
+		<li class="wordCut">바느질 기본기다지기</li>
+		<li>생선가시로 바느질 마스터하기</li>
+		<li>fishThorn.avi</li>
+		<li>15:26</li>
+		<li>2020-11-24</li>
+		
+		<li>vid10</li>
+		<li>1</li>
+		<li class="wordCut">바느질 기본기다지기</li>
+		<li>생선가시로 바느질 마스터하기</li>
+		<li>fishThorn.avi</li>
+		<li>15:26</li>
+		<li>2020-11-24</li>
+	</ul>
 <h3>질문답변</h3>
 	<ul id="ad_goods_inquiry" class="text-center">
 		<li>선택</li>
@@ -54,7 +93,7 @@
 	<div style="height:50px;text-align:right;">	
 		<button class="ad_right_align btn" onclick="goodsInquiryDel()">삭제</button>
 	</div>
-<h3>상품리뷰</h3>
+<h3>수강리뷰</h3>
 	<ul id="ad_goods_review" class="text-center">
 		<li>선택</li>
 		<li>번호</li>
