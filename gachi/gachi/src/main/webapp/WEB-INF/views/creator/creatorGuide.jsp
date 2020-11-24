@@ -4,11 +4,12 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 
-AOS.init();
 
 	$(()=>{
+		AOS.init();
+		console.log("aos init");
 		$("#headerDiv").css("display","none");
-		
+		AOS.init();
 		$('.class-img-list').each(function(){
 			$(this).mouseenter(function(){
 				$(this).css('z-index','10');
@@ -41,18 +42,6 @@ AOS.init();
 			behavior : 'smooth'
 		});
 	}
-	$('.class-img-list').each(function(){
-		$(this).mouseenter(function(){
-			$(this).css('z-index','10');
-		});
-		$(this).mouseleave(function(){
-			$(this).css('z-index','2');
-		});
-	});//each
-	
-	$(()=>{
-		$("#headerDiv").css("display","none");
-	});
 
 </script>	
 
@@ -183,94 +172,94 @@ a:hover {
 			현재 등록된 클래스 
 			</div>
 			<ul>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src=/gachi/img/cookingEx/cookingEx03.jpg alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/craftsEx/craftsEx02.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/craftsEx/craftsEx03.jpg" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/cookingEx/cookingEx04.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx05.PNG" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/cookingEx/cookingEx05.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx06.PNG" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx06.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx04.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx01.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx02.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx03.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/craftsEx/craftsEx04.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx05.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/craftsEx/craftsEx05.jpg" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx18.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx04.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx10.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx03.jpg" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx19.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx07.jpg" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/musicEx/musicEx07.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx01.jpg" alt="클래스 이미지">
 				</li>			
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx02.jpg" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx21.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/pictureEx/pictureEx07.PNG" alt="클래스 이미지">
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx13.jpg" alt="클래스 이미지">					
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/exerciseEx/exerciseEx14.jpg" alt="클래스 이미지">					
 				</li>				
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/cookingEx/cookingEx02.jpg" alt="클래스 이미지">				
 				</li>
-				<li class="class-img-list" data-aos="fade-up" data-aos-duration="3000">
+				<li class="class-img-list" data-aos="fade-up" data-aos-duration="2000">
 						<img class="class-guide-image" src="/gachi/img/cookingEx/cookingEx01.jpg" alt="클래스 이미지">			
 				</li>
 			

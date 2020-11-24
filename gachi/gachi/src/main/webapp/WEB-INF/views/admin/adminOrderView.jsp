@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="containe-r">
+<div class="container">
 <h1>주문조회</h1>
 <form method="post" action="#">
 <ul id="ad_order_View">
@@ -12,7 +12,7 @@
 	<li>가격</li><li>15000원</li>
 	<li>수량</li><li>1개</li>
 	<li>사용 마일리지</li><li>150원</li>
-	<li>반품사유</li><li><textarea>잘못주문함</textarea></li>
+	<li>반품사유</li><li style="height:100px"><textarea style="width:100%;height:100px">잘못주문함</textarea></li>
 	<li>구매일</li><li>2020-08-01</li>
 	<li>반품신청일</li><li>2020-08-04</li>
 	<li>상태</li>
@@ -23,6 +23,8 @@
 		</select>
 	</li>
 </ul>
-<input type="submit" value="저장하기">
+<div style="margin-top:20px" class="content_center">
+<input type="submit" class="btn" value="저장하기">
+</div>
 </form>
 </div>

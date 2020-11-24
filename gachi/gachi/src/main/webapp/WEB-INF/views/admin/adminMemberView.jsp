@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="container cfont">
+<style>
+	h3{
+		margin:20px 0px;
+	}
+</style>
+<div class="container">
 	<h1>회원조회</h1>
 	<ul id="ad_member_View">
 		<li>번호</li><li>001</li>
@@ -18,9 +23,9 @@
 	<div class="ad_member_Box">
 	
 	</div>
-	<div style="text-align:center;">
-		<button onclick="history.back()">회원목록</button>
-		<button onclick="location.href='/gachi/adminMemberEdit'">회원정보수정</button>
-		<button onclick="location.href='/gachi/adminMemberEdit'">회원탈퇴처리</button>
+	<div style="text-align:center;margin-top:20px;">
+		<button class="btn" onclick="history.back()">회원목록</button>
+		<button class="btn" onclick="location.href='/gachi/adminMemberEdit'">회원정보수정</button>
+		<button class="btn" onclick="location.href='/gachi/adminMemberEdit'">회원탈퇴처리</button>
 	</div>
 </div>

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container">
 <h1>배송관리</h1>
+<div id="ad_search_header">
 <div>
 	<ul id="ad_delivery_info">
 		<li>●배송대기 : 5개</li>
@@ -10,7 +10,7 @@
 		<li>●배송완료 : 90개</li>
 	</ul>
 </div>
-<div class="ad_right_align">
+<div>
 	<form action="">
 		<select name="#">
 			<option>전체</option>
@@ -25,8 +25,9 @@
 			
 		</select>
 		<input type="text" id="" name=""/>
-		<input type="submit" value="검색" />
+		<input type="submit" class="btn" value="검색" />
 		</form>
+</div>
 </div>
 <ul id="ad_delivery_lst" class="text-center">
 	<li>번호</li>

@@ -54,8 +54,8 @@
 }
 #adminEvent_View_ReplyDiv li{
 	float:left;
-	min-height: 50px;
-	border-bottom: 1px solid #e5e5e5;
+	line-height: 50px;
+	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
 }
 #adminEvent_View_ReplyDiv li:nth-child(4n+1){
@@ -90,14 +90,14 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="adminEvent_View_BtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
-		<button type="button" class="btn btn-light">목록</button>
+		<button type="button" class="btn">이전</button>
+		<button type="button" class="btn">다음</button>
+		<button type="button" class="btn">목록</button>
 	</div>
 	<!-- 댓글 -->
 	<form id="adminEvent_View_ReplyForm">
 		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn btn-outline-primary">등록</button></div>
+		<div><button class="btn">등록</button></div>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>
