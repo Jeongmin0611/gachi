@@ -23,7 +23,7 @@
 		let ckeditor=CKEDITOR.replace("content");
 	});
 </script>
-<div class="container" style="margin-bottom:50px;">
+<div class="container ad_font" style="margin-bottom:50px;">
 	<h1>클래스 신청</h1>
 <form method="post" action="" enctype="multipart/form-data">
 <ul id="cre_myclass_writeForm">

@@ -6,7 +6,7 @@ $(function(){
 	CKEDITOR.config.height=500;
 });
 </script>
-<div class="container text-center cfont">
+<div class="container text-center ad_font">
 <h1>공지사항 글쓰기</h1>
 <form method="post" action="#" enctype="multipart/form-data">
 	<ul id="ad_notice_WriteForm">

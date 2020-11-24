@@ -36,7 +36,7 @@
 	 }
  </style> 
  
- <div class="container text-center">
+ <div class="container text-center ad_font">
  	<h1>동영상 관리</h1>
 	<div id="cr_MyClass_area">
 		<form method="get" action="">

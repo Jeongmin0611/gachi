@@ -20,7 +20,7 @@
 		CKEDITOR.replace("creator_info");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 	<h1>프로필 수정</h1>
 	<div>
 		<form method="post" id="cre_creator_editForm" action="" enctype="multipart/form-data">

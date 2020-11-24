@@ -25,7 +25,7 @@
 		CKEDITOR.replace("content");
 	});
 </script>
-<div class="container text-center">
+<div class="container text-center ad_font">
 	<h1>1:1문의</h1>
 	<div style="margin:20px">
 		<ul id="cr_1on1_write">

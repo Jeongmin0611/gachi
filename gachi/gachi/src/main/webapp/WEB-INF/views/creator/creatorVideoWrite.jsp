@@ -32,7 +32,7 @@
 		CKEDITOR.replace("content");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 	<h1>영상등록요청</h1>
 	<div class="card" id="cre_video_addArea">
 		<img src="/gachi/img/add.png">
