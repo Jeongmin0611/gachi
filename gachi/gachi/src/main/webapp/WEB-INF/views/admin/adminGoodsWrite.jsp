@@ -9,7 +9,7 @@
 		$("#ad_goods_li li").css("margin-bottom","10px");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 <h1>상품등록</h1>
 <form method="post" action="">
 <ul id="ad_goods_writeForm">

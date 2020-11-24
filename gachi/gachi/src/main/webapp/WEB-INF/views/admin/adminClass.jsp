@@ -8,7 +8,7 @@
 		height:50px;
 	}
 </style>
-<div class="container">
+<div class="container ad_font">
 	<h1>클래스관리</h1>
 <div id="search_area">
 	<form method="post" action="">

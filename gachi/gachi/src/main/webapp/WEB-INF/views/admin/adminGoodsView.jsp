@@ -18,7 +18,7 @@
 		}
 	}
 </script>
-<div class="container cfont">
+<div class="container ad_font">
 <h1>상품조회</h1>
 <ul id="ad_goods_viewForm">
 	<li class="text-center">

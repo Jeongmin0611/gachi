@@ -5,7 +5,7 @@
 		$(".ad_settle_searchForm").css("text-align","right").css("margin","5px 0px");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 <h1>정산관리</h1>
 	<form method="post" action="">
 	<div class="ad_settle_searchForm">

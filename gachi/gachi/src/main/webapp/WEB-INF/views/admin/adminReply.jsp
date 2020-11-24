@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="container">
+<style>
+	#ad_video_lstArea li{
+		float:left;
+		width:10%;
+		height:40px;
+		line-height:40px;
+		border-bottom:1px solid gray;
+		text-align:center;
+	}
+	#ad_video_lstArea li:nth-child(8n+4),#ad_video_lstArea li:nth-child(8n+5){
+		width:20%;
+	}
+</style>
+<div class="container ad_font">
 	<h1>상품리뷰관리</h1>
 	<div id="ad_video_searchArea">
 		<form method="post" action="">
@@ -55,7 +68,23 @@
 		</ul>
 		</form>
 	</div>
-	<ul>
-		<li></li>
+	<ul id="ad_video_lstArea">
+		<li>번호</li>
+		<li>상품코드</li>
+		<li>상품명</li>
+		<li>제목</li>
+		<li>내용</li>
+		<li>평점</li>
+		<li>작성자</li>
+		<li>작성일</li>
+		
+		<li>번호</li>
+		<li>상품코드</li>
+		<li>상품명</li>
+		<li class="wordCut">제목</li>
+		<li class="wordCut">내용</li>
+		<li>평점</li>
+		<li>작성자</li>
+		<li>작성일</li>
 	</ul>
 </div>

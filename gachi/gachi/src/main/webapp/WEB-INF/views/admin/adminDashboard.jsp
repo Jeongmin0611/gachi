@@ -22,7 +22,7 @@ b{
 </style>    
     
 
-<div class="container ad_dash_center text-center">
+<div class="container ad_dash_center text-center ad_font">
 <h1 style="text-align:center;"> 관리자 대시보드 </h1>
 <br/>
 	<div>

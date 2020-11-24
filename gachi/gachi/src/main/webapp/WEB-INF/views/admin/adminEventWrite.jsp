@@ -12,7 +12,7 @@
 		CKEDITOR.replace("content");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 <h1 class="content_center">이벤트 등록</h1>
 <form method="post" action="" enctype="multipart/form-data">
 	<div id="ad_event_writeForm">

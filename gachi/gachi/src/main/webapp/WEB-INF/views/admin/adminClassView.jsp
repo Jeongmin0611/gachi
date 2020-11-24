@@ -10,7 +10,7 @@
 		text-align: right;
 	}
 </style>
-<div class="container cfont">
+<div class="container ad_font">
 	<h1>클래스 조회</h1>
 <ul id="ad_goods_viewForm">
 	<li class="text-center">

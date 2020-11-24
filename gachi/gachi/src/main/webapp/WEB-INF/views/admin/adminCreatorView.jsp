@@ -8,7 +8,7 @@
 		margin-bottom:10px;
 	}
 </style>
-<div class="container">
+<div class="container ad_font">
 	<h1>크리에이터회원 조회</h1>
 	<ul id="ad_member_View">
 		<li>&nbsp;&nbsp;번호</li><li>001</li>

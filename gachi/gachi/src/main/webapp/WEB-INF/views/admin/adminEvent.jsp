@@ -26,7 +26,7 @@ select {
 	height: 30px;
 }
 </style> 
-<div class="container text-center">
+<div class="container text-center ad_font">
 <h1>이벤트관리</h1>
 <div id="search_area">
 	<form method="get" action="">

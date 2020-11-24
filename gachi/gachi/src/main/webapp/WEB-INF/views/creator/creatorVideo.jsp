@@ -61,7 +61,7 @@
 		});
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 	<h1>동영상등록현황</h1>
 	<div id="cre_video_info">
 		<ul style="width:40%;">
