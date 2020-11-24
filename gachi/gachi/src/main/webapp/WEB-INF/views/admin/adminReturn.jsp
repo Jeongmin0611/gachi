@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
-<div class="container">
+<div class="container ad_font">
 <h1>반품관리</h1>
 <div id="ad_search_header">
 <div>

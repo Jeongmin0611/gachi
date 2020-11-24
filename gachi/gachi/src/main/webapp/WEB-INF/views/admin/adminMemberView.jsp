@@ -5,7 +5,7 @@
 		margin:20px 0px;
 	}
 </style>
-<div class="container">
+<div class="container ad_font">
 	<h1>회원조회</h1>
 	<ul id="ad_member_View">
 		<li>번호</li><li>001</li>

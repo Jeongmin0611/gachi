@@ -6,7 +6,7 @@
 		$('.container>div:nth-of-type(2)').css("margin-bottom","10px");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 <h1>회원관리</h1>
 <div>
 	<ul id="ad_member_info">

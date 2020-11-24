@@ -72,7 +72,7 @@
 	width: 70%;
 }
 </style>
-<div class="container cfont">
+<div class="container ad_font">
 	<div >
 		<h3 id="adminEvent_View_Title">신규 이벤트</h3>
 		<div id="adminEvent_View_Div">

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.board.BoardDaoImp">
+	<select id="noticeBoardAllRecord" resultType="com.bitcamp.gachi.board.NoticeBoardVO">
+		select notice_num, subject, writer, to_char(writedate, 'MM-DD') writedate 
+		from notice order by notice_num desc
+	</select>
+	<select id="noticeBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.NoticeBoardVO">
+		select notice_num, subject, content, writer, to_char(writedate, 'YYYY-MM-DD') writedate 
+		from notice where notice_num=${param1}
+	</select>
+</mapper>

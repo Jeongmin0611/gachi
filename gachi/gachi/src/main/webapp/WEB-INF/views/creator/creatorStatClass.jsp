@@ -20,7 +20,7 @@ canvas {
 }
 </style>
 
-<div class="container cr_StatClass_center text-center">
+<div class="container cr_StatClass_center text-center ad_font">
 	<h1 style="text-align:center;"> 클래스시청 회원 통계 </h1>
 	<br/>
 
