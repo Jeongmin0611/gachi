@@ -14,7 +14,7 @@ public class BoardController {
 	}
 	
 	@Autowired
-	public void setSqlSession(SqlSession sql)
+	public void setSqlSession(SqlSession sql) {}
 	
 	@RequestMapping("/noticeBoard")
 	public String noticeBoard() {

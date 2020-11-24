@@ -675,10 +675,13 @@ Gitple('onOpen', function () {
 Gitple('onClose', function () {
 	  console.log('onClose event');
 	});
-	if($('#email').val()==""){
-		alert("이메일을 입력하여주세요");
-		return false;
-		}
+	$("#loginBtn").on("click",function(){
+		if($('#loginBtn').val()==""){
+			alert("이메일을 입력하여주세요");
+			return false;
+			}
+
+		});
 
 </script>
 <meta charset="UTF-8">
@@ -736,10 +739,13 @@ Gitple('onClose', function () {
             href="/gachi/creatorDashboard">크리에이터</a></li>
          <li class="nav-item"><a class="nav-link"
             href="/gachi/mypage">마이페이지</a></li>
-          <li class="nav-item" id="loginFormBtn"><a class="nav-link" 
-            href="#">로그인</a></li>
-         <li class="nav-item" id="joinFormBtn"><a class="nav-link"
-            href="#">회원가입</a></li>
+          <c:if test="${logStatus!='Y'}"><li class="nav-item" id="loginFormBtn">
+          <a class="nav-link" href="#">로그인</a></li>
+          </c:if>
+          <c:if test="${logStatus!=null	||	logStatus=='Y'} }">
+          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+         <li class="nav-item" id="joinFormBtn"><a class="nav-link" href="#">회원가입</a></li>
+         </c:if>
          <li class="nav-item"><a class="nav-link"
             href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
@@ -755,7 +761,7 @@ Gitple('onClose', function () {
    <!-- 로그인폼 -->
    <div id="md" class="join">
       <div id="loginFrm" class="col-xs-12 col-md-12">
-         <form method="post" action="/gachi/registerInsert">
+         <form method="post" action="/gachi/login1">
          <div id="mdBtm">
                <button type="button" class="btn btn-primary" id="mdClose">X</button>
             </div>
@@ -766,7 +772,7 @@ Gitple('onClose', function () {
                   <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
                   <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
                   <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
-               <button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
+               <input type="submit"id="loginBtn" class="btn btn-default signupBtn" value="로그인"/><br/>
                <span>or</span><br />
                <button id="kokoBtn">카카오톡으로 로그인</button><br />
                <span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span>
@@ -806,12 +812,10 @@ Gitple('onClose', function () {
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
             <div class="mdJ_layer"></div>
-             <input type="text" placeholder="이메일" name="email" id="email" /><span id="emailMessage" class="message"></span>
-             <input type="hidden" id="emailChk" value="false" />
-             <button type="button" id="emailChkBtn" style="display: none;">중복확인</button>
-             <input type="password" placeholder="비밀번호" name="password" id="password" /><span id="passwordMessage" class="message"></span>
-             <input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
-             <input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
+             <input type="text" placeholder="이메일" name="userid" id="userid" /><span id="emailMessage" class="message"></span>
+             <input type="password" placeholder="비밀번호" name="userpwd" id="userpwd" /><span id="passwordMessage" class="message"></span>
+             <input type="password" placeholder="비밀번호 확인" name="userpwdChk" id="userpwdChk" /><span id="passwordChkMessage" class="message"></span>
+             <input type="text" placeholder="이름" name="username" id="username" /><span id="nameMessage" class="message"></span>
              <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
              <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
 				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 90px;height:40px;">
@@ -861,20 +865,20 @@ Gitple('onClose', function () {
 					<option value="30">30일</option>
 					<option value="31">31일</option>
 				</select><br/>
-             <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
+             <input type="radio" value="M" style="width:15px;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
              <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
              <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
              <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
              <span id="telMessage" class="message"></span>
-             <input type="text" id="addrJ" name="addrJ" placeholder="주소"/>
-             <input type="text" id="addrJDetail" name="addrJDetail" placeholder="상세주소"/>
-             <input type="checkbox"id="checkboxArt" style="width:15px;height:15px;"><span>그림</span>
-             <input type="checkbox"id="checkboxCooking" style="width:15px;height:15px;"><span>요리</span>
-             <input type="checkbox"id="checkboxCrafts" style="width:15px;height:15px;"><span>공예/창작</span>
-             <input type="checkbox"id="checkboxExercise" style="width:15px;height:15px;"><span>운동</span><br/>
-             <input type="checkbox"id="checkboxMusic" style="width:15px;height:15px;"><span>음악</span>
-             <input type="checkbox"id="checkboxPicture" style="width:15px;height:15px;"><span>사진/영상</span>
-             <input type="checkbox"id="checkboxLifeStyle" style="width:15px;height:15px;"><span>라이프스타일</span>
+             <input type="text" id="addr" name="addr" placeholder="주소"/>
+             <input type="text" id="detailaddr" name="detailaddr" placeholder="상세주소"/>
+             <input type="checkbox"id="lnterestArt" style="width:15px;height:15px;"><span>그림</span>
+             <input type="checkbox"id="lnterestCooking" style="width:15px;height:15px;"><span>요리</span>
+             <input type="checkbox"id="lnterestCrafts" style="width:15px;height:15px;"><span>공예/창작</span>
+             <input type="checkbox"id="lnterestExercise" style="width:15px;height:15px;"><span>운동</span><br/>
+             <input type="checkbox"id="lnterestMusic" style="width:15px;height:15px;"><span>음악</span>
+             <input type="checkbox"id="lnterestPicture" style="width:15px;height:15px;"><span>사진/영상</span>
+             <input type="checkbox"id="lnterestLiseStyle" style="width:15px;height:15px;"><span>라이프스타일</span>
             <button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
       </form>
    </div>
