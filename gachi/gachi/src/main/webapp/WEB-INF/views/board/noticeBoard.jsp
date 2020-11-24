@@ -79,38 +79,17 @@ table a, table a:hover{
 				<td>제목</td>
 				<td>작성자</td>
 				<td>작성일</td>
-				<td>조회수</td>
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="vo" items="${list }">
 			<tr>
-				<td>10</td>
-				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다 공지사항 제목 입니다</a></td>
-				<td>관리자</td>
-				<td>10-30</td>
-				<td>50</td>
+				<td>${vo.notice_num }</td>
+				<td><a href="/gachi/noticeBoardDetail?no=${vo.notice_num }">${vo.subject }</a></td>
+				<td>${vo.writer }</td>
+				<td>${vo.writedate }</td>
 			</tr>
-			<tr>
-				<td>10</td>
-				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
-				<td>관리자</td>
-				<td>10-30</td>
-				<td>50</td>
-			</tr>
-			<tr>
-				<td>10</td>
-				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
-				<td>관리자</td>
-				<td>10-30</td>
-				<td>50</td>
-			</tr>
-			<tr>
-				<td>10</td>
-				<td><a href="/gachi/noticeBoardDetail">공지사항 제목 입니다</a></td>
-				<td>관리자</td>
-				<td>10-30</td>
-				<td>50</td>
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	

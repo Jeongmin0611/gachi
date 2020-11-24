@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 #noticeTitle{
 	margin-top:50px;
@@ -22,8 +23,8 @@
 #noticeDetailContent{
 	min-height: 500px;
 	overflow:auto;
-	text-align:center;
 	padding: 20px;
+	font-weight: 600px;
 }
 #noticeDetailContent img{
 	width: 100%;
@@ -43,22 +44,18 @@
 		<h3 id="noticeTitle">공지사항</h3>
 		<div id="noticeDetailDiv">
 			<div id="noticeDetailSubject">
-				<h3 style="margin-top:20px ">공지사항 제목입니다.</h3>
-				<div id="noticeDetailDateDiv"><span>작성자</span> <span>2020-10-30</span></div>
+				<h3 style="margin-top:20px ">${vo.subject }</h3>
+				<div id="noticeDetailDateDiv"><span>${vo.writer }</span> <span>${vo.writedate }</span></div>
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="noticeDetailContent">
-				<img src="/gachi/img/notice_sample_image.jpg"/>
+				${vo.content }
 			</div>
 		</div>
 		
 	</div>
 	<!-- 버튼 -->
 	<div id="noticeDetailBtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
-		<button type="button" class="btn btn-light">목록</button>
-	</div>
-	
-	
+		<a href="/gachi/noticeBoard"><button type="button" class="btn btn-light">목록</button></a>
+	</div>	
 </div>
