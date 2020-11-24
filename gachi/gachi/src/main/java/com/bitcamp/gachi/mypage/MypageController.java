@@ -71,13 +71,21 @@ public class MypageController {
 	public String myclassVideo() {
 		return "myclass/myclassVideo";
 	}
+	////////////////////////////////////
 	@RequestMapping("/userMileage")
 	public ModelAndView userMileage() {
 		MileageDaoImp dao = sqlSession.getMapper(MileageDaoImp.class);
 		List<MileageVO> list = dao.mileageAllRecord();
 		
+		int mileageAllSum = dao.mileageAllSum();
+		int mileagePosiSum = dao.mileagePosiSum();
+		int mileageNegaSum = dao.mileageNegaSum();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
+		mav.addObject("mileageAllSum", mileageAllSum);
+		mav.addObject("mileagePosiSum", mileagePosiSum);
+		mav.addObject("mileageNegaSum",mileageNegaSum);
 		mav.setViewName("mypage/userMileage");
 		return mav;
 	}
