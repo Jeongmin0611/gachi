@@ -87,7 +87,7 @@
 			<li class="CservicetopMenuLi"><a href="/gachi/serviceCenterBoard" class="CservicemenuLink">자주 묻는 질문</a>
 				<ul class="CserviceSubmenu"><!-- 서브메뉴 -->
 					<li><a href="/gachi/serviceCenterBoard" class="CserviceSubmenuLink longLink">전체</a></li>
-					<li><a href="/gachi/serviceCenterBoard_TopFAQ" class="CserviceSubmenuLink longLink">TOP FAQ </a></li>
+					<li><a href="/gachi/serviceCenterBoard_TopFAQ?" class="CserviceSubmenuLink longLink">TOP FAQ </a></li>
 					<li><a href="/gachi/serviceCenterBoard_order" class="CserviceSubmenuLink longLink">주문/결제</a></li>
 					<li><a href="/gachi/serviceCenterBoard_refund" class="CserviceSubmenuLink longLink">취소/환불</a></li>
 					<li><a href="/gachi/serviceCenterBoard_class" class="CserviceSubmenuLink longLink">클래스/스토어</a></li>
