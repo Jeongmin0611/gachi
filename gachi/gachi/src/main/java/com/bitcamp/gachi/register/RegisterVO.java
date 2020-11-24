@@ -120,11 +120,11 @@ public class RegisterVO {
 	public void setSignupdate(String signupdate) {
 		this.signupdate = signupdate;
 	}
-	public String getInterest() {
-		return interest;
+	public String getLnterest() {
+		return lnterest;
 	}
-	public void setInterest(String interest) {
-		this.interest = interest;
+	public void setLnterest(String lnterest) {
+		this.lnterest = lnterest;
 	}
 	private String username;
 	private String nickname;
@@ -145,6 +145,6 @@ public class RegisterVO {
 	private String detailaddr;
 	
 	private String signupdate;
-	private String interest;
+	private String lnterest;
 	
 }
