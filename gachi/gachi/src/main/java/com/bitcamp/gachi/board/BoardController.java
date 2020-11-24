@@ -19,8 +19,7 @@ public class BoardController {
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-	}
-
+}
 	@RequestMapping("/noticeBoard")
 	public ModelAndView noticeBoard() {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
