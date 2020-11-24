@@ -40,8 +40,7 @@ button:focus, button:active{
 }
 /* 진행중 , 완료 이벤트 끝*/
 /* 이벤트 리스트 */
-
-.homeClassListImg {/*이미지 사이즈 조절*/
+#eventThumbnail>img {/*이미지 사이즈 조절*/
 	width: 100%;
 	margin: 10px auto;
 	height: 250px;
@@ -145,48 +144,15 @@ button:focus, button:active{
 
 	<!-- 이벤트 리스트 -->
 	<div class="row">
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/art1.jpg" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span id="eventdate">2020-10-01~2020-10-31</span></p>
-				<a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원!</a>
-			</div>				
-		</div>
+		<c:forEach var="vo" items="${list }">
+			<div class="col-sm-4">
+				<a href="/gachi/eventBoardDetail" id="eventThumbnail">${vo.event_img }</a><br/>
+				<div class="homeClassListTxt">
+					<p><span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
+					<a href="/gachi/eventBoardDetail">${vo.subject }</a>
+				</div>				
+			</div>
+		</c:forEach>
 	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
