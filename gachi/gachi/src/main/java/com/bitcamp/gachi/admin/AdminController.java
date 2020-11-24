@@ -30,8 +30,19 @@ public class AdminController {
 		return "admin/adminDashboard";
 	}
 	@RequestMapping("/adminCreator")
-	public String adminCreator() {
-		return "admin/adminCreator";
+	public ModelAndView adminCreator() {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<AllVO> list = dao.selectAllCreator();
+		int countAllCreator = dao.countAllCreator();
+		int countNowCreator =dao.countNowCreator();
+		int countDeletedCreator = dao.countDeletedCreator();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("creatorList", list);
+		mav.addObject("countAllCreator", countAllCreator);
+		mav.addObject("countNowCreator", countNowCreator);
+		mav.addObject("countDeletedCreator", countDeletedCreator);
+		mav.setViewName("admin/adminCreator");
+		return mav;
 	}
 	@RequestMapping("/adminCreatorView")
 	public String adminCreatorView() {

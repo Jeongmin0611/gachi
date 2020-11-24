@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
+	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
+	select rownum,category, nickname, c.userid, tel, to_char(signupdate, 'yyyy-mm-dd')
+  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
+  	 from member a join creator c on a.userid = c.userid
+	</select>
+		<select id="countAllCreator" resultType="_int">
+		select count(*) from member where grade = '2'
+	</select>
+	<select id="countNowCreator" resultType="_int">
+		select count(*) from member where deleted=0 and grade = '2'
+	</select>
+	<select id="countDeletedCreator" resultType="_int">
+		select count(*) from member where deleted=1 and grade = '2'
+	</select>
+	
+</mapper>
