@@ -1,9 +1,12 @@
 package com.bitcamp.gachi.board;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BoardController {
@@ -14,16 +17,31 @@ public class BoardController {
 	}
 	
 	@Autowired
-	public void setSqlSession(SqlSession sql)
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	
 	@RequestMapping("/noticeBoard")
-	public String noticeBoard() {
-		return "board/noticeBoard";
+	public ModelAndView noticeBoard() {
+		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		List<NoticeBoardVO> list = dao.noticeBoardAllRecord();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("board/noticeBoard");
+		return mav;
 	}
 	@RequestMapping("/noticeBoardDetail")
-	public String noticeBoardDetail() {
-		return "board/noticeBoardDetail";
+	public ModelAndView noticeBoardDetail(int no) {
+		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		NoticeBoardVO vo = dao.noticeBoardSelect(no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("board/noticeBoardDetail");
+		return mav;
 	}
+	
 	@RequestMapping("/eventBoard")
 	public String eventBoard() {
 		return "board/eventBoard";
