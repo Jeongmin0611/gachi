@@ -67,7 +67,7 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
+#loginFrm,#login2Frm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
@@ -78,10 +78,10 @@ a {
 #listFontColor{
 	color:black;
 }
-#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
+#mdBtm,#md2Btm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
 	float:right;
 }
-.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
+.md_layer,.md2_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -90,7 +90,7 @@ a {
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
 	}
-	#md,#mdJ,#mdJ2,#idF1,#idF2,#pwdF1,#pwdF1C,#pwdF2,#pwdF2C{
+	#md,#md2,#mdJ,#mdJ2,#idF1,#idF2,#pwdF1,#pwdF1C,#pwdF2,#pwdF2C{
 		display:none;
 		position:absolute;
 		width:100%;
@@ -128,7 +128,7 @@ a {
 	margin-top:83px;
 	margin-bottom:5px;
 }
-#mdClose,#mdJClose,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
+#mdClose,#md2Close,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
 	background-color:white;
 	border:0;
 	outline:0;
@@ -146,19 +146,19 @@ a {
 		margin-top:10px;
 		margin-bottom:10px;
 	}
-	#md{
+	#md,#md2{
 		width:350px;
 		height:640px;
 		border-radius:10px;
 	}
 	#mdJ{
 		width:350px;
-		height:790px;
+		height:920px;
 		border-radius:10px;
 	}
 	#mdJ2{
 		width:350px;
-		height:800px;
+		height:900px;
 		border-radius:10px;
 	}
 	#idF1{
@@ -223,7 +223,7 @@ a {
 		color:#999;
 		font-size:16px
 	}
-	.tel{
+	.tel,.birthdata{
 		margin: 0px auto;
 		float: left;
 		margin-right:10px;
@@ -344,6 +344,9 @@ a {
 }
 .logRadioBtnInterval{
 	margin:0 0 0 10px;
+}
+.genderRadioBtnInterval{
+	margin:0 0 0 20px;
 }
 /* 메뉴 */
 .nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
@@ -612,14 +615,71 @@ $(function(){
 		   		$("#pwdF2").fadeOut();
 		});
 	}
+	function loginChange(){
+		$("#md").css({'display':'none'});
+		$('#md2').css({
+			"top": (($(window).height()-$("#md2").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#md2").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#md2").fadeIn();
+			
+			$("#md2Close,.md2_layer").click(function(){
+		   		$("#md2").fadeOut();
+		});
+
+		}
+	function login2Change(){
+		$("#md2").css({'display':'none'});
+		$('#md').css({
+			"top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
+		    "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
+			}).css("display","block");
+			$("#md").fadeIn();
+			
+			$("#mdClose,.md_layer").click(function(){
+		   		$("#md").fadeOut();
+		});
+	}
+	
 	
 </script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/9a15be1bb8.js"></script>
+<script>
+
+window.GitpleConfig = {"appCode":"j2vNGCZzc42igrnPe6ofouihLQ2se3"};
+!function(){function e(){function e(){var e=t.contentDocument,a=e.createElement("script");a.type="text/javascript",a.async=!0,a.src=window[n]&&window[n].url?window[n].url+"/inapp-web/gitple-loader.js":"https://app.gitple.io/inapp-web/gitple-loader.js",a.charset="UTF-8",e.head&&e.head.appendChild(a)}var t=document.getElementById(a);t||((t=document.createElement("iframe")).id=a,t.style.display="none",t.style.width="0",t.style.height="0",t.addEventListener?t.addEventListener("load",e,!1):t.attachEvent?t.attachEvent("onload",e):t.onload=e,document.body.appendChild(t))}var t=window,n="GitpleConfig",a="gitple-loader-frame";if(!window.Gitple){document;var i=function(){i.ex&&i.ex(arguments)};i.q=[],i.ex=function(e){i.processApi?i.processApi.apply(void 0,e):i.q&&i.q.push(e)},window.Gitple=i,t.attachEvent?t.attachEvent("onload",e):t.addEventListener("load",e,!1)}}();
+Gitple('boot');
+
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  userLang: 'ko'
+		};
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  showFileUpload: false
+		};
+window.GitpleConfig = {
+		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  enableCookie: false
+		};
+if (window.Gitple) {
+    window.Gitple('show');
+  }
+
+Gitple('onOpen', function () {
+	  console.log('onOpen event');
+	});
+Gitple('onClose', function () {
+	  console.log('onClose event');
+	});
+
+</script>
 <meta charset="UTF-8">
 <title>같이가치</title>
 </head>
 <body>
+
    <!-- 메뉴 -->
    <nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
    <a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
@@ -689,16 +749,37 @@ $(function(){
    <!-- 로그인폼 -->
    <div id="md" class="join">
       <div id="loginFrm" class="col-xs-12 col-md-12">
-         <form method="post" action="">
-         <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+         <form method="post" action="/gachi/registerInsert">
          <div id="mdBtm">
                <button type="button" class="btn btn-primary" id="mdClose">X</button>
             </div>
          <div>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>크리에이터<br/>
+          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="loginChange()"/>크리에이터<br/>
             <div class="md_layer"></div>
                   <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
                   <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
+                  <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
+               <button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
+               <span>or</span><br />
+               <button id="kokoBtn">카카오톡으로 로그인</button><br />
+               <span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div id="md2" class="join">
+      <div id="login2Frm" class="col-xs-12 col-md-12">
+         <form method="post" action="">
+         <div id="md2Btm">
+               <button type="button" class="btn btn-primary" id="md2Close">X</button>
+            </div>
+         <div>
+          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
+            <div class="md2_layer"></div>
+                  <input type="text" placeholder="아이디(이메일)" id="userid2" name="userid2"/><br />
+                  <input type="password" placeholder="비밀번호" id="userpwd2" name="userpwd2"/><br />
                   <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
                <button id="loginBtn" class="btn btn-default signupBtn">로그인</button><br />
                <span>or</span><br />
@@ -712,7 +793,7 @@ $(function(){
    <!-- 회원가입 -->
    <div id="mdJ" class="join">
    <div id="joinForm" class="col-xs-12 col-md-12">
-      <form method="post" action="">   
+      <form method="post" action="/gachi/registerInsert">   
             <div id="mdJBtm">
                <button type="button" class="btn btn-primary" id="mdJClose">X</button>
             </div>
@@ -726,12 +807,68 @@ $(function(){
              <input type="password" placeholder="비밀번호 확인" name="passwordChk" id="passwordChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="name" id="name" /><span id="nameMessage" class="message"></span>
              <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+             <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
+				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01월</option>
+					<option value="02">02월</option>
+					<option value="03">03월</option>
+					<option value="04">04월</option>
+					<option value="05">05월</option>
+					<option value="06">06월</option>
+					<option value="07">07월</option>
+					<option value="08">08월</option>
+					<option value="09">09월</option>
+					<option value="10">10월</option>
+					<option value="11">11월</option>
+					<option value="12">12월</option>
+				</select>
+				<select name="birtdate3" id="birtdate3" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01일</option>
+					<option value="02">02일</option>
+					<option value="03">03일</option>
+					<option value="04">04일</option>
+					<option value="05">05일</option>
+					<option value="06">06일</option>
+					<option value="07">07일</option>
+					<option value="08">08일</option>
+					<option value="09">09일</option>
+					<option value="10">10일</option>
+					<option value="11">11일</option>
+					<option value="12">12일</option>
+					<option value="13">13일</option>
+					<option value="14">14일</option>
+					<option value="15">15일</option>
+					<option value="16">16일</option>
+					<option value="17">17일</option>
+					<option value="18">18일</option>
+					<option value="19">19일</option>
+					<option value="20">20일</option>
+					<option value="21">21일</option>
+					<option value="22">22일</option>
+					<option value="23">23일</option>
+					<option value="24">24일</option>
+					<option value="25">25일</option>
+					<option value="26">26일</option>
+					<option value="27">27일</option>
+					<option value="28">28일</option>
+					<option value="29">29일</option>
+					<option value="30">30일</option>
+					<option value="31">31일</option>
+				</select><br/>
+             <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
+             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
              <span id="telMessage" class="message"></span>
              <input type="text" id="addrJ" name="addrJ" placeholder="주소"/>
              <input type="text" id="addrJDetail" name="addrJDetail" placeholder="상세주소"/>
+             <input type="checkbox"id="checkboxArt" style="width:15px;height:15px;"><span>그림</span>
+             <input type="checkbox"id="checkboxCooking" style="width:15px;height:15px;"><span>요리</span>
+             <input type="checkbox"id="checkboxCrafts" style="width:15px;height:15px;"><span>공예/창작</span>
+             <input type="checkbox"id="checkboxExercise" style="width:15px;height:15px;"><span>운동</span><br/>
+             <input type="checkbox"id="checkboxMusic" style="width:15px;height:15px;"><span>음악</span>
+             <input type="checkbox"id="checkboxPicture" style="width:15px;height:15px;"><span>사진/영상</span>
+             <input type="checkbox"id="checkboxLifeStyle" style="width:15px;height:15px;"><span>라이프스타일</span>
             <button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
       </form>
    </div>
@@ -743,7 +880,7 @@ $(function(){
                <button type="button" class="btn btn-primary" id="mdJ2Close">X</button>
             </div>
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn" class="logRadioBtnInterval" onclick="mdJ2change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
+            <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn"  class="logRadioBtnInterval" onclick="mdJ2change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
             <div class="mdJ2_layer"></div>
                <input type="text" placeholder="이메일" name="email2" id="email2" /><span id="email2Message" class="message"></span>
                 <input type="hidden" id="emailChk2" value="false" />
@@ -752,12 +889,71 @@ $(function(){
                 <input type="password" placeholder="비밀번호 확인" name="passwordChk2" id="passwordChk2" /><span id="passwordChkMessage" class="message"></span>
                 <input type="text" placeholder="이름" name="name2" id="name2" /><span id="name2Message" class="message"></span>
                 <input type="text" placeholder="닉네임" name="nickname2" id="nickname2" /><span id="nickname2Message" class="message"></span>
+                <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
+				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01월</option>
+					<option value="02">02월</option>
+					<option value="03">03월</option>
+					<option value="04">04월</option>
+					<option value="05">05월</option>
+					<option value="06">06월</option>
+					<option value="07">07월</option>
+					<option value="08">08월</option>
+					<option value="09">09월</option>
+					<option value="10">10월</option>
+					<option value="11">11월</option>
+					<option value="12">12월</option>
+				</select>
+				<select name="birtdate3" id="birtdate3" class="birthdata" style="width: 90px;height:40px;">
+					<option value="01">01일</option>
+					<option value="02">02일</option>
+					<option value="03">03일</option>
+					<option value="04">04일</option>
+					<option value="05">05일</option>
+					<option value="06">06일</option>
+					<option value="07">07일</option>
+					<option value="08">08일</option>
+					<option value="09">09일</option>
+					<option value="10">10일</option>
+					<option value="11">11일</option>
+					<option value="12">12일</option>
+					<option value="13">13일</option>
+					<option value="14">14일</option>
+					<option value="15">15일</option>
+					<option value="16">16일</option>
+					<option value="17">17일</option>
+					<option value="18">18일</option>
+					<option value="19">19일</option>
+					<option value="20">20일</option>
+					<option value="21">21일</option>
+					<option value="22">22일</option>
+					<option value="23">23일</option>
+					<option value="24">24일</option>
+					<option value="25">25일</option>
+					<option value="26">26일</option>
+					<option value="27">27일</option>
+					<option value="28">28일</option>
+					<option value="29">29일</option>
+					<option value="30">30일</option>
+					<option value="31">31일</option>
+				</select><br/>
+             <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
                 <input type="text" placeholder="010" name="mdJ2tel1" id="mdJ2tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
                 <input type="text" placeholder="1234"name="mdJ2tel2" id="mdJ2tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
                 <input type="text" placeholder="5678"name="mdJ2tel3" id="mdJ2tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
                 <span id="telMessage" class="message"></span>
                <input type="text" placeholder="사업자번호" name="Business Number" id="Business Number"/>
                <input type="text" placeholder="계좌" name="account" id="account"/>
+               <span style="width:50%;">지원카테고리:</span>
+                <select style="width:50%;">
+                	<option value="그림">그림</option>
+                	<option value="요리">요리</option>
+                	<option value="공예/창작">공예/창작</option>
+                	<option value="운동">운동</option>
+                	<option value="음악">음악</option>
+                	<option value="사진/영상">사진/영상</option>
+                	<option value="라이프스타일">라이프스타일</option>
+                </select>
                <button type="submit" class="btn btn-default signupBtn" id="mdJ2signupBtn">회원가입</button>
          </form>
       </div>

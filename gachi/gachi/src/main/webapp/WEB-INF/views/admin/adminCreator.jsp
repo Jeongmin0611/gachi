@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+
 <div class="container">
 <h1>크리에이터 관리</h1>
 <div id="ad_search_header">
 <div>
 	<ul id="cr_member_info">
-		<li>●활동 : 99명</li>
-		<li>●탈퇴 : 1명</li>
-		<li>●누적 : 100명</li>
+		<li>●활동 : ${countNowCreator }명</li>
+		<li>●탈퇴 : ${countDeletedCreator}명</li>
+		<li>●누적 : ${countAllCreator }명</li>
 	</ul>
 </div>
 <div>
@@ -43,23 +44,18 @@
 	<li>탈퇴일</li>
 	<li>승인여부</li>
 	
-	<li>041</li>
-	<li>창작/공예</li>
-	<li>박창작씨</li>
-	<li><a href="/gachi/adminCreatorView">creator@naver.com</a></li>
-	<li>010-1234-1234</li>
-	<li>2020-04-24</li>
-	<li>x</li>
-	<li><a href="#">미승인</a></li>
-	
-	<li>055</li>
-	<li>라이프스타일</li>
-	<li>김헬스</li>
-	<li>creator123@nate.com</li>
-	<li>010-1234-4124</li>
-	<li>2020-01-24</li>
-	<li>x</li>
-	<li><a href="#">승인</a></li>
+	<c:forEach var="creatorList" items="${creatorList }">
+	<li>${creatorList.rownum }</li>
+	<li>${creatorList.category}</li>
+	<li>${creatorList.nickname}</li>
+	<li><a href="/gachi/adminCreatorView">${creatorList.userid }</a></li>
+	<li>${creatorList.tel }</li>
+	<li>${creatorList.signupdate }</li>
+	<li><c:if test="${creatorList.withdrawdate eq null}">x</c:if><c:if test="${creatorList.withdrawdate ne null}">${creatorList.withdrawdate }</c:if></li>
+	<li><c:if test="${creatorList.creator_state eq 0 }">미승인</c:if>
+		<c:if test="${creatorList.creator_state eq 1 }">승인</c:if>
+		<c:if test="${creatorList.creator_state eq 2 }">승인거절</c:if></li>
+	</c:forEach>
 </ul>
 </div>	
 <div id="paging">

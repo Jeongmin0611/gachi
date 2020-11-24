@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.gachi.admin.MemberDaoImp">
+	<select id="selectAllMember" resultType="com.bitcamp.gachi.admin.MemberVO">
+		select rownum, userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
+		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade = '1'
+	</select>
+	<select id="countAllMember" resultType="_int">
+		select count(*) from member where grade = '1'
+	</select>
+	<select id="countNowMember" resultType="_int">
+		select count(*) from member where deleted=0 and grade = '1'
+	</select>
+	<select id="countDeletedMember" resultType="_int">
+		select count(*) from member where deleted=1 and grade = '1'
+	</select>
+</mapper>

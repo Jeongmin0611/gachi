@@ -1,18 +1,45 @@
 package com.bitcamp.gachi.admin;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class AdminController {
+	SqlSession sqlSession;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
 	@RequestMapping ("/adminDashboard")
 	public String adminDashboard() {
 		return "admin/adminDashboard";
 	}
 	@RequestMapping("/adminCreator")
-	public String adminCreator() {
-		return "admin/adminCreator";
+	public ModelAndView adminCreator() {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<AllVO> list = dao.selectAllCreator();
+		int countAllCreator = dao.countAllCreator();
+		int countNowCreator =dao.countNowCreator();
+		int countDeletedCreator = dao.countDeletedCreator();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("creatorList", list);
+		mav.addObject("countAllCreator", countAllCreator);
+		mav.addObject("countNowCreator", countNowCreator);
+		mav.addObject("countDeletedCreator", countDeletedCreator);
+		mav.setViewName("admin/adminCreator");
+		return mav;
 	}
 	@RequestMapping("/adminCreatorView")
 	public String adminCreatorView() {
@@ -26,9 +53,30 @@ public class AdminController {
 	public String adminClassView() {
 		return "admin/adminClassView";
 	}
+	
+//	public String adminMember() {
+//		
+//		return "admin/adminMember";
+//	}
 	@RequestMapping("/adminMember")
-	public String adminMember() {
-		return "admin/adminMember";
+	public ModelAndView adminMember() {
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<MemberVO> list = dao.selectAllMember(); // 전체 회원 리스트
+		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
+		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
+		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
+		
+		PagingVO pageVO = new PagingVO();
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("memberList",list);
+		mav.addObject("pageVO",pageVO);
+		mav.addObject("countAllMember", countAllMember);
+		mav.addObject("countNowMember", countNowMember);
+		mav.addObject("countDeletedMember", countDeletedMember);
+		mav.setViewName("admin/adminMember");
+		return mav;
 	}
 	@RequestMapping("/adminMemberView")
 	public String adminMemberView() {
@@ -131,5 +179,20 @@ public class AdminController {
 	public String adminReturn() {
 		return "admin/adminReturn";
 	}
-
+	@RequestMapping("/adminVideo")
+	public String adminVideo() {
+		return "admin/adminVideo";
+	}
+	@RequestMapping("/adminReply")	
+	public String adminReply() {
+		return "admin/adminReply";
+	}
+	@RequestMapping("/adminClassReview")
+	public String adminClassReview() {
+		return "admin/adminClassReview";
+	}
+	@RequestMapping("/adminAnswer")
+	public String adminAnswer() {
+		return "admin/adminAnswer";
+	}
 }

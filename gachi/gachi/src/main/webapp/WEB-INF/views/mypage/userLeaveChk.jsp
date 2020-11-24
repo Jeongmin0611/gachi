@@ -4,80 +4,48 @@
 	
 	/* 회원탈퇴 - 비번확인 */
 	
-	/******************/
-	/* 상단 */
-	#userLeaveChkTop{
-		margin:20px auto;
-		margin-left:50px;
-		overflow:auto;
-		text-align:center;
+	.mypageTop>div>div:last-child{
+		font-weight: bold;
 	}
-	#userLeaveChkTop li{
-		float:left;
+	.mypageContent div{
+		margin: 10px 0;
 	}
-	#userLeaveChkTop li:nth-child(2){
-		width:3%;
+	.mypageContent input{
+		border:	none;
+		outline: none;
+		background-color: #eee;
 	}
-	
-	/******************/
-	/* 내용 */
-	#userLeaveChkContent{
-		width:50%;
-		position:relative;
-		left:25%;
-		margin:50px 0;
+	.mypageContent>div>div:last-child{
+		background-color: #eee;
 	}
-	#userLeaveChkContent label{
-		font-size:1.3em;
-	}
-	/* 비번확인 리스트 */
-	#userLeaveChkLst{
-		margin:50px 0 100px;
-	}
-	#userLeaveChkLst li{
-		overflow:auto;
-		margin-bottom:10px;
-		text-align:center;
-	}
-	#userLeaveChkLst li:nth-child(2n+1){
-		width:30%;
-		float:left;
-	}
-	#userLeaveChkLst li:nth-child(2n){
-		width:70%;
-	}
-	#leaveUserpwd{
-		width:70%;
-		border:none;
-		outline:none;
-		border-bottom:1px solid #ddd;
-	}
-	#userLeaveChkContent button{
-		background-color:#eee;
-		color:#000;
+	.mypageContent>button{
+		background-color: #abcee3;
+		margin-top: 100px;
 	}
 	
 </style>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div id="userLeaveChkTop">
-			<ul>
-				<li><a href="/gachi/userInfoEdit">회원정보수정</a></li>
-				<li>|</li>
-				<li><a href="/gachi/userLeave"><b>회원탈퇴</b></a></li>
-			</ul>
+		<div class="mypageTop">
+			<div class="row">
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-1">|</div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
+			</div>
 		</div>
-		<div id="userLeaveChkContent">
-			<label>비밀번호확인</label>
-			<hr style="background:#000;"/>
-			<ul id="userLeaveChkLst">
-				<li>아이디</li>
-				<li>userid@bitcamp.com</li>
-				<li>비밀번호</li>
-				<li><input type="password" name="userpwd" id="leaveUserpwd"/></li>
-			</ul>
-			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userLeaveOk'">회원탈퇴</button>
+		<div class="mypageContent col-lg-8 col-md-10">
+			<h4>비밀번호확인</h4>
+			<hr class="userHr"/>
+			<div class="row">
+				<div class="col-md-4">아이디</div>
+				<div class="col-md-8">userid@bitcamp.com</div>
+			</div>
+			<div class="row">	
+				<div class="col-md-4">비밀번호</div>
+				<div class="col-md-8"><input type="password"/></div>
+			</div>
+			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userLeaveOk'">확인</button>
 		</div>
 	</div>
 </div>
