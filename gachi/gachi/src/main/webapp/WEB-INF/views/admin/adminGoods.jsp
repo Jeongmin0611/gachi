@@ -3,7 +3,7 @@
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <div class="container text-center cfont">
 <h1>스토어 관리</h1>
-	<div style="text-align:right;margin:20px 0px;">
+	<div id="ad_goods_writeForm">
 	<form action="">
 		<select name="category">
 			<option>공예/창작</option>

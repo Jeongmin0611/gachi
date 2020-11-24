@@ -621,6 +621,7 @@ input{text-align:center;}
 	}
 	#ad_goods_writeForm{
 		width:80%;
+		border:3px solid #437299;
 		margin:0 auto;
 	}
 	#ad_goods_writeForm li{
