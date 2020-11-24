@@ -3,7 +3,7 @@
 /* 같이 배경색 = #F4BFA9 
    가치 배경색 = #ABCEE3 */
 
-
+cr_MyClass_header
 ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 
 select{height:30px}
@@ -703,19 +703,20 @@ input{text-align:center;}
 		line-height:50px;
 		height:50px;
 	}
-	.cr_MyClass_header li:nth-of-type(7n+1){
+	.cr_MyClass_header li:nth-of-type(8n+1){
 		width:5%;
 	}
-	.cr_MyClass_header li:nth-of-type(7n+3){
+	.cr_MyClass_header li:nth-of-type(8n+3){
 		width:15%;
 	}
-	.cr_MyClass_header li:nth-of-type(7n+4){
+	.cr_MyClass_header li:nth-of-type(8n+4){
 		width:10%;
 	}
-	.cr_MyClass_header li:nth-of-type(7n+5){
-		width:40%;
+	.cr_MyClass_header li:nth-of-type(8n+5){
+		width:30%;
 	}
 	.cr_MyClass_lst{
+		padding-left:0px;
 		overflow:auto;
 	}
 	.cr_MyClass_lst li{
@@ -731,18 +732,18 @@ input{text-align:center;}
 		width:90%;
 		height:90%;
 	}
-	.cr_MyClass_lst li:nth-of-type(7n+1){
+	.cr_MyClass_lst li:nth-of-type(8n+1){
 		width:5%;
 	}
-	.cr_MyClass_lst li:nth-of-type(7n+3){
+	.cr_MyClass_lst li:nth-of-type(8n+3){
 		width:15%;
 		padding:7px;
 	}
-	.cr_MyClass_lst li:nth-of-type(7n+4){
+	.cr_MyClass_lst li:nth-of-type(8n+4){
 		width:10%;
 	}
-	.cr_MyClass_lst li:nth-of-type(7n+5){
-		width:40%;
+	.cr_MyClass_lst li:nth-of-type(8n+5){
+		width:30%;
 	}
 	/*크리에이터 마이클래스 리스트 end*/
 	

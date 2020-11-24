@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <style>
 	#ad_video_lstArea li{
 		float:left;
@@ -14,7 +14,7 @@
 	}
 </style>
 <div class="container ad_font">
-	<h1>상품리뷰관리</h1>
+	<h1>수강평 관리</h1>
 	<div id="ad_video_searchArea">
 		<form method="post" action="">
 		<ul id="ad_video_searchList">
@@ -56,11 +56,13 @@
 					<option>1</option>
 				</select>
 			</li>
-			<li>리뷰검색</li>
+			<li>수강평검색</li>
 			<li>
 				<select>
-					<option>상품코드</option>
-					<option>상품명</option>
+					<option>클래스코드</option>
+					<option>클래스명</option>
+					<option>제목</option>
+					<option>내용</option>
 				</select>
 				<input type="text" size="40"/>
 				<input type="submit" class="btn" value="검색" />
