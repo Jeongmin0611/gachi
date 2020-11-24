@@ -20,7 +20,7 @@
 	border-radius: 0.5rem;
 }
 </style>
-<div class="container cr_dash_center text-center">
+<div class="container cr_dash_center text-center ad_font">
 <h1> 크리에이터 대시보드 </h1>
 	<br/>
 	<div style="height:200px;">

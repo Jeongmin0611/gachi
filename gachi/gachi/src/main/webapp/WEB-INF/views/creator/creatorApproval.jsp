@@ -20,7 +20,7 @@ select {
 	height: 30px;
 }
 </style> 
-<div class="container text-center cfont">
+<div class="container text-center ad_font">
 <h3> 미승인 클래스</h3>
 	<div id="cr_Approval_area">
 		<form method="get" action="">

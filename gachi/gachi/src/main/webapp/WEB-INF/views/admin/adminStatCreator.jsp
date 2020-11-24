@@ -6,7 +6,7 @@
 	canvas {width:100%; margin-bottom:20px;}
 </style>
 
-<div class="container cr_StatClass_center text-center">
+<div class="container cr_StatClass_center text-center ad_font">
 	<h1 style="text-align:center;"> 크리에이터 통계 </h1><br/>
 		<p>
 

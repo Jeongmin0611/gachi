@@ -119,7 +119,7 @@ a:hover {
 }
 </style>
 
-<div class="cr_guide text-center " style="margin-bottom:50px;">
+<div class="cr_guide text-center ad_font" style="margin-bottom:50px;">
 
 	 	<div id="guide_navi_div"style="margin-top: 100px">
 			<ul id="cr_guide_navi">

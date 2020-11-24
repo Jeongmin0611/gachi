@@ -15,7 +15,7 @@ select {
 	height: 30px;
 }
 </style> 
-<div class="container">
+<div class="container ad_font">
 <h1>공지사항</h1>
 <!-- 1:1문의 영역 -->
 

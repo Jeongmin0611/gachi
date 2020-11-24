@@ -10,7 +10,7 @@
 		CKEDITOR.replace("content");
 	});
 </script>
-<div class="container">
+<div class="container ad_font">
 	<h1>영상 변경 사항 요청</h1>
 	<form method="post" action="">
 	<ul id="cre_video_requestForm">

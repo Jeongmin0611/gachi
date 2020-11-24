@@ -74,7 +74,7 @@
 	width: 70%;
 }
 </style>
-<div class="container">
+<div class="container ad_font">
 	<div >
 		<h3>공지사항</h3>
 		<div id="cr_NoticeView_Div">

@@ -78,7 +78,7 @@ span{
 	font-size: 0.7em;
 }
 </style>
-<div class="container cfont">
+<div class="container ad_font">
 	<div >
 		<h3>1:1문의내역</h3>
 		<div id="admin1on1View_Div">

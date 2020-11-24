@@ -5,7 +5,7 @@
 	.ad_StatClass_Piechart {float:left;width:33%; margin:50px 0px; font-size:1.5em;}
 	canvas {width:100%; margin-bottom:20px;}
 </style>
-<div class="container store_StatClass_center text-center">
+<div class="container store_StatClass_center text-center ad_font">
 	<h1 style="text-align:center;"> 스토어 통계 </h1><br/>
 		<p>
 			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>

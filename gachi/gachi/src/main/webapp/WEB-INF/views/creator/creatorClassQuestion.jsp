@@ -12,7 +12,7 @@
 		line-height: 50px;
 	}
 </style>
-<div class="container">
+<div class="container ad_font">
 <h1>클래스 문의</h1>
 <form method="post" action="">
 <ul id="ad_order_searchForm">
