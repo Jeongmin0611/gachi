@@ -10,7 +10,7 @@
   	 from member a join creator c on a.userid = c.userid
 	</select>
 		<select id="countAllCreator" resultType="_int">
-		select count(*) from member where grade = '2'
+		select count(*) from creator
 	</select>
 	<select id="countNowCreator" resultType="_int">
 		select count(*) from member where deleted=0 and grade = '2'
