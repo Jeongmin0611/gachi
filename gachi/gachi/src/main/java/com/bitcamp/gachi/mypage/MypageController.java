@@ -1,10 +1,24 @@
 package com.bitcamp.gachi.mypage;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MypageController {
+	SqlSession sqlSession;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	@RequestMapping("/mypage")
 	public String Mypage() {
 		return "mypage/mypageMain";
@@ -58,8 +72,14 @@ public class MypageController {
 		return "myclass/myclassVideo";
 	}
 	@RequestMapping("/userMileage")
-	public String userMileage() {
-		return "mypage/userMileage";
+	public ModelAndView userMileage() {
+		MileageDaoImp dao = sqlSession.getMapper(MileageDaoImp.class);
+		List<MileageVO> list = dao.mileageAllRecord();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("mypage/userMileage");
+		return mav;
 	}
 	@RequestMapping("/userWishList")
 	public String userWishList() {
