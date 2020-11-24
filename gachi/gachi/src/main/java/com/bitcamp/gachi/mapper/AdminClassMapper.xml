@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.admin.ClassDaoImp">
+	<select id="selectAllClass" resultType="com.bitcamp.gachi.admin.ClassVO">
+select class_code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,to_char(allrow,'YYYY-MM-DD') allrow,class_state from class order by class_code
+	</select>
+</mapper>

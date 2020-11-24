@@ -11,30 +11,30 @@
 <div class="container ad_font">
 	<h1>클래스관리</h1>
 <div id="search_area">
-	<form method="post" action="">
-		<select>
+	<form method="get" action="/gachi/adminClass">
+		<select name="category">
 			<option>전체</option>
-			<option>공예/창작</option>
-			<option>요리</option>
-			<option>미술</option>
-			<option>음악</option>
-			<option>라이프스타일</option>
-			<option>운동</option>
-			<option>사진/영상</option>
+			<option value="공예/창작">공예/창작</option>
+			<option value="요리">요리</option>
+			<option value="미술">미술</option>
+			<option value="음악">음악</option>
+			<option value="라이프스타일">라이프스타일</option>
+			<option value="운동">운동</option>
+			<option value="사진/영상">사진/영상</option>
 		</select>
-		<select>
+		<select name="option">
 			<option>전체</option>
-			<option>클래스코드</option>
-			<option>클래스명</option>
-			<option>크리에이터닉네임</option>
+			<option value="class_code">클래스코드</option>
+			<option value="class_name">클래스명</option>
+			<option value="nickname">크리에이터닉네임</option>
 		</select>
-		<select>
+		<select name="class_state">
 			<option>전체</option>
 			<option>등록대기</option>
 			<option>개설</option>
 			<option>종료</option>
 		</select>
-		<input type="text" name=""/>
+		<input type="text" name="searchWord"/>
 		<input type="submit" class="btn" value="검색"/>
 	</form>
 </div>
@@ -44,26 +44,31 @@
 		<li>클래스명</li>
 		<li>크리에이터명</li>
 		<li>누적수강생</li>
+		<li>등록신청일</li>
 		<li>등록일</li>
 		<li>상태</li>
 		
-		<li>cl001</li>
-		<li>공예/창작</li>
-		<li><a href="/gachi/adminClassView">곰돌이인형div</a></li>
-		<li>홍길동</li>
-		<li>999</li>
-		<li>2020-11-11</li>
-		<li>등록대기</li>
+		
+		<c:forEach var="vo" items="${list}">
+		<li>${vo.class_code }</li>
+		<li>${vo.category }</li>
+		<li><a href="/gachi/adminClassView?class_code=${vo.class_code}">${vo.class_name}</a></li>
+		<li>${vo.nickname }</li>
+		<li>${vo.total_student }</li>
+		<li>${vo.signup }</li>
+		<li>${vo.allrow }</li>
+		<li>${vo.class_state }</li>
+		</c:forEach>
 	</ul>
 	<div id="paging">
-	<ul>
-		<li>prev</li>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>next</li>
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
 	</ul>
 </div>
 </div>
