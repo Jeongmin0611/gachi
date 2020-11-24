@@ -449,6 +449,7 @@ $(function(){
     });
     $("#mdClose, .md_layer").click(function(){
        $("#md").fadeOut();
+       $(".nav-item a").css({ 'pointer-events': 'auto' });
     });
 
 
@@ -463,6 +464,7 @@ $(function(){
     });
     $("#mdJClose, .mdJ_layer").click(function(){
        $("#mdJ").fadeOut();
+       $(".nav-item a").css({ 'pointer-events': 'auto' });
     });
     //아이디찾기
     $("#idFindBtn").click(function(){
@@ -673,6 +675,10 @@ Gitple('onOpen', function () {
 Gitple('onClose', function () {
 	  console.log('onClose event');
 	});
+	if($('#email').val()==""){
+		alert("이메일을 입력하여주세요");
+		return false;
+		}
 
 </script>
 <meta charset="UTF-8">
