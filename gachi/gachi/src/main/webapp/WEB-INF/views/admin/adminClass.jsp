@@ -8,12 +8,26 @@
 		height:50px;
 	}
 </style>
+<script>
+	$(()=>{
+		$('#ad_class_search').submit(function(){
+			if($('#searchWord').val()==null||$('#searchWord').val()==""){
+					alert("검색어를 입력해주세요.");
+					return false;
+			}else if($('#option option:selected').val()=='전체'){
+					alert("검색옵션을 선택해주세요.");
+					return false;
+			}
+			return true;
+		});
+	});
+</script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
 <div id="search_area">
-	<form method="get" action="/gachi/adminClass">
-		<select name="category">
-			<option>전체</option>
+	<form method="post" id="ad_class_search" action="/gachi/adminClass">
+		<select name="category">	
+			<option value="전체">전체</option>
 			<option value="공예/창작">공예/창작</option>
 			<option value="요리">요리</option>
 			<option value="미술">미술</option>
@@ -22,19 +36,19 @@
 			<option value="운동">운동</option>
 			<option value="사진/영상">사진/영상</option>
 		</select>
-		<select name="option">
-			<option>전체</option>
+		<select name="class_state">
+			<option value="전체">전체</option>
+			<option value="등록대기">등록대기</option>
+			<option value="개설">개설</option>
+			<option value="종료">종료</option>
+		</select>
+		<select id="option" name="option">
+			<option value="전체">전체</option>
 			<option value="class_code">클래스코드</option>
 			<option value="class_name">클래스명</option>
 			<option value="nickname">크리에이터닉네임</option>
 		</select>
-		<select name="class_state">
-			<option>전체</option>
-			<option>등록대기</option>
-			<option>개설</option>
-			<option>종료</option>
-		</select>
-		<input type="text" name="searchWord"/>
+		<input type="text" id="searchWord" name="searchWord"/>
 		<input type="submit" class="btn" value="검색"/>
 	</form>
 </div>

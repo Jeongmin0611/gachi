@@ -1,16 +1,16 @@
 package com.bitcamp.gachi.admin;
 
 public class TestVO {
-	private String Category;
+	private String category;
 	private String option;
 	private String searchWord;
 	private String class_state;
 	
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 	public void setCategory(String category) {
-		Category = category;
+		this.category = category;
 	}
 	public String getOption() {
 		return option;

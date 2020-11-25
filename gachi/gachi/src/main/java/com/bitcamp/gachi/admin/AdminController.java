@@ -49,18 +49,15 @@ public class AdminController {
 	}
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo) {
-//		System.out.println("cate==>"+vo.getCategory());
-//		System.out.println("option==>"+vo.getOption());
-//		System.out.println("state==>"+vo.getClass_state());
-//		System.out.println("word==>"+vo.getSearchWord());
-		
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		if(vo.getCategory().equals("전체")) {
-			
+		if(vo.getCategory()!=null) {
+			System.out.println("cate==>"+vo.getCategory());
+			System.out.println("option==>"+vo.getOption());
+			System.out.println("state==>"+vo.getClass_state());
+			System.out.println("word==>"+vo.getSearchWord());
 		}
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);		
+		List<ClassVO> list=dao.selectAllClass(vo);
 		
-		
-		List<ClassVO> list=dao.selectAllClass();
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
 		mav.setViewName("admin/adminClass");
