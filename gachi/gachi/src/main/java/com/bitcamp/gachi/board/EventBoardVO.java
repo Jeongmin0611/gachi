@@ -8,6 +8,15 @@ public class EventBoardVO {
 	private String startdate;
 	private String enddate;
 	private String event_img;
+	
+	private String event_category;
+	public String getEvent_category() {
+		return event_category;
+	}
+	public void setEvent_category(String event_category) {
+		this.event_category = event_category;
+	}
+	
 	public int getEvent_num() {
 		return event_num;
 	}
