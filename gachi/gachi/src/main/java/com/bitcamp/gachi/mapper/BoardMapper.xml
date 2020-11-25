@@ -23,7 +23,4 @@
 		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, to_char(writedate, 'YYYY-MM-DD') writedate, content
 		from event where event_num=${param1}
 	</select>
-	<select id="eventGetAllRecordCount" parameterType="com.bitcamp.gachi.board.BoardPagingVO" resultType="int">
-		
-	</select>
 </mapper>

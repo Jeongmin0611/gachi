@@ -14,7 +14,7 @@ public class CreatorVO {
 	private String sns_addr; // sns 주소
 	private String creator_info; // 소개글
 	private int creator_state; // 승인상태 ( 0: 미승인 / 1:승인 : 2: 승인거절)
-	
+	private String picture;//크리에이터 사진	
 	
 	public int getRownum() {
 		return rownum;
@@ -94,6 +94,12 @@ public class CreatorVO {
 	}
 	public void setcreator_State(int creator_state) {
 		this.creator_state = creator_state;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 	
 }
