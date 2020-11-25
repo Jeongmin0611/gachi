@@ -4,13 +4,14 @@
 <h1>회원정보수정</h1>
 	<form action="" id="ad_memberEdit_Frm">
 	<ul>
-		<li>번호</li><li><input type="text" name="" value="1234"readonly/></li>
-		<li>아이디</li><li><input type="text" name="" value="park1234"readonly/></li>
-		<li>이름</li><li><input type="text" name=""/></li>
-		<li>닉네임</li><li><input type="text" name=""/></li>
-		<li>연락처</li><li><input type="text" name=""/></li>
-		<li>가입일</li><li><input type="text" name="" value="2020-12-12"readonly/></li>
-		<li>마일리지</li><li><input type="text" name=""/></li>
+		<li>아이디</li><li><input type="text" name="" value="${vo.userid }"readonly/></li>
+		<li>이름</li><li><input type="text" name="" placeholder="${vo.username }" /></li>
+		<li>닉네임</li><li><input type="text" name="" placeholder="${vo.nickname }"/></li>
+		<li>연락처</li><li><input type="text" name="" placeholder="${vo.tel }"/></li>
+		<li>가입일</li><li><input type="text" name="" value="${vo.signupdate }"readonly/></li>
+		<li>마일리지</li><li><input type="text" name="" value="1000p"/></li>
+		
+		
 	</ul><br/>
 		<input type="submit" class="btn" value="회원정보수정"/>
 		<input type="reset" class="btn" value="다시쓰기"/>

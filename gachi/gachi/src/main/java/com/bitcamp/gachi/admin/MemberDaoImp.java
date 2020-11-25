@@ -13,4 +13,10 @@ public interface MemberDaoImp {
 	public int countNowMember(); // 현재 회원 명 수
 
 	public int countDeletedMember(); // 탈퇴 회원 명 수
+
+	public MemberVO selectMember(String userid); // 레코드 1개 멤버회원 가져오기
+	
+	public int MemberUpdate(MemberVO vo); //회원정보 수정
+	
+	public int adminMemberDelete(String userid);
 }
