@@ -1,4 +1,4 @@
-package com.bitcamp.gachi.admin;
+	package com.bitcamp.gachi.admin;
 
 import java.sql.Date;
 
@@ -6,7 +6,7 @@ public class MemberVO {
 	private int rownum;
 	private String userid; // 아이디(이메일)
 	private String userpwd; // 비밀번호
-	private int grade; // 회원등급 (1 일반 / 2 크리에이터 3 관리자)
+	private int grade; // 회원등급 ( 일반 / 크리에이터 / 관리자)
 	private String username; // 이름
 	private String nickname; // 닉네임
 	private String birthdate; // 생년월일

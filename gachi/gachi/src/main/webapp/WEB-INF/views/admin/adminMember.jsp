@@ -45,7 +45,7 @@
 	
 	<c:forEach var="memberList" items="${memberList }">
 		<li>${memberList.rownum }</li>
-		<li><a href="/gachi/adminMemberEdit">${memberList.userid }</a></li>
+		<li><a href="/gachi/adminMemberView?userid=${memberList.userid}">${memberList.userid }</a></li>
 		<li>${memberList.nickname }</li>
 		<li>${memberList.username }</li>
 		<li>${memberList.tel }</li>

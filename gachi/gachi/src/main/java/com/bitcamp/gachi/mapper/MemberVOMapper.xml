@@ -17,4 +17,20 @@
 	<select id="countDeletedMember" resultType="_int">
 		select count(*) from member where deleted='탈퇴' and grade = '회원'
 	</select>
+	
+	<select id="selectMember" resultType="com.bitcamp.gachi.admin.MemberVO">
+		select userid , username , nickname ,tel , to_char(signupdate, 'yyyy-mm-dd') 
+		signupdate from member where userid =#{userid}
+	</select>
+	
+	<update id="MemberUpdate" parameterType="com.bitcamp.gachi.admin.MemberVO"> 
+		update member set username = #{username}, nickname = #{nickname} ,tel =#{tel}
+		where userid = #{userid}
+	</update>
+	
+	<delete id="adminMemberDelete">
+		delete from member where userid =#{userid}
+	</delete>
+	
 </mapper>
+

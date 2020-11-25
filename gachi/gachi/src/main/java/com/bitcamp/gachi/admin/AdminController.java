@@ -3,11 +3,13 @@ package com.bitcamp.gachi.admin;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -93,12 +95,47 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminMemberView")
-	public String adminMemberView() {
-		return "admin/adminMemberView";
+	public ModelAndView adminMemberView(String userid) {
+		
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		
+		MemberVO vo = dao.selectMember(userid);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("vo",vo);		
+		mav.setViewName("admin/adminMemberView");
+		return mav;
 	}
-	@RequestMapping("/adminMemberEdit")
-	public String adminMemberEdit() {
-		return "admin/adminMemberEdit";
+	@RequestMapping(value="/adminMemberEditOk",method=RequestMethod.POST)
+	public ModelAndView adminMemberEditOk(MemberVO vo) {
+
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		
+		int result = dao.MemberUpdate(vo);
+		ModelAndView mav = new ModelAndView();	
+		
+		if(result>0) {
+
+			mav.setViewName("redirect:adminMember");
+			
+		}else {
+			mav.setViewName("admin/adminResult");	
+		}		
+		return mav;
+	}
+	@RequestMapping("/adminMemberDelete")
+	public ModelAndView adminMemberDelete(String userid) {
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		int result = dao.adminMemberDelete(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result >0) {
+			mav.setViewName("redirect:adminMember");
+		}else {
+			mav.setViewName("gachi/adminResult");
+		}
+		return mav;
 	}
 	@RequestMapping("/adminNotice")
 	public String adminNotice() {
