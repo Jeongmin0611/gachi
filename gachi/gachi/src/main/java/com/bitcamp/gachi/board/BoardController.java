@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.CreatorDaoImp;
+
 @Controller
 public class BoardController {
 	SqlSession sqlSession;
@@ -59,8 +62,15 @@ public class BoardController {
 	}
 
 	@RequestMapping("/eventBoardDetail")
-	public String eventBoardDetail() {
-		return "board/eventBoardDetail";
+	public ModelAndView eventBoardDetail(int no, String event) {
+		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		EventBoardVO vo = dao.eventBoardSelect(no);
+		vo.setEvent_category(event);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("board/eventBoardDetail");
+		return mav;
 	}
 
 	@RequestMapping("/eventBoardEnd")
@@ -114,14 +124,20 @@ public class BoardController {
 		return "board/deliveryBoard";
 	}
 
-	@RequestMapping("/introCreate")
-	public String introCreate() {
-		return "board/introCreate";
+	@RequestMapping("/introCreator")
+	public ModelAndView introCreate() {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<AllVO> list = dao.creatorBoardSelectAll();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("board/introCreator");
+		return mav;
 	}
 
-	@RequestMapping("/introCreateDetail")
+	@RequestMapping("/introCreatorDetail")
 	public String introCreateDetail() {
-		return "board/introCreateDetail";
+		return "board/introCreatorDetail";
 	}
 
 }

@@ -19,7 +19,7 @@ public class AllVO {
 	private String profile; // 프로필 이미지 파일명
 	private String signupdate; // 가입일
 	private String interest; // 관심사
-	private int deleted; // 회원 상태 (0:회원, 1:탈퇴)
+	private String deleted; // 회원 상태 (회원, 탈퇴)
 	private Date withdrawdate; // 탈퇴일 (null인 경우 탈퇴 X)
 	
 	//크리에이터
@@ -32,7 +32,10 @@ public class AllVO {
 	private String ilcense_img3; // 자격증 이미지3
 	private String sns_addr; // sns 주소
 	private String creator_info; // 소개글
-	private int creator_state; // 승인상태 ( 0: 미승인 / 1:승인 : 2: 승인거절)
+	private String creator_state; // 승인상태 ( 미승인 /승인 / 승인거절)
+	private String picture;//크리에이터 사진
+	
+	//클래스
 	public int getRownum() {
 		return rownum;
 	}
@@ -117,10 +120,10 @@ public class AllVO {
 	public void setInterest(String interest) {
 		this.interest = interest;
 	}
-	public int getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(int deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	public Date getWithdrawdate() {
@@ -183,12 +186,16 @@ public class AllVO {
 	public void setCreator_info(String creator_info) {
 		this.creator_info = creator_info;
 	}
-	public int getCreator_state() {
+	public String getCreator_state() {
 		return creator_state;
 	}
-	public void setCreator_state(int creator_state) {
+	public void setCreator_state(String creator_state) {
 		this.creator_state = creator_state;
 	}
-	
-	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicutre(String picture) {
+		this.picture = picture;
+	}	
 }

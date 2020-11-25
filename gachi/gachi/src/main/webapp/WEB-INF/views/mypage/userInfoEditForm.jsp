@@ -18,30 +18,62 @@
 	.mypageContent button{
 		background-color: #abcee3;
 	}
-	.mypageContent>button{
+	#userInfoEditFrm>button{
 		margin-top: 100px;
 	}
-	.mypageContent>div:nth-child(7) input,
-	.mypageContent>div:nth-child(7) button,
-	.mypageContent>div:nth-child(8) input:first-child,
-	.mypageContent>div:nth-child(8) button{
+	#userInfoEditFrm>div:nth-child(5) input,
+	#userInfoEditFrm>div:nth-child(5) button,
+	#userInfoEditFrm>div:nth-child(6) input:first-child,
+	#userInfoEditFrm>div:nth-child(6) button{
 		width: 20%;
 	}
-	.mypageContent>div:nth-child(8) input:last-child{
+	#userInfoEditFrm>div:nth-child(8) input:last-child{
 		width: 50%;
 	}
-	.mypageContent>div>div:last-child{
+	#userInfoEditFrm>div>div:last-child{
 		background-color: #eee;
 	}
 
 	
 </style>
+<script>
+	//빈칸검사
+	$(function(){
+		$("#userInfoEditFrm").submit(function(){
+			if($("#userInfoNickname").val()==""){
+				alert("닉네임을 입력하세요.");
+				return false;
+			}
+			if($("#userInfoTel1").val()=="" || $("#userInfoTel2").val()=="" || $("#userInfoTel3").val()==""){
+				alert("연락처를 입력하세요.");
+				return false;
+			}
+			if($("#userInfoZipcode").val()=="" || $("#userInfoAddr").val()==""){
+				alert("주소를 입력하세요.");
+				return false;
+			}
+			if($("#userInfoDetailaddr").val()==""){
+				alert("상세주소를 입력하세요.");
+				return false;
+			}
+			if($("#userInfoPwd1").val()=="" || $("#userInfoPwd2").val()==""){
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}
+			if($("#userInfoPwd1").val() != $("#userInfoPwd2").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div class="mypageTop">
 			<div class="row">
-				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEditChk">회원정보수정</a></div>
 				<div class="col-1">|</div>
 				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
 			</div>
@@ -49,45 +81,59 @@
 		<div class="mypageContent col-lg-8 col-md-10">
 			<h4>회원정보수정</h4>
 			<hr class="userHr"/>
-			<div class="row">
-				<div class="col-md-4">이름</div>
-				<div class="col-md-8">김유미</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">생년월일</div>
-				<div class="col-md-8">1990.12.31</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">아이디</div>
-				<div class="col-md-8">userid@bitcamp.com</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">닉네임</div>
-				<div class="col-md-8"><input type="text" name="nickname" value="김유미"/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">연락처</div>
-				<div class="col-md-8">
-					<input type="text" name="tel1" value="010"/>-
-					<input type="text" name="tel2" value="9999"/>-
-					<input type="text" name="tel3" value="8888"/>
-					<button type="button" class="btn btn-outline-light btn-sm">인증</button>
+			<form method="post" id="userInfoEditFrm" action="/gachi/userInfoEditFormOk">
+				<div class="row">
+					<div class="col-md-4">이름</div>
+					<div class="col-md-8">${vo.username }</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">주소</div>
-				<div class="col-md-8">
-					<input type="text" name="zipcode" value="01234" readonly/>
-					<button type="button" class="btn btn-outline-light btn-sm">검색</button>
-					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
+				<div class="row">
+					<div class="col-md-4">생년월일</div>
+					<div class="col-md-8">${vo.birthdate }</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">상세주소</div>
-				<div class="col-md-8"><input type="text" name="addrDetail" value="11111112222222"/></div>
-			</div>
-			
-			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfo'">확인</button>
+				<div class="row">
+					<div class="col-md-4">아이디</div>
+					<div class="col-md-8"><input type="text" name="userid" value="${vo.userid }" readonly/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">닉네임</div>
+					<div class="col-md-8"><input type="text" name="nickname" id="userInfoNickname" value="${vo.nickname }"/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">연락처</div>
+					<div class="col-md-8">
+						<input type="text" name="tel1" id="userInfoTel1" value="${vo.tel1 }"/>-
+						<input type="text" name="tel2" id="userInfoTel2" value="${vo.tel2 }"/>-
+						<input type="text" name="tel3" id="userInfoTel3" value="${vo.tel3 }"/>
+						<button type="button" class="btn btn-outline-light btn-sm">인증</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">주소</div>
+					<div class="col-md-8">
+						<input type="text" name="zipcode" id="userInfoZipcode" value="01234" readonly/>
+						<button type="button" class="btn btn-outline-light btn-sm">검색</button>
+						<input type="text" name="addr" id="userInfoAddr" value="${vo.addr }" readonly/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">상세주소</div>
+					<div class="col-md-8"><input type="text" name="detailaddr" id="userInfoDetailaddr" value="${vo.detailaddr }"/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">관심사</div>
+					<div class="col-md-8"><input type="text" name="interest" value="${vo.lnterest }"/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">새로운 비밀번호</div>
+					<div class="col-md-8"><input type="password" name="userpwd" id="userInfoPwd1"/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">비밀번호 확인</div> 
+					<div class="col-md-8"><input type="password" id="userInfoPwd2"/></div>
+				</div>
+				
+				<button type="submit" class="btn btn-outline-light btn-block">확인</button>
+			</form>
 		</div>
 	</div>
 </div>

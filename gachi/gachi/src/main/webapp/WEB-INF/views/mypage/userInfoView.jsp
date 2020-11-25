@@ -33,7 +33,7 @@
 	<div class="userMainDiv">
 		<div class="mypageTop">
 			<div class="row">
-				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEditChk">회원정보수정</a></div>
 				<div class="col-1">|</div>
 				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
 			</div>
@@ -43,41 +43,45 @@
 			<hr class="userHr"/>
 			<div class="row">
 				<div class="col-md-4">이름</div>
-				<div class="col-md-8">김유미</div>
+				<div class="col-md-8">${vo.username }</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">생년월일</div>
-				<div class="col-md-8">1990.12.31</div>
+				<div class="col-md-8">${vo.birthdate }</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">아이디</div>
-				<div class="col-md-8">userid@bitcamp.com</div>
+				<div class="col-md-8">${vo.userid }</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">닉네임</div>
-				<div class="col-md-8"><input type="text" name="nickname" value="김유미" readonly/></div>
+				<div class="col-md-8"><input type="text" name="nickname" value="${vo.nickname }" readonly/></div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">연락처</div>
 				<div class="col-md-8">
-					<input type="text" name="tel1" value="010" readonly/>-
-					<input type="text" name="tel2" value="9999" readonly/>-
-					<input type="text" name="tel3" value="8888" readonly/>
+					<input type="text" name="tel1" value="${vo.tel1 }" readonly/>-
+					<input type="text" name="tel2" value="${vo.tel2 }" readonly/>-
+					<input type="text" name="tel3" value="${vo.tel3 }" readonly/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">주소</div>
 				<div class="col-md-8">
 					<input type="text" name="zipcode" value="01234" readonly/>
-					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
+					<input type="text" name="addr" value="${vo.addr }" readonly/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">상세주소</div>
-				<div class="col-md-8"><input type="text" name="addrDetail" value="11111112222222" readonly/></div>
+				<div class="col-md-8"><input type="text" name="detailaddr" value="${vo.detailaddr }" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">관심사</div>
+				<div class="col-md-8"><input type="text" name="interest" value="${vo.lnterest }" readonly/></div>
 			</div>
 			
-			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEdit'">수정하기</button>
+			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEditChk'">수정하기</button>
 		</div>
 	</div>
 </div>

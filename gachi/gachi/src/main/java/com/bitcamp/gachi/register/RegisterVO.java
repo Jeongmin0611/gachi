@@ -2,8 +2,19 @@ package com.bitcamp.gachi.register;
 
 public class RegisterVO {
 	private String logStatus="N";
+	private String userSort="D";
+	public String getUserSort() {
+		return userSort;
+	}
+	public void setUserSort(String userSort) {
+		this.userSort = userSort;
+	}
 	private String userid;
 	private String userpwd;
+	private String userid2;
+	private String userpwd2;
+	private String userid3;
+	private String userpwd3;
 	
 	private int grade;//체크박스에따라서 결정
 	
@@ -22,6 +33,7 @@ public class RegisterVO {
 	private String tel3;
 	
 	private String gender;
+	private String zipcode;
 	private String addr;
 	private String detailaddr;
 	
@@ -96,6 +108,30 @@ public class RegisterVO {
 	}
 	public void setUserpwd(String userpwd) {
 		this.userpwd = userpwd;
+	}
+	public String getUserid2() {
+		return userid2;
+	}
+	public void setUserid2(String userid2) {
+		this.userid2 = userid2;
+	}
+	public String getUserpwd2() {
+		return userpwd2;
+	}
+	public void setUserpwd2(String userpwd2) {
+		this.userpwd2 = userpwd2;
+	}
+	public String getUserid3() {
+		return userid3;
+	}
+	public void setUserid3(String userid3) {
+		this.userid3 = userid3;
+	}
+	public String getUserpwd3() {
+		return userpwd3;
+	}
+	public void setUserpwd3(String userpwd3) {
+		this.userpwd3 = userpwd3;
 	}
 	public int getGrade() {
 		return grade;
@@ -180,6 +216,12 @@ public class RegisterVO {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getAddr() {
 		return addr;

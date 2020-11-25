@@ -70,26 +70,6 @@ button:focus, button:active{
 }
 /* 이벤트 리스트 끝*/
 
-/*버튼 오버 효과*/
-#CEventBtnDiv button {
-	max-width: 100%;
-	position: relative;
-	opacity: 1;
-}
-
-#CEventBtnDiv button:hover {
-	-webkit-transform: scale(1.05);
-	transform: scale(1.05);
-}
-
-#CEventBtnDiv * {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all ease-in-out;
-	transition: all ease-in-out;
-}
-/*버튼 오버 효과 끝 */
-
 /* 이미지 오버 효과 */
 .row img {
 	max-width: 100%;
@@ -137,8 +117,8 @@ button:focus, button:active{
 	<div>
 		<h3>이벤트</h3>
 		<div id="CEventBtnDiv">
-			<button id="ingEvent">진행중인 이벤트</button>
-			<button id="endEvent">종료된 이벤트</button>
+			<button id="ingEvent">진행 중 이벤트</button>
+			<button id="endEvent">종료 이벤트</button>
 		</div>
 	</div>
 
@@ -146,10 +126,10 @@ button:focus, button:active{
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
 		<div class="col-sm-4">
-			<a href="/gachi/eventBoardDetail" id="eventThumbnail">${vo.event_img}</a><br/>
+			<a href="/gachi/eventBoardDetail?no=${vo.event_num }&event=진행 중 이벤트" id="eventThumbnail">${vo.event_img}</a><br/>
 			<div class="homeClassListTxt">
 				<p><span class="badge " id="eventNew">new</span>&nbsp; <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
-				<a href="/gachi/eventBoardDetail">${vo.subject }</a>
+				<a href="/gachi/eventBoardDetail?no=${vo.event_num }&event=진행 중 이벤트">${vo.subject }</a>
 			</div>				
 		</div>
 		</c:forEach>

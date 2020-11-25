@@ -26,7 +26,7 @@
 	<div class="userMainDiv">
 		<div class="mypageTop">
 			<div class="row">
-				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEdit">회원정보수정</a></div>
+				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userInfoEditChk">회원정보수정</a></div>
 				<div class="col-1">|</div>
 				<div class="col-4 col-sm-4 col-md-3 col-lg-2"><a href="/gachi/userLeave">회원탈퇴</a></div>
 			</div>

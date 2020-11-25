@@ -2,13 +2,13 @@
 package com.bitcamp.gachi.admin;
 
 public class PagingVO {
-   private int nowPage=1;                
-   private int totalRecord;
-   private int totalPage;        
-   private int onePageRecord=20;
-   private int onePageNumCount=10;
-   private int startPageNum=1;
-   private int lastPageRecordCount=10;   
+   private int nowPage=1;    //현재 페이지            
+   private int totalRecord;	//총 레코드 수
+   private int totalPage;   //총 페이지 수
+   private int onePageRecord=20; //한 페이지에 표시할 레코드
+   private int onePageNumCount=10; //한 번에 표시할 페이지 번호 숫자
+   private int startPageNum=1;	// 페이지 번호의 시작 페이지
+   private int lastPageRecordCount=10;	//마지막 페이지의 선택 레코드 수 onePageRecord 수
    private String searchKey;
    private String searchWord;
    

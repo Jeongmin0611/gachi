@@ -12,11 +12,15 @@
 		from notice where notice_num=${param1}
 	</select>
 	<select id="eventBoardAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
+		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
 		from event where enddate>=sysdate order by enddate
 	</select>
 	<select id="endEventBoardAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
+		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
 		from event where enddate<![CDATA[ < ]]> sysdate order by enddate desc
+	</select>
+	<select id="eventBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.EventBoardVO">
+		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, to_char(writedate, 'YYYY-MM-DD') writedate, content
+		from event where event_num=${param1}
 	</select>
 </mapper>

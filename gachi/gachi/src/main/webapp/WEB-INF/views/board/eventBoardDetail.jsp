@@ -56,6 +56,7 @@
 	clear: both;
 	overflow: auto;
 	margin-bottom: 50px;
+	padding:0;
 }
 #eventDetailReplyDiv li{
 	float:left;
@@ -83,13 +84,13 @@
 		<h3 id="eventTitle">이벤트</h3>
 		<div id="eventDetailDiv">
 			<div id="eventDetailSubject">
-				<p style="color:red; margin: 20px 0px;">진행 중 이벤트</p>
-				<h3>이벤트 제목입니다.</h3>
-				<div id="eventDetailDateDiv"><span>작성자</span> <span>2020-10-30</span></div>
+				<p style="color:red; margin: 20px 0px;">${vo.event_category }</p>
+				<h3>${vo.subject }</h3>
+				<div id="eventDetailDateDiv"><span>작성일 | ${vo.writedate }</span> &nbsp; <span>이벤트기간 | ${vo.startdate }~${vo.enddate }</span></div>
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				<img src="/gachi/img/event_sample.png"/><br/>
+				${vo.content }
 			</div>
 		</div>
 		

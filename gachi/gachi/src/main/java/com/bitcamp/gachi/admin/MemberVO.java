@@ -9,18 +9,15 @@ public class MemberVO {
 	private int grade; // 회원등급 (1 일반 / 2 크리에이터 3 관리자)
 	private String username; // 이름
 	private String nickname; // 닉네임
-	
 	private String birthdate; // 생년월일
-	
-	private String tel;
-	
+	private String tel; //연락처
 	private String gender; // 성별 (m 남 / f 여)
 	private String addr; // 주소
 	private String detailaddr; // 상세주소
 	private String profile; // 프로필 이미지 파일명
 	private String signupdate; // 가입일
 	private String interest; // 관심사
-	private int deleted; // 회원 상태 (0:회원, 1:탈퇴)
+	private String deleted; // 회원 상태 (0:회원, 1:탈퇴)
 	private Date withdrawdate; // 탈퇴일 (null인 경우 탈퇴 X)
 	
 	
@@ -65,7 +62,6 @@ public class MemberVO {
 	}
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
-		
 	}
 	
 	public String getTel() {
@@ -111,10 +107,10 @@ public class MemberVO {
 		this.interest = interest;
 	}
 	
-	public int getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(int deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	public Date getWithdrawdate() {
@@ -128,7 +124,7 @@ public class MemberVO {
 	
 	public MemberVO(String userid, String userpwd, int grade, String username, String nickname, String birthdate,
 			String tel, String gender, String addr, String detailaddr, String profile,
-			String signupdate, String interest, int deleted, Date withdrawdate) {
+			String signupdate, String interest, String deleted, Date withdrawdate) {
 		super();
 		this.userid = userid;
 		this.userpwd = userpwd;
