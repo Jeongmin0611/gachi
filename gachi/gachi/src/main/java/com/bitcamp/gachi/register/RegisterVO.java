@@ -22,6 +22,7 @@ public class RegisterVO {
 	private String tel3;
 	
 	private String gender;
+	private String zipcode;
 	private String addr;
 	private String detailaddr;
 	
@@ -180,6 +181,12 @@ public class RegisterVO {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getAddr() {
 		return addr;

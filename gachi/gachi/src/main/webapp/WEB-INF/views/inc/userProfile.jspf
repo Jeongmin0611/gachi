@@ -66,7 +66,7 @@
 			<div id="profileBox">
 				<img src="/gachi/img/icon_user.png" id="profileIcon"/>
 			</div>
-			<h4><a href="/gachi/userInfo">김유미 님</a></h4>
+			<h4><a href="/gachi/userInfo">${username } 님</a></h4>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
@@ -99,7 +99,7 @@
 	<hr/>
 	<ul id="userProfileNavi">
 		<li><a href="/gachi/mypage">결제내역</a></li>
-		<li><a href="/gachi/userInfo">회원정보</a></li>
+		<li><a href="/gachi/userInfoView">회원정보</a></li>
 		<li><a href="/gachi/userCart">장바구니</a></li>
 		<li><a href="/gachi/myclassList">내 학습표</a></li>
 		<li><a href="/gachi/myqnaClass">질문/문의</a></li>
