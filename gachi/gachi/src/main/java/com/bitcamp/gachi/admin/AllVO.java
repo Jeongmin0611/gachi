@@ -33,7 +33,7 @@ public class AllVO {
 	private String sns_addr; // sns 주소
 	private String creator_info; // 소개글
 	private String creator_state; // 승인상태 ( 미승인 /승인 / 승인거절)
-	
+	private String picutre;//크리에이터 사진
 	
 	//클래스
 	public int getRownum() {
@@ -192,6 +192,10 @@ public class AllVO {
 	public void setCreator_state(String creator_state) {
 		this.creator_state = creator_state;
 	}
-	
-	
+	public String getPicutre() {
+		return picutre;
+	}
+	public void setPicutre(String picutre) {
+		this.picutre = picutre;
+	}	
 }

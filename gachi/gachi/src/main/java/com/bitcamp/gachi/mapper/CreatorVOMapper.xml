@@ -5,9 +5,9 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
 	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-	select rownum,category, nickname, c.userid, tel, to_char(signupdate, 'yyyy-mm-dd')
-  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
-  	 from member a join creator c on a.userid = c.userid
+		select rownum,category, nickname, c.userid, tel, to_char(signupdate, 'yyyy-mm-dd')
+	  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
+	  	 from member a join creator c on a.userid = c.userid
 	</select>
 		<select id="countAllCreator" resultType="_int">
 		select count(*) from creator
