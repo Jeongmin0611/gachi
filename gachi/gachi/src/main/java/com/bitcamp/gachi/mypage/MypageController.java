@@ -2,11 +2,16 @@ package com.bitcamp.gachi.mypage;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bitcamp.gachi.register.RegisterVO;
 
 @Controller
 public class MypageController {
@@ -19,33 +24,107 @@ public class MypageController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+	//마이페이지 메인(결제내역)
 	@RequestMapping("/mypage")
-	public String Mypage() {
-		return "mypage/mypageMain";
+	public ModelAndView Mypage(HttpSession ses) {
+		
+		ModelAndView mav = new ModelAndView();
+		ses.setAttribute("userid", "member0@gachi.com");
+		ses.setAttribute("username", "박회원");
+		ses.setAttribute("logStatus", "Y");
+		mav.setViewName("mypage/mypageMain");
+		return mav;
 	}
-	@RequestMapping("/userInfo")
-	public String userInfo() {
-		return "mypage/userInfo";
+	//회원정보확인
+	@RequestMapping("/userInfoView")
+	public ModelAndView userInfoView(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		RegisterVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("mypage/userInfoView");
+		return mav;
 	}
-	@RequestMapping("/userInfoEdit")
-	public String userInfoEdit() {
-		return "mypage/userInfoEdit";
+	//회원정보수정-비밀번호입력
+	@RequestMapping("/userInfoEditChk")
+	public ModelAndView userInfoEditChk(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid",(String)ses.getAttribute("userid"));
+		mav.setViewName("mypage/userInfoEditChk");
+		return mav;
 	}
-	@RequestMapping("/userInfoEditForm")
-	public String userInfoEditForm() {
-		return "mypage/userInfoEditForm";
+	//회원정보수정-비밀번호확인
+	@RequestMapping(value="/userInfoEditOk", method=RequestMethod.POST)
+	public ModelAndView userInfoEditOk(RegisterVO vo, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.userInfoPwdChk(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result==0) { //비밀번호 틀리면
+			mav.setViewName("mypage/userInfoPwdResult");
+		}else if(result==1) { //비밀번호 맞으면
+			RegisterVO resultVO = dao.userInfoView((String)ses.getAttribute("userid"));
+			mav.addObject("vo", resultVO);
+			mav.setViewName("mypage/userInfoEditForm");
+		}
+		return mav;
 	}
+	//회원정보수정-성공여부
+	@RequestMapping(value="/userInfoEditFormOk", method=RequestMethod.POST)
+	public ModelAndView userInfoEditFormOk(RegisterVO vo, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.userInfoEdit(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result>0) { //업데이트 성공
+			mav.setViewName("redirect:userInfoView");
+		}else { //업데이트 실패
+			mav.setViewName("mypage/userInfoEditResult");
+		}
+		return mav;
+	}
+	//회원탈퇴
 	@RequestMapping("/userLeave")
-	public String userLeave() {
-		return "mypage/userLeave";
+	public ModelAndView userLeave(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid", (String)ses.getAttribute("userid"));
+		mav.addObject("username", (String)ses.getAttribute("username"));
+		mav.setViewName("mypage/userLeave");
+		return mav;
 	}
+	//회원탈퇴-비밀번호입력
 	@RequestMapping("/userLeaveChk")
-	public String userLeaveChk() {
-		return "mypage/userLeaveChk";
+	public ModelAndView userLeaveChk(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid",(String)ses.getAttribute("userid"));
+		mav.setViewName("mypage/userLeaveChk");
+		return mav;
 	}
-	@RequestMapping("/userLeaveOk")
-	public String userLeaveOk() {
-		return "mypage/userLeaveOk";
+	//회원탈퇴-비밀번호확인
+	@RequestMapping(value="/userLeaveOk", method=RequestMethod.POST)
+	public ModelAndView userLeaveOk(RegisterVO vo, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.userInfoPwdChk(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result==0) { //비밀번호 틀리면
+			mav.setViewName("mypage/userInfoPwdResult");
+		}else if(result==1) { //비밀번호 맞으면
+			int LeaveResult = dao.userLeave(vo);
+			if(LeaveResult>0) { //탈퇴 성공
+				ses.invalidate();
+				mav.setViewName("mypage/userLeaveConfirmed");
+			}else { //탈퇴 실패
+				mav.setViewName("mypage/userLeaveResult");
+			}
+		}
+		return mav;
+	}
+	//회원탈퇴-성공
+	@RequestMapping("/userLeaveConfirmed")
+	public String userLeaveConfirmed() {
+		return "mypage/userLeaveConfirmed";
 	}
 	@RequestMapping("/userCart")
 	public String userCart() {
@@ -71,7 +150,7 @@ public class MypageController {
 	public String myclassVideo() {
 		return "myclass/myclassVideo";
 	}
-	////////////////////////////////////
+	//마일리지
 	@RequestMapping("/userMileage")
 	public ModelAndView userMileage() {
 		MileageDaoImp dao = sqlSession.getMapper(MileageDaoImp.class);
