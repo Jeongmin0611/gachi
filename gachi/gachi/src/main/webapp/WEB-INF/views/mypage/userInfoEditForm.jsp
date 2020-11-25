@@ -33,7 +33,19 @@
 	#userInfoEditFrm>div>div:last-child{
 		background-color: #eee;
 	}
-
+	#userInfoEditFrm input[type=checkbox]{
+		margin:0;
+	}
+	#userInfoEditFrm label{
+		width:15%;
+		font-size:0.8em;
+	}
+	#userInfoEditFrm label:nth-child(3){
+		width:30%;
+	}
+	#userInfoEditFrm label:last-child{
+		width:35%;
+	}
 	
 </style>
 <script>
@@ -121,7 +133,16 @@
 				</div>
 				<div class="row">
 					<div class="col-md-4">관심사</div>
-					<div class="col-md-8"><input type="text" name="interest" value="${vo.lnterest }"/></div>
+					<div class="col-md-8">
+						<label><input type="checkbox" name="interest" value="art">미술</label>
+						<label><input type="checkbox" name="interest" value="cooking">요리</label>
+						<label><input type="checkbox" name="interest" value="crafts">공예/창작</label>
+						<label><input type="checkbox" name="interest" value="Exercise">운동</label>
+					
+						<label><input type="checkbox" name="interest" value="music">음악</label>
+						<label><input type="checkbox" name="interest" value="picture">사진</label>
+						<label><input type="checkbox" name="interest" value="lifestyle">라이프스타일</label>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">새로운 비밀번호</div>
