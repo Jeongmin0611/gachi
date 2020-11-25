@@ -9,6 +9,12 @@
 	                values(#{userid},#{userpwd},1,#{username},#{nickname},#{birthdate},#{tel},#{gender},#{addr},#{detailaddr},#{lnterest})
 	</insert>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
-		select userid,nickname from member where userid=#{userid} and userpwd=#{userpwd}
+		select userid,nickname from member where userid=#{userid} and userpwd=#{userpwd} and grade=1
+	</select>
+	<select id="creatorLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
+		select userid,nickname from member where userid=#{userid2} and userpwd=#{userpwd2} and grade=2
+	</select>
+	<select id="adminLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
+		select userid,nickname from member where userid=#{userid3} and userpwd=#{userpwd3} and grade=3
 	</select>
 </mapper>
