@@ -6,15 +6,15 @@
 <mapper namespace="com.bitcamp.gachi.admin.MemberDaoImp">
 	<select id="selectAllMember" resultType="com.bitcamp.gachi.admin.MemberVO">
 		select rownum, userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
-		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade = '1'
+		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade = '회원'
 	</select>
 	<select id="countAllMember" resultType="_int">
-		select count(*) from member where grade = '1'
+		select count(*) from member where grade = '회원'
 	</select>
 	<select id="countNowMember" resultType="_int">
-		select count(*) from member where deleted=0 and grade = '1'
+		select count(*) from member where deleted='회원' and grade = '회원'
 	</select>
 	<select id="countDeletedMember" resultType="_int">
-		select count(*) from member where deleted=1 and grade = '1'
+		select count(*) from member where deleted='탈퇴' and grade = '회원'
 	</select>
 </mapper>

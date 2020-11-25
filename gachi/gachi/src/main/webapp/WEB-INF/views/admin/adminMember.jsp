@@ -50,10 +50,9 @@
 		<li>${memberList.username }</li>
 		<li>${memberList.tel }</li>
 		<li>${memberList.signupdate }</li>
-		<li><c:if test="${memberList.withdrawdate eq null}">x</c:if><c:if test="${memberList.withdrawdate ne null}">${memberList.withdrawdate }</c:if></li>
-	<li><c:if test="${memberList.deleted eq 0 }">가입</c:if><c:if test="${memberList.deleted eq 1 }">탈퇴</c:if></li>	
+		<li><c:if test="${memberList.deleted eq '탈퇴'}">X</c:if><c:if test="${memberList.deleted ne '탈퇴'}">${memberList.withdrawdate }</c:if></li>
+	<li>${memberList.deleted}</li>	
 	</c:forEach>
-
 </ul>	
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

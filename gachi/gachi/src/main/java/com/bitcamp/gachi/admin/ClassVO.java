@@ -7,11 +7,11 @@ public class ClassVO {
 	private String class_code;
 	private String userid;
 	private String category;
-	private int cate_num;
 	private String class_name;
 	private int full_price;
 	private int real_price;
 	private String stage;
+	private Number class_term;
 	private String class_info;
 	private int total_student;
 	private int good;
@@ -22,8 +22,6 @@ public class ClassVO {
 	private String class_img1;
 	private String class_img2;
 	private String class_img3;
-	private String nickname;
-	
 	public String getClass_code() {
 		return class_code;
 	}
@@ -41,12 +39,6 @@ public class ClassVO {
 	}
 	public void setCategory(String category) {
 		this.category = category;
-	}
-	public int getCate_num() {
-		return cate_num;
-	}
-	public void setCate_num(int cate_num) {
-		this.cate_num = cate_num;
 	}
 	public String getClass_name() {
 		return class_name;
@@ -71,6 +63,12 @@ public class ClassVO {
 	}
 	public void setStage(String stage) {
 		this.stage = stage;
+	}
+	public Number getClass_term() {
+		return class_term;
+	}
+	public void setClass_term(Number class_term) {
+		this.class_term = class_term;
 	}
 	public String getClass_info() {
 		return class_info;
@@ -132,10 +130,6 @@ public class ClassVO {
 	public void setClass_img3(String class_img3) {
 		this.class_img3 = class_img3;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}	
+	
+	
 }
