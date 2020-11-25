@@ -760,18 +760,21 @@ Gitple('onClose', function () {
           </c:if>
           <c:if test="${logStatus!=null	||	logStatus=='Y'}"> 
           <c:if test="${userSort=='U'}">
+          <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
           <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
           <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
          </c:if>
          </c:if>
          <c:if test="${logStatus!=null	||	logStatus=='Y'}">
          <c:if test="${userSort=='C'}">
+         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
          <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
          </c:if>
          </c:if>
          <c:if test="${logStatus!=null	||	logStatus=='Y'}">
          <c:if test="${userSort=='A'}">
+         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
          <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
         </c:if>
