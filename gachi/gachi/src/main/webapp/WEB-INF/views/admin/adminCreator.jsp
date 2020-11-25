@@ -51,7 +51,7 @@
 	<li><a href="/gachi/adminCreatorView">${creatorList.userid }</a></li>
 	<li>${creatorList.tel }</li>
 	<li>${creatorList.signupdate }</li>
-		<li><c:if test="${memberList.deleted eq '탈퇴'}">X</c:if><c:if test="${memberList.deleted ne '탈퇴'}">${memberList.withdrawdate }</c:if></li>
+		<li><c:if test="${creatorList.deleted eq '탈퇴'}">X</c:if><c:if test="${creatorList.deleted ne '탈퇴'}">${creatorList.withdrawdate }</c:if></li>
 	<li>${creatorList.creator_state}
 
 	</c:forEach>
