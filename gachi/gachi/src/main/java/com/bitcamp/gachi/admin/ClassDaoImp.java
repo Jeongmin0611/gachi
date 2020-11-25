@@ -5,7 +5,7 @@ import java.util.List;
 public interface ClassDaoImp {
 	
 	//클래스목록
-	public List<ClassVO> selectAllClass();
+	public List<ClassVO> selectAllClass(TestVO vo);
 	
 	//클래스조회
 	public ClassVO selectClass();
