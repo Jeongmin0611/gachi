@@ -15,6 +15,8 @@ public interface CreatorDaoImp {
 	public int countNowCreator(); // 현재 크리에이터 명 수
 
 	public int countDeletedCreator(); // 탈퇴 크리에이터 명 수 
+	
+	public List<AllVO> creatorBoardSelectAll();//크리에이터 소개 페이지 리스트
 }
 
 

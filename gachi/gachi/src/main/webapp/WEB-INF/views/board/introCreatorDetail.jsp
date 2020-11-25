@@ -4,13 +4,14 @@
 <style>
 
 /* 크리에이터 사진, sns계정 ul*/
-#createDetailDiv{	
+#createDetailDiv{
 	min-height: 500px;
+	margin-top: 50px;
 }
 #createDetailSub1 {
 	background: #FCE8E6;
 	float: left;
-	
+	margin: 0;
 }
 #createDetailSub1>li>img{
  	width: 100%;
