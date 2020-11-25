@@ -18,5 +18,7 @@
 	<select id="countDeletedCreator" resultType="_int">
 		select count(*) from member where deleted='탈퇴' and grade = '크리에이터'
 	</select>
-	
+	<select id="creatorBoardSelectAll" resultType="com.bitcamp.gachi.admin.AllVO">
+		select category, m.nickname, picture from creator c join member m on c.userid = m.userid
+	</select>	
 </mapper>

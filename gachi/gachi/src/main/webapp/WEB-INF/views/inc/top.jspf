@@ -436,7 +436,7 @@ a {
 
 /* 검색 버튼 끝 */
 .container{
-margin-top: 50px;
+	margin-top: 50px;
 }
 </style>
 <script>
@@ -734,7 +734,7 @@ Gitple('onClose', function () {
            <a class="nav-link" href="/gachi/storeMain">스토어 </a>
          </li>
          <li class="nav-item">
-           <a class="nav-link" href="/gachi/introCreate">크리에이터 소개</a>
+           <a class="nav-link" href="/gachi/introCreator">크리에이터 소개</a>
          </li>
          <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
