@@ -13,10 +13,10 @@
 		select count(*) from creator
 	</select>
 	<select id="countNowCreator" resultType="_int">
-		select count(*) from member where deleted=0 and grade = '2'
+	select count(*) from creator where creator_state='승인'
 	</select>
 	<select id="countDeletedCreator" resultType="_int">
-		select count(*) from member where deleted=1 and grade = '2'
+		select count(*) from member where deleted='탈퇴' and grade = '크리에이터'
 	</select>
 	
 </mapper>

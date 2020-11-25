@@ -48,18 +48,15 @@ public class AdminController {
 		return "admin/adminCreatorView";
 	}
 	@RequestMapping("/adminClass")
-	public ModelAndView adminClass(TestVO vo) {
+	public ModelAndView adminClass(ClassVO vo) {
 //		System.out.println("cate==>"+vo.getCategory());
 //		System.out.println("option==>"+vo.getOption());
 //		System.out.println("state==>"+vo.getClass_state());
 //		System.out.println("word==>"+vo.getSearchWord());
 		
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		if(vo.getCategory().equals("전체")) {
-			
+		if(vo.getCategory().equals("전체")) {		
 		}
-		
-		
 		List<ClassVO> list=dao.selectAllClass();
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
