@@ -38,7 +38,7 @@ public class RegisterVO {
 	private String detailaddr;
 	
 	private String signupdate;
-	private String[] lnterest;
+	private String interest;
 	
 	
 	private int deleted;
@@ -133,6 +133,13 @@ public class RegisterVO {
 	public void setBirthdate3(String birthdate3) {
 		this.birthdate3 = birthdate3;
 	}
+	
+	public String getInterest() {
+		return interest;
+	}
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
 	public String getTel() {
 		tel=tel1+"-"+tel2+"-"+tel3;
 		return tel;
@@ -192,12 +199,6 @@ public class RegisterVO {
 	}
 	public void setSignupdate(String signupdate) {
 		this.signupdate = signupdate;
-	}
-	public String[] getLnterest() {
-		return lnterest;
-	}
-	public void setLnterest(String[] lnterest) {
-		this.lnterest = lnterest;
 	}
 	public String getLogStatus() {
 		return logStatus;

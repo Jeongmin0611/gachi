@@ -35,8 +35,8 @@ import org.springframework.web.servlet.ModelAndView;
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			String voGrade=dao.selectList(vo);
 			RegisterVO resultVO=dao.memberLogin(vo);
+			String voGrade=dao.selectList(vo);
 			ModelAndView mav=new ModelAndView();
 			if(resultVO==null) {
 				mav.setViewName("loginFalse/loginFalse");
