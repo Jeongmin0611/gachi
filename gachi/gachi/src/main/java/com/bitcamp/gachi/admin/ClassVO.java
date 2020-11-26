@@ -16,7 +16,7 @@ public class ClassVO {
 	private int total_student;
 	private int good;
 	private int grade;
-	private Date allrow;
+	private Date allow;
 	private Date signup;
 	private String class_state;
 	private String class_img1;
@@ -97,11 +97,11 @@ public class ClassVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public Date getAllrow() {
-		return allrow;
+	public Date getAllow() {
+		return allow;
 	}
-	public void setAllrow(Date allrow) {
-		this.allrow = allrow;
+	public void setAllow(Date allow) {
+		this.allow = allow;
 	}
 	public Date getSignup() {
 		return signup;

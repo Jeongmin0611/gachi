@@ -24,6 +24,9 @@ public interface ClassDaoImp {
 	//평점 계산
 	public int countGrade();
 	
-	//총 페이지 수 구하기
+	//총 레코드 수 구하기
 	public int getAllRecordCount(TestVO vo);
+	
+	//리스트 목록 구하기
+	public List<ClassVO> getClassList(TestVO vo);
 }

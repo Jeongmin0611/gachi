@@ -96,11 +96,21 @@ public class AdminController {
 		System.out.println(vo.getOption());
 		System.out.println(vo.getClass_state());
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
+		
 		System.out.println("date1===> "+vo.getDate1()+"date2===> "+vo.getDate2());
-		List<ClassVO> list=dao.selectAllClass(vo);
+		
+		
+		int totalRecord=dao.getAllRecordCount(vo);
+		vo.setTotalRecord(totalRecord);
+		
+		
+		
+		
+		List<ClassVO> list=dao.getClassList(vo);
 		
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
+		mav.addObject("pvo",vo);
 		mav.setViewName("admin/adminClass");
 		return mav;
 	}

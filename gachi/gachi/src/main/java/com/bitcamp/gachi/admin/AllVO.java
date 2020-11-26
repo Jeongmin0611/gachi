@@ -231,8 +231,5 @@ public class AllVO {
 	}
 	public void setClass_img1(String class_img1) {
 		this.class_img1 = class_img1;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}	
 }
