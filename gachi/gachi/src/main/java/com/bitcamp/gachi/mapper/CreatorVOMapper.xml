@@ -5,9 +5,9 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
 	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-		select rownum,category, nickname, c.userid, tel, to_char(signupdate, 'yyyy-mm-dd')
+		select rownum,a.userid userid ,nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd')
 	  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
-	  	 from member a join creator c on a.userid = c.userid
+	  	 from member a join creator c on a.userid = c.userid where grade = '크리에이터'
 	</select>
 		<select id="countAllCreator" resultType="_int">
 		select count(*) from creator
@@ -23,16 +23,14 @@
 	</select>	
 	
 	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category ,c.userid , nickname ,tel , to_char(signupdate, 'yyyy-mm-dd') 
-		signupdate from member a join creator c on a.userid= c.userid where c.userid = #{userid}
+		select  u.userid, grade ,username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
+	  	 birthdate, gender, zipcode, addr, detailaddr, to_char(signupdate, 'yyyy-mm-dd') signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
+	  	 deleted from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
 	</select>
 	<update id="creatorMemberUpdate" parameterType="com.bitcamp.gachi.admin.AllVO"> 
-		update creator set category =#{category} where userid = #{userid}
-	</update>
-	<update id="creatorMemberUpdate1" parameterType="com.bitcamp.gachi.admin.AllVO"> 
 		update member set nickname =#{nickname}, tel=#{tel} where userid = #{userid}
 	</update>
-	<delete id="creatorMemberDelete">
+	<delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
 	</delete>
 </mapper>

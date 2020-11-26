@@ -36,9 +36,9 @@
 <div style="margin-bottom:20px;">
 <ul id="cr_member_lst" class="text-center">
 	<li>번호</li>
-	<li>카테고리</li>
+	<li>아이디</li>
 	<li>크리에이터명</li>
-	<li>이메일</li>
+	<li>이름</li>
 	<li>연락처</li>
 	<li>가입일</li>
 	<li>탈퇴일</li>
@@ -46,12 +46,12 @@
 	
 	<c:forEach var="creatorList" items="${creatorList }">
 	<li>${creatorList.rownum }</li>
-	<li>${creatorList.category}</li>
-	<li>${creatorList.nickname}</li>
 	<li><a href="/gachi/adminCreatorView?userid=${creatorList.userid }">${creatorList.userid }</a></li>
+	<li>${creatorList.nickname}</li>
+	<li>${creatorList.username }</li>
 	<li>${creatorList.tel }</li>
 	<li>${creatorList.signupdate }</li>
-		<li><c:if test="${creatorList.deleted eq '탈퇴'}">X</c:if><c:if test="${creatorList.deleted ne '탈퇴'}">${creatorList.withdrawdate }</c:if></li>
+	<li><c:if test="${creatorList.deleted eq '탈퇴'}">${creatorList.withdrawdate }</c:if><c:if test="${creatorList.deleted ne '탈퇴'}"> </c:if></li>
 	<li>${creatorList.creator_state}
 
 	</c:forEach>
