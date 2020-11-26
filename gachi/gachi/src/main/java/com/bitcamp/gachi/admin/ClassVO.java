@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ClassVO {
 
-	private String class_code;
+	private String code;
 	private String userid;
 	private String category;
 	private String class_name;
@@ -24,11 +24,12 @@ public class ClassVO {
 	private String class_img3;
 	private String nickname;
 	
-	public String getClass_code() {
-		return class_code;
+	
+	public String getCode() {
+		return code;
 	}
-	public void setClass_code(String class_code) {
-		this.class_code = class_code;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getUserid() {
 		return userid;

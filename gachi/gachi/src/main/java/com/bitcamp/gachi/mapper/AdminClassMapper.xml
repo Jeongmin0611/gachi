@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.admin.ClassDaoImp">
 	<select id="selectAllClass" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
-				select class_code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
+				select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
 				to_char(allrow,'YYYY-MM-DD') allrow,class_state from class c join member m on c.userid=m.userid 
 				<choose>
-					<when test="category==null and option==null and class_state==null and searchWord==null "></when>
+					<when test="category==null and option==null and class_state==null and searchWord==null"></when>
 					<when test='!category.equals("전체") and option.equals("전체") and class_state.equals("전체")'>
 						where category='${category}' and c.class_name like '%${searchWord}%' or 
-						m.nickname like '%${searchWord}%' or c.class_code like '%${searchWord}%'
+						m.nickname like '%${searchWord}%' or c.code like '%${searchWord}%'
 					</when>
 					<when test='!category.equals("전체") and !option.equals("전체") and class_state.equals("전체")'>
 						where category='${category}' and ${option} like '%${searchWord}%'
@@ -21,12 +21,12 @@
 					<when test='category.equals("전체") and !option.equals("전체") and class_state.equals("전체")'>
 					 	where ${option} like '%${searchWord}%'
 					</when>
-						<when test='category.equals("전체") and !option.equals("전체") and !class_state.equals("전체")'>
-					 	where class_state='${class_state}' c.class_name like '%${searchWord}%' or 
-					 	m.nickname like '%${searchWord}%' or c.class_code like '%${searchWord}%'
+					<when test='category.equals("전체") and !option.equals("전체") and !class_state.equals("전체")'>
+					 	where ${option} like '%${searchWord}%' and class_state='${class_state}'
 					</when>
+					
 				</choose>
-				order by class_code
+				order by code
 	</select>
 	<select id="getAllRecordCount" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="int">
 		select count from class
