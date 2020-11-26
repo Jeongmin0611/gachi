@@ -14,6 +14,7 @@ public class AllVO {
 	private String birthdate; // 생년월일
 	private String tel;
 	private String gender; // 성별 (m 남 / f 여)
+	private String zipcode;
 	private String addr; // 주소
 	private String detailaddr; // 상세주소
 	private String profile; // 프로필 이미지 파일명
@@ -93,6 +94,16 @@ public class AllVO {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 	public String getAddr() {
 		return addr;

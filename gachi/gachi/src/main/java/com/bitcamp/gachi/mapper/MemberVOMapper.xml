@@ -19,15 +19,20 @@
 	</select>
 	
 	<select id="selectMember" resultType="com.bitcamp.gachi.admin.MemberVO">
-		select userid , username , nickname ,tel , to_char(signupdate, 'yyyy-mm-dd') 
-		signupdate from member where userid =#{userid}
+		select  userid, grade ,username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
+	  	 birthdate, gender, zipcode, addr, detailaddr, to_char(signupdate, 'yyyy-mm-dd') signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
+	  	 deleted from member where userid = #{userid}
 	</select>
 	
 	<update id="MemberUpdate" parameterType="com.bitcamp.gachi.admin.MemberVO"> 
-		update member set username = #{username}, nickname = #{nickname} ,tel =#{tel}
+		update member set username = #{username}, grade=#{grade}, nickname = #{nickname} ,tel =#{tel}, gender=#{gender}, zipcode=#{zipcode}, 
+		addr =#{addr},detailaddr =#{detailaddr}
 		where userid = #{userid}
 	</update>
-	
+	<update id="leaveMemberUpdate" parameterType="String">
+		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
+	</update>
+
 	<delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
 	</delete>

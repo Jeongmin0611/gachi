@@ -18,5 +18,7 @@ public interface MemberDaoImp {
 	
 	public int MemberUpdate(MemberVO vo); //회원정보 수정
 	
+	public int leaveMemberUpdate(String userid);
+	
 	public int adminMemberDelete(String userid);
 }

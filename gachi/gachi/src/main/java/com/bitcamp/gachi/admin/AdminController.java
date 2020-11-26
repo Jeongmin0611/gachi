@@ -63,7 +63,6 @@ public class AdminController {
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
 		
 		int result = dao.creatorMemberUpdate(vo);
-			result += dao.creatorMemberUpdate1(vo);
 		ModelAndView mav = new ModelAndView();	
 		
 		if(result>1) {
@@ -78,8 +77,8 @@ public class AdminController {
 	
 	@RequestMapping("/creatorMemberDelete")
 	public ModelAndView creatorMemberDelete(String userid) {
-		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-		int result = dao.creatorMemberDelete(userid);
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		int result = dao.adminMemberDelete(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -149,20 +148,33 @@ public class AdminController {
 	@RequestMapping(value="/adminMemberEditOk",method=RequestMethod.POST)
 	public ModelAndView adminMemberEditOk(MemberVO vo) {
 
-		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);	
+		int result = dao.MemberUpdate(vo);	
 		
-		int result = dao.MemberUpdate(vo);
-		ModelAndView mav = new ModelAndView();	
-		
+		ModelAndView mav = new ModelAndView();			
 		if(result>0) {
-
-			mav.setViewName("redirect:adminMember");
-			
+			mav.setViewName("redirect:adminMember");	
 		}else {
 			mav.setViewName("admin/adminResult");	
 		}		
 		return mav;
 	}
+	
+	@RequestMapping("/adminMemberLeaveEditOk")
+	public ModelAndView adminMemberLeaveEditOk(String userid) {
+
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);	
+		int result = dao.leaveMemberUpdate(userid);
+		
+		ModelAndView mav = new ModelAndView();			
+		if(result>0) {
+			mav.setViewName("redirect:adminMember");	
+		}else {
+			mav.setViewName("admin/adminResult");	
+		}		
+		return mav;
+	}
+
 	@RequestMapping("/adminMemberDelete")
 	public ModelAndView adminMemberDelete(String userid) {
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
