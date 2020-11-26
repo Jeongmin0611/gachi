@@ -5,7 +5,7 @@
 <mapper namespace="com.bitcamp.gachi.admin.ClassDaoImp">
 	<select id="selectAllClass" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
 				select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
-				to_char(allrow,'YYYY-MM-DD') allrow,class_state from class c join member m on c.userid=m.userid 
+				to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid 
 				<choose>
 					<when test="category==null and option==null and class_state==null and searchWord==null"></when>
 					<when test='!category.equals("전체") and option.equals("전체") and class_state.equals("전체")'>
@@ -29,6 +29,11 @@
 				order by code
 	</select>
 	<select id="getAllRecordCount" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="int">
-		select count from class
+		select count(code) from class where code like '%c%'
+	</select>
+	<select id="getClassList" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
+		select * from (select * from (select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
+		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid order by c.code desc) 
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>) where <![CDATA[rownum<=${lastPageRecordCount}]]> 
 	</select>
 </mapper>

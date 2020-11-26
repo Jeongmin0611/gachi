@@ -24,13 +24,13 @@
 <div class="container ad_font">
 	<h1>클래스관리</h1>
 	<div style="overflow:auto">
-		총 레코드 수: ${pvo.totalRecord}
+		총 레코드 수: ${pvo.totalRecord}<br/>
 	</div>
 <div id="search_area">
 <form method="get" id="ad_class_search" action="/gachi/adminClass">
 		<div>
 			<select name="dateOption">
-				<option value="allrow">등록일</option>
+				<option value="allow">등록일</option>
 				<option value="signup">등록신청일</option>
 			</select>
 			<input type="date" name="date1">&nbsp;~<input type="date" name="date2">
@@ -82,19 +82,27 @@
 		<li>${vo.nickname }</li>
 		<li>${vo.total_student }</li>
 		<li>${vo.signup }</li>
-		<li>${vo.allrow }</li>
+		<li>${vo.allow }</li>
 		<li>${vo.class_state }</li>
 		</c:forEach>
 	</ul>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<c:if test="${pvo.nowPage>1}">
+				<li class="btn">
+					<a class="btn" href="#">Prev</a>
+				</li>
+			</c:if>
 			<li><a href="#" class="paging_num">1</a></li>
 			<li><a href="#" class="paging_num">2</a></li>
 			<li><a href="#" class="paging_num">3</a></li>
 			<li><a href="#" class="paging_num">4</a></li>
 			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${pvo.nowPage<pvo.totalpage}">
+				<li class="btn">
+					<a class="btn" href="#">next</a>
+				</li>
+			</c:if>
 	</ul>
 </div>
 </div>
