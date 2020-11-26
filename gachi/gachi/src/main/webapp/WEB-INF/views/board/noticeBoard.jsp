@@ -85,7 +85,7 @@ table a, table a:hover{
 			<c:forEach var="vo" items="${list }">
 			<tr>
 				<td>${vo.notice_num }</td>
-				<td><a href="/gachi/noticeBoardDetail?no=${vo.notice_num }">${vo.subject }</a></td>
+				<td><a href="/gachi/noticeBoardView?no=${vo.notice_num }">${vo.subject }</a></td>
 				<td>${vo.writer }</td>
 				<td>${vo.writedate }</td>
 			</tr>

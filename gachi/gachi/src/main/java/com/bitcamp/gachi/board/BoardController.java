@@ -38,14 +38,14 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping("/noticeBoardDetail")
-	public ModelAndView noticeBoardDetail(int no) {
+	@RequestMapping("/noticeBoardView")
+	public ModelAndView noticeBoardView(int no) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		NoticeBoardVO vo = dao.noticeBoardSelect(no);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
-		mav.setViewName("board/noticeBoardDetail");
+		mav.setViewName("board/noticeBoardView");
 		return mav;
 	}
 
@@ -61,15 +61,15 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping("/eventBoardDetail")
-	public ModelAndView eventBoardDetail(int no, String event) {
+	@RequestMapping("/eventBoardView")
+	public ModelAndView eventBoardView(int no, String event) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		EventBoardVO vo = dao.eventBoardSelect(no);
 		vo.setEvent_category(event);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
-		mav.setViewName("board/eventBoardDetail");
+		mav.setViewName("board/eventBoardView");
 		return mav;
 	}
 
@@ -135,9 +135,17 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping("/introCreatorDetail")
-	public String introCreateDetail() {
-		return "board/introCreatorDetail";
+	@RequestMapping("/introCreatorView")
+	public ModelAndView introCreateView(String userid) {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		AllVO vo = dao.creatorBoardViewSelect(userid);
+		List<AllVO> list = dao.creatorBoardViewSelectClass(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.addObject("list", list);
+		mav.setViewName("board/introCreatorView");
+		return mav;
 	}
 
 }

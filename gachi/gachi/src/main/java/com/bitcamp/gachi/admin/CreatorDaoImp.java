@@ -16,14 +16,18 @@ public interface CreatorDaoImp {
 
 	public int countDeletedCreator(); // 탈퇴 크리에이터 명 수 
 	
-	public List<AllVO> creatorBoardSelectAll();//크리에이터 소개 페이지 리스트
+	public List<AllVO> creatorBoardSelectAll();//크리에이터 소개 페이지 리스트	
+
+	public AllVO creatorBoardViewSelect(String userid);//크리에이터 소개 상세 (사진, 닉네임, 소개글)
 	
+	public List<AllVO> creatorBoardViewSelectClass(String userid);//크리에이터 소개 상세 (관련 클래스)
+
 	public AllVO selectCreator(String userid); // 레코드 1개 멤버회원 가져오기
 	
 	public int creatorMemberUpdate(AllVO vo); //크리에이터 카테고리 정보 수정
 	public int creatorMemberUpdate1(AllVO vo); //크리에이터 정보 수정
 	public int creatorMemberDelete(String userid); //크리에이터 정보삭제
-	
+
 }
 
 

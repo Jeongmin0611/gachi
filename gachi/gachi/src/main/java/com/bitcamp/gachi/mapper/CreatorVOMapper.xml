@@ -19,8 +19,15 @@
 		select count(*) from member where deleted='탈퇴' and grade = '크리에이터'
 	</select>
 	<select id="creatorBoardSelectAll" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category, m.nickname, picture from creator c join member m on c.userid = m.userid
+		select category, m.nickname, picture, c.userid from creator c join member m on c.userid = m.userid
 	</select>	
+	<select id="creatorBoardViewSelect" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
+		select picture, nickname, sns_addr, creator_info from member m join creator cre on m.userid=cre.userid  where cre.userid='${param1}'
+	</select>
+	<select id="creatorBoardViewSelectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
+		select creator_info, class_name, real_price, class_img1 from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
+	</select>
+
 	
 	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
 		select category ,c.userid , nickname ,tel , to_char(signupdate, 'yyyy-mm-dd') 
