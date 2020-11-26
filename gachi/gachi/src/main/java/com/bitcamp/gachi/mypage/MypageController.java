@@ -24,14 +24,21 @@ public class MypageController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	//마이페이지 메인(결제내역)
+	//******마이페이지 메인-결제/주문내역확인*******
 	@RequestMapping("/mypage")
 	public ModelAndView Mypage(HttpSession ses) {
-		
-		ModelAndView mav = new ModelAndView();
+		//임시데이터//
 		ses.setAttribute("userid", "member0@gachi.com");
 		ses.setAttribute("username", "박회원");
 		ses.setAttribute("logStatus", "Y");
+		///////////////////////////////////////
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<ClassVO> cList = dao.classOrderList();
+		List<GoodsVO> gList = dao.goodsOrderList();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cList", cList);
+		mav.addObject("gList", gList);
 		mav.setViewName("mypage/mypageMain");
 		return mav;
 	}
