@@ -16,7 +16,7 @@ public class RegisterVO {
 	private String userid3;
 	private String userpwd3;
 	
-	private int grade;//체크박스에따라서 결정
+	private String grade;//체크박스에따라서 결정
 	
 	private String username;
 	private String nickname;
@@ -85,10 +85,10 @@ public class RegisterVO {
 	public void setUserpwd3(String userpwd3) {
 		this.userpwd3 = userpwd3;
 	}
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 	public String getUsername() {

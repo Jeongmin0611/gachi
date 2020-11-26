@@ -34,58 +34,38 @@ import org.springframework.web.servlet.ModelAndView;
 	}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
-			System.out.println(vo.getUserid());
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			String voGrade=dao.selectList(vo);
 			RegisterVO resultVO=dao.memberLogin(vo);
 			ModelAndView mav=new ModelAndView();
 			if(resultVO==null) {
 				mav.setViewName("loginFalse/loginFalse");
 			}else{
-				ses.setAttribute("userid", resultVO.getUserid());
-				ses.setAttribute("nickname", resultVO.getNickname());
-				ses.setAttribute("logStatus","Y");
-				ses.setAttribute("userSort","U");
-				mav.setViewName("redirect:/");
+					if(voGrade.equals("회원")){
+						ses.setAttribute("userid", resultVO.getUserid());
+						ses.setAttribute("nickname", resultVO.getNickname());
+						ses.setAttribute("grade", resultVO.getGrade());
+						ses.setAttribute("logStatus","Y");
+						ses.setAttribute("userSort","U");
+						mav.setViewName("redirect:/");
 				
-			}
+					}else if(voGrade.equals("크리에이터")){
+						ses.setAttribute("userid", resultVO.getUserid());
+						ses.setAttribute("nickname", resultVO.getNickname());
+						ses.setAttribute("grade", resultVO.getGrade());
+						ses.setAttribute("logStatus","Y");
+						ses.setAttribute("userSort","C");
+						mav.setViewName("redirect:/");
+					}else{
+						ses.setAttribute("userid", resultVO.getUserid());
+						ses.setAttribute("nickname", resultVO.getNickname());
+						ses.setAttribute("grade", resultVO.getGrade());
+						ses.setAttribute("logStatus","Y");
+						ses.setAttribute("userSort","A");
+						mav.setViewName("redirect:/");
+					}
+				}
 			return mav;
-		}
-		@RequestMapping(value="/creatorLogin",method=RequestMethod.POST)
-		public ModelAndView login2(RegisterVO vo,HttpSession ses) {
-
-			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			RegisterVO resultVO=dao.creatorLogin(vo);
-			ModelAndView mav=new ModelAndView();
-			if(resultVO==null) {
-				mav.setViewName("loginFalse/loginFalse");
-			}else {
-				ses.setAttribute("userid", resultVO.getUserid());
-				ses.setAttribute("nickname", resultVO.getNickname());
-				ses.setAttribute("logStatus","Y");
-				ses.setAttribute("userSort","C");
-				mav.setViewName("redirect:/");
-			}
-			return mav;
-		}
-		@RequestMapping(value="/adminLogin",method=RequestMethod.POST)
-		public ModelAndView login3(RegisterVO vo,HttpSession ses) {
-			
-			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			RegisterVO resultVO=dao.adminLogin(vo);
-			ModelAndView mav=new ModelAndView();
-			System.out.println(vo.getUserid3());
-			System.out.println(resultVO);
-			if(resultVO==null) {			
-				mav.setViewName("loginFalse/loginFalse");
-			}else {
-				ses.setAttribute("userid", resultVO.getUserid());
-				ses.setAttribute("nickname", resultVO.getNickname());
-				ses.setAttribute("logStatus","Y");
-				ses.setAttribute("userSort","A");
-				mav.setViewName("redirect:/");
-			}
-			return mav;
-			
 		}
 		@RequestMapping("/logout")
 		public String logout(HttpSession s) {
