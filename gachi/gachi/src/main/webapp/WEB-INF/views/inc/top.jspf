@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -67,7 +66,7 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#login2Frm,#login3Frm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
+#loginFrm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
@@ -78,10 +77,10 @@ a {
 #listFontColor{
 	color:black;
 }
-#mdBtm,#md2Btm,#md3Btm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
+#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
 	float:right;
 }
-.md_layer,.md2_layer,.md3_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
+.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -128,7 +127,7 @@ a {
 	margin-top:83px;
 	margin-bottom:5px;
 }
-#mdClose,#md2Close,#md3Close,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
+#mdClose,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
 	background-color:white;
 	border:0;
 	outline:0;
@@ -146,16 +145,12 @@ a {
 		margin-top:10px;
 		margin-bottom:10px;
 	}
-	#md,#md2{
+	#md{
 		width:350px;
 		height:640px;
 		border-radius:10px;
 	}
-	#md3{
-		width:350px;
-		height:500px;
-		border-radius:10px;
-	}
+	
 	
 	#mdJ{
 		width:350px;
@@ -621,43 +616,6 @@ $(function(){
 		   		$("#pwdF2").fadeOut();
 		});
 	}
-	function loginChange(){
-		$("#md,#md3").css({'display':'none'});
-		$('#md2').css({
-			"top": (($(window).height()-$("#md2").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#md2").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#md2").fadeIn();
-			
-			$("#md2Close,.md2_layer").click(function(){
-		   		$("#md2").fadeOut();
-		});
-
-		}
-	function login2Change(){
-		$("#md2,#md3").css({'display':'none'});
-		$('#md').css({
-			"top": (($(window).height()-$("#md").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#md").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#md").fadeIn();
-			
-			$("#mdClose,.md_layer").click(function(){
-		   		$("#md").fadeOut();
-		});
-	}
-	function login3Change(){
-		$("#md,#md2").css({'display':'none'});
-		$('#md3').css({
-			"top": (($(window).height()-$("#md3").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#md3").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#md3").fadeIn();
-			
-			$("#md3Close,.md3_layer").click(function(){
-		   		$("#md3").fadeOut();
-		});
-	}
 	
 	
 </script>
@@ -760,31 +718,27 @@ Gitple('onClose', function () {
         <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
-          <c:if test="${logStatus!='Y'}">
+          <c:if test="${logStatus==null&&logStatus!='Y'}">
           <li class="nav-item" id="loginFormBtn"><a class="nav-link" href="#">로그인</a></li>
           <li class="nav-item" id="joinFormBtn"><a class="nav-link" href="#">회원가입</a></li>
           </c:if>
-          <c:if test="${logStatus!=null	||	logStatus=='Y'}"> 
-          <c:if test="${userSort=='U'}">
-          <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
-          <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
-         </c:if>
-         </c:if>
-         <c:if test="${logStatus!=null	||	logStatus=='Y'}">
-         <c:if test="${userSort=='C'}">
-         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
-         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
-         </c:if>
-         </c:if>
-         <c:if test="${logStatus!=null	||	logStatus=='Y'}">
-         <c:if test="${userSort=='A'}">
-         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
-         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
-        </c:if>
-         </c:if>
+          <c:if test="${logStatus!=null	&& logStatus=='Y'}"> 
+	          <c:if test="${userSort=='U'}">
+	          <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+	          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
+	         </c:if>
+	         <c:if test="${userSort=='C'}">
+	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+	         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
+	         </c:if>
+	         <c:if test="${userSort=='A'}">
+	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+	         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
+	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+	        </c:if>
+          </c:if>
          <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
         <!-- 검색버튼 -->
@@ -805,9 +759,6 @@ Gitple('onClose', function () {
             </div>
          <div>
           <img src="/gachi/img/logo.png" class="mainLogoImg"/>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" checked class="logRadioBtnInterval"/>회원
-            <input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="loginChange()"/>크리에이터
-            <input type="radio" value="관리자" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="login3Change()"/>관리자<br/>
             <div class="md_layer"></div>
                   <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
                   <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
@@ -816,48 +767,6 @@ Gitple('onClose', function () {
                <span>or</span><br />
                <button id="kokoBtn">카카오톡으로 로그인</button><br />
                <span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span>
-            </div>
-         </form>
-      </div>
-   </div>
-   <div id="md2" class="join">
-      <div id="login2Frm" class="col-xs-12 col-md-12">
-         <form method="post" action="/gachi/creatorLogin">
-         <div id="md2Btm">
-               <button type="button" class="btn btn-primary" id="md2Close" style="color:gray">X</button>
-            </div>
-         <div>
-          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="login2Change()"/>회원
-            <input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" checked />크리에이터
-            <input type="radio" value="관리자" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="login3Change()"/>관리자<br/>
-            <div class="md2_layer"></div>
-                  <input type="text" placeholder="아이디(이메일)" id="userid2" name="userid2"/><br />
-                  <input type="password" placeholder="비밀번호" id="userpwd2" name="userpwd2"/><br />
-                  <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
-               <input type="submit" id="loginBtn" class="btn btn-default signupBtn" value="크리에이터로그인"/><br/>
-               <span>or</span><br />
-               <button id="kokoBtn">카카오톡으로 로그인</button><br />
-               <span id="logbtm">아직같이가치의 회원이 아니신가요?<br/><a href="#">회원가입하기</a></span><br/>
-            </div>
-         </form>
-      </div>
-   </div>
-   <div id="md3" class="join">
-      <div id="login3Frm" class="col-xs-12 col-md-12">
-         <form method="post" action="/gachi/adminLogin">
-         <div id="md3Btm">
-               <button type="button" class="btn btn-primary" id="md3Close" style="color:gray">X</button>
-            </div>
-         <div>
-          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
-            <input type="radio" value="회원" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="login2Change()"/>회원
-            <input type="radio" value="크리에이터" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" onclick="loginChange()"/>크리에이터
-            <input type="radio" value="관리자" style="width:15px;height:15px;" name="logRadioBtn" class="logRadioBtnInterval" checked />관리자<br/>
-            <div class="md3_layer"></div>
-                  <input type="text" placeholder="아이디(이메일)" id="userid3" name="userid3"/><br />
-                  <input type="password" placeholder="비밀번호" id="userpwd3" name="userpwd3"/><br />
-               <input type="submit" id="loginBtn" class="btn btn-default signupBtn" value="관리자로그인"/><br/>
             </div>
          </form>
       </div>
