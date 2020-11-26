@@ -48,7 +48,7 @@
 	<li>${creatorList.rownum }</li>
 	<li>${creatorList.category}</li>
 	<li>${creatorList.nickname}</li>
-	<li><a href="/gachi/adminCreatorView">${creatorList.userid }</a></li>
+	<li><a href="/gachi/adminCreatorView?userid=${creatorList.userid }">${creatorList.userid }</a></li>
 	<li>${creatorList.tel }</li>
 	<li>${creatorList.signupdate }</li>
 		<li><c:if test="${creatorList.deleted eq '탈퇴'}">X</c:if><c:if test="${creatorList.deleted ne '탈퇴'}">${creatorList.withdrawdate }</c:if></li>
