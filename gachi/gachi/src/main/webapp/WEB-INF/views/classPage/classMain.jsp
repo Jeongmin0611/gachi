@@ -52,6 +52,9 @@
 	}
 	#QNADiv li:nth-child(6n+2),#dbEndDiv li:nth-child(6n+2){width:50%;}
 	#dbEndDiv{margin:0 0 50px 0;}
+	#slideitem button{
+		
+	}
 
 </style>
 	<div class="container">

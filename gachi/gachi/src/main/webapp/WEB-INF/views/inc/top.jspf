@@ -698,6 +698,14 @@ Gitple('onClose', function () {
 			}
 
 		});
+	$("#mdJ>input[type='checked']").on("click",function(){
+		var countChk=$("#mdJ>input[type='checked']").length;
+
+		if(countChk>3){
+			$(this).attr("checked",false);
+			alert("취미는최대3개까지입력가능합니다");
+			}
+		});
 
 </script>
 <meta charset="UTF-8">
