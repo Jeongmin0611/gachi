@@ -8,17 +8,30 @@
 		margin-bottom:10px;
 	}
 </style>
+<script>
+	$(function(){
+		$("#cr_delBtn").click(function(){
+			if(confirm("회원의 정보를 삭제하시겠습니까?")){
+				location.href="/gachi/creatorMemberDelete?userid=${vo.userid}";
+			}
+		});
+	});
+</script>
 <div class="container ad_font">
 	<h1>크리에이터회원 조회</h1>
+<form action="adminCreatorEditOk" method="post">	
 	<ul id="ad_member_View">
-		<li>&nbsp;&nbsp;번호</li><li>001</li>
-		<li>&nbsp;&nbsp;아이디</li><li>park1234@naver.com</li>
-		<li>&nbsp;&nbsp;이름</li><li>홍길동</li>
-		<li>&nbsp;&nbsp;닉네임</li><li>동서남북</li>
-		<li>&nbsp;&nbsp;연락처</li><li>010-1234-1233</li>
-		<li>&nbsp;&nbsp;가입일</li><li>2020-08-12</li>
-		<li>&nbsp;&nbsp;마일리지</li><li>1200p</li>
+		<li>카테고리</li><li><input type="text" name="category" value="${vo.category }" /></li>
+		<li>아이디</li><li><input type="text" name="userid" value="${vo.userid }"readonly/></li>
+		<li>닉네임</li><li><input type="text" name="nickname" value="${vo.nickname }"/></li>
+		<li>연락처</li><li><input type="text" name="tel" value="${vo.tel }"/></li>
+		<li>가입일</li><li><input type="text" name="signupdate" value="${vo.signupdate }"readonly/></li>
+		<li>마일리지</li><li>1200p</li>
 	</ul>
+		<button class="btn" onclick="history.back()">회원목록</button>
+		<input type="submit" class="btn" value="회원정보수정"/>
+		<input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/>
+	</form>	
 	<h3>클래스 내역</h3>
 	<div class="ad_member_Box">
 	</div>
@@ -26,9 +39,5 @@
 	<div class="ad_member_Box">
 	
 	</div>
-	<div style="margin-top:20px;text-align:center;">
-		<button class="btn" onclick="history.back()">회원목록</button>
-		<button class="btn" onclick="location.href='/gachi/adminMemberEdit'">회원정보수정</button>
-		<button class="btn" onclick="location.href='/gachi/adminMemberEdit'">회원탈퇴처리</button>
-	</div>
+
 </div>

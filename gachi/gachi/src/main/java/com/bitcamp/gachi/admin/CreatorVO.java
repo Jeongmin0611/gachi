@@ -13,7 +13,7 @@ public class CreatorVO {
 	private String ilcense_img3; // 자격증 이미지3
 	private String sns_addr; // sns 주소
 	private String creator_info; // 소개글
-	private int creator_state; // 승인상태 ( 0: 미승인 / 1:승인 : 2: 승인거절)
+	private String creator_state; // 승인상태 ( 0: 미승인 / 1:승인 : 2: 승인거절)
 	private String picture;//크리에이터 사진	
 	
 	public int getRownum() {
@@ -35,10 +35,10 @@ public class CreatorVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getCreator_state() {
+	public String getCreator_state() {
 		return creator_state;
 	}
-	public void setCreator_state(int creator_state) {
+	public void setCreator_state(String creator_state) {
 		this.creator_state = creator_state;
 	}
 	public String getBusiness_number() {
@@ -89,10 +89,10 @@ public class CreatorVO {
 	public void setCreator_info(String creator_info) {
 		this.creator_info = creator_info;
 	}
-	public int getcreator_State() {
+	public String getcreator_State() {
 		return creator_state;
 	}
-	public void setcreator_State(int creator_state) {
+	public void setcreator_State(String creator_state) {
 		this.creator_state = creator_state;
 	}
 	public String getPicture() {
