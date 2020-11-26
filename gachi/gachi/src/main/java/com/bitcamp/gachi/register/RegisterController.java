@@ -39,10 +39,8 @@ import org.springframework.web.servlet.ModelAndView;
 			RegisterVO resultVO=dao.memberLogin(vo);
 			ModelAndView mav=new ModelAndView();
 			if(resultVO==null) {
-				System.out.println("로그인실패");
-				mav.setViewName("redirect:/");
+				mav.setViewName("loginFalse/loginFalse");
 			}else{
-				System.out.println("로그인성공");
 				ses.setAttribute("userid", resultVO.getUserid());
 				ses.setAttribute("nickname", resultVO.getNickname());
 				ses.setAttribute("logStatus","Y");
@@ -59,7 +57,7 @@ import org.springframework.web.servlet.ModelAndView;
 			RegisterVO resultVO=dao.creatorLogin(vo);
 			ModelAndView mav=new ModelAndView();
 			if(resultVO==null) {
-				mav.setViewName("redirect:/");
+				mav.setViewName("loginFalse/loginFalse");
 			}else {
 				ses.setAttribute("userid", resultVO.getUserid());
 				ses.setAttribute("nickname", resultVO.getNickname());
@@ -77,11 +75,9 @@ import org.springframework.web.servlet.ModelAndView;
 			ModelAndView mav=new ModelAndView();
 			System.out.println(vo.getUserid3());
 			System.out.println(resultVO);
-			if(resultVO==null) {
-				System.out.println("관리자로그인실패");
-				mav.setViewName("redirect:/");
+			if(resultVO==null) {			
+				mav.setViewName("loginFalse/loginFalse");
 			}else {
-				System.out.println("관리자로그인성공");
 				ses.setAttribute("userid", resultVO.getUserid());
 				ses.setAttribute("nickname", resultVO.getNickname());
 				ses.setAttribute("logStatus","Y");

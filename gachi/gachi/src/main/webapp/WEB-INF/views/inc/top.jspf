@@ -511,7 +511,6 @@ $(function(){
     $("#pwdF2Close, .pwdF2_layer").click(function(){
        $("#pwdF2").fadeOut();
     });
-  	//
     $("#pwd1FindReturnBtn").click(function(){
 		$("#pwdF2").css({'display':'none'});
 	$("#pwdF1").css({
@@ -573,7 +572,6 @@ $(function(){
 			$("#idF1Close,.idF1_layer").click(function(){
 		   		$("#idF1").fadeOut();
 		});
-
 	}
 	function pwdF1Change(){
 		$("#pwdF1").css({'display':'none'});
@@ -862,7 +860,7 @@ Gitple('onClose', function () {
    <div id="joinForm" class="col-xs-12 col-md-12">
       <form method="post" action="/gachi/registerInsert">   
             <div id="mdJBtm">
-               <button type="button" class="btn btn-primary" id="mdJClose">X</button>
+               <button type="button" class="btn btn-primary" id="mdJClose" style="color:gray;">X</button>
             </div>
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
@@ -1011,13 +1009,13 @@ Gitple('onClose', function () {
                <input type="text" placeholder="계좌" name="account" id="account"/>
                <span style="width:50%;">지원카테고리:</span>
                 <select style="width:50%;">
-                	<option value="그림">그림</option>
-                	<option value="요리">요리</option>
-                	<option value="공예/창작">공예/창작</option>
-                	<option value="운동">운동</option>
-                	<option value="음악">음악</option>
-                	<option value="사진/영상">사진/영상</option>
-                	<option value="라이프스타일">라이프스타일</option>
+                	<option id="lnterest" name="lnterest" value="미술">미술</option>
+                	<option id="lnterest" name="lnterest" value="요리">요리</option>
+                	<option id="lnterest" name="lnterest" value="창작/공예">창작/공예</option>
+                	<option id="lnterest" name="lnterest" value="운동">운동</option>
+                	<option id="lnterest" name="lnterest" value="음악">음악</option>
+                	<option id="lnterest" name="lnterest" value="사진/영상">사진/영상</option>
+                	<option id="lnterest" name="lnterest" value="라이프스타일">라이프스타일</option>
                 </select>
                <button type="submit" class="btn btn-default signupBtn" id="mdJ2signupBtn">회원가입</button>
          </form>
@@ -1029,13 +1027,13 @@ Gitple('onClose', function () {
 		<div id="idF1Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="idF1Btm">
-					<button type="button" class="btn btn-primary" id="idF1Close">X</button>
+					<button type="button" class="btn btn-primary" id="idF1Close" style="color:gray">X</button>
 				</div>
 				<div class="idF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFindChange()"/>크리에이터<br/>
-						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
+						<span id="idFF">회원정보에등록된 전화번호을 통해 아이디를 찾을 수 있습니다</span>
 						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
@@ -1050,13 +1048,13 @@ Gitple('onClose', function () {
 		<div id="idF2Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="idF2Btm">
-					<button type="button" class="btn btn-primary" id="idF2Close">X</button>
+					<button type="button" class="btn btn-primary" id="idF2Close" style="color:gray">X</button>
 				</div>
 				<div class="idF2_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFind2Change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
-						<span id="idFF">회원정보에등록된 이메일을 통해 아이디를 찾을 수 있습니다</span>
+						<span id="idFF">회원정보에등록된 전화번호을 통해 아이디를 찾을 수 있습니다</span>
 						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
 			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
@@ -1073,7 +1071,7 @@ Gitple('onClose', function () {
 		<div id="pwdF1Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="pwdF1Btm">
-					<button type="button" class="btn btn-primary" id="pwdF1Close">X</button>
+					<button type="button" class="btn btn-primary" id="pwdF1Close" style="color:gray">X</button>
 				</div>
 				<div class="pwdF1_layer"></div>
 				<div>
@@ -1095,7 +1093,7 @@ Gitple('onClose', function () {
 		<div id="pwdF1CForm" class="col-xs-12 col-md-12">
 			<form>
 				<div id="pwdF1CBtm">
-					<button type="button" class="btn btn-primary" id="pwdF1CClose">X</button>
+					<button type="button" class="btn btn-primary" id="pwdF1CClose" style="color:gray">X</button>
 				</div>
 				<div class="pwdF1C_layer"></div>
 				<div>
@@ -1118,7 +1116,7 @@ Gitple('onClose', function () {
 		<div id="pwdF2Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="pwdF2Btm">
-					<button type="button" class="btn btn-primary" id="pwdF2Close">X</button>
+					<button type="button" class="btn btn-primary" id="pwdF2Close" style="color:gray">X</button>
 				</div>
 				<div class="pwdF2_layer"></div>
 					<div>
@@ -1139,14 +1137,14 @@ Gitple('onClose', function () {
 		<div id="pwdF2CForm" class="col-xs-12 col-md-12">
 			<form>
 				<div id="pwdF2CBtm">
-					<button type="button" class="btn btn-primary" id="pwdF2CClose">X</button>
+					<button type="button" class="btn btn-primary" id="pwdF2CClose" style="color:gray">X</button>
 				</div>
 				<div class="pwdF2C_layer"></div>
 					<div>
 					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" onclick="pwdF2CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
 							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
-							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
+							<span id="pwdFF4"><a href="#" id="pwd2FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
 							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
 						<button class="autBtn">인증</button>
 						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>

@@ -5,8 +5,8 @@
 
 <mapper namespace="com.bitcamp.gachi.register.RegisterDaoImp">
 	<insert id="registerInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
-		insert into member(userid,userpwd,grade,username,nickname, to_date('2002-6-6','yyyy-mm-dd') birthdate,tel,gender,addr,detailaddr,lnterest)
-	                values(#{userid},#{userpwd},1,#{username},#{nickname},#{birthdate},#{tel},#{gender},#{addr},#{detailaddr},#{lnterest})
+		insert into member(userid,userpwd,grade,username,nickname,birthdate,tel,gender,addr,detailaddr)
+	                values(#{userid},#{userpwd},1,#{username},#{nickname},#{birthdate},#{tel},#{gender},#{addr},#{detailaddr})
 	</insert>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
 		select userid,nickname from member where userid=#{userid} and userpwd=#{userpwd} and grade=1

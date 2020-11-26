@@ -37,56 +37,8 @@ public class RegisterVO {
 	private String detailaddr;
 	
 	private String signupdate;
-	private String lnterest;
-	private String lnterestArt;
-	public String getLnterestArt() {
-		return lnterestArt;
-	}
-	public void setLnterestArt(String lnterestArt) {
-		this.lnterestArt = lnterestArt;
-	}
-	public String getLnterestCooking() {
-		return lnterestCooking;
-	}
-	public void setLnterestCooking(String lnterestCooking) {
-		this.lnterestCooking = lnterestCooking;
-	}
-	public String getLnterestCrafts() {
-		return lnterestCrafts;
-	}
-	public void setLnterestCrafts(String lnterestCrafts) {
-		this.lnterestCrafts = lnterestCrafts;
-	}
-	public String getLnterestExercise() {
-		return lnterestExercise;
-	}
-	public void setLnterestExercise(String lnterestExercise) {
-		this.lnterestExercise = lnterestExercise;
-	}
-	public String getLnterestMusic() {
-		return lnterestMusic;
-	}
-	public void setLnterestMusic(String lnterestMusic) {
-		this.lnterestMusic = lnterestMusic;
-	}
-	public String getLnterestPicture() {
-		return lnterestPicture;
-	}
-	public void setLnterestPicture(String lnterestPicture) {
-		this.lnterestPicture = lnterestPicture;
-	}
-	public String getLnterestLiseStyle() {
-		return lnterestLiseStyle;
-	}
-	public void setLnterestLiseStyle(String lnterestLiseStyle) {
-		this.lnterestLiseStyle = lnterestLiseStyle;
-	}
-	private String lnterestCooking;
-	private String lnterestCrafts;
-	private String lnterestExercise;
-	private String lnterestMusic;
-	private String lnterestPicture;
-	private String lnterestLiseStyle;
+	private String[] lnterest;
+	
 	
 	private int deleted;
 	
@@ -234,22 +186,11 @@ public class RegisterVO {
 	public void setSignupdate(String signupdate) {
 		this.signupdate = signupdate;
 	}
-	public String getLnterest() {
-		lnterest=lnterestArt+","+lnterestCooking+","+lnterestCrafts+","+lnterestExercise+","+lnterestMusic
-				+","+lnterestPicture+","+lnterestLiseStyle;
+	public String[] getLnterest() {
 		return lnterest;
 	}
-	public void setLnterest(String lnterest) {
+	public void setLnterest(String[] lnterest) {
 		this.lnterest = lnterest;
-		//
-		String lnterestCut[]=lnterest.split(",");
-		lnterestArt=lnterestCut[0];
-		lnterestCooking=lnterestCut[1];
-		lnterestCrafts=lnterestCut[2];
-		lnterestExercise=lnterestCut[3];
-		lnterestMusic=lnterestCut[4];
-		lnterestPicture=lnterestCut[5];
-		lnterestLiseStyle=lnterestCut[6];
 	}
 	public String getLogStatus() {
 		return logStatus;
