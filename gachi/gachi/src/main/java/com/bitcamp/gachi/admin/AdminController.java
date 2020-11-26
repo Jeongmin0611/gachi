@@ -46,9 +46,51 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminCreatorView")
-	public String adminCreatorView() {
-		return "admin/adminCreatorView";
+	public ModelAndView adminCreatorView(String userid) {
+		
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		
+		ModelAndView mav = new ModelAndView();
+		AllVO vo = dao.selectCreator(userid);	
+		mav.addObject("vo",vo);		
+		mav.setViewName("admin/adminCreatorView");
+		return mav;
 	}
+	
+	@RequestMapping(value="/adminCreatorEditOk",method=RequestMethod.POST)
+	public ModelAndView adminMemberEditOk(AllVO vo) {
+
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		
+		int result = dao.creatorMemberUpdate(vo);
+			result += dao.creatorMemberUpdate1(vo);
+		ModelAndView mav = new ModelAndView();	
+		
+		if(result>1) {
+
+			mav.setViewName("redirect:adminCreator");
+			
+		}else {
+			mav.setViewName("admin/adminResult");	
+		}		
+		return mav;
+	}
+	
+	@RequestMapping("/creatorMemberDelete")
+	public ModelAndView creatorMemberDelete(String userid) {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		int result = dao.creatorMemberDelete(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result >0) {
+			mav.setViewName("redirect:adminCreator");
+		}else {
+			mav.setViewName("gachi/adminResult");
+		}
+		return mav;
+	}
+	
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo) {
 		if(vo.getCategory()!=null) {

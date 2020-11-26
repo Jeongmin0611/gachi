@@ -21,4 +21,18 @@
 	<select id="creatorBoardSelectAll" resultType="com.bitcamp.gachi.admin.AllVO">
 		select category, m.nickname, picture from creator c join member m on c.userid = m.userid
 	</select>	
+	
+	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
+		select category ,c.userid , nickname ,tel , to_char(signupdate, 'yyyy-mm-dd') 
+		signupdate from member a join creator c on a.userid= c.userid where c.userid = #{userid}
+	</select>
+	<update id="creatorMemberUpdate" parameterType="com.bitcamp.gachi.admin.AllVO"> 
+		update creator set category =#{category} where userid = #{userid}
+	</update>
+	<update id="creatorMemberUpdate1" parameterType="com.bitcamp.gachi.admin.AllVO"> 
+		update member set nickname =#{nickname}, tel=#{tel} where userid = #{userid}
+	</update>
+	<delete id="creatorMemberDelete">
+		delete from member where userid =#{userid}
+	</delete>
 </mapper>
