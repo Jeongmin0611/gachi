@@ -5,14 +5,14 @@
 
 <mapper namespace="com.bitcamp.gachi.register.RegisterDaoImp">
 	<insert id="registerInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
-		insert into member(userid,userpwd,grade,username,nickname,birthdate,tel,gender,addr,detailaddr)
-	                values(#{userid},#{userpwd},1,#{username},#{nickname},#{birthdate},#{tel},#{gender},#{addr},#{detailaddr})
+		insert into member(userid,userpwd,grade,username,nickname,to_char('birthdate','yyyy-mm-dd') birthdate,tel,gender,addr,detailaddr,interest)
+	                values('${userid}','${userpwd}',"회원",'${username}','${nickname}','${birthdate}','${tel}','${gender}','${addr}','${detailaddr}','${interest}')
 	               
 	</insert>
-	<select id="selectList" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="string">
-		select grade from member where userid=#{userid}
-	</select>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
-		select userid,nickname,grade from member where userid=#{userid} and userpwd=#{userpwd}
+		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'
+	</select>
+	<select id="selectList" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="string">
+		select grade from member where userid='${userid}'
 	</select>
 </mapper>
