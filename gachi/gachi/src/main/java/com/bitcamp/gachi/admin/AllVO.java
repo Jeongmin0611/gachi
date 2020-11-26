@@ -36,6 +36,10 @@ public class AllVO {
 	private String picture;//크리에이터 사진
 	
 	//클래스
+	private String class_name; /* 클래스명 */
+	private int real_price; /* 판매가 */
+	private String class_img1; /* 클래스사진1 */
+	
 	public int getRownum() {
 		return rownum;
 	}
@@ -196,6 +200,28 @@ public class AllVO {
 		return picture;
 	}
 	public void setPicutre(String picture) {
+		this.picture = picture;
+	}
+	//클래스
+	public String getClass_name() {
+		return class_name;
+	}
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+	public int getReal_price() {
+		return real_price;
+	}
+	public void setReal_price(int real_price) {
+		this.real_price = real_price;
+	}
+	public String getClass_img1() {
+		return class_img1;
+	}
+	public void setClass_img1(String class_img1) {
+		this.class_img1 = class_img1;
+	}
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}	
 }
