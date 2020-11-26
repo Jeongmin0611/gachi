@@ -152,15 +152,28 @@ public class AdminController {
 
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);	
 		int result = dao.MemberUpdate(vo);	
-		int cnt = dao.leaveMemberUpdate(vo);
 		
 		ModelAndView mav = new ModelAndView();			
-		if(result>0 || cnt>0) {
+		if(result>0) {
 			mav.setViewName("redirect:adminMember");	
 		}else {
 			mav.setViewName("admin/adminResult");	
 		}		
-		System.out.println(vo.getUserid());
+		return mav;
+	}
+	
+	@RequestMapping("/adminMemberLeaveEditOk")
+	public ModelAndView adminMemberLeaveEditOk(String userid) {
+
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);	
+		int result = dao.leaveMemberUpdate(userid);
+		
+		ModelAndView mav = new ModelAndView();			
+		if(result>0) {
+			mav.setViewName("redirect:adminMember");	
+		}else {
+			mav.setViewName("admin/adminResult");	
+		}		
 		return mav;
 	}
 

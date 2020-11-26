@@ -29,11 +29,10 @@
 		addr =#{addr},detailaddr =#{detailaddr}
 		where userid = #{userid}
 	</update>
-	<update id="leaveMemberUpdate" parameterType="com.bitcamp.gachi.admin.MemberVO">
+	<update id="leaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
 	</update>
 
-	
 	<delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
 	</delete>
