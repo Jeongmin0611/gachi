@@ -33,12 +33,12 @@ public class MypageController {
 		ses.setAttribute("logStatus", "Y");
 		///////////////////////////////////////
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		List<ClassVO> cList = dao.classOrderList();
-		List<GoodsVO> gList = dao.goodsOrderList();
+		//List<ClassVO> cList = dao.classOrderList();
+		//List<GoodsVO> gList = dao.goodsOrderList();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("cList", cList);
-		mav.addObject("gList", gList);
+		//mav.addObject("cList", cList);
+		//mav.addObject("gList", gList);
 		mav.setViewName("mypage/mypageMain");
 		return mav;
 	}
