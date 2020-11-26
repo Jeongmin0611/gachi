@@ -14,9 +14,6 @@
 			if($('#searchWord').val()==null||$('#searchWord').val()==""){
 					alert("검색어를 입력해주세요.");
 					return false;
-			}else if($('#option option:selected').val()=='전체'){
-					alert("검색옵션을 선택해주세요.");
-					return false;
 			}
 			return true;
 		});
@@ -24,8 +21,11 @@
 </script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
+	<div>
+		총 레코드 수: ${pvo.totalRecord}
+	</div>
 <div id="search_area">
-	<form method="post" id="ad_class_search" action="/gachi/adminClass">
+	<form method="get" id="ad_class_search" action="/gachi/adminClass">
 		<select name="category">	
 			<option value="전체">전체</option>
 			<option value="공예/창작">공예/창작</option>

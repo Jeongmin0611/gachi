@@ -9,8 +9,6 @@ public class PagingVO {
    private int onePageNumCount=10; //한 번에 표시할 페이지 번호 숫자
    private int startPageNum=1;	// 페이지 번호의 시작 페이지
    private int lastPageRecordCount=10;	//마지막 페이지의 선택 레코드 수 onePageRecord 수
-   private String searchKey;
-   private String searchWord;
    
    public int getNowPage() {
       return nowPage;
@@ -63,18 +61,5 @@ public class PagingVO {
    }
    public void setLastPageRecordCount(int lastPageRecordCount) {
       this.lastPageRecordCount = lastPageRecordCount;
-   }
-   
-   public String getSearchKey() {
-      return searchKey;
-   }
-   public void setSearchKey(String searchKey) {
-      this.searchKey = searchKey;
-   }
-   public String getSearchWord() {
-      return searchWord;
-   }
-   public void setSearchWord(String searchWord) {
-      this.searchWord = searchWord;
    }
 }

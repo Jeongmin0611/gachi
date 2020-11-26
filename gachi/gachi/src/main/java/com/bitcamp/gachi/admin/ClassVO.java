@@ -11,7 +11,7 @@ public class ClassVO {
 	private int full_price;
 	private int real_price;
 	private String stage;
-	private Number class_term;
+	private int class_term;
 	private String class_info;
 	private int total_student;
 	private int good;
@@ -22,6 +22,8 @@ public class ClassVO {
 	private String class_img1;
 	private String class_img2;
 	private String class_img3;
+	private String nickname;
+	
 	public String getClass_code() {
 		return class_code;
 	}
@@ -67,7 +69,7 @@ public class ClassVO {
 	public Number getClass_term() {
 		return class_term;
 	}
-	public void setClass_term(Number class_term) {
+	public void setClass_term(int class_term) {
 		this.class_term = class_term;
 	}
 	public String getClass_info() {
@@ -129,6 +131,12 @@ public class ClassVO {
 	}
 	public void setClass_img3(String class_img3) {
 		this.class_img3 = class_img3;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	
