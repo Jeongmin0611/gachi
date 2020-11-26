@@ -5,7 +5,9 @@
 		text-align:right;
 		margin-top:20px;
 		margin-bottom:10px;
-		height:50px;
+	}
+	#search_area div{
+		margin-top:5px; 
 	}
 </style>
 <script>
@@ -21,11 +23,19 @@
 </script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
-	<div>
+	<div style="overflow:auto">
 		총 레코드 수: ${pvo.totalRecord}
 	</div>
 <div id="search_area">
-	<form method="get" id="ad_class_search" action="/gachi/adminClass">
+<form method="get" id="ad_class_search" action="/gachi/adminClass">
+		<div>
+			<select name="dateOption">
+				<option value="allrow">등록일</option>
+				<option value="signup">등록신청일</option>
+			</select>
+			<input type="date" name="date1">&nbsp;~<input type="date" name="date2">
+		</div>
+		<div>
 		<select name="category">	
 			<option value="전체">전체</option>
 			<option value="공예/창작">공예/창작</option>
@@ -44,12 +54,14 @@
 		</select>
 		<select id="option" name="option">
 			<option value="전체">전체</option>
-			<option value="class_code">클래스코드</option>
+			<option value="code">클래스코드</option>
+			<option value="category">카테고리</option>
 			<option value="class_name">클래스명</option>
 			<option value="nickname">크리에이터닉네임</option>
 		</select>
 		<input type="text" id="searchWord" name="searchWord"/>
 		<input type="submit" class="btn" value="검색"/>
+		</div>
 	</form>
 </div>
 	<ul id="ad_class_lst">
@@ -64,9 +76,9 @@
 		
 		
 		<c:forEach var="vo" items="${list}">
-		<li>${vo.class_code }</li>
+		<li>${vo.code }</li>
 		<li>${vo.category }</li>
-		<li><a href="/gachi/adminClassView?class_code=${vo.class_code}">${vo.class_name}</a></li>
+		<li><a href="/gachi/adminClassView?class_code=${vo.code}">${vo.class_name}</a></li>
 		<li>${vo.nickname }</li>
 		<li>${vo.total_student }</li>
 		<li>${vo.signup }</li>
