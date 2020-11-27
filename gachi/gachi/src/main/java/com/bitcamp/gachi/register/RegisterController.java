@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 		
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("result",result);
-			mav.setViewName("redirect:home");
+			mav.setViewName("redirect:/");
 			return mav;
 	}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
