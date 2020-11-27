@@ -9,8 +9,10 @@ public class TestVO {
 	private int nowPage=1;
 	private int lastPageRecordCount=10;
 	
+	
 	private String category;
 	private String option;
+	private String dateOption;
 	private String date1;
 	private String date2;
 	private String searchWord;
@@ -108,6 +110,12 @@ public class TestVO {
 	}
 	public void setOnePageNumCount(int onePageNumCount) {
 		this.onePageNumCount = onePageNumCount;
+	}
+	public String getDateOption() {
+		return dateOption;
+	}
+	public void setDateOption(String dateOption) {
+		this.dateOption = dateOption;
 	}
 	
 	

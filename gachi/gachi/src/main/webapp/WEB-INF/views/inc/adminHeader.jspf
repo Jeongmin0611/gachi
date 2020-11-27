@@ -60,11 +60,14 @@
 	line-height: 50px;
 	text-align: center;
 }
+.submenu{
+	padding-left:10px;
+}
 
 .submenu li {
 	line-height: 50px;
 	background-color: #437299;
-	margin-left: 25px;
+	margin-left:10px;
 }
 
 #headerDiv, #adminMenu {
@@ -81,11 +84,13 @@
 	height: auto;
 	float: left
 }
+#adminMenu{
+	padding-left:20px;
+}
 
 #adminMenu>li {
 	line-height: 50px;
 	color: white;
-	margin-left: 15px;
 }
 
 @font-face {
@@ -115,6 +120,34 @@ a, h1, li {
         opacity:1;
     }
 }
+@media all and (min-width:320px) and (max-width:600px){
+		#headerDiv{
+			width:20%;
+		}
+		#adminMenu>li{
+			font-size:0.5em;
+			margin-left:0px;
+		}
+		.container{
+			max-width:80%;
+		}
+	}	
+@media all and (min-width:601px) and (max-width:800px){
+		#headerDiv{
+			width:15%;
+		}
+		#adminMenu{
+			padding:0px;
+		}
+		#adminMenu>li{
+			font-size:0.5em;
+			margin-left:0px;
+		}
+		.container{
+			max-width:70%;
+		}
+	}
+
 </style>
 
 <title>관리자페이지</title>
