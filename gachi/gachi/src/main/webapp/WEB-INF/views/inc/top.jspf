@@ -134,7 +134,7 @@ a {
 }
 /* 로그인폼*/
 	#loginBtn{
-		width: 240px;
+		width: 65%;
 		height: 50px;
 		border: none;
 		background: linear-gradient(to right, rgb(171, 206, 227), rgb(244, 191, 169));
@@ -146,44 +146,44 @@ a {
 		margin-bottom:10px;
 	}
 	#md{
-		width:350px;
-		height:640px;
+		width:35%;
+		height:700px;
 		border-radius:10px;
 	}
 	
 	
 	#mdJ{
-		width:350px;
-		height:910px;
+		width:35%;
+		height:1000px;
 		border-radius:10px;
 	}
 	#mdJ2{
-		width:350px;
-		height:900px;
+		width:35%;
+		height:1200px;
 		border-radius:10px;
 	}
 	#idF1{
-		width:350px;
-		height:640px;
+		width:35%;
+		height:680px;
 		border-radius:10px;
 	}
 	#idF2{
-		width:350px;
-		height:640px;
+		width:35%;
+		height:680px;
 		border-radius:10px;
 	}
 	#pwdF1,#pwdF1C{
-		width:350px;
-		height:640px;
+		width:35%;
+		height:730px;
 		border-radius:10px;
 	}
 	#pwdF2,#pwdF2C{
-		width:350px;
-		height:640px;
+		width:35%;
+		height:730;
 		border-radius:10px;
 	}
 	#kokoBtn{
-		width: 240px;
+		width: 65%;
 		height: 50px;
 		border: none;
 		background-color:yellow;
@@ -242,7 +242,7 @@ a {
 		border-radius: 50px;
 	}
 	#signupBtn,#mdJ2signupBtn {
-		width: 240px;
+		width: 65%;
 		height: 50px;
 		border: none;
 		background: linear-gradient(to right, rgb(171, 206, 227), rgb(244, 191, 169));
@@ -853,8 +853,8 @@ Gitple('onClose', function () {
              <input type="password" placeholder="비밀번호 확인" name="userpwdChk" id="userpwdChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="username" id="username" /><span id="nameMessage" class="message"></span>
              <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
-             <input type="text" placeholder="년도" name="birthdate1" id="birthdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
-				<select name="birthdate2" id="birthdate2" class="birthdata" style="width: 90px;height:40px;">
+             <input type="text" placeholder="년도" name="birthdate1" id="birthdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 31%;"/>
+				<select name="birthdate2" id="birthdate2" class="birthdata" style="width: 31%;height:40px;">
 					<option value="01">01월</option>
 					<option value="02">02월</option>
 					<option value="03">03월</option>
@@ -868,7 +868,7 @@ Gitple('onClose', function () {
 					<option value="11">11월</option>
 					<option value="12">12월</option>
 				</select>
-				<select name="birthdate3" id="birthdate3" class="birthdata" style="width: 90px;height:40px;">
+				<select name="birthdate3" id="birthdate3" class="birthdata" style="width: 32%;height:40px;">
 					<option value="01">01일</option>
 					<option value="02">02일</option>
 					<option value="03">03일</option>
@@ -901,10 +901,10 @@ Gitple('onClose', function () {
 					<option value="30">30일</option>
 					<option value="31">31일</option>
 				</select><br/>
-             <input type="radio" value="M" style="width:15px;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
-             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 90px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+             <input type="radio" value="M" style="width:15%;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15%;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
+             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
              <span id="telMessage" class="message"></span>
              <!-- <input type="text" name="zipcode" id="zipcode" size="10" style="width:52%"><input type="button"value="우편번호검색"style="width:45%" id="zipcodeSearch">  -->
              <input type="text" id="addr" name="addr" placeholder="주소" size="70"/>
@@ -912,10 +912,10 @@ Gitple('onClose', function () {
              <input type="checkbox"id="lnterestArt" name="interest"style="width:15px;height:15px;" value="그림"><span>그림</span>
              <input type="checkbox"id="lnterestCooking" name="interest" style="width:15px;height:15px;" value="요리"><span>요리</span>
              <input type="checkbox"id="lnterestCrafts" name="interest" style="width:15px;height:15px;" value="공예/창작"><span>공예/창작</span>
-             <input type="checkbox"id="lnterestExercise" name="interest" style="width:15px;height:15px;" value="운동"><span>운동</span><br/>
+             <input type="checkbox"id="lnterestExercise" name="interest" style="width:15px;height:15px;" value="운동"><span>운동</span>
              <input type="checkbox"id="lnterestMusic" name="interest" style="width:15px;height:15px;" value="음악"><span>음악</span>
              <input type="checkbox"id="lnterestPicture" name="interest" style="width:15px;height:15px;" value="사진/영상"><span>사진/영상</span>
-             <input type="checkbox"id="lnterestLiseStyle" name="interest" style="width:15px;height:15px;" value="라이프스타일"><span>라이프스타일</span>
+             <input type="checkbox"id="lnterestLiseStyle" name="interest" style="width:15px;height:15px;" value="라이프스타일"><span>라이프스타일</span><br/>
             <button type="submit" class="btn btn-default signupBtn" id="signupBtn">회원가입</button>
       </form>
    </div>
@@ -936,8 +936,8 @@ Gitple('onClose', function () {
                 <input type="password" placeholder="비밀번호 확인" name="passwordChk2" id="passwordChk2" /><span id="passwordChkMessage" class="message"></span>
                 <input type="text" placeholder="이름" name="name2" id="name2" /><span id="name2Message" class="message"></span>
                 <input type="text" placeholder="닉네임" name="nickname2" id="nickname2" /><span id="nickname2Message" class="message"></span>
-                <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 90px;"/>
-				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 90px;height:40px;">
+                <input type="text" placeholder="년도" name="birtdate1" id="birtdate1"maxlength="4" class="birthdata" onkeypress="onlyNumber();" style="width: 31%;"/>
+				<select name="birtdate2" id="birtdate2" class="birthdata" style="width: 31%;height:40px;">
 					<option value="01">01월</option>
 					<option value="02">02월</option>
 					<option value="03">03월</option>
@@ -951,7 +951,7 @@ Gitple('onClose', function () {
 					<option value="11">11월</option>
 					<option value="12">12월</option>
 				</select>
-				<select name="birtdate3" id="birtdate3" class="birthdata" style="width: 90px;height:40px;">
+				<select name="birtdate3" id="birtdate3" class="birthdata" style="width: 32%;height:40px;">
 					<option value="01">01일</option>
 					<option value="02">02일</option>
 					<option value="03">03일</option>
@@ -985,9 +985,9 @@ Gitple('onClose', function () {
 					<option value="31">31일</option>
 				</select><br/>
              <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
-                <input type="text" placeholder="010" name="mdJ2tel1" id="mdJ2tel1" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-                <input type="text" placeholder="1234"name="mdJ2tel2" id="mdJ2tel2" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-                <input type="text" placeholder="5678"name="mdJ2tel3" id="mdJ2tel3" class="tel" style="width: 96px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+                <input type="text" placeholder="010" name="mdJ2tel1" id="mdJ2tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+                <input type="text" placeholder="1234"name="mdJ2tel2" id="mdJ2tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+                <input type="text" placeholder="5678"name="mdJ2tel3" id="mdJ2tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
                 <span id="telMessage" class="message"></span>
                <input type="text" placeholder="사업자번호" name="Business Number" id="Business Number"/>
                <input type="text" placeholder="계좌" name="account" id="account"/>
@@ -1017,10 +1017,9 @@ Gitple('onClose', function () {
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFindChange()"/>크리에이터<br/>
-						<span id="idFF">회원정보에등록된 전화번호을 통해 아이디를 찾을 수 있습니다</span>
-						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 						<button class="autBtn">인증</button><br/>
 						<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
 						<button class="idFNoBtn">확인</button>
@@ -1038,10 +1037,9 @@ Gitple('onClose', function () {
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFind2Change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
-						<span id="idFF">회원정보에등록된 전화번호을 통해 아이디를 찾을 수 있습니다</span>
-						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 						<button class="autBtn">인증</button><br/>
 						<input type="text" placeholder="인증번호" id="idF2No" name="idF2No"/>
 						<button class="idFNoBtn">확인</button>
@@ -1063,9 +1061,9 @@ Gitple('onClose', function () {
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1Change()"/>크리에이터<br/>
 					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
 					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
-					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 31%" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 					<button class="autBtn">인증</button><br/>
 					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
 					<button class="pwdFNoBtn">확인</button>
@@ -1085,9 +1083,9 @@ Gitple('onClose', function () {
 					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
 					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
 					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
-					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 95px;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
+					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 31%" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
+			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 					<button class="autBtn">인증</button><br/>
 					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
 					<button class="pwdFNoBtn">확인</button>
