@@ -33,9 +33,9 @@
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
 	</update>
 
-	<delete id="adminMemberDelete">
+	<!--   <delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
-	</delete>
+	</delete> -->
 	
 </mapper>
 
