@@ -33,7 +33,6 @@ input{text-align:center;}
 
 /*관리자 클래스관리 start*/
 #ad_class_lst{
-	overflow: auto;
 	margin-bottom:20px;
 }
 #ad_class_lst li{
