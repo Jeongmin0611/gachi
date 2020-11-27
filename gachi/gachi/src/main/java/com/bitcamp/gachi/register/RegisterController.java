@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 			int result=dao.registerInsert(vo);
 		
 			ModelAndView mav=new ModelAndView();
+			mav.addObject("result",result);
 			mav.setViewName("redirect:home");
 			return mav;
 	}
