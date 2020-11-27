@@ -111,10 +111,11 @@ public class AdminController {
 		if(nowPageRequest!=null) {
 			vo.setNowPage(Integer.parseInt(nowPageRequest));
 		}
-		
-		
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
+		
+		
+		
 		
 		List<ClassVO> list=dao.getClassList(vo);
 		

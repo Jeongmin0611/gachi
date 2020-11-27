@@ -14,7 +14,11 @@
 		
 	}
 	#search_area h3{
+		margin-top:50px;
 		text-align:center;
+	}
+	#search_area li{
+		margin:5px 0px;
 	}
 	#search_area ul>li{
 		width:50%;
@@ -26,7 +30,7 @@
 	}
 	#search_area ul>li li:nth-child(2n){
 		width:80%;
-		
+		text-align:left;
 	}
 </style>
 <script>
@@ -43,9 +47,9 @@
 <div class="container ad_font">
 	<h1>클래스관리</h1>
 <div id="search_area">
-<form method="get" id="ad_class_search" action="/gachi/adminClass">
 	<ul>
 		<li>
+			<form method="get" action="/gachi/adminClass">
 			<h3>조회옵션</h3>
 			<ul>
 				<li>날짜옵션</li>
@@ -54,12 +58,12 @@
 						<option value="allow">등록일</option>
 						<option value="signup">등록신청일</option>
 					</select>	
-					<input type="date" name="date1">&nbsp;~<input type="date" name="date2">
+					<input type="date" name="date1">&nbsp;~&nbsp;<input type="date" name="date2">
 				</li>
 				<li>카테고리</li>
 				<li>
 					<select name="category">	
-						<option value="전체">전체</option>
+						<option>전체</option>
 						<option value="공예/창작">공예/창작</option>
 						<option value="요리">요리</option>
 						<option value="미술">미술</option>
@@ -72,17 +76,22 @@
 				<li>클래스상태</li>
 				<li>
 					<select name="class_state">
-						<option value="전체">전체</option>
+						<option>전체</option>
 						<option value="등록대기">등록대기</option>
 						<option value="개설">개설</option>
 						<option value="종료">종료</option>
 					</select>
 				</li>
+				<li style="width:100%;text-align:center">
+					<input type="submit" class="btn" value="조회"/>
+				</li>	
 			</ul>
+			</form>
 	</li>
 		<li>
+		<form method="get" id="ad_class_search" action="/gachi/adminClass">
 			<h3>검색옵션</h3>
-			<ul>
+			<ul style="margin-top:10px;height:200px;">
 				<li>검색옵션</li>
 				<li>
 					<select id="option" name="option">
@@ -99,9 +108,9 @@
 					<input type="submit" class="btn" value="검색"/>
 				</li>
 			</ul>
-		</li>		
-	</ul>	
 		</form>
+		</li>	
+	</ul>	
 </div>
 
 	<ul id="ad_class_lst">
