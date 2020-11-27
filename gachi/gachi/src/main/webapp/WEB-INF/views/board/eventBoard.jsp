@@ -137,6 +137,5 @@ button:focus, button:active{
 	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
-			${pageCode }
 		</ul>
 </div>

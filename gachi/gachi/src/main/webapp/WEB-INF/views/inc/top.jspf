@@ -696,13 +696,13 @@ Gitple('onClose', function () {
              카테고리
            </a>
            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/gachi/oneClassPage">공예/창작</a> 
-            <a class="dropdown-item" href="/gachi/oneClassPage">미술</a> 
-            <a class="dropdown-item" href="/gachi/oneClassPage">사진/영상</a>
-            <a class="dropdown-item" href="/gachi/oneClassPage">요리</a> 
-            <a class="dropdown-item" href="/gachi/oneClassPage">운동</a> 
-            <a class="dropdown-item" href="/gachi/oneClassPage">음악</a> 
-            <a class="dropdown-item" href="/gachi/oneClassPage">라이프스타일</a>
+              <a class="dropdown-item" href="/gachi/classList?category=공예/창작">공예/창작</a> 
+            <a class="dropdown-item" href="/gachi/classList?category=미술">미술</a> 
+            <a class="dropdown-item" href="/gachi/classList?category=사진/영상">사진/영상</a>
+            <a class="dropdown-item" href="/gachi/classList?category=요리">요리</a> 
+            <a class="dropdown-item" href="/gachi/classList?category=운동">운동</a> 
+            <a class="dropdown-item" href="/gachi/classList?category=음악">음악</a> 
+            <a class="dropdown-item" href="/gachi/classList?category=라이프스타일">라이프스타일</a>
            </div>
          </li>
          <li class="nav-item ">

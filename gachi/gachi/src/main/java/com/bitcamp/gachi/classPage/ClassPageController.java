@@ -1,10 +1,27 @@
 package com.bitcamp.gachi.classPage;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.bitcamp.gachi.admin.AllVO;
 
 @Controller
 public class ClassPageController {
+	SqlSession sqlSession;	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	
 	@RequestMapping("/classPage")
 	public String class1go() {
@@ -22,9 +39,16 @@ public class ClassPageController {
 	public String classMain() {
 		return "classPage/classView";
 	}
-	@RequestMapping("/oneClassPage")
-	public String oneclasspage() {
-		return "classPage/oneClassPage";
+	@RequestMapping("/classList")
+	public ModelAndView classList(HttpServletRequest req) {
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		String category = req.getParameter("category");
+		List<AllVO> list = dao.classPageAllRecord(category);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("classPage/classList");
+		return mav;
 	}
 
 }
