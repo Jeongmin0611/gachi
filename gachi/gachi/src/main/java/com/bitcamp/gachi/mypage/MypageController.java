@@ -27,9 +27,8 @@ public class MypageController {
 	//******마이페이지 메인-결제/주문내역확인*******
 	@RequestMapping("/mypage")
 	public ModelAndView Mypage(HttpSession ses) {
-		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//List<ClassVO> cList = dao.classOrderList();
-		//List<GoodsVO> gList = dao.goodsOrderList();
+	//	UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		//List<OrderVO> list = dao.orderAllRecord((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		//mav.addObject("cList", cList);

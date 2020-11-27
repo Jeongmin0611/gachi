@@ -93,7 +93,7 @@
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>좋아요 <a href="/gachi/userWishList">4</a></div>
+			<div>좋아요<a href="/gachi/userWishList">4</a></div>
 		</div>
 	</div>
 	<hr/>
