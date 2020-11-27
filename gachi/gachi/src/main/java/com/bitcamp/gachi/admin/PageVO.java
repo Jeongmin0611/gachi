@@ -2,10 +2,9 @@ package com.bitcamp.gachi.admin;
 
 public class PageVO {
 	private int totalRecord;
-	private int onePageRecord=10;
-	private int nowPage=1;
-	
-	
+	private int onePageRecord = 10;
+	private int nowPage = 1;
+
 	public int getTotalRecord() {
 		return totalRecord;
 	}
@@ -29,6 +28,5 @@ public class PageVO {
 	public void setOnePageRecord(int onePageRecord) {
 		this.onePageRecord = onePageRecord;
 	}
-	
-	
+
 }

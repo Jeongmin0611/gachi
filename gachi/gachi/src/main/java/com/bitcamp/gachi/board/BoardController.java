@@ -1,18 +1,26 @@
 package com.bitcamp.gachi.board;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
+import com.bitcamp.gachi.admin.PagingVO;
 
 @Controller
 public class BoardController {
@@ -28,12 +36,24 @@ public class BoardController {
 	}
 
 	@RequestMapping("/noticeBoard")
-	public ModelAndView noticeBoard() {
+	public ModelAndView noticeBoard(PagingVO vo, HttpServletRequest req) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
-		List<NoticeBoardVO> list = dao.noticeBoardAllRecord();
-
+		List<NoticeBoardVO> list = dao.noticeBoardAllRecord(vo);
+		
+		String nowPage = req.getParameter("nowPage");
+		if(nowPage!=null) {
+			vo.setNowPage(Integer.parseInt(nowPage));
+		}
+		
+		int totalRecord=dao.noticeBoardAllRecordCount(vo);
+		vo.setTotalRecord(totalRecord);
+		vo.setOnePageRecord(10);
+		vo.setOnePageNumCount(5);
+		vo.setLastPageRecordCount(10);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("pvo",vo);
 		mav.setViewName("board/noticeBoard");
 		return mav;
 	}
@@ -54,6 +74,8 @@ public class BoardController {
 	public ModelAndView eventBoard() {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		List<EventBoardVO> list = dao.eventBoardAllRecord();
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -125,7 +147,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/introCreator")
-	public ModelAndView introCreate() {
+	public ModelAndView introCreate(){
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
 		List<AllVO> list = dao.creatorBoardSelectAll();
 		
@@ -147,5 +169,7 @@ public class BoardController {
 		mav.setViewName("board/introCreatorView");
 		return mav;
 	}
+	
+	
 
 }
