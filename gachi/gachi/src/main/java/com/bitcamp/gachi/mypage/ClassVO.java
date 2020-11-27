@@ -1,12 +1,13 @@
 package com.bitcamp.gachi.mypage;
 
 public class ClassVO {
-	private String class_code; /* 클래스코드 */
+	private String code; /* 코드 */
 	private String userid; /* 아이디(이메일) */
 	private String category; /* 카테고리명 */
 	private String class_name; /* 클래스명 */
-	private int full_price; /* 원가 */
+	private int primecost; /* 원가 */
 	private int real_price; /* 판매가 */
+	private int stack; /* 적립마일리지 */
 	private String stage; /* 난이도 */
 	private int class_term; /* 수강기간 */
 	private String class_info; /* 클래스소개 */
@@ -20,11 +21,11 @@ public class ClassVO {
 	private String class_img2; /* 클래스사진2 */
 	private String class_img3; /* 클래스사진3 */
 	
-	public String getClass_code() {
-		return class_code;
+	public String getCode() {
+		return code;
 	}
-	public void setClass_code(String class_code) {
-		this.class_code = class_code;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getUserid() {
 		return userid;
@@ -44,17 +45,23 @@ public class ClassVO {
 	public void setClass_name(String class_name) {
 		this.class_name = class_name;
 	}
-	public int getFull_price() {
-		return full_price;
+	public int getPrimecost() {
+		return primecost;
 	}
-	public void setFull_price(int full_price) {
-		this.full_price = full_price;
+	public void setPrimecost(int primecost) {
+		this.primecost = primecost;
 	}
 	public int getReal_price() {
 		return real_price;
 	}
 	public void setReal_price(int real_price) {
 		this.real_price = real_price;
+	}
+	public int getStack() {
+		return stack;
+	}
+	public void setStack(int stack) {
+		this.stack = stack;
 	}
 	public String getStage() {
 		return stage;

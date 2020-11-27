@@ -80,7 +80,7 @@
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
 			<div>마일리지</div>
-			<div><a href="/gachi/userMileage">1,000p</a></div>
+			<div><a href="/gachi/userMileage">${mileage }p</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
