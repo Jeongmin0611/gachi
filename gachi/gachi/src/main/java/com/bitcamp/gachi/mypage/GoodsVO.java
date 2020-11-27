@@ -1,7 +1,7 @@
 package com.bitcamp.gachi.mypage;
 
 public class GoodsVO {
-	private int goods_code; /* 상품코드 */
+	private int code; /* 코드 */
 	private String category; /* 카테고리 */
 	private String goods_name; /* 상품명 */
 	private int prime_cost; /* 원가 */
@@ -16,17 +16,16 @@ public class GoodsVO {
 	private String goods_info; /* 상품상세정보 */
 	private int good; /* 좋아요 */
 	private int grade; /* 평점 */
-	private int shipping_fee; /* 배송비 */
 	private String goods_img1; /* 상품이미지1 */
 	private String goods_img2; /* 상품이미지2 */
 	private String goods_img3; /* 상품이미지3 */
 	private String goods_img4; /* 상품이미지4 */
 	
-	public int getGoods_code() {
-		return goods_code;
+	public int getCode() {
+		return code;
 	}
-	public void setGoods_code(int goods_code) {
-		this.goods_code = goods_code;
+	public void setCode(int code) {
+		this.code = code;
 	}
 	public String getCategory() {
 		return category;
@@ -111,12 +110,6 @@ public class GoodsVO {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
-	}
-	public int getShipping_fee() {
-		return shipping_fee;
-	}
-	public void setShipping_fee(int shipping_fee) {
-		this.shipping_fee = shipping_fee;
 	}
 	public String getGoods_img1() {
 		return goods_img1;

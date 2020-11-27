@@ -143,11 +143,9 @@
 				<input type="radio" name="option"/><label>상품</label>
 				<input type="radio" name="option"/><label>클래스</label>
 						
-				<!-- <button type="button" class="btn btn-outline-light btn-sm" id="mypagePrev">◀</button><!-- 이전달 -->
 				<input type="date" id="mypageMainDate1"/>
 				-
 				<input type="date" id="mypageMainDate2"/>
-				<!--  <button type="button" class="btn btn-outline-light btn-sm" id="mypageNext">▶</button><!-- 다음달 -->
 			
 				<button type="button" class="btn btn-outline-light btn-sm">조회</button>
 			</div>
@@ -159,11 +157,9 @@
 					<input type="radio" name="option"/><label>클래스</label>
 				</div>
 				<div>	
-					<!-- <button type="button" class="btn btn-outline-light btn-sm" id="mypagePrev">◀</button><!-- 이전달 -->
 					<input type="date" id="mypageMainDate1"/>
 					-
 					<input type="date" id="mypageMainDate2"/>
-					<!--  <button type="button" class="btn btn-outline-light btn-sm" id="mypageNext">▶</button><!-- 다음달 -->
 				
 				<button type="button" class="btn btn-outline-light btn-block">조회</button>
 				</div>
