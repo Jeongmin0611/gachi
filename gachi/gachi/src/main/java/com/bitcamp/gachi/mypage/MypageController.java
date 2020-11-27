@@ -166,6 +166,7 @@ public class MypageController {
 		int mileagePosiSum = dao.mileagePosiSum(userid);
 		int mileageNegaSum = dao.mileageNegaSum(userid);
 		
+		ses.setAttribute("mileage", mileageAllSum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
 		mav.addObject("mileageAllSum", mileageAllSum);

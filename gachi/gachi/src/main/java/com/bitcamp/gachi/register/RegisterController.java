@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.gachi.mypage.MileageDaoImp;
+
 
 	@Controller
 	public class RegisterController {
@@ -36,6 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			MileageDaoImp mDao=sqlSession.getMapper(MileageDaoImp.class);
 			RegisterVO resultVO=dao.memberLogin(vo);
 			String voGrade=dao.selectList(vo);
 			ModelAndView mav=new ModelAndView();
@@ -46,6 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
 						ses.setAttribute("userid", resultVO.getUserid());
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
+						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
 						mav.setViewName("redirect:/");
