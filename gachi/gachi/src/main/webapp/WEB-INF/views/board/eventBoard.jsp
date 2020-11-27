@@ -128,7 +128,8 @@ button:focus, button:active{
 		<div class="col-sm-4">
 			<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 중 이벤트" id="eventThumbnail">${vo.event_img}</a><br/>
 			<div class="homeClassListTxt">
-				<p><span class="badge " id="eventNew">new</span>&nbsp; <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
+				<!-- <span class="badge " id="eventNew">new</span>&nbsp; -->
+				<p> <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
 				<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 중 이벤트">${vo.subject }</a>
 			</div>				
 		</div>
@@ -136,12 +137,6 @@ button:focus, button:active{
 	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			${pageCode }
 		</ul>
 </div>

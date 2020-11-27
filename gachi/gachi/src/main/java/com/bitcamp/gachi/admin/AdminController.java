@@ -107,9 +107,6 @@ public class AdminController {
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
 		
-		
-		
-		
 		List<ClassVO> list=dao.getClassList(vo);
 		
 		ModelAndView mav =new ModelAndView();
