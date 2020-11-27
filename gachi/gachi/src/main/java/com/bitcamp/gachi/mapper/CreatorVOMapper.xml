@@ -5,9 +5,13 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
 	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-		select rownum,a.userid userid ,nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd')
+<!-- 		select rownum,a.userid ,nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd')
 	  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
-	  	 from member a join creator c on a.userid = c.userid where grade = '크리에이터'
+	  	 from member a join creator c on a.userid = c.userid where grade = '크리에이터' -->
+	  
+	  	 select m.userid, rownum, m.userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
+		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted ,creator_state
+		 from member m full outer join creator c on m.userid = c.userid where grade = '크리에이터'
 	</select>
 		<select id="countAllCreator" resultType="_int">
 		select count(*) from creator
@@ -30,14 +34,18 @@
 
 	
 	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-		select  u.userid, grade ,username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
+		select u.userid, grade , username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
 	  	 birthdate, gender, zipcode, addr, detailaddr, to_char(signupdate, 'yyyy-mm-dd') signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
 	  	 deleted from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
 	</select>
 	<update id="creatorMemberUpdate" parameterType="com.bitcamp.gachi.admin.AllVO"> 
-		update member set nickname =#{nickname}, tel=#{tel} where userid = #{userid}
+		update member set nickname =#{nickname}, username=#{username}, tel=#{tel} ,gender=#{gender},  zipcode=#{zipcode},
+		addr =#{addr},detailaddr =#{detailaddr} where userid = #{userid}
 	</update>
-	<delete id="adminMemberDelete">
+	<update id="creatorleaveMemberUpdate" parameterType="String">
+		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
+	</update>
+<!-- 	<delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
-	</delete>
+	</delete> -->
 </mapper>

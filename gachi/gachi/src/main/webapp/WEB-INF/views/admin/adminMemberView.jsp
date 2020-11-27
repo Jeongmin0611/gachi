@@ -7,15 +7,20 @@
 </style>
 <script>
 	$(function(){
-		$("#ad_delBtn").click(function(){
+/* 		$("#ad_delBtn").click(function(){
 			if(confirm("회원의 정보를 삭제하시겠습니까?")){
 				location.href="/gachi/adminMemberDelete?userid=${vo.userid}";
+			}else {
+				return false;
 			}
-		});
-		$("#ad_leaveBtn").click(function(){
+		}); */
+ 		$("#ad_leaveBtn").click(function(){
 			if(confirm("회원의 상태를 수정 하시겠습니까?")){
 				$("#deleted").val('탈퇴');
-		});
+				location.href='/gachi/adminMemberLeaveEditOk?userid=${vo.userid}'";
+			}else{
+				return false;
+		}); 
 	});
 </script>
 
@@ -41,9 +46,9 @@
 		
 		<button class="btn" onclick="history.back()">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
-		<input type="button" id="ad_leaveBtn" class="btn" value="회원탈퇴" onclick="location.href='/gachi/adminMemberLeaveEditOk?userid=${vo.userid}'"/>
-		<input type="button" id="ad_delBtn" class="btn" value="회원정보삭제"onclick="location.href='/gachi/adminMemberDelete?userid=${vo.userid}'"/>
-	</form>	
+		<button type="button" id="ad_leaveBtn" class="btn" >회원탈퇴</button>
+<%-- 		<input type="button" id="ad_delBtn" class="btn" value="회원정보삭제"onclick="location.href='/gachi/adminMemberDelete?userid=${vo.userid}'"/>
+ --%>	</form>	
 	<h3>시청 중인 클래스</h3>
 	<div class="ad_member_Box">
 	</div>

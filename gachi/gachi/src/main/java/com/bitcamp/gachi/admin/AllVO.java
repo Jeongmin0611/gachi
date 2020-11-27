@@ -21,7 +21,7 @@ public class AllVO {
 	private String signupdate; // 가입일
 	private String interest; // 관심사
 	private String deleted; // 회원 상태 (회원, 탈퇴)
-	private Date withdrawdate; // 탈퇴일 (null인 경우 탈퇴 X)
+	private String withdrawdate; // 탈퇴일 (null인 경우 탈퇴 X)
 	
 	//크리에이터
 	private String category; // 카테고리
@@ -141,10 +141,10 @@ public class AllVO {
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-	public Date getWithdrawdate() {
+	public String getWithdrawdate() {
 		return withdrawdate;
 	}
-	public void setWithdrawdate(Date withdrawdate) {
+	public void setWithdrawdate(String withdrawdate) {
 		this.withdrawdate = withdrawdate;
 	}
 	public String getCategory() {

@@ -10,21 +10,18 @@
 </style>
 <script>
 	$(function(){
-		$("#cr_delBtn").click(function(){
-			if(confirm("회원의 정보를 삭제하시겠습니까?")){
-				location.href="/gachi/adminMemberDelete?userid=${vo.userid}";
-			}
-		});
-		$("#ad_leaveBtn").click(function(){
-			if(confirm("회원의 상태를 수정 하시겠습니까?"))
+		$("#cr_leaveBtn").click(function(){
+			if(confirm("회원의 상태를 수정 하시겠습니까?")){
 				$("#deleted").val('탈퇴');
-		});
+			}else{
+				return false;	
+		});	
 	});
 </script>
 <div class="container ad_font">
 	<h1>크리에이터회원 조회</h1>
 <form action="adminCreatorEditOk" method="post">	
-	<ul id="ad_member_View">
+	<ul id="ad_member_View" style="overflow:hidden;">
 		<li>아이디</li><li><input type="text" name="userid" value="${vo.userid }"readonly/></li>
 		<li>회원분류</li><li><input type="text" name="grade" value="${vo.grade }"readonly/></li>
 		<li>이름</li><li><input type="text" name="username" value="${vo.username }" /></li>
@@ -39,11 +36,12 @@
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }"readonly/></li>
 		<li>회원상태</li><li><input type="text" name="deleted" id="deleted" value="${vo.deleted }"readonly/></li>
 	</ul>
-		<button class="btn" onclick="history.back()">회원목록</button>
+		<button type="button" id = "aaa" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
-		<input type="button" id="ad_leaveBtn" class="btn" value="회원탈퇴"/>
-		<input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/>
+		<button type="button" id="cr_leaveBtn" class="btn" onclick="location.href='/gachi/adminCreatorLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
+		<!-- <input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/> -->
 	</form>	
+	
 	<h3>클래스 내역</h3>
 	<div class="ad_member_Box">
 	</div>
