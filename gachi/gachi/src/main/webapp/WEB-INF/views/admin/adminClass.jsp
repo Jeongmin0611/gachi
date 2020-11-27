@@ -32,6 +32,14 @@
 		width:80%;
 		text-align:left;
 	}
+	@media all and (min-width:320px) and (max-width:600px){
+		h3{
+			margin-top:5px;
+		}
+		#search_area li{
+			font-size: 0.5em;
+		}
+	}
 </style>
 <script>
 	$(()=>{
