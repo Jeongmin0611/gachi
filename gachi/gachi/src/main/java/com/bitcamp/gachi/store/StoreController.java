@@ -9,9 +9,9 @@ public class StoreController {
 	public String storeMain() {
 		return "store/storeMain";
 	}
-	@RequestMapping("/storeDetail")
+	@RequestMapping("/storeView")
 	public String storeDetail() {
-		return "store/storeDetail";
+		return "store/storeView";
 	}
 	@RequestMapping("/purchase")
 	public String purchase() {
