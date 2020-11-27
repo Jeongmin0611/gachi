@@ -179,7 +179,7 @@ a {
 	}
 	#pwdF2,#pwdF2C{
 		width:35%;
-		height:730;
+		height:730px;
 		border-radius:10px;
 	}
 	#kokoBtn{
@@ -901,7 +901,8 @@ Gitple('onClose', function () {
 					<option value="30">30일</option>
 					<option value="31">31일</option>
 				</select><br/>
-             <input type="radio" value="M" style="width:15%;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15%;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
+				<p style="clear: both; ">
+             <input type="radio"  value="M" style="width:15px;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
              <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
              <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
              <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
@@ -984,6 +985,7 @@ Gitple('onClose', function () {
 					<option value="30">30일</option>
 					<option value="31">31일</option>
 				</select><br/>
+				<p style="clear: both; ">
              <input type="radio" value="M" style="width:15px;height:15px;" name="genderRadioBtn" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="genderRadioBtn" class="genderRadioBtnInterval"/>여<br/>
                 <input type="text" placeholder="010" name="mdJ2tel1" id="mdJ2tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
                 <input type="text" placeholder="1234"name="mdJ2tel2" id="mdJ2tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
