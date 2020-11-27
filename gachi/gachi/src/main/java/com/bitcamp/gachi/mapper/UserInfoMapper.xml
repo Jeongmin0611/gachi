@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.mypage.UserInfoDaoImp">
+	<select id="userInfoView" parameterType="String" resultType="com.bitcamp.gachi.mypage.MemberVO">
+		select userid, username, nickname, to_char(birthdate, 'YYYY-MM-DD') birthdate, tel, gender, zipcode, addr, detailaddr,
+		 to_char(signupdate, 'YYYY-MM-DD') signupdate, interest from member where userid='${userid}'	
+	</select>
+	<select id="userInfoPwdChk" parameterType="com.bitcamp.gachi.mypage.MemberVO" resultType="_int">
+		select count(userid) from member where userid='${userid}' and userpwd='${userpwd}'
+	</select>
+	<update id="userInfoEdit" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set userpwd='${userpwd}', nickname='${nickname}', tel='${tel}', zipcode='${zipcode}', addr='${addr}', detailaddr='${detailaddr}',
+		 interest='${interest}' where userid='${userid}'
+	</update>
+	<update id="userLeave" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set deleted='탈퇴', withdrawdate=sysdate where userid='${userid}'
+	</update>
+</mapper>
