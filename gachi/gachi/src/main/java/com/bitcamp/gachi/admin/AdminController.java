@@ -91,13 +91,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/adminClass")
-	public ModelAndView adminClass(TestVO vo) {
+	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
 		System.out.println(vo.getCategory());
 		System.out.println(vo.getOption());
 		System.out.println(vo.getClass_state());
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
 		
 		System.out.println("date1===> "+vo.getDate1()+"date2===> "+vo.getDate2());
+		String nowPageRequest=req.getParameter("nowPage");
+		if(nowPageRequest!=null) {
+			vo.setNowPage(Integer.parseInt(nowPageRequest));
+		}
 		
 		
 		int totalRecord=dao.getAllRecordCount(vo);
