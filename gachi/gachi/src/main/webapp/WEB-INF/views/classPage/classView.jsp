@@ -56,7 +56,7 @@
 		</div>
 
 		<!-- 설명글 -->
-		<h4 style="margin-top:10px; padding-left:10px;">클래스소개글</h4><br/>
+		<h4 style="margin-top:10px; padding-left:10px;">클래스 소개글</h4><br/>
 		차시 | 112차 총 시간 | 896시간
 		<div class="col-sm-12" style="min-height: 300px; background-color: #eee">
 			클래스 설명글 
