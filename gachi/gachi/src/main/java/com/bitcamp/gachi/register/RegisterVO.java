@@ -13,8 +13,6 @@ public class RegisterVO {
 	private String userpwd;
 	private String userid2;
 	private String userpwd2;
-	private String userid3;
-	private String userpwd3;
 	
 	private String grade;//체크박스에따라서 결정
 	
@@ -72,18 +70,6 @@ public class RegisterVO {
 	}
 	public void setUserpwd2(String userpwd2) {
 		this.userpwd2 = userpwd2;
-	}
-	public String getUserid3() {
-		return userid3;
-	}
-	public void setUserid3(String userid3) {
-		this.userid3 = userid3;
-	}
-	public String getUserpwd3() {
-		return userpwd3;
-	}
-	public void setUserpwd3(String userpwd3) {
-		this.userpwd3 = userpwd3;
 	}
 	public String getGrade() {
 		return grade;
