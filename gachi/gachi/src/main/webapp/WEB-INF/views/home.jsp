@@ -83,30 +83,30 @@
 		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 		<div class="row">
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/musicEx/musicEx01.png" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/musicEx/musicEx01.png" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/musicEx/musicEx04.PNG" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/musicEx/musicEx04.PNG" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/musicEx/musicEx05.PNG" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/musicEx/musicEx05.PNG" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
@@ -119,30 +119,30 @@
 		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 		<div class="row">
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx04.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx04.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx03.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx03.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx02.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx02.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
@@ -154,30 +154,30 @@
 		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 		<div class="row" style="margin-bottom:50px;">
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx01.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx01.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx11.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx11.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>
 					</div>				
 			</div>
 			<div class="col-sm-4">
-				<a href="/gachi/classMain"><img src="img/cookingEx/cookingEx12.jpg" class="homeClassListImg"/></a><br/>
+				<a href="/gachi/classView"><img src="img/cookingEx/cookingEx12.jpg" class="homeClassListImg"/></a><br/>
 					<div class="homeClassListTxt">
 						<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-						<a href="/gachi/classMain"><span>카모마일 프랑스 자수</span><br/>
+						<a href="/gachi/classView"><span>카모마일 프랑스 자수</span><br/>
 							<span>by &nbsp;</span><span class=""> 홍길동</span><br/>				
 							<span style="float: right">가격 &nbsp; 15,000원</span>
 						</a>

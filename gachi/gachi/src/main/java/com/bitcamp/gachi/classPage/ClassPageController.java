@@ -18,9 +18,9 @@ public class ClassPageController {
 	public String class3go() {
 		return "classPage/classPage3";
 	}
-	@RequestMapping("/classMain")
+	@RequestMapping("/classView")
 	public String classMain() {
-		return "classPage/classMain";
+		return "classPage/classView";
 	}
 	@RequestMapping("/oneClassPage")
 	public String oneclasspage() {
