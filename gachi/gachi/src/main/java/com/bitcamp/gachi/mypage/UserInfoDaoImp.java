@@ -11,11 +11,11 @@ public interface UserInfoDaoImp {
 	public List<GoodsVO> goodsOrderList();
 	
 	//회원정보확인
-	public RegisterVO userInfoView(String userid);
+	public MemberVO userInfoView(String userid);
 	//회원정보수정-비밀번호확인
-	public int userInfoPwdChk(RegisterVO vo);
+	public int userInfoPwdChk(MemberVO vo);
 	//회원정보수정
-	public int userInfoEdit(RegisterVO vo);
+	public int userInfoEdit(MemberVO vo);
 	//회원탈퇴
-	public int userLeave(RegisterVO vo);
+	public int userLeave(MemberVO vo);
 }

@@ -94,21 +94,21 @@
 			<h4>회원정보수정</h4>
 			<hr class="userHr"/>
 			<form method="post" id="userInfoEditFrm" action="/gachi/userInfoEditFormOk">
+			<div class="row">
+					<div class="col-md-4">아이디</div>
+					<div class="col-md-8"><input type="text" name="userid" value="${vo.userid }" readonly/></div>
+				</div>
 				<div class="row">
 					<div class="col-md-4">이름</div>
 					<div class="col-md-8">${vo.username }</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">생년월일</div>
-					<div class="col-md-8">${vo.birthdate }</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">아이디</div>
-					<div class="col-md-8"><input type="text" name="userid" value="${vo.userid }" readonly/></div>
-				</div>
-				<div class="row">
 					<div class="col-md-4">닉네임</div>
 					<div class="col-md-8"><input type="text" name="nickname" id="userInfoNickname" value="${vo.nickname }"/></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">생년월일</div>
+					<div class="col-md-8">${vo.birthdate }</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">연락처</div>
@@ -132,16 +132,20 @@
 					<div class="col-md-8"><input type="text" name="detailaddr" id="userInfoDetailaddr" value="${vo.detailaddr }"/></div>
 				</div>
 				<div class="row">
+				<div class="col-md-4">가입일</div>
+					<div class="col-md-8">${vo.signupdate }</div>
+				</div>
+				<div class="row">
 					<div class="col-md-4">관심사</div>
 					<div class="col-md-8">
-						<label><input type="checkbox" name="interest" value="art">미술</label>
-						<label><input type="checkbox" name="interest" value="cooking">요리</label>
-						<label><input type="checkbox" name="interest" value="crafts">공예/창작</label>
-						<label><input type="checkbox" name="interest" value="Exercise">운동</label>
+						<label><input type="checkbox" name="interest" value="미술">미술</label>
+						<label><input type="checkbox" name="interest" value="요리">요리</label>
+						<label><input type="checkbox" name="interest" value="공예/창작">공예/창작</label>
+						<label><input type="checkbox" name="interest" value="운동">운동</label>
 					
-						<label><input type="checkbox" name="interest" value="music">음악</label>
-						<label><input type="checkbox" name="interest" value="picture">사진</label>
-						<label><input type="checkbox" name="interest" value="lifestyle">라이프스타일</label>
+						<label><input type="checkbox" name="interest" value="음악">음악</label>
+						<label><input type="checkbox" name="interest" value="사진">사진</label>
+						<label><input type="checkbox" name="interest" value="라이프스타일">라이프스타일</label>
 					</div>
 				</div>
 				<div class="row">

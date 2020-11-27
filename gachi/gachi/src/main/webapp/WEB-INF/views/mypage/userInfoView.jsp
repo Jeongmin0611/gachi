@@ -16,6 +16,7 @@
 		background-color: #abcee3;
 		margin-top: 100px;
 	}
+	/* 연락처, 주소 */
 	.mypageContent>div:nth-child(7) input,
 	.mypageContent>div:nth-child(8) input:first-child{
 		width: 20%;
@@ -42,20 +43,20 @@
 			<h4>회원정보확인</h4>
 			<hr class="userHr"/>
 			<div class="row">
-				<div class="col-md-4">이름</div>
-				<div class="col-md-8">${vo.username }</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">생년월일</div>
-				<div class="col-md-8">${vo.birthdate }</div>
-			</div>
-			<div class="row">
 				<div class="col-md-4">아이디</div>
 				<div class="col-md-8">${vo.userid }</div>
 			</div>
 			<div class="row">
+				<div class="col-md-4">이름</div>
+				<div class="col-md-8">${vo.username }</div>
+			</div>
+			<div class="row">
 				<div class="col-md-4">닉네임</div>
 				<div class="col-md-8"><input type="text" name="nickname" value="${vo.nickname }" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">생년월일</div>
+				<div class="col-md-8">${vo.birthdate }</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">연락처</div>
@@ -68,7 +69,7 @@
 			<div class="row">
 				<div class="col-md-4">주소</div>
 				<div class="col-md-8">
-					<input type="text" name="zipcode" value="01234" readonly/>
+					<input type="text" name="zipcode" value="${vo.zipcode }" readonly/>
 					<input type="text" name="addr" value="${vo.addr }" readonly/>
 				</div>
 			</div>
@@ -77,8 +78,12 @@
 				<div class="col-md-8"><input type="text" name="detailaddr" value="${vo.detailaddr }" readonly/></div>
 			</div>
 			<div class="row">
+				<div class="col-md-4">가입일</div>
+				<div class="col-md-8">${vo.signupdate }</div>
+			</div>
+			<div class="row">
 				<div class="col-md-4">관심사</div>
-				<div class="col-md-8"><input type="text" name="interest" value="${vo.lnterest }" readonly/></div>
+				<div class="col-md-8"><input type="text" name="interest" value="${vo.interest }" readonly/></div>
 			</div>
 			
 			<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEditChk'">수정하기</button>

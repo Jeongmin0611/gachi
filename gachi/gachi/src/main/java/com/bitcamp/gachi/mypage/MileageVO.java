@@ -1,16 +1,17 @@
 package com.bitcamp.gachi.mypage;
 
 public class MileageVO {
-	private String mileage_type;
-	private int mileage;
-	private String breakdown;
-	private String occurence_date;
-	private String userid;
-	public String getMileage_type() {
-		return mileage_type;
+	private String userid; /* 아이디 */
+	private int mileage; /* 금액 */
+	private String breakdown; /* 내역 */
+	private String occurence_date; /* 날짜 */
+
+	
+	public String getUserid() {
+		return userid;
 	}
-	public void setMileage_type(String mileage_type) {
-		this.mileage_type = mileage_type;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public int getMileage() {
 		return mileage;
@@ -30,10 +31,5 @@ public class MileageVO {
 	public void setOccurence_date(String occurence_date) {
 		this.occurence_date = occurence_date;
 	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+	
 }
