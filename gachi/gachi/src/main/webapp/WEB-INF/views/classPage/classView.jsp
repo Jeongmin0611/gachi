@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../inc/top.jspf" %>
 <style>
 .carousel-item img {
 	width: 100%;
@@ -56,7 +57,7 @@
 		</div>
 
 		<!-- 설명글 -->
-		<h4 style="margin-top:10px; padding-left:10px;">클래스 소개글</h4><br/>
+		<h4 style="margin-top:10px; padding-left:10px;">클래스 소개</h4><br/>&nbsp;
 		차시 | 112차 총 시간 | 896시간
 		<div class="col-sm-12" style="min-height: 300px; background-color: #eee">
 			클래스 설명글 
@@ -90,3 +91,4 @@
 		</div>
 	</div>
 </div>
+<%@ include file="../inc/bottom.jspf"%>
