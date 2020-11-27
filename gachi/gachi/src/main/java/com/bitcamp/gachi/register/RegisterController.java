@@ -47,7 +47,7 @@ import org.springframework.web.servlet.ModelAndView;
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
 						ses.setAttribute("logStatus","Y");
-						ses.setAttribute("userSort","U");
+						ses.setAttribute("userSort","user");
 						mav.setViewName("redirect:/");
 				
 					}else if(voGrade.equals("크리에이터")){
@@ -55,14 +55,14 @@ import org.springframework.web.servlet.ModelAndView;
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
 						ses.setAttribute("logStatus","Y");
-						ses.setAttribute("userSort","C");
+						ses.setAttribute("userSort","creator");
 						mav.setViewName("redirect:/");
 					}else{
 						ses.setAttribute("userid", resultVO.getUserid());
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
 						ses.setAttribute("logStatus","Y");
-						ses.setAttribute("userSort","A");
+						ses.setAttribute("userSort","admin");
 						mav.setViewName("redirect:/");
 					}
 				}

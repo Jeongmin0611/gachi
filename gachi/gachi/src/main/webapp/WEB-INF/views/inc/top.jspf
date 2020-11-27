@@ -154,7 +154,7 @@ a {
 	
 	#mdJ{
 		width:350px;
-		height:970px;
+		height:910px;
 		border-radius:10px;
 	}
 	#mdJ2{
@@ -435,8 +435,7 @@ a {
 }
 </style>
 <script>
-$(function(){
-	
+	$(function(){
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
     	$(".nav-item a").css({ 'pointer-events': 'none' });
@@ -452,8 +451,6 @@ $(function(){
        $("#md").fadeOut();
        $(".nav-item a").css({ 'pointer-events': 'auto' });
     });
-
-
   //회원가입모달창 띄우기
     $("#joinFormBtn").click(function(){
     	$(".nav-item a").css({ 'pointer-events': 'none' });
@@ -518,7 +515,29 @@ $(function(){
 	$("#pwdF1Close, .pwdF1_layer").click(function(){
    		$("#pwdF1").fadeOut();
 	});
-	
+    $("#loginEffectiveness").submit(function(){
+		if($("#userid").val()==""){
+			alert("아이디(이메일)을 입력하여주세요");
+			return false;
+			}
+		if($("#userpwd").val()==""){
+			alert("비밀번호를 입력하여주세요");
+			return false;
+			}
+		return true;
+		});
+	$("#joinEffectiveness").submit(function(){
+		if($("#userid").val()==""){
+			alert("아이디(이메일)을 입력하여주세요");
+			return false;
+			}
+		if($("#userpwd").val()==""){
+			alert("비밀번호를 입력하여주세요");
+			return false;
+			}
+		
+		return true;
+		});
 });
 	function mdJchange(){//회원가입폼에서 크리에이터 회원가입폼으로
 		$("#mdJ").css({'display':'none'});
@@ -656,14 +675,6 @@ Gitple('onClose', function () {
 			}
 
 		});
-	$("#mdJ>input[type='checked']").on("click",function(){
-		var countChk=$("#mdJ>input[type='checked']").length;
-
-		if(countChk>3){
-			$(this).attr("checked",false);
-			alert("취미는최대3개까지입력가능합니다");
-			}
-		});
 
 </script>
 <meta charset="UTF-8">
@@ -723,17 +734,17 @@ Gitple('onClose', function () {
           <li class="nav-item" id="joinFormBtn"><a class="nav-link" href="#">회원가입</a></li>
           </c:if>
           <c:if test="${logStatus!=null	&& logStatus=='Y'}"> 
-	          <c:if test="${userSort=='U'}">
+	          <c:if test="${userSort=='user'}">
 	          <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
 	          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
 	         </c:if>
-	         <c:if test="${userSort=='C'}">
+	         <c:if test="${userSort=='creator'}">
 	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
 	         </c:if>
-	         <c:if test="${userSort=='A'}">
+	         <c:if test="${userSort=='admin'}">
 	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
@@ -753,7 +764,7 @@ Gitple('onClose', function () {
    <!-- 로그인폼 -->
    <div id="md" class="join">
       <div id="loginFrm" class="col-xs-12 col-md-12">
-         <form method="post" action="/gachi/memberLogin">
+         <form method="post" id="loginEffectiveness" action="/gachi/memberLogin">
          <div id="mdBtm">
                <button type="button" class="btn btn-primary" id="mdClose" style="color:gray;">X</button>
             </div>
@@ -775,7 +786,7 @@ Gitple('onClose', function () {
    <!-- 회원가입 -->
    <div id="mdJ" class="join">
    <div id="joinForm" class="col-xs-12 col-md-12">
-      <form method="post" action="/gachi/registerInsert">   
+      <form method="post" id="joinEffectiveness" action="/gachi/registerInsert">   
             <div id="mdJBtm">
                <button type="button" class="btn btn-primary" id="mdJClose" style="color:gray;">X</button>
             </div>
