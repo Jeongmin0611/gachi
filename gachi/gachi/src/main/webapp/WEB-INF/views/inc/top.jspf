@@ -515,27 +515,89 @@ a {
 	$("#pwdF1Close, .pwdF1_layer").click(function(){
    		$("#pwdF1").fadeOut();
 	});
+	//로그인폼 아이디 비밀번호 유효성검사
     $("#loginEffectiveness").submit(function(){
 		if($("#userid").val()==""){
 			alert("아이디(이메일)을 입력하여주세요");
+			$("#userid").val(""); 
+			 $("#userid").focus();
 			return false;
 			}
 		if($("#userpwd").val()==""){
 			alert("비밀번호를 입력하여주세요");
+			$("#userpwd").val(""); 
+			$("#userpwd").focus();
 			return false;
 			}
 		return true;
 		});
+	//회원가입창에서 유효성검사
+	var emailChk=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+	var nameChk= RegExp(/^[가-힣]+$/);
+	var nickNameChk = RegExp(/^[가-힣A-Za-z0-9]+$/);
+	var birthdateChk = RegExp(/^[0-9]+$/);
 	$("#joinEffectiveness").submit(function(){
-		if($("#userid").val()==""){
+		if($("#userid2").val()==""){
 			alert("아이디(이메일)을 입력하여주세요");
+			$("#userid2").val(""); 
+			 $("#userid2").focus();
 			return false;
 			}
-		if($("#userpwd").val()==""){
+		if(!emailChk.test($("#userid2").val())){
+			 alert("이메일의 형식에 맞게 입력해주세요");
+			 $("#userid2").val(""); 
+			 $("#userid2").focus(); 
+			 return false; 
+		}
+		if($("#userpwd2").val()==""){
 			alert("비밀번호를 입력하여주세요");
+			$("#userpwd2").val(""); 
+			$("#userpwd2").focus();
 			return false;
 			}
-		
+		if($("#userpwdChk").val()==""){
+			alert("비밀번호확인을 입력하여주세요");
+			$("#userpwdChk").val(""); 
+			$("#userpwdChk").focus();
+			return false;
+			}
+		if($("#userpwd2").val() != $("#userpwdChk").val()){
+			alert("비밀번호가 같지않습니다 다시확인해주세요");
+			$("#userpwdChk").val(""); 
+			$("#userpwdChk").focus();
+			return false;
+			}
+		if($("#username").val()==""){
+			alert("이름을 입력해주세요");
+			$("#username").val(""); 
+			$("#username").focus(); 
+			return false; 
+			}
+		if(!nameChk.test($("#username").val())){ 
+			alert("이름형식에 맞게 입력해주세요");
+			$("#username").val(""); 
+			$("#username").focus(); 
+			return false; 
+		}
+		if($("#nickname").val()==""){
+			alert("닉네임을 입력해주세요");
+			$("#nickname").val(""); 
+			$("#nickname").focus(); 
+			return false; 
+			}
+		if(!nickNameChk.test($("#nickname").val())){ 
+			alert("닉네임의 형식에 맞게 입력해주세요(특수문자X)");
+			$("#nickname").val(""); 
+			$("#nickname").focus(); 
+			return false;
+			}
+		if($("#birthdate1").val()==""){
+			alert("생년월일을 입력해주세요");
+			$("#birthdate1").val(""); 
+			$("#birthdate1").focus(); 
+			return false; 
+			}
+
 		return true;
 		});
 });
@@ -668,13 +730,6 @@ Gitple('onOpen', function () {
 Gitple('onClose', function () {
 	  console.log('onClose event');
 	});
-	$("#loginBtn").on("click",function(){
-		if($('#loginBtn').val()==""){
-			alert("이메일을 입력하여주세요");
-			return false;
-			}
-
-		});
 
 </script>
 <meta charset="UTF-8">
@@ -771,9 +826,9 @@ Gitple('onClose', function () {
          <div>
           <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <div class="md_layer"></div>
-                  <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
-                  <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
-                  <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
+               <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
+               <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
+               <span id="idPwd"><a href="#" id="idFindBtn">아이디찾기</a>/<a href="#" id="pwd1FindBtn">비밀번호찾기</a></span><br />
                <input type="submit"id="loginBtn" class="btn btn-default signupBtn" value="로그인"/><br/>
                <span>or</span><br />
                <button id="kokoBtn">카카오톡으로 로그인</button><br />
@@ -793,8 +848,8 @@ Gitple('onClose', function () {
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
             <div class="mdJ_layer"></div>
-             <input type="text" placeholder="이메일" name="userid" id="userid" /><span id="emailMessage" class="message"></span>
-             <input type="password" placeholder="비밀번호" name="userpwd" id="userpwd" /><span id="passwordMessage" class="message"></span>
+             <input type="text" placeholder="이메일" name="userid2" id="userid2" /><span id="emailMessage" class="message"></span>
+             <input type="password" placeholder="비밀번호" name="userpwd2" id="userpwd2" /><span id="passwordMessage" class="message"></span>
              <input type="password" placeholder="비밀번호 확인" name="userpwdChk" id="userpwdChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="username" id="username" /><span id="nameMessage" class="message"></span>
              <input type="text" placeholder="닉네임" name="nickname" id="nickname" /><span id="nicknameMessage" class="message"></span>
