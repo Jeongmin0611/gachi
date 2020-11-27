@@ -27,11 +27,6 @@ public class MypageController {
 	//******마이페이지 메인-결제/주문내역확인*******
 	@RequestMapping("/mypage")
 	public ModelAndView Mypage(HttpSession ses) {
-		//임시데이터//
-		ses.setAttribute("userid", "member0@gachi.com");
-		ses.setAttribute("username", "박회원");
-		ses.setAttribute("logStatus", "Y");
-		///////////////////////////////////////
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		//List<ClassVO> cList = dao.classOrderList();
 		//List<GoodsVO> gList = dao.goodsOrderList();
@@ -46,7 +41,7 @@ public class MypageController {
 	@RequestMapping("/userInfoView")
 	public ModelAndView userInfoView(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		RegisterVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
+		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
@@ -63,7 +58,7 @@ public class MypageController {
 	}
 	//회원정보수정-비밀번호확인
 	@RequestMapping(value="/userInfoEditOk", method=RequestMethod.POST)
-	public ModelAndView userInfoEditOk(RegisterVO vo, HttpSession ses) {
+	public ModelAndView userInfoEditOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		int result = dao.userInfoPwdChk(vo);
 		
@@ -71,7 +66,7 @@ public class MypageController {
 		if(result==0) { //비밀번호 틀리면
 			mav.setViewName("mypage/userInfoPwdResult");
 		}else if(result==1) { //비밀번호 맞으면
-			RegisterVO resultVO = dao.userInfoView((String)ses.getAttribute("userid"));
+			MemberVO resultVO = dao.userInfoView((String)ses.getAttribute("userid"));
 			mav.addObject("vo", resultVO);
 			mav.setViewName("mypage/userInfoEditForm");
 		}
@@ -79,7 +74,7 @@ public class MypageController {
 	}
 	//회원정보수정-성공여부
 	@RequestMapping(value="/userInfoEditFormOk", method=RequestMethod.POST)
-	public ModelAndView userInfoEditFormOk(RegisterVO vo, HttpSession ses) {
+	public ModelAndView userInfoEditFormOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		int result = dao.userInfoEdit(vo);
 		
@@ -94,9 +89,12 @@ public class MypageController {
 	//회원탈퇴
 	@RequestMapping("/userLeave")
 	public ModelAndView userLeave(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		String username = dao.userInfoView(userid).getUsername();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("userid", (String)ses.getAttribute("userid"));
-		mav.addObject("username", (String)ses.getAttribute("username"));
+		mav.addObject("userid", userid);
+		mav.addObject("username", username);
 		mav.setViewName("mypage/userLeave");
 		return mav;
 	}
@@ -110,7 +108,7 @@ public class MypageController {
 	}
 	//회원탈퇴-비밀번호확인
 	@RequestMapping(value="/userLeaveOk", method=RequestMethod.POST)
-	public ModelAndView userLeaveOk(RegisterVO vo, HttpSession ses) {
+	public ModelAndView userLeaveOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		int result = dao.userInfoPwdChk(vo);
 		
@@ -159,13 +157,14 @@ public class MypageController {
 	}
 	//마일리지
 	@RequestMapping("/userMileage")
-	public ModelAndView userMileage() {
+	public ModelAndView userMileage(HttpSession ses) {
 		MileageDaoImp dao = sqlSession.getMapper(MileageDaoImp.class);
-		List<MileageVO> list = dao.mileageAllRecord();
+		String userid = (String)ses.getAttribute("userid");
+		List<MileageVO> list = dao.mileageAllRecord(userid);
 		
-		int mileageAllSum = dao.mileageAllSum();
-		int mileagePosiSum = dao.mileagePosiSum();
-		int mileageNegaSum = dao.mileageNegaSum();
+		int mileageAllSum = dao.mileageAllSum(userid);
+		int mileagePosiSum = dao.mileagePosiSum(userid);
+		int mileageNegaSum = dao.mileageNegaSum(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
