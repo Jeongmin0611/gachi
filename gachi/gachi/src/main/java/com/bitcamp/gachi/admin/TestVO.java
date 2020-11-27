@@ -4,6 +4,8 @@ public class TestVO {
 	private int totalRecord;
 	private int totalPage;
 	private int onePageRecord=10;
+	private int startPageNum=1;
+	private int onePageNumCount=5;
 	private int nowPage=1;
 	private int lastPageRecordCount=10;
 	
@@ -79,6 +81,9 @@ public class TestVO {
 	}
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
+		
+		//시작페이지 번호계산
+		startPageNum=((nowPage-1)/onePageNumCount*onePageNumCount)+1;
 	}
 	public int getTotalPage() {
 		return totalPage;
@@ -92,7 +97,19 @@ public class TestVO {
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
 	}
-
+	public int getStartPageNum() {
+		return startPageNum;
+	}
+	public void setStartPageNum(int startPageNum) {
+		this.startPageNum = startPageNum;
+	}
+	public int getOnePageNumCount() {
+		return onePageNumCount;
+	}
+	public void setOnePageNumCount(int onePageNumCount) {
+		this.onePageNumCount = onePageNumCount;
+	}
+	
 	
 	
 }

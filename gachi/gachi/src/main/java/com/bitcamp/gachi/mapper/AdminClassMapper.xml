@@ -34,6 +34,6 @@
 	<select id="getClassList" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
 		select * from (select * from (select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
 		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid order by c.code desc) 
-		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>) where <![CDATA[rownum<=${lastPageRecordCount}]]> 
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by code asc) where <![CDATA[rownum<=${lastPageRecordCount}]]> order by code desc 
 	</select>
 </mapper>
