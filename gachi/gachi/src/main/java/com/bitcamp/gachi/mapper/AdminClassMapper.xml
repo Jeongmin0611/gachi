@@ -24,7 +24,6 @@
 					<when test='category.equals("전체") and !option.equals("전체") and !class_state.equals("전체")'>
 					 	where ${option} like '%${searchWord}%' and class_state='${class_state}'
 					</when>
-					
 				</choose>
 				order by code
 	</select>

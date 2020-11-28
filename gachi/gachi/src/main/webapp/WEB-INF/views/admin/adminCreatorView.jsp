@@ -7,6 +7,9 @@
 	h1{
 		margin-bottom:10px;
 	}
+	#ad_member_View input[type="text"]{
+		line-height:0px;
+	}
 </style>
 <script>
 	$(function(){
@@ -22,7 +25,7 @@
 	<h1>크리에이터회원 조회</h1>
 <form action="adminCreatorEditOk" method="post">	
 	<ul id="ad_member_View" style="overflow:hidden;">
-		<li>아이디</li><li><input type="text" name="userid" value="${vo.userid }"readonly/></li>
+		<li>아이디</li><li><input type="text" name="userid" value="${vo.userid }" disabled/></li>
 		<li>회원분류</li><li><input type="text" name="grade" value="${vo.grade }"readonly/></li>
 		<li>이름</li><li><input type="text" name="username" value="${vo.username }" /></li>
 		<li>닉네임</li><li><input type="text" name="nickname" value="${vo.nickname }"/></li>
@@ -36,10 +39,12 @@
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }"readonly/></li>
 		<li>회원상태</li><li><input type="text" name="deleted" id="deleted" value="${vo.deleted }"readonly/></li>
 	</ul>
+	<div style="margin:10px 0px;">
 		<button type="button" id = "aaa" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
 		<button type="button" id="cr_leaveBtn" class="btn" onclick="location.href='/gachi/adminCreatorLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
 		<!-- <input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/> -->
+	</div>
 	</form>	
 	
 	<h3>클래스 내역</h3>

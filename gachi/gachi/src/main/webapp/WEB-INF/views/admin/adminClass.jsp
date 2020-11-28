@@ -120,7 +120,6 @@
 		</li>	
 	</ul>	
 </div>
-
 	<ul id="ad_class_lst">
 		<li>클래스코드</li>
 		<li>카테고리</li>
