@@ -1,17 +1,24 @@
 package com.bitcamp.gachi.mypage;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.register.RegisterVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 @Controller
 public class MypageController {
@@ -138,9 +145,14 @@ public class MypageController {
 	public String orderSheet() {
 		return "mypage/orderSheet";
 	}
-	@RequestMapping("/orderConfirmed")
-	public String orderConfirmed() {
-		return "mypage/orderConfirmed";
+	//주문완료
+	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
+	public ModelAndView orderConfirmed(@RequestBody Map<String, Object> params) {
+		System.out.println(params.get("imp_uid"));
+		System.out.println(params.get("merchant_uid"));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mypage/orderConfirmed");
+		return mav;
 	}
 	@RequestMapping("/myclassList")
 	public String myclassList() {

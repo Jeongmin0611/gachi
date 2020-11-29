@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="resources/bootstrap.css" type="text/css" />
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="resources/bootstrap.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="text/javascript" src="resources/jquery.raty.js"></script>

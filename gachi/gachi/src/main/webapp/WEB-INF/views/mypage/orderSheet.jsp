@@ -232,6 +232,43 @@
 		color:#000;
 	}
 </style>
+<script>
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp49958481');  // 가맹점 식별 코드
+	
+	function requestpay(){
+		// IMP.request_pay(param, callback) 호출
+		IMP.request_pay({
+		   pg : 'html5_inicis', // 결제방식
+		    pay_method : 'card',	// 결제 수단
+		    merchant_uid : 'merchant_' + new Date().getTime(), //주문번호 생성
+		   name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+		    amount : '100',	// 결제 금액
+		    buyer_email : 'member0@gachi.com',	
+		   buyer_name :  '박회원',	// 
+		    buyer_tel :  '010-1234-5678',	
+		    buyer_addr :  '서울시 마포구 백범로',	
+		    buyer_postcode :  '01234',	
+		}, function(rsp) { // callback
+			if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+			      // jQuery로 HTTP 요청
+			      jQuery.ajax({
+			          url: "/gachi/orderConfirmed", // 가맹점 서버
+			          method: "POST",
+			          headers: { "Content-Type": "application/json" },
+			          data: JSON.stringify({
+			              imp_uid: rsp.imp_uid,
+			              merchant_uid: rsp.merchant_uid
+			          })
+			      }).done(function (data) {
+			        // 가맹점 서버 결제 API 성공시 로직
+			      })
+			    } else {
+			      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+			    }
+		});
+	}
+</script>
 <div class="container userMainDiv cfont" id="orderSheetContainer">
 	<div id="orderSheetTop">
 		<ul>
@@ -315,8 +352,8 @@
 		</ul>
 	</div>
 	<div id="orderSheetBtm">
-		<label><input type="checkbox" name="orderAgree""/>구매진행에 동의합니다.</label>
-		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/orderConfirmed'">결제하기</button>
+		<label><input type="checkbox" name="orderAgree"/>구매진행에 동의합니다.</label>
+		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="requestpay()">결제하기</button>
 		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
 	</div>
 </div>
