@@ -8,16 +8,15 @@
 }
 #ad_event_lst{
 	overflow: auto;
+	border:3px solid #437299;
+	border-radius: 10px;
 }
 #ad_event_lst li {
 	vertical-align: middle;
+	border-bottom:1px solid gray;
 }
 #ad_event_header{
 	overflow:auto;
-}
-#ad_event_header li {
-	vertical-align: middle;
-	line-height: 50px;
 }
 .ad_list_menu li{
 	float:right;
@@ -26,6 +25,11 @@ select {
 	height: 30px;
 }
 </style> 
+<script type="text/javascript">
+	$(()=>{
+		$("#ad_event_lst li:lt(7)").css("height","40px").css("line-height","40px").css("overflow","visible");
+	});
+</script>
 <div class="container text-center ad_font">
 <h1>이벤트관리</h1>
 <div id="search_area">
@@ -51,7 +55,7 @@ select {
 		</ul>
 	</form>
 </div>
-<ul id="ad_event_header">
+<ul id="ad_event_lst">
 	<li>선택</li>
 	<li>번호</li>
 	<li>이미지</li>
@@ -59,8 +63,7 @@ select {
 	<li>시작일</li>
 	<li>종료일</li>
 	<li>조회수</li>
-</ul>
-<ul id="ad_event_lst">
+	
 	<li><input type="checkbox" id="" name=""/></li>
 	<li>10</li>
 	<li><img src="img/musicEx/musicEx01.png"></li>

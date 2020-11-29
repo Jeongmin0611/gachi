@@ -48,7 +48,7 @@
 					alert("검색어를 입력해주세요.");
 					return false;
 			}
-			return true;
+			return false;
 		});
 	});
 </script>
@@ -57,12 +57,13 @@
 <div id="search_area">
 	<ul>
 		<li>
-			<form method="get" action="/gachi/adminClass">
+			<form method="get" id="ad_class_lookup" action="/gachi/adminClass">
 			<h3>조회옵션</h3>
 			<ul>
 				<li>날짜옵션</li>
 				<li>	
-					<select name="dateOption">
+					<select id="dateOption" name="dateOption">
+						<option>전체</option>
 						<option value="allow">등록일</option>
 						<option value="signup">등록신청일</option>
 					</select>	
@@ -70,7 +71,7 @@
 				</li>
 				<li>카테고리</li>
 				<li>
-					<select name="category">	
+					<select id="category" name="category">	
 						<option>전체</option>
 						<option value="공예/창작">공예/창작</option>
 						<option value="요리">요리</option>
@@ -86,7 +87,7 @@
 					<select name="class_state">
 						<option>전체</option>
 						<option value="등록대기">등록대기</option>
-						<option value="개설">개설</option>
+						<option value="판매중">판매중</option>
 						<option value="종료">종료</option>
 					</select>
 				</li>
@@ -103,7 +104,7 @@
 				<li>검색옵션</li>
 				<li>
 					<select id="option" name="option">
-						<option value="전체">전체</option>
+						<option value=null>전체</option>
 						<option value="code">클래스코드</option>
 						<option value="category">카테고리</option>
 						<option value="class_name">클래스명</option>
@@ -120,7 +121,6 @@
 		</li>	
 	</ul>	
 </div>
-
 	<ul id="ad_class_lst">
 		<li>클래스코드</li>
 		<li>카테고리</li>

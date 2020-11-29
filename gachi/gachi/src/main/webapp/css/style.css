@@ -1,14 +1,19 @@
-x@charset "UTF-8";
+@charset "UTF-8";
 
-/* 같이 배경색 = #F4BFA9 
-   가치 배경색 = #ABCEE3 */
+/* 媛숈씠 諛곌꼍�깋 = #F4BFA9 
+   媛�移� 諛곌꼍�깋 = #ABCEE3 */
 
-cr_MyClass_header
-ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
+ul,li{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+cr_MyClass_header ul,li {margin:0; padding:0; list-style-type:none; text-decoration:none;}
 
 select{height:30px}
 input{text-align:center;}
-/* 폰트설정시  클래스 지정후 폰트적용시키기 */
+/* �룿�듃�꽕�젙�떆  �겢�옒�뒪 吏��젙�썑 �룿�듃�쟻�슜�떆�궎湲� */
 .cfont{font-family:'OSeongandHanEum';}
 .carousel-inner img{width: 100%; height: 400px;}
 
@@ -29,17 +34,20 @@ input{text-align:center;}
 	text-overflow: ellipsis;
 }
 
-/*관리자 대시보드*/
+/*愿�由ъ옄 ���떆蹂대뱶*/
 
-/*관리자 클래스관리 start*/
+/*愿�由ъ옄 �겢�옒�뒪愿�由� start*/
 #ad_class_lst{
+	border:3px solid #437299;
 	margin-bottom:20px;
+	border-radius: 10px;
+	overflow: auto;
 }
 #ad_class_lst li{
 	float:left;
 	width:8%;
 	text-align:center;
-	border:1px solid gray;
+	border-bottom:1px solid gray;
 	height:50px;
 	line-height: 50px;
 }
@@ -50,19 +58,24 @@ input{text-align:center;}
 	width:37%;
 }
 
-/*관리자 클래스관리 end*/
+/*愿�由ъ옄 �겢�옒�뒪愿�由� end*/
 
-/*관리자 회원관리 start*/	
+/*愿�由ъ옄 �쉶�썝愿�由� start*/	
 #ad_member_info li{
 	float:left;
 	width:15%;
+}
+#ad_member_lst{
+	border:3px solid #437299;
+	overflow:auto;
+	border-radius: 10px;
 }
 #ad_member_lst li{
 	width:10%;
 	float:left;
 	height:40px;
 	line-height:40px;
-	border:1px solid gray;
+	border-bottom:1px solid gray;
 }
 #ad_member_lst li:nth-child(8n+1){
 	width:5%;
@@ -87,6 +100,9 @@ input{text-align:center;}
 	border-radius:10px;
 	overflow: auto;
 }
+#ad_member_View input{
+	text-align:left;
+}
 #ad_member_View>li{
 	float:left;
 	width:50%;
@@ -94,6 +110,7 @@ input{text-align:center;}
 	font-size: 1.2em;
 	line-height:50px;
 	height:50px;
+	overflow: visible;
 }
 #ad_member_View>li:nth-child(2n+1){
 	width:30%;
@@ -109,9 +126,9 @@ input{text-align:center;}
 	border-radius: 10px;
 }
 
-/*관리자 회원관리 end*/
+/*愿�由ъ옄 �쉶�썝愿�由� end*/
 
-/* 관리자 크리에이터 관리 start*/
+/* 愿�由ъ옄 �겕由ъ뿉�씠�꽣 愿�由� start*/
 
 
 #cr_member_info li{
@@ -120,14 +137,16 @@ input{text-align:center;}
 	height:30px;
 }
 #cr_member_lst{
-	overflow:auto;	
+	overflow:auto;
+	border:3px solid #437299;
+	border-radius: 10px;	
 }
 #cr_member_lst li{
 	width:10%;
 	float:left;
 	height:40px;
 	line-height:40px;
-	border:1px solid gray;
+	border-bottom:1px solid gray;
 }
 #cr_member_lst li:nth-child(8n+1){
 	width:5%;
@@ -183,11 +202,11 @@ input{text-align:center;}
 	text-align:right;
 }
 
-/*관리자 크리에이터관리 end*/
+/*愿�由ъ옄 �겕由ъ뿉�씠�꽣愿�由� end*/
 
 
 
-/* 관리자 주문 관리 start*/
+/* 愿�由ъ옄 二쇰Ц 愿�由� start*/
 #ad_order_lst{
 	margin-top:20px;
 	margin-bottom:20px;
@@ -255,10 +274,10 @@ input{text-align:center;}
 	padding-top:5px;
 	padding-bottom:10px;
 }
-/*관리자 주문 end*/
+/*愿�由ъ옄 二쇰Ц end*/
 
 
-/* 관리자 배송 관리 start*/
+/* 愿�由ъ옄 諛곗넚 愿�由� start*/
 
 
 #ad_delivery_info li{
@@ -267,6 +286,9 @@ input{text-align:center;}
 }
 #ad_delivery_lst{
 	overflow:auto;
+	border:3px solid #437299;
+	border-radius:10px;
+	
 	margin-bottom:20px;
 }
 #ad_delivery_lst li{
@@ -274,7 +296,7 @@ input{text-align:center;}
 	float:left;
 	height:40px;
 	line-height:40px;
-	border:1px solid gray;
+	border-bottom:1px solid gray;
 }
 #ad_delivery_lst li:nth-child(8n+1){
 	width:10%;
@@ -327,22 +349,27 @@ input{text-align:center;}
 }
 
 
-/*관리자 배송 end*/
+/*愿�由ъ옄 諛곗넚 end*/
 
 
-/* 관리자 반품 관리 start*/
+/* 愿�由ъ옄 諛섑뭹 愿�由� start*/
 
 
 #ad_return_info li{
 	float:left;
 	width:50%;
 }
+#ad_return_lst{
+	border:3px solid #437299;
+	border-radius:10px;
+	overflow: auto;
+}
 #ad_return_lst li{
 	width:10%;
 	float:left;
 	height:40px;
 	line-height:40px;
-	border:1px solid gray;
+	border-bottom:1px solid gray;
 }
 #ad_return_lst li:nth-child(8n+1){
 	width:20%;
@@ -395,19 +422,21 @@ input{text-align:center;}
 }
 
 
-/*관리자 반품 end*/
+/*愿�由ъ옄 諛섑뭹 end*/
 
 
 
-/*관리자 공지사항 리스트 start*/
+/*愿�由ъ옄 怨듭��궗�빆 由ъ뒪�듃 start*/
 	#ad_notice_lst{
 		overflow: auto;
+		border:3px solid #437299;
+		border-radius:10px;
 	}
 	#ad_notice_lst li{
 		float: left;
 		width:10%;
 		text-align: center;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:30px;
 		height:50px;
 	}
@@ -430,9 +459,9 @@ input{text-align:center;}
 		margin-left:10px;
 		overflow:auto;
 	}
-	/*관리자 공지사항 리스트 end*/
+	/*愿�由ъ옄 怨듭��궗�빆 由ъ뒪�듃 end*/
 	
-	/*관리자 공지사항 글쓰기 start*/
+	/*愿�由ъ옄 怨듭��궗�빆 湲��벐湲� start*/
 	#ad_notice_WriteForm{
 		margin-top:30px;
 		text-align: left;
@@ -442,10 +471,10 @@ input{text-align:center;}
 		margin-bottom:10px;
 	}
 	
-	/*관리자 공지사항 글쓰기 end*/
+	/*愿�由ъ옄 怨듭��궗�빆 湲��벐湲� end*/
 	
 	
-	/*관리자 1:1문의 리스트 start*/
+	/*愿�由ъ옄 1:1臾몄쓽 由ъ뒪�듃 start*/
 	#ad_1on1_lst{
 		overflow:auto;
 		height:auto;
@@ -470,8 +499,8 @@ input{text-align:center;}
 	#ad_1on1_lst>li:nth-of-type(7n+7){
 		width:8%;
 	}
-	/*관리자 1:1문의 리스트 end*/
-	/*관리자 1:1문의 보기 start*/
+	/*愿�由ъ옄 1:1臾몄쓽 由ъ뒪�듃 end*/
+	/*愿�由ъ옄 1:1臾몄쓽 蹂닿린 start*/
 	#ad_1on1_write,#ad_1on1_writeForm{
 		overflow:auto;
 	}
@@ -487,17 +516,17 @@ input{text-align:center;}
 	.content_center{
 		text-align: center;
 	}
-	/*관리자 1:1문의 보기 end*/
+	/*愿�由ъ옄 1:1臾몄쓽 蹂닿린 end*/
 	
-	/*관리자 이벤트 글쓰기 start*/
-	/*bottom 내리기*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 湲��벐湲� start*/
+	/*bottom �궡由ш린*/
 	.container{
 		overflow:auto;
 		height:auto;
 	}
-	/*관리자 이벤트 글쓰기 end*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 湲��벐湲� end*/
 	
-	/*관리자 이벤트 리스트 start*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 由ъ뒪�듃 start*/
 	
 	#ad_event_header li{
 		float: left;
@@ -519,7 +548,7 @@ input{text-align:center;}
 		overflow:auto;
 		float: left;
 		width:10%;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:100px;
 		height:120px;
 	}
@@ -536,26 +565,29 @@ input{text-align:center;}
 	#ad_event_lst li:nth-of-type(7n+4){
 		width:40%;
 	}
-	/*관리자 이벤트 리스트 end*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 由ъ뒪�듃 end*/
 	
-	/*관리자 이벤트 리스트 start*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 由ъ뒪�듃 start*/
 	#ad_event_writeForm{
 		overflow: auto;
 		border:3px solid #437299;
 		border-radius: 10px;
 		margin-bottom:20px;
 	}
-	/*관리자 이벤트 리스트 end*/
+	/*愿�由ъ옄 �씠踰ㅽ듃 由ъ뒪�듃 end*/
 
-	/*관리자 정산관리 리스트 start*/
+	/*愿�由ъ옄 �젙�궛愿�由� 由ъ뒪�듃 start*/
 	.textSize{
 		font-size: 24px;
 	}
 	#ad_settle_lst{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
 		text-align: center;
 	}
 	#ad_settle_lst li{
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		float:left;
 		width:15%;
 		height:50px;
@@ -566,11 +598,13 @@ input{text-align:center;}
 	#ad_settle_lst li:nth-of-type(6n+1){
 		width:25%;
 	}
-	/*관리자 정산관리 리스트 end*/
+	/*愿�由ъ옄 �젙�궛愿�由� 由ъ뒪�듃 end*/
 	
-	/*관리자 스토어관리 start*/
+	/*愿�由ъ옄 �뒪�넗�뼱愿�由� start*/
 	#ad_goods_lst{
 		overflow: auto;
+		border:3px solid #437299;
+		border-radius:10px;
 		margin-bottom:20px;
 	}
 	#ad_goods_lst>li{
@@ -578,7 +612,7 @@ input{text-align:center;}
 		width:10%;
 		height:50px;
 		line-height:50px;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 	}	
 	#ad_goods_lst>li:nth-child(8n+2){
 		width:20%;
@@ -665,9 +699,9 @@ input{text-align:center;}
 	#ad_goods_writeForm ul>li:nth-child(2n){
 		width:50%;
 	}
-	/*관리자 스토어관리 end*/
+	/*愿�由ъ옄 �뒪�넗�뼱愿�由� end*/
 	
-	/*관리자 리스트 페이징 start*/
+	/*愿�由ъ옄 由ъ뒪�듃 �럹�씠吏� start*/
 	#paging{
 		margin-top:20px;
 		width:50%;
@@ -689,13 +723,13 @@ input{text-align:center;}
 		line-height: 50px;
 	}
 	
-	/*관리자 리스트 페이징 end*/
+	/*愿�由ъ옄 由ъ뒪�듃 �럹�씠吏� end*/
 	.container h1{
 		text-align: center;
 	}
 	/*  creator */
 
-	/*크리에이터 마이클래스 리스트 start*/
+	/*�겕由ъ뿉�씠�꽣 留덉씠�겢�옒�뒪 由ъ뒪�듃 start*/
 	
 	.cr_MyClass_header li{
 		float: left;
@@ -746,10 +780,10 @@ input{text-align:center;}
 	.cr_MyClass_lst li:nth-of-type(8n+5){
 		width:30%;
 	}
-	/*크리에이터 마이클래스 리스트 end*/
+	/*�겕由ъ뿉�씠�꽣 留덉씠�겢�옒�뒪 由ъ뒪�듃 end*/
 	
 	
-	/*크리에이터 신청클래스 리스트 start*/
+	/*�겕由ъ뿉�씠�꽣 �떊泥��겢�옒�뒪 由ъ뒪�듃 start*/
 	
 	.cr_Approval_header li{
 		float: left;
@@ -794,16 +828,16 @@ input{text-align:center;}
 	.cr_Approval_lst li:nth-of-type(7n+5){
 		width:40%;
 	}
-	/*크리에이터 클래스신청 리스트 end*/
+	/*�겕由ъ뿉�씠�꽣 �겢�옒�뒪�떊泥� 由ъ뒪�듃 end*/
 	
-	/*크리에이터 클래스신청 글쓰기 start*/
+	/*�겕由ъ뿉�씠�꽣 �겢�옒�뒪�떊泥� 湲��벐湲� start*/
 	#ps{
 		font-size:0.5em;
 		color:red;
 	}
-	/*크리에이터 클래스신청 글쓰기 end*/
+	/*�겕由ъ뿉�씠�꽣 �겢�옒�뒪�떊泥� 湲��벐湲� end*/
 	
-	/*크리에이터 질문/답변 목록 start*/
+	/*�겕由ъ뿉�씠�꽣 吏덈Ц/�떟蹂� 紐⑸줉 start*/
 	#cr_classQuestion_lst li{
 		width:15%;
 		float:left;
@@ -812,10 +846,10 @@ input{text-align:center;}
 		width:25%;
 		float:left;
 	}
-	/*크리에이터 질문/답변 목록 end*/
+	/*�겕由ъ뿉�씠�꽣 吏덈Ц/�떟蹂� 紐⑸줉 end*/
 	
 	
-	/*관리자 크리에이터 리스트 start*/
+	/*愿�由ъ옄 �겕由ъ뿉�씠�꽣 由ъ뒪�듃 start*/
 	.textSize{
 		font-size: 24px;
 	}
@@ -836,9 +870,9 @@ input{text-align:center;}
 	#cr_settle_lst li:nth-of-type(8n+1),#cr_settle_lst li:nth-of-type(8n+4){
 		width:20%;
 	}
-	/*크리에이터 정산관리 리스트 end*/
+	/*�겕由ъ뿉�씠�꽣 �젙�궛愿�由� 由ъ뒪�듃 end*/
 
-/*크리에이터 공지사항 리스트 start*/
+/*�겕由ъ뿉�씠�꽣 怨듭��궗�빆 由ъ뒪�듃 start*/
 	#cr_notice_lst li{
 		float: left;
 		width:10%;
@@ -861,9 +895,9 @@ input{text-align:center;}
 		height:50px;
 		text-align: right;
 	}
-	/*관리자 공지사항 리스트 end*/
+	/*愿�由ъ옄 怨듭��궗�빆 由ъ뒪�듃 end*/
 	
-	/*크리에이터  공지사항 글쓰기 start*/
+	/*�겕由ъ뿉�씠�꽣  怨듭��궗�빆 湲��벐湲� start*/
 	#cr_notice_WriteForm{
 		margin-top:30px;
 		text-align: left;
@@ -873,13 +907,13 @@ input{text-align:center;}
 		margin-bottom:10px;
 	}
 	
-	/*크리에이터 공지사항 글쓰기 end*/
+	/*�겕由ъ뿉�씠�꽣 怨듭��궗�빆 湲��벐湲� end*/
 
 
 
 
 
-	/*크리에이터 1:1문의 리스트 start*/
+	/*�겕由ъ뿉�씠�꽣 1:1臾몄쓽 由ъ뒪�듃 start*/
 	#cr_1on1_lst li{
 		float: left;
 		width:12%;
@@ -900,8 +934,8 @@ input{text-align:center;}
 	#cr_1on1_lst>li:nth-of-type(7n+7){
 		width:8%;
 	}
-	/*크리에이터 1:1문의 리스트 end*/
-	/*크리에이터 1:1문의 보기 start*/
+	/*�겕由ъ뿉�씠�꽣 1:1臾몄쓽 由ъ뒪�듃 end*/
+	/*�겕由ъ뿉�씠�꽣 1:1臾몄쓽 蹂닿린 start*/
 	#cr_1on1_write,#cr_1on1_writeForm{
 		overflow:auto;
 	}
@@ -916,9 +950,9 @@ input{text-align:center;}
 	.content_center{
 		text-align: center;
 	}
-	/*크리에이터 1:1문의 보기 end*/
+	/*�겕由ъ뿉�씠�꽣 1:1臾몄쓽 蹂닿린 end*/
 
-	/* 크리에이터 가이드 start*/
+	/* �겕由ъ뿉�씠�꽣 媛��씠�뱶 start*/
 		
 	.class-guide-image{
 		box-shadow: 2px 2px 6px rgba(0,0,0,.1), 0 0 2px rgba(0,0,0,.2); width:100%; height:auto;
@@ -961,14 +995,14 @@ input{text-align:center;}
 		font-weight:bold;
 		font-size:1.3em;
 	}
-	/*크리에이터 가이드 end*/
+	/*�겕由ъ뿉�씠�꽣 媛��씠�뱶 end*/
 	
-	/*크리에이터 클래스 문의 start*/
+	/*�겕由ъ뿉�씠�꽣 �겢�옒�뒪 臾몄쓽 start*/
 	#cre_classQuestion_lst li{
 		float:left;
 		width:15%;
 	}
-	/*크리에이터 클래스 문의 end*/
+	/*�겕由ъ뿉�씠�꽣 �겢�옒�뒪 臾몄쓽 end*/
 	
 	.btn{
 		background-color: #437299;
