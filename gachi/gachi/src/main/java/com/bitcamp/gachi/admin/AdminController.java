@@ -101,6 +101,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
+		System.out.println(vo.getDateOption());
 		System.out.println(vo.getCategory());
 		System.out.println(vo.getOption());
 		System.out.println(vo.getClass_state());

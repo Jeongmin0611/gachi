@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+<style>
+	#ad_goods_searchForm{
+		overflow: auto;
+		margin-bottom: 15px;
+	}
+	
+</style>
 <div class="container text-center ad_font">
 <h1>스토어 관리</h1>
-	<div id="ad_goods_writeForm">
+	<div id="ad_goods_searchForm">
 	<form action="">
 		<select name="category">
 			<option>공예/창작</option>
