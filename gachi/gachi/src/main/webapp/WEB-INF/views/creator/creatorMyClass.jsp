@@ -9,17 +9,19 @@
 	 	padding:5px;
 	 	overflow:auto;
 	 }
-	 
 	 .cr_MyClass_lst li{
 	 	vertical-align:middle;
-	 	overflow: auto;
-	 	
+	 	overflow: auto;	
 	 }
 	 .cr_MyClass_header{
 	 	height:50px;
  		line-height:50px;
  		padding-left:0px;
  		margin-bottom:0px
+	 }
+	 .cr_Classlist_menu{
+		border:3px solid #437299;	
+		border-radius: 10px; 
 	 }
 	 .cr_Classlist_menu li{
 		margin-top:5px;
@@ -37,10 +39,8 @@
 	 	height:30px;
 	 }
  </style> 
- 
  <div class="container text-center ad_font">
  	<h1>클래스 관리</h1>
-	<div id="cr_MyClass_area">
 		<form method="get" action="">
 			<ul class="cr_Classlist_menu">
 				<li>클래스검색</li>
@@ -56,6 +56,7 @@
 				<li>
 					<select>
 						<option>등록일</option>
+						<option>신청일</option>
 					</select>
 					 <button class="btn">오늘</button>
 					 <button class="btn">어제</button>
@@ -76,13 +77,15 @@
 					<input type="radio" name=""/>개설완료
 					<input type="radio" name=""/>강의종료
 				</li>
+				<li>
+					<input type="submit" class="btn" value="검색">
+					<input type="reset" class="btn" value="초기화">
+				</li>
 			</ul>
 			<div style="text-align:center">
-				<input type="submit" class="btn" value="검색">
-				<input type="reset" class="btn" value="초기화">
+				
 			</div>
 		</form>
-	</div>
 	<ul class="cr_MyClass_header">
 	<li>선택</li>
 		<li>클레스코드</li>

@@ -15,6 +15,7 @@ public interface ClassDaoImp {
 	
 	//클래스등록
 	public int insertClass();
+	
 	//클래스삭제
 	public int deleteClass();
 	
@@ -32,4 +33,7 @@ public interface ClassDaoImp {
 	
 	//리스트 목록 구하기(검색옵션)
 	public List<ClassVO> getClassListSearch(TestVO vo);
+	
+	//강좌 영상 간략 조회
+	public List<ClassVideoVO> getClassVideoListSample(String code);
 }
