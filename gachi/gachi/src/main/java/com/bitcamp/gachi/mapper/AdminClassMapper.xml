@@ -97,5 +97,7 @@
 		select VIDEO_CODE,VIDEO_NAME,VIDEO_FILENAME,unit,unit_content,VIDEO_LENGTH,
 		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video where code=#{param}
 	</select>
-			
+	<update id="updateClassState" parameterType="String">
+		update class set class_state='등록승인' where code='${code}'
+	</update>		
 </mapper>

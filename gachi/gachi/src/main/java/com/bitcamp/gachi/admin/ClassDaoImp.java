@@ -28,6 +28,9 @@ public interface ClassDaoImp {
 	//총 레코드 수 구하기
 	public int getAllRecordCount(TestVO vo);
 	
+	//클래스 등록처리
+	public int updateClassState(String code);
+	
 	//리스트 목록 구하기(조회옵션)
 	public List<ClassVO> getClassListLookUp(TestVO vo);
 	
