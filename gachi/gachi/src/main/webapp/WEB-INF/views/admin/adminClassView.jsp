@@ -9,28 +9,30 @@
 		width:80%;
 		text-align: right;
 	}
+	#ad_goods_viewForm>li{
+		height:100%;
+	}
 </style>
 <div class="container ad_font">
 	<h1>클래스 조회</h1>
 <ul id="ad_goods_viewForm">
 	<li class="text-center">
 		<ul>
-			<li>클래스코드 cla001</li>
-			<li>카테고리 공예/창작</li>
-			<li>상품명 곰돌이 인형만들기</li>
-			<li>난이도 초급</li>
-			<li>수업차시 12강</li>
-			<li>수강시간 3시간</li>
-			<li>가격 100,000원</li>
-			<li>좋아요 999개</li>
-			<li>등록일 2020-08-12</li>
-			<li>상태 판매중</li>
+			<li>클래스코드 ${vo.code}</li>
+			<li>카테고리 ${vo.category}</li>
+			<li>클래스명 ${vo.class_name}</li>
+			<li>난이도 ${vo.stage}</li>
+			<li>원가 ${vo.full_price}</li>
+			<li>가격 ${vo.real_price}</li>
+			<li>좋아요 ${vo.good}</li>
+			<li>등록일 ${vo.allow}</li>
+			<li>상태 ${vo.class_state}</li>
 		</ul>
 	</li>
 	<li>
 		<ul style="width:50%; margin-top:45px;">
 			<li style="text-align: center">대표이미지</li>
-			<li><img src="/gachi/img/147.jpg"/></li>
+			<li><img src="upload/classImg/${vo.class_img1}"/></li>
 		</ul>
 	</li>
 </ul>

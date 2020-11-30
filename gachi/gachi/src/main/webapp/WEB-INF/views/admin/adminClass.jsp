@@ -42,13 +42,13 @@
 	}
 </style>
 <script>
-	$(()=>{
-		$('#ad_class_search').submit(function(){
+	$(function(){
+		$("#ad_class_search").submit(()=>{
 			if($('#searchWord').val()==null||$('#searchWord').val()==""){
-					alert("검색어를 입력해주세요.");
-					return false;
+				alert("검색어를 입력해주세요.");
+				return false;
 			}
-			return false;
+			return true;
 		});
 	});
 </script>
@@ -57,7 +57,7 @@
 <div id="search_area">
 	<ul>
 		<li>
-			<form method="get" id="ad_class_lookup" action="/gachi/adminClass">
+			<form method="post" id="ad_class_lookup" action="/gachi/adminClass">
 			<h3>조회옵션</h3>
 			<ul>
 				<li>날짜옵션</li>
@@ -98,17 +98,18 @@
 			</form>
 	</li>
 		<li>
-		<form method="get" id="ad_class_search" action="/gachi/adminClass">
+		<form method="get" id="ad_class_search" action="/gachi/adminClass2">
 			<h3>검색옵션</h3>
 			<ul style="margin-top:10px;height:200px;">
 				<li>검색옵션</li>
 				<li>
 					<select id="option" name="option">
-						<option value=null>전체</option>
+						<option>전체</option>
 						<option value="code">클래스코드</option>
 						<option value="category">카테고리</option>
 						<option value="class_name">클래스명</option>
 						<option value="nickname">크리에이터닉네임</option>
+						<option value="class_state">클래스상태</option>
 					</select>
 				</li>
 				<li>검색</li>
@@ -135,7 +136,7 @@
 		<c:forEach var="vo" items="${list}">
 		<li>${vo.code }</li>
 		<li>${vo.category }</li>
-		<li><a href="/gachi/adminClassView?class_code=${vo.code}">${vo.class_name}</a></li>
+		<li><a href="/gachi/adminClassView?code=${vo.code}">${vo.class_name}</a></li>
 		<li>${vo.nickname }</li>
 		<li>${vo.total_student }</li>
 		<li>${vo.signup }</li>
@@ -152,8 +153,18 @@
 			</c:if>
 			<c:forEach var="p" begin="${pvo.startPageNum}" end="${pvo.startPageNum + pvo.onePageRecord-1 }">
 				<c:if test="${p<=pvo.totalPage}">
-					<li <c:if test="${p==pvo.nowPage}"> style="background-color:white"</c:if>>
-						<a href="/gachi/adminClass?nowPage=${p}" class="paging_num">${p}</a>
+					<li <c:if test="${p==pvo.nowPage}"> style="color:#437299"</c:if>>
+						<a href="/gachi/adminClass?nowPage=${p}
+						<c:choose>
+							<c:when test='searchWord==null||searchWord.equals("")'>
+								&dateOption=${dateOption}&date1=${date1}&date2=${date2}&category=${category}
+								&class_state=${class_state}
+							</c:when>
+							<c:when test='searchWord!=null&&!searchWord.equals("")'>
+								&option=${option}&searchWord=${searchWord}
+							</c:when>
+						</c:choose>
+						" class="paging_num">${p}</a>
 					</li>
 				</c:if>
 			</c:forEach>

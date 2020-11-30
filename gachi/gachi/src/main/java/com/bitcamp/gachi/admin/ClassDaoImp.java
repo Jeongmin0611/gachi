@@ -8,7 +8,7 @@ public interface ClassDaoImp {
 	public List<ClassVO> selectAllClass(TestVO vo);
 	
 	//클래스조회
-	public ClassVO selectClass();
+	public ClassVO selectClass(String code);
 
 	//클래스수정
 	public int updateClass();
@@ -27,6 +27,9 @@ public interface ClassDaoImp {
 	//총 레코드 수 구하기
 	public int getAllRecordCount(TestVO vo);
 	
-	//리스트 목록 구하기
-	public List<ClassVO> getClassList(TestVO vo);
+	//리스트 목록 구하기(조회옵션)
+	public List<ClassVO> getClassListLookUp(TestVO vo);
+	
+	//리스트 목록 구하기(검색옵션)
+	public List<ClassVO> getClassListSearch(TestVO vo);
 }
