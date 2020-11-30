@@ -682,7 +682,7 @@ input{text-align:center;}
 	#ad_goods_writeForm{
 		border:3px solid #437299;
 		border-radius:10px;
-		height:300px;
+		overflow:auto;
 	}
 	#ad_goods_writeForm li{
 		float:left;

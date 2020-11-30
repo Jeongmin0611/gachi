@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -149,6 +152,51 @@ public class AdminController {
 		mav.setViewName("admin/adminClassView");
 		return mav;
 	}
+	@RequestMapping("/adminClassEdit")
+	public ModelAndView adminClassEdit(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping("/adminClassStateUpdate")
+	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		int result=dao.updateClassState(code);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",code);
+			mav.setViewName("redirect:adminClassView");
+		}
+		return mav;
+	} 
+	
+	@RequestMapping("/adminClassDel")
+	public ModelAndView adminClassDel(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
+	public void imageUpload(HttpServletRequest req) {
+		System.out.println("Aaaaa");
+		HttpSession session=req.getSession();
+		String path=session.getServletContext().getRealPath("/classImg");
+		MultipartHttpServletRequest mr=(MultipartHttpServletRequest) req;
+		List<MultipartFile> files=mr.getFiles("filename");
+		for (int i = 0; i < files.size(); i++) {
+			System.out.println("이미지 파일 1 => "+files.get(i));
+		}
+	}
+	
+	
 	
 //	public String adminMember() {
 //		

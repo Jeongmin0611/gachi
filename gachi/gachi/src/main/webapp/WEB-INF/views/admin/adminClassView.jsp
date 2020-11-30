@@ -14,6 +14,16 @@
 	}
 </style>
 <script type="text/javascript">
+	function classDel(){
+		if(confirm("해당 클래스를 삭제하시겠습니까?")){
+			location.href='/gachi/adminClassDel?code=${vo.code}';	
+		}
+	}
+	function updateClassState(){
+		if(confirm("${vo.code} 클래스를 등록처리 하시겠습니까?")){
+			location.href='/gachi/adminClassStateUpdate?code=${vo.code}';
+		}
+	}
 	$(function(){
 		CKEDITOR.replace("class_info");
 		CKEDITOR.config.height=500;
@@ -112,8 +122,10 @@
 		<button class="btn" onclick="goodsInquiryDel()">삭제</button>
 	</div>
 <div class="text-center">
-		<button class="btn">등록처리</button>
-		<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
-		<button class="btn" onclick="goodsDel()">삭제</button>
+		<c:if test="${vo.class_state ne '등록승인'}">
+			<button class="btn" onclick="updateClassState()">등록처리</button>
+		</c:if>
+		<button class="btn" onclick="location.href='/gachi/adminClassEdit?code=${vo.code}'">수정</button>
+		<button class="btn" onclick="classDel()">삭제</button>
 </div>
 </div>
