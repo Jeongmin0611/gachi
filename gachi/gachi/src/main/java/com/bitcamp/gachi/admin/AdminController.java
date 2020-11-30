@@ -118,7 +118,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminClass2")
-	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req) {
+	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req){
 		System.out.println(vo.getOption());
 		System.out.println(vo.getSearchWord());
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
@@ -138,36 +138,14 @@ public class AdminController {
 		mav.setViewName("admin/adminClass");
 		return mav;
 	}
-	@RequestMapping("/adminClass2")
-	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req) {
-		System.out.println(vo.getDateOption());
-		System.out.println(vo.getCategory());
-		System.out.println(vo.getOption());
-		System.out.println(vo.getClass_state());
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
-		
-		System.out.println("date1===> "+vo.getDate1()+"date2===> "+vo.getDate2());
-		String nowPageRequest=req.getParameter("nowPage");
-		if(nowPageRequest!=null) {
-			vo.setNowPage(Integer.parseInt(nowPageRequest));
-		}
-		int totalRecord=dao.getAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);	
-		List<ClassVO> list=dao.getClassList(vo);
-		
-		ModelAndView mav =new ModelAndView();
-		mav.addObject("list",list);
-		mav.addObject("pvo",vo);
-		mav.setViewName("admin/adminClass");
-		return mav;
-	}
 	@RequestMapping("/adminClassView")
 	public ModelAndView adminClassView(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		ClassVO vo=dao.selectClass(code);
-		
+		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("vList",vList);
 		mav.setViewName("admin/adminClassView");
 		return mav;
 	}

@@ -638,7 +638,7 @@ input{text-align:center;}
 		width:50%;
 	}
 	#ad_goods_info,#ad_goods_inquiry,#ad_goods_review,#ad_video_priview{
-		height:400px;
+		overflow:auto;
 		border:3px solid #437299;
 		border-radius: 10px; 
 		margin:10px 0px;

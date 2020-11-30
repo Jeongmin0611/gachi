@@ -91,6 +91,11 @@
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by code asc) where <![CDATA[rownum<=${lastPageRecordCount}]]> order by code desc
 	</select>
 	<select id="selectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVO">
-		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_img1 from class where code=#{code}
+		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img1 from class where code=#{code}
 	</select>
+	<select id="getClassVideoListSample" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		select VIDEO_CODE,VIDEO_NAME,VIDEO_FILENAME,unit,unit_content,VIDEO_LENGTH,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video where code=#{param}
+	</select>
+			
 </mapper>
