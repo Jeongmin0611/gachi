@@ -38,7 +38,7 @@
 	</delete> -->
 	<select id="dashForMember" parameterType="map" resultType="_int">
 		<foreach collection="list" item="item" separator=" union all">
- 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item}
+ 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='회원'
 		</foreach>
 	</select>
 	

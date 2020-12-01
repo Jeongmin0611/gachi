@@ -428,7 +428,7 @@ public class AdminController {
 //	public String adminStatMember() {
 //		return "admin/adminStatMember";
 //	}
-	@RequestMapping("/adminStatMember")
+@RequestMapping("/adminStatMember")
 	
 	public ModelAndView adminStatMember() {
 		ModelAndView mav = new ModelAndView();
@@ -450,7 +450,7 @@ public class AdminController {
 //		
 		System.out.println("startMonth:" + startMonth);
 		System.out.println("endMonth:" + endMonth);
-//		mav.addObject("dataSize", dataSize);
+		mav.addObject("dataSize", 2);
 //		mav.addObject("newMember", newMember);
 		mav.setViewName("admin/adminStatMember");
 		return mav;
@@ -512,10 +512,16 @@ public class AdminController {
 		}
 		
 		if(startMonth != null && endMonth != null) {
-			
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+				System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+				System.out.println(dbParam2.get(i));
+			}
 			
 			mav.addObject("dashData", newMember);
 			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
 			mav.addObject("endMonth", endMonth);
 			

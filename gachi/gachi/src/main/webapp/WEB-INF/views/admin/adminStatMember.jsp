@@ -10,9 +10,9 @@
    <h1 style="text-align:center;"> 회원 통계 </h1><br/>
       
 		<form action="adminStatMember" method="post">
-         <input type="month" id="startMonth" name="startMonth" value="${startMonth }" onchange="return chkPeriod();"/>
+         <input type="month" id="startMonth" name="startMonth" value="${startMonth }" onchange="return chkPeriod()"/>
          -
-         <input type="month" id="endMonth" name="endMonth" value="${endMonth }" onchange="return chkPeriod();"/>
+         <input type="month" id="endMonth" name="endMonth" value="${endMonth }" onchange="return chkPeriod()"/>
          <input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
         </form> 
       <div>
@@ -21,10 +21,10 @@
          
          var dashData = [];
          var labelData = []; 
-         /* labelData = "${labelData}"; */
+         dashData = "${dashData}";
+         labelData = "${labelData}";
          var startMonth = "${startMonth}";
          var endMonth = "${endMonth}";
-         
          
          $(function(){
         		console.log('loading');
@@ -39,12 +39,13 @@
         	    } else{
         	    	
         	    }
-        	    $('#frm').on('submit',function(){
+/*         	    $('#frm').on('submit',function(){
         	         frmSubmit();
         	         return false;
-        	     });//submit
-        	     
+        	     });//submit */
+        	       	     
 		$("#frm").click(function(){
+			
 			var url = "/adminStatMember";
 			var data = ${dashData};
 			$.ajax({
@@ -57,9 +58,11 @@
 				},error:function(){
 					console.log("ajax에러발생");
 				}
+			
 			});
 		});
-        	              
+     
+   	              
          function addData(chart, label, data) {
         	 
         	    chart.data.labels.push(label);
@@ -81,8 +84,6 @@
         		}
         	} // chkPeriod
 
-        	     
-		
          });
          
          var ad_Mb_StatClass_context = document.getElementById('ad_Mb_StatClass_chart').getContext('2d');
@@ -184,4 +185,4 @@
       </script>
       연령별
       </div>
-</div>   
+</div>
