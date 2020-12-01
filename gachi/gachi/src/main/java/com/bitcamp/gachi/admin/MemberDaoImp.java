@@ -1,6 +1,8 @@
 package com.bitcamp.gachi.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bitcamp.gachi.admin.MemberVO;
 
@@ -21,4 +23,8 @@ public interface MemberDaoImp {
 	public int leaveMemberUpdate(String userid);
 	
 	public int adminMemberDelete(String userid);
+
+	public List<Integer> dashForMember(Map<String, List> dbParam);
+	
+	
 }
