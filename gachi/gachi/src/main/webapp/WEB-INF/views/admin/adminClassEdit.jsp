@@ -4,16 +4,14 @@
 <script type="text/javascript">
 	$(function(){
 		CKEDITOR.replace('class_info',{
-			fliebrowserUploadUrl:'/gachi/imageUpload'
+			imageUploadUrl:'/gachi/imageUpload',
+			extraPlugins:'uploadimage'
 		});
 		CKEDITOR.config.height=500;
-		//CKEDITOR.config.extraPlugins='dragdrop'
 		$("#ad_goods_writeForm>li").slice(2).css("width","100%");
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
 		$("#ad_goods_write li").css("margin-top","10px");
 		$("textarea").css("height","800px");
-		
-		$("#class_info")
 	});
 </script>
 <div class="container">
