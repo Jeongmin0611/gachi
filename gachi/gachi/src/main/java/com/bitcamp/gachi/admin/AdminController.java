@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,15 +207,7 @@ public class AdminController {
 		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
 		String path=session.getServletContext().getRealPath("/upload/classImg");
-		InetAddress local = null;
-		try {
-			local = InetAddress.getLocalHost();
-		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} 
-		String ip = local.getHostAddress();
-		//String path=req.get
+		
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
 		try {
@@ -222,12 +215,12 @@ public class AdminController {
 			ops.write(upload.getBytes());
 			json.addProperty("uploaded",1);
 			json.addProperty("filename",upload.getOriginalFilename());
-			json.addProperty("url",upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/classImg/"+upload.getOriginalFilename());
 			ops.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("path ip ==> "+ip);
+		//System.out.println("path ip ==> "+ip);
 		System.out.println("path real ==> "+path);
 		System.out.println("path req ==> "+req.getRequestURI());
 		System.out.println("path context ==> "+req.getContextPath());
