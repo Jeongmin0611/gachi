@@ -11,9 +11,9 @@
 		<p>
 
 			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>
-			<input type="date" value="2020-11-11"/>
+			<input type="month" value="2020-11"/>
 			-
-			<input type="date" value="2020-11-11"/>
+			<input type="month" value="2020-11"/>
 			<button type="button" class="btn btn-outline-dark btn-sm">▶</button>
 			<button type="button" class="btn btn-outline-dark btn-sm">이번달</button></p>
 		<div>
