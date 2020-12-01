@@ -1,6 +1,9 @@
 package com.bitcamp.gachi.register;
 
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.mypage.MileageDaoImp;
@@ -88,5 +92,31 @@ import com.bitcamp.gachi.mypage.MileageDaoImp;
 			s.invalidate();
 			return "home";
 		}
+		@RequestMapping("/smsIdentity")
+		public String smsIdentity() {
+			return "register/telChkOk";
+		}
+		
+		@RequestMapping(value="/telChkOk",method={RequestMethod.GET, RequestMethod.POST})
+		@ResponseBody
+		public String sendSms(HttpServletRequest request) throws Exception {
+			
+			String api_key = "NCSADDFSIE3CDS6C";
+			String api_secret = "CF5SAJ2PP48LUB3QXHGJJNLZ14MKANFH";
+
+		    com.bitcamp.gachi.register.Coolsms coolsms = new com.bitcamp.gachi.register.Coolsms(api_key, api_secret);
+		       
+		    HashMap<String, String> set = new HashMap<String, String>();
+
+		    set.put("to", (String)request.getParameter("to")); // 받는 사람
+		    set.put("from", "01051141319"); // 발신번호
+		    set.put("text", "같이가치 본인인증 \n 인증번호는 ["+(String)request.getParameter("text")+"]입니다"); // 문자내용
+		    set.put("type", "sms"); // 문자 타입
+		   
+		    coolsms.send(set); // 보내기
+		    
+		    return "suc";
+		}
+		
 }
 
