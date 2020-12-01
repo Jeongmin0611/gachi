@@ -5,8 +5,10 @@
 <head>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="resources/bootstrap.css" type="text/css" />
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
+<script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -145,6 +147,10 @@
 		color:gray;
 		font-size:1em;
 	}
+	#my-video{
+		width:100%;
+		height:100%;
+	}
 </style>
 <script>
 	$(function(){
@@ -170,12 +176,16 @@
 			<div><a href="/gachi/myclassView">내 학습표</a></div>
 			<div>
 				프랑스 자수 클래스를 소개합니다!
-				<button class="btn btn-light" id="videoLstClose">></button>
-				<button class="btn btn-light" id="videoLstOpen"><</button>
+				<button class="btn btn-light" id="videoLstClose"></button>
+				<button class="btn btn-light" id="videoLstOpen"></button>
 			</div>
 		</div>
 		<div id="myclassVideoView">
-			<img src="/gachi/img/video_test_image.png"/>
+			<video  id="my-video" class="video-js" controls preload="auto"
+    				data-setup="{}">
+    		<source src="upload/class_video/test2.mp4" type="video/mp4" />	
+    				
+			</video>
 		</div>
 		<div id="myclassVideoBtm">
 			<button type="button" class="btn btn-light">이전 영상</button>

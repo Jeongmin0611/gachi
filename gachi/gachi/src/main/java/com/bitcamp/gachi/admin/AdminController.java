@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -109,9 +113,25 @@ public class AdminController {
 	
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
-		System.out.println(vo.getCategory());
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
+		String nowPageRequest=req.getParameter("nowPage");
+		if(nowPageRequest!=null) {
+			vo.setNowPage(Integer.parseInt(nowPageRequest));
+		}
+		int totalRecord=dao.getAllRecordCount(vo);
+		vo.setTotalRecord(totalRecord);
+		List<ClassVO> list=dao.getClassListLookUp(vo);
+		
+		ModelAndView mav =new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("pvo",vo);
+		mav.setViewName("admin/adminClass");
+		return mav;
+	}
+	@RequestMapping("/adminClass2")
+	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req){
 		System.out.println(vo.getOption());
-		System.out.println(vo.getClass_state());
+		System.out.println(vo.getSearchWord());
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
 		
 		System.out.println("date1===> "+vo.getDate1()+"date2===> "+vo.getDate2());
@@ -121,11 +141,7 @@ public class AdminController {
 		}
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
-		
-		
-		
-		
-		List<ClassVO> list=dao.getClassList(vo);
+		List<ClassVO> list=dao.getClassListSearch(vo);
 		
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
@@ -134,9 +150,61 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminClassView")
-	public String adminClassView() {
-		return "admin/adminClassView";
+	public ModelAndView adminClassView(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("vList",vList);
+		mav.setViewName("admin/adminClassView");
+		return mav;
 	}
+	@RequestMapping("/adminClassEdit")
+	public ModelAndView adminClassEdit(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping("/adminClassStateUpdate")
+	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		int result=dao.updateClassState(code);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",code);
+			mav.setViewName("redirect:adminClassView");
+		}
+		return mav;
+	} 
+	
+	@RequestMapping("/adminClassDel")
+	public ModelAndView adminClassDel(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
+	public void imageUpload(HttpServletRequest req) {
+		System.out.println("Aaaaa");
+		HttpSession session=req.getSession();
+		String path=session.getServletContext().getRealPath("/classImg");
+		MultipartHttpServletRequest mr=(MultipartHttpServletRequest) req;
+		List<MultipartFile> files=mr.getFiles("filename");
+		for (int i = 0; i < files.size(); i++) {
+			System.out.println("이미지 파일 1 => "+files.get(i));
+		}
+	}
+	
+	
 	
 //	public String adminMember() {
 //		

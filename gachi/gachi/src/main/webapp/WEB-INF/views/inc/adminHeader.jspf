@@ -120,34 +120,6 @@ a, h1, li {
         opacity:1;
     }
 }
-@media all and (min-width:320px) and (max-width:600px){
-		#headerDiv{
-			width:20%;
-		}
-		#adminMenu>li{
-			font-size:0.5em;
-			margin-left:0px;
-		}
-		.container{
-			max-width:80%;
-		}
-	}	
-@media all and (min-width:601px) and (max-width:800px){
-		#headerDiv{
-			width:15%;
-		}
-		#adminMenu{
-			padding:0px;
-		}
-		#adminMenu>li{
-			font-size:0.5em;
-			margin-left:0px;
-		}
-		.container{
-			max-width:70%;
-		}
-	}
-
 </style>
 
 <title>관리자페이지</title>
@@ -196,8 +168,8 @@ a, h1, li {
 			<a href="/gachi/adminGoods">스토어 관리</a>
 		</li>
 		<li><a href="/gachi/adminSettle">정산 관리</a></li>
-		<li data-target="#menu3" data-toggle="collapse">통계
-			<div id="menu3" class="collapse">
+		<li data-target="#menu5" data-toggle="collapse">통계
+			<div id="menu5" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminStatStore">스토어</a></li>
 	            <li><a href="/gachi/adminStatClass">클래스</a></li>

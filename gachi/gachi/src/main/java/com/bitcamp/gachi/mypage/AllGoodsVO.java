@@ -2,6 +2,7 @@ package com.bitcamp.gachi.mypage;
 
 public class AllGoodsVO {
 	private String code; /* 코드 */
+	private String class_order_code;
 	private String userid; /* 아이디(이메일) */
 	private String category; /* 카테고리 */
 	private String class_name; /* 클래스명 */
@@ -43,6 +44,12 @@ public class AllGoodsVO {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getClass_order_code() {
+		return class_order_code;
+	}
+	public void setClass_order_code(String class_order_code) {
+		this.class_order_code = class_order_code;
 	}
 	public String getUserid() {
 		return userid;

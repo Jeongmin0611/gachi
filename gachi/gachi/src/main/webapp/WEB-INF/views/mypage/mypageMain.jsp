@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>	
 	
 	/* 마이페이지(메인) - 컨테이너 */
 	
+	a:hover{
+		font-weight:bold;
+	}
 	.mypageTop>div{	
 		width:;
 		float:;
@@ -116,6 +120,22 @@
 </style>
 <script>
 	$(function(){
+		//오늘 날짜 세팅
+		var date = new Date();
+		var yyyy = date.getFullYear();
+		var mm = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + date.getMonth()+1;
+		var dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+		 
+		$("#mypageMainDate1").val(yyyy+"-"+mm+"-"+dd);
+		$("#mypageMainDate2").val(yyyy+"-"+mm+"-"+dd);
+
+		//날짜 조회
+		$("#orderListDate").click(function(){
+			var startDate = $("#mypageMainDate1").val();
+			var endDate = $("#mypageMainDate2").val();
+			
+		});
+		
 		//모달창 띄우기
 	    $(".mypageDelivery").click(function(){
     		$("#mypageModal").css({
@@ -130,7 +150,7 @@
 	       $("#mypageModal").fadeOut();
 	    });   
 	});
-
+	
 </script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
@@ -147,7 +167,7 @@
 				-
 				<input type="date" id="mypageMainDate2"/>
 			
-				<button type="button" class="btn btn-outline-light btn-sm">조회</button>
+				<button type="button" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
 			</div>
 			<!-- xs, sm 크기에서만 보이기  -->
 			<div class="d-block d-sm-bolck d-md-none">
@@ -161,38 +181,75 @@
 					-
 					<input type="date" id="mypageMainDate2"/>
 				
-				<button type="button" class="btn btn-outline-light btn-block">조회</button>
+				<button type="button" class="btn btn-outline-light btn-block" id="orderListDate">조회</button>
 				</div>
 			</div>
 		</div>
 		<div class="mypageContent">
-			<h4>2020.11.06</h4>
 			<hr class="userHr"/>
-			<div class="row">	
-				<div class="col-md-3"><img src="/gachi/img/test_image.jpg"/></div>
-				<div class="col-md-6">
-					<ul class="mypageMainLst">
-						<li>
-							<label class="badge badge-info">공예/창작</label>
-							<label class="badge badge-light"><a href="#">주문번호 10101010</a></label>
-						</li>
-						<li>클래스명 <a href="#">카모마일 프랑스 자수</a></li>
-						<li>크리에이터명 <a href="#">홍길동</a></li>
-						<li>결제가격 15000원</li>
-						<li>결제일시 20.11.06 19:30:34</li>
-					</ul>
-				</div>
-				<!-- xs 크기에서만 숨기기  -->
-				<div class="col-md-3 col d-none d-sm-block">
-					<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
-					<div><button type="button" class="btn btn-outline-light">결제취소</button></div>
-				</div>
-				<!-- xs 크기에서만 보이기  -->
-				<div class="col-md-3 d-block d-sm-none">
-					<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-						<button type="button" class="btn btn-outline-light">결제취소</button></div>
-				</div>
-			</div>
+			<c:forEach var="list" items="${map }">
+				<c:set var="key" value="${list.key }"/>
+				<c:if test="${fn:contains(key,'c')}">
+					<c:forEach var="vo" items="${list.value }">
+					<div class="row">	
+						<div class="col-md-3"><img src="/gachi/img/${vo.class_img1 }"/></div>
+						<div class="col-md-6">
+							<ul class="mypageMainLst">
+								<li>
+									<label class="badge badge-info">${vo.category }</label>
+									<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.class_order_code }</a></label>
+								</li>
+								<li>클래스명 <a href="#">${vo.class_name }</a></li>
+								<li>크리에이터명 <a href="#">${vo.username }</a></li>
+								<li>가격 ${vo.real_price }원</li>
+								<li>결제일시 ${vo.orderdate }</li>
+							</ul>
+						</div>
+						<!-- xs 크기에서만 숨기기  -->
+						<div class="col-md-3 col d-none d-sm-block">
+							<div><button type="button" class="btn btn-outline-light">결제취소</button></div>
+						</div>
+						<!-- xs 크기에서만 보이기  -->
+						<div class="col-md-3 d-block d-sm-none">
+							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+								<button type="button" class="btn btn-outline-light">결제취소</button></div>
+						</div>
+					</div>
+					<hr/>
+					</c:forEach>
+				</c:if>
+				<c:if test="${fn:contains(key,'g')}">
+					<c:forEach var="vo" items="${list.value }">
+					<div class="row">	
+						<div class="col-md-3"><img src="/gachi/img/${vo.goods_img1 }"/></div>
+						<div class="col-md-6" style="text-align:left">
+							<ul class="mypageMainLst">
+								<li>
+									<label class="badge badge-info">${vo.category }</label>
+									<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
+								</li>
+								<li>상품명 <a href="#">${vo.goods_name }</a></li>
+								<li>수량 ${vo.amount }개</li>
+								<li>가격 ${vo.real_price }원</li>
+								<li>결제일시 ${vo.orderdate }</li>
+							</ul>
+						</div>
+						<!-- xs 크기에서만 숨기기  -->
+						<div class="col-md-3 col d-none d-sm-block">
+							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
+							<div><button type="button" class="btn btn-outline-light">결제취소</button></div>
+						</div>
+						<!-- xs 크기에서만 보이기  -->
+						<div class="col-md-3 d-block d-sm-none">
+							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+								<button type="button" class="btn btn-outline-light">결제취소</button></div>
+						</div>
+					</div>
+					<hr/>
+			</c:forEach>
+				</c:if>
+			</c:forEach>
+		</div>
 		</div>
 		<div class="mypageMainBtm">
 			<ul class="pagination justify-content-center">

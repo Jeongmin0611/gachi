@@ -3,37 +3,101 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.admin.ClassDaoImp">
-	<select id="selectAllClass" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
-				select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
-				to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid 
-				<choose>
-					<when test="category==null and option==null and class_state==null and searchWord==null"></when>
-					<when test='!category.equals("전체") and option.equals("전체") and class_state.equals("전체")'>
-						where category='${category}' and c.class_name like '%${searchWord}%' or 
-						m.nickname like '%${searchWord}%' or c.code like '%${searchWord}%'
-					</when>
-					<when test='!category.equals("전체") and !option.equals("전체") and class_state.equals("전체")'>
-						where category='${category}' and ${option} like '%${searchWord}%'
-					</when>
-					<when test='!category.equals("전체") and !option.equals("전체") and !class_state.equals("전체")'>
-						where category='${category}' and ${option} like '%${searchWord}%' and class_state='${class_state}'
-					</when>
-					<when test='category.equals("전체") and !option.equals("전체") and class_state.equals("전체")'>
-					 	where ${option} like '%${searchWord}%'
-					</when>
-					<when test='category.equals("전체") and !option.equals("전체") and !class_state.equals("전체")'>
-					 	where ${option} like '%${searchWord}%' and class_state='${class_state}'
-					</when>
-					
-				</choose>
-				order by code
-	</select>
 	<select id="getAllRecordCount" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="int">
-		select count(code) from class where code like '%c%'
+		select count(code) from class
+		<choose>
+			<when test="option==null and dateOption==null and option==null"></when>
+			<when test='option!=null and option.equals("전체")'>
+				where code like '%${searchWord}%' or category like '%${searchWord}%' or 
+				class_name like '%${searchWord}%' or userid like '%${searchWord}%' or class_state like '%${searchWord}%'
+			</when>
+			<when test='option!=null and !option.equals("전체")'>
+				where ${option} like '%${searchWord}%'
+			</when>
+			<when test='!dateOption.equals("전체") and !category.equals("전체") and !class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and category='${category}' and class_state='${class_state}'
+			</when>
+			<when test='!dateOption.equals("전체") and !category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and category='${category}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}'
+			</when>
+			<when test='dateOption.equals("전체") and !category.equals("전체") and !class_state.equals("전체")'>
+				where category='${category}' and class_state='${class_state}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and !class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and class_state='${class_state}'
+			</when>
+			<when test='dateOption.equals("전체") and category.equals("전체") and !class_state.equals("전체")'>
+				where class_state='${class_state}'
+			</when>
+			<when test='dateOption.equals("전체") and !category.equals("전체") and class_state.equals("전체")'>
+				where category='${category}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}'
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
-	<select id="getClassList" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
+	<select id="getClassListLookUp" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
 		select * from (select * from (select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
-		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid order by c.code desc) 
+		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid 
+		<choose>
+			<when test="option==null and dateOption==null and category==null"></when>
+			<when test='!dateOption.equals("전체") and !category.equals("전체") and !class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and category='${category}' and class_state='${class_state}'
+			</when>
+			<when test='!dateOption.equals("전체") and !category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and category='${category}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}'
+			</when>
+			<when test='dateOption.equals("전체") and !category.equals("전체") and !class_state.equals("전체")'>
+				where category='${category}' and class_state='${class_state}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and !class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}' and class_state='${class_state}'
+			</when>
+			<when test='dateOption.equals("전체") and category.equals("전체") and !class_state.equals("전체")'>
+				where class_state='${class_state}'
+			</when>
+			<when test='dateOption.equals("전체") and !category.equals("전체") and class_state.equals("전체")'>
+				where category='${category}'
+			</when>
+			<when test='!dateOption.equals("전체") and category.equals("전체") and class_state.equals("전체")'>
+				where ${dateOption} between '${date1}' and '${date2}'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by c.code desc) 
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by code asc) where <![CDATA[rownum<=${lastPageRecordCount}]]> order by code desc 
 	</select>
+	<select id="getClassListSearch" parameterType="com.bitcamp.gachi.admin.TestVO" resultType="com.bitcamp.gachi.admin.ClassVO">
+		select * from (select * from (select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,
+		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid 
+		<choose>
+			<when test='option!=null and option.equals("전체")'>
+				where c.code like '%${searchWord}%' or c.category like '%${searchWord}%' or 
+				c.class_name like '%${searchWord}%' or c.userid like '%${searchWord}%' or c.class_state like '%${searchWord}%'
+			</when>
+			<when test='option!=null and !option.equals("전체")'>
+				where ${option} like '%${searchWord}%'
+			</when>
+		</choose>
+		order by c.code desc) 
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by code asc) where <![CDATA[rownum<=${lastPageRecordCount}]]> order by code desc
+	</select>
+	<select id="selectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVO">
+		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img1 from class where code=#{code}
+	</select>
+	<select id="getClassVideoListSample" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		select VIDEO_CODE,VIDEO_NAME,VIDEO_FILENAME,unit,unit_content,VIDEO_LENGTH,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video where code=#{param}
+	</select>
+	<update id="updateClassState" parameterType="String">
+		update class set class_state='등록승인' where code='${code}'
+	</update>		
 </mapper>

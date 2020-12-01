@@ -25,12 +25,13 @@
 			behavior : 'smooth'
 		});
 	}
-</script>	
+</script>
 <style>
-#slideimage{
-	margin-top: 50px;
+.carousel-item img {
+	height: 588px;
+	width: 100%;
 }
-</style>
+</style>	
     <div id="slideimage" class="carousel slide" data-ride="carousel" data-interval="5000" 
     data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000"><!-- carousel -->
         <!-- 하단 컨트롤러 -->
@@ -39,27 +40,33 @@
             <li data-target="#slideimage" data-slide-to="1"></li>
             <li data-target="#slideimage" data-slide-to="2"></li>
             <li data-target="#slideimage" data-slide-to="3"></li>
+            <li data-target="#slideimage" data-slide-to="4"></li>
         </ul>
         <!-- 이미지 목록 (컨텐츠) -->
-        <div class="carousel-inner">
+        <div class="carousel-inner" >
             <div class="carousel-item active">
-               <a href="#"> <img src="img/slideimg1.jpg"/></a>
+               <a href="#"> <img src="img/bxslide1.jpg"/></a>
                 <!-- 이미지 위의 설명쓰기-->
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <a href=""><img src="img/slideimg33.jpg"/></a>
+                <a href=""><img src="img/bxslide2.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <a href=""><img src="img/slide0303.jpg"/></a>
+                <a href=""><img src="img/bxslide3.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
                 <a href=""><img src="img/slide031.jpg"/></a>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href=""><img src="img/slideimg33.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>

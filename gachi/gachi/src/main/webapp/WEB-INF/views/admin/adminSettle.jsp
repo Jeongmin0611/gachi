@@ -54,7 +54,7 @@
 		<li>150000</li>
 		<li>0</li>
 		<li>2020-11-14</li>
-		<li><a href="#">정산처리</a></li>
+		<li><a href="#">정산대기</a></li>
 	</ul>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
