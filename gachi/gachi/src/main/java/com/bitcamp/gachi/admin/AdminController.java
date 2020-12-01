@@ -194,10 +194,9 @@ public class AdminController {
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		ClassVO vo=dao.selectClass(code);
+		dao.deleteClass(code);
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("vo",vo);
-		mav.setViewName("admin/adminClassEdit");
+		mav.setViewName("redirect:adminClass");
 		return mav;
 	}
 	
@@ -206,7 +205,7 @@ public class AdminController {
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
 		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
-		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String path=session.getServletContext().getRealPath("/upload/class_info");
 		
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
@@ -215,7 +214,7 @@ public class AdminController {
 			ops.write(upload.getBytes());
 			json.addProperty("uploaded",1);
 			json.addProperty("filename",upload.getOriginalFilename());
-			json.addProperty("url","/gachi/upload/classImg/"+upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/class_info/"+upload.getOriginalFilename());
 			ops.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,7 +226,31 @@ public class AdminController {
 		return json;
 	}
 	
-	
+	@RequestMapping(value="/imageUpload2",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonObject imageUpload2(HttpServletRequest req,@RequestParam MultipartFile upload) {
+		System.out.println("upload ==> "+upload.getOriginalFilename());
+		HttpSession session=req.getSession();
+		String path=session.getServletContext().getRealPath("/upload/notice_img");
+		
+		JsonObject json=new JsonObject();
+		OutputStream ops=null;
+		try {
+			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
+			ops.write(upload.getBytes());
+			json.addProperty("uploaded",1);
+			json.addProperty("filename",upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/notice_img/"+upload.getOriginalFilename());
+			ops.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//System.out.println("path ip ==> "+ip);
+		System.out.println("path real ==> "+path);
+		System.out.println("path req ==> "+req.getRequestURI());
+		System.out.println("path context ==> "+req.getContextPath());
+		return json;
+	}
 	
 //	public String adminMember() {
 //		

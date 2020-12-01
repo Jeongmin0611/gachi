@@ -693,11 +693,12 @@ input{text-align:center;}
 		width:50%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n+1){
-		width:50%;
+		width:40%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n){
-		width:50%;
+		width:60%;
 	}
+	
 	/*愿�由ъ옄 �뒪�넗�뼱愿�由� end*/
 	
 	/*愿�由ъ옄 由ъ뒪�듃 �럹�씠吏� start*/
@@ -1055,5 +1056,16 @@ input{text-align:center;}
 	}
 	#ad_video_Lst li:nth-child(10n+6){
 		width:24%;
+	}
+	
+	.ad_box{
+		margin:10px 0px;
+		border:3px solid #437299;
+		border-radius:10px;
+	}
+	.add_img{
+		background-color:white;
+		border:1px solid white;
+		border-radius: 10px; 
 	}
 	

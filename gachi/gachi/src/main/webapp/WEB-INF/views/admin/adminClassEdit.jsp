@@ -12,6 +12,8 @@
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
 		$("#ad_goods_write li").css("margin-top","10px");
 		$("textarea").css("height","800px");
+		
+		$(".ad_box img").css("width","200px").css("height","200px");
 	});
 </script>
 <div class="container">
@@ -75,15 +77,30 @@
 			</li>
 		</ul>
 	</li>
-	<li class="text-center">
-		대표이미지<br/>
-		<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img1}"/>
+	<li class="content_center">
+		<div style="height:24px;margin:7px 0px;">
+			클래스 이미지 추가
+		</div>
+		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
+			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
+		</div>
 	</li>
 </ul>
+<div class="text_center ad_box">
+	<div style="width:230px;height:100%;">
+		<div style="text-align:center;height:24px;">이미지1</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}"/>
+		</div>
+		<div style="padding:0 auto;">
+			<input type="file" name="class_img"/>
+		</div>
+	</div>
+</div>
 <ul id="ad_goods_write">
 	<li>상품설명</li>
 	<li><textarea name="class_info">${vo.class_info}</textarea></li>
-	<li>첨부파일 <input type="file" name="class_img1" value="${vo.class_img1}"/></li>
+	<li>첨부파일 <input type="file" name="class_img1" value="${vo.class_img}"/></li>
 	<li class="content_center">
 		<input type="submit" class="btn" value="수정"/>
 		<input type="reset" class="btn" value="다시쓰기"/>

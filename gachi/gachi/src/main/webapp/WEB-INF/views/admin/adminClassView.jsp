@@ -49,7 +49,7 @@
 	<li>
 		<ul style="width:50%; margin-top:45px;">
 			<li style="text-align: center">대표이미지</li>
-			<li><img src="upload/classImg/${vo.class_img1}"/></li>
+			<li><img src="upload/classImg/${vo.class_img}"/></li>
 		</ul>
 	</li>
 </ul>
