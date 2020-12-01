@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.classPage.StoreDaoImp">
+	<select id="storeAllRecord" resultType="com.bitcamp.gachi.admin.AllVO">
+		select category, goods_name, real_price from goods
+	</select>
+</mapper>
