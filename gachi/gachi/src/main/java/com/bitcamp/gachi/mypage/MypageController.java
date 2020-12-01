@@ -1,5 +1,8 @@
 package com.bitcamp.gachi.mypage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,12 +37,24 @@ public class MypageController {
 	//******마이페이지 메인-결제/주문내역확인*******
 	@RequestMapping("/mypage")
 	public ModelAndView Mypage(HttpSession ses) {
-	//	UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//List<OrderVO> list = dao.orderAllRecord((String)ses.getAttribute("userid"));
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		List<String> list = dao.orderList(userid);
+		
+		//List<OrderListVO> cList = dao.classOrderView(userid);
+		//List<OrderListVO> gList = dao.goodsOrderView(userid);
+		
+		LinkedHashMap<String,List<OrderListVO>> map = new LinkedHashMap<String,List<OrderListVO>>();
+		for(int i=0; i<list.size(); i++) {
+			map.put(list.get(i)+"c", dao.classOrderView(list.get(i)));
+			map.put(list.get(i)+"g", dao.goodsOrderView(list.get(i)));
+		}
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
 		//mav.addObject("cList", cList);
 		//mav.addObject("gList", gList);
+		mav.addObject("map", map);
 		mav.setViewName("mypage/mypageMain");
 		return mav;
 	}

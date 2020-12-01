@@ -1,8 +1,21 @@
 package com.bitcamp.gachi.admin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +24,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -118,7 +138,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminClass2")
-	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req) {
+	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req){
 		System.out.println(vo.getOption());
 		System.out.println(vo.getSearchWord());
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
@@ -142,12 +162,72 @@ public class AdminController {
 	public ModelAndView adminClassView(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		ClassVO vo=dao.selectClass(code);
-		
+		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("vList",vList);
 		mav.setViewName("admin/adminClassView");
 		return mav;
 	}
+	@RequestMapping("/adminClassEdit")
+	public ModelAndView adminClassEdit(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping("/adminClassStateUpdate")
+	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		int result=dao.updateClassState(code);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",code);
+			mav.setViewName("redirect:adminClassView");
+		}
+		return mav;
+	} 
+	
+	@RequestMapping("/adminClassDel")
+	public ModelAndView adminClassDel(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
+		return mav;
+	}
+	
+	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
+		System.out.println("upload ==> "+upload.getOriginalFilename());
+		HttpSession session=req.getSession();
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		
+		JsonObject json=new JsonObject();
+		OutputStream ops=null;
+		try {
+			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
+			ops.write(upload.getBytes());
+			json.addProperty("uploaded",1);
+			json.addProperty("filename",upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/classImg/"+upload.getOriginalFilename());
+			ops.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//System.out.println("path ip ==> "+ip);
+		System.out.println("path real ==> "+path);
+		System.out.println("path req ==> "+req.getRequestURI());
+		System.out.println("path context ==> "+req.getContextPath());
+		return json;
+	}
+	
+	
 	
 //	public String adminMember() {
 //		
@@ -296,9 +376,45 @@ public class AdminController {
 	public String adminGoodsEnroll() {
 		return "admin/adminGoodsWrite";
 	}
-	@RequestMapping("/adminStatStore")
-	public String adminStatStore() {
-		return "admin/adminStatStore";
+	
+//	@RequestMapping(value="/adminStatStore")
+//	public String adminStatStore() {
+//	
+//		return "admin/adminStatStore";
+//	}
+	
+	@RequestMapping(value="/adminStatStore",method=RequestMethod.GET)
+	public ModelAndView adminStatStore(@RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(startMonth==null || endMonth == null) {
+			SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+			String todate =  yyyymm.format(new Date());
+			if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+				startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+			}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+			
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+		}
+		
+		int dataSize = 0;
+		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+			dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+		} else{
+			dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+			dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+			dataSize -= Integer.parseInt(startMonth.substring(5,7)); 
+		}
+		
+		
+		System.out.println("startMonth:" + startMonth);
+		System.out.println("endMonth:" + endMonth);
+		
+		mav.setViewName("admin/adminStatStore");
+		return mav;
 	}
 	@RequestMapping("/adminStatClass")
 	public String adminStatClass() {
@@ -308,9 +424,131 @@ public class AdminController {
 	public String adminStatCreator() {
 		return "admin/adminStatCreator";
 	}
-	@RequestMapping("/adminStatMember")
-	public String adminStatMember() {
-		return "admin/adminStatMember";
+//	@RequestMapping("/adminStatMember")
+//	public String adminStatMember() {
+//		return "admin/adminStatMember";
+//	}
+@RequestMapping("/adminStatMember")
+	
+	public ModelAndView adminStatMember() {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("controller");
+		System.out.println("startMonth is null");
+			
+		String startMonth, endMonth;
+		SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+		String todate =  yyyymm.format(new Date());
+		if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+			startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+		}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+		
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+		
+//		
+		System.out.println("startMonth:" + startMonth);
+		System.out.println("endMonth:" + endMonth);
+		mav.addObject("dataSize", 2);
+//		mav.addObject("newMember", newMember);
+		mav.setViewName("admin/adminStatMember");
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminStatMember",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminStatMember(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("controller11");
+		if(startMonth==null || endMonth == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+			String todate =  yyyymm.format(new Date());
+			if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+				startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+			}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+		} 
+		
+		
+		
+		int dataSize = 0;
+		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+			dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+		} else{
+			dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+			dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+			dataSize -= Integer.parseInt(startMonth.substring(5,7));
+			
+		}
+		dataSize += 1;
+		System.out.println(dataSize);
+		
+		List<String> dbParam2 = new ArrayList<String>();
+		for(int i=0; i<dataSize; i++) {
+			String tmp;
+			if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+				tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+				System.out.println("tmp1:" + tmp);
+			} else {
+				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+				System.out.println("tmp2:" + tmp);
+			}
+			dbParam2.add(tmp);
+		}
+		
+		Map<String, List> dbParam = new HashMap<String, List>();
+		dbParam.put("list", dbParam2);
+		
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Integer> newMember = dao.dashForMember(dbParam); // return type
+
+		System.out.println(newMember.size());
+		for(int i=0; i<newMember.size(); i++) {
+			System.out.println(newMember.get(i));
+		}
+		
+		if(startMonth != null && endMonth != null) {
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+				System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+				System.out.println(dbParam2.get(i));
+			}
+			
+			mav.addObject("dashData", newMember);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+			
+			System.out.println("ajax success");
+			System.out.println("labelData =="+dbParam2);
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminStatMember");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+                e.printStackTrace();
+            }
+		}
+		System.out.println("startMonth:" + startMonth);
+		System.out.println("endMonth:" + endMonth);
+//		mav.addObject("dataSize", dataSize);
+//		mav.addObject("newMember", newMember);
+//		mav.setViewName("admin/adminStatMember");
+		return null;
 	}
 	@RequestMapping("/adminSettle")
 	public String adminSettle() {

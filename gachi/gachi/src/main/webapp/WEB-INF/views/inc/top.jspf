@@ -113,7 +113,7 @@ a {
     color: #333;
     font-size: 14px;
     font-weight: 600;
-    transition: 1s ease;
+    /*transition: 1s ease;*/
 }
 .navbar-nav .nav-item a:hover{
     color: #0062cc;
@@ -233,6 +233,7 @@ a {
 		margin: 0px auto;
 		float: left;
 		margin-right:10px;
+		margin-bottom:10px;
 		text-align: center;
 	}
 	#emailChkBtn{
@@ -394,39 +395,37 @@ a {
 
 
 
-.nav li:hover:nth-child(11n+1), .nav li.active:nth-child(11n+1){
+.nav li:hover:nth-child(10n+1), .nav li.active:nth-child(10n+1){
   border-bottom: #C4E17F 3px solid;
 }
-.nav li:hover:nth-child(11n+2), .nav li.active:nth-child(11n+2){
+.nav li:hover:nth-child(10n+2), .nav li.active:nth-child(10n+2){
   border-bottom: #C3D2FE 3px solid;
 }
-.nav li:hover:nth-child(11n+3), .nav li.active:nth-child(11n+3){
+.nav li:hover:nth-child(10n+3), .nav li.active:nth-child(10n+3){
   border-bottom: #FECF71 3px solid;
 }
-.nav li:hover:nth-child(11n+4), .nav li.active:nth-child(11n+4){
+.nav li:hover:nth-child(10n+4), .nav li.active:nth-child(10n+4){
   border-bottom: #F0776C 3px solid;
 }
-.nav li:hover:nth-child(11n+5), .nav li.active:nth-child(11n+5){
+.nav li:hover:nth-child(10n+5), .nav li.active:nth-child(10n+5){
   border-bottom: #DB9DBE 3px solid;
 }
-.nav li:hover:nth-child(11n+6), .nav li.active:nth-child(11n+6){
+.nav li:hover:nth-child(10n+6), .nav li.active:nth-child(10n+6){
   border-bottom: #C49CDE 3px solid;
 }
-.nav li:hover:nth-child(11n+7), .nav li.active:nth-child(11n+7){
+.nav li:hover:nth-child(10n+7), .nav li.active:nth-child(10n+7){
   border-bottom: #669AE1 3px solid;
 }
-.nav li:hover:nth-child(11n+8), .nav li.active:nth-child(11n+8){
+.nav li:hover:nth-child(10n+8), .nav li.active:nth-child(10n+8){
   border-bottom: #62C2E4 3px solid;
 }
-.nav li:hover:nth-child(11n+9), .nav li.active:nth-child(11n+9){
+.nav li:hover:nth-child(10n+9), .nav li.active:nth-child(10n+9){
   border-bottom: #C4E17F 3px solid;
 }
-.nav li:hover:nth-child(11n+10), .nav li.active:nth-child(11n+10){
+.nav li:hover:nth-child(10n+10), .nav li.active:nth-child(10n+10){
   border-bottom: #F7FDCA 3px solid;
 }
-.nav li:hover:nth-child(11n+11), .nav li.active:nth-child(11n+11){
-  border-bottom: #FECF71 3px solid;
-}
+
 /* 메뉴 끝 */
 /* 검색 버튼 */
 #top-searchbtn{
@@ -439,8 +438,118 @@ a {
 	margin-top: 50px;
 }
 </style>
+<style media="all">
+#navMenu {/*카테고리*/
+	margin-top:50px;
+	height:50px;
+	overflow-x: scroll;
+	white-space: nowrap;
+	line-height: 50px;
+	text-align: center;
+	padding-top:7px;
+	-ms-overflow-style: none; /* IE and Edge */
+   		scrollbar-width: none; /* Firefox */
+	color:gray;
+	font-size:1.5em;
+	
+	width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#navMenu::-webkit-scrollbar{
+	display:none;
+}
+
+
+#navMenu a{
+	width: auto;
+	margin:0 24px;
+	text-decoration: none;
+	color:gray;
+	line-height: 100%;
+	text-align: center;
+}
+@media (max-width:720px){
+	#navMenu {/*카테고리*/
+		margin-top:50px;
+		height: 65px;
+		overflow-x: scroll;
+		white-space: nowrap;
+		line-height: 65px;
+		text-align: center;
+		padding-top:7px;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		-ms-overflow-style: none; /* IE and Edge */
+   		scrollbar-width: none; /* Firefox */
+	}
+	#navMenu::-webkit-scrollbar{
+		display:none;/* Chrome, Safari, Opera*/
+	}
+	#navMenu a{	
+		flex:1 0 auto;
+		overflow:auto;
+		flex-basis: auto;
+		
+		
+		float: left;
+		line-height: 100%;
+		text-align:center;
+	}
+}
+.container-fluid {
+	margin: 0;
+	padding: 0;
+ }
+.row {
+	margin: 0;
+	padding: 0;
+}
+
+.dropdown:hover> .dropdown-menu {
+	display: block;
+}
+.megamenu {
+	position: static;
+}
+.dropdown-menu {
+	border: none;
+	width: 100%;
+}
+#navbarContent>ul>li>a{
+	font-size: 1.2em;
+	color:#1B1C1D;
+	text-align: center;
+}
+#navbarContent>ul>li>a:hover{
+	border-bottom: 3px solid black;
+}
+#navbarContent>ul{
+	width: 100%;
+}
+#navbarContent>ul>li{
+	width: 16.6%;
+}
+
+</style>
 <script>
-	$(function(){
+	$(function(){		
+		function toggleDropdown (e) {
+			  const _d = $(e.target).closest('.dropdown'),
+			    _m = $('.dropdown-menu', _d);
+			  setTimeout(function(){
+			    const shouldOpen = e.type !== 'click' && _d.is(':hover');
+			    _m.toggleClass('show', shouldOpen);
+			    _d.toggleClass('show', shouldOpen);
+			    $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
+			  }, e.type === 'mouseleave' ? 300 : 0);
+			}
+		$('body')
+		  .on('mouseenter mouseleave','.dropdown',toggleDropdown)
+		  .on('click', '.dropdown-menu a', toggleDropdown);
+		
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
     	$(".nav-item a").css({ 'pointer-events': 'none' });
@@ -900,6 +1009,7 @@ a {
 			$("#pwdF2Close,.pwdF2_layer").click(function(){
 		   		$("#pwdF2").fadeOut();
 		});
+
 	}
 	//체크박스 수제한
 	var maxCount = 3;								
@@ -932,8 +1042,7 @@ a {
 		count -= 1;									
 		}
 	}
-	
-	
+
 </script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/9a15be1bb8.js"></script>
@@ -1063,49 +1172,20 @@ Gitple('onClose', function () {
 <body>
 
    <!-- 메뉴 -->
-   <nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
-   <a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-   
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-       <ul class="nav navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             카테고리
-           </a>
-           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/gachi/classList?category=공예/창작">공예/창작</a> 
-            <a class="dropdown-item" href="/gachi/classList?category=미술">미술</a> 
-            <a class="dropdown-item" href="/gachi/classList?category=사진/영상">사진/영상</a>
-            <a class="dropdown-item" href="/gachi/classList?category=요리">요리</a> 
-            <a class="dropdown-item" href="/gachi/classList?category=운동">운동</a> 
-            <a class="dropdown-item" href="/gachi/classList?category=음악">음악</a> 
-            <a class="dropdown-item" href="/gachi/classList?category=라이프스타일">라이프스타일</a>
-           </div>
-         </li>
-         <li class="nav-item ">
-           <a class="nav-link" href="/gachi/storeMain">스토어 </a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="/gachi/introCreator">크리에이터 소개</a>
-         </li>
-         <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             공지사항
-           </a>
-           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <a class="dropdown-item" href="/gachi/noticeBoard">공지사항</a>
-             <a class="dropdown-item" href="/gachi/eventBoard">이벤트</a>
-           </div>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="/gachi/companyBoard">회사 소개</a>
-         </li>
-       </ul>
-       
-        <ul class="nav navbar-nav pull-right">
+
+	<nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
+	<a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>    
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<!-- 검색버튼 -->
+		<form class="form-inline d-flex justify-content-center md-form form-sm">
+			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search">
+			<button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
+		       
+          <ul class="nav navbar-nav pull-right">
         <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
@@ -1128,18 +1208,82 @@ Gitple('onClose', function () {
 	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
 	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+	        </c:if> 
 	        </c:if>
-          </c:if>
-         <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   
+	          
+			<li class="nav-item"><a class="nav-link" href="/gachi/noticeBoard">공지사항</a></li>
+	        <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
-        <!-- 검색버튼 -->
-        <form class="form-inline d-flex justify-content-center md-form form-sm">
-			  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-			    aria-label="Search">
-			  <button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
-		</form>
+       
      </div>
 </nav>
+<nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
+  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1">
+    <ul class="navbar-nav mr-auto">
+      <!-- Megamenu-->
+      <li class="nav-item dropdown megamenu"><a id="megamenu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">전체</a>
+        <div aria-labelledby="megamenu" class="dropdown-menu border-0 p-0 m-0">
+          <div class="container-fluid">
+            <div class="row rounded-0 m-0 shadow-sm">
+              <div class="col-12">
+                <div class="p-4">
+                  <div class="row">
+                    <div class="col-sm-6 col-lg-3 mb-4">
+                      <h6 class="font-weight-bold text-uppercase">클래스</h6>
+                      <ul class="list-unstyled">
+                        <li class="nav-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
+                        <li class="nav-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
+                      </ul>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-4">
+                      <h6 class="font-weight-bold text-uppercase">스토어</h6>
+                      <ul class="list-unstyled">
+                        <li class="nav-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
+                        <li class="nav-item"><a href="/gachi/storeList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-4">
+                      <h6 class="font-weight-bold text-uppercase">이벤트</h6>
+                      <ul class="list-unstyled">
+                        <li class="nav-item"><a href="/gachi/eventBoard" class="nav-link text-small pb-0 ">진행 이벤트</a></li>
+                        <li class="nav-item"><a href="/gachi/eventBoardEnd" class="nav-link text-small pb-0 ">종료 이벤트</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-4">
+                      <h6 class="font-weight-bold text-uppercase">크리에이터 소개</h6>
+                      <ul class="list-unstyled">
+							<li class="nav-item"><a href="/gachi/introCreator" class="nav-link text-small pb-0">크리에이터 소개</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a></li>
+      <li class="nav-item"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase">스토어</a></li>
+      <li class="nav-item"><a href="/gachi/eventBoard" class="nav-link font-weight-bold text-uppercase">이벤트</a></li>
+      <li class="nav-item"><a href="/gachi/introCreator" class="nav-link font-weight-bold text-uppercase">크리에이터 소개</a></li>
+      <li class="nav-item"><a href="/gachi/companyBoard" class="nav-link font-weight-bold text-uppercase">회사 소개</a></li>
+    </ul>
+  </div>  
+	<button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler order-md-1" style="margin-top:50px;">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+</nav>
+
    <!-- 메뉴 끝 -->
    <!-- 로그인폼 -->
    <div id="md" class="join">
@@ -1225,9 +1369,11 @@ Gitple('onClose', function () {
 					<option value="29">29일</option>
 					<option value="30">30일</option>
 					<option value="31">31일</option>
+
 				</select><br/>
 				<p style="clear: both; ">
              <input type="radio"  value="M" style="width:15px;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
+
              <input type="text" placeholder="오른쪽버튼을눌러 전화번호인증을해주세요" name="tel" id="tel" class="tel" style="width: 68%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"readonly/>
              <input type="button" style="width: 28%;border:1px solid gray;" value="인증문자보내기" id="telChkOk"/>
              <span id="telMessage" class="message"></span>
@@ -1311,6 +1457,7 @@ Gitple('onClose', function () {
 					<option value="30">30일</option>
 					<option value="31">31일</option>
 				</select><br/>
+
 				<p style="clear: both; ">
              <input type="radio"  value="M" style="width:15px;height:15px;" name="gender2" id="gender2" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender2" id="gender2" class="genderRadioBtnInterval"/>여<br/>
              <input type="text" placeholder="010" name="tel1C" id="tel1C" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
@@ -1335,6 +1482,7 @@ Gitple('onClose', function () {
       </form>
    </div>
    </div>
+
    <!-- 회원가입 끝 -->
 <!-- 아이디찾기 클릭시 나오는 아이디찾는폼 -->
 	<div id="idF1" class="join">

@@ -13,6 +13,23 @@
 		height:100%;
 	}
 </style>
+<script type="text/javascript">
+	function classDel(){
+		if(confirm("해당 클래스를 삭제하시겠습니까?")){
+			location.href='/gachi/adminClassDel?code=${vo.code}';	
+		}
+	}
+	function updateClassState(){
+		if(confirm("${vo.code} 클래스를 등록처리 하시겠습니까?")){
+			location.href='/gachi/adminClassStateUpdate?code=${vo.code}';
+		}
+	}
+	$(function(){
+		CKEDITOR.replace("class_info");
+		CKEDITOR.config.height=500;
+		CKEDITOR.config.readOnly = true;
+	});
+</script>
 <div class="container ad_font">
 	<h1>클래스 조회</h1>
 <ul id="ad_goods_viewForm">
@@ -38,7 +55,7 @@
 </ul>
 <h3>클래스 상세정보</h3>
 <div id="ad_goods_info">
-
+	<textarea name="class_info">${vo.class_info }</textarea>
 </div>
 <h3>클래스영상정보</h3>
 	<ul id="ad_video_priview" class="text-center">
@@ -49,30 +66,15 @@
 		<li>파일명</li>
 		<li>영상길이</li>
 		<li>등록일</li>
-		
-		<li>vid10</li>
-		<li>1</li>
-		<li class="wordCut">바느질 기본기다지기</li>
-		<li>생선가시로 바느질 마스터하기</li>
-		<li>fishThorn.avi</li>
-		<li>15:26</li>
-		<li>2020-11-24</li>
-		
-		<li>vid10</li>
-		<li>1</li>
-		<li class="wordCut">바느질 기본기다지기</li>
-		<li>생선가시로 바느질 마스터하기</li>
-		<li>fishThorn.avi</li>
-		<li>15:26</li>
-		<li>2020-11-24</li>
-		
-		<li>vid10</li>
-		<li>1</li>
-		<li class="wordCut">바느질 기본기다지기</li>
-		<li>생선가시로 바느질 마스터하기</li>
-		<li>fishThorn.avi</li>
-		<li>15:26</li>
-		<li>2020-11-24</li>
+		<c:forEach var="vList" items="${vList}">
+			<li>${vList.video_code}</li>
+			<li>${vList.unit}</li>
+			<li class="wordCut">${vList.unit_content}</li>
+			<li>${vList.video_name}</li>
+			<li>${vList.video_filename}</li>
+			<li>${vList.video_length}</li>
+			<li>${vList.enroll_date}</li>	
+		</c:forEach>
 	</ul>
 <h3>질문답변</h3>
 	<ul id="ad_goods_inquiry" class="text-center">
@@ -120,8 +122,10 @@
 		<button class="btn" onclick="goodsInquiryDel()">삭제</button>
 	</div>
 <div class="text-center">
-		<button class="btn">등록처리</button>
-		<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
-		<button class="btn" onclick="goodsDel()">삭제</button>
+		<c:if test="${vo.class_state ne '등록승인'}">
+			<button class="btn" onclick="updateClassState()">등록처리</button>
+		</c:if>
+		<button class="btn" onclick="location.href='/gachi/adminClassEdit?code=${vo.code}'">수정</button>
+		<button class="btn" onclick="classDel()">삭제</button>
 </div>
 </div>

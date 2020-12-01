@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class StoreController {
-	@RequestMapping("/storeMain")
-	public String storeMain() {
-		return "store/storeMain";
+	@RequestMapping("/storeList")
+	public String storeList() {
+		return "store/storeList";
 	}
 	@RequestMapping("/storeView")
 	public String storeDetail() {

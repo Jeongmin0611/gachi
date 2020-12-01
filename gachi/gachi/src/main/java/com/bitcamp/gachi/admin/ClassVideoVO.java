@@ -3,12 +3,13 @@ package com.bitcamp.gachi.admin;
 public class ClassVideoVO {
 	private String code;
 	private String video_code;
-	private String class_name;
 	private int unit;
 	private String unit_content;
 	private String video_name;
+	private String video_filename;
 	private int video_length;
 	private String enroll_date;
+	
 	public String getCode() {
 		return code;
 	}
@@ -20,12 +21,6 @@ public class ClassVideoVO {
 	}
 	public void setVideo_code(String video_code) {
 		this.video_code = video_code;
-	}
-	public String getClass_name() {
-		return class_name;
-	}
-	public void setClass_name(String class_name) {
-		this.class_name = class_name;
 	}
 	public int getUnit() {
 		return unit;
@@ -56,6 +51,12 @@ public class ClassVideoVO {
 	}
 	public void setEnroll_date(String enroll_date) {
 		this.enroll_date = enroll_date;
+	}
+	public String getVideo_filename() {
+		return video_filename;
+	}
+	public void setVideo_filename(String video_filename) {
+		this.video_filename = video_filename;
 	}
 	
 	

@@ -35,6 +35,10 @@ public class BoardController {
 		this.sqlSession = sqlSession;
 	}
 
+	@RequestMapping("/all")
+	public String all() {
+		return "board/all";
+	}
 	@RequestMapping("/noticeBoard")
 	public ModelAndView noticeBoard(PagingVO vo, HttpServletRequest req) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);

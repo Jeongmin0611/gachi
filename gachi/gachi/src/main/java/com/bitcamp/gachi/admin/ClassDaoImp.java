@@ -15,6 +15,7 @@ public interface ClassDaoImp {
 	
 	//클래스등록
 	public int insertClass();
+	
 	//클래스삭제
 	public int deleteClass();
 	
@@ -27,9 +28,15 @@ public interface ClassDaoImp {
 	//총 레코드 수 구하기
 	public int getAllRecordCount(TestVO vo);
 	
+	//클래스 등록처리
+	public int updateClassState(String code);
+	
 	//리스트 목록 구하기(조회옵션)
 	public List<ClassVO> getClassListLookUp(TestVO vo);
 	
 	//리스트 목록 구하기(검색옵션)
 	public List<ClassVO> getClassListSearch(TestVO vo);
+	
+	//강좌 영상 간략 조회
+	public List<ClassVideoVO> getClassVideoListSample(String code);
 }

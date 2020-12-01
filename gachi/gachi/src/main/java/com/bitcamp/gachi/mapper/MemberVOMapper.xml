@@ -25,7 +25,7 @@
 	</select>
 	
 	<update id="MemberUpdate" parameterType="com.bitcamp.gachi.admin.MemberVO"> 
-		update member set username = #{username}, grade=#{grade}, nickname = #{nickname} ,tel =#{tel}, gender=#{gender}, zipcode=#{zipcode}, 
+		update member set username = #{username}, nickname = #{nickname} ,tel =#{tel}, gender=#{gender}, zipcode=#{zipcode}, 
 		addr =#{addr},detailaddr =#{detailaddr}
 		where userid = #{userid}
 	</update>
@@ -36,6 +36,11 @@
 	<!--   <delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
 	</delete> -->
+	<select id="dashForMember" parameterType="map" resultType="_int">
+		<foreach collection="list" item="item" separator=" union all">
+ 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='회원'
+		</foreach>
+	</select>
 	
 </mapper>
 
