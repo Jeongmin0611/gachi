@@ -909,7 +909,9 @@ a {
 			}
 
 		return true;
-		
+		});
+	$("#telChkOk").click(function(){
+		window.open("smsIdentity","문자인증","width=400, height=300, left=100, top=50");
 		});
 });
     function mdJchange(){//회원가입폼에서 크리에이터 회원가입폼으로
@@ -1371,10 +1373,9 @@ Gitple('onClose', function () {
 				</select><br/>
 				<p style="clear: both; ">
              <input type="radio"  value="M" style="width:15px;height:15px;" name="gender" id="gender" checked class="genderRadioBtnInterval"/>남<input type="radio" value="F" style="width:15px;height:15px;" name="gender" id="gender" class="genderRadioBtnInterval"/>여<br/>
-             <input type="text" placeholder="010" name="tel1" id="tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="1234"name="tel2" id="tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-             <input type="text" placeholder="5678"name="tel3" id="tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
 
+             <input type="text" placeholder="오른쪽버튼을눌러 전화번호인증을해주세요" name="tel" id="tel" class="tel" style="width: 68%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"readonly/>
+             <input type="button" style="width: 28%;border:1px solid gray;" value="인증문자보내기" id="telChkOk"/>
              <span id="telMessage" class="message"></span>
              <input type="text" name="sample6_postcode" id="sample6_postcode" placeholder="우편번호" size="10" style="width:69%"><input type="button" value="우편번호검색" style="width:29%;border:1px solid gray;" onclick="sample6_execDaumPostcode()" id="zipcodeSearch" >
              <input type="text" id="sample6_address" name="sample6_address" placeholder="주소" size="70"/>
