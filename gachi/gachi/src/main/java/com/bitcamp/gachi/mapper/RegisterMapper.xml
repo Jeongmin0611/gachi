@@ -5,9 +5,14 @@
 
 <mapper namespace="com.bitcamp.gachi.register.RegisterDaoImp">
 	<insert id="registerInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
-		insert into member(userid,userpwd,grade,username,nickname,birthdate,tel,gender,addr,detailaddr,interest)
-	                values('${userid}','${userpwd}','회원','${username}','${nickname}','${birthdate}','${tel}','${gender}','${addr}','${detailaddr}','${interest}')
-	               
+		insert into member(userid,userpwd,grade,username,nickname,birthdate,tel,gender,zipcode,addr,detailaddr,interest)
+	                values('${userid2}','${userpwd2}','회원','${username}','${nickname}','${birthdate}','${tel}','${gender}','${sample6_postcode}','${addr}','${sample6_detailAddress}','${interest}')      
+	</insert>
+	<insert id="creatorInsert" parameterType="com.bitcamp.gachi.register.RegisterVO">
+		insert into member(userid,userpwd,grade,username,nickname,birthdate,tel,gender,zipcode,addr,detailaddr,interest)
+	                values('${userid3}','${userpwd3}','크리에이터','${username2}','${nickname2}','${birthdateC}','${telC}','${gender2}','${sample6_postcode2}','${addr2}','${sample6_detailAddress2}','${interest2}') 
+	    insert into creator(userid,business_number,category,bankname,license_img1,,license_img2,,license_img3,sns_addr,creator_info,creator_state)
+	    			values('$(userid3)','$(business_number)','$(interest2)','$(bankname)','$(license_img1)','$(license_img2)','$(license_img3)','$(sns_addr)','creator_info',0)                 
 	</insert>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
 		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'

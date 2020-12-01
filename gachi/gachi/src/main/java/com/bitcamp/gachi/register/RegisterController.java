@@ -35,6 +35,17 @@ import com.bitcamp.gachi.mypage.MileageDaoImp;
 			mav.setViewName("redirect:/");
 			return mav;
 	}
+		@RequestMapping(value="/creatorInsert",method=RequestMethod.POST)
+		public ModelAndView creatorInsert(RegisterVO vo) {
+			System.out.println();
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			int result=dao.creatorInsert(vo);
+		
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("result",result);
+			mav.setViewName("redirect:/");
+			return mav;
+	}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
