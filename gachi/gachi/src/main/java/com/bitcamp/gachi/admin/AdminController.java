@@ -1,5 +1,11 @@
 package com.bitcamp.gachi.admin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -185,15 +193,37 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
-	public void imageUpload(HttpServletRequest req) {
-		System.out.println("Aaaaa");
+	@ResponseBody
+	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
+		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
-		String path=session.getServletContext().getRealPath("/classImg");
-		MultipartHttpServletRequest mr=(MultipartHttpServletRequest) req;
-		List<MultipartFile> files=mr.getFiles("filename");
-		for (int i = 0; i < files.size(); i++) {
-			System.out.println("이미지 파일 1 => "+files.get(i));
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		InetAddress local = null;
+		try {
+			local = InetAddress.getLocalHost();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		String ip = local.getHostAddress();
+		//String path=req.get
+		JsonObject json=new JsonObject();
+		OutputStream ops=null;
+		try {
+			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
+			ops.write(upload.getBytes());
+			json.addProperty("uploaded",1);
+			json.addProperty("filename",upload.getOriginalFilename());
+			json.addProperty("url",upload.getOriginalFilename());
+			ops.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		System.out.println("path ip ==> "+ip);
+		System.out.println("path real ==> "+path);
+		System.out.println("path req ==> "+req.getRequestURI());
+		System.out.println("path context ==> "+req.getContextPath());
+		return json;
 	}
 	
 	
