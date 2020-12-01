@@ -17,7 +17,7 @@ public interface ClassDaoImp {
 	public int insertClass();
 	
 	//클래스삭제
-	public int deleteClass();
+	public int deleteClass(String code);
 	
 	//좋아요 증가
 	public int countGood();
