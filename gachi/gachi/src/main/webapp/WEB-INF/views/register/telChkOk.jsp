@@ -57,7 +57,7 @@ $(document).ready(function() {
        	else{     
           	if(userNum.trim() == sysNum.trim()){
           		alert("인증이 완료되었습니다.");
-          		opener.document.getElementById("tel1").value = $("#to").val();
+          		opener.document.getElementById("tel").value = $("#to").val();
           		window.close();
            	}
            	else {
