@@ -185,8 +185,8 @@
 				</div>
 			</div>
 		</div>
+		<hr class="userHr"/>
 		<div class="mypageContent">
-			<hr class="userHr"/>
 			<c:forEach var="list" items="${map }">
 				<c:set var="key" value="${list.key }"/>
 				<c:if test="${fn:contains(key,'c')}">
