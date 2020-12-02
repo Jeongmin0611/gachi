@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,6 @@ public class MypageController {
 		String userid = (String)ses.getAttribute("userid");
 		List<String> list = dao.orderList(userid);
 		
-		//List<OrderListVO> cList = dao.classOrderView(userid);
-		//List<OrderListVO> gList = dao.goodsOrderView(userid);
-		
 		LinkedHashMap<String,List<OrderListVO>> map = new LinkedHashMap<String,List<OrderListVO>>();
 		for(int i=0; i<list.size(); i++) {
 			map.put(list.get(i)+"c", dao.classOrderView(list.get(i)));
@@ -52,8 +50,6 @@ public class MypageController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-		//mav.addObject("cList", cList);
-		//mav.addObject("gList", gList);
 		mav.addObject("map", map);
 		mav.setViewName("mypage/mypageMain");
 		return mav;
@@ -152,9 +148,36 @@ public class MypageController {
 	public String userLeaveConfirmed() {
 		return "mypage/userLeaveConfirmed";
 	}
+	//장바구니
 	@RequestMapping("/userCart")
-	public String userCart() {
-		return "mypage/userCart";
+	public ModelAndView userCart(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<OrderListVO> cList = dao.classCartView((String)ses.getAttribute("userid"));
+		List<OrderListVO> gList = dao.goodsCartView((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cList", cList);
+		mav.addObject("gList", gList);
+		mav.setViewName("mypage/userCart");
+		return mav;
+	}
+	//장바구니 삭제
+	@RequestMapping("/userCartDelete")
+	public ModelAndView userCartDelete(String code, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.cartDelete((String)ses.getAttribute("userid"), code);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:userCart");
+		return mav;
+	}
+	//장바구니 전체삭제
+	@RequestMapping("/userCartDeleteAll")
+	public ModelAndView userCartDeleteAll(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.cartDeleteAll((String)ses.getAttribute("userid"));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:userCart");
+		return mav;
 	}
 	@RequestMapping("/orderSheet")
 	public String orderSheet() {
@@ -163,6 +186,7 @@ public class MypageController {
 	//주문완료
 	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
 	public ModelAndView orderConfirmed(@RequestBody Map<String, Object> params) {
+		
 		System.out.println(params.get("imp_uid"));
 		System.out.println(params.get("merchant_uid"));
 		ModelAndView mav = new ModelAndView();

@@ -35,4 +35,26 @@
 	<update id="userLeave" parameterType="com.bitcamp.gachi.mypage.MemberVO">
 		update member set deleted='탈퇴', withdrawdate=sysdate where userid='${userid}'
 	</update>
+	<select id="classCartView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, class_img1, class_name, username, amount, stack, real_price
+		 from cart ct, class c, member m
+		 where ct.code = c.code
+		 and c.userid = m.userid
+		 and ct.userid='${userid}'
+	</select>
+	<select id="goodsCartView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, goods_img1, goods_name, amount, stack, real_price
+		 from cart ct, goods g
+		 where ct.code = g.code
+		 and ct.userid='${userid}'
+	</select>
+	<delete id="cartDelete">
+		delete from cart 
+	 	 where userid='${userid}'
+		 and code='${code}'
+	</delete>
+	<delete id="cartDeleteAll">
+		delete from cart 
+	 	 where userid='${userid}'
+	</delete>
 </mapper>
