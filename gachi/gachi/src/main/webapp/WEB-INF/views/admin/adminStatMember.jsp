@@ -10,21 +10,25 @@
    <h1 style="text-align:center;"> 회원 통계 </h1><br/>
       
 		<form action="adminStatMember" method="post">
-         <input type="month" id="startMonth" name="startMonth" value="${startMonth }" onchange="return chkPeriod()"/>
+         <input type="month" id="startMonth" name="startMonth" value="${startMonth }" onchange="return chkPeriod();"/>
          -
-         <input type="month" id="endMonth" name="endMonth" value="${endMonth }" onchange="return chkPeriod()"/>
+         <input type="month" id="endMonth" name="endMonth" value="${endMonth }" onchange="return chkPeriod();"/>
          <input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
         </form> 
       <div>
          <canvas id="ad_Mb_StatClass_chart" style="margin-top:50px"></canvas>
          <script type="text/javascript">
          
-         var dashData = [];
-         var labelData = []; 
-         dashData = "${dashData}";
-         labelData = "${labelData}";
+         var dashData = "${dashData}";
+         var labelData = "${labelData}";
+         var genderLabel = "${genderLabel}";
+         var genderData = "${genderData}";
+         var ageLabel = "${ageLabel}";
+         var ageData = "${ageData}";
+         
          var startMonth = "${startMonth}";
          var endMonth = "${endMonth}";
+         
          
          $(function(){
         		console.log('loading');
@@ -39,13 +43,12 @@
         	    } else{
         	    	
         	    }
-/*         	    $('#frm').on('submit',function(){
+        	    $('#frm').on('submit',function(){
         	         frmSubmit();
         	         return false;
-        	     });//submit */
-        	       	     
+        	     });//submit
+        	     
 		$("#frm").click(function(){
-			
 			var url = "/adminStatMember";
 			var data = ${dashData};
 			$.ajax({
@@ -58,11 +61,9 @@
 				},error:function(){
 					console.log("ajax에러발생");
 				}
-			
 			});
 		});
-     
-   	              
+        	              
          function addData(chart, label, data) {
         	 
         	    chart.data.labels.push(label);
@@ -84,6 +85,8 @@
         		}
         	} // chkPeriod
 
+        	     
+		
          });
          
          var ad_Mb_StatClass_context = document.getElementById('ad_Mb_StatClass_chart').getContext('2d');
@@ -147,11 +150,11 @@
       var ad_Mb_StatClass_gender_chart = new Chart(ad_Mb_StatClass_gender_context, {
           type: 'pie',
           data: {
-         labels : ["Man" , "Woman"],
+         labels : ${genderLabel},
          datasets : [{
          backgroundColor : ["#2ecc71","#3498dd"],
          hoverBackgroundColor : ["#a6a6a6","#d1b2ff"],
-         data : [10,9]
+         data : ${genderData}
             }]
          },
          options : {
@@ -170,11 +173,11 @@
       var ad_Mb_StatClass_age_chart = new Chart(ad_Mb_StatClass_age_context, {
           type: 'pie',
           data: {
-         labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
+         labels : ${ageLabel},
          datasets : [{
          backgroundColor : ["#2ecc71","#3498dd","pink","yellow","green","orange"],
          hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","green","orange"],
-         data : [10,9,7,3,1,2]
+         data : ${ageData}
             }]
          },
          options : {

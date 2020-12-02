@@ -20,11 +20,12 @@ public interface MemberDaoImp {
 	
 	public int MemberUpdate(MemberVO vo); //회원정보 수정
 	
-	public int leaveMemberUpdate(String userid);
-	
-	public int adminMemberDelete(String userid);
+	public int leaveMemberUpdate(String userid); //회원탈퇴 
 
-	public List<Integer> dashForMember(Map<String, List> dbParam);
-	
-	
+	public List<Integer> dashForMember(Map<String, List> dbParam); //회원통계 그래프형
+
+	public List<Map<String, Integer>> dashForGender(Map<String, String> dbParam_pie);
+
+	public List<Map<String, Integer>> dashForAge(Map<String, String> dbParam_pie);	
+
 }
