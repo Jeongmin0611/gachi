@@ -220,15 +220,12 @@ public class RegisterVO {
 	}
 
 	public String getAddr() {
-		addr = sample6_address + " " + sample6_extraAddress;
+		addr = sample6_address;
 		return addr;
 	}
 
 	public void setAddr(String addr) {
 		this.addr = addr;
-		String addrCut[] = addr.split(" ");
-		sample6_address = addrCut[0];
-		sample6_extraAddress = addrCut[1];
 	}
 
 	public String getSample6_address() {
@@ -358,15 +355,12 @@ public class RegisterVO {
 	}
 
 	public String getAddr2() {
-		addr2 = sample6_address2 + " " + sample6_extraAddress2;
+		addr2 = sample6_address2;
 		return addr;
 	}
 
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
-		String addrCut2[] = addr2.split(" ");
-		sample6_address2 = addrCut2[0];
-		sample6_extraAddress2 = addrCut2[1];
 	}
 
 	public String getSample6_address2() {

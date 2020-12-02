@@ -37,7 +37,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		@Autowired
 		DataSourceTransactionManager transactionManager;
 		
-		@RequestMapping(value="/registerInsert",method=RequestMethod.POST)
+		@RequestMapping(value="/registerInsert",method={RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView registerInsert(RegisterVO vo) {
 			System.out.println();
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
@@ -48,7 +48,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			mav.setViewName("redirect:/");
 			return mav;
 	}
-		@RequestMapping(value="/creatorInsert",method=RequestMethod.POST)
+		@RequestMapping(value="/creatorInsert",method={RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView creatorInsert(RegisterVO vo) {
 			DefaultTransactionDefinition def=new DefaultTransactionDefinition();
 			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
@@ -56,17 +56,18 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			TransactionStatus status=transactionManager.getTransaction(def);
 			
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			int result=dao.creatorInsert(vo);
+			ModelAndView mav=new ModelAndView();
+			int result=0;
 			try {
-				 
-				dao.creatorInsert(vo);
-				
+					 dao.creatorInsert(vo); 
+					 dao.creatorInsert2(vo);
+							
 				transactionManager.commit(status);
 			}catch(Exception e) {
 				transactionManager.rollback(status);
 			}
 		
-			ModelAndView mav=new ModelAndView();
+
 			mav.addObject("result",result);
 			mav.setViewName("redirect:/");
 			return mav;
