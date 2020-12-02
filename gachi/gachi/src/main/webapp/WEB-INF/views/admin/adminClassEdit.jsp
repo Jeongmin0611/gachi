@@ -3,7 +3,7 @@
 <div class="container ad_font">
 <script type="text/javascript">
 	$(function(){
-		CKEDITOR.replace('class_info',{
+		var editor=CKEDITOR.replace('class_info',{
 			imageUploadUrl:'/gachi/imageUpload',
 			extraPlugins:'uploadimage'
 		});
@@ -14,11 +14,34 @@
 		$("textarea").css("height","800px");
 		
 		$(".ad_box img").css("width","200px").css("height","200px");
+	
+		$("#class_img").on('change',(event)=>{
+			event.preventDefault();
+			var file =event.target.files[0];
+			//var file=files[0];
+			console.log(file);
+			var formData= new FormData();
+			formData.append("file",file);
+			$.ajax({
+				type:"post",
+				enctype: 'multipart/form-data',
+				url:"/gachi/imgThumbnail",
+				//ajax로 넘길경우 form-data 형식
+				processData: false,
+				contentType: false,
+				//////////////////////////
+				data: formData,
+				success:function(result){
+					$(".ad_box img").attr("src",result);
+				}
+			});
+		});
+		
 	});
 </script>
 <div class="container">
 <h1>클래스수정</h1>
-<form method="post" action="">
+<form method="post" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
@@ -92,15 +115,15 @@
 		<div style="text-align:center">
 			<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}"/>
 		</div>
-		<div style="padding:0 auto;">
-			<input type="file" name="class_img"/>
+		<div id="selectImg" style="padding:0 auto;">
+			<input type="file" name="class_img" id="class_img"/>
 		</div>
 	</div>
 </div>
 <ul id="ad_goods_write">
 	<li>상품설명</li>
 	<li><textarea name="class_info">${vo.class_info}</textarea></li>
-	<li>첨부파일 <input type="file" name="class_img1" value="${vo.class_img}"/></li>
+	<li>첨부파일 <input type="file" name="class_img" value="${vo.class_img}"/></li>
 	<li class="content_center">
 		<input type="submit" class="btn" value="수정"/>
 		<input type="reset" class="btn" value="다시쓰기"/>
