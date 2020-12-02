@@ -11,7 +11,7 @@ public interface ClassDaoImp {
 	public ClassVO selectClass(String code);
 
 	//클래스수정
-	public int updateClass();
+	public int updateClass(ClassVO vo);
 	
 	//클래스등록
 	public int insertClass();
@@ -39,4 +39,5 @@ public interface ClassDaoImp {
 	
 	//강좌 영상 간략 조회
 	public List<ClassVideoVO> getClassVideoListSample(String code);
+	
 }
