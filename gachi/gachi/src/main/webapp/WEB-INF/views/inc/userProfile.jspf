@@ -28,7 +28,7 @@
 		text-align: center;
 		margin-top: 20px;
 	}
-	.mypageContent{	
+	.mypageContent, #mypageContent{	
 		margin: 10px auto 50px;	 	
 	}
 	
@@ -76,7 +76,7 @@
 		});
 	});
 </script>
-<div class="userMainDiv cfont mypageContent">
+<div class="userMainDiv cfont" id="mypageContent">
 	<div id="profileDiv" class="row">
 		<div class="col-sm-3">
 			<div id="profileBox">
