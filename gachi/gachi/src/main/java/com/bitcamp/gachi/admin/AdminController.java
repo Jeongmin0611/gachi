@@ -1,11 +1,8 @@
 package com.bitcamp.gachi.admin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +29,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 
 @Controller
 public class AdminController {
@@ -347,25 +340,14 @@ public class AdminController {
 	}
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
 	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
-//		String path=session.getServletContext().getRealPath("/upload/class_info");
-//		//System.out.println("class_info => "+vo.getClass_info());
-//		Document doc=Jsoup.parse(vo.getClass_info());
-//		//gachi/upload/class_info/126464.jpg
-//		System.out.println("doc => "+doc);
-//		List<String> imgFileSrc=doc.getElementsByTag("img").eachAttr("src");
-//		List<String> imgFileNames=new ArrayList<String>();
-//		for(String name:imgFileSrc) {
-//			imgFileNames.add(name.substring(name.lastIndexOf("/")+1));
-//		}
-//		
-//		File dir=new File(path);
-//		for (String name:imgFileNames) {
-//			File imgFile=new File(path+name);
-//			if(!imgFile.exists()) {
-//				
-//			}
-//		}
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		
+		System.out.println("bbbbbbb=> ");
+		for (String name:vo.getImgList()) {
+			System.out.println("aaaaaa=> "+name);
+		}
+		
+		
 		int result=dao.updateClass(vo);
 		ModelAndView mav=new ModelAndView();
 		if(result>0) {
