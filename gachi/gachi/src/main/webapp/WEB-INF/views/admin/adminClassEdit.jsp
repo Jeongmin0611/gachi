@@ -12,13 +12,20 @@
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
 		$("#ad_goods_write li").css("margin-top","10px");
 		$("textarea").css("height","800px");
-		
 		$(".ad_box img").css("width","200px").css("height","200px");
-	
-		$("#class_img").on('change',(event)=>{
+		$(".ad_box>div").css("margin","20px 0px;");
+		$(".ad_box>div:first-child").css("float","left");
+		let imgCount=2;
+		 $(".add_img").on("dragenter dragover", function(event){
+		        event.preventDefault();
+		    });
+		
+		 
+		 
+		$(document).on("drop",".add_img",(event)=>{
 			event.preventDefault();
-			var file =event.target.files[0];
-			//var file=files[0];
+			var files =event.originalEvent.dataTransfer.files;
+			var file=files[0];
 			console.log(file);
 			var formData= new FormData();
 			formData.append("file",file);
@@ -32,11 +39,43 @@
 				//////////////////////////
 				data: formData,
 				success:function(result){
-					$(".ad_box img").attr("src",result);
+					let num=1;
+					var filename=result.slice(result.lastIndexOf("/")+1);
+					let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
+					tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
+					tagTxt+='<div style="text-align:center">';
+					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
+					tagTxt+='<div style="padding:0 auto;">';
+					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
+					tagTxt+='<span><input type="hidden" name="imgList['+num+']"/>'+filename+'<b>x</b></span></div>';
+					$(".ad_box").append(tagTxt);
 				}
 			});
 		});
-		
+			$(document).on('change',".class_img",(event)=>{
+			console.log("aaaaaa");
+			event.preventDefault();
+			var file =event.target.files[0];
+			console.log(file);
+			var formData= new FormData();
+			formData.append("file",file);
+			$.ajax({
+				type:"post",
+				enctype: 'multipart/form-data',
+				url:"/gachi/imgThumbnail",
+				//ajax로 넘길경우 form-data 형식
+				processData: false,
+				contentType: false,
+				//////////////////////////
+				data: formData,
+				success:function(result){
+					$(event.target).parent().prev().children().attr("src",result);
+				}
+			});
+		});
+			$(document).on('click','b',(event)=>{
+				$(event.target).parent().parent().parent().remove();
+			});	
 	});
 </script>
 <div class="container">
@@ -109,21 +148,23 @@
 		</div>
 	</li>
 </ul>
+<h3>클래스 이미지 목록</h3>
 <div class="text_center ad_box">
-	<div style="width:230px;height:100%;">
+	<div style="margin:0 15px; width:230px;height:100%;">
 		<div style="text-align:center;height:24px;">이미지1</div>
 		<div style="text-align:center">
 			<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}"/>
 		</div>
-		<div id="selectImg" style="padding:0 auto;">
-			<input type="file" name="class_img" id="class_img"/>
+		<div style="padding:0 auto;">
+			<!--<input type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"/>-->
+			<label><input type="hidden" name="imgList[0]"/> ${vo.class_img}<b>x</b></label>
 		</div>
 	</div>
 </div>
+<h3>상품설명</h3>
 <ul id="ad_goods_write">
-	<li>상품설명</li>
 	<li><textarea name="class_info">${vo.class_info}</textarea></li>
-	<li>첨부파일 <input type="file" name="class_img" value="${vo.class_img}"/></li>
+	<!--<li>첨부파일 <input type="file" name="class_img" value="${vo.class_img}"/></li> -->
 	<li class="content_center">
 		<input type="submit" class="btn" value="수정"/>
 		<input type="reset" class="btn" value="다시쓰기"/>
