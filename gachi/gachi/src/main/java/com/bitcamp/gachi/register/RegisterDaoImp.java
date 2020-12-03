@@ -7,4 +7,5 @@ public interface RegisterDaoImp {
 	public int creatorInsert2(RegisterVO vo);
 	public String selectList(RegisterVO vo);
 	public RegisterVO memberLogin(RegisterVO vo);
+	public RegisterVO useridChk(RegisterVO vo);
 }
