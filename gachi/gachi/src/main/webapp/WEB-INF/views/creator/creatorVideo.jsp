@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+	#cre_video_lst{
+		border:3px solid #437299;
+		border-radius: 10px;
+		overflow: auto;
+	}
 	#cre_video_lst li{
 		width:8%;
 		float:left;
 		height:50px;
 		line-height:50px;
 		text-align:center;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 	}
 	#cre_video_lst li:nth-child(8n+3){
 		width:20%;
@@ -95,6 +100,7 @@
 				<option>사진/영상</option>
 			</select>
 			<select name="">
+				<option>전체</option>
 				<option>이불에 지도그리기</option>
 				<option>a4용지에 지도그리기</option>
 				<option>벽에 지도그리기</option>
@@ -145,4 +151,15 @@
 			<li>영상정보</li>
 		</ul>	
 	</div>
+<div id="paging">
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
+	</ul>
+</div>
 </div>

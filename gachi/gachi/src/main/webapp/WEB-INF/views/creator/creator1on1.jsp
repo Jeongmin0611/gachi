@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style>
  #cr_1on1_lst{
+ 	border:3px solid #437299;
+ 	border-radius:10px;
  	overflow: auto;
  }
  #cr_1on1_lst li{
