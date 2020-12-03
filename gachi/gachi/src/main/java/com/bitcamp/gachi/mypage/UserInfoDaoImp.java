@@ -17,7 +17,9 @@ public interface UserInfoDaoImp {
 	public MemberVO userInfoView(String userid);
 	//회원정보수정-비밀번호확인
 	public int userInfoPwdChk(MemberVO vo);
-	//회원정보수정
+	//회원정보수정(비밀번호 변경)
+	public int userInfoEditPwd(MemberVO vo);
+	//회원정보수정(비밀번호 변경하지 않음)
 	public int userInfoEdit(MemberVO vo);
 	//회원탈퇴
 	public int userLeave(MemberVO vo);

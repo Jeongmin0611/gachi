@@ -13,6 +13,9 @@
 		background-color: #abcee3;
 		margin:5px 0;
 	}	
+	.mypageContent div{
+		text-align: center;
+	}
 	.mypageContent>div>div{
 		margin:auto 0;
 	}	
@@ -244,7 +247,6 @@
 			</c:forEach>
 				</c:if>
 			</c:forEach>
-		</div>
 		</div>
 		<div class="mypageMainBtm">
 			<ul class="pagination justify-content-center">

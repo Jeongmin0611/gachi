@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 
 	/* 주문신청서 */
@@ -13,104 +14,36 @@
 		font-weight:bold;
 	}
 	.userMainDiv{
-		box-shadow:0px 0px 10px 1px #eee;
-		padding:20px;
-		margin:50px auto;
+		box-shadow: 0px 0px 10px 1px #eee;
+		padding: 20px;
+		margin-bottom: 50px;
+		overflow: hidden;
+	}
+	.userHr{
+		background-color: #000;
+	}
+	.mypageContent{	
+		margin: 10px auto 50px;	 	
 	}
 	
-	/**************/
-	/* 상단 */
-	/* 01 장바구니 > 02 주문/결제 > 03 주문완료 */
-	#orderSheetTop{
-		font-size:0.9em;
-		text-align:center;
-		line-height:50px;
-	}
-	#orderSheetTop>label{
-		margin:0 5px;
-	}
-
 	
-	/**************/
-	/* 내용 */
-	#orderSheetContent{
-		margin-bottom:20px;
+	.mypageContent div{
+		text-align: center;
 	}
-	#orderSheetContent>label{
-		margin-left:20px;
+	.mypageContent>label{
+		margin-top:20px;
+	}
+	.mypageContent input[type="text"],
+	.mypageContent textarea{
+		width: 100%;
+	}
+	.mypageContent button{
+		background-color: #abcee3;
+	}
+	#orderAgree{
+		margin: 50px 0 20px;
 	}
 	
-	/* 주문신청서 내역 제목 */
-	#orderSheetTtl, #orderSheetTtl{
-		overflow:auto;
-	}
-	#orderSheetTtl li, #orderSheetLst li{
-		float:left;
-		width:10%;
-		text-align:center;
-	}
-	#orderSheetTtl li:first-child{
-		width:70%;
-	}
-	
-	/* 주문신청서 내역 리스트 */
-	#orderSheetLst{
-		height:200px;
-		line-height:160px;
-	}
-	#orderSheetLst li:first-child{
-		width:70%;
-		text-align:left;
-	}
-	#orderSheetLst li img{
-		float:left;
-		margin:10px;
-	}
-	#orderSheetLst img{
-		width:200px;
-		height:150px;
-		object-fit:cover;
-		margin-top:5%;
-	}
-	/* 주문자정보 */ /* 결제정보 */
-	#orderSheetUserInfo>div>div:nth-child(2n+1),
-	#orderSheetPay>div>div:nth-child(2n+1){
-		text-align:center;
-	}
-	#orderSheetUserInfo>div>div,
-	#orderSheetPay>div>div{
-		margin:10px 0;
-	}
-	#orderSheetUserInfo input,
-	#orderSheetUserInfo textarea,
-	#orderSheetPay input{
-		width:100%;
-	}
-	
-	/**************/
-	/* 하단 */
-	#orderSheetBtm{
-		overflow:auto;
-		text-align:center;
-		width:100%;
-		margin:0 0 50px;
-	}
-	/* 버튼 */
-	#orderSheetBtm>div{
-		text-align: right;
-		margin: 20px 10px;
-	}
-	#orderSheetBtm>button{
-		margin:10px 5px;
-	}
-	#orderSheetContent button,
-	#orderSheetBtm button{
-		background-color:#ABCEE3;
-	}
-	#orderSheetBtm button:last-child{
-		background-color:#eee;
-		color:#000;
-	}
 </style>
 <script>
 	var IMP = window.IMP; // 생략가능
@@ -153,169 +86,188 @@
 			if($("#sameUserInfo").is(":checked")){
 				$("#shipUsername").val($("#orderUsername").val());
 				$("#shipUserid").val($("#orderUserid").val());
-				$("#shipTel").val($("#orderTel").val());
-				$(".shipZipcode").val($("#orderZipcode").val());
-				$(".shipAddr").val($("#orderAddr").val());
+				$("#shipTel1").val($("#orderTel1").val());
+				$("#shipTel2").val($("#orderTel2").val());
+				$("#shipTel3").val($("#orderTel3").val());
+				$("#shipZipcode").val($("#orderZipcode").val());
+				$("#shipAddr").val($("#orderAddr").val());
 				$("#shipAddrDetail").val($("#orderAddrDetail").val());
 			}else{
 				$("#shipUsername").val("");
 				$("#shipUserid").val("");
-				$("#shipTel").val("");
-				$(".shipZipcode").val("");
-				$(".shipAddr").val("");
+				$("#shipTel1").val("");
+				$("#shipTel2").val($("").val());
+				$("#shipTel3").val($("").val());
+				$("#shipZipcode").val("");
+				$("#shipAddr").val("");
 				$("#shipAddrDetail").val("");
 			}
 		});
 		$("#mileageBtn").click(function(){
-			$("#mileageLbl").val($("#mileageInput").val());
+			if($("#mileageInput").val()>1000){
+				alert("보유한 마일리지를 초과하였습니다. 다시 입력해주세요.");
+			}else{
+				$("#mileageLbl").val($("#mileageInput").val());
+				$("#mileageUse").val($("#mileageInput").val()*-1);
+				$("#finalPrice").val($("#sumPrice").val()*1+$("#mileageUse").val()*1);
+			}
 		});
 	});
 </script>
-<div class="container userMainDiv cfont" id="orderSheetContainer">
-	<div id="orderSheetTop">
-		<label style="color:gray">1 장바구니</label>
-		>
-		<label style="font-size:1.2em"><b>2 주문/결제</b></label>
-		>
-		<label style="color:gray">3 주문완료</label>
-	</div>
-	<hr style="background:#000"/>
-	<div id="orderSheetContent">
-		<ul id="orderSheetTtl">
-			<li>클래스/상품명</li>
-			<li>수량</li>
-			<li>마일리지</li>
-			<li>가격</li>
-		</ul>
+<div class="container userMainDiv cfont">
+	<div class="mypageContent col-lg-8 col-md-10">
+		<label style="color:gray">장바구니 ></label>
+		<label style="font-size:1.1em"><b>주문/결제</b></label>
+		<label style="color:gray">> 주문완료</label>
+		<hr class="userHr"/>
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-5">클래스/상품명</div>
+		</div>
 		<hr/>
-		<ul id="orderSheetLst">
-			<li>
-				<img src="/gachi/img/test_image.jpg"/>
-				<label>카모마일 프랑스 자수</label>
-			</li>
-			<li>1</li>
-			<li>150p</li>
-			<li>15,000원</li>
-		</ul>
+		<c:set var="sum" value="0"/>
+		<c:set var="ship" value="2500"/>
+		<c:set var="mileage" value="0"/>
+		<c:set var="price" value="0"/>
+		<c:set var="cnt" value="0"/>
+		<c:forEach var="cvo" items="${orderVOList }">
+			<div class="row">
+				<c:set var="key" value="${cvo.code }"/>
+				<input type="hidden" value="${key }"/>
+				<c:if test="${fn:contains(key,'c')}">
+					<div class="col-md-4" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img1 }" style="width:100%;height:100px;object-fit: cover"/></div>
+				</c:if>
+				<c:if test="${fn:contains(key,'g')}">
+					<div class="col-md-4" style="overflow:hidden"><img src="/gachi/img/${cvo.goods_img1 }" style="width:100%;height:100px;object-fit: cover"/></div>
+				</c:if>
+				<c:if test="${fn:contains(key,'c')}">
+					<div class="col-md-5">${cvo.class_name }<br/>${cvo.username }</div>
+				</c:if>
+				<c:if test="${fn:contains(key,'g')}">
+					<div class="col-md-5">${cvo.goods_name }</div>
+				</c:if>
+				<div class="col-md-1">${cvo.amount }개</div>
+				<div class="col-md-1">${cvo.stack }p</div>
+				<div class="col-md-1">${cvo.real_price }원</div>
+			</div>
+			<hr/>
+			<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
+			<c:if test="${sum ge 50000}">
+				<c:set var="ship" value="0"/>
+			</c:if>
+			<c:set var="price" value="${sum+ship }"/>
+			<c:set var="cnt" value="${cnt+1 }"/>
+		</c:forEach>
 		<label>주문자 정보</label>
-		<hr style="background:#000"/>
-		<div id="orderSheetUserInfo">
-			<div class="row">
-				<div class="col-md-4">이름</div>
-				<div class="col-md-8"><input type="text" name="username" id="orderUsername" value="홍길동" style="border:none;outline:none;background:#eee" readonly/></div>
+		<hr class="userHr"/>
+		<div class="row">
+			<div class="col-md-4">이름</div>
+			<div class="col-md-8"><input type="text" name="username" id="orderUsername" style="border:none;outline:none" value="홍길동" readonly/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">E-mail</div>
+			<div class="col-md-8"><input type="text" name="userid" id="orderUserid" style="border:none;outline:none" value="userid@bitcamp.com" readonly/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">연락처</div>
+			<div class="col-md-8">
+				<input type="text" name="tel1" id="orderTel1" value="010" style="width:25%;border:none;outline:none" readonly/>-
+				<input type="text" name="tel2" id="orderTel2" value="1111" style="width:25%;border:none;outline:none" readonly/>-
+				<input type="text" name="tel3" id="orderTel3" value="2222" style="width:25%;border:none;outline:none" readonly/>
 			</div>
-			<div class="row">
-				<div class="col-md-4">E-mail</div>
-				<div class="col-md-8"><input type="text" name="userid" id="orderUserid" value="userid@bitcamp.com" style="border:none;outline:none;background:#eee" readonly/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">주소</div>
+			<div class="col-md-8">
+				<input type="text" name="zipcode" id="orderZipcode" value="01234" style="width:15%;outline:none" readonly/>
+				<button type="button" class="btn btn-outline-light btn-sm" style="width:15%">검색</button>
+				<input type="text" name="addr" id="orderAddr" value="서울시 마포구 백범로" style="width:67%;outline:none" readonly/>
 			</div>
-			<div class="row">
-				<div class="col-md-4">연락처</div>
-				<div class="col-md-8"><input type="text" name="tel" id="orderTel" value="010-9999-8888" style="border:none;outline:none;background:#eee" readonly/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">주소</div>
-				<!-- xs에서 숨기기 -->
-				<div class="col-md-8 d-none d-sm-block">
-					<div class="row">
-						<div class="col-md-2" style="padding:5px"><input type="text" name="zipcode" id="orderZipcode" value="01234" readonly/></div>
-						<div class="col-md-1" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div>
-						<div class="col-md-9" style="padding:5px"><input type="text" name="addr" id="orderAddr" value="서울시 백범로" readonly/></div>
-					</div>
-				</div>
-				<!-- xs에서 보이기 -->
-				<div class="col-md-8 d-block d-sm-none">
-					<div class="row">
-						<div class="col-4" style="padding:5px"><input type="text" name="zipcode" id="orderZipcode" value="01234" readonly/></div>
-						<div class="col-2" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div	>			
-					</div>
-					<div class="row">
-						<div class="col-12 d-block d-sm-none" style="padding:5px"><input type="text" name="addr" id="orderAddr" value="서울시 백범로" readonly/></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">상세주소</div>
-				<div class="col-md-8"><input type="text" name="addrDetail" id="orderAddrDetail" value="11111222222"/></div>
-			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">상세주소</div>
+			<div class="col-md-8"><input type="text" name="addrDetail" id="orderAddrDetail" value="11111222222"/></div>
 		</div>
 		<label>배송지 정보</label>
 		<label style="float:right"><input type="checkbox" id="sameUserInfo"/>주문자 정보와 동일</label>
-		<hr style="background:#000"/>
-		<div id="orderSheetUserInfo">
-			<div class="row">
-				<div class="col-md-4">이름</div>
-				<div class="col-md-8"><input type="text" name="username" id="shipUsername" readonly/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">E-mail</div>
-				<div class="col-md-8"><input type="text" name="userid" id="shipUserid" readonly/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">연락처</div>
-				<div class="col-md-8"><input type="text" name="tel" id="shipTel" readonly/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">주소</div>
-				<!-- xs에서 숨기기 -->
-				<div class="col-md-8 d-none d-sm-block">
-					<div class="row">
-						<div class="col-md-2" style="padding:5px"><input type="text" name="zipcode" class="shipZipcode" readonly/></div>
-						<div class="col-md-1" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div>
-						<div class="col-md-9" style="padding:5px"><input type="text" name="addr" class="shipAddr" readonly/></div>
-					</div>
-				</div>
-				<!-- xs에서 보이기 -->
-				<div class="col-md-8 d-block d-sm-none">
-					<div class="row">
-						<div class="col-4" style="padding:5px"><input type="text" name="zipcode" class="shipZipcode" readonly/></div>
-						<div class="col-2" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div	>			
-					</div>
-					<div class="row">
-						<div class="col-12 d-block d-sm-none" style="padding:5px"><input type="text" name="addr" class="shipAddr" readonly/></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">상세주소</div>
-				<div class="col-md-8"><input type="text" name="addrDetail" id="shipAddrDetail"/></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">배송메세지</div>
-				<div class="col-md-8"><textarea name="orderMsg" id="orderMsg"></textarea></div>
+		<hr class="userHr"/>
+		<div class="row">
+			<div class="col-md-4">이름</div>
+			<div class="col-md-8"><input type="text" name="username" id="shipUsername" readonly/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">E-mail</div>
+			<div class="col-md-8"><input type="text" name="userid" id="shipUserid" readonly/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">연락처</div>
+			<div class="col-md-8">
+				<input type="text" name="tel1" id="shipTel1" style="width:25%"/>-
+				<input type="text" name="tel2" id="shipTel2" style="width:25%"/>-
+				<input type="text" name="tel3" id="shipTel3" style="width:25%"/>
 			</div>
 		</div>
-		<label>결제정보</label>
-		<hr style="background:#000"/>
-		<div id="orderSheetPay">
-			<div class="row">
-				<div class="col-md-4">결제수단</div>
-				<div class="col-md-8"><input type="radio" name="creditCard" value="신용카드" style="width:10px" checked/><label>신용카드</label></div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">주소</div>
+			<div class="col-md-8">
+				<input type="text" name="zipcode" id="shipZipcode" style="width:15%;outline:none" readonly/>
+				<button type="button" class="btn btn-outline-light btn-sm" style="width:15%">검색</button>
+				<input type="text" name="addr" id="shipAddr" style="width:67%;outline:none" readonly/>
 			</div>
-			<div class="row">
-				<div class="col-md-4">적립금사용</div>
-				<div class="col-md-8">
-					<div class="row">
-						<div class="col-md-6"><input type="text" id="mileageLbl" value="0" style="border:none;outline:none" readonly/></div>
-						<div class="col-md-1">원</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6"><input type="text" name="mileage" id="mileageInput" placeholder="현재 마일리지 1,000p"/></div>
-						<div class="col-md-2"><button type="button" class="btn btn-outline-light btn-sm" id="mileageBtn">적용</button></div>
-					</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">상세주소</div>
+			<div class="col-md-8"><input type="text" name="addrDetail" id="shipAddrDetail"/></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">배송메세지</div>
+			<div class="col-md-8"><textarea name="orderMsg" id="orderMsg"></textarea></div>
+		</div>
+		<label>결제정보</label>
+		<hr class="userHr"/>
+		<div class="row">
+			<div class="col-md-4">결제수단</div>
+			<div class="col-md-8"><input type="radio" name="creditCard" value="신용카드" checked/><label>신용카드</label></div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-4">마일리지사용</div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-8"><input type="text" id="mileageLbl" value="0" style="border:none;outline:none" readonly/></div>
+					<div class="col-md-2">원</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8"><input type="text" name="mileage" id="mileageInput" placeholder="현재 마일리지 1,000p"/></div>
+					<div class="col-md-3"><button type="button" class="btn btn-outline-light btn-sm" id="mileageBtn">적용</button></div>
 				</div>
 			</div>
 		</div>
 		<label>결제금액</label>
-		<hr style="background:#000"/>
-		</div>
-	<div id="orderSheetBtm">
-		<div><b>합계</b> 720000원</div>	
-		<div><b>배송비 무료</b></div>
-		<div><b>마일리지</b> -0원</div>
 		<hr class="userHr"/>
-		<div style="font-size:1.2em"><b>총 금액</b> 720000원</div>
-		<label><input type="checkbox" name="orderAgree"/>구매진행에 동의합니다.</label>
-		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="requestpay()">결제하기</button>
-		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
+		<div><b>합계</b><input type="text" value="${price }" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
+		<c:if test="${ship eq 0}">
+			<div><b>배송비 무료</b></div>
+		</c:if>	
+		<c:if test="${ship ne 0}">
+			<div><b>배송비</b> +${ship }원</div>
+		</c:if>	
+		<div><b>마일리지</b><input type="text" id="mileageUse" value="0" style="border:none;outline:none;width:10%" readonly/>원</div>
+		<hr class="userHr"/>
+		<div style="font-size:1.2em"><b>총 금액</b><input type="text" value="${price }" id="finalPrice" style="border:none;outline:none;width:15%" readonly/>원</div>
+		<div>
+			<div><input type="checkbox" id="orderAgree"/>구매진행에 동의합니다.</div>
+			<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="requestpay()">결제하기</button>
+			<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
+		</div>
 	</div>
 </div>

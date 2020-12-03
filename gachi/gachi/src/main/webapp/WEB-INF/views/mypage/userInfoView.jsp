@@ -14,7 +14,7 @@
 	}
 	.mypageContent button{
 		background-color: #abcee3;
-		margin-top: 50px;
+		margin-top: 100px;
 	}
 	
 </style>
@@ -22,8 +22,7 @@
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div class="mypageContent col-lg-8 col-md-10">
-			<label style="color:gray">회원정보수정</label>
-			<label style="color:gray">></label>
+			<label style="color:gray">회원정보수정 ></label>
 			<label style="font-size:1.1em"><b>회원정보확인</b></label>
 			<hr class="userHr"/>
 			<div class="row">
@@ -37,29 +36,29 @@
 			</div>
 			<hr/>
 			<div class="row">
-				<div class="col-md-4">닉네임</div>
-				<div class="col-md-8"><input type="text" name="nickname" value="${vo.nickname }" readonly/></div>
-			</div>
-			<hr/>
-			<div class="row">
 				<div class="col-md-4">생년월일</div>
 				<div class="col-md-8">${vo.birthdate }</div>
 			</div>
 			<hr/>
 			<div class="row">
+				<div class="col-md-4">닉네임</div>
+				<div class="col-md-8"><input type="text" name="nickname" value="${vo.nickname }" readonly/></div>
+			</div>
+			<hr/>
+			<div class="row">
 				<div class="col-md-4">연락처</div>
 				<div class="col-md-8">
-					<input type="text" name="tel1" value="${vo.tel1 }" style="width:30%" readonly/>-
-					<input type="text" name="tel2" value="${vo.tel2 }" style="width:30%" readonly/>-
-					<input type="text" name="tel3" value="${vo.tel3 }" style="width:30%" readonly/>
+					<input type="text" name="tel1" value="${vo.tel1 }" style="width:25%" readonly/>-
+					<input type="text" name="tel2" value="${vo.tel2 }" style="width:25%" readonly/>-
+					<input type="text" name="tel3" value="${vo.tel3 }" style="width:25%" readonly/>
 				</div>
 			</div>
 			<hr/>
 			<div class="row">
 				<div class="col-md-4">주소</div>
 				<div class="col-md-8">
-					<input type="text" name="zipcode" value="${vo.zipcode }" readonly/>
-					<input type="text" name="addr" value="${vo.addr }" readonly/>
+					<input type="text" name="zipcode" value="${vo.zipcode }" style="width:15%" readonly/>
+					<input type="text" name="addr" value="${vo.addr }" style="width:70%" readonly/>
 				</div>
 			</div>
 			<hr/>

@@ -14,7 +14,7 @@
 	}
 	.mypageContent button{
 		background-color: #abcee3;
-		margin-top: 50px;
+		margin-top: 100px;
 	}
 	
 </style>
@@ -34,17 +34,17 @@
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div class="mypageContent col-lg-8 col-md-10">
-			<label style="color:gray">회원정보수정</label>
-			<label style="color:gray">></label>
+			<label style="color:gray">회원정보수정 ></label>
 			<label style="font-size:1.1em"><b>비밀번호확인</b></label>
 			<hr class="userHr"/>
-			<form method="post" id="pwdFrm" action="/gachi/userInfoEditOk">
+			<form method="post" id="pwdFrm" action="/gachi/userInfoEditOk">	
+				<input type="hidden" name="userid" value="${userid }"/>
 				<div class="row">	
 					<div class="col-md-4">비밀번호확인</div>
 					<div class="col-md-8"><input type="password" name="userpwd" id="userInfoPwd" style="width:100%"/></div>
 				</div>
 				<div>
-					<button type="submit" class="btn btn-outline-light">확인</button>
+					<button type="submit" class="btn btn-outline-light btn-block">확인</button>
 				</div>
 			</form>
 		</div>

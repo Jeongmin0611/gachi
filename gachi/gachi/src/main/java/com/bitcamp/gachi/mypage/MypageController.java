@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -93,8 +94,12 @@ public class MypageController {
 	@RequestMapping(value="/userInfoEditFormOk", method=RequestMethod.POST)
 	public ModelAndView userInfoEditFormOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		int result = dao.userInfoEdit(vo);
-		
+		int result;
+		if(vo.getUserpwd()==null || vo.getUserpwd()=="") {
+			result = dao.userInfoEdit(vo);
+		}else {
+			result = dao.userInfoEditPwd(vo);
+		}
 		ModelAndView mav = new ModelAndView();
 		if(result>0) { //업데이트 성공
 			mav.setViewName("redirect:userInfoView");
@@ -109,9 +114,11 @@ public class MypageController {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		String userid = (String)ses.getAttribute("userid");
 		String username = dao.userInfoView(userid).getUsername();
+		int mileage = (Integer)ses.getAttribute("mileage");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userid", userid);
 		mav.addObject("username", username);
+		mav.addObject("mileage", mileage);
 		mav.setViewName("mypage/userLeave");
 		return mav;
 	}
@@ -154,10 +161,10 @@ public class MypageController {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		List<OrderListVO> cList = dao.classCartView((String)ses.getAttribute("userid"));
 		List<OrderListVO> gList = dao.goodsCartView((String)ses.getAttribute("userid"));
-		
 		ModelAndView mav = new ModelAndView();
+
 		mav.addObject("cList", cList);
-		mav.addObject("gList", gList);
+		mav.addObject("gList", gList);	
 		mav.setViewName("mypage/userCart");
 		return mav;
 	}
@@ -179,9 +186,15 @@ public class MypageController {
 		mav.setViewName("redirect:userCart");
 		return mav;
 	}
-	@RequestMapping("/orderSheet")
-	public String orderSheet() {
-		return "mypage/orderSheet";
+	/* 주문신청서 */
+	@RequestMapping(value="/orderSheet", method=RequestMethod.POST)
+	public ModelAndView orderSheet(OrderVOList orderVOList) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("orderVOList", orderVOList.getOrderVOList());
+
+		mav.setViewName("mypage/orderSheet");
+		return mav;
 	}
 	//주문완료
 	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
