@@ -5,6 +5,39 @@
 .carousel-item img {
 	width: 100%;
 }
+/* 탭 메뉴 */
+/*
+#storeViewTab{
+	position: fixed;
+    top: 105px;
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+}
+*/
+#storeViewTab{
+	margin-top:10px;
+	width: 100%;
+}
+#storeViewTab ul{
+	border-bottom: 1px solid #eee;
+	text-align:center;
+}
+#storeViewTab li{
+	float:left;
+	width:33%;
+	margin: 0 0 -1px -1px;
+    border: 1px solid #eaeaea;
+    border-bottom: 1px solid #FFFFFF;
+    border-top: 2px solid #3d4248;
+}
+#storeViewTab li>a{
+	color: black;
+}
+/*상품소개글*/
+#detail-info img{
+	width: 100%;
+}
 </style>
 <script>
 	function purchase(){
@@ -24,7 +57,7 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/gachi/img/artEx/artEx14.PNG" class="d-block w-100">
+					<img src="/gachi/img/store/${vo.goods_img1 }" class="d-block w-100">
 				</div>
 				<div class="carousel-item">
 					<img src="/gachi/img/artEx/artEx15.PNG" class="d-block w-100">
@@ -45,26 +78,32 @@
 		</div>
 		<!-- bxslide 옆에 글 -->
 		<div class="col-sm-6 pt-2">
-			<span style="background-color: lightblue">공예/창작</span><br/>
-			<h3>드로잉 set 상품 </h3><br/>
-			재고 &nbsp; 100개<br/>
-			가격 &nbsp; 150,000원<br/>
-			적립금 &nbsp; 150원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
+			<span style="background-color: lightblue">${vo.category }</span><br/>
+			<h3>${vo.goods_name } </h3><br/>
+			재고 &nbsp; ${vo.stock }개<br/>
+			가격 &nbsp; ${vo.real_price }원<br/>
+			적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
 			<p><p/>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue;" onclick="purchase()">구매</button>
 		</div>
-
+		<div id="storeViewTab">
+			<ul>
+				<li><a href="#detail-info">상품소개글</a></li>
+				<li><a href="#detail-qna">문의 작성</a></li>
+				<li><a href="#detail-review">상품 리뷰</a></li>
+			</ul>
+		</div>
 		<!-- 설명글 -->
 		<h4 style="margin-top:10px; padding-left:10px;">상품소개글</h4>
-		<div class="col-sm-12" style="min-height: 300px; background-color: #eee">
-			상품 설명글 
+		<div class="col-sm-12" style="min-height: 300px; background-color: #eee; text-align: center;" id="detail-info">
+			<img src="/gachi/img/store/${vo.goods_info }"/>
 		</div>
 		
 		<!-- 상품 문의 -->
 		<h4 style="margin-top:10px; padding-left:10px;">상품 문의</h4><br/>
 		<button style="border: 1px solid lightblue; background-color: lightblue; text-align:right" >문의 작성</button>
-		<div class="col-sm-12" style="min-height: 300px; border:1px solid lightblue">
+		<div class="col-sm-12" style="min-height: 300px; border:1px solid lightblue" id="detail-qna">
 			<ul class="row">
 				<li class="col-sm-1" style="border-bottom: 1px solid gray">번호</li>
 				<li class="col-sm-4" style="border-bottom:1px solid gray">제목</li>
@@ -77,7 +116,7 @@
 		<!-- 상품 리뷰 -->
 		<h4 style="margin-top:10px; padding-left:10px;">상품 리뷰</h4>
 		<button style="border: 1px solid lightblue; background-color: lightblue;" >리뷰 작성</button>
-		<div class="col-sm-12" style="min-height: 300px; border:1px solid lightblue; margin-bottom:50px;" >
+		<div class="col-sm-12" style="min-height: 300px; border:1px solid lightblue; margin-bottom:50px;" id="detail-review">
 			<ul class="row">
 				<li class="col-sm-1" style="border-bottom:1px solid gray">번호</li>
 				<li class="col-sm-4" style="border-bottom:1px solid gray">제목</li>
