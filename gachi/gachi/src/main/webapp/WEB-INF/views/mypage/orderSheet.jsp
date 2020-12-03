@@ -16,38 +16,18 @@
 		box-shadow:0px 0px 10px 1px #eee;
 		padding:20px;
 		margin:50px auto;
-		width:50%;
 	}
 	
 	/**************/
 	/* 상단 */
 	/* 01 장바구니 > 02 주문/결제 > 03 주문완료 */
 	#orderSheetTop{
-		overflow:auto;
-		margin:20px 50px 10px;
+		font-size:0.9em;
+		text-align:center;
+		line-height:50px;
 	}
-	/* 로고사이즈 */
-	#orderSheetTop>ul>li img{
+	#orderSheetTop>label{
 		margin:0 5px;
-	}
-	#orderSheetTop>ul>li:first-child img{
-		width:30px;
-	}
-	#orderSheetTop>ul>li:nth-child(3) img{
-		width:22px;
-	}
-	#orderSheetTop>ul>li:nth-child(5) img{
-		width:25px;
-	}
-	#orderSheetTop li{
-		float:left;
-		margin:0 10px;
-	}
-	#orderSheetTop li:nth-child(3){
-		font-weight:bold;
-	}
-	#orderSheetTop li:not(:nth-child(3)){
-		color:gray;
 	}
 
 	
@@ -55,10 +35,6 @@
 	/* 내용 */
 	#orderSheetContent{
 		margin-bottom:20px;
-	}
-	#orderSheetContent input,
-	#orderSheetContent textarea{
-		outline:none;
 	}
 	#orderSheetContent>label{
 		margin-left:20px;
@@ -96,119 +72,19 @@
 		object-fit:cover;
 		margin-top:5%;
 	}
-	
-	/* 주문자정보 */
-	#orderSheetUserInfo{
-		overflow:auto;
-		margin-bottom:40px;
-	}
-	#orderSheetUserInfo li{
-		overflow:auto;
-		text-align:center;
-		margin-bottom:20px;
-	}
-	#orderSheetUserInfo li:nth-child(2n+1){
-		width:30%;
-		float:left;
-	}
-	#orderSheetUserInfo li:nth-child(2n){
-		width:70%;
-	}
-	#orderSheetUserInfo li input{
-		width:70%;
-		padding:0 20px;
+	/* 주문자정보 */ /* 결제정보 */
+	#orderSheetUserInfo>div>div:nth-child(2n+1),
+	#orderSheetPay>div>div:nth-child(2n+1){
 		text-align:center;
 	}
-	#orderSheetUserInfo li:nth-child(8)>input:first-child{
-		width:15%;
-		padding:0;
-		border:none;
-	}
-	#orderSheetUserInfo li:nth-child(8)>input:last-child{
-		width:70%;
-		border:none;
-	}
-	#orderSheetUserInfo li:nth-child(10)>input{
-		width:100%;
-	}
-	#orderSheetUserInfo textarea{
-		border:1px solid #ddd;
-	}
-	
-	/* 결제정보 */
-	#orderSheetPay{
-		margin-bottom:40px;
-		overflow:auto;
-	}
-	#orderSheetPay li{
-		text-align:center;
-		margin-bottom:20px;
-		overflow:auto;
-	}
-	#orderSheetPay li:nth-child(2n+1){
-		width:30%;
-		float:left;
-	}
-	#orderSheetPay li:nth-child(2n){
-		width:70%;
-		text-align:left;
-	}
-	#orderSheetPay li:nth-child(4)>input{
-		width:50%;
-	}
-	#orderMsg{
-		width:100%;
-		height:60px;
-	}
-	
-	/* 가격정보 */
-	#orderSheetPrice{
-		margin:0 10px;
-		width:48%;
-		height:170px;
-		overflow:hidden;
-		background-color:#eee;
-		padding:20px;
-		float:left;
-	}
-	#orderSheetPrice>li{
-		width:50%;
-		overflow:auto;
-		float:left;
+	#orderSheetUserInfo>div>div,
+	#orderSheetPay>div>div{
 		margin:10px 0;
 	}
-	#orderSheetPrice>li:nth-child(2n+1){
-		font-weight:bold;
-	}
-	#orderSheetPrice>li:nth-child(2n){
-		text-align:right;
-	}
-	
-	/* 최종가격 */
-	#orderSheetPriceFinal{
-		margin:0 10px;
-		width:48%;
-		height:170px;
-		overflow:hidden;
-		padding:20px;
-		border:3px solid #ABCEE3;
-	}
-	#orderSheetPriceFinal>li{
-		font-size:1.5em;
-		text-align:center;
-		margin:10px;
-	}
-	#orderSheetPriceFinal>li:nth-child(2){
-		font-size:1.2em;
-	}
-	#orderSheetPriceFinal>li:nth-child(3){
+	#orderSheetUserInfo input,
+	#orderSheetUserInfo textarea,
+	#orderSheetPay input{
 		width:100%;
-		text-align:right;
-		font-size:0.8em;
-	}
-	#orderSheetContent input{
-		border:none;
-		border-bottom:1px solid #ddd;
 	}
 	
 	/**************/
@@ -217,9 +93,13 @@
 		overflow:auto;
 		text-align:center;
 		width:100%;
-		margin:100px 0 50px;
+		margin:0 0 50px;
 	}
 	/* 버튼 */
+	#orderSheetBtm>div{
+		text-align: right;
+		margin: 20px 10px;
+	}
 	#orderSheetBtm>button{
 		margin:10px 5px;
 	}
@@ -268,21 +148,39 @@
 			    }
 		});
 	}
+	$(function(){
+		$("#sameUserInfo").change(function(){
+			if($("#sameUserInfo").is(":checked")){
+				$("#shipUsername").val($("#orderUsername").val());
+				$("#shipUserid").val($("#orderUserid").val());
+				$("#shipTel").val($("#orderTel").val());
+				$(".shipZipcode").val($("#orderZipcode").val());
+				$(".shipAddr").val($("#orderAddr").val());
+				$("#shipAddrDetail").val($("#orderAddrDetail").val());
+			}else{
+				$("#shipUsername").val("");
+				$("#shipUserid").val("");
+				$("#shipTel").val("");
+				$(".shipZipcode").val("");
+				$(".shipAddr").val("");
+				$("#shipAddrDetail").val("");
+			}
+		});
+		$("#mileageBtn").click(function(){
+			$("#mileageLbl").val($("#mileageInput").val());
+		});
+	});
 </script>
 <div class="container userMainDiv cfont" id="orderSheetContainer">
 	<div id="orderSheetTop">
-		<ul>
-			<li><img src="/gachi/img/icon_cart.png"/>장바구니</li>
-			<li>></li>
-			<li><img src="/gachi/img/icon_ordersheet.png"/>주문/결제</li>
-			<li>></li>
-			<li><img src="/gachi/img/icon_check.png"/>주문완료</li>
-		</ul>
+		<label style="color:gray">1 장바구니</label>
+		>
+		<label style="font-size:1.2em"><b>2 주문/결제</b></label>
+		>
+		<label style="color:gray">3 주문완료</label>
 	</div>
 	<hr style="background:#000"/>
 	<div id="orderSheetContent">
-		<label>주문내역</label>
-		<hr style="background:#000"/>
 		<ul id="orderSheetTtl">
 			<li>클래스/상품명</li>
 			<li>수량</li>
@@ -302,56 +200,120 @@
 		<label>주문자 정보</label>
 		<hr style="background:#000"/>
 		<div id="orderSheetUserInfo">
-			<ul>
-				<li>이름</li>
-				<li><input type="text" name="username" value="홍길동"/></li>
-				<li>E-mail</li>
-				<li><input type="text" name="userid" value="userid@bitcamp.com"/></li>
-				<li>연락처</li>
-				<li><input type="text" name="tel" value="010-9999-8888"/></li>
-				<li>주소</li>
-				<li>
-					<input type="text" name="zipcode" value="01234" readonly/>
-					<button type="button" class="btn btn-outline-light btn-sm">검색</button>
-					<input type="text" name="addr" value="서울시 마포구 백범로" readonly/>
-				</li>
-				<li>상세주소</li>
-				<li><input type="text" name="addrDetail" value="11111222222"/></li>
-				<li>배송메세지</li>
-				<li><textarea name="orderMsg" id="orderMsg"></textarea></li>
-			</ul>
+			<div class="row">
+				<div class="col-md-4">이름</div>
+				<div class="col-md-8"><input type="text" name="username" id="orderUsername" value="홍길동" style="border:none;outline:none;background:#eee" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">E-mail</div>
+				<div class="col-md-8"><input type="text" name="userid" id="orderUserid" value="userid@bitcamp.com" style="border:none;outline:none;background:#eee" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">연락처</div>
+				<div class="col-md-8"><input type="text" name="tel" id="orderTel" value="010-9999-8888" style="border:none;outline:none;background:#eee" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">주소</div>
+				<!-- xs에서 숨기기 -->
+				<div class="col-md-8 d-none d-sm-block">
+					<div class="row">
+						<div class="col-md-2" style="padding:5px"><input type="text" name="zipcode" id="orderZipcode" value="01234" readonly/></div>
+						<div class="col-md-1" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div>
+						<div class="col-md-9" style="padding:5px"><input type="text" name="addr" id="orderAddr" value="서울시 백범로" readonly/></div>
+					</div>
+				</div>
+				<!-- xs에서 보이기 -->
+				<div class="col-md-8 d-block d-sm-none">
+					<div class="row">
+						<div class="col-4" style="padding:5px"><input type="text" name="zipcode" id="orderZipcode" value="01234" readonly/></div>
+						<div class="col-2" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div	>			
+					</div>
+					<div class="row">
+						<div class="col-12 d-block d-sm-none" style="padding:5px"><input type="text" name="addr" id="orderAddr" value="서울시 백범로" readonly/></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">상세주소</div>
+				<div class="col-md-8"><input type="text" name="addrDetail" id="orderAddrDetail" value="11111222222"/></div>
+			</div>
+		</div>
+		<label>배송지 정보</label>
+		<label style="float:right"><input type="checkbox" id="sameUserInfo"/>주문자 정보와 동일</label>
+		<hr style="background:#000"/>
+		<div id="orderSheetUserInfo">
+			<div class="row">
+				<div class="col-md-4">이름</div>
+				<div class="col-md-8"><input type="text" name="username" id="shipUsername" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">E-mail</div>
+				<div class="col-md-8"><input type="text" name="userid" id="shipUserid" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">연락처</div>
+				<div class="col-md-8"><input type="text" name="tel" id="shipTel" readonly/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">주소</div>
+				<!-- xs에서 숨기기 -->
+				<div class="col-md-8 d-none d-sm-block">
+					<div class="row">
+						<div class="col-md-2" style="padding:5px"><input type="text" name="zipcode" class="shipZipcode" readonly/></div>
+						<div class="col-md-1" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div>
+						<div class="col-md-9" style="padding:5px"><input type="text" name="addr" class="shipAddr" readonly/></div>
+					</div>
+				</div>
+				<!-- xs에서 보이기 -->
+				<div class="col-md-8 d-block d-sm-none">
+					<div class="row">
+						<div class="col-4" style="padding:5px"><input type="text" name="zipcode" class="shipZipcode" readonly/></div>
+						<div class="col-2" style="padding:5px"><button type="button" class="btn btn-outline-light btn-sm" style="width:100%;margin:0">검색</button></div	>			
+					</div>
+					<div class="row">
+						<div class="col-12 d-block d-sm-none" style="padding:5px"><input type="text" name="addr" class="shipAddr" readonly/></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">상세주소</div>
+				<div class="col-md-8"><input type="text" name="addrDetail" id="shipAddrDetail"/></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">배송메세지</div>
+				<div class="col-md-8"><textarea name="orderMsg" id="orderMsg"></textarea></div>
+			</div>
 		</div>
 		<label>결제정보</label>
 		<hr style="background:#000"/>
 		<div id="orderSheetPay">
-			<ul>
-				<li>결제수단</li>
-				<li><input type="radio" name="creditCard" value="신용카드" checked/><label>신용카드</label></li>
-				<li>적립금사용</li>
-				<li>
-					<input type="text" name="useMileage" value="1000"/>
-					<button type="button" class="btn btn-outline-light btn-sm">적용</button>
-					<label>(현재 마일리지 1,000p)</label>
-				</li>
-			</ul>
+			<div class="row">
+				<div class="col-md-4">결제수단</div>
+				<div class="col-md-8"><input type="radio" name="creditCard" value="신용카드" style="width:10px" checked/><label>신용카드</label></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">적립금사용</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-6"><input type="text" id="mileageLbl" value="0" style="border:none;outline:none" readonly/></div>
+						<div class="col-md-1">원</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6"><input type="text" name="mileage" id="mileageInput" placeholder="현재 마일리지 1,000p"/></div>
+						<div class="col-md-2"><button type="button" class="btn btn-outline-light btn-sm" id="mileageBtn">적용</button></div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<label>총 결제금액</label>
+		<label>결제금액</label>
 		<hr style="background:#000"/>
-		<ul id="orderSheetPrice">
-			<li>총 구매금액</li>
-			<li>15,000원</li>
-			<li>배송비 </li>
-			<li>2500원</li>
-			<li>마일리지 사용</li>
-			<li>-0원</li>
-		</ul>
-		<ul id="orderSheetPriceFinal">
-			<li>최종결제금액</li>
-			<li>17,500원</li>
-			<li>(마일리지 150p)</li>
-		</ul>
-	</div>
+		</div>
 	<div id="orderSheetBtm">
+		<div><b>합계</b> 720000원</div>	
+		<div><b>배송비 무료</b></div>
+		<div><b>마일리지</b> -0원</div>
+		<hr class="userHr"/>
+		<div style="font-size:1.2em"><b>총 금액</b> 720000원</div>
 		<label><input type="checkbox" name="orderAgree"/>구매진행에 동의합니다.</label>
 		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="requestpay()">결제하기</button>
 		<button type="button" class="btn btn-outline-light" id="orderSheetBtn" onclick="location.href='/gachi/userCart'">취소</button>
