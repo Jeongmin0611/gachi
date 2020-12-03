@@ -8,8 +8,12 @@
 	/* 상단 */
 	/* 01 장바구니 > 02 주문/결제 > 03 주문완료*/
 	#userCartTop{
+		font-size:0.9em;
 		text-align:center;
 		line-height:50px;
+	}
+	#userCartTop>label{
+		margin:0 5px;
 	}
 	/**********************/
 	/* 내용 */
@@ -17,51 +21,39 @@
 	#userCartContent{
 		text-align: center;
 	}
+	#userCartContent>div{
+		margin: 5px;
+	}
 	#userCartContent>div>div:nth-child(3){
 		text-align: left;
+	}
+	#userCartContent>button{
+		float:left;
+		margin:10px 5px;
+	}
+	#userCartContent>label{
+		width:100%;
+		font-size:0.7em;
+		margin-right:10px;
+		text-align:right;
 	}
 	
 	/**********************/
 	/* 하단 */
-	#userCartBtm>label{
-		float:right;
-		font-size:0.7em;
-		margin-right:10px;
-	}
-	#userCartBtm>button{
-		background-color:#eee;
-		color:#000;
-		margin-left:10px;
-	}
 	
-	/* 가격정보 */
-	#userCartPrice{
-		margin:20px 10px;
-		height:150px;
-		line-height:150px;
-		text-align:center;
-		background-color:#eee;
+	#userCartBtm>div{
+		text-align: right;
+		margin: 20px 10px;
 	}
-	#userCartPrice>label{
-		width:10%;
-	}
-	#userCartPrice>label:nth-child(7),#userCartPrice>label:nth-child(8){
-		font-weight:bold;
-	}
-	/* 버튼 영역 */
-	#userCartBtnDiv{
-		margin:100px auto 50px;
-		width:50%;
-	}
-	#userCartBtnDiv button{
-		width:30%;
-	}
-	#userCartBtnDiv button:first-child,
-	#userCartBtnDiv button:nth-child(2){
+	#userCartBtm>div:last-child{
+		text-align: center;
+	} 
+	#userCartBtm>div:last-child>button:first-child,
+	#userCartBtm>div:last-child>button:nth-child(2){
 		background-color:#eee;
 		color:#000;
 	}
-	#userCartBtnDiv button:last-child{
+	#userCartBtm>div:last-child>button:last-child{
 		background-color:#ABCEE3;
 	}
 	
@@ -86,21 +78,12 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="row" id="userCartTop">
-			<div class="col-3">
-				<img src="/gachi/img/icon_cart.png" style="width:35px"/>
-				<div><b>장바구니</b></div>
-			</div>
-			<div class="col-1">></div>
-			<div class="col-4">
-				<img src="/gachi/img/icon_ordersheet.png" style="width:25px"/>
-				<div style="color:gray">주문/결제</div>
-			</div>
-			<div class="col-1">></div>
-			<div class="col-3">
-				<img src="/gachi/img/icon_check.png" style="width:30px"/>
-				<div style="color:gray">주문완료</div>
-			</div>
+		<div id="userCartTop">
+			<label style="font-size:1.1em"><b>1 장바구니</b></label>
+			>
+			<label style="color:gray">2 주문/결제</label>
+			>
+			<label style="color:gray">3 주문완료</label>
 		</div>
 		<hr style="background:#000"/>
 		<div id="userCartContent">
@@ -145,22 +128,21 @@
 				</c:if>
 				<c:set var="price" value="${sum+ship }"/>
 			</c:forEach>
+			<button type="button" id="selectDel" class="btn btn-info btn-sm">선택상품삭제</button>
+			<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDeleteAll'">전체삭제</button>
+			<label>*주문 시 상품 합계 금액이 50,000원 이상(할인 전 기준)은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
 		</div>
 		<hr/>
 		<div id="userCartBtm">
-			<button type="button" id="selectDel" class="btn btn-outline-light btn-sm user_btn_gray">선택상품삭제</button>
-			<button type="button" class="btn btn-outline-light btn-sm user_btn_gray" onclick="location.href='/gachi/userCartDeleteAll'">전체삭제</button>
-			<label>*주문 시 상품 합계 금액이 50,000원 이상(할인 전 기준)은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
-			<div id="userCartPrice">
-				<label>총 구매금액</label>
-				<label>${sum }원</label>
-				<label>+</label>
-				<label>배송비</label>
-				<label>${ship }원</label>
-				<label>=</label>
-				<label>총 결제금액</label>
-				<label>${price }원</label>
-			</div>
+			<div><b>합계</b> ${sum }원</div>	
+			<c:if test="${ship eq 0}">
+				<div><b>배송비 무료</b></div>
+			</c:if>	
+			<c:if test="${ship ne 0}">
+				<div><b>배송비</b> +${ship }원</div>
+			</c:if>	
+			<hr class="userHr"/>
+			<div style="font-size:1.2em"><b>총 금액</b> ${price }원</div>
 			<div id="userCartBtnDiv">
 				<button type="button" class="btn btn-outline-light">쇼핑계속하기</button>
 				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/orderSheet'">선택상품 주문하기</button>

@@ -8,11 +8,6 @@
 	a:hover{
 		font-weight:bold;
 	}
-	.mypageTop>div{	
-		width:;
-		float:;
-		margin:;
-	}
 	.mypageTop button,
 	.mypageContent button{
 		background-color: #abcee3;
@@ -25,7 +20,7 @@
 		text-align:left;
 	}
 	/*클래스썸네일*/
-	.mypageContent img{
+	.mypageContent>div>div>img{
 		width: 150px;
 	    height: 100px;
 	    object-fit: cover;
