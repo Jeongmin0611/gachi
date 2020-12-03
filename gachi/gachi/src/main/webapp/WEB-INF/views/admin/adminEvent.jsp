@@ -77,14 +77,14 @@ select {
 	<button class="btn">삭제</button> 
 </div>
 <div id="paging">
-	<ul>
-		<li>prev</li>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>next</li>
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
 	</ul>
 </div>
 </div>

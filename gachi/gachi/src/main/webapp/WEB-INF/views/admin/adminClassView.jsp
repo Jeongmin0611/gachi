@@ -28,6 +28,7 @@
 		CKEDITOR.replace("class_info");
 		CKEDITOR.config.height=500;
 		CKEDITOR.config.readOnly = true;
+		$('#ad_goods_viewForm>li:first-child').css("borderRight","1px solid gray");
 	});
 </script>
 <div class="container ad_font">
@@ -47,8 +48,8 @@
 		</ul>
 	</li>
 	<li>
-		<ul style="width:50%; margin-top:45px;">
-			<li style="text-align: center">대표이미지</li>
+		<ul style="width:50%; margin:auto; text-align: center;">
+			<li>대표이미지</li>
 			<li><img src="upload/classImg/${vo.class_img}"/></li>
 		</ul>
 	</li>

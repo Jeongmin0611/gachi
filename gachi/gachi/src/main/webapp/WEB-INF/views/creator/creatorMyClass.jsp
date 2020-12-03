@@ -9,19 +9,19 @@
 	 	padding:5px;
 	 	overflow:auto;
 	 }
-	 .cr_MyClass_lst li{
-	 	vertical-align:middle;
-	 	overflow: auto;	
-	 }
 	 .cr_MyClass_header{
-	 	height:50px;
+	 	margin-top:20px;
+	 	border-top:3px solid #437299;
+	 	border-left:3px solid #437299;
+	 	border-right:3px solid #437299;
+	 	border-radius:10px;
  		line-height:50px;
- 		padding-left:0px;
- 		margin-bottom:0px
+ 		overflow: auto;
 	 }
 	 .cr_Classlist_menu{
 		border:3px solid #437299;	
 		border-radius: 10px; 
+		margin:20px 0px;
 	 }
 	 .cr_Classlist_menu li{
 		margin-top:5px;
@@ -39,6 +39,13 @@
 	 	height:30px;
 	 }
  </style> 
+ <script>
+ 	$(()=>{
+ 		$(".cr_MyClass_lst li:nth-child(3)").css("padding","0");
+ 		$(".cr_MyClass_lst li:lt(8)").css("height","55px").css("lineHeight","50px");
+ 		
+ 	});
+ </script>
  <div class="container text-center ad_font">
  	<h1>클래스 관리</h1>
 		<form method="get" action="">
@@ -86,8 +93,8 @@
 				
 			</div>
 		</form>
-	<ul class="cr_MyClass_header">
-	<li>선택</li>
+	<ul class="cr_MyClass_lst">
+		<li>선택</li>
 		<li>클레스코드</li>
 		<li>이미지</li>
 		<li>카테고리</li>
@@ -95,8 +102,10 @@
 		<li>신청일</li>
 		<li>등록일</li>
 		<li>상태</li>
-	</ul>
-	<ul class="cr_MyClass_lst">
+	
+	
+	
+	
 		<li><input type="checkbox" id="" name=""/></li>
 		<li>cla1546484</li>
 		<li><img src="img/artEx/artEx03.PNG"></li>
@@ -119,15 +128,15 @@
 		<button onclick="location.href='/gachi/creatorMyClassWrite'" class="btn">강좌개설신청</button>
 		<button class="btn">종료신청</button>
 	</div>
-	<div id="paging">
-		<ul>
-			<li>prev</li>
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>5</li>
-			<li>next</li>
-		</ul>
-	</div>
+<div id="paging">
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
+	</ul>
+</div>
 </div>
