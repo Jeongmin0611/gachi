@@ -533,8 +533,21 @@ public class AdminController {
 //		return mav;
 //	}
 	@RequestMapping("/adminNotice")
-	public String adminNotice() {
-		return "admin/adminNotice";
+	public ModelAndView adminNotice(NoticePageVO npvo,HttpServletRequest req) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		String nowPageRequest=req.getParameter("nowPage");
+		if(nowPageRequest!=null) {
+			npvo.setNowPage(Integer.parseInt(nowPageRequest));
+		}
+		int totalRecord=dao.getAllRecord(npvo);
+		npvo.setTotalRecord(totalRecord);
+		
+		List<NoticeVO> list=dao.selectList();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("npvo",npvo);
+		mav.setViewName("admin/adminNotice");
+		return mav;
 	}
 	
 	@RequestMapping("/adminNoticeView")
@@ -544,6 +557,21 @@ public class AdminController {
 	@RequestMapping("/adminNoticeWrite")
 	public String adminNoticeWrite() {
 		return "admin/adminNoticeWrite";
+	}
+	@RequestMapping(value="/adminNoticeWriteOk",method = RequestMethod.POST)
+	public ModelAndView adminNoticeWriteOk(NoticeVO vo,MultipartFile file) {
+		vo.setFilename(vo.getInput_file().getOriginalFilename());
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.insertNotice(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:adminNotice");	
+		}else{
+			String msg="공지사항 등록을 실패하였습니다. 공지사항 쓰기로 돌아갑니다.";
+			mav.addObject("msg", msg);
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
 	}
 	@RequestMapping("/adminEvent")
 	public String adminEvent() {
