@@ -654,18 +654,6 @@ a {
 	var tel2Chk=RegExp(/^[0-9]{3,}$/);
 	var tel3Chk=RegExp(/^[0-9]{4}$/);
 	$("#joinEffectiveness").submit(function(){
-		if($("#userid2").val()==""){
-			alert("아이디(이메일)을 입력하여주세요");
-			$("#userid2").val(""); 
-			 $("#userid2").focus();
-			return false;
-			}
-		if(!emailChk.test($("#userid2").val())){
-			 alert("이메일의 형식에 맞게 입력해주세요");
-			 $("#userid2").val(""); 
-			 $("#userid2").focus(); 
-			 return false; 
-		}
 		if($("#userpwd2").val()==""){
 			alert("비밀번호를 입력하여주세요");
 			$("#userpwd2").val(""); 
@@ -748,12 +736,29 @@ a {
 		return true;
 		
 		});
+	$("#joinEmailChk").click(function(){
+		if($("#userid2").val()==""){
+			alert("아이디(이메일)을 입력하여주세요");
+			$("#userid2").val(""); 
+			 $("#userid2").focus();
+			return false;
+			}
+		if(!emailChk.test($("#userid2").val())){
+			 alert("이메일의 형식에 맞게 입력해주세요");
+			 $("#userid2").val(""); 
+			 $("#userid2").focus(); 
+			 return false; 
+		}
+		if($("#userid2").val()!=""){
+			return "useridChk";
+			}
+		});
 	//크리에이터 회원가입 유효성검사
 	var emailChk2=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var nameChk2= RegExp(/^[가-힣]+$/);
 	var nickNameChk2 = RegExp(/^[가-힣A-Za-z0-9]+$/);
 	var birthdateChk2 = RegExp(/^[0-9]+$/);
-	var business_numberChk= RegExp(/^[0-9]{3}+-[0-9]{2}+-[0-9]{5}+$/);
+	var business_numberChk= RegExp(/^[0-9]+$/);
 	var banknameChk=RegExp(/^[가-힣a-zA-Z]+$/);
 	var accountChk=RegExp(/^[0-9]+$/);
 	$("#joinEffectiveness2").submit(function(){
@@ -1175,9 +1180,7 @@ $(document).ready(function() {
     
 	$("#enterBtn").click(function() {  
 		var userNum = $("#userNum").val();
-       
        	var sysNum = $("#text").val();         
-       
        	if(userNum == null || userNum == ""){
           	alert("휴대폰으로 발송된 인증번호를 입력해주세요");
        	}     
@@ -1193,16 +1196,12 @@ $(document).ready(function() {
   	});
 });
 $(document).ready(function() {
-	
     $("#send2").click(function() {
-       
        	var number = Math.floor(Math.random() * 100000) + 100000;
       	if(number>100000){
         	number = number - 10000;
         }
-
         $("#text2").val(number); 
-       
       	var to = $("#to2").val();
       	var telReg = /^01(?:0)\d{8}$/;
        	if(!telReg.test(to)){
@@ -1231,9 +1230,7 @@ $(document).ready(function() {
     
 	$("#enterBtn2").click(function() {  
 		var userNum = $("#userNum2").val();
-       
        	var sysNum = $("#text2").val();         
-       
        	if(userNum == null || userNum == ""){
           	alert("휴대폰으로 발송된 인증번호를 입력해주세요");
        	}     
@@ -1401,7 +1398,8 @@ $(document).ready(function() {
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
             <div class="mdJ_layer"></div>
-             <input type="text" placeholder="이메일" name="userid2" id="userid2" /><span id="emailMessage" class="message"></span>
+             <input type="text" placeholder="이메일" name="userid2" id="userid2" style="width:68%"/>
+             <button type="button" id="joinEmailChk" class="joinEmailChk" style="width:30%;height:40px;background-color:white;border:1px solid gray">이메일확인</button>
              <input type="password" placeholder="비밀번호" name="userpwd2" id="userpwd2" /><span id="passwordMessage" class="message"></span>
              <input type="password" placeholder="비밀번호 확인" name="userpwdChk" id="userpwdChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="username" id="username" /><span id="nameMessage" class="message"></span>
@@ -1572,9 +1570,9 @@ $(document).ready(function() {
              <input type="checkbox" onclick=CountChecked2(this) id="lnterestMusic2" name="interest2" style="width:15px;height:15px;" value="음악"><span>음악</span>
              <input type="checkbox" onclick=CountChecked2(this) id="lnterestPicture2" name="interest2" style="width:15px;height:15px;" value="사진/영상"><span>사진/영상</span>
              <input type="checkbox" onclick=CountChecked2(this) id="lnterestLiseStyle2" name="interest2" style="width:15px;height:15px;" value="라이프스타일"><span>라이프스타일</span><br/>
-             <input type="text" placeholder="사업자번호" id="business_number">
-             <input type="text" placeholder="은행명" id="bankname">
-             <input type="text" placeholder="계좌번호" onkeypress="onlyNumber();" id="account">
+             <input type="text" placeholder="사업자번호" id="business_number" name="business_number">
+             <input type="text" placeholder="은행명" id="bankname" name="bankname">
+             <input type="text" placeholder="계좌번호" onkeypress="onlyNumber();" id="account" name="account">
              <input type="file" name="creatorLicense_img1" id="creatorLicense_img1"/>
              <input type="file" name="creatorLicense_img2" id="creatorLicense_img2"/>
              <input type="file" name="creatorLicense_img3" id="creatorLicense_img3"/>
@@ -1591,7 +1589,7 @@ $(document).ready(function() {
 		<div id="idF1Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="idF1Btm">
-					<button type="button" class="btn btn-primary" id="idF1Close" style="color:gray">X</button>
+					<button type="" class="btn btn-primary" id="idF1Close" style="color:gray">X</button>
 				</div>
 				<div class="idF1_layer"></div>
 				<div>
