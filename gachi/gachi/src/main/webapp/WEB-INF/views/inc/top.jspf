@@ -1183,31 +1183,31 @@ Gitple('onClose', function () {
 			<button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
 		</form>
 		       
-          <ul class="nav navbar-nav pull-right">
+		<ul class="nav navbar-nav pull-right  ml-auto ">
         <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
           <c:if test="${logStatus==null&&logStatus!='Y'}">
-          <li class="nav-item" id="loginFormBtn"><a class="nav-link">로그인</a></li>
-          <li class="nav-item" id="joinFormBtn"><a class="nav-link">회원가입</a></li>
+         	 <li class="nav-item" id="loginFormBtn"><a class="nav-link">로그인</a></li>
+         	 <li class="nav-item" id="joinFormBtn"><a class="nav-link">회원가입</a></li>
           </c:if>
-          <c:if test="${logStatus!=null	&& logStatus=='Y'}"> 
-	          <c:if test="${userSort=='user'}">
-	          <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-	          <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
-	          <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
-	         </c:if>
-	         <c:if test="${userSort=='creator'}">
-	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
-	         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
-	         </c:if>
-	         <c:if test="${userSort=='admin'}">
-	         <li><span class="nav-link" >${nickname}님 어세오세요</span></li>
-	         <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
-	         <li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+		<c:if test="${logStatus!=null	&& logStatus=='Y'}"> 
+			<c:if test="${userSort=='user'}">
+				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
+			</c:if>
+			<c:if test="${userSort=='creator'}">
+				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
+			</c:if>
+			<c:if test="${userSort=='admin'}">
+				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
+				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 	        </c:if> 
-	        </c:if>
+		</c:if>
 	          
 			<li class="nav-item"><a class="nav-link" href="/gachi/noticeBoard">공지사항</a></li>
 	        <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   

@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@page import="java.net.URLEncoder"%>
 <%@ include file="../inc/top2.jspf"%>
 <style>
-
 
 /*======= 검색 ==========*/
 #CintroCreateSearch {
@@ -12,16 +11,18 @@
 	text-align: right;
 	width: 100%;
 }
-#CintroCreateSearch span{
+
+#CintroCreateSearch span {
 	float: left;
 }
-#CintroCreateSearch span a{
+
+#CintroCreateSearch span a {
 	text-decoration: none;
-	color:black;
+	color: black;
 }
 /*======= 검색 ==========*/
 /*======= 스토어 리스트 ==========*/
-.homeClassListImg {/*이미지 사이즈 조절*/
+.homeClassListImg { /*이미지 사이즈 조절*/
 	width: 100%;
 	margin: 10px auto;
 	height: 250px;
@@ -48,8 +49,9 @@
 	text-decoration: none;
 	color: black;
 }
-.fa-heart{ /*하트 색상*/
-	color:red;
+
+.fa-heart { /*하트 색상*/
+	color: red;
 }
 /*======= 스토어 리스트 ==========*/
 /* 이미지 오버 효과 */
@@ -72,131 +74,172 @@
 }
 
 /* 이미지 오버 효과 끝 */
-.pagination{
-	margin:50px 0;
+.pagination {
+	margin: 50px 0;
 }
-
-
 </style>
 <script>
-$(".hover").mouseleave(
-	function () {
+	$(".hover").mouseleave(function() {
 		$(this).removeClass("hover");
-	}
-);
+	});
+	$(function() {
+		
+		//주소에서 파라미터 값 가져오기
+		var url = decodeURI(document.location.href);
+		var param = url.substring(url.indexOf('?') + 1).split('&');
+		//var init_selectVal;//select option 초기값
+		//alert("param[0]=" + param[0] + ", param[1]=" + param[1]);
+		//category, select 해당되는것 표시
+		if (url.indexOf('?') == -1) {// localhost:9090/gachi/storeList 인경우
+			$('#aAll').attr('style', 'font-weight:bold');
+		} else{
+			if(param[0].substring(0,param[0].indexOf("="))=='category'){
+				var cate = param[0].substring(param[0].indexOf("=") + 1);
+				switch (cate) {
+				case '요리':
+					$('#aFood').attr('style', 'font-weight:bold');
+					break;
+				case '음악':
+					$('#aMusic').attr('style', 'font-weight:bold');
+					break;
+				case '운동':
+					$('#aExercise').attr('style', 'font-weight:bold');
+					break;
+				case '공예%2F창작':
+					$('#aCrafts').attr('style', 'font-weight:bold');
+					break;
+				case '미술':
+					$('#aArt').attr('style', 'font-weight:bold');
+					break;
+				case '라이프스타일':
+					$('#aLifeStyle').attr('style', 'font-weight:bold');
+					break;
+				case '사진%2F영상':
+					$('#aPhoto').attr('style', 'font-weight:bold');
+					break;
+				default:
+					$('#aAll').attr('style', 'font-weight:bold');
+				}
+				if (param[1] != undefined) {
+					var selectOption = param[1].substring(param[1].indexOf("=") + 1);
+					switch (selectOption) {
+					case 'Iall':
+					case 'undefined':
+						$('#Iall').attr('selected', 'selected');
+						break;
+					case 'Inew':
+						$('#Inew').attr('selected', 'selected');
+						break;
+					case 'Ipopular':
+						$('#Ipopular').attr('selected', 'selected');
+						break;
+					}
+				} else {
+					$('#Iall').attr('selected', 'selected');
+				}
+			}else if(param[0].substring(0,param[0].indexOf("="))=='selectval'){
+				$('#aAll').attr('style', 'font-weight:bold');
+				if (param[0] != undefined) {
+					var selectOption = param[0].substring(param[0].indexOf("=") + 1);
+					switch (selectOption) {
+					case 'Iall':
+					case 'undefined':
+						$('#Iall').attr('selected', 'selected');
+						break;
+					case 'Inew':
+						$('#Inew').attr('selected', 'selected');
+						break;
+					case 'Ipopular':
+						$('#Ipopular').attr('selected', 'selected');
+						break;
+					}
+				} else {
+					$('#Iall').attr('selected', 'selected');
+				}
+			}
+		}
+		//var init_selectVal = $('#storeListSelect option:selected').val();
+		if(param[0].substring(0,param[0].indexOf("="))=='category'){
+			if(param[1] != undefined){
+				var init_selectVal = param[1].substring(param[1].indexOf("=") + 1);
+			}else{
+				var init_selectVal="Iall";
+			}
+		}else{
+			if(param[0] != undefined){
+				var init_selectVal = param[0].substring(param[0].indexOf("=") + 1);
+			}else{
+				var init_selectVal="Iall";
+			}
+		}
+		
+		$('select').click(function() {// select태그 클릭 이벤트
+			var new_selectVal = $('#storeListSelect option:selected').val();
+			if (init_selectVal == new_selectVal) {
+				return false;
+			}
+			if (init_selectVal != new_selectVal) {
+				init_selectVal = new_selectVal;
+				if (url.indexOf('category') == -1) {
+					location.href = "/gachi/storeList?selectval="+ init_selectVal;
+				} else if (url.indexOf('category') > -1) {
+					if (url.indexOf('&') > -1) {
+						var url2 = url.split('&');
+						location.href = url2[0] + "&selectval="+ init_selectVal;
+					} else {
+						location.href = url + "&selectval="+ init_selectVal;
+					}
+				}
+			}
+		});
+
+	});
 </script>
 
 <div class="container cfont">
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-	<span>
-		<a href="#"  style="font-weight: bold;">전체</a> &nbsp; <a href="#">공예/창작</a> &nbsp; 
-		<a href="#">요리</a> &nbsp; <a href="#">미술</a> &nbsp; 
-		<a href="#">음악</a> &nbsp; <a href="#">라이프스타일</a> &nbsp; 
-		<a href="#">운동</a> &nbsp; <a href="#">사진/영상</a> &nbsp; 
-	</span>
-	<select name="introCreateSelect1">
-		<option value="Iall">전체</option>
-		<option value="Inew">최신순</option>
-		<option value="Ipopular">인기순</option>
-	</select>
+		<span> <a href="/gachi/storeList" id="aAll">전체</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("공예/창작", "UTF-8")%>"
+			title="공예/창작" id="aCrafts">공예/창작</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("요리", "UTF-8")%>"
+			title="요리" id="aFood">요리</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("미술", "UTF-8")%>"
+			title="미술" id="aArt">미술</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("음악", "UTF-8")%>"
+			title="음악" id="aMusic">음악</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("라이프스타일", "UTF-8")%>"
+			title="라이프스타일" id="aLifeStyle">라이프스타일</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("운동", "UTF-8")%>"
+			title="운동" id="aExercise">운동</a> &nbsp; <a
+			href="/gachi/storeList?category=<%=URLEncoder.encode("사진/영상", "UTF-8")%>"
+			title="사진/영상" id="aPhoto">사진/영상</a> &nbsp;
+		</span> <select id="storeListSelect" name="storeListSelect">
+			<option value="Iall" id="Iall">전체</option>
+			<option value="Inew" id="Inew">최신순</option>
+			<option value="Ipopular" id="Ipopular">인기순</option>
+		</select>
 	</div>
 
 	<!-- 리스트 -->
 	<div class="row">
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx11.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx12.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx13.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx14.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/classView"><img src="/gachi/img/artEx/artEx01.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx02.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx03.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx05.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
-		<div class="col-sm-4">
-			<a href="/gachi/storeView"><img src="/gachi/img/artEx/artEx06.PNG" class="homeClassListImg"/></a><br/>
-			<div class="homeClassListTxt">
-				<p><span>공예/창작</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
-				<a href="/gachi/storeView"><span>카모마일 프랑스 자수</span><br/>									
-					<span style="float: right">가격 &nbsp; 15,000원</span><br/>
-					<span style="float: right">배송비 &nbsp;무료</span>
-				</a>
-			</div>				
-		</div>
+		<c:forEach var="list" items="${list }">
+			<div class="col-sm-4">
+				<a href="/gachi/storeView?code=${list.code}"><img
+					src="/gachi/img/store/${list.goods_img1 }" class="homeClassListImg" /></a><br />
+				<div class="homeClassListTxt">
+					<p>
+						<span>${list.category }</span><i class="far fa-heart fa-lg p-2"
+							style="float: right; height: 15px;"></i>
+					</p>
+					<a href="/gachi/storeView?code=${list.code}"><span>${list.goods_name }</span><br />
+						<span style="float: right">가격 &nbsp; ${list.real_price }원</span><br />
+						<span style="float: right">배송비 &nbsp;무료</span> </a>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
-	
+
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center" id="mypageMainPage">
 		<li class="page-item"><a class="page-link" href="#">Prev</a></li>

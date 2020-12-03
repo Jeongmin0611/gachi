@@ -44,6 +44,12 @@ public class AllVO {
 	//상품
 	private String code;/*코드*/
 	private String goods_name;/*상품명*/
+	private String goods_img1;/*상품 사진1*/
+	private String writedate;
+	private int stock;//재고
+	private int stack;//적립마일리지
+	private int good;//좋아요
+	private String goods_info;//상품내용
 	
 	public int getRownum() {
 		return rownum;
@@ -248,6 +254,43 @@ public class AllVO {
 	}
 	public void setGoods_name(String goods_name) {
 		this.goods_name = goods_name;
+	}
+	public String getGoods_img1() {
+		return goods_img1;
+	}
+	public void setGoods_img1(String goods_img1) {
+		this.goods_img1 = goods_img1;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public int getStack() {
+		return stack;
+	}
+	public void setStack(int stack) {
+		this.stack = stack;
+	}
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
+	}
+	public String getGoods_info() {
+		return goods_info;
+	}
+	public void setGoods_info(String goods_info) {
+		this.goods_info = goods_info;
 	}
 	
 }
