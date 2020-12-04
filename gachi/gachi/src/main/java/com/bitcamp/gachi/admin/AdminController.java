@@ -79,21 +79,43 @@ public class AdminController {
 					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 					System.out.println("tmp2:" + tmp);
 				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 				dbParam2.add(tmp);
 			}
 			
+			// dbParam definition
 			Map<String, List> dbParam = new HashMap<String, List>();
 			dbParam.put("list", dbParam2);
 			
+			// chart1 data
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			List<Integer> newMember = dao.dashForMember(dbParam); // return type
-			
-
-			
-			for(int i=0; i<newMember.size(); i++) {
-				System.out.println(newMember.get(i));
-			}
+					
+			// dbParam for member chart 
+			Map<String, String> dashmember_cnt = new HashMap<String, String>();
+			dashmember_cnt.put("startMonth", startMonth.toString());
+			dashmember_cnt.put("endMonth", endMonth.toString());
 		
+			//chart1 member 
+			dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+			List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+			List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+
+			// ChartJs 전송 데이터
+			List<String> dashMemberData = new ArrayList<String>();
+			List<String> dashAllMemberData = new ArrayList<String>();
+			List<String> dashCreatorData = new ArrayList<String>();
+			
+			for(int i=0; i<dashMember.size(); i++) {
+			     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
+			}
+			for(int i=0; i<dashCreator.size();i++) {
+				dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
+			}
+			for(int i=0; i<dashAllMember.size();i++) {
+				 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+			}
 			for(int i=0; i<dataSize; i++) {
 				String tmp = dbParam2.get(i);
 //					System.out.println(tmp);
@@ -101,7 +123,9 @@ public class AdminController {
 //					System.out.println(dbParam2.get(i));
 			}
 			
-			mav.addObject("dashData", newMember);
+			mav.addObject("dashMemberData", dashMemberData);
+			mav.addObject("dashAllMemberData",dashAllMemberData);
+			mav.addObject("dashCreatorData", dashCreatorData);
 			mav.addObject("labelData", dbParam2);
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
@@ -154,6 +178,7 @@ public class AdminController {
 				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 				System.out.println("tmp2:" + tmp);
 			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 			dbParam2.add(tmp);
 		}
 		
@@ -164,16 +189,32 @@ public class AdminController {
 		// chart1 data
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 		List<Integer> newMember = dao.dashForMember(dbParam); // return type
+				
+		// dbParam for member chart 
+		Map<String, String> dashmember_cnt = new HashMap<String, String>();
+		dashmember_cnt.put("startMonth", startMonth.toString());
+		dashmember_cnt.put("endMonth", endMonth.toString());
 	
-		for(int i=0; i<newMember.size(); i++) {
-			System.out.println(newMember.get(i));
+		//chart1 member 
+		dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+		List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+		List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+
+		// ChartJs 전송 데이터
+		List<String> dashMemberData = new ArrayList<String>();
+		List<String> dashAllMemberData = new ArrayList<String>();
+		List<String> dashCreatorData = new ArrayList<String>();
+		
+		for(int i=0; i<dashMember.size(); i++) {
+		     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
 		}
-		
-		
-		for(int i=0; i<newMember.size(); i++) {
-			System.out.println(newMember.get(i));
+		for(int i=0; i<dashCreator.size();i++) {
+			dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
 		}
-		
+		for(int i=0; i<dashAllMember.size();i++) {
+			 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+		}
 		if(startMonth != null && endMonth != null) {
 			for(int i=0; i<dataSize; i++) {
 				String tmp = dbParam2.get(i);
@@ -181,9 +222,10 @@ public class AdminController {
 				dbParam2.set(i, "\'" + tmp +"\'");
 
 			}
-
 			
-			mav.addObject("dashData", newMember);
+			mav.addObject("dashMemberData", dashMemberData);
+			mav.addObject("dashAllMemberData",dashAllMemberData);
+			mav.addObject("dashCreatorData",dashCreatorData);
 			mav.addObject("labelData", dbParam2);
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
@@ -685,6 +727,7 @@ public class AdminController {
 					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 					System.out.println("tmp2:" + tmp);
 				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 				dbParam2.add(tmp);
 			}
 			
@@ -809,6 +852,7 @@ public class AdminController {
 				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 				System.out.println("tmp2:" + tmp);
 			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 			dbParam2.add(tmp);
 		}
 		
@@ -948,6 +992,7 @@ public class AdminController {
 					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 					System.out.println("tmp2:" + tmp);
 				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 				dbParam2.add(tmp);
 			}
 			
@@ -1061,6 +1106,7 @@ public class AdminController {
 				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 				System.out.println("tmp2:" + tmp);
 			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 			dbParam2.add(tmp);
 		}
 		

@@ -14,7 +14,7 @@
 	width: 250px;
 	height: 200px;
 	padding: 10px;
-	margin-bottom: 50px;
+	margin-top: 50px;
 }
 b{
 	margin-top:10px;
@@ -38,7 +38,7 @@ b{
 					<input type="radio" name="ad_dash_User" value="회원"/>회원
 					<input type="radio" name="ad_dash_User" value="크리에이터"/>크리에이터<br/>
 						<b>신규 가입자 수</b><br/>
-						<span style="font-size:50px;line-height:100px"> ${dashData} 명</span>
+						<span style="font-size:50px;line-height:100px"> ${dashAllMemberData},${dashMemberData},${dashCreatorData} 명</span>
 					</div></li>
 			<li><div class="ad_dash_board"><input type="radio" name="ad_dash_pay" value="전체" checked/>전체
 					<input type="radio" name="ad_dash_pay" value="스토어"/>스토어
@@ -59,7 +59,9 @@ b{
 	<script type="text/javascript">
 
      
-     var dashData = "${dashData}";
+     var dashMemberData = "${dashMemberData}";
+     var dashAllMemberData = "${dashAllMemberData}";
+     var dashCreatorData = "${dashCreatorData}"
      var labelData = "${labelData}";
      var startMonth = "${startMonth}";
      var endMonth = "${endMonth}";
@@ -84,7 +86,7 @@ b{
  	     
 	$("#frm").click(function(){
 		var url = "/adminStatMember";
-		var data = ${dashData};
+		var data = ${dashAllMemberData};
 		$.ajax({
 			url : url,
 			data : data,
@@ -131,7 +133,7 @@ b{
 	        labels: ${labelData},
 	        datasets: [{
 	            label: '월별 매출 기록',
-	            data: ${dashData},
+	            data: ${dashAllMemberData},
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',

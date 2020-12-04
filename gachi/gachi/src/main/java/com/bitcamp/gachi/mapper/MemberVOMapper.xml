@@ -42,9 +42,21 @@
 		</foreach>
 	</select>
 	
-	<select id="dashboardMember" parameterType="map" resultType="_int">		
+	<select id="dashboardMember" parameterType="map" resultType="map">		
 		select count(*) cnt from member where withdrawdate is null and 
 		grade ='회원' and deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
+	<select id="dashboardCreator" parameterType="map" resultType="map">
+		select count(*) cnt from member where withdrawdate is null and 
+		grade ='크리에이터' and deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
+	<select id="dashboardAllMember" parameterType="map" resultType="map">
+		select count(*) cnt from member where withdrawdate is null and 
+		deleted='회원'
 		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
 	</select>
 	
