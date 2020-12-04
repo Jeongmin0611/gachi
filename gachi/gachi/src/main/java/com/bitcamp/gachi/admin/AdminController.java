@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 
+
 @Controller
 public class AdminController {
 	SqlSession sqlSession;
@@ -87,9 +88,7 @@ public class AdminController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			List<Integer> newMember = dao.dashForMember(dbParam); // return type
 			
-			Map<String, String> dbParam_pie = new HashMap<String, String>();
-			dbParam_pie.put("startMonth", startMonth.toString());
-			dbParam_pie.put("endMonth", endMonth.toString());
+
 			
 			for(int i=0; i<newMember.size(); i++) {
 				System.out.println(newMember.get(i));
@@ -338,6 +337,7 @@ public class AdminController {
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
+
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
 	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -377,9 +377,7 @@ public class AdminController {
 		return filePath;
 	}
 	
-	
-	
-	
+
 	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
@@ -396,18 +394,19 @@ public class AdminController {
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		dao.deleteClass(code);
+		ClassVO vo=dao.selectClass(code);
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:adminClass");
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
 	
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
-		//System.out.println("upload ==> "+upload.getOriginalFilename());
+		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
-		String path=session.getServletContext().getRealPath("/upload/class_info");
+		String path=session.getServletContext().getRealPath("/upload/classImg");
 		
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
@@ -416,43 +415,19 @@ public class AdminController {
 			ops.write(upload.getBytes());
 			json.addProperty("uploaded",1);
 			json.addProperty("filename",upload.getOriginalFilename());
-			json.addProperty("url","/gachi/upload/class_info/"+upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/classImg/"+upload.getOriginalFilename());
 			ops.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//System.out.println("path ip ==> "+ip);
-	//	System.out.println("path real ==> "+path);
-		//System.out.println("path req ==> "+req.getRequestURI());
-		//System.out.println("path context ==> "+req.getContextPath());
+		System.out.println("path real ==> "+path);
+		System.out.println("path req ==> "+req.getRequestURI());
+		System.out.println("path context ==> "+req.getContextPath());
 		return json;
 	}
 	
-//	@RequestMapping(value="/imageUpload2",method=RequestMethod.POST)
-//	@ResponseBody
-//	public JsonObject imageUpload2(HttpServletRequest req,@RequestParam MultipartFile upload) {
-//		System.out.println("upload ==> "+upload.getOriginalFilename());
-//		HttpSession session=req.getSession();
-//		String path=session.getServletContext().getRealPath("/upload/notice_img");
-//		
-//		JsonObject json=new JsonObject();
-//		OutputStream ops=null;
-//		try {
-//			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
-//			ops.write(upload.getBytes());
-//			json.addProperty("uploaded",1);
-//			json.addProperty("filename",upload.getOriginalFilename());
-//			json.addProperty("url","/gachi/upload/notice_img/"+upload.getOriginalFilename());
-//			ops.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		//System.out.println("path ip ==> "+ip);
-//		System.out.println("path real ==> "+path);
-//		System.out.println("path req ==> "+req.getRequestURI());
-//		System.out.println("path context ==> "+req.getContextPath());
-//		return json;
-//	}
+	
 	
 //	public String adminMember() {
 //		

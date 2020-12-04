@@ -42,6 +42,12 @@
 		</foreach>
 	</select>
 	
+	<select id="dashboardMember" parameterType="map" resultType="_int">		
+		select count(*) cnt from member where withdrawdate is null and 
+		grade ='회원' and deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
 <select id="dashForGender" parameterType="map" resultType="map">
 		select gender_gb, count(*) cnt 
       from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
