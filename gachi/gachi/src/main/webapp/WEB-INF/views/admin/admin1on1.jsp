@@ -3,22 +3,24 @@
  <style>
  #ad_1on1_lst li{
  	vertical-align:middle;
+ 	border-bottom:1px solid gray;
  	line-height:50px;
  }
  #search_area{
  	margin-bottom:20px;
+ 	text-align:right;
  }
  select{
  	height:30px;
  }
  
  </style> 
-<div class="container text-center ad_font">
+<div class="container ad_font">
 	<h1>1:1문의</h1>
 	<!-- 1:1문의 영역 -->
 	
 	<!-- 검색영역 -->
-	<div id="search_area">
+	<div id="search_area" >
 	<form action="#">
 		<select id="searchType1" name="option1">
 				<option selected="selected">상품/클래스</option>
