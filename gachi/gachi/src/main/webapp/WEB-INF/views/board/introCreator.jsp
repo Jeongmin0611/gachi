@@ -84,7 +84,6 @@
 		<select name="introCreateSelect1">
 			<option value="Iall">전체</option>
 			<option value="Inew">최신순</option>
-			<option value="Ipopular">인기순</option>
 		</select>
 		<select name="IntroCreateSelect2">
 			<option value="Iall">전체</option>

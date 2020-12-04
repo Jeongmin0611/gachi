@@ -97,8 +97,6 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="eventDetailBtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
 		<button type="button" class="btn btn-light">목록</button>
 	</div>
 	<!-- 댓글 -->
