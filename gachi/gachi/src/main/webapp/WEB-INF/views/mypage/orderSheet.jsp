@@ -156,7 +156,7 @@
 				<c:set var="key" value="${cvo.code }"/>
 				<input type="hidden" value="${key }"/>
 				<c:if test="${fn:contains(key,'c')}">
-					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
+					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 				</c:if>
 				<c:if test="${fn:contains(key,'g')}">
 					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>

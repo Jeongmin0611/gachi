@@ -2,7 +2,7 @@ package com.bitcamp.gachi.mypage;
 
 public class OrderListVO {
 	private String code;
-	private String class_img1;
+	private String class_img;
 	private String goods_img1;
 	private String category;
 	private String order_code;
@@ -21,11 +21,11 @@ public class OrderListVO {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getClass_img1() {
-		return class_img1;
+	public String getClass_img() {
+		return class_img;
 	}
-	public void setClass_img1(String class_img1) {
-		this.class_img1 = class_img1;
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}
 	public String getGoods_img1() {
 		return goods_img1;

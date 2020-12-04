@@ -32,9 +32,7 @@ public class AllGoodsVO {
 	private String class_state; /* 상태(미승인, 승인거절, 판매중, 판매종료) */
 	private String sale_state; /* 상태(판매중지, 판매중, 판매종료) */
 
-	private String class_img1; /* 클래스 사진1 */
-	private String class_img2; /* 클래스 사진2 */
-	private String class_img3; /* 클래스 사진3 */
+	private String class_img; /* 클래스 사진 */
 	private String goods_img1; /* 상품이미지1 */ 
 	private String goods_img2; /* 상품이미지2 */ 
 	private String goods_img3; /* 상품이미지3 */ 
@@ -189,23 +187,11 @@ public class AllGoodsVO {
 	public void setSale_state(String sale_state) {
 		this.sale_state = sale_state;
 	}
-	public String getClass_img1() {
-		return class_img1;
+	public String getClass_img() {
+		return class_img;
 	}
-	public void setClass_img1(String class_img1) {
-		this.class_img1 = class_img1;
-	}
-	public String getClass_img2() {
-		return class_img2;
-	}
-	public void setClass_img2(String class_img2) {
-		this.class_img2 = class_img2;
-	}
-	public String getClass_img3() {
-		return class_img3;
-	}
-	public void setClass_img3(String class_img3) {
-		this.class_img3 = class_img3;
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}
 	public String getGoods_img1() {
 		return goods_img1;
