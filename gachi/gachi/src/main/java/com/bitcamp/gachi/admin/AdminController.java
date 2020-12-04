@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 
 @Controller
@@ -94,9 +91,7 @@ public class AdminController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			List<Integer> newMember = dao.dashForMember(dbParam); // return type
 			
-			Map<String, String> dbParam_pie = new HashMap<String, String>();
-			dbParam_pie.put("startMonth", startMonth.toString());
-			dbParam_pie.put("endMonth", endMonth.toString());
+
 			
 			for(int i=0; i<newMember.size(); i++) {
 				System.out.println(newMember.get(i));
@@ -345,59 +340,6 @@ public class AdminController {
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
-	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
-	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
-//		String path=session.getServletContext().getRealPath("/upload/class_info");
-//		//System.out.println("class_info => "+vo.getClass_info());
-//		Document doc=Jsoup.parse(vo.getClass_info());
-//		//gachi/upload/class_info/126464.jpg
-//		System.out.println("doc => "+doc);
-//		List<String> imgFileSrc=doc.getElementsByTag("img").eachAttr("src");
-//		List<String> imgFileNames=new ArrayList<String>();
-//		for(String name:imgFileSrc) {
-//			imgFileNames.add(name.substring(name.lastIndexOf("/")+1));
-//		}
-//		
-//		File dir=new File(path);
-//		for (String name:imgFileNames) {
-//			File imgFile=new File(path+name);
-//			if(!imgFile.exists()) {
-//				
-//			}
-//		}
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		int result=dao.updateClass(vo);
-		ModelAndView mav=new ModelAndView();
-		if(result>0) {
-			mav.addObject("code",vo.getCode());
-			mav.setViewName("redirect:adminClassView");
-		}
-		return mav;
-	}
-	@RequestMapping(value="/imgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
-	@ResponseBody
-	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr) {
-		MultipartFile file=mhsr.getFile("file");
-		OutputStream ops=null;
-		String path=session.getServletContext().getRealPath("/upload/classImg");
-		
-		boolean isc=file.isEmpty();
-		String filePath=null;
-		if(!isc){
-			try {
-				ops=new FileOutputStream(new File(path,file.getOriginalFilename()));
-				ops.write(file.getBytes());
-				filePath="/gachi/upload/classImg/"+file.getOriginalFilename();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return filePath;
-	}
-	
-	
-	
-	
 	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
@@ -414,18 +356,19 @@ public class AdminController {
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		dao.deleteClass(code);
+		ClassVO vo=dao.selectClass(code);
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:adminClass");
+		mav.addObject("vo",vo);
+		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
 	
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
-		//System.out.println("upload ==> "+upload.getOriginalFilename());
+		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
-		String path=session.getServletContext().getRealPath("/upload/class_info");
+		String path=session.getServletContext().getRealPath("/upload/classImg");
 		
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
@@ -434,43 +377,19 @@ public class AdminController {
 			ops.write(upload.getBytes());
 			json.addProperty("uploaded",1);
 			json.addProperty("filename",upload.getOriginalFilename());
-			json.addProperty("url","/gachi/upload/class_info/"+upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/classImg/"+upload.getOriginalFilename());
 			ops.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//System.out.println("path ip ==> "+ip);
-	//	System.out.println("path real ==> "+path);
-		//System.out.println("path req ==> "+req.getRequestURI());
-		//System.out.println("path context ==> "+req.getContextPath());
+		System.out.println("path real ==> "+path);
+		System.out.println("path req ==> "+req.getRequestURI());
+		System.out.println("path context ==> "+req.getContextPath());
 		return json;
 	}
 	
-//	@RequestMapping(value="/imageUpload2",method=RequestMethod.POST)
-//	@ResponseBody
-//	public JsonObject imageUpload2(HttpServletRequest req,@RequestParam MultipartFile upload) {
-//		System.out.println("upload ==> "+upload.getOriginalFilename());
-//		HttpSession session=req.getSession();
-//		String path=session.getServletContext().getRealPath("/upload/notice_img");
-//		
-//		JsonObject json=new JsonObject();
-//		OutputStream ops=null;
-//		try {
-//			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
-//			ops.write(upload.getBytes());
-//			json.addProperty("uploaded",1);
-//			json.addProperty("filename",upload.getOriginalFilename());
-//			json.addProperty("url","/gachi/upload/notice_img/"+upload.getOriginalFilename());
-//			ops.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		//System.out.println("path ip ==> "+ip);
-//		System.out.println("path real ==> "+path);
-//		System.out.println("path req ==> "+req.getRequestURI());
-//		System.out.println("path context ==> "+req.getContextPath());
-//		return json;
-//	}
+	
 	
 //	public String adminMember() {
 //		

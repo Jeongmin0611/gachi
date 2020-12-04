@@ -26,6 +26,9 @@ public interface MemberDaoImp {
 
 	public List<Map<String, Integer>> dashForGender(Map<String, String> dbParam_pie);
 
-	public List<Map<String, Integer>> dashForAge(Map<String, String> dbParam_pie);	
+	public List<Map<String, Integer>> dashForAge(Map<String, String> dbParam_pie);
+
+	public List<Integer> dashboardMember(Map<String, List> dbParam);
+
 
 }

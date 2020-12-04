@@ -50,7 +50,7 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
 	
 		<select id="dashForCreator" parameterType="map" resultType="_int">
 		<foreach collection="list" item="item" separator=" union all">
- 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='크리에이터' and deleted ='회원'
+ 			select count(*) as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='크리에이터' and deleted ='회원'
 		</foreach>
 	</select>
 <!-- 	<delete id="adminMemberDelete">
@@ -93,7 +93,7 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
       	end labels
       from (select to_char(signupdate, 'yyyy-mm') signupdate ,to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
             creator_state , category from member m full outer join creator c on m.userid = c.userid where withdrawdate is null 
-            and grade='크리에이터' and creator_state='승인' 
+            and grade='크리에이터' <!--  and creator_state='승인'  -->
             and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
             )
             )
