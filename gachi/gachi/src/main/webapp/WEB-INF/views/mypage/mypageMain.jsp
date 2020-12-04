@@ -8,16 +8,14 @@
 	a:hover{
 		font-weight:bold;
 	}
-	.mypageTop>div{	
-		width:;
-		float:;
-		margin:;
-	}
 	.mypageTop button,
 	.mypageContent button{
 		background-color: #abcee3;
 		margin:5px 0;
 	}	
+	.mypageContent div{
+		text-align: center;
+	}
 	.mypageContent>div>div{
 		margin:auto 0;
 	}	
@@ -25,7 +23,7 @@
 		text-align:left;
 	}
 	/*클래스썸네일*/
-	.mypageContent img{
+	.mypageContent>div>div>img{
 		width: 150px;
 	    height: 100px;
 	    object-fit: cover;
@@ -249,7 +247,6 @@
 			</c:forEach>
 				</c:if>
 			</c:forEach>
-		</div>
 		</div>
 		<div class="mypageMainBtm">
 			<ul class="pagination justify-content-center">

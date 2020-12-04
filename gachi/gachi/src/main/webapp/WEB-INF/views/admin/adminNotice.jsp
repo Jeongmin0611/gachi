@@ -21,6 +21,9 @@ select {
 
 <!-- 검색영역 -->
 <div id="search_area">
+<div>
+	총 레코드 수:
+</div>
 <form action="#">
 	<select id="searchType2" name="option2">
 			<option selected="selected">제목</option>
@@ -40,14 +43,15 @@ select {
 	<li>등록일</li>
 	<li>조회수</li>
 
-	
+	<c:forEach var="vo" items="${list}">
+		<li><input type="checkbox" id="" name=""/></li>
+		<li>${vo.notice_num}</li>
+		<li><a href="/gachi/adminNoticeView?notice_num=${vo.notice_num}">${vo.subject}</a></li>
+		<li>${vo.writer}</li>
+		<li>${vo.writedate}</li>
+		<li>${vo.hit}</li>
+	</c:forEach>
 
-	<li><input type="checkbox" id="" name=""/></li>
-	<li>10</li>
-	<li><a href="/gachi/adminNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
-	<li>같이가치</li>
-	<li>2020-10-29</li>
-	<li>25</li>
 </ul>
 <div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/adminNoticeWrite'">글쓰기</button>
@@ -55,13 +59,23 @@ select {
 </div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+		<c:if test="${npvo.nowPage>1}">
+			<li class="btn">
+				<a class="btn" href="/gachi/adminClass?nowPage=${npvo.nowPage-1}">Prev</a>
+			</li>
+		</c:if>
+		<c:forEach var="p" begin="${npvo.startPageNum}" end="${npvo.startPageNum + npvo.onePageRecord-1 }">
+			<c:if test="${p<=pvo.totalPage}">
+				<li <c:if test="${p==npvo.nowPage}"> style="color:#437299"</c:if>>
+					<a href="/gachi/adminClass?nowPage=${p}" class="paging_num">${p}</a>
+				</li>
+			</c:if>
+		</c:forEach>
+		<c:if test="${npvo.nowPage<npvo.totalPage}">
+			<li class="btn">
+				<a class="btn" href="/gachi/adminClass?nowPage=${npvo.nowPage+1}">next</a>
+			</li>
+		</c:if>
 	</ul>
 </div>
 </div>

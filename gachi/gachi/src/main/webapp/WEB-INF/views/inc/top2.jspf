@@ -28,7 +28,7 @@
 </script>
 <style>
 .carousel-item img {
-	height: 588px;
+	height: 550px;
 	width: 100%;
 }
 </style>	

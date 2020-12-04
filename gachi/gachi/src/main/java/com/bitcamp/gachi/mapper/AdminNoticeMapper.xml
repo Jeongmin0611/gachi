@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.admin.NoticeDaoImp">
+	<insert id="insertNotice" parameterType="com.bitcamp.gachi.admin.NoticeVO">
+		insert into notice(notice_num,subject,content,writer,writedate,target,input_file
+		) values(a_sq.nextval,'${subject}','${content}','같이가치',sysdate,'${target}'
+		<choose>
+			<when test="filename==null"></when>
+			<when test="filename!=null">
+			,'${filename}'
+			</when>
+		</choose>
+		)
+	</insert>
+	<select id="selectList" resultType="com.bitcamp.gachi.admin.NoticeVO">
+		select notice_num,subject,writer,to_char(writedate,'YYYY-MM-DD') writedate,hit from notice order by notice_num
+	</select>
+	<select id="getAllRecord" resultType="int">
+		select count(notice_num) from notice
+	</select>
+</mapper>

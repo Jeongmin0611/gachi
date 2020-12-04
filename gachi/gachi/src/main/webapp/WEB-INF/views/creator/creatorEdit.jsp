@@ -2,29 +2,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
  #cre_profile_imgArea{
- 	border:1px solid gray;
+ 	border:3px solid #437299;
  	border-radius:10px;
  	text-align:center;
  }
  #cre_profile_imgArea li{
  	padding:5px 0px;
  }
+ #creator_editForm2{
+ 	margin:20px 0px;
+ 	border:3px solid #437299;
+ 	border-radius:10px;
+ 	overflow: auto;
+ }
+ #creator_editForm2>li{
+ 	float:left;
+ 	border-bottom:1px solid gray;
+ 	height:45px;
+ 	padding-top:7px;
+ 	overflow: auto;
+ }
 </style>
 <script>
 	$(()=>{
 		$("#creator_editForm2>li:nth-child(2n+1)").css("width","15%").css("text-align","center");
 		$("#creator_editForm2>li:nth-child(2n)").css("width","85%");
-		$("#creator_editForm2>li").css("float","left").css("margin","10px 0px");
-		$("#creator_editForm2>li:last-child").css("width","100%");
+		$("#creator_editForm2>li:nth-child(17)").css("width","100%").css("border","none");
+		$("#creator_editForm2>li:nth-child(18)").css("height","800px").css("margin","0");
 		$(".form-control").css("width","30%").css("float","left");
 		CKEDITOR.replace("creator_info");
+		CKEDITOR.config.height=650;
+		
 	});
 </script>
 <div class="container ad_font">
 	<h1>프로필 수정</h1>
 	<div>
 		<form method="post" id="cre_creator_editForm" action="" enctype="multipart/form-data">
-			<ul id="cre_profile_imgArea" style="border:1px solid gray;border-radius:10px;text-align:center">
+			<ul id="cre_profile_imgArea" style="border:3px solid #437299;border-radius:10px;text-align:center;margin:10px 0px">
 				<li>프로필 사진</li>
 				<li><img src="/gachi/img/147.jpg"></li>
 				<li style="text-align:center;"><input type="file"/></li>
@@ -68,10 +83,10 @@
 				</li>
 				<li>sns계정</li>
 				<li><input type="text"/></li>
-				<li>소개글</li>
-				<li><textarea name="creator_info"></textarea></li>
 			</ul>
-			<div style="text-align:center;">
+			<h3>소개글</h3>
+			<textarea name="creator_info"></textarea>
+			<div style="text-align:center;margin-top:20px;">
 				<input type="submit" class="btn" value="수정"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
 			</div>

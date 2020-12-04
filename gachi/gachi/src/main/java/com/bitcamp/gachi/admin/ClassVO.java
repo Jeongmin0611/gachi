@@ -1,6 +1,7 @@
 package com.bitcamp.gachi.admin;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ClassVO {
 
@@ -21,7 +22,7 @@ public class ClassVO {
 	private String class_state;
 	private String class_img;
 	private String nickname;
-	
+	private List<String> imgList;
 	
 	public String getCode() {
 		return code;
@@ -125,6 +126,11 @@ public class ClassVO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+	public List<String> getImgList() {
+		return imgList;
+	}
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
 	
 }

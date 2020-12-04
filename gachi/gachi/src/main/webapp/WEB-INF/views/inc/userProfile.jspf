@@ -6,9 +6,13 @@
 	ul, li{
 		list-style:none;
 	}
-	a:link, a:visited, a:hover{
+	a:link, a:visited{
 		text-decoration: none;
 		color: #000;
+	}
+	a:hover{
+		text-decoration: none;
+		font-weight:bold;
 	}
 	.userMainDiv{
 		box-shadow: 0px 0px 10px 1px #eee;
@@ -24,12 +28,14 @@
 		text-align: center;
 		margin-top: 20px;
 	}
-	.mypageContent,
-	#mypageContent{	
-		text-align: center;
-		margin: 50px auto;	 	
+	.mypageContent, #mypageContent{	
+		margin: 10px auto 50px;	 	
 	}
 	
+	/* 프로필영역 */
+	#profileDiv{
+		padding:20px;
+	}
 	#profileDiv>div{
 		text-align:center;
 		margin: auto 0;
@@ -60,9 +66,17 @@
 		width: 20%;
 		text-align: center;
 	}
-
 </style>
-<div  class="userMainDiv cfont" id="mypageContent">
+<script>
+	$(function(){
+		$("#userProfileNavi").hover(function(){
+			$(".userProfileNavi").fadeIn();
+		}, function(){
+			$(".userProfileNavi").fadeOut();
+		});
+	});
+</script>
+<div class="userMainDiv cfont" id="mypageContent">
 	<div id="profileDiv" class="row">
 		<div class="col-sm-3">
 			<div id="profileBox">
@@ -72,12 +86,12 @@
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
-			<div>내 클래스</div>
+			<div>클래스</div>
 			<div><a href="/gachi/myclassList">1</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>내 클래스 <a href="/gachi/myclassList">1</a></div>
+			<div>클래스 <a href="/gachi/myclassList">1</a></div>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
@@ -95,16 +109,59 @@
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>좋아요<a href="/gachi/userWishList">4</a></div>
+			<div>좋아요 <a href="/gachi/userWishList">4</a></div>
 		</div>
 	</div>
 	<hr/>
 	<ul id="userProfileNavi">
-		<li><a href="/gachi/mypage">결제내역</a></li>
-		<li><a href="/gachi/userInfoView">회원정보</a></li>
-		<li><a href="/gachi/userCart">장바구니</a></li>
-		<li><a href="/gachi/myclassList">내 학습표</a></li>
-		<li><a href="/gachi/myqnaClass">질문/문의</a></li>
+		<li>
+			<div><img src="/gachi/img/icon_ordersheet.png" style="width:21px"/></div>
+			<div>주문/결제</div>
+			<div class="userProfileNavi" style="display:none">
+				<hr class="userHr"/>
+				<div><a href="/gachi/mypage">결제내역확인</a></div>
+				<div><a href="#">결제취소/환불</a></div>
+				<div><a href="/gachi/userMileage">마일리지</a></div>
+			</div>
+		</li>
+		<li>
+			<div><img src="/gachi/img/icon_userinfo.png" style="width:28px"/></div>
+			<div>회원정보</div>
+			<div class="userProfileNavi" style="display:none">
+				<hr class="userHr"/>
+				<div><a href="/gachi/userInfoView">회원정보수정</a></div>
+				<div><a href="/gachi/userLeave">회원탈퇴</a></div>
+			</div>
+		</li>	
+		<li>
+			<div><img src="/gachi/img/icon_cart.png" style="width:28px"/></div>
+			<div>장바구니</div>
+			<div class="userProfileNavi" style="display:none">
+				<hr class="userHr"/>
+				<div><a href="/gachi/userCart">장바구니</a></div>
+				<div><a href="/gachi/userWishList">좋아요</a></div>
+			</div>
+		</li>
+		<li>
+			<div><img src="/gachi/img/icon_myclass.png" style="width:28px"/></div>
+			<div>내 학습표</div>
+			<div class="userProfileNavi" style="display:none">
+				<hr class="userHr"/>
+				<div><a href="/gachi/myclassList">클래스 목록</a></div>
+				<div><a href="/gachi/myqnaClass">질문/답변</a></div>
+			</div>
+		</li>
+		<li>
+			<div><img src="/gachi/img/icon_myqna.png" style="width:28px"/></div>
+			<div>내 활동</div>
+			<div class="userProfileNavi" style="display:none">
+				<hr class="userHr"/>
+				<div><a href="/gachi/myqnaClass">수강평</a></div>
+				<div><a href="/gachi/myqnaStore">상품리뷰</a></div>
+				<div><a href="/gachi/myqna1on1">1:1문의</a></div>
+				<div><a href="/gachi/myqnaEvent">이벤트</a></div>
+			</div>
+		</li>
 	</ul>
 	
 </div>

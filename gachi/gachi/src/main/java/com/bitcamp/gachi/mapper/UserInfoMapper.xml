@@ -28,8 +28,12 @@
 	<select id="userInfoPwdChk" parameterType="com.bitcamp.gachi.mypage.MemberVO" resultType="_int">
 		select count(userid) from member where userid='${userid}' and userpwd='${userpwd}'
 	</select>
-	<update id="userInfoEdit" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+	<update id="userInfoEditPwd" parameterType="com.bitcamp.gachi.mypage.MemberVO">
 		update member set userpwd='${userpwd}', nickname='${nickname}', tel='${tel}', zipcode='${zipcode}', addr='${addr}', detailaddr='${detailaddr}',
+		 interest='${interest}' where userid='${userid}'
+	</update>
+	<update id="userInfoEdit" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set nickname='${nickname}', tel='${tel}', zipcode='${zipcode}', addr='${addr}', detailaddr='${detailaddr}',
 		 interest='${interest}' where userid='${userid}'
 	</update>
 	<update id="userLeave" parameterType="com.bitcamp.gachi.mypage.MemberVO">
