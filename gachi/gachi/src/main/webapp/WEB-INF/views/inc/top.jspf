@@ -749,9 +749,23 @@ a {
 			 $("#userid2").focus(); 
 			 return false; 
 		}
-		if($("#userid2").val()!=""){
-			return "useridChk";
+		var okid=$("#userid2").val();
+		if($("#userid2").val()!=$("#userid2Text").val()){
+				$.ajax({
+					url:"/useridChk",
+					data:okid,
+					type:"GET",
+					success:function(result){
+						if(result=0){
+							alert("이메일사용가능");
+							
+						}else{
+							alert("이메일사용불가능");
+							}
+					},error:function(){}
+				});
 			}
+		   		
 		});
 	//크리에이터 회원가입 유효성검사
 	var emailChk2=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -1400,6 +1414,7 @@ $(document).ready(function() {
             <div class="mdJ_layer"></div>
              <input type="text" placeholder="이메일" name="userid2" id="userid2" style="width:68%"/>
              <button type="button" id="joinEmailChk" class="joinEmailChk" style="width:30%;height:40px;background-color:white;border:1px solid gray">이메일확인</button>
+             <input type="hidden" id="userid2Text" name="userid2Text"/>
              <input type="password" placeholder="비밀번호" name="userpwd2" id="userpwd2" /><span id="passwordMessage" class="message"></span>
              <input type="password" placeholder="비밀번호 확인" name="userpwdChk" id="userpwdChk" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="username" id="username" /><span id="nameMessage" class="message"></span>
