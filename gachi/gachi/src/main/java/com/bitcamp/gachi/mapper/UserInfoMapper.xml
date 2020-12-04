@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.mypage.UserInfoDaoImp">
+	<select id="orderList" parameterType="String" resultType="String">
+		select order_code from orderlist where userid='${userid}' order by order_code desc
+	</select>
+	<select id="classOrderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select class_img1, category, o.order_code, class_order_code, c.class_name, real_price, username, to_char(orderdate,'YYYY-MM-DD HH24:MI:SS') orderdate
+		 from orderlist o, class_order co, class c, member m
+		 where o.order_code = co.order_code(+)
+		 and co.code = c.code
+		 and c.userid = m.userid
+		 and o.order_code='${order_code}'
+	</select>
+	<select id="goodsOrderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select goods_img1, category, o.order_code, goods_order_code, g.goods_name, real_price, amount, to_char(orderdate,'YYYY-MM-DD HH24:MI:SS') orderdate
+		 from orderlist o, goods_order go, goods g
+		 where o.order_code = go.order_code(+)
+		 and go.code = g.code
+		 and o.order_code='${order_code}'
+	</select>
+	<select id="userInfoView" parameterType="String" resultType="com.bitcamp.gachi.mypage.MemberVO">
+		select userid, username, nickname, to_char(birthdate, 'YYYY-MM-DD') birthdate, tel, gender, zipcode, addr, detailaddr,
+		 to_char(signupdate, 'YYYY-MM-DD') signupdate, interest from member where userid='${userid}'	
+	</select>
+	<select id="userInfoPwdChk" parameterType="com.bitcamp.gachi.mypage.MemberVO" resultType="_int">
+		select count(userid) from member where userid='${userid}' and userpwd='${userpwd}'
+	</select>
+	<update id="userInfoEditPwd" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set userpwd='${userpwd}', nickname='${nickname}', tel='${tel}', zipcode='${zipcode}', addr='${addr}', detailaddr='${detailaddr}',
+		 interest='${interest}' where userid='${userid}'
+	</update>
+	<update id="userInfoEdit" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set nickname='${nickname}', tel='${tel}', zipcode='${zipcode}', addr='${addr}', detailaddr='${detailaddr}',
+		 interest='${interest}' where userid='${userid}'
+	</update>
+	<update id="userLeave" parameterType="com.bitcamp.gachi.mypage.MemberVO">
+		update member set deleted='탈퇴', withdrawdate=sysdate where userid='${userid}'
+	</update>
+	<select id="classCartView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, class_img1, class_name, username, amount, stack, real_price
+		 from cart ct, class c, member m
+		 where ct.code = c.code
+		 and c.userid = m.userid
+		 and ct.userid='${userid}'
+	</select>
+	<select id="goodsCartView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, goods_img1, goods_name, amount, stack, real_price
+		 from cart ct, goods g
+		 where ct.code = g.code
+		 and ct.userid='${userid}'
+	</select>
+	<delete id="cartDelete">
+		delete from cart 
+	 	 where userid='${userid}'
+		 and code='${code}'
+	</delete>
+	<delete id="cartDeleteAll">
+		delete from cart 
+	 	 where userid='${userid}'
+	</delete>
+</mapper>
