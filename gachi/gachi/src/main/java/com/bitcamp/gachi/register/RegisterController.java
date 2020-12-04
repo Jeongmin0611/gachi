@@ -73,20 +73,13 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			mav.setViewName("redirect:/");
 			return mav;
 	}
-		@RequestMapping(value="/useridChk")
-		public ModelAndView useridChk(RegisterVO vo,Model model) {
+		@RequestMapping(value="/useridChk",method=RequestMethod.GET)
+		@ResponseBody
+		public int useridChk(RegisterVO vo,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			RegisterVO resultVO=dao.useridChk(vo);
-			ModelAndView mav=new ModelAndView();
-			if(resultVO==null) {
-				model.addAttribute("msg","사용가능한 아이디입니다");
-				mav.setViewName("redirect:body");
-			}else {
-				model.addAttribute("msg","중복된 아이디입니다 다른아이디를 입력하세요");
-				mav.setViewName("redirect:body");
-			}
-			return mav;
+			int result=dao.useridChk(vo);
 			
+			return result;
 		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {

@@ -16,8 +16,8 @@
 	 insert into creator(userid,business_number,category,bankname,account,license_img1,license_img2,license_img3,sns_addr,creator_info,creator_state)
 	    			values('${userid3}','${business_number}','${interest2}','${bankname}','${account}','${creatorLicense_img1}','${creatorLicense_img2}','${creatorLicense_img3}','${sns_addr}','${creator_info}',0)                 
 	</insert>
-	<select id="useridChk" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
-		select userid from member
+	<select id="useridChk" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="int">
+		select userid from member where userid='${userid2}'
 	</select>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
 		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'
