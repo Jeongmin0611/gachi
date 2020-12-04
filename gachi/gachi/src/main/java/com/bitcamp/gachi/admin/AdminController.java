@@ -204,7 +204,6 @@ public class AdminController {
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
-		System.out.println("upload ==> "+upload.getOriginalFilename());
 		HttpSession session=req.getSession();
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		
@@ -220,10 +219,7 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//System.out.println("path ip ==> "+ip);
-		System.out.println("path real ==> "+path);
-		System.out.println("path req ==> "+req.getRequestURI());
-		System.out.println("path context ==> "+req.getContextPath());
+
 		return json;
 	}
 	

@@ -99,5 +99,6 @@
 	</select>
 	<update id="updateClassState" parameterType="String">
 		update class set class_state='등록승인' where code='${code}'
-	</update>		
+	</update>	
+		
 </mapper>
