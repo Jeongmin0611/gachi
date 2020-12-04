@@ -41,8 +41,6 @@
 }
 
 .homeClassListTxt p>span { /* 클래스 리스트 카테고리 */
-	width: 100%;
-	background-color: lightblue;
 	color: white;
 }
 
@@ -223,7 +221,7 @@ $(function(){
 				<img src="/gachi/img/${list.class_img }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
-						<span>${list.category }</span><i class="far fa-heart fa-lg p-2"
+						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span><i class="far fa-heart fa-lg p-2"
 							style="float: right; height: 15px;"></i>
 					</p>
 					<a href="/gachi/classView?code=${list.code }"><span>${list.class_name }</span><br />

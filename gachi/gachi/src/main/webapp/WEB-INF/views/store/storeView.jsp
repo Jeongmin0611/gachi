@@ -78,7 +78,7 @@
 		</div>
 		<!-- bxslide 옆에 글 -->
 		<div class="col-sm-6 pt-2">
-			<span style="background-color: lightblue">${vo.category }</span><br/>
+			<span class="badge badge-info" style="font-size:0.9em">${vo.category }</span><br/>
 			<h3>${vo.goods_name } </h3><br/>
 			재고 &nbsp; ${vo.stock }개<br/>
 			가격 &nbsp; ${vo.real_price }원<br/>

@@ -39,8 +39,6 @@
 }
 
 .homeClassListTxt p>span { /* 스토어 리스트 카테고리 */
-	width: 100%;
-	background-color: lightblue;
 	color: white;
 }
 
@@ -230,7 +228,7 @@
 					src="/gachi/img/store/${list.goods_img1 }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
-						<span>${list.category }</span><i class="far fa-heart fa-lg p-2"
+						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span><i class="far fa-heart fa-lg p-2"
 							style="float: right; height: 15px;"></i>
 					</p>
 					<a href="/gachi/storeView?code=${list.code}"><span>${list.goods_name }</span><br />
