@@ -112,8 +112,8 @@ table a, table a:hover{
 			</c:if>
 			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1}">
 				<c:if test="${p<=pvo.totalPage }">
-					<li class="page-item" <c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>
-						<a class="page-link" href="/gachi/noticeBoard?nowPage=${p }<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">${p}</a>
+					<li class="page-item">
+						<a class="page-link" href="/gachi/noticeBoard?nowPage=${p }<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>" <c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>${p}</a>
 					</li>
 				</c:if>
 			</c:forEach>
