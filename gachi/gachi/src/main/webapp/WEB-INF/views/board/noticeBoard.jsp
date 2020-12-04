@@ -14,19 +14,19 @@ h3{
 	width: 100%;
 }
 
-#CnoticeSearchTxt {
+#searchWord {
 	border: 0;
 	border-bottom: 1px solid black;
 	outline: none;
 }
 
-#CnoticeSearch button {
+#CnoticeSearch [type=submit] {
 	background-color: white;
 	color: black;
 	border: 0;
 }
 
-#CnoticeSearch button:focus {
+#CnoticeSearch [type=submit]:focus {
 	outline: none;
 	color: #888;
 }
@@ -55,6 +55,13 @@ table a, table a:hover{
 		$('#eventBtn').click(function(){
 			location.href="<%=request.getContextPath()%>/eventBoard";
 		});
+		//검색어 폼에서 검색 버튼 클릭
+		$('#searchForm').submit(function(){
+			if($('#searchWord').val()==""){
+				return false;
+			}
+			return true;
+		});
 
 	});
 </script>
@@ -63,13 +70,15 @@ table a, table a:hover{
 	<!-- 내용 표시 -->
 	
 		<h3>공지사항</h3>
+		<!-- 검색 기능 -->
 		<div id="CnoticeSearch">
-			<select name="noticeSubject">
-				<option value='Nall'>전체</option>
-				<option value='Nsubject'>제목</option>
-				<option value='Ncontent'>내용</option>
-			</select> <input type="text" name="CnoticeSearchTxt" id="CnoticeSearchTxt" />
-			<button name="noticeSearchBtn">검색하기</button>
+			<form method="get" action="/gachi/noticeBoard" id="searchForm">
+				<select name="searchKey" id="searchKey">
+					<option value='subject'>제목</option>
+					<option value='content'>내용</option>
+				</select> <input type="text" name="searchWord" id="searchWord" />
+				<input type="submit" value="검색"/>
+			</form>
 		</div>
 	<!-- 표 -->
 	<table class="table ">
@@ -85,7 +94,7 @@ table a, table a:hover{
 			<c:forEach var="vo" items="${list }">
 			<tr>
 				<td>${vo.notice_num }</td>
-				<td><a href="/gachi/noticeBoardView?no=${vo.notice_num }">${vo.subject }</a></td>
+				<td><a href="/gachi/noticeBoardView?no=${vo.notice_num }&nowPage=${pvo.nowPage}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">${vo.subject }</a></td>
 				<td>${vo.writer }</td>
 				<td>${vo.writedate }</td>
 			</tr>
@@ -98,18 +107,18 @@ table a, table a:hover{
 		<ul class="pagination justify-content-center">
 			<c:if test="${pvo.nowPage>1 }">
 				<li class="page-item">
-					<a class="page-link" href="/gachi/noticeBoard?nowPage=${pageVO.nowPage-1}">Prev</a>
+					<a class="page-link" href="/gachi/noticeBoard?nowPage=${pageVO.nowPage-1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Prev</a>
 				</li>
 			</c:if>
 			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1}">
 				<c:if test="${p<=pvo.totalPage }">
-					<li class="page-item">
-						<a class="page-link" href="/gachi/noticeBoard?nowPage=${p }">${p}</a>
+					<li class="page-item" <c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>
+						<a class="page-link" href="/gachi/noticeBoard?nowPage=${p }<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">${p}</a>
 					</li>
 				</c:if>
 			</c:forEach>
 			<c:if test="${pvo.nowPage<pvo.totalPage }">
-				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/noticeBoard?nowPage=${pageVO.nowPage+1}">Next</a></li>
+				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/noticeBoard?nowPage=${pageVO.nowPage+1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Next</a></li>
 			</c:if>
 		</ul>
 	</div>

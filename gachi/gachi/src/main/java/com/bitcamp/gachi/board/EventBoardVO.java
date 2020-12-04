@@ -10,12 +10,10 @@ public class EventBoardVO {
 	private String event_img;
 	
 	private String event_category;
-	public String getEvent_category() {
-		return event_category;
-	}
-	public void setEvent_category(String event_category) {
-		this.event_category = event_category;
-	}
+	
+	private String userid;
+	private String ip;
+	private String nickname;
 	
 	public int getEvent_num() {
 		return event_num;
@@ -58,5 +56,29 @@ public class EventBoardVO {
 	}
 	public void setEvent_img(String event_img) {
 		this.event_img = event_img;
+	}
+	public String getEvent_category() {
+		return event_category;
+	}
+	public void setEvent_category(String event_category) {
+		this.event_category = event_category;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }

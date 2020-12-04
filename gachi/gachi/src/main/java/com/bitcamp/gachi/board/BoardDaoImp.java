@@ -24,4 +24,10 @@ public interface BoardDaoImp {
 	public List<EventBoardVO> endEventBoardAllRecord();
 	//종료된 이벤트 총 레코드 수
 	public int endEvnetGetAllRecordCount(PagingVO pvo);	
+	
+	//이벤트 댓글 저장
+	public int insertReply(EventBoardVO vo);
+	//이벤트 댓글 전체 선택
+	public List<EventBoardVO> replyAllRecord(int no);
+	
 }

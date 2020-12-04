@@ -4,9 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.board.BoardDaoImp">
 	<select id="noticeBoardAllRecord" parameterType="com.bitcamp.gachi.admin.PagingVO"  resultType="com.bitcamp.gachi.board.NoticeBoardVO">
-		select * from (select * from (select notice_num, subject, writer, to_char(writedate, 'MM-DD') writedate 
-		from notice order by notice_num desc)where<![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc) 
-		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by notice_num desc
+		select * from (select * from (select notice_num,subject,writer,to_char(writedate,'YYYY-MM-DD') writedate
+      from notice 
+      <choose>
+      	<when test="searchWord==null">
+			order by notice_num desc)
+			where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc)
+			where <![CDATA[rownum<=${lastPageRecordCount} ]]>order by notice_num desc
+      	</when>
+      	<when test="searchWord!=null">
+      		where ${searchKey} like '%${searchWord}%'
+      		order by notice_num desc)
+			where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc)
+			where <![CDATA[rownum<=${lastPageRecordCount} ]]>order by notice_num desc
+      	</when>      	
+      </choose>
+      
 	</select>
 	<select id="noticeBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.NoticeBoardVO">
 		select notice_num, subject, content, writer, to_char(writedate, 'YYYY-MM-DD') writedate 
@@ -14,6 +27,11 @@
 	</select>
 	<select id="noticeBoardAllRecordCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
 		select count(notice_num) from notice
+		<choose>
+			<when test="searchWord!=null">
+				where ${searchKey} like '%${searchWord}%'
+			</when>
+		</choose>
 	</select>
 	<select id="eventBoardAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
 		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
@@ -26,5 +44,13 @@
 	<select id="eventBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.EventBoardVO">
 		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, to_char(writedate, 'YYYY-MM-DD') writedate, content
 		from event where event_num=${param1}
+	</select>
+	<insert id="insertReply" parameterType="com.bitcamp.gachi.board.EventBoardVO">
+		insert into event_reply values(${event_num}, '${userid}', '${content}', sysdate, '${ip}')
+	</insert>
+	<select id="replyAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
+		select nickname, content, to_char(sysdate, 'YYYY-MM-DD') writedate, ip 
+		from event_reply e join member m on e.userid = m.userid 
+		where event_num=${param1}
 	</select>
 </mapper>

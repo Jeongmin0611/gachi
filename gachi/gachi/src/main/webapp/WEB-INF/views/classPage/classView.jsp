@@ -46,11 +46,11 @@
 		</div>
 		<!-- bxslide 옆에 글 -->
 		<div class="col-sm-6 pt-2">
-			<span style="background-color: lightblue">공예/창작</span><br/>
-			<h3>곰돌이 만들기</h3><br/>
-			by 홍길동<br/>
-			가격 &nbsp; 150,000원<br/>
-			적립금 &nbsp; 150원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
+			<span style="background-color: lightblue">${vo.category }</span><br/>
+			<h3>${vo.class_name }</h3><br/>
+			by ${vo.nickname }<br/>
+			가격 &nbsp; ${vo.real_price }원<br/>
+			적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
 			<p><p/>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue;" onclick="purchase()">구매</button>

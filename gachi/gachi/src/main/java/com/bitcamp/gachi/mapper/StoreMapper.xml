@@ -6,7 +6,7 @@
 	<select id="storeAllRecord" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select code, category, goods_name, real_price, goods_img1 from goods
 		<choose>
-			<when test='category== null and selectval == null'></when>
+			<when test='category==null and selectval == null'></when>
 			<when test='category==null and selectval.equals("Iall")'></when>
 			<when test='category==null and selectval.equals("Inew")'>
 				order by writedate desc
