@@ -24,8 +24,8 @@
 	overflow:auto;
 	text-align:center;
 	padding: 50px;
-	border: 2px solid gray;
-	
+	border: 3px solid #437299;
+	border-radius: 10px;
 }
 /* 1:1문의 상세 내용 끝*/
 /* 댓글 입력 폼*/
@@ -45,7 +45,7 @@
 /*버튼*/
 #adminNoticeView_BtnDiv{
 	clear: both;
-	margin: 20px 0;
+	margin: 10px 0;
 	background-color: oragin;
 }
 /*댓글 리스트*/
@@ -53,11 +53,14 @@
 	clear: both;
 	overflow: auto;
 	margin-bottom: 50px;
+	border:3px solid #437299;
+	border-radius: 10px;
+	overflow: auto;
 }
 #adminNoticeView_ReplyDiv li{
 	float:left;
-	min-height: 50px;
-	border-bottom: 1px solid #e5e5e5;
+	line-height:50px;
+	border-bottom: 1px solid gray;
 	margin-bottom: 10px;
 }
 #adminNoticeView_ReplyDiv li:nth-child(4n+1){
@@ -79,13 +82,13 @@
 		<h3>공지사항</h3>
 		<div id="adminNoticeView_Div">
 			<div id="adminNoticeView_Subject">
-				<h3>[동영상] 소리만 나오고 동영상 화면이 나오지 않아요.</h3>
-				<div id="admin1on1View_DateDiv"><span>작성자</span> <span>2020-10-30</span></div>
+				<h3>${vo.subject}</h3>
+				<div id="admin1on1View_DateDiv"><span>${vo.writer}</span> <span>${vo.writedate}</span></div>
 			</div>
 			<!-- 1:1문의 내용 -->
 			<div id="adminNoticeView_Content">
-				<!-- <img src="/gachi/img/event_sample.png"/> -->
-			<p>	
+			<!-- <img src="/gachi/img/event_sample.png"/> -->			
+			<!-- <p>	
 				<b>1. 영상출력방식이 맞지 않아 발생할 수 있습니다.</b><br/>
 				재생화면에 마우스를 올려 놓으시고 마우스 오른쪽 버튼을 누르면 메뉴가 나옵니다.<br/>
 				메뉴중 [비디오]->[출력방식]->[VMR9] 순으로 변경해 보시기 바랍니다.<br/><br/>
@@ -97,22 +100,29 @@
 				
 				잘 안되시거나 어려우시면 고객센터(1500-0000)으로 연락주세요.<br/>
 				원격지원을 통해 도움 드리도록 하겠습니다. 감사합니다. </p>
+				 -->
+				${vo.content}
 			</div>
 		</div>
 		
 	</div>
 	<!-- 버튼 -->
-	<div id="adminNoticeView_BtnDiv">
-		<button type="button" class="btn btn-light">이전</button>
-		<button type="button" class="btn btn-light">다음</button>
-		<button type="button" class="btn btn-light">목록</button>
+	<div id="adminNoticeView_BtnDiv" style="width:50%;float:left;">
+		<button type="button" class="btn">이전</button>
+		<button type="button" class="btn">다음</button>
+		<a href="/gachi/adminNotice?nowPage=${nowPage}"><button type="button" class="btn">목록</button></a>
 	</div>
-	<!-- 댓글 -->
+	<div style="text-align: right;width:50%;float:left; margin-top:10px;">
+		<a href="/gachi/adminNoticeEdit?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">수정</button></a>
+		<a href="/gachi/adminNoticeDel?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">삭제</button></a>
+	</div>
+	<!-- 
 	<form id="adminNoticeView_ReplyForm">
 		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn btn-outline-primary">등록</button></div>
+		<div><button class="btn">등록</button></div>
 	</form>
 	<!-- 댓글 리스트 -->
+		<!-- 
 	<div>
 		<ul id="adminNoticeView_ReplyDiv">
 			<li>홍길동</li>
@@ -133,8 +143,7 @@
 			<li>댓글 내용</li>
 			<li>2020-10-19</li>
 			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
 		</ul>
 	</div>
+	 -->
 </div>

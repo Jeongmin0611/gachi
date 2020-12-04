@@ -1,7 +1,8 @@
 package com.bitcamp.gachi.mypage;
 
 public class OrderListVO {
-	private String class_img1;
+	private String code;
+	private String class_img;
 	private String goods_img1;
 	private String category;
 	private String order_code;
@@ -12,12 +13,19 @@ public class OrderListVO {
 	private String  goods_name;
 	private int real_price;
 	private int amount;
+	private int stack;
 	private String orderdate;
-	public String getClass_img1() {
-		return class_img1;
+	public String getCode() {
+		return code;
 	}
-	public void setClass_img1(String class_img1) {
-		this.class_img1 = class_img1;
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getClass_img() {
+		return class_img;
+	}
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}
 	public String getGoods_img1() {
 		return goods_img1;
@@ -78,6 +86,12 @@ public class OrderListVO {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	public int getStack() {
+		return stack;
+	}
+	public void setStack(int stack) {
+		this.stack = stack;
 	}
 	public String getOrderdate() {
 		return orderdate;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.gachi.admin.NoticeDaoImp">
+	<insert id="insertNotice" parameterType="com.bitcamp.gachi.admin.NoticeVO">
+		insert into notice(notice_num,subject,content,writer,writedate,target,input_file
+		) values(a_sq.nextval,'${subject}','${content}','같이가치',sysdate,'${target}'
+		<choose>
+			<when test="filename==null"></when>
+			<when test="filename!=null">
+			,'${filename}'
+			</when>
+		</choose>
+		)
+	</insert>
+	<select id="selectList" parameterType="com.bitcamp.gachi.admin.NoticePageVO" resultType="com.bitcamp.gachi.admin.NoticeVO">
+		select * from (select * from (select notice_num,subject,writer,to_char(writedate,'YYYY-MM-DD') writedate,hit 
+		from notice order by notice_num desc)
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc)
+		where <![CDATA[rownum<=${lastPageRecordCount} ]]>order by notice_num desc
+	</select>
+	<select id="getAllRecord" resultType="int">
+		select count(notice_num) from notice
+	</select>
+	<select id="selectNotice" parameterType="int" resultType="com.bitcamp.gachi.admin.NoticeVO">
+		select notice_num,subject,content,to_char(writedate,'YYYY-MM-DD HH24:MI:SS') writedate,hit from notice where notice_num=${param1}
+	</select>
+	<update id="updateNotice" parameterType="com.bitcamp.gachi.admin.NoticeVO">
+		update notice set subject='${subject}',content='${content}',target='${target}' where notice_num=${notice_num}
+	</update>
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice where notice_num=${param1}
+	</delete>
+</mapper>

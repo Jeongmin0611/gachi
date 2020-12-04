@@ -19,9 +19,13 @@
          <canvas id="ad_Mb_StatClass_chart" style="margin-top:50px"></canvas>
          <script type="text/javascript">
          
-         var dashData = [];
-         var labelData = []; 
-         /* labelData = "${labelData}"; */
+         var dashData = "${dashData}";
+         var labelData = "${labelData}";
+         var genderLabel = "${genderLabel}";
+         var genderData = "${genderData}";
+         var ageLabel = "${ageLabel}";
+         var ageData = "${ageData}";
+         
          var startMonth = "${startMonth}";
          var endMonth = "${endMonth}";
          
@@ -146,11 +150,11 @@
       var ad_Mb_StatClass_gender_chart = new Chart(ad_Mb_StatClass_gender_context, {
           type: 'pie',
           data: {
-         labels : ["Man" , "Woman"],
+         labels : ${genderLabel},
          datasets : [{
          backgroundColor : ["#2ecc71","#3498dd"],
          hoverBackgroundColor : ["#a6a6a6","#d1b2ff"],
-         data : [10,9]
+         data : ${genderData}
             }]
          },
          options : {
@@ -169,11 +173,11 @@
       var ad_Mb_StatClass_age_chart = new Chart(ad_Mb_StatClass_age_context, {
           type: 'pie',
           data: {
-         labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
+         labels : ${ageLabel},
          datasets : [{
          backgroundColor : ["#2ecc71","#3498dd","pink","yellow","green","orange"],
          hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","green","orange"],
-         data : [10,9,7,3,1,2]
+         data : ${ageData}
             }]
          },
          options : {
@@ -184,4 +188,4 @@
       </script>
       연령별
       </div>
-</div>   
+</div>

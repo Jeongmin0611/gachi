@@ -36,14 +36,22 @@ public class ClassPageController {
 		return "classPage/classPage3";
 	}
 	@RequestMapping("/classView")
-	public String classMain() {
-		return "classPage/classView";
+	public ModelAndView classMain(HttpServletRequest req) {
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		String code = req.getParameter("code");
+		AllVO vo = dao.classView(code);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("classPage/classView");
+		return mav;
 	}
 	@RequestMapping("/classList")
 	public ModelAndView classList(HttpServletRequest req) {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		String category = req.getParameter("category");
-		List<AllVO> list = dao.classPageAllRecord(category);
+		String selectval = req.getParameter("selectval");
+		List<AllVO> list = dao.classPageAllRecord(category, selectval);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

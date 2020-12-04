@@ -84,7 +84,6 @@
 		<select name="introCreateSelect1">
 			<option value="Iall">전체</option>
 			<option value="Inew">최신순</option>
-			<option value="Ipopular">인기순</option>
 		</select>
 		<select name="IntroCreateSelect2">
 			<option value="Iall">전체</option>
@@ -104,7 +103,7 @@
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
 			<div class="col-sm-4">
-				<a href="/gachi/introCreatorView?userid=${vo.userid }" id="introCreatorThumbnail">${vo.picture }</a><br/>
+				<a href="/gachi/introCreatorView?userid=${vo.userid }" id="introCreatorThumbnail"><img src="/gachi/img/creator/${vo.picture }"/></a><br/>
 				<div class="homeClassListTxt">
 					<p><span>${vo.category }</span></p>
 					<a href="/gachi/introCreatorView?userid=${vo.userid }">${vo.nickname }</a>

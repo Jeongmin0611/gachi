@@ -4,174 +4,131 @@
 	
 	/* 장바구니 */
 	
-	/**********************/
-	/* 상단 */
-	/* 01 장바구니 > 02 주문/결제 > 03 주문완료 */
-	#userCartTop{
-		overflow:auto;
-		margin:20px 50px 10px;
+	.mypageContent div{
+		text-align: center;
 	}
-	
-	/* 로고사이즈 */
-	#userCartTop>ul>li img{
-		margin:0 5px;
+	.mypageContent input{
+		border:	none;
+		outline: none;
+		width: 100%;
 	}
-	#userCartTop>ul>li:first-child img{
-		width:30px;
+	.mypageContent button{
+		background-color: #abcee3;
 	}
-	#userCartTop>ul>li:nth-child(3) img{
-		width:22px;
+	.mypageContent>div:last-child button{
+		margin-top: 100px;
 	}
-	#userCartTop>ul>li:nth-child(5) img{
-		width:25px;
+	#userCartContent{
+		text-align: center;
 	}
-	
-	#userCartTop li{
-		line-height:50px;
+	#userCartContent>div{
+		margin: 5px;
+	}
+	#userCartContent>div>div:nth-child(3){
+		text-align: left;
+	}
+	#userCartContent>button{
 		float:left;
-		margin:0 10px;
-	}
-	#userCartTop li:first-child{
-		font-weight:bold;
-	}
-	#userCartTop li:not(:first-child){
-		color:gray;
-	}
-	
-	/**********************/
-	/* 내용 */
-	/*장바구니 내역 제목*/
-	#userCartLstTtl, #userCartLst{
-		overflow:auto;
-	}
-	#userCartLstTtl li, #userCartLst li{
-		float:left;
-		width:10%;
-		text-align:center;
-	}
-	#userCartLstTtl li:nth-child(2){
-		width:40%;
-	}
-	/*장바구니 내역 리스트*/
-	#userCartLst{
-		height:200px;
-		line-height:160px;
-	}
-	#userCartLst li:nth-child(2){
-		width:40%;
-	}
-	#userCartLst li img{
-		float:left;
-		margin:10px;
-	}
-	#userCartLst img{
-		width:200px;
-		height:150px;
-		object-fit:cover;
-		margin-top:5%;
+		margin:10px 5px;
 	}
 	
 	/**********************/
 	/* 하단 */
-	#userCartBtm>label{
-		float:right;
-		font-size:0.7em;
-		margin-right:10px;
-	}
-	#userCartBtm>button{
-		background-color:#eee;
-		color:#000;
-		margin-left:10px;
-	}
 	
-	/* 가격정보 */
-	#userCartPrice{
-		margin:20px 10px;
-		height:150px;
-		line-height:150px;
-		text-align:center;
-		background-color:#eee;
-	}
-	#userCartPrice>label{
-		width:10%;
-	}
-	#userCartPrice>label:nth-child(7),#userCartPrice>label:nth-child(8){
-		font-weight:bold;
-	}
-	/* 버튼 영역 */
-	#userCartBtnDiv{
-		margin:100px auto 50px;
-		width:50%;
-	}
-	#userCartBtnDiv button{
-		width:30%;
-	}
-	#userCartBtnDiv button:first-child,
-	#userCartBtnDiv button:nth-child(2){
-		background-color:#eee;
-		color:#000;
-	}
-	#userCartBtnDiv button:last-child{
-		background-color:#ABCEE3;
+	#userCartBtm>div{
+		text-align: center;
+		margin: 20px 10px;
 	}
 	
 </style>
+<script>
+	
+	$(function(){
+		//전체체크
+		$("#cartSelectAll").click(function(){
+			if($("#cartSelectAll").prop("checked")){
+				$("input:checkbox").prop("checked",true);
+			}else{
+				$("input:checkbox").prop("checked",false);
+			}
+		});
+		
+		//선택상품삭제
+		$("#selectDel").click(function(){
+			
+		});
+	
+	});
+</script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div id="userCartTop">
-			<ul>
-				<li><img src="/gachi/img/icon_cart.png"/>장바구니</li>
-				<li>></li>
-				<li><img src="/gachi/img/icon_ordersheet.png"/>주문/결제</li>
-				<li>></li>
-				<li><img src="/gachi/img/icon_check.png"/>주문완료</li>
-			</ul>
-		</div>
-		<hr style="background:#000"/>
-		<div id="userCartContent">
-			<ul id="userCartLstTtl">
-				<li><input type="checkbox" name="selectAll" checked/></li>
-				<li>클래스/상품명</li>
-				<li>수량</li>
-				<li>마일리지</li>
-				<li>가격</li>
-				<li>배송비</li>
-				<li>삭제</li>
-			</ul>
-			<hr/>
-			<ul id="userCartLst">
-				<li><input type="checkbox" name="selectItem" checked/></li>
-				<li>
-					<img src="/gachi/img/test_image.jpg"/>
-					<label>카모마일 프랑스 자수</label>
-				</li>
-				<li>1</li>
-				<li>150p</li>
-				<li>15,000원</li>
-				<li>2,500원</li>
-				<li><label class="badge badge-secondary">X</label></li>
-			</ul>
-		</div>
-		<hr/>
-		<div id="userCartBtm">
-			<button type="button" class="btn btn-outline-light btn-sm user_btn_gray">선택상품삭제</button>
-			<label>*주문 시 상품 합계 금액이 50,000원 이상(할인 전 기준)은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
-			<div id="userCartPrice">
-				<label>총 구매금액</label>
-				<label>15,000원</label>
-				<label>+</label>
-				<label>배송비</label>
-				<label>2,500원</label>
-				<label>=</label>
-				<label>총 결제금액</label>
-				<label>17,500원</label>
-			</div>
-			<div id="userCartBtnDiv">
-				<button type="button" class="btn btn-outline-light">쇼핑계속하기</button>
-				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/orderSheet'">선택상품 주문하기</button>
-				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/orderSheet'">전체상품 주문하기</button>
-			</div>
+		<div class="mypageContent col-lg-8 col-md-10">
+			<label style="font-size:1.1em"><b>장바구니</b></label>
+			<label style="color:gray">> 주문/결제 ></label>
+			<label style="color:gray">주문완료</label>
+			<hr class="userHr"/>
+			<form method="post" id="cartFrm" action="/gachi/orderSheet">
+				<div class="row">
+					<div class="col-md-1"><input type="checkbox" id="cartSelectAll" checked/></div>
+					<div class="col-md-2"></div>
+					<div class="col-md-4">클래스/상품명</div>
+				</div>
+				<hr/>
+				<c:set var="sum" value="0"/>
+				<c:set var="cnt" value="0"/>
+				<c:forEach var="cvo" items="${cList }">
+					<div class="row">
+						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${cvo.code }" checked/></div>
+						<input type="hidden" name="orderVOList[${cnt }].class_img1" value="${cvo.class_img }"/>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
+						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].class_name" value="${cvo.class_name }"/><br/>${cvo.username }</div>
+						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${cvo.amount }" style="width:15%"/>개
+											  <input type="text" name="orderVOList[${cnt }].stack" value="${cvo.stack }" style="width:15%"/>p
+									          <input type="text" name="orderVOList[${cnt }].real_price" value="${cvo.real_price }" style="width:30%"/>원
+											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${cvo.code}'">X</button></div>
+					</div>
+					<hr/>
+					<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
+					<c:set var="cnt" value="${cnt+1 }"/>
+				</c:forEach>
+				<c:forEach var="gvo" items="${gList }">
+					<div class="row">
+						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${gvo.code }" checked/></div>
+						<input type="hidden" name="orderVOList[${cnt }].goods_img1" value="${gvo.goods_img1 }"/>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
+						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].goods_name" value="${gvo.goods_name }"/></div>
+						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${gvo.amount }" style="width:15%"/>개
+											  <input type="text" name="orderVOList[${cnt }].stack" value="${gvo.stack }" style="width:15%"/>p
+											  <input type="text" name="orderVOList[${cnt }].real_price" value="${gvo.real_price }" style="width:30%"/>원
+											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'">X</button></div>
+					</div>
+					<hr/>
+					<c:set var="sum" value="${sum+gvo.real_price*gvo.amount }"/>
+					<c:set var="cnt" value="${cnt+1 }"/>
+				</c:forEach>
+				<button type="button" id="selectDel" class="btn btn-info btn-sm">선택상품삭제</button>
+				<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDeleteAll'">전체삭제</button>
+				<label style="font-size:0.7em;margin:10px">*주문 시 상품 합계 금액이 50,000원 이상은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
+				<hr/>
+				<div id="userCartBtm">
+					<div><b>합계</b> ${sum }원</div>	
+					<c:if test="${sum lt 50000}">
+						<c:set var="ship" value="2500"/>
+						<div><b>배송비</b> +${ship }원</div>
+					</c:if>
+					<c:if test="${sum ge 50000}">
+						<c:set var="ship" value="0"/>
+						<div><b>배송비 무료</b></div>
+					</c:if>
+					<hr class="userHr"/>
+					<div style="font-size:1.2em;"><b>총 금액</b> ${sum+ship }원</div>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-outline-light">선택상품주문</button>
+					<button type="submit" class="btn btn-outline-light">전체상품주문</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

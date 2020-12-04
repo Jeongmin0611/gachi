@@ -476,13 +476,14 @@ input{text-align:center;}
 	/*愿�由ъ옄 1:1臾몄쓽 由ъ뒪�듃 start*/
 	#ad_1on1_lst{
 		overflow:auto;
-		height:auto;
+		border:3px solid #437299;
+		border-radius:10px;
 	}
 	#ad_1on1_lst li{
 		float: left;
 		width:12%;
 		text-align: center;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:30px;
 		height:50px;
 	}
@@ -693,11 +694,12 @@ input{text-align:center;}
 		width:50%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n+1){
-		width:50%;
+		width:40%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n){
-		width:50%;
+		width:60%;
 	}
+	
 	/*愿�由ъ옄 �뒪�넗�뼱愿�由� end*/
 	
 	/*愿�由ъ옄 由ъ뒪�듃 �럹�씠吏� start*/
@@ -733,7 +735,7 @@ input{text-align:center;}
 	.cr_MyClass_header li{
 		float: left;
 		width:10%;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:50px;
 		height:50px;
 	}
@@ -751,15 +753,19 @@ input{text-align:center;}
 	}
 	.cr_MyClass_lst{
 		padding-left:0px;
+		border:3px solid #437299;
+		border-radius:10px;
 		overflow:auto;
 	}
 	.cr_MyClass_lst li{
 		overflow:auto;
 		float: left;
 		width:10%;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:100px;
 		height:120px;
+		vertical-align:middle;
+	 	overflow: auto;	
 	}
 	.cr_MyClass_lst img{
 		
@@ -853,12 +859,14 @@ input{text-align:center;}
 		font-size: 24px;
 	}
 	#cr_settle_lst{
+		border:3px solid #437299;
+		border-radius:10px;
 		margin-top:30px;
-		width:100%;
 		text-align: center;
+		overflow: auto;
 	}
 	#cr_settle_lst li{
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		float:left;
 		width:10%;
 		height:50px;
@@ -876,7 +884,7 @@ input{text-align:center;}
 		float: left;
 		width:10%;
 		text-align: center;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:30px;
 		height:50px;
 	}
@@ -917,7 +925,7 @@ input{text-align:center;}
 		float: left;
 		width:12%;
 		text-align: center;
-		border:1px solid gray;
+		border-bottom:1px solid gray;
 		line-height:30px;
 		height:50px;
 	}
@@ -1055,5 +1063,17 @@ input{text-align:center;}
 	}
 	#ad_video_Lst li:nth-child(10n+6){
 		width:24%;
+	}
+	
+	.ad_box{
+		margin:10px 0px;
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow: auto;
+	}
+	.add_img{
+		background-color:white;
+		border:1px solid white;
+		border-radius: 10px; 
 	}
 	

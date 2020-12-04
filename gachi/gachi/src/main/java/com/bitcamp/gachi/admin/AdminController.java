@@ -1,11 +1,8 @@
 package com.bitcamp.gachi.admin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,8 +45,212 @@ public class AdminController {
 	}
 	
 	@RequestMapping ("/adminDashboard")
-	public String adminDashboard() {
-		return "admin/adminDashboard";
+	public ModelAndView adminDashboard() {
+		ModelAndView mav = new ModelAndView();
+		
+		String startMonth, endMonth;
+		SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+		String todate =  yyyymm.format(new Date());
+		if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+			startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+		}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+			
+		int dataSize = 0;
+			if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+				dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+			} else{
+				dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+				dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+				dataSize -= Integer.parseInt(startMonth.substring(5,7));
+				
+			}
+			dataSize += 1;
+			System.out.println(dataSize);
+			
+			List<String> dbParam2 = new ArrayList<String>();
+			for(int i=0; i<dataSize; i++) {
+				String tmp;
+				if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+					tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+					System.out.println("tmp1:" + tmp);
+				} else {
+					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+					System.out.println("tmp2:" + tmp);
+				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
+				dbParam2.add(tmp);
+			}
+			
+			// dbParam definition
+			Map<String, List> dbParam = new HashMap<String, List>();
+			dbParam.put("list", dbParam2);
+			
+			// chart1 data
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Integer> newMember = dao.dashForMember(dbParam); // return type
+					
+			// dbParam for member chart 
+			Map<String, String> dashmember_cnt = new HashMap<String, String>();
+			dashmember_cnt.put("startMonth", startMonth.toString());
+			dashmember_cnt.put("endMonth", endMonth.toString());
+		
+			//chart1 member 
+			dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+			List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+			List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+
+			// ChartJs 전송 데이터
+			List<String> dashMemberData = new ArrayList<String>();
+			List<String> dashAllMemberData = new ArrayList<String>();
+			List<String> dashCreatorData = new ArrayList<String>();
+			
+			for(int i=0; i<dashMember.size(); i++) {
+			     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
+			}
+			for(int i=0; i<dashCreator.size();i++) {
+				dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
+			}
+			for(int i=0; i<dashAllMember.size();i++) {
+				 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+			}
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+//					System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+//					System.out.println(dbParam2.get(i));
+			}
+			
+			mav.addObject("dashMemberData", dashMemberData);
+			mav.addObject("dashAllMemberData",dashAllMemberData);
+			mav.addObject("dashCreatorData", dashCreatorData);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+			
+			mav.addObject("dataSize", 2);
+			mav.setViewName("admin/adminDashboard");
+			
+		return mav;			
+		
+	}
+	
+	@RequestMapping(value="/adminDashboard",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminDashboard(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		if(startMonth==null || endMonth == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+			String todate =  yyyymm.format(new Date());
+			if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+				startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+			}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+		} 
+		
+		int dataSize = 0;
+		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+			dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+		} else{
+			dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+			dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+			dataSize -= Integer.parseInt(startMonth.substring(5,7));
+			
+		}
+		dataSize += 1;
+		System.out.println(dataSize);
+		
+		List<String> dbParam2 = new ArrayList<String>();
+		for(int i=0; i<dataSize; i++) {
+			String tmp;
+			if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+				tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+				System.out.println("tmp1:" + tmp);
+			} else {
+				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+				System.out.println("tmp2:" + tmp);
+			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
+			dbParam2.add(tmp);
+		}
+		
+		// dbParam definition
+		Map<String, List> dbParam = new HashMap<String, List>();
+		dbParam.put("list", dbParam2);
+		
+		// chart1 data
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Integer> newMember = dao.dashForMember(dbParam); // return type
+				
+		// dbParam for member chart 
+		Map<String, String> dashmember_cnt = new HashMap<String, String>();
+		dashmember_cnt.put("startMonth", startMonth.toString());
+		dashmember_cnt.put("endMonth", endMonth.toString());
+	
+		//chart1 member 
+		dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+		List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+		List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+
+		// ChartJs 전송 데이터
+		List<String> dashMemberData = new ArrayList<String>();
+		List<String> dashAllMemberData = new ArrayList<String>();
+		List<String> dashCreatorData = new ArrayList<String>();
+		
+		for(int i=0; i<dashMember.size(); i++) {
+		     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
+		}
+		for(int i=0; i<dashCreator.size();i++) {
+			dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
+		}
+		for(int i=0; i<dashAllMember.size();i++) {
+			 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+		}
+		if(startMonth != null && endMonth != null) {
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+
+				dbParam2.set(i, "\'" + tmp +"\'");
+
+			}
+			
+			mav.addObject("dashMemberData", dashMemberData);
+			mav.addObject("dashAllMemberData",dashAllMemberData);
+			mav.addObject("dashCreatorData",dashCreatorData);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+			
+			System.out.println("ajax success");
+
+			try {
+				mav.setViewName("admin/adminDashboard");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+		
+		
+		return mav;
 	}
 	@RequestMapping("/adminCreator")
 	public ModelAndView adminCreator() {
@@ -105,20 +306,20 @@ public class AdminController {
 		
 	return mav;
 	}
-	@RequestMapping("/creatorMemberDelete")
-	public ModelAndView creatorMemberDelete(String userid) {
-		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-		int result = dao.adminMemberDelete(userid);
-		
-		ModelAndView mav = new ModelAndView();
-		if(result >0) {
-			mav.addObject("result", result);
-			mav.setViewName("redirect:adminCreator");
-		}else {
-			mav.setViewName("gachi/adminResult");
-		}
-		return mav;
-	}
+//	@RequestMapping("/creatorMemberDelete")
+//	public ModelAndView creatorMemberDelete(String userid) {
+//		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+//		int result = dao.adminMemberDelete(userid);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		if(result >0) {
+//			mav.addObject("result", result);
+//			mav.setViewName("redirect:adminCreator");
+//		}else {
+//			mav.setViewName("gachi/adminResult");
+//		}
+//		return mav;
+//	}
 	
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
@@ -178,6 +379,47 @@ public class AdminController {
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
+
+	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
+	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		
+		System.out.println("bbbbbbb=> ");
+		for (String name:vo.getImgList()) {
+			System.out.println("aaaaaa=> "+name);
+		}
+		
+		
+		int result=dao.updateClass(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",vo.getCode());
+			mav.setViewName("redirect:adminClassView");
+		}
+		return mav;
+	}
+	@RequestMapping(value="/imgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr) {
+		MultipartFile file=mhsr.getFile("file");
+		OutputStream ops=null;
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		
+		boolean isc=file.isEmpty();
+		String filePath=null;
+		if(!isc){
+			try {
+				ops=new FileOutputStream(new File(path,file.getOriginalFilename()));
+				ops.write(file.getBytes());
+				filePath="/gachi/upload/classImg/"+file.getOriginalFilename();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return filePath;
+	}
+	
+
 	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
@@ -288,33 +530,114 @@ public class AdminController {
 	return mav;
 	}
 
-	@RequestMapping("/adminMemberDelete")
-	public ModelAndView adminMemberDelete(String userid) {
-		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-		int result = dao.adminMemberDelete(userid);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result >0) {
-			mav.addObject("result", result);
-			mav.setViewName("redirect:adminMember");
-		}else {
-			mav.setViewName("gachi/adminResult");
-		}
-		return mav;
-	}
+//	@RequestMapping("/adminMemberDelete")
+//	public ModelAndView adminMemberDelete(String userid) {
+//		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+//		int result = dao.adminMemberDelete(userid);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		if(result >0) {
+//			mav.addObject("result", result);
+//			mav.setViewName("redirect:adminMember");
+//		}else {
+//			mav.setViewName("gachi/adminResult");
+//		}
+//		return mav;
+//	}
 	@RequestMapping("/adminNotice")
-	public String adminNotice() {
-		return "admin/adminNotice";
+	public ModelAndView adminNotice(NoticePageVO npvo,HttpServletRequest req) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		String nowPageRequest=req.getParameter("nowPage");
+		if(nowPageRequest!=null) {
+			npvo.setNowPage(Integer.parseInt(nowPageRequest));
+		}
+		int totalRecord=dao.getAllRecord(npvo);
+		npvo.setTotalRecord(totalRecord);
+		
+		List<NoticeVO> list=dao.selectList(npvo);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("npvo",npvo);
+		mav.setViewName("admin/adminNotice");
+		return mav;
 	}
 	
 	@RequestMapping("/adminNoticeView")
-	public String adminNoticeView() {
-		return "admin/adminNoticeView";
+	public ModelAndView adminNoticeView(@RequestParam("notice_num") int noticeNum,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		NoticeVO vo=dao.selectNotice(noticeNum);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("nowPage",nowPage);
+		mav.setViewName("admin/adminNoticeView");
+		return mav;
 	}
+	@RequestMapping("adminNoticeEdit")
+	public ModelAndView adminNoticeEdit(@RequestParam("notice_num") int noticeNum,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		NoticeVO vo=dao.selectNotice(noticeNum);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("nowPage",nowPage);
+		mav.setViewName("admin/adminNoticeEdit");
+		return mav;
+	}
+	@RequestMapping("adminNoticeEditOk")
+	public ModelAndView adminNoticeEditOk(NoticeVO vo,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.updateNotice(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0){
+			mav.addObject("notice_num",vo.getNotice_num());
+			mav.addObject("nowPage",nowPage);
+			mav.setViewName("redirect:adminNoticeView");
+		}else {
+			mav.addObject("msg","공지사항 수정에 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
+	}
+	@RequestMapping("/adminNoticeDel")
+	public ModelAndView adminNoticeDel(@RequestParam("notice_num") int notice_num,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.deleteNotice(notice_num);
+		NoticePageVO npvo=new NoticePageVO();
+		npvo.setNowPage(nowPage);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("npvo", npvo);
+			mav.setViewName("redirect:adminNotice");
+		}else{
+			mav.addObject("msg","공지사항 삭제를 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
+	}
+	
 	@RequestMapping("/adminNoticeWrite")
 	public String adminNoticeWrite() {
 		return "admin/adminNoticeWrite";
+	}
+	
+	@RequestMapping(value="/adminNoticeWriteOk",method = RequestMethod.POST)
+	public ModelAndView adminNoticeWriteOk(NoticeVO vo,MultipartFile file) {
+		vo.setFilename(vo.getInput_file().getOriginalFilename());
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.insertNotice(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:adminNotice");	
+		}else{
+			String msg="공지사항 등록을 실패하였습니다. 공지사항 쓰기로 돌아갑니다.";
+			mav.addObject("msg", msg);
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
 	}
 	@RequestMapping("/adminEvent")
 	public String adminEvent() {
@@ -417,16 +740,7 @@ public class AdminController {
 		return "admin/adminStatClass";
 	}
 	@RequestMapping("/adminStatCreator")
-	public String adminStatCreator() {
-		return "admin/adminStatCreator";
-	}
-//	@RequestMapping("/adminStatMember")
-//	public String adminStatMember() {
-//		return "admin/adminStatMember";
-//	}
-	@RequestMapping("/adminStatMember")
-	
-	public ModelAndView adminStatMember() {
+	public ModelAndView adminStatCreator() {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller");
 		System.out.println("startMonth is null");
@@ -439,24 +753,120 @@ public class AdminController {
 		}
 			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
 			endMonth = todate;
+			
+		int dataSize = 0;
+			if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+				dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+			} else{
+				dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+				dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+				dataSize -= Integer.parseInt(startMonth.substring(5,7));
+				
+			}
+			dataSize += 1;
+			System.out.println(dataSize);
+			
+			List<String> dbParam2 = new ArrayList<String>();
+			for(int i=0; i<dataSize; i++) {
+				String tmp;
+				if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+					tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+					System.out.println("tmp1:" + tmp);
+				} else {
+					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+					System.out.println("tmp2:" + tmp);
+				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
+				dbParam2.add(tmp);
+			}
+			
+			Map<String, List> dbParam = new HashMap<String, List>();
+			dbParam.put("list", dbParam2);
+			
+			// chart1 data
+			CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+			List<Integer> newMember = dao.dashForCreator(dbParam); // return type
 		
+			// dbParam for pie chart 
+			Map<String, String> dbParam_pie = new HashMap<String, String>();
+			dbParam_pie.put("startMonth", startMonth.toString());
+			dbParam_pie.put("endMonth", endMonth.toString());
+			
+			System.out.println(dbParam_pie.get("startMonth"));
+			System.out.println(dbParam_pie.get("endMonth"));
+			
+			// chart2 data
+			dao = sqlSession.getMapper(CreatorDaoImp.class);
+			List<Map<String, Integer>> genderResult = dao.CreatorForGender(dbParam_pie);
+			
+			// chart3 data
+			dao = sqlSession.getMapper(CreatorDaoImp.class);
+			List<Map<String, Integer>> ageResult = dao.CreatorForAge(dbParam_pie);
+			
+			//chart4 data 
+			dao = sqlSession.getMapper(CreatorDaoImp.class);
+			List<Map<String, Integer>> categoryResult = dao.CreatorForCategory(dbParam_pie);
+
+			// ChartJs 전송 데이터
+			List<String> genderPieLbl = new ArrayList<String>();
+			List<String> genderPieData = new ArrayList<String>();
+			
+			List<String> agePieLbl = new ArrayList<String>();
+			List<String> agePieData = new ArrayList<String>();
+			
+			List<String> categoryPieLbl = new ArrayList<String>();
+			List<String> categoryPieData = new ArrayList<String>();
+			
+			
+			for(int i=0; i< genderResult.size(); i++) {
+				genderPieLbl.add("\'" + genderResult.get(i).get("GENDER_GB") + "\'");
+				genderPieData.add(String.valueOf(genderResult.get(i).get("CNT")));
+			}
+			for(int i=0; i< ageResult.size(); i++) {
+				agePieData.add(String.valueOf(ageResult.get(i).get("CNT")));
+				agePieLbl.add("\'" + ageResult.get(i).get("AGE_GB") + "\'");
+			}
+			for(int i=0; i< categoryResult.size(); i++) {
+				categoryPieData.add(String.valueOf(categoryResult.get(i).get("DATA")));
+				categoryPieLbl.add("\'" + categoryResult.get(i).get("labels") + "\'");
+			}
+			
+			for(int i=0; i<newMember.size(); i++) {
+				System.out.println(newMember.get(i));
+			}
+		
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+//					System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+//					System.out.println(dbParam2.get(i));
+			}
+			
+			mav.addObject("dashData", newMember);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
 			mav.addObject("endMonth", endMonth);
-		
-//		
+			mav.addObject("genderLabel", genderPieLbl);
+			mav.addObject("genderData", genderPieData);
+			mav.addObject("ageLabel", agePieLbl);
+			mav.addObject("ageData", agePieData);
+			mav.addObject("categoryLabel", categoryPieLbl);
+			mav.addObject("categoryData", categoryPieData);
+			
 		System.out.println("startMonth:" + startMonth);
 		System.out.println("endMonth:" + endMonth);
-//		mav.addObject("dataSize", dataSize);
-//		mav.addObject("newMember", newMember);
-		mav.setViewName("admin/adminStatMember");
+		// getChartData(startMonth, endMonth);
+		mav.addObject("dataSize", 2);
+		mav.setViewName("admin/adminStatCreator");
 		return mav;
 	}
 	
-	@RequestMapping(value="/adminStatMember",method=RequestMethod.POST)
+	@RequestMapping(value="/adminStatCreator",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminStatMember(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
+	public ModelAndView adminStatCreator(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller11");
+		
 		if(startMonth==null || endMonth == null) {
 			System.out.println("startMonth is null");
 			
@@ -468,8 +878,6 @@ public class AdminController {
 			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
 			endMonth = todate;
 		} 
-		
-		
 		
 		int dataSize = 0;
 		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
@@ -493,30 +901,330 @@ public class AdminController {
 				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
 				System.out.println("tmp2:" + tmp);
 			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
 			dbParam2.add(tmp);
 		}
 		
+		// dbParam definition
 		Map<String, List> dbParam = new HashMap<String, List>();
 		dbParam.put("list", dbParam2);
 		
+		// chart1 data
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<Integer> newMember = dao.dashForCreator(dbParam); // return type
+	
+		// dbParam for pie chart 
+		Map<String, String> dbParam_pie = new HashMap<String, String>();
+		dbParam_pie.put("startMonth", startMonth.toString());
+		dbParam_pie.put("endMonth", endMonth.toString());
+		
+		System.out.println(dbParam_pie.get("startMonth"));
+		System.out.println(dbParam_pie.get("endMonth"));
+		
+		// chart2 data
+		dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<Map<String, Integer>> genderResult = dao.CreatorForGender(dbParam_pie);
+		
+		// chart3 data
+		dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<Map<String, Integer>> ageResult = dao.CreatorForAge(dbParam_pie);
+		
+		//chart4 data 
+		dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<Map<String, Integer>> categoryResult = dao.CreatorForCategory(dbParam_pie);
+
+		// ChartJs 전송 데이터
+		List<String> genderPieLbl = new ArrayList<String>();
+		List<String> genderPieData = new ArrayList<String>();
+		
+		List<String> agePieLbl = new ArrayList<String>();
+		List<String> agePieData = new ArrayList<String>();
+		
+		List<String> categoryPieLbl = new ArrayList<String>();
+		List<String> categoryPieData = new ArrayList<String>();
+		
+		for(int i=0; i< genderResult.size(); i++) {
+			genderPieLbl.add("\'" + genderResult.get(i).get("GENDER_GB") + "\'");
+			genderPieData.add(String.valueOf(genderResult.get(i).get("CNT")));
+		}
+		for(int i=0; i< ageResult.size(); i++) {
+			agePieData.add(String.valueOf(ageResult.get(i).get("CNT")));
+			agePieLbl.add("\'" + ageResult.get(i).get("AGE_GB") + "\'");
+		}
+		for(int i=0; i<categoryResult.size(); i++) {
+			categoryPieData.add(String.valueOf(categoryResult.get(i).get("DATA")));
+			categoryPieLbl.add("\'" + categoryResult.get(i).get("labels") + "\'");
+		}
+		
+		
+		for(int i=0; i<newMember.size(); i++) {
+		}
+		
+		if(startMonth != null && endMonth != null) {
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+
+				dbParam2.set(i, "\'" + tmp +"\'");
+			}
+//			System.out.println("generData.size:" + genderPieData.size());
+//			System.out.println("ageData.size:" + agePieData.size());
+			
+			mav.addObject("dashData", newMember);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+			mav.addObject("genderLabel", genderPieLbl);
+			mav.addObject("genderData", genderPieData);
+			mav.addObject("ageLabel", agePieLbl);
+			mav.addObject("ageData", agePieData);
+			mav.addObject("categoryLabel", categoryPieLbl);
+			mav.addObject("categoryData", categoryPieData);
+
+			
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminStatCreator");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+	//	mav.addObject("dataSize", dataSize);
+	//	mav.addObject("newMember", newMember);
+	//	mav.setViewName("admin/adminStatMember");
+		return null;
+	}
+
+	@RequestMapping("/adminStatMember")
+	public ModelAndView adminStatMember() {
+		ModelAndView mav = new ModelAndView();
+			
+		String startMonth, endMonth;
+		SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+		String todate =  yyyymm.format(new Date());
+		if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+			startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+		}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+			
+		int dataSize = 0;
+			if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+				dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+			} else{
+				dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+				dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+				dataSize -= Integer.parseInt(startMonth.substring(5,7));
+				
+			}
+			dataSize += 1;
+			System.out.println(dataSize);
+			
+			List<String> dbParam2 = new ArrayList<String>();
+			for(int i=0; i<dataSize; i++) {
+				String tmp;
+				if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+					tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+					System.out.println("tmp1:" + tmp);
+				} else {
+					tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+					System.out.println("tmp2:" + tmp);
+				}
+				if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
+				dbParam2.add(tmp);
+			}
+			
+			// dbParam definition
+			Map<String, List> dbParam = new HashMap<String, List>();
+			dbParam.put("list", dbParam2);
+			
+			// chart1 data
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Integer> newMember = dao.dashForMember(dbParam); // return type
+		
+			// dbParam for pie chart 
+			Map<String, String> dbParam_pie = new HashMap<String, String>();
+			dbParam_pie.put("startMonth", startMonth.toString());
+			dbParam_pie.put("endMonth", endMonth.toString());
+			
+			System.out.println(dbParam_pie.get("startMonth"));
+			System.out.println(dbParam_pie.get("endMonth"));
+			
+			// chart2 data
+			dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Map<String, Integer>> genderResult = dao.dashForGender(dbParam_pie);
+			
+			// chart3 data
+			dao = sqlSession.getMapper(MemberDaoImp.class);
+			List<Map<String, Integer>> ageResult = dao.dashForAge(dbParam_pie);
+
+			// ChartJs 전송 데이터
+			List<String> genderPieLbl = new ArrayList<String>();
+			List<String> genderPieData = new ArrayList<String>();
+			
+			List<String> agePieLbl = new ArrayList<String>();
+			List<String> agePieData = new ArrayList<String>();
+			
+			for(int i=0; i< genderResult.size(); i++) {
+				genderPieLbl.add("\'" + genderResult.get(i).get("GENDER_GB") + "\'");
+				genderPieData.add(String.valueOf(genderResult.get(i).get("CNT")));
+			}
+			for(int i=0; i< ageResult.size(); i++) {
+				agePieData.add(String.valueOf(ageResult.get(i).get("CNT")));
+				agePieLbl.add("\'" + ageResult.get(i).get("AGE_GB") + "\'");
+			}
+			
+			for(int i=0; i<newMember.size(); i++) {
+				System.out.println(newMember.get(i));
+			}
+			
+		
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+//					System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+//					System.out.println(dbParam2.get(i));
+			}
+			
+			mav.addObject("dashData", newMember);
+			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
+			mav.addObject("genderLabel", genderPieLbl);
+			mav.addObject("genderData", genderPieData);
+			mav.addObject("ageLabel", agePieLbl);
+			mav.addObject("ageData", agePieData);
+		
+			mav.addObject("startMonth", startMonth);
+			mav.addObject("endMonth", endMonth);
+			
+		System.out.println("startMonth:" + startMonth);
+		System.out.println("endMonth:" + endMonth);
+		// getChartData(startMonth, endMonth);
+		mav.addObject("dataSize", 2);
+		mav.setViewName("admin/adminStatMember");
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminStatMember",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminStatMember(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(startMonth==null || endMonth == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
+			String todate =  yyyymm.format(new Date());
+			if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
+				startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
+			}
+			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
+			endMonth = todate;
+		} 
+		
+		int dataSize = 0;
+		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
+			dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
+		} else{
+			dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
+			dataSize += Integer.parseInt(endMonth.substring(5,7)); 
+			dataSize -= Integer.parseInt(startMonth.substring(5,7));
+			
+		}
+		dataSize += 1;
+		System.out.println(dataSize);
+		
+		List<String> dbParam2 = new ArrayList<String>();
+		for(int i=0; i<dataSize; i++) {
+			String tmp;
+			if(Integer.parseInt(startMonth.substring(5, 7)) + i > 12) {
+				tmp = Integer.parseInt(startMonth.substring(0,4))+1 + "-" + (Integer.parseInt(startMonth.substring(5, 7)) - 12 + i);
+				System.out.println("tmp1:" + tmp);
+			} else {
+				tmp = Integer.parseInt(startMonth.substring(0,4)) + "-" + (Integer.parseInt(startMonth.substring(5, 7)) + i);
+				System.out.println("tmp2:" + tmp);
+			}
+			if(tmp.length()<7) tmp = tmp.substring(0,4)+ "-0" + tmp.substring(5,6);
+			dbParam2.add(tmp);
+		}
+		
+		// dbParam definition
+		Map<String, List> dbParam = new HashMap<String, List>();
+		dbParam.put("list", dbParam2);
+		
+		// chart1 data
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 		List<Integer> newMember = dao.dashForMember(dbParam); // return type
+	
+		// dbParam for pie chart 
+		Map<String, String> dbParam_pie = new HashMap<String, String>();
+		dbParam_pie.put("startMonth", startMonth.toString());
+		dbParam_pie.put("endMonth", endMonth.toString());
+		
+		System.out.println(dbParam_pie.get("startMonth"));
+		System.out.println(dbParam_pie.get("endMonth"));
+		
+		// chart2 data
+		dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Map<String, Integer>> genderResult = dao.dashForGender(dbParam_pie);
+		
+		// chart3 data
+		dao = sqlSession.getMapper(MemberDaoImp.class);
+		List<Map<String, Integer>> ageResult = dao.dashForAge(dbParam_pie);
 
-		System.out.println(newMember.size());
+		// ChartJs 전송 데이터
+		List<String> genderPieLbl = new ArrayList<String>();
+		List<String> genderPieData = new ArrayList<String>();
+		
+		List<String> agePieLbl = new ArrayList<String>();
+		List<String> agePieData = new ArrayList<String>();
+		
+		for(int i=0; i< genderResult.size(); i++) {
+			genderPieLbl.add("\'" + genderResult.get(i).get("GENDER_GB") + "\'");
+			genderPieData.add(String.valueOf(genderResult.get(i).get("CNT")));
+		}
+		for(int i=0; i< ageResult.size(); i++) {
+			agePieData.add(String.valueOf(ageResult.get(i).get("CNT")));
+			agePieLbl.add("\'" + ageResult.get(i).get("AGE_GB") + "\'");
+		}
+		
 		for(int i=0; i<newMember.size(); i++) {
 			System.out.println(newMember.get(i));
 		}
 		
 		if(startMonth != null && endMonth != null) {
-			
+			for(int i=0; i<dataSize; i++) {
+				String tmp = dbParam2.get(i);
+//				System.out.println(tmp);
+				dbParam2.set(i, "\'" + tmp +"\'");
+//				System.out.println(dbParam2.get(i));
+			}
+//			System.out.println("generData.size:" + genderPieData.size());
+//			System.out.println("ageData.size:" + agePieData.size());
 			
 			mav.addObject("dashData", newMember);
 			mav.addObject("labelData", dbParam2);
+			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
 			mav.addObject("endMonth", endMonth);
+			mav.addObject("genderLabel", genderPieLbl);
+			mav.addObject("genderData", genderPieData);
+			mav.addObject("ageLabel", agePieLbl);
+			mav.addObject("ageData", agePieData);
 			
 			System.out.println("ajax success");
-			System.out.println("labelData =="+dbParam2);
+//			System.out.println("labelData =="+dbParam2);
 			try {
 				//resp.getWriter().write("{\"result\":\"success\"}");
 				mav.setViewName("admin/adminStatMember");
@@ -530,14 +1238,14 @@ public class AdminController {
 			try{
 				resp.getWriter().write("{\"result\":\"fail\"}");
 			} catch (IOException e) {
-                e.printStackTrace();
-            }
+	            e.printStackTrace();
+	        }
 		}
 		System.out.println("startMonth:" + startMonth);
 		System.out.println("endMonth:" + endMonth);
-//		mav.addObject("dataSize", dataSize);
-//		mav.addObject("newMember", newMember);
-//		mav.setViewName("admin/adminStatMember");
+	//	mav.addObject("dataSize", dataSize);
+	//	mav.addObject("newMember", newMember);
+	//	mav.setViewName("admin/adminStatMember");
 		return null;
 	}
 	@RequestMapping("/adminSettle")

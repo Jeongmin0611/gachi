@@ -56,6 +56,6 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="noticeDetailBtnDiv">
-		<a href="/gachi/noticeBoard"><button type="button" class="btn btn-light">목록</button></a>
+		<a href="/gachi/noticeBoard?nowPage=${pvo.nowPage }<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>"><button type="button" class="btn btn-light">목록</button></a>
 	</div>	
 </div>

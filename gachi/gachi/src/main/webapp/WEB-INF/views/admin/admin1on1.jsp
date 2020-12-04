@@ -3,22 +3,24 @@
  <style>
  #ad_1on1_lst li{
  	vertical-align:middle;
+ 	border-bottom:1px solid gray;
  	line-height:50px;
  }
  #search_area{
  	margin-bottom:20px;
+ 	text-align:right;
  }
  select{
  	height:30px;
  }
  
  </style> 
-<div class="container text-center ad_font">
+<div class="container ad_font">
 	<h1>1:1문의</h1>
 	<!-- 1:1문의 영역 -->
 	
 	<!-- 검색영역 -->
-	<div id="search_area">
+	<div id="search_area" >
 	<form action="#">
 		<select id="searchType1" name="option1">
 				<option selected="selected">상품/클래스</option>
@@ -56,15 +58,15 @@
 				<button class="btn" onclick="location.href='/gachi/admin1on1Write'">글쓰기</button>
 				<button class="btn">삭제</button> 
 			</div>
-				<div id="paging">
-					<ul>
-						<li>prev</li>
-						<li>1</li>
-						<li>2</li>
-						<li>3</li>
-						<li>4</li>
-						<li>5</li>
-						<li>next</li>
-					</ul>
-				</div>
+			<div id="paging">
+	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<li class="btn"><a class="btn" href="#">Prev</a></li>
+			<li><a href="#" class="paging_num">1</a></li>
+			<li><a href="#" class="paging_num">2</a></li>
+			<li><a href="#" class="paging_num">3</a></li>
+			<li><a href="#" class="paging_num">4</a></li>
+			<li><a href="#" class="paging_num">5</a></li>
+			<li class="btn"><a class="btn" href="#">Next</a></li>
+	</ul>
+</div>
 </div>

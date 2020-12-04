@@ -1,6 +1,7 @@
 package com.bitcamp.gachi.admin;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ClassVO {
 
@@ -19,11 +20,9 @@ public class ClassVO {
 	private Date allow;
 	private Date signup;
 	private String class_state;
-	private String class_img1;
-	private String class_img2;
-	private String class_img3;
+	private String class_img;
 	private String nickname;
-	
+	private List<String> imgList;
 	
 	public String getCode() {
 		return code;
@@ -115,23 +114,11 @@ public class ClassVO {
 	public void setClass_state(String class_state) {
 		this.class_state = class_state;
 	}
-	public String getClass_img1() {
-		return class_img1;
+	public String getClass_img() {
+		return class_img;
 	}
-	public void setClass_img1(String class_img1) {
-		this.class_img1 = class_img1;
-	}
-	public String getClass_img2() {
-		return class_img2;
-	}
-	public void setClass_img2(String class_img2) {
-		this.class_img2 = class_img2;
-	}
-	public String getClass_img3() {
-		return class_img3;
-	}
-	public void setClass_img3(String class_img3) {
-		this.class_img3 = class_img3;
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}
 	public String getNickname() {
 		return nickname;
@@ -139,6 +126,11 @@ public class ClassVO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+	public List<String> getImgList() {
+		return imgList;
+	}
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
 	
 }

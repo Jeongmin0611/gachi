@@ -1,21 +1,17 @@
 package com.bitcamp.gachi.board;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
@@ -42,6 +38,23 @@ public class BoardController {
 	@RequestMapping("/noticeBoard")
 	public ModelAndView noticeBoard(PagingVO vo, HttpServletRequest req) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		vo.setOnePageRecord(10);
+		//현재 페이지
+		String nowPageTxt = req.getParameter("nowPage");
+		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));			
+		}
+		//검색어, 검색키
+		String searchWord = req.getParameter("searchWord");
+		if(!(searchWord==null||searchWord.equals(""))) {//검색어가 있을 때
+			String searchKey = req.getParameter("searchKey");
+			vo.setSearchKey(searchKey);
+			vo.setSearchWord(searchWord);
+		}
+		
+		int totalRecord=dao.noticeBoardAllRecordCount(vo);
+		vo.setTotalRecord(totalRecord);
+		
 		List<NoticeBoardVO> list = dao.noticeBoardAllRecord(vo);
 		
 		String nowPage = req.getParameter("nowPage");
@@ -49,11 +62,6 @@ public class BoardController {
 			vo.setNowPage(Integer.parseInt(nowPage));
 		}
 		
-		int totalRecord=dao.noticeBoardAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		vo.setOnePageRecord(10);
-		vo.setOnePageNumCount(5);
-		vo.setLastPageRecordCount(10);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -63,12 +71,21 @@ public class BoardController {
 	}
 
 	@RequestMapping("/noticeBoardView")
-	public ModelAndView noticeBoardView(int no) {
+	public ModelAndView noticeBoardView(int no, HttpServletRequest req, PagingVO pvo) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		NoticeBoardVO vo = dao.noticeBoardSelect(no);
-
+		
+		String searchWord = req.getParameter("searchWord");
+		if(!(searchWord==null||searchWord.equals(""))) {//검색어가 있을 때
+			pvo.setSearchKey(req.getParameter("searchKey"));
+			pvo.setSearchWord(searchWord);
+		}
+		String nowPage=req.getParameter("nowPage");
+		pvo.setNowPage(Integer.parseInt(nowPage));
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("pvo", pvo);
 		mav.setViewName("board/noticeBoardView");
 		return mav;
 	}
@@ -91,14 +108,29 @@ public class BoardController {
 	public ModelAndView eventBoardView(int no, String event) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		EventBoardVO vo = dao.eventBoardSelect(no);
+		List<EventBoardVO> list = dao.replyAllRecord(no);
 		vo.setEvent_category(event);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("list", list);
 		mav.setViewName("board/eventBoardView");
 		return mav;
 	}
 
+	//이벤트 댓글
+	@RequestMapping(value= "/eventReplyFormOk", method=RequestMethod.POST)
+	public ModelAndView eventReplyFormOk(EventBoardVO vo, HttpServletRequest req, HttpSession ses) {
+		vo.setIp(req.getRemoteAddr());
+		vo.setUserid((String) ses.getAttribute("userid"));
+		
+		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
+		int result = dao.insertReply(vo);
+		System.out.println("result= "+result);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:eventBoardView");
+		return mav;
+	}
 	@RequestMapping("/eventBoardEnd")
 	public ModelAndView eventBoardEnd() {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);

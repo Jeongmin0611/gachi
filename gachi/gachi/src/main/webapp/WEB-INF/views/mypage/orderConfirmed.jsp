@@ -124,7 +124,7 @@
 		<label>주문이 완료되었습니다.</label>
 		<ul id="orderConfirmedLst">
 			<li>주문번호</li>
-			<li>10101010</li>
+			<li>${order_code }</li>
 			<li>결제금액</li>
 			<li>17,500원</li>
 			<li>결제수단</li>

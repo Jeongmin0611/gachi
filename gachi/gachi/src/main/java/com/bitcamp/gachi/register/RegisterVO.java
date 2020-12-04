@@ -37,13 +37,7 @@ public class RegisterVO {
 	private String birthdate3C;
 
 	private String tel;
-	private String tel1;
-	private String tel2;
-	private String tel3;
 	private String telC;
-	private String tel1C;
-	private String tel2C;
-	private String tel3C;
 
 	private String gender;
 	private String gender2;
@@ -61,6 +55,17 @@ public class RegisterVO {
 	private String signupdate;
 	private String interest;
 	private String interest2;
+	
+	private String business_number;
+	private String bankname;
+	private String account;
+	
+	private String creatorLicense_img1;
+	private String creatorLicense_img2;
+	private String creatorLicense_img3;
+	
+	private String sns_addr;
+	private String creator_info;
 
 	private int deleted;
 
@@ -175,41 +180,11 @@ public class RegisterVO {
 	}
 
 	public String getTel() {
-		tel = tel1 + "-" + tel2 + "-" + tel3;
 		return tel;
 	}
 
 	public void setTel(String tel) {
 		this.tel = tel;
-		//
-		String telCut[] = tel.split("-");
-		tel1 = telCut[0];
-		tel2 = telCut[1];
-		tel3 = telCut[2];
-	}
-
-	public String getTel1() {
-		return tel1;
-	}
-
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-
-	public String getTel2() {
-		return tel2;
-	}
-
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-
-	public String getTel3() {
-		return tel3;
-	}
-
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
 	}
 
 	public String getGender() {
@@ -245,15 +220,12 @@ public class RegisterVO {
 	}
 
 	public String getAddr() {
-		addr = sample6_address + " " + sample6_extraAddress;
+		addr = sample6_address;
 		return addr;
 	}
 
 	public void setAddr(String addr) {
 		this.addr = addr;
-		String addrCut[] = addr.split(" ");
-		sample6_address = addrCut[0];
-		sample6_extraAddress = addrCut[1];
 	}
 
 	public String getSample6_address() {
@@ -359,43 +331,13 @@ public class RegisterVO {
 	}
 
 	public String getTelC() {
-		telC = tel1C + "-" + tel2C + "-" + tel3C;
 		return telC;
 	}
 
 	public void setTelC(String telC) {
 		this.telC = telC;
-		//
-		String telCutC[] = telC.split("-");
-		tel1C = telCutC[0];
-		tel2C = telCutC[1];
-		tel3C = telCutC[2];
-	}
 
-	public String getTel1C() {
-		return tel1C;
 	}
-
-	public void setTel1C(String tel1c) {
-		tel1C = tel1c;
-	}
-
-	public String getTel2C() {
-		return tel2C;
-	}
-
-	public void setTel2C(String tel2c) {
-		tel2C = tel2c;
-	}
-
-	public String getTel3C() {
-		return tel3C;
-	}
-
-	public void setTel3C(String tel3c) {
-		tel3C = tel3c;
-	}
-
 	public String getGender2() {
 		return gender2;
 	}
@@ -413,15 +355,12 @@ public class RegisterVO {
 	}
 
 	public String getAddr2() {
-		addr2 = sample6_address2 + " " + sample6_extraAddress2;
+		addr2 = sample6_address2;
 		return addr;
 	}
 
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
-		String addrCut2[] = addr2.split(" ");
-		sample6_address2 = addrCut2[0];
-		sample6_extraAddress2 = addrCut2[1];
 	}
 
 	public String getSample6_address2() {
@@ -454,6 +393,70 @@ public class RegisterVO {
 
 	public void setInterest2(String interest2) {
 		this.interest2 = interest2;
+	}
+
+	public String getBusiness_number() {
+		return business_number;
+	}
+
+	public void setBusiness_number(String business_number) {
+		this.business_number = business_number;
+	}
+
+	public String getBankname() {
+		return bankname;
+	}
+
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getCreatorLicense_img1() {
+		return creatorLicense_img1;
+	}
+
+	public void setCreatorLicense_img1(String creatorLicense_img1) {
+		this.creatorLicense_img1 = creatorLicense_img1;
+	}
+
+	public String getCreatorLicense_img2() {
+		return creatorLicense_img2;
+	}
+
+	public void setCreatorLicense_img2(String creatorLicense_img2) {
+		this.creatorLicense_img2 = creatorLicense_img2;
+	}
+
+	public String getCreatorLicense_img3() {
+		return creatorLicense_img3;
+	}
+
+	public void setCreatorLicense_img3(String creatorLicense_img3) {
+		this.creatorLicense_img3 = creatorLicense_img3;
+	}
+
+	public String getSns_addr() {
+		return sns_addr;
+	}
+
+	public void setSns_addr(String sns_addr) {
+		this.sns_addr = sns_addr;
+	}
+
+	public String getCreator_info() {
+		return creator_info;
+	}
+
+	public void setCreator_info(String creator_info) {
+		this.creator_info = creator_info;
 	}
 	
 }

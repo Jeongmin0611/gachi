@@ -91,7 +91,7 @@
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by code asc) where <![CDATA[rownum<=${lastPageRecordCount}]]> order by code desc
 	</select>
 	<select id="selectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVO">
-		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img1 from class where code=#{code}
+		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img from class where code=#{code}
 	</select>
 	<select id="getClassVideoListSample" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
 		select VIDEO_CODE,VIDEO_NAME,VIDEO_FILENAME,unit,unit_content,VIDEO_LENGTH,
@@ -100,5 +100,11 @@
 	<update id="updateClassState" parameterType="String">
 		update class set class_state='등록승인' where code='${code}'
 	</update>	
-		
+	<delete id="deleteClass" parameterType="String">
+		delete from class where code='${param1}'
+	</delete>	
+	<update id="updateClass" parameterType="com.bitcamp.gachi.admin.ClassVO">
+		update class set category='${category}',class_name='${class_name}',stage='${stage}',full_price='${full_price}',
+		real_price='${real_price}',class_state='${class_state}',class_info='${class_info}' where code='${code}'  
+	</update>
 </mapper>

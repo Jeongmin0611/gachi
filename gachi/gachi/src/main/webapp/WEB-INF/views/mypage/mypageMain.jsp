@@ -8,16 +8,18 @@
 	a:hover{
 		font-weight:bold;
 	}
-	.mypageTop>div{	
-		width:;
-		float:;
-		margin:;
+	.mypageTop{
+		text-align: center;
+		margin: 10px auto 0px;	 
 	}
 	.mypageTop button,
 	.mypageContent button{
 		background-color: #abcee3;
 		margin:5px 0;
 	}	
+	.mypageContent div{
+		text-align: center;
+	}
 	.mypageContent>div>div{
 		margin:auto 0;
 	}	
@@ -25,7 +27,7 @@
 		text-align:left;
 	}
 	/*클래스썸네일*/
-	.mypageContent img{
+	.mypageContent>div>div>img{
 		width: 150px;
 	    height: 100px;
 	    object-fit: cover;
@@ -156,7 +158,7 @@
 	<%@ include file="../inc/userProfile.jspf"%>
 	<!-- 마이페이지(메인) - 상단 -->
 	<div class="userMainDiv">
-		<div class="mypageTop">
+		<div class="mypageTop col-lg-8 col-md-10">
 			<div class="d-none d-sm-none d-md-block">
 				<!-- xs, sm 크기에서만 숨기기  -->
 				<input type="radio" name="option"/><label>전체</label>
@@ -184,15 +186,15 @@
 				<button type="button" class="btn btn-outline-light btn-block" id="orderListDate">조회</button>
 				</div>
 			</div>
-		</div>
-		<div class="mypageContent">
 			<hr class="userHr"/>
+		</div>
+		<div class="mypageContent col-lg-8 col-md-10">
 			<c:forEach var="list" items="${map }">
 				<c:set var="key" value="${list.key }"/>
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
 					<div class="row">	
-						<div class="col-md-3"><img src="/gachi/img/${vo.class_img1 }"/></div>
+						<div class="col-md-3"><img src="/gachi/img/${vo.class_img }"/></div>
 						<div class="col-md-6">
 							<ul class="mypageMainLst">
 								<li>
@@ -249,7 +251,6 @@
 			</c:forEach>
 				</c:if>
 			</c:forEach>
-		</div>
 		</div>
 		<div class="mypageMainBtm">
 			<ul class="pagination justify-content-center">

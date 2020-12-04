@@ -31,7 +31,7 @@
 	line-height: 50px;
 }
 
-#admintop>a {
+#admintop a {
 	width: 10%;
 	text-decoration: none;
 	color: white;
@@ -127,8 +127,8 @@ a, h1, li {
 <body style="background-color:#E4E6DA">
 
 <div id="admintop">
-		<a href="/gachi">로그아웃</a>
-		<a href="/gachi">사용자웹 이동</a>
+		<div><a href="/gachi">로그아웃</a>
+		<a href="/gachi">사용자웹 이동</a></div>
 </div>
 <div id="headerDiv">
 	<ul id="adminMenu">

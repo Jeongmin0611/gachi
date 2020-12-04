@@ -47,7 +47,58 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
 	<update id="creatorleaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
 	</update>
+	
+		<select id="dashForCreator" parameterType="map" resultType="_int">
+		<foreach collection="list" item="item" separator=" union all">
+ 			select count(*) as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='크리에이터' and deleted ='회원'
+		</foreach>
+	</select>
 <!-- 	<delete id="adminMemberDelete">
 		delete from member where userid =#{userid}
 	</delete> -->
+	
+	<select id="CreatorForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from member where withdrawdate is null and grade='크리에이터'
+            and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
+            )
+      )
+    group by gender_gb
+	</select>
+	<select id="CreatorForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM member where withdrawdate is null and grade ='크리에이터' and
+	                  to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
+	</select>
+	
+	<select id ="CreatorForCategory" parameterType="map" resultType="map">
+		select labels, count(*) data 
+      	from (select case when category=('창작/공예') then '창작/공예 ' when category=('미술') then '미술' 
+      	when category=('사진/영상') then '사진/영상' when category=('요리') then '요리'
+      	when category=('운동') then '운동' when category=('음악') then '음악'
+      	when category=('라이프스타일') then '라이프스타일'
+      	end labels
+      from (select to_char(signupdate, 'yyyy-mm') signupdate ,to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
+            creator_state , category from member m full outer join creator c on m.userid = c.userid where withdrawdate is null 
+            and grade='크리에이터' <!--  and creator_state='승인'  -->
+            and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
+            )
+            )
+    group by labels
+	
+	</select>
+	
 </mapper>

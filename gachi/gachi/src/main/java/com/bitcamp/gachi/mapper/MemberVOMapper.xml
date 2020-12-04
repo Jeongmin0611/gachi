@@ -38,8 +38,53 @@
 	</delete> -->
 	<select id="dashForMember" parameterType="map" resultType="_int">
 		<foreach collection="list" item="item" separator=" union all">
- 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item}
+ 			select count(*)  as newMember from member where to_char(signupdate, 'yyyy-mm') = #{item} and grade ='회원' and deleted ='회원'
 		</foreach>
+	</select>
+	
+	<select id="dashboardMember" parameterType="map" resultType="map">		
+		select count(*) cnt from member where withdrawdate is null and 
+		grade ='회원' and deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
+	<select id="dashboardCreator" parameterType="map" resultType="map">
+		select count(*) cnt from member where withdrawdate is null and 
+		grade ='크리에이터' and deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
+	<select id="dashboardAllMember" parameterType="map" resultType="map">
+		select count(*) cnt from member where withdrawdate is null and 
+		deleted='회원'
+		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
+	</select>
+	
+<select id="dashForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from member where withdrawdate is null and grade='회원'
+            and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
+            )
+      )
+    group by gender_gb
+	</select>
+	<select id="dashForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM member where withdrawdate is null and grade ='회원' and
+	                  to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
 	</select>
 	
 </mapper>
