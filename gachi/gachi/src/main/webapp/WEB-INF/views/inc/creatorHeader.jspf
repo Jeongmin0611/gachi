@@ -161,7 +161,6 @@ a, h1, li,h3 {
 <body style="background-color:#E4E6DA">
 
 <div id="creatortop" style="background-color:#2d383f">
-	<div style="width:500px; float:left;overflow:auto"><h3 style="color:white; line-height:50px">크리에이터 전용페이지</h3></div>
 		<div style="overflow:auto"><a href="/gachi">고객센터</a>
 		<a href="/gachi">홈페이지 이동</a>
 		<a href="/gachi">마이페이지</a>

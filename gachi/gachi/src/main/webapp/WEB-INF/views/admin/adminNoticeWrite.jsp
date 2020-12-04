@@ -17,8 +17,8 @@ $(function(){
 			분류
 			<select name="target">
 				<option value="전체">전체</option>
-				<option value="전체">사용자</option>
-				<option value="전체">크리에이터</option>
+				<option value="사용자">사용자</option>
+				<option value="크리에이터">크리에이터</option>
 			</select>  
 		</li>
 		<li>

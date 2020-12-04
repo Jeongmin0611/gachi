@@ -559,7 +559,7 @@ public class AdminController {
 		int totalRecord=dao.getAllRecord(npvo);
 		npvo.setTotalRecord(totalRecord);
 		
-		List<NoticeVO> list=dao.selectList();
+		List<NoticeVO> list=dao.selectList(npvo);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("list",list);
 		mav.addObject("npvo",npvo);
@@ -568,13 +568,66 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/adminNoticeView")
-	public String adminNoticeView() {
-		return "admin/adminNoticeView";
+	public ModelAndView adminNoticeView(@RequestParam("notice_num") int noticeNum,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		NoticeVO vo=dao.selectNotice(noticeNum);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("nowPage",nowPage);
+		mav.setViewName("admin/adminNoticeView");
+		return mav;
 	}
+	@RequestMapping("adminNoticeEdit")
+	public ModelAndView adminNoticeEdit(@RequestParam("notice_num") int noticeNum,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		NoticeVO vo=dao.selectNotice(noticeNum);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("nowPage",nowPage);
+		mav.setViewName("admin/adminNoticeEdit");
+		return mav;
+	}
+	@RequestMapping("adminNoticeEditOk")
+	public ModelAndView adminNoticeEditOk(NoticeVO vo,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.updateNotice(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0){
+			mav.addObject("notice_num",vo.getNotice_num());
+			mav.addObject("nowPage",nowPage);
+			mav.setViewName("redirect:adminNoticeView");
+		}else {
+			mav.addObject("msg","공지사항 수정에 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
+	}
+	@RequestMapping("/adminNoticeDel")
+	public ModelAndView adminNoticeDel(@RequestParam("notice_num") int notice_num,
+			@RequestParam("nowPage") int nowPage) {
+		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+		int result=dao.deleteNotice(notice_num);
+		NoticePageVO npvo=new NoticePageVO();
+		npvo.setNowPage(nowPage);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("npvo", npvo);
+			mav.setViewName("redirect:adminNotice");
+		}else{
+			mav.addObject("msg","공지사항 삭제를 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.setViewName("admin/adminNoticeResult");
+		}
+		return mav;
+	}
+	
 	@RequestMapping("/adminNoticeWrite")
 	public String adminNoticeWrite() {
 		return "admin/adminNoticeWrite";
 	}
+	
 	@RequestMapping(value="/adminNoticeWriteOk",method = RequestMethod.POST)
 	public ModelAndView adminNoticeWriteOk(NoticeVO vo,MultipartFile file) {
 		vo.setFilename(vo.getInput_file().getOriginalFilename());

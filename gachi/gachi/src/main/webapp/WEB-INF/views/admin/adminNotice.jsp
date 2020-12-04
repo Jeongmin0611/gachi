@@ -22,14 +22,13 @@ select {
 <!-- 검색영역 -->
 <div id="search_area">
 <div>
-	총 레코드 수:
+	총 레코드 수:${npvo.totalRecord}
 </div>
 <form action="#">
 	<select id="searchType2" name="option2">
 			<option selected="selected">제목</option>
 			<option>작성자</option>
 			<option>등록일</option>
-			<option>답변여부</option>
 	</select>
 <input type="text" id="searchWord" placeholder="내용 입력" size="40"/>
 <input type="submit" class="btn" value="검색"/>
@@ -46,7 +45,7 @@ select {
 	<c:forEach var="vo" items="${list}">
 		<li><input type="checkbox" id="" name=""/></li>
 		<li>${vo.notice_num}</li>
-		<li><a href="/gachi/adminNoticeView?notice_num=${vo.notice_num}">${vo.subject}</a></li>
+		<li><a href="/gachi/adminNoticeView?notice_num=${vo.notice_num}&nowPage=${npvo.nowPage}">${vo.subject}</a></li>
 		<li>${vo.writer}</li>
 		<li>${vo.writedate}</li>
 		<li>${vo.hit}</li>
@@ -57,25 +56,25 @@ select {
 	<button class="btn" onclick="location.href='/gachi/adminNoticeWrite'">글쓰기</button>
 	<button class="btn">삭제</button> 
 </div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-		<c:if test="${npvo.nowPage>1}">
-			<li class="btn">
-				<a class="btn" href="/gachi/adminClass?nowPage=${npvo.nowPage-1}">Prev</a>
-			</li>
-		</c:if>
-		<c:forEach var="p" begin="${npvo.startPageNum}" end="${npvo.startPageNum + npvo.onePageRecord-1 }">
-			<c:if test="${p<=pvo.totalPage}">
-				<li <c:if test="${p==npvo.nowPage}"> style="color:#437299"</c:if>>
-					<a href="/gachi/adminClass?nowPage=${p}" class="paging_num">${p}</a>
+			<c:if test="${npvo.nowPage>1}">
+				<li class="btn">
+					<a class="btn" href="/gachi/adminNotice?nowPage=${npvo.nowPage-1}">Prev</a>
 				</li>
 			</c:if>
-		</c:forEach>
-		<c:if test="${npvo.nowPage<npvo.totalPage}">
-			<li class="btn">
-				<a class="btn" href="/gachi/adminClass?nowPage=${npvo.nowPage+1}">next</a>
-			</li>
-		</c:if>
+			<c:forEach var="p" begin="${npvo.startPageNum}" end="${npvo.startPageNum + npvo.onePageRecord-1 }">
+				<c:if test="${p<=npvo.totalPage}">
+					<li <c:if test="${p==npvo.nowPage}"> style="color:#437299"</c:if>>
+						<a href="/gachi/adminNotice?nowPage=${p}" class="paging_num">${p}</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<c:if test="${npvo.nowPage<npvo.totalPage}">
+				<li class="btn">
+					<a class="btn" href="/gachi/adminNotice?nowPage=${npvo.nowPage+1}">next</a>
+				</li>
+			</c:if>
 	</ul>
 </div>
 </div>
