@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.classPage.ClassPageDaoImp">
 	<select id="classPageAllRecord" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, nickname, class_img1 from class join member on class.userid=member.userid
+		select code, category, class_name, real_price, nickname, class_img from class join member on class.userid=member.userid
 		<choose>
 			<when test="category==null and selectval==null"></when>
 			<when test="category==null and selectval.equals('Iall')"></when>
@@ -29,15 +29,15 @@
 		</choose>
 	</select>
 	<select id="classView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category, class_name, real_price, stack, nickname, class_img1 from class join member on class.userid=member.userid	
+		select category, class_name, real_price, stack, nickname, class_img from class join member on class.userid=member.userid	
 		where code='${param1}'
 	</select>
 	<select id="homeClassPopular" resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price, nickname, class_img1, good from class join member on class.userid=member.userid
+		select * from (select code, category, class_name, real_price, nickname, class_img, good from class join member on class.userid=member.userid
 	order by good desc ) where rownum<![CDATA[<=3]]>
 	</select>
 	<select id="homeClassNew" resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price, nickname, class_img1, good from class join member on class.userid=member.userid
+		select * from (select code, category, class_name, real_price, nickname, class_img, good from class join member on class.userid=member.userid
 	order by allow desc ) where rownum<![CDATA[<=3]]>
 	</select>
 </mapper>
