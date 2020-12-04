@@ -23,11 +23,6 @@
 	.userHr{
 		background-color: #000;
 	}
-	.mypageTop{
-		width: 100%;
-		text-align: center;
-		margin-top: 20px;
-	}
 	.mypageContent, #mypageContent{	
 		margin: 10px auto 50px;	 	
 	}

@@ -8,6 +8,10 @@
 	a:hover{
 		font-weight:bold;
 	}
+	.mypageTop{
+		text-align: center;
+		margin: 10px auto 0px;	 
+	}
 	.mypageTop button,
 	.mypageContent button{
 		background-color: #abcee3;
@@ -154,7 +158,7 @@
 	<%@ include file="../inc/userProfile.jspf"%>
 	<!-- 마이페이지(메인) - 상단 -->
 	<div class="userMainDiv">
-		<div class="mypageTop">
+		<div class="mypageTop col-lg-8 col-md-10">
 			<div class="d-none d-sm-none d-md-block">
 				<!-- xs, sm 크기에서만 숨기기  -->
 				<input type="radio" name="option"/><label>전체</label>
@@ -182,9 +186,9 @@
 				<button type="button" class="btn btn-outline-light btn-block" id="orderListDate">조회</button>
 				</div>
 			</div>
+			<hr class="userHr"/>
 		</div>
-		<hr class="userHr"/>
-		<div class="mypageContent">
+		<div class="mypageContent col-lg-8 col-md-10">
 			<c:forEach var="list" items="${map }">
 				<c:set var="key" value="${list.key }"/>
 				<c:if test="${fn:contains(key,'c')}">
