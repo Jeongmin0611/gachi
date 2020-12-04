@@ -36,7 +36,7 @@ public class MypageController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	//******마이페이지 메인-결제/주문내역확인*******
+	/* *****마이페이지 메인-결제/주문내역확인****** */
 	@RequestMapping("/mypage")
 	public ModelAndView Mypage(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -55,7 +55,7 @@ public class MypageController {
 		mav.setViewName("mypage/mypageMain");
 		return mav;
 	}
-	//회원정보확인
+	/* 회원정보확인 */
 	@RequestMapping("/userInfoView")
 	public ModelAndView userInfoView(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -66,7 +66,7 @@ public class MypageController {
 		mav.setViewName("mypage/userInfoView");
 		return mav;
 	}
-	//회원정보수정-비밀번호입력
+	/* 회원정보수정-비밀번호입력 */
 	@RequestMapping("/userInfoEditChk")
 	public ModelAndView userInfoEditChk(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
@@ -74,7 +74,7 @@ public class MypageController {
 		mav.setViewName("mypage/userInfoEditChk");
 		return mav;
 	}
-	//회원정보수정-비밀번호확인
+	/* 회원정보수정-비밀번호확인 */
 	@RequestMapping(value="/userInfoEditOk", method=RequestMethod.POST)
 	public ModelAndView userInfoEditOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -90,7 +90,7 @@ public class MypageController {
 		}
 		return mav;
 	}
-	//회원정보수정-성공여부
+	/* 회원정보수정-성공여부 */
 	@RequestMapping(value="/userInfoEditFormOk", method=RequestMethod.POST)
 	public ModelAndView userInfoEditFormOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -108,7 +108,7 @@ public class MypageController {
 		}
 		return mav;
 	}
-	//회원탈퇴
+	/* 회원탈퇴 */
 	@RequestMapping("/userLeave")
 	public ModelAndView userLeave(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -122,7 +122,7 @@ public class MypageController {
 		mav.setViewName("mypage/userLeave");
 		return mav;
 	}
-	//회원탈퇴-비밀번호입력
+	/* 회원탈퇴-비밀번호입력 */
 	@RequestMapping("/userLeaveChk")
 	public ModelAndView userLeaveChk(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
@@ -130,7 +130,7 @@ public class MypageController {
 		mav.setViewName("mypage/userLeaveChk");
 		return mav;
 	}
-	//회원탈퇴-비밀번호확인
+	/* 회원탈퇴-비밀번호확인 */
 	@RequestMapping(value="/userLeaveOk", method=RequestMethod.POST)
 	public ModelAndView userLeaveOk(MemberVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -150,12 +150,12 @@ public class MypageController {
 		}
 		return mav;
 	}
-	//회원탈퇴-성공
+	/* 회원탈퇴-성공 */
 	@RequestMapping("/userLeaveConfirmed")
 	public String userLeaveConfirmed() {
 		return "mypage/userLeaveConfirmed";
 	}
-	//장바구니
+	/* 장바구니 */
 	@RequestMapping("/userCart")
 	public ModelAndView userCart(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -168,7 +168,7 @@ public class MypageController {
 		mav.setViewName("mypage/userCart");
 		return mav;
 	}
-	//장바구니 삭제
+	/* 장바구니 삭제 */
 	@RequestMapping("/userCartDelete")
 	public ModelAndView userCartDelete(String code, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -177,7 +177,7 @@ public class MypageController {
 		mav.setViewName("redirect:userCart");
 		return mav;
 	}
-	//장바구니 전체삭제
+	/* 장바구니 전체삭제 */
 	@RequestMapping("/userCartDeleteAll")
 	public ModelAndView userCartDeleteAll(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -188,21 +188,35 @@ public class MypageController {
 	}
 	/* 주문신청서 */
 	@RequestMapping(value="/orderSheet", method=RequestMethod.POST)
-	public ModelAndView orderSheet(OrderVOList orderVOList) {
+	public ModelAndView orderSheet(OrderVOList orderVOList, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("orderVOList", orderVOList.getOrderVOList());
-
+		mav.addObject("vo", vo);
 		mav.setViewName("mypage/orderSheet");
 		return mav;
 	}
-	//주문완료
-	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
-	public ModelAndView orderConfirmed(@RequestBody Map<String, Object> params) {
+	/* 주문내역 넣기 */
+	@RequestMapping(value="/orderChk", method=RequestMethod.POST)
+	public void orderChk(@RequestBody Map<String, Object> order) {
+		System.out.println(order.get("imp_uid"));
+		System.out.println(order.get("order_code"));
+		System.out.println(order.get("userid"));
+		System.out.println(order.get("full_price"));
+		System.out.println(order.get("shipping_fee"));
+		System.out.println(order.get("discount"));
+		System.out.println(order.get("price"));
+		System.out.println(order.get("payment_type"));
+		System.out.println(order.get("card_type"));
 		
-		System.out.println(params.get("imp_uid"));
-		System.out.println(params.get("merchant_uid"));
+	}
+	/* 주문완료 페이지 */
+	@RequestMapping("/orderConfirmed")
+	public ModelAndView orderConfirmed(String order_code) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("order_code", order_code);
 		mav.setViewName("mypage/orderConfirmed");
 		return mav;
 	}

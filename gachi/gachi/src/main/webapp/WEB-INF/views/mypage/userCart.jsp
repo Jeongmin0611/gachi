@@ -70,25 +70,23 @@
 			<hr class="userHr"/>
 			<form method="post" id="cartFrm" action="/gachi/orderSheet">
 				<div class="row">
-					<div class="col-1"><input type="checkbox" id="cartSelectAll" checked/></div>
-					<div class="col-2"></div>
-					<div class="col-4">클래스/상품명</div>
+					<div class="col-md-1"><input type="checkbox" id="cartSelectAll" checked/></div>
+					<div class="col-md-2"></div>
+					<div class="col-md-4">클래스/상품명</div>
 				</div>
 				<hr/>
 				<c:set var="sum" value="0"/>
-				<c:set var="ship" value="2500"/>
-				<c:set var="price" value="0"/>
 				<c:set var="cnt" value="0"/>
 				<c:forEach var="cvo" items="${cList }">
 					<div class="row">
 						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${cvo.code }" checked/></div>
 						<input type="hidden" name="orderVOList[${cnt }].class_img1" value="${cvo.class_img1 }"/>
-						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img1 }" style="width:100%;height:100px;object-fit: cover"/></div>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].class_name" value="${cvo.class_name }"/><br/>${cvo.username }</div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].amount" value="${cvo.amount }"/>개</div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].stack" value="${cvo.stack }"/>p</div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].real_price" value="${cvo.real_price }"/>원</div>
-						<div class="col-md-2"><button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${cvo.code}'">X</button></div>
+						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${cvo.amount }" style="width:15%"/>개
+											  <input type="text" name="orderVOList[${cnt }].stack" value="${cvo.stack }" style="width:15%"/>p
+									          <input type="text" name="orderVOList[${cnt }].real_price" value="${cvo.real_price }" style="width:30%"/>원
+											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${cvo.code}'">X</button></div>
 					</div>
 					<hr/>
 					<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
@@ -98,19 +96,15 @@
 					<div class="row">
 						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${gvo.code }" checked/></div>
 						<input type="hidden" name="orderVOList[${cnt }].goods_img1" value="${gvo.goods_img1 }"/>
-						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100px;object-fit: cover"/></div>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].goods_name" value="${gvo.goods_name }"/></div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].amount" value="${gvo.amount }"/>개</div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].stack" value="${gvo.stack }"/>p</div>
-						<div class="col-md-1"><input type="text" name="orderVOList[${cnt }].real_price" value="${gvo.real_price }"/>원</div>
-						<div class="col-md-2"><button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'">X</button></div>
+						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${gvo.amount }" style="width:15%"/>개
+											  <input type="text" name="orderVOList[${cnt }].stack" value="${gvo.stack }" style="width:15%"/>p
+											  <input type="text" name="orderVOList[${cnt }].real_price" value="${gvo.real_price }" style="width:30%"/>원
+											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'">X</button></div>
 					</div>
 					<hr/>
 					<c:set var="sum" value="${sum+gvo.real_price*gvo.amount }"/>
-					<c:if test="${sum ge 50000}">
-						<c:set var="ship" value="0"/>
-					</c:if>
-					<c:set var="price" value="${sum+ship }"/>
 					<c:set var="cnt" value="${cnt+1 }"/>
 				</c:forEach>
 				<button type="button" id="selectDel" class="btn btn-info btn-sm">선택상품삭제</button>
@@ -119,14 +113,16 @@
 				<hr/>
 				<div id="userCartBtm">
 					<div><b>합계</b> ${sum }원</div>	
-					<c:if test="${ship eq 0}">
-						<div><b>배송비 무료</b></div>
-					</c:if>	
-					<c:if test="${ship ne 0}">
+					<c:if test="${sum lt 50000}">
+						<c:set var="ship" value="2500"/>
 						<div><b>배송비</b> +${ship }원</div>
-					</c:if>	
+					</c:if>
+					<c:if test="${sum ge 50000}">
+						<c:set var="ship" value="0"/>
+						<div><b>배송비 무료</b></div>
+					</c:if>
 					<hr class="userHr"/>
-					<div style="font-size:1.2em;"><b>총 금액</b> ${price }원</div>
+					<div style="font-size:1.2em;"><b>총 금액</b> ${sum+ship }원</div>
 				</div>
 				<div>
 					<button type="submit" class="btn btn-outline-light">선택상품주문</button>
