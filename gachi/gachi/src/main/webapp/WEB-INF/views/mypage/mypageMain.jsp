@@ -194,7 +194,7 @@
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
 					<div class="row">	
-						<div class="col-md-3"><img src="/gachi/img/${vo.class_img1 }"/></div>
+						<div class="col-md-3"><img src="/gachi/img/${vo.class_img }"/></div>
 						<div class="col-md-6">
 							<ul class="mypageMainLst">
 								<li>
