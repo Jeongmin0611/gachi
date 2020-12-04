@@ -12,6 +12,26 @@ public class PagingVO {
 
 	private int startRow;// 한페이지의 시작글번호
 	private int endRow;// 한 페이지의 마지막 글번호
+	
+	//검색어
+	private String searchKey;
+	private String searchWord;
+
+	public String getSearchKey() {
+		return searchKey;
+	}
+
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+
+	public String getSearchWord() {
+		return searchWord;
+	}
+
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
 
 	public int getStartRow() {
 		return startRow;
@@ -94,5 +114,4 @@ public class PagingVO {
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
 	}
-
 }

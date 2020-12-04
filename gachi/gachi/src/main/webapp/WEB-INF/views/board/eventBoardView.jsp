@@ -102,31 +102,19 @@
 		<button type="button" class="btn btn-light">목록</button>
 	</div>
 	<!-- 댓글 -->
-	<form id="eventReplyForm">
-		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn btn-outline-primary">등록</button></div>
+	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk">
+		댓글<br/> <textarea rows="3" cols="90%" name="content"></textarea>
+		<div><input type="submit" class="btn btn-outline-primary" value="등록"></div>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>
 		<ul id="eventDetailReplyDiv">
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">삭제</a></li>
-			
-			
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">삭제</a></li>
+			<c:forEach var="list" items="${list }">
+				<li>${list.nickname }</li>
+				<li>${list.content }</li>
+				<li>${list.sysdate }</li>
+				<li><a href="#">삭제</a></li>
+			</c:forEach>
 		</ul>
 	</div>
 </div>

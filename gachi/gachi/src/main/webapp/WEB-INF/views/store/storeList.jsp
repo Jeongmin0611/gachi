@@ -214,7 +214,8 @@
 			title="운동" id="aExercise">운동</a> &nbsp; <a
 			href="/gachi/storeList?category=<%=URLEncoder.encode("사진/영상", "UTF-8")%>"
 			title="사진/영상" id="aPhoto">사진/영상</a> &nbsp;
-		</span> <select id="storeListSelect" name="storeListSelect">
+		</span> 
+		<select id="storeListSelect" name="storeListSelect">
 			<option value="Iall" id="Iall">전체</option>
 			<option value="Inew" id="Inew">최신순</option>
 			<option value="Ipopular" id="Ipopular">인기순</option>
