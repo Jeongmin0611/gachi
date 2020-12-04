@@ -39,7 +39,7 @@ public class AllVO {
 	//클래스
 	private String class_name; /* 클래스명 */
 	private int real_price; /* 판매가 */
-	private String class_img1; /* 클래스사진1 */
+	private String class_img; /* 클래스사진1 */
 	
 	//상품
 	private String code;/*코드*/
@@ -236,11 +236,11 @@ public class AllVO {
 	public void setReal_price(int real_price) {
 		this.real_price = real_price;
 	}
-	public String getClass_img1() {
-		return class_img1;
+	public String getClass_img() {
+		return class_img;
 	}
-	public void setClass_img1(String class_img1) {
-		this.class_img1 = class_img1;
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}	
 	//상품
 	public String getCode() {

@@ -117,7 +117,7 @@ button:focus, button:active{
 	<div>
 		<h3>이벤트</h3>
 		<div id="CEventBtnDiv">
-			<button id="ingEvent">진행 중 이벤트</button>
+			<button id="ingEvent">진행 이벤트</button>
 			<button id="endEvent">종료 이벤트</button>
 		</div>
 	</div>
@@ -126,16 +126,24 @@ button:focus, button:active{
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
 		<div class="col-sm-4">
-			<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 중 이벤트" id="eventThumbnail">${vo.event_img}</a><br/>
+			<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 이벤트" id="eventThumbnail">${vo.event_img}</a><br/>
 			<div class="homeClassListTxt">
 				<!-- <span class="badge " id="eventNew">new</span>&nbsp; -->
 				<p> <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
-				<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 중 이벤트">${vo.subject }</a>
+				<a href="/gachi/eventBoardView?no=${vo.event_num }&event=진행 이벤트">${vo.subject }</a>
 			</div>				
 		</div>
 		</c:forEach>
 	</div>	
 	<!-- paging -->
+	<div id="eventPaging">
 		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<a class="page-link">Prev</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link">1</a>
+			</li>
 		</ul>
+	</div>
 </div>
