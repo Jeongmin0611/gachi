@@ -61,4 +61,8 @@
 		delete from cart 
 	 	 where userid='${userid}'
 	</delete>
+	<insert id="orderInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
+		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type)
+		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}');
+	</insert>
 </mapper>

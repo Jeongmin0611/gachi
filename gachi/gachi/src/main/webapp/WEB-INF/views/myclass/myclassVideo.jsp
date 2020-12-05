@@ -11,7 +11,14 @@
 <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 <title>Insert title here</title>
 <style>
-
+	@font-face {
+	font-family: 'OSeongandHanEum';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OSeongandHanEum.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 	/* 클래스 수강하기(동영상 창) */
 	
 	.cfont{

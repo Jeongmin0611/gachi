@@ -52,14 +52,14 @@
 	//결제하는 함수
 	function requestPay(){
 		//결제하기
-		if($("#orderAgree").is(":checked")){
+		if($("#orderAgree").is(":checked")){ //구매진행동의
 			// IMP.request_pay(param, callback) 호출
 			IMP.request_pay({
 			   pg : 'html5_inicis', // 결제방식
 			    pay_method : 'card',	// 결제 수단
-			    merchant_uid : 'merchant_' + new Date().getTime(), //주문번호 생성
+			    merchant_uid : 'o' + new Date().getTime(), //주문번호 생성
 			   name : '결제테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
-			    amount : '100', //document.getElementById("finalPrice").value,	// 결제 금액
+			    amount : '100', //$("finalPrice").val(),	// 결제 금액
 			    buyer_email : $("#orderUserid").val(),	
 			   buyer_name : $("#orderUsername").val(),
 			    buyer_tel : $("#orderTel").val(),	
@@ -154,7 +154,7 @@
 		<c:forEach var="cvo" items="${orderVOList }">
 			<div class="row">
 				<c:set var="key" value="${cvo.code }"/>
-				<input type="hidden" value="${key }"/>
+				<input type="hidden" name="" value="${key }"/>
 				<c:if test="${fn:contains(key,'c')}">
 					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 				</c:if>

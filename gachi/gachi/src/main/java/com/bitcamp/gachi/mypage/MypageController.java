@@ -201,6 +201,18 @@ public class MypageController {
 	/* 주문내역 넣기 */
 	@RequestMapping(value="/orderChk", method=RequestMethod.POST)
 	public void orderChk(@RequestBody Map<String, Object> order) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		OrderVO vo = new OrderVO();
+		vo.setOrder_code((String)order.get("order_code"));
+		vo.setUserid((String)order.get("userid"));
+		vo.setFull_price((Integer)order.get("full_price"));
+		vo.setShipping_fee((Integer)order.get("shipping_fee"));
+		vo.setDiscount((Integer)order.get("discount"));
+		vo.setPrice((Integer)order.get("price"));
+		vo.setPayment_type("html5_inicis");
+		vo.setCard_type((String)order.get("card_type"));
+		int result = dao.orderInsert(vo);
+		
 		System.out.println(order.get("imp_uid"));
 		System.out.println(order.get("order_code"));
 		System.out.println(order.get("userid"));
