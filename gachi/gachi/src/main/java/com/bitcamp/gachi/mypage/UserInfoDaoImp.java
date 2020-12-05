@@ -31,4 +31,8 @@ public interface UserInfoDaoImp {
 	public int cartDelete(@Param("userid") String userid, @Param("code") String code);
 	//장바구니 전체삭제
 	public int cartDeleteAll(String userid);
+	//결제 후 주문정보 넣기
+	public int orderInsert(OrderVO vo);
+	//좋아요
+	//public List<OrderListVO> userWishList(String userid);
 }

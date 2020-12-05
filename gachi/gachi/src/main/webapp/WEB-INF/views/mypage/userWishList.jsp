@@ -11,54 +11,41 @@
 	#userWishTop>label{
 		margin:0 10px;
 	}
-	
-	/* 리스트 */
-	.userWishItem{
-		overflow:auto;
-		margin-left:50px;
-		width:20%;
-		float:left;
-		margin-bottom:100px;
-	}
-	.userWishItem img{
-		width:100%;
-		height:150px;
-		object-fit:cover;
-	}
+
 </style>
-<div class="container cfont" id="userWishListContainer">
+<div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
-	<div class="userMainDiv" style="overflow:auto">
-		<div id="userWishTop">
-			<select>
-				<option>전체</option>
-				<option>클래스</option>
-				<option>스토어</option>
-			</select>
+	<div class="userMainDiv">
+		<div class="mypageContent col-lg-8 col-md-10">
+			<label style="color:gray">장바구니 ></label>
+			<label style="font-size:1.1em"><b>좋아요</b></label>
+			<hr class="userHr"/>
+			<div class="row">
+				<div class="col-md-4">
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><span class="badge badge-info">공예/창작</span></div>
+					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
+					<div><a href="#">홍길동</a></div>
+				</div>
+				<div class="col-md-4">
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><span class="badge badge-info">공예/창작</span></div>
+					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
+					<div><a href="#">홍길동</a></div>
+				</div>
+				<div class="col-md-4">
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><span class="badge badge-info">공예/창작</span></div>
+					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
+					<div><a href="#">홍길동</a></div>
+				</div>
+				<div class="col-md-4">
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><span class="badge badge-info">공예/창작</span></div>
+					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
+					<div><a href="#">홍길동</a></div>
+				</div>	
+			</div>
 		</div>
-		<ul class="userWishItem">
-			<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
-			<li><span class="badge badge-info">공예/창작</span></li>
-			<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
-		</ul>
-		<ul class="userWishItem">
-			<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
-			<li><span class="badge badge-info">공예/창작</span></li>
-			<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
-		</ul>
-		<ul class="userWishItem">
-			<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
-			<li><span class="badge badge-info">공예/창작</span></li>
-			<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
-		</ul>
-		<ul class="userWishItem">
-			<li><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg"/></a></li>
-			<li><span class="badge badge-info">공예/창작</span></li>
-			<li>클래스명 <a href="/gachi/myclassView">카모마일 프랑스 자수</a></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
-		</ul>	
 	</div>
 </div>
