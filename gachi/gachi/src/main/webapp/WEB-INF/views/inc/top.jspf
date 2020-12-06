@@ -654,6 +654,11 @@ a {
 	var tel2Chk=RegExp(/^[0-9]{3,}$/);
 	var tel3Chk=RegExp(/^[0-9]{4}$/);
 	$("#joinEffectiveness").submit(function(){
+		if($("#userid2").val() != $("#userid2Text").val()){
+			alert("이메일확인버튼을누르지않으셨습니다"); 
+			$("#userid2").focus();
+			return false;
+			}
 		if($("#userpwd2").val()==""){
 			alert("비밀번호를 입력하여주세요");
 			$("#userpwd2").val(""); 
@@ -750,19 +755,24 @@ a {
 			 return false; 
 		}
 		var okid=$("#userid2").val();
-		if($("#userid2").val()!=$("#userid2Text").val()){
+		if($("#userid2Text").val()==""){
 				$.ajax({
-					url:"/useridChk",
-					data:okid,
-					type:"GET",
+					url:'/gachi/useridChk?okid='+okid,
+					type:'GET',
 					success:function(result){
-						if(result=0){
-							alert("이메일사용가능");
-							
+						console.log(result);
+						if(result>0){
+							alert("이미 사용중인 아이디입니다.");
+							$("#userid2").val("");
+							$("#userid2").focus();
 						}else{
-							alert("이메일사용불가능");
-							}
-					},error:function(){}
+							alert("이메일사용가능");	
+							$("#userid2Text").val($("#userid2").val());
+							$("#userpwd2").focus();
+						}
+					},error:function(){
+					
+					}
 				});
 			}
 		   		
@@ -902,6 +912,42 @@ a {
 
 		return true;
 		});
+	$("#joinEmailChk2").click(function(){
+		if($("#userid3").val()==""){
+			alert("아이디(이메일)을 입력하여주세요");
+			$("#userid3").val(""); 
+			 $("#userid3").focus();
+			return false;
+			}
+		if(!emailChk2.test($("#userid3").val())){
+			 alert("이메일의 형식에 맞게 입력해주세요");
+			 $("#userid3").val(""); 
+			 $("#userid3").focus(); 
+			 return false; 
+		}
+		var okid2=$("#userid3").val();
+		if($("#userid2Text2").val()==""){
+				$.ajax({
+					url:'/gachi/useridChk2?okid2='+okid2,
+					type:'GET',
+					success:function(result){
+						console.log(result);
+						if(result>0){
+							alert("이미 사용중인 아이디입니다.");
+							$("#userid3").val("");
+							$("#userid2").focus();
+						}else{
+							alert("이메일사용가능");	
+							$("#userid2Text2").val($("#userid3").val());
+							$("#userpwd3").focus();
+						}
+					},error:function(){
+					
+					}
+				});
+			}
+		   		
+		});
 });
     function mdJchange(){//회원가입폼에서 크리에이터 회원가입폼으로
 		$("#mdJ").css({'display':'none'});
@@ -925,30 +971,6 @@ a {
 			
 			$("#mdJClose,.mdJ_layer").click(function(){
 		   		$("#mdJ").fadeOut();
-		});
-	}
-	function idFindChange(){
-		$("#idF1").css({'display':'none'});
-		$('#idF2').css({
-			"top": (($(window).height()-$("#idF2").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#idF2").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#idF2").fadeIn();
-			
-			$("#idF2Close,.idF2_layer").click(function(){
-		   		$("#idF2").fadeOut();
-		});
-	}
-	function idFind2Change(){
-		$("#idF2").css({'display':'none'});
-		$('#idF1').css({
-			"top": (($(window).height()-$("#idF1").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#idF1").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#idF1").fadeIn();
-			
-			$("#idF1Close,.idF1_layer").click(function(){
-		   		$("#idF1").fadeOut();
 		});
 	}
 	function pwdF1Change(){
@@ -1259,6 +1281,140 @@ $(document).ready(function() {
        	}
   	});
 });
+$(document).ready(function() {
+    $("#send3").click(function() {
+       	var number = Math.floor(Math.random() * 100000) + 100000;
+      	if(number>100000){
+        	number = number - 10000;
+        }
+        $("#text3").val(number); 
+      	var to = $("#to3").val();
+      	var telReg = /^01(?:0)\d{8}$/;
+       	if(!telReg.test(to)){
+          	alert("010으로 시작하는 전화번호만 인증가능합니다.");
+       	} else {
+			var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
+          
+       		if(con_test == true){
+               $.ajax({
+                   url:"telChkOk3",
+                   type:"post",
+                   data:{to: $("#to3").val(),
+                        text: $("#text3").val()
+                        },
+                 success:function(){
+                   alert("해당 휴대폰으로 인증번호를 발송했습니다");
+                   }, error:function(){
+                      
+                   }
+                });
+          	}else{
+        	  
+          	}
+      	}   
+    });  
+	$("#enterBtn3").click(function() {  
+		var userNum = $("#userNum3").val();
+       	var sysNum = $("#text3").val();         
+       	if(userNum == null || userNum == ""){
+          	alert("휴대폰으로 발송된 인증번호를 입력해주세요");
+       	}     
+       	else{     
+          	if(userNum.trim() == sysNum.trim()){
+          		alert("인증이 완료되었습니다.");
+          		var useridF=$("#to3").val();
+        		if($("#telFUserId").val()==""){
+        				$.ajax({
+        					url:'/gachi/useridFChk?useridF='+useridF,
+        					type:'GET',
+        					success:function(result){
+        						console.log(result);
+        						if(result>0){
+        							$("#telFUserId").val("");
+        							$("#telFUserId").focus();
+        						}else{
+        							alert("가입한적이없는 전화번호입니다");	
+        							$("#to3").val("");
+        							$("#to3").focus();
+        						}
+        					},error:function(){
+        					
+        					}
+        				});
+        			}
+           	}
+           	else {
+           		alert("인증번호를 다시 확인해주세요");
+           	}          
+       	}
+  	});
+    $("#send4").click(function() {
+       	var number = Math.floor(Math.random() * 100000) + 100000;
+      	if(number>100000){
+        	number = number - 10000;
+        }
+        $("#text4").val(number); 
+      	var to = $("#to4").val();
+      	var telReg = /^01(?:0)\d{8}$/;
+       	if(!telReg.test(to)){
+          	alert("010으로 시작하는 전화번호만 인증가능합니다.");
+       	} else {
+			var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
+          
+       		if(con_test == true){
+               $.ajax({
+                   url:"telChkOk4",
+                   type:"post",
+                   data:{to: $("#to4").val(),
+                        text: $("#text4").val()
+                        },
+                 success:function(){
+                   alert("해당 휴대폰으로 인증번호를 발송했습니다");
+                   }, error:function(){
+                      
+                   }
+                });
+          	}else{
+        	  
+          	}
+      	}   
+    });  
+	$("#enterBtn4").click(function() {  
+		var userNum = $("#userNum4").val();
+       	var sysNum = $("#text4").val();         
+       	if(userNum == null || userNum == ""){
+          	alert("휴대폰으로 발송된 인증번호를 입력해주세요");
+       	}     
+       	else{     
+          	if(userNum.trim() == sysNum.trim()){
+          		alert("인증이 완료되었습니다.");
+          		var userpwdF=$("#to4").val();
+        		if($("#telFUserPwd").val()==""){
+        				$.ajax({
+        					url:'/gachi/userpwdFChk?userpwdF='+userpwdF,
+        					type:'GET',
+        					success:function(result){
+        						console.log(result);
+        						if(result>0){
+        							$("#telFUserPwd").val("111");
+        							$("#telFUserPwd").focus();
+        						}else{
+        							alert("가입한적이없는 전화번호입니다");	
+        							$("#to4").val("");
+        							$("#to4").focus();
+        						}
+        					},error:function(){
+        					
+        					}
+        				});
+        			}
+           	}
+           	else {
+           		alert("인증번호를 다시 확인해주세요");
+           	}          
+       	}
+  	});
+});
 //전화번호 확인 문자 끝
 </script>
 <meta charset="UTF-8">
@@ -1508,7 +1664,9 @@ $(document).ready(function() {
             <img src="/gachi/img/logo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn"  class="logRadioBtnInterval" onclick="mdJ2change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
             <div class="mdJ2_layer"></div>
-                <input type="text" placeholder="이메일" name="userid3" id="userid3" /><span id="emailMessage" class="message"></span>
+                <input type="text" placeholder="이메일" name="userid3" id="userid3"style="width:68%"/>
+                <button type="button" id="joinEmailChk2" class="joinEmailChk2" style="width:30%;height:40px;background-color:white;border:1px solid gray">이메일확인</button>
+                <input type="hidden" id="userid2Text2" name="userid2Text2"/>
              <input type="password" placeholder="비밀번호" name="userpwd3" id="userpwd3" /><span id="passwordMessage" class="message"></span>
              <input type="password" placeholder="비밀번호 확인" name="userpwdChk2" id="userpwdChk2" /><span id="passwordChkMessage" class="message"></span>
              <input type="text" placeholder="이름" name="username2" id="username2" /><span id="nameMessage" class="message"></span>
@@ -1604,38 +1762,21 @@ $(document).ready(function() {
 		<div id="idF1Form" class="col-xs-12 col-md-12">
 			<form>
 				<div id="idF1Btm">
-					<button type="" class="btn btn-primary" id="idF1Close" style="color:gray">X</button>
+					<button class="btn btn-primary" id="idF1Close" style="color:gray">X</button>
 				</div>
 				<div class="idF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFindChange()"/>크리에이터<br/>
-						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
-						<button class="autBtn">인증</button><br/>
-						<input type="text" placeholder="인증번호" id="idFNo" name="idFNo"/>
-						<button class="idFNoBtn">확인</button>
-				</div>
-			</form>
-		</div>
-	</div>
-		<div id="idF2" class="join">
-		<div id="idF2Form" class="col-xs-12 col-md-12">
-			<form>
-				<div id="idF2Btm">
-					<button type="button" class="btn btn-primary" id="idF2Close" style="color:gray">X</button>
-				</div>
-				<div class="idF2_layer"></div>
 				<div>
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" onclick="idFind2Change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="idFindRadioBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
-						<input type="text" placeholder="010" name="tel1" id="idF1tel1" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="1234"name="tel2" id="idF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 			<input type="text" placeholder="5678"name="tel3" id="idF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
-						<button class="autBtn">인증</button><br/>
-						<input type="text" placeholder="인증번호" id="idF2No" name="idF2No"/>
-						<button class="idFNoBtn">확인</button>
+		 		<input type="text" id="to3" name="to3" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+			    <input type="button" id="send3" value="전송" style="width:30%;border:1px solid gray"class="autBtn"/><br> <!-- 문자보내는 전송버튼 -->
+			 </div>
+			 <div>
+				<input type="text" id="userNum3" placeholder="인증번호 입력" style="width:68%">   <!-- 인증번호 입력창 -->
+			  	<input type="button" id="enterBtn3" value="확인" style="width:30%;border:1px solid gray"class="idFNoBtn">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+			 </div>
+		     <input type="hidden" name="text3" id="text3">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+		     <input type="text" placeholder="인증시 이메일이나타납니다" id="telFUserId" readonly/>
 				</div>
 			</form>
 		</div>
@@ -1651,37 +1792,18 @@ $(document).ready(function() {
 				<div class="pwdF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1Change()"/>크리에이터<br/>
-					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
-					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
-					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 31%" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
-					<button class="autBtn">인증</button><br/>
-					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
-					<button class="pwdFNoBtn">확인</button>
-				</div>	
-			</form>
-		</div>
-	</div>
-	<div id="pwdF1C" class="join">
-		<div id="pwdF1CForm" class="col-xs-12 col-md-12">
-			<form>
-				<div id="pwdF1CBtm">
-					<button type="button" class="btn btn-primary" id="pwdF1CClose" style="color:gray">X</button>
-				</div>
-				<div class="pwdF1C_layer"></div>
+				<span id="pwdFF3">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
+				<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">이메일로 비밀번호찾기</a><br/></span>
 				<div>
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-					<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" onclick="pwdF1CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind1RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
-					<span id="pwdFF1">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
-					<span id="pwdFF2"><a href="#" id="pwd2FindBtn">이메일로 비밀번호찾기</a><br/></span>
-					<input type="text" placeholder="010" name="tel1" id="pwdF1tel1" class="tel" style="width: 31%" onkeypress="onlyNumber();" maxlength="3" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="1234"name="tel2" id="pwdF1tel2" class="tel" style="width: 31%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);"/>
-			 		<input type="text" placeholder="5678"name="tel3" id="pwdF1tel3" class="tel" style="width: 32%;" onkeypress="onlyNumber();" maxlength="4" oninput="numberMaxLength(this);" />
-					<button class="autBtn">인증</button><br/>
-					<input type="text" placeholder="인증번호" id="pwdFNo1" name="pwdFNo1" />
-					<button class="pwdFNoBtn">확인</button>
+		 		<input type="text" id="to4" name="to4" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"class="autBtn"/><br> <!-- 문자보내는 전송버튼 -->
+			 </div>
+			 <div>
+				<input type="text" id="userNum4" placeholder="인증번호 입력" style="width:68%">   <!-- 인증번호 입력창 -->
+			  	<input type="button" id="enterBtn4" value="확인" style="width:30%;border:1px solid gray"class="idFNoBtn">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+			 </div>
+		     <input type="hidden" name="text3" id="text4">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+		     <input type="text" placeholder="인증시 이메일이나타납니다" id="telFUserpwd" readonly/>
 				</div>	
 			</form>
 		</div>
@@ -1696,30 +1818,8 @@ $(document).ready(function() {
 				<div class="pwdF2_layer"></div>
 					<div>
 					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" onclick="pwdF2Change()"/>크리에이터<br/>
 							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
 							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
-							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
-						<button class="autBtn">인증</button>
-						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>
-						<button class="pwdFNoBtn">확인</button>
-					</div>
-				
-			</form>
-		</div>
-	</div>	
-	<div id="pwdF2C" class="join">
-		<div id="pwdF2CForm" class="col-xs-12 col-md-12">
-			<form>
-				<div id="pwdF2CBtm">
-					<button type="button" class="btn btn-primary" id="pwdF2CClose" style="color:gray">X</button>
-				</div>
-				<div class="pwdF2C_layer"></div>
-					<div>
-					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-						<input type="radio" value="회원" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" onclick="pwdF2CChange()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="pwdFind2RadioBtn" class="logRadioBtnInterval" checked/>크리에이터<br/>
-							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
-							<span id="pwdFF4"><a href="#" id="pwd2FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
 							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
 						<button class="autBtn">인증</button>
 						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>

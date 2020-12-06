@@ -67,18 +67,44 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			}catch(Exception e) {
 				transactionManager.rollback(status);
 			}
-		
-
 			mav.addObject("result",result);
 			mav.setViewName("redirect:/");
 			return mav;
 	}
-		@RequestMapping(value="/useridChk",method=RequestMethod.GET)
+		@RequestMapping("/useridChk")
 		@ResponseBody
-		public int useridChk(RegisterVO vo,Model model) {
+		public int useridChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			int result=dao.useridChk(vo);
-			
+			String okid=req.getParameter("okid");
+			System.out.println("aaaa===>"+okid);
+			int result=dao.useridChk(okid);
+			return result;
+		}
+		@RequestMapping("/useridChk2")
+		@ResponseBody
+		public int useridChk2(HttpServletRequest req,Model model) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			String okid2=req.getParameter("okid2");
+			System.out.println("aaaa===>"+okid2);
+			int result=dao.useridChk2(okid2);
+			return result;
+		}
+		@RequestMapping("/useridFChk")
+		@ResponseBody
+		public int useridFChk(HttpServletRequest req,Model model) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			String useridF=req.getParameter("useridF");
+			System.out.println("aaaa===>"+useridF);
+			int result=dao.useridF(useridF);
+			return result;
+		}
+		@RequestMapping("/userpwdFChk")
+		@ResponseBody
+		public int userpwdFChk(HttpServletRequest req,Model model) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			String userpwdF=req.getParameter("userpwdF");
+			System.out.println("aaaa===>"+userpwdF);
+			int result=dao.userpwdF(userpwdF);
 			return result;
 		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
@@ -146,6 +172,46 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		@RequestMapping(value="/telChkOk2",method={RequestMethod.GET, RequestMethod.POST})
 		@ResponseBody
 		public String sendSms2(HttpServletRequest request) throws Exception {
+			
+			String api_key = "NCSADDFSIE3CDS6C";
+			String api_secret = "CF5SAJ2PP48LUB3QXHGJJNLZ14MKANFH";
+
+		    com.bitcamp.gachi.register.Coolsms coolsms = new com.bitcamp.gachi.register.Coolsms(api_key, api_secret);
+		       
+		    HashMap<String, String> set = new HashMap<String, String>();
+
+		    set.put("to", (String)request.getParameter("to")); // 받는 사람
+		    set.put("from", "01051141319");// 발신번호
+		    set.put("text", "같이가치 본인인증 \n 인증번호는 ["+(String)request.getParameter("text")+"]입니다"); // 문자내용
+		    set.put("type", "sms"); // 문자 타입
+		   
+		    coolsms.send(set); // 보내기
+		    
+		    return "suc";
+		}
+		@RequestMapping(value="/telChkOk3",method={RequestMethod.GET, RequestMethod.POST})
+		@ResponseBody
+		public String sendSms3(HttpServletRequest request) throws Exception {
+			
+			String api_key = "NCSADDFSIE3CDS6C";
+			String api_secret = "CF5SAJ2PP48LUB3QXHGJJNLZ14MKANFH";
+
+		    com.bitcamp.gachi.register.Coolsms coolsms = new com.bitcamp.gachi.register.Coolsms(api_key, api_secret);
+		       
+		    HashMap<String, String> set = new HashMap<String, String>();
+
+		    set.put("to", (String)request.getParameter("to")); // 받는 사람
+		    set.put("from", "01051141319");// 발신번호
+		    set.put("text", "같이가치 본인인증 \n 인증번호는 ["+(String)request.getParameter("text")+"]입니다"); // 문자내용
+		    set.put("type", "sms"); // 문자 타입
+		   
+		    coolsms.send(set); // 보내기
+		    
+		    return "suc";
+		}
+		@RequestMapping(value="/telChkOk4",method={RequestMethod.GET, RequestMethod.POST})
+		@ResponseBody
+		public String sendSms4(HttpServletRequest request) throws Exception {
 			
 			String api_key = "NCSADDFSIE3CDS6C";
 			String api_secret = "CF5SAJ2PP48LUB3QXHGJJNLZ14MKANFH";
