@@ -358,9 +358,9 @@
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
 		<ul id="myclassView">
-			<li><img src="/gachi/img/test_image.jpg"/></li>
-			<li><label class="badge badge-info">공예/창작</label><label>카모마일 프랑스 자수</label></li>
-			<li>크리에이터명 <a href="#">홍길동</a></li>
+			<li><img src="/gachi/img/${vo.class_img }"/></li>
+			<li><label class="badge badge-info">${vo.category }</label><label>${vo.class_name }</label></li>
+			<li>크리에이터명 <a href="#">${vo.username }</a></li>
 			<li><label>진도율 : 0.00%</label></li>
 			<li><label>기한 : 20.11.01 ~ 21.01.31</label></li>
 			<li><progress value="50" max="100"></progress></li>

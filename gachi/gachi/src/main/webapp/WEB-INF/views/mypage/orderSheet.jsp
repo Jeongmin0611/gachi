@@ -51,57 +51,56 @@
 	
 	//결제하는 함수
 	function requestPay(){
-		//결제하기
-		if($("#orderAgree").is(":checked")){ //구매진행동의
-			// IMP.request_pay(param, callback) 호출
-			IMP.request_pay({
-			   pg : 'html5_inicis', // 결제방식
-			    pay_method : 'card',	// 결제 수단
-			    merchant_uid : 'o' + new Date().getTime(), //주문번호 생성
-			   name : '결제테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
-			    amount : '100', //$("finalPrice").val(),	// 결제 금액
-			    buyer_email : $("#orderUserid").val(),	
-			   buyer_name : $("#orderUsername").val(),
-			    buyer_tel : $("#orderTel").val(),	
-			    buyer_addr : $("#orderAddr").val(),	
-			    buyer_postcode : $("#orderZipcode").val(),	
-			}, function(rsp) { // callback
-				console.log(rsp);
-				if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-			      // jQuery로 HTTP 요청
-		      		var msg = '결제가 완료되었습니다.';
-	                msg += '고유ID : ' + rsp.imp_uid; 
-	                msg += '상점 거래ID : ' + rsp.merchant_uid; 
-	                msg += '결제 금액 : ' + rsp.paid_amount;
-	                msg += '카드 승인번호 : ' + rsp.apply_num;
-			        jQuery.ajax({
-			          url: "/gachi/orderChk", 
-			          method: "POST",
-			          headers: { "Content-Type": "application/json" },
-			          data: JSON.stringify({
-			                imp_uid: rsp.imp_uid, //거래고유번호
-			                order_code: rsp.merchant_uid, //주문번호
-			                userid: rsp.buyer_email,
-			                full_price: $("#sumPrice").val(),
-			                shipping_fee: $("#shipLbl").val(),
-			                discount: $("#mileageUse").val(),
-			                price: $("#finalPrice").val(),
-			                payment_type: rsp.pg,
-			                card_type: rsp.pay_method
-			                }),
-			          });
-			        alert(msg);
-			        document.location.href="/gachi/orderConfirmed?order_code="+rsp.merchant_uid;
-			    } else {
-			    	var msg = '결제에 실패하였습니다.';
-		            msg += '에러내용 : ' + rsp.error_msg;
-		            alert(msg);
-			        document.location.href="/gachi/mypage";
-			    }
-			});
-		}else{
-			alert("구매진행에 동의해주세요.");
-		}
+		// IMP.request_pay(param, callback) 호출
+		IMP.request_pay({
+		   pg : 'html5_inicis', // 결제방식
+		    pay_method : 'card',	// 결제 수단
+		    merchant_uid : 'o' + new Date().getTime(), //주문번호 생성
+		   name : '결제테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
+		    amount : '100', //$("finalPrice").val(),	// 결제 금액
+		    buyer_email : $("#orderUserid").val(),	
+		   buyer_name : $("#orderUsername").val(),
+		    buyer_tel : $("#orderTel").val(),	
+		    buyer_addr : $("#orderAddr").val(),	
+		    buyer_postcode : $("#orderZipcode").val(),	
+		}, function(rsp) { // callback
+			console.log(rsp);
+			if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+		      // jQuery로 HTTP 요청
+	      		var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid; 
+                msg += '상점 거래ID : ' + rsp.merchant_uid; 
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+		        jQuery.ajax({
+		          url: "/gachi/orderChk", 
+		          method: "POST",
+		          headers: { "Content-Type": "application/json" },
+		          data: JSON.stringify({
+		                imp_uid: rsp.imp_uid, //거래고유번호
+		                order_code: rsp.merchant_uid, //주문번호
+		                userid: rsp.buyer_email,
+		                full_price: $("#sumPrice").val(),
+		                shipping_fee: $("#shipLbl").val(),
+		                discount: $("#mileageUse").val(),
+		                price: $("#finalPrice").val(),
+		                payment_type: rsp.pg,
+		                card_type: rsp.pay_method,
+		                zipcode: $("#shipZipcode").val(),
+		                addr: $("#shipAddr").val(),
+		                detailaddr: $("#shipDetailaddr").val(),
+		                etc: $("#orderMsg").val()
+		                }),
+		          });
+		        alert(msg);
+		        document.location.href="/gachi/orderConfirmed?order_code="+rsp.merchant_uid;
+		    } else {
+		    	var msg = '결제에 실패하였습니다.';
+	            msg += '에러내용 : ' + rsp.error_msg;
+	            alert(msg);
+		        document.location.href="/gachi/mypage";
+		    }
+		});
 	}
 	$(function(){
 		// 주문자정보와 배송지정보가 같을때
@@ -136,6 +135,48 @@
 				$("#finalPrice").val($("#sumPrice").val()*1+$("#shipLbl").val()*1+$("#mileageUse").val()*1);
 			}
 		});
+		//빈칸검사
+		$("#payBtn").click(function(){
+			var msg = "배송지 정보를 모두 입력해주세요.";
+			if($("#shipUsername").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipUserid").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipTel1").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipTel2").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipTel3").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipZipcode").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipAddr").val()==""){
+				alert(msg);
+				return false;
+			}
+			if($("#shipAddrdetail").val()==""){
+				alert(msg);
+				return false;
+			}
+			if(!($("#orderAgree").is(":checked"))){
+				msg = "구매진행에 동의해주세요.";
+				alert(msg);
+				return false;
+			}
+			requestPay();
+		});
 	});
 </script>
 <div class="container userMainDiv cfont">
@@ -154,20 +195,16 @@
 		<c:forEach var="cvo" items="${orderVOList }">
 			<div class="row">
 				<c:set var="key" value="${cvo.code }"/>
-				<input type="hidden" name="" value="${key }"/>
+				<input type="hidden" name="code[${cnt }]" value="${key }"/>
 				<c:if test="${fn:contains(key,'c')}">
 					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
-				</c:if>
-				<c:if test="${fn:contains(key,'g')}">
-					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
-				</c:if>
-				<c:if test="${fn:contains(key,'c')}">
 					<div class="col-md-5">${cvo.class_name }<br/>${cvo.username }</div>
 				</c:if>
 				<c:if test="${fn:contains(key,'g')}">
+					<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 					<div class="col-md-5">${cvo.goods_name }</div>
 				</c:if>
-				<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label>
+				<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 									  <label style="width:20%">${cvo.stack }p</label>
 									  <label style="width:50%">${cvo.real_price }원</label></div>
 			</div>
@@ -175,6 +212,7 @@
 			<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
 			<c:set var="cnt" value="${cnt+1 }"/>
 		</c:forEach>
+		<input type="hidden" name="cnt" value="${cnt }"/>
 		<label>주문자 정보</label>
 		<hr class="userHr"/>
 		<div class="row">
@@ -275,19 +313,19 @@
 		<div><b>합계</b><input type="text" value="${sum }" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
 		<c:if test="${sum lt 50000}">
 			<c:set var="ship" value="2500"/>
-			<input type="hidden" id="shipLbl" value="${ship }"/>
 			<div><b>배송비</b> +${ship }원</div>
 		</c:if>
 		<c:if test="${sum ge 50000}">
 			<c:set var="ship" value="0"/>
 			<div><b>배송비 무료</b></div>
 		</c:if>	
+		<input type="hidden" id="shipLbl" value="${ship }"/>
 		<div><b>마일리지</b><input type="text" id="mileageUse" value="0" style="border:none;outline:none;width:10%" readonly/>원</div>
 		<hr class="userHr"/>
 		<div style="font-size:1.2em"><b>총 금액</b><input type="text" value="${sum+ship }" id="finalPrice" style="border:none;outline:none;width:15%" readonly/>원</div>
 		<div>
 			<div><input type="checkbox" id="orderAgree"/>구매진행에 동의합니다.</div>
-			<button type="button" class="btn btn-outline-light" onclick="requestPay()" id="payBtn">결제하기</button>
+			<button type="button" class="btn btn-outline-light" id="payBtn">결제하기</button>
 			<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/userCart'">취소</button>
 		</div>
 	</div>

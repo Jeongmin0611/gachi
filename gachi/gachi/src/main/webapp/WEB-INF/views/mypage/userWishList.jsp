@@ -21,30 +21,21 @@
 			<label style="font-size:1.1em"><b>좋아요</b></label>
 			<hr class="userHr"/>
 			<div class="row">
+				<c:forEach var="cvo" items="${cList }">
+					<div class="col-md-4">
+						<div><a href="/gachi/myclassView"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></a></div>
+						<div><span class="badge badge-info">${cvo.category }</span></div>
+						<div><a href="/gachi/myclassView">${cvo.class_name }</a></div>
+						<div><a href="#">${cvo.username }</a></div>
+					</div>
+				</c:forEach>
+				<c:forEach var="gvo" items="${gList }">
 				<div class="col-md-4">
-					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
-					<div><span class="badge badge-info">공예/창작</span></div>
-					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
-					<div><a href="#">홍길동</a></div>
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><span class="badge badge-info">${gvo.category }</span></div>
+					<div><a href="/gachi/myclassView">${gvo.goods_name }</a></div>
 				</div>
-				<div class="col-md-4">
-					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
-					<div><span class="badge badge-info">공예/창작</span></div>
-					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
-					<div><a href="#">홍길동</a></div>
-				</div>
-				<div class="col-md-4">
-					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
-					<div><span class="badge badge-info">공예/창작</span></div>
-					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
-					<div><a href="#">홍길동</a></div>
-				</div>
-				<div class="col-md-4">
-					<div><a href="/gachi/myclassView"><img src="/gachi/img/test_image.jpg" style="width:100%;height:100%;object-fit: cover"/></a></div>
-					<div><span class="badge badge-info">공예/창작</span></div>
-					<div><a href="/gachi/myclassView">카모마일 프랑스 자수</a></div>
-					<div><a href="#">홍길동</a></div>
-				</div>	
+				</c:forEach>
 			</div>
 		</div>
 	</div>

@@ -33,6 +33,16 @@ public interface UserInfoDaoImp {
 	public int cartDeleteAll(String userid);
 	//결제 후 주문정보 넣기
 	public int orderInsert(OrderVO vo);
-	//좋아요
-	//public List<OrderListVO> userWishList(String userid);
+	//내 클래스 개수
+	public int countClass(String userid);
+	//내 클래스 목록
+	public List<OrderListVO> myclassList(String userid);
+	//내 클래스 보기
+	public OrderListVO myclassView(@Param("userid") String userid, @Param("code") String code);
+	//좋아요(클래스)
+	public List<OrderListVO> classWishList(String userid);
+	//좋아요(상품)
+	public List<OrderListVO> goodsWishList(String userid);
+	//좋아요(숫자)
+	public int countGood(String userid);
 }
