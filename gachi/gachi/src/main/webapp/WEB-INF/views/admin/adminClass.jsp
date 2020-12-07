@@ -98,7 +98,7 @@
 			</form>
 	</li>
 		<li>
-		<form method="get" id="ad_class_search" action="/gachi/adminClass2">
+		<form method="post" id="ad_class_search" action="/gachi/adminClass2">
 			<h3>검색옵션</h3>
 			<ul style="margin-top:10px;height:200px;">
 				<li>검색옵션</li>

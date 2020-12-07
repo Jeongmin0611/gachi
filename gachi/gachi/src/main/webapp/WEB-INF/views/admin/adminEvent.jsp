@@ -18,9 +18,6 @@
 #ad_event_header{
 	overflow:auto;
 }
-.ad_list_menu li{
-	float:right;
-}
 select {
 	height: 30px;
 }
@@ -36,22 +33,23 @@ select {
 	<form method="get" action="">
 		<ul class="ad_list_menu">
 			<li>
-				<select>
-					<option>제목</option>
-					<option>내용</option>
+				<select name="dateOption">
+					<option value="startdate">시작일</option>
+					<option value="enddate">종료일</option>
+				</select> 
+				<input type="date" id="ad_event_date1" name="date1"/>~
+				<input type="date" id="ad_event_date2" name="date2"/>
+			</li>
+			<li>
+				<select name="option">
+					<option value="전체">전체</option>	
+					<option value="subject">제목</option>
+					<option value="content">내용</option>
 				</select>
 				<input type="text" id="searchWord" name="searchWord" size="30"/>
 				<input type="submit" class="btn" value="검색"/>
 			</li>
-			<li>
-				<input type="date" id="ad_event_date2" name="date2"/>
-			</li>
-			<li>
-				~
-			</li>
-			<li>
-				기간 <input type="date" id="ad_event_date1" name="date1"/>
-			</li>
+			
 		</ul>
 	</form>
 </div>

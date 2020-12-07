@@ -8,6 +8,12 @@ public class NoticePageVO {
 	private int onePageNumCount=5;
 	private int nowPage=1;
 	private int lastPageRecordCount=10;
+	
+	private String dateOption;
+	private String date1;
+	private String date2;
+	private String option;
+	private String searchWord;
 	public int getTotalRecord() {
 		return totalRecord;
 	}
@@ -60,6 +66,36 @@ public class NoticePageVO {
 	}
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
+	}
+	public String getDateOption() {
+		return dateOption;
+	}
+	public void setDateOption(String dateOption) {
+		this.dateOption = dateOption;
+	}
+	public String getDate1() {
+		return date1;
+	}
+	public void setDate1(String date1) {
+		this.date1 = date1;
+	}
+	public String getDate2() {
+		return date2;
+	}
+	public void setDate2(String date2) {
+		this.date2 = date2;
+	}
+	public String getOption() {
+		return option;
+	}
+	public void setOption(String option) {
+		this.option = option;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
 	}
 	
 	

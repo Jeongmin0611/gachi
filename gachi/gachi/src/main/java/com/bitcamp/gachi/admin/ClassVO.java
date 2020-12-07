@@ -22,7 +22,7 @@ public class ClassVO {
 	private String class_state;
 	private String class_img;
 	private String nickname;
-	private List<String> imgList;
+	private String[] imgList;
 	
 	public String getCode() {
 		return code;
@@ -126,11 +126,17 @@ public class ClassVO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public List<String> getImgList() {
+	public String[] getImgList() {
 		return imgList;
 	}
-	public void setImgList(List<String> imgList) {
+	public void setImgList(String[] imgList) {
 		this.imgList = imgList;
+		String txt="";
+		for (int i = 0; i < imgList.length; i++) {
+			txt+=imgList[i]+",";
+		}
+		setClass_img(txt);
 	}
+	
 	
 }

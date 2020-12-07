@@ -27,8 +27,10 @@
 			var files =event.originalEvent.dataTransfer.files;
 			var file=files[0];
 			console.log(file);
+			let code=$("#code").val();
 			var formData= new FormData();
 			formData.append("file",file);
+			formData.append("code",code);
 			$.ajax({
 				type:"post",
 				enctype: 'multipart/form-data',
@@ -38,16 +40,16 @@
 				contentType: false,
 				//////////////////////////
 				data: formData,
-				success:function(result){
-					let num=1;
+				success:function(result){					
 					var filename=result.slice(result.lastIndexOf("/")+1);
+					console.log(filename);
 					let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
 					tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
 					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList['+num+']"/>'+filename+'<b>x</b></span></div>';
+					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></span></div>';
 					$(".ad_box").append(tagTxt);
 				}
 			});
@@ -76,16 +78,37 @@
 			$(document).on('click','b',(event)=>{
 				$(event.target).parent().parent().parent().remove();
 			});	
+			
+		$("#adminClassEditOk").submit(()=>{
+			let grpl = $("input[name=imgList]").length;
+			if(grpl==0){
+				alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
+				return false;
+			}
+			if($("#class_name").val()==null||$("#class_name").val()==""){
+				alert("클래스명을 입력하여 주세요.");
+				return false;
+			}
+			if($("#full_price").val()==null||$("#full_price").val()==""){
+				alert("원가격을 입력하여 주세요.");
+				return false;
+			}
+			if($("#real_price").val()==null||$("#real_price").val()==""){
+				alert("판매가를 입력하여 주세요.");
+				return false;
+			}
+			return true;
+		});	
 	});
 </script>
 <div class="container">
 <h1>클래스수정</h1>
-<form method="post" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
+<form method="post" id="adminClassEditOk" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
 			<li class="content_center">클래스코드</li>
-			<li><input type="hidden" name="code" value="${vo.code}"/>${vo.code}</li>
+			<li><input type="hidden" id="code" name="code" value="${vo.code}"/>${vo.code}</li>
 			<li class="content_center">카테고리</li>
 			<li>
 				<select id="category" name="category">
@@ -106,7 +129,7 @@
 				</select>
 			</li>
 			<li class="content_center">클래스명</li>
-			<li><input type="text" id="" name="class_name" value="${vo.class_name}" size="40"/></li>
+			<li><input type="text" id="class_name" name="class_name" value="${vo.class_name}" size="40"/></li>
 			<li class="content_center">난이도</li>
 			<li>
 				<select id="stage" name="stage">
@@ -121,9 +144,9 @@
 				</select>
 			</li>
 			<li class="content_center">원가격</li>
-			<li><input type="text" id="" name="full_price" value="${vo.full_price}"/></li>
+			<li><input type="text" id="full_price" name="full_price" value="${vo.full_price}"/></li>
 			<li class="content_center">가격</li>
-			<li><input type="text" id="" name="real_price" value="${vo.real_price}"/></li>
+			<li><input type="text" id="real_price" name="real_price" value="${vo.real_price}"/></li>
 			<li class="content_center">클래스상태</li>
 			<li>
 				<select id="stage" name="class_state">
@@ -157,7 +180,7 @@
 		</div>
 		<div style="padding:0 auto;">
 			<!--<input type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"/>-->
-			<label><input type="hidden" name="imgList[0]"/> ${vo.class_img}<b>x</b></label>
+			<label><input type="hidden" name="imgList" value="${vo.class_img}"/> ${vo.class_img}<b>x</b></label>
 		</div>
 	</div>
 </div>
