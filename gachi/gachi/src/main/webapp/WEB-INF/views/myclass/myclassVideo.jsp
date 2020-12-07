@@ -180,7 +180,7 @@
 <div class="cfont">
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
-			<div><a href="/gachi/myclassView">내 학습표</a></div>
+			<div><a href="/gachi/myclassList">내 학습표</a></div>
 			<div>
 				프랑스 자수 클래스를 소개합니다!
 				<button class="btn btn-light" id="videoLstClose"></button>

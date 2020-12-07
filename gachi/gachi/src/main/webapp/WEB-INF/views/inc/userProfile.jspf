@@ -82,11 +82,11 @@
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
 			<div>클래스</div>
-			<div><a href="/gachi/myclassList">1</a></div>
+			<div><a href="/gachi/myclassList">${cntClass }</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>클래스 <a href="/gachi/myclassList">1</a></div>
+			<div>클래스 <a href="/gachi/myclassList">${cntClass }</a></div>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
@@ -95,16 +95,16 @@
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>마일리지 <a href="/gachi/userMileage">1,000p</a></div>
+			<div>마일리지 <a href="/gachi/userMileage">${mileage }p</a></div>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
 			<div>좋아요</div>
-			<div><a href="/gachi/userWishList">4</a></div>
+			<div><a href="/gachi/userWishList">${cntGood }</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>좋아요 <a href="/gachi/userWishList">4</a></div>
+			<div>좋아요 <a href="/gachi/userWishList">${cntGood }</a></div>
 		</div>
 	</div>
 	<hr/>

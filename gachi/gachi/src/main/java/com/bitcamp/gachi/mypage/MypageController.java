@@ -200,28 +200,29 @@ public class MypageController {
 	}
 	/* 주문내역 넣기 */
 	@RequestMapping(value="/orderChk", method=RequestMethod.POST)
-	public void orderChk(@RequestBody Map<String, Object> order) {
+	public void orderChk(@RequestBody Map<String, String> order) {
+		System.out.println(order);
+		/*
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		OrderVO vo = new OrderVO();
 		vo.setOrder_code((String)order.get("order_code"));
 		vo.setUserid((String)order.get("userid"));
-		vo.setFull_price((Integer)order.get("full_price"));
-		vo.setShipping_fee((Integer)order.get("shipping_fee"));
-		vo.setDiscount((Integer)order.get("discount"));
-		vo.setPrice((Integer)order.get("price"));
+		vo.setFull_price(Integer.parseInt(order.get("full_price")));
+		vo.setShipping_fee(Integer.parseInt(order.get("shipping_fee")));
+		vo.setDiscount(Integer.parseInt(order.get("discount")));
+		vo.setPrice(Integer.parseInt(order.get("price")));
 		vo.setPayment_type("html5_inicis");
 		vo.setCard_type((String)order.get("card_type"));
+		vo.setZipcode((String)order.get("zipcode"));
+		vo.setAddr((String)order.get("addr"));
+		vo.setDetailaddr((String)order.get("detailaddr"));
+		vo.setEtc((String)order.get("etc"));
 		int result = dao.orderInsert(vo);
-		
-		System.out.println(order.get("imp_uid"));
-		System.out.println(order.get("order_code"));
-		System.out.println(order.get("userid"));
-		System.out.println(order.get("full_price"));
-		System.out.println(order.get("shipping_fee"));
-		System.out.println(order.get("discount"));
-		System.out.println(order.get("price"));
-		System.out.println(order.get("payment_type"));
-		System.out.println(order.get("card_type"));
+		*/
+	}
+	/* 주문내역 넣기 (클래스)*/
+	@RequestMapping(value="/classOrderChk", method=RequestMethod.POST)
+	public void classOrderChk(@RequestBody Map<String, Object> order) {
 		
 	}
 	/* 주문완료 페이지 */
@@ -232,19 +233,32 @@ public class MypageController {
 		mav.setViewName("mypage/orderConfirmed");
 		return mav;
 	}
+	/* 내학습표(클래스 목록) */
 	@RequestMapping("/myclassList")
-	public String myclassList() {
-		return "mypage/myclassList";
+	public ModelAndView myclassList(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<OrderListVO> list = dao.myclassList((String)ses.getAttribute("userid"));
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("mypage/myclassList");
+		return mav;
 	}
+	/* 내학습표(클래스 상세 페이지) */
 	@RequestMapping("/myclassView")
-	public String myclassView() {
-		return "mypage/myclassView";
+	public ModelAndView myclassView(String code, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("mypage/myclassView");
+		return mav;
 	}
 	@RequestMapping("/myclassVideo")
 	public String myclassVideo() {
 		return "myclass/myclassVideo";
 	}
-	//마일리지
+	/* 마일리지 */
 	@RequestMapping("/userMileage")
 	public ModelAndView userMileage(HttpSession ses) {
 		MileageDaoImp dao = sqlSession.getMapper(MileageDaoImp.class);
@@ -264,9 +278,18 @@ public class MypageController {
 		mav.setViewName("mypage/userMileage");
 		return mav;
 	}
+	/* 좋아요 */
 	@RequestMapping("/userWishList")
-	public String userWishList() {
-		return "mypage/userWishList";
+	public ModelAndView userWishList(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<OrderListVO> cList = dao.classWishList((String)ses.getAttribute("userid"));
+		List<OrderListVO> gList = dao.goodsWishList((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cList", cList);
+		mav.addObject("gList", gList);
+		mav.setViewName("mypage/userWishList");
+		return mav;
 	}
 	@RequestMapping("/myqnaClass")
 	public String myqnaClass() {

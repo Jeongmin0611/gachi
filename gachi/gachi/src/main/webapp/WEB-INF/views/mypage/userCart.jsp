@@ -121,6 +121,7 @@
 						<c:set var="ship" value="0"/>
 						<div><b>배송비 무료</b></div>
 					</c:if>
+					<input type="hidden" id="shipLbl" value="${ship }"/>
 					<hr class="userHr"/>
 					<div style="font-size:1.2em;"><b>총 금액</b> ${sum+ship }원</div>
 				</div>

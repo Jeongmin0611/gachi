@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.mypage.MileageDaoImp;
+import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
 import oracle.jdbc.internal.OracleConnection.TransactionState;
 
@@ -111,6 +112,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			MileageDaoImp mDao=sqlSession.getMapper(MileageDaoImp.class);
+			UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 			RegisterVO resultVO=dao.memberLogin(vo);
 			String voGrade=dao.selectList(vo);
 			ModelAndView mav=new ModelAndView();
@@ -122,6 +124,8 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
 						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid()));
+						ses.setAttribute("cntGood", uDao.countGood(resultVO.getUserid()));
+						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
 						mav.setViewName("redirect:/");
