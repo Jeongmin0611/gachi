@@ -147,44 +147,36 @@ a {
 	}
 	#md{
 		width:35%;
-		height:700px;
+		height:auto;
 		border-radius:10px;
 		margin:200px 0px;
+
 	}
 	
 	
 	#mdJ{
-		width:35%;
-		height:1200px;
+		width:35%; 
+		height:auto;
 		border-radius:10px;
 		margin:350px 0px;
 	}
 	#mdJ2{
 		width:35%;
-		height:1620px;
+		height:auto;
 		border-radius:10px;
 		margin:560px 0px;
 	}
 	#idF1{
 		width:35%;
-		height:680px;
-		border-radius:10px;
-	}
-	#idF2{
-		width:35%;
-		height:680px;
+		height:auto;
 		border-radius:10px;
 	}
 	#pwdF1{
 		width:35%;
-		height:500px;
+		height:auto;
 		border-radius:10px;
 	}
-	#pwdF2{
-		width:35%;
-		height:500px;
-		border-radius:10px;
-	}
+
 	#kokoBtn{
 		width: 65%;
 		height: 50px;
@@ -1696,7 +1688,7 @@ $(document).ready(function() {
 			  	<input type="button" id="enterBtn4" value="확인" style="width:30%;border:1px solid gray">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
 			 </div>
 		     <input type="hidden" name="text3" id="text4">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
-		     <input type="text" placeholder="인증시 이메일이나타납니다" id="telFUserPwd" readonly/>
+		     <input type="text" placeholder="인증시 비밀번호가나타납니다" id="telFUserPwd" readonly/>
 				</div>	
 			</form>
 		</div>
