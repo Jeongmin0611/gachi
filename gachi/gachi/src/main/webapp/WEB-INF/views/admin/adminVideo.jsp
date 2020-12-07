@@ -91,7 +91,7 @@
 		</ul>
 	</div>
 	<div class="ad_list_menu">
-		<button class="btn">등록</button>
+		<button class="btn" onclick="location.href='/gachi/adminVideoWrite'">등록</button>
 		<button class="btn">삭제</button>
 		<button class="btn">수정</button>
 	</div>

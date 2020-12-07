@@ -438,7 +438,7 @@ public class AdminController {
 				}//if
 				try {
 					file.transferTo(newFile);
-					filePath="/gachi/upload/classImg/"+fName;
+					filePath="/gachi/upload/classImg/"+newFile.getName();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1314,6 +1314,10 @@ public class AdminController {
 	public String adminVideo() {
 		return "admin/adminVideo";
 	}
+	@RequestMapping("/adminVideoWrite")
+	public String adminVideoWrite() {
+		return "admin/adminVideoWrite";
+	}
 	@RequestMapping("/adminReply")	
 	public String adminReply() {
 		return "admin/adminReply";
@@ -1327,3 +1331,4 @@ public class AdminController {
 		return "admin/adminAnswer";
 	}
 }
+
