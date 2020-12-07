@@ -22,11 +22,11 @@
 	<select id="useridChk2" parameterType="String" resultType="int">
 		select count(userid) from member where userid='${param1}'
 	</select>
-	<select id="useridF" parameterType="String" resultType="int">
-		select count(userid),userid from member where userid='${param1}'
+	<select id="useridF" parameterType="String" resultType="string">
+		select userid from member where tel='${param1}'
 	</select>
-		<select id="userpwdF" parameterType="String" resultType="int">
-		select count(userid),userid from member where userid='${param1}'
+		<select id="userpwdF" parameterType="String" resultType="string">
+		select userpwd from member where tel='${param1}'
 	</select>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
 		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'

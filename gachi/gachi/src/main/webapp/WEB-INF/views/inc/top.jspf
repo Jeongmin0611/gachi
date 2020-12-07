@@ -13,9 +13,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="resources/jquery.raty.js"></script>
-<link href="<c:url value="/img/logo.png" />" rel="stylesheet">
-<link href="<c:url value="/img/slide1.jpeg" />" rel="stylesheet">
-<link href="<c:url value="/img/slide2.jpeg" />" rel="stylesheet">
+
 
 <style>
 @font-face {
@@ -68,7 +66,7 @@ a {
 	font-size: 0.7em;
 	background-color: red;
 }
-#loginFrm,#joinForm,#joinForm2,#idF1Form,#idF2Form,#pwdF1Form,#pwdF1CForm,#pwdF2Form,#pwdF2CForm{
+#loginFrm,#joinForm,#joinForm2,#idF1Form,#pwdF1Form{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
@@ -79,10 +77,10 @@ a {
 #listFontColor{
 	color:black;
 }
-#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#idF2Btm,#pwdF1Btm,#pwdF1CBtm,#pwdF2Btm,#pwdF2CBtm{
+#mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#pwdF1Btm{
 	float:right;
 }
-.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.idF2_layer,.pwdF1_layer,.pwdF1C_layer,.pwdF2_layer,.pwdF2C_layer{
+.md_layer,.mdJ_layer,.mdJ2_layer,.idF1_layer,.pwdF1_layer{
 		position:fixed;
 		top:0;
 		left:0;
@@ -91,7 +89,7 @@ a {
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
 	}
-	#md,#md2,#md3,#mdJ,#mdJ2,#idF1,#idF2,#pwdF1,#pwdF1C,#pwdF2,#pwdF2C{
+	#md,#md2,#mdJ,#mdJ2,#idF1,#pwdF1{
 		display:none;
 		position:absolute;
 		width:100%;
@@ -129,7 +127,7 @@ a {
 	margin-top:83px;
 	margin-bottom:5px;
 }
-#mdClose,#mdJClose,#mdJ2Close,#idF1Close,#idF2Close,#pwdF1Close,#pwdF1CClose,#pwdF2Close,#pwdF2CClose{
+#mdClose,#mdJClose,#mdJ2Close,#idF1Close,#pwdF1Close{
 	background-color:white;
 	border:0;
 	outline:0;
@@ -149,44 +147,36 @@ a {
 	}
 	#md{
 		width:35%;
-		height:700px;
+		height:auto;
 		border-radius:10px;
 		margin:200px 0px;
+
 	}
 	
 	
 	#mdJ{
-		width:35%;
-		height:1200px;
+		width:35%; 
+		height:auto;
 		border-radius:10px;
 		margin:350px 0px;
 	}
 	#mdJ2{
 		width:35%;
-		height:1620px;
+		height:auto;
 		border-radius:10px;
 		margin:560px 0px;
 	}
 	#idF1{
 		width:35%;
-		height:680px;
+		height:auto;
 		border-radius:10px;
 	}
-	#idF2{
+	#pwdF1{
 		width:35%;
-		height:680px;
+		height:auto;
 		border-radius:10px;
 	}
-	#pwdF1,#pwdF1C{
-		width:35%;
-		height:730px;
-		border-radius:10px;
-	}
-	#pwdF2,#pwdF2C{
-		width:35%;
-		height:730px;
-		border-radius:10px;
-	}
+
 	#kokoBtn{
 		width: 65%;
 		height: 50px;
@@ -306,44 +296,8 @@ a {
 		color: black;
 	}
 /* 버튼 css*/
-.autBtn,.idFNoBtn,.pwdFNoBtn{
-  width:100%;
-  background:rgb(243,191,169);
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-.autBtn:hover,.idFNoBtn:hover,.pwdFNoBtn:hover{
-  background:rgb(241,247,250);
-  color:rgb(171,206,226);
-}
-.autBtn:before,.idFNoBtn:before,,.pwdFNoBtn:before.autBtn:after,.idFNoBtn:after,.pwdFNoBtn:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background:rgb(171,206,226);
-  transition:400ms ease all;
-}
-.autBtn:after,.idFNoBtn:after,.pwdFNoBtn:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-.autBtn:hover:before,.idFNoBtn:hover:brfore,.pwdFNoBtn:hover:brfore,.autBtn:hover:after,.idFNoBtn:hover:after,.pwdFNoBtn:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
-#idF1 button,#idF2 button,#pwdF1 button,#pwdF1C button,#pwdF1 button,#pwdF2 button,#pwdF2C button{
+
+#idF1 button,#pwdF1 button,#pwdF1 button,#pwdF2 button{
 	margin:10px 0;
 }
 .mainLogoImg{
@@ -604,31 +558,6 @@ a {
     $("#pwdF1Close, .pwdF1_layer").click(function(){
        $("#pwdF1").fadeOut();
     });
-    //비밀번호찾기2
-    $("#pwd2FindBtn").click(function(){
-    	$("#pwdF1").css({'display':'none'});
-		$("#pwdF2").css({
-           "top": (($(window).height()-$("#pwdF2").outerHeight())/2+$(window).scrollTop())+"px",
-           "left": (($(window).width()-$("#pwdF2").outerWidth())/2+$(window).scrollLeft())+"px"
-        
-        });
-        $("#pwdF2").fadeIn();
-    });
-    $("#pwdF2Close, .pwdF2_layer").click(function(){
-       $("#pwdF2").fadeOut();
-    });
-    $("#pwd1FindReturnBtn").click(function(){
-		$("#pwdF2").css({'display':'none'});
-	$("#pwdF1").css({
-       "top": (($(window).height()-$("#pwdF1").outerHeight())/2+$(window).scrollTop())+"px",
-       "left": (($(window).width()-$("#pwdF1").outerWidth())/2+$(window).scrollLeft())+"px"
-    
-   		});
-    	$("#pwdF1").fadeIn();
-	});
-	$("#pwdF1Close, .pwdF1_layer").click(function(){
-   		$("#pwdF1").fadeOut();
-	});
 	//로그인폼 아이디 비밀번호 유효성검사
     $("#loginEffectiveness").submit(function(){
 		if($("#userid").val()==""){
@@ -648,6 +577,7 @@ a {
 	//회원가입창에서 유효성검사
 	var emailChk=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var nameChk= RegExp(/^[가-힣]+$/);
+	var pwdChk= RegExp(/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
 	var nickNameChk = RegExp(/^[가-힣A-Za-z0-9]+$/);
 	var birthdateChk = RegExp(/^[0-9]+$/);
 	var tel1Chk=RegExp(/^0(2|1[01679])$/);
@@ -663,6 +593,12 @@ a {
 			alert("비밀번호를 입력하여주세요");
 			$("#userpwd2").val(""); 
 			$("#userpwd2").focus();
+			return false;
+			}
+		if(!pwdChk.test($("#userpwd2").val())){ 
+			alert("비밀번호 형식에 맞지않습니다(8자 이상16자리이하 영어,특수문자,숫자 조합)");
+			$("#userpwd2").val(""); 
+			$("#userpwd2").focus(); 
 			return false;
 			}
 		if($("#userpwdChk").val()==""){
@@ -780,28 +716,28 @@ a {
 	//크리에이터 회원가입 유효성검사
 	var emailChk2=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var nameChk2= RegExp(/^[가-힣]+$/);
+	var pwdChk2=RegExp(/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
 	var nickNameChk2 = RegExp(/^[가-힣A-Za-z0-9]+$/);
 	var birthdateChk2 = RegExp(/^[0-9]+$/);
 	var business_numberChk= RegExp(/^[0-9]+$/);
 	var banknameChk=RegExp(/^[가-힣a-zA-Z]+$/);
 	var accountChk=RegExp(/^[0-9]+$/);
 	$("#joinEffectiveness2").submit(function(){
-		if($("#userid3").val()==""){
-			alert("아이디(이메일)을 입력하여주세요");
-			$("#userid3").val(""); 
-			 $("#userid3").focus();
+		if($("#userid3").val() != $("#userid2Text2").val()){
+			alert("이메일확인버튼을누르지않으셨습니다"); 
+			$("#userid3").focus();
 			return false;
 			}
-		if(!emailChk2.test($("#userid3").val())){
-			 alert("이메일의 형식에 맞게 입력해주세요");
-			 $("#userid3").val(""); 
-			 $("#userid3").focus(); 
-			 return false; 
-		}
 		if($("#userpwd3").val()==""){
 			alert("비밀번호를 입력하여주세요");
 			$("#userpwd3").val(""); 
 			$("#userpwd3").focus();
+			return false;
+			}
+		if(!pwdChk2.test($("#userpwd3").val())){ 
+			alert("비밀번호 형식에 맞지않습니다(8자 이상16자리이하 영어,특수문자,숫자 조합)");
+			$("#userpwd3").val(""); 
+			$("#userpwd3").focus(); 
 			return false;
 			}
 		if($("#userpwdChk2").val()==""){
@@ -972,55 +908,6 @@ a {
 			$("#mdJClose,.mdJ_layer").click(function(){
 		   		$("#mdJ").fadeOut();
 		});
-	}
-	function pwdF1Change(){
-		$("#pwdF1").css({'display':'none'});
-		$('#pwdF1C').css({
-			"top": (($(window).height()-$("#pwdF1C").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#pwdF1C").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#pwdF1C").fadeIn();
-			
-			$("#pwdF1CClose,.pwdF1C_layer").click(function(){
-		   		$("#pwdF1C").fadeOut();
-		});
-	}
-	function pwdF1CChange(){
-		$("#pwdF1C").css({'display':'none'});
-		$('#pwdF1').css({
-			"top": (($(window).height()-$("#pwdF1").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#pwdF1").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#pwdF1").fadeIn();
-			
-			$("#pwdF1Close,.pwdF1_layer").click(function(){
-		   		$("#pwdF1").fadeOut();
-		});
-	}
-	function pwdF2Change(){
-		$("#pwdF2").css({'display':'none'});
-		$('#pwdF2C').css({
-			"top": (($(window).height()-$("#pwdF2C").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#pwdF2C").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#pwdF2C").fadeIn();
-			
-			$("#pwdF2CClose,.pwdF2C_layer").click(function(){
-		   		$("#pwdF2C").fadeOut();
-		});
-	}
-	function pwdF2CChange(){
-		$("#pwdF2C").css({'display':'none'});
-		$('#pwdF2').css({
-			"top": (($(window).height()-$("#pwdF2").outerHeight())/2+$(window).scrollTop())+"px",
-		    "left": (($(window).width()-$("#pwdF2").outerWidth())/2+$(window).scrollLeft())+"px"
-			}).css("display","block");
-			$("#pwdF2").fadeIn();
-			
-			$("#pwdF2Close,.pwdF2_layer").click(function(){
-		   		$("#pwdF2").fadeOut();
-		});
-
 	}
 	//체크박스 수제한
 	var maxCount = 3;								
@@ -1329,8 +1216,8 @@ $(document).ready(function() {
         					type:'GET',
         					success:function(result){
         						console.log(result);
-        						if(result>0){
-        							$("#telFUserId").val("");
+        						if(result!=null){
+        							$("#telFUserId").val("아이디는"+result+"입니다");
         							$("#telFUserId").focus();
         						}else{
         							alert("가입한적이없는 전화번호입니다");	
@@ -1395,8 +1282,8 @@ $(document).ready(function() {
         					type:'GET',
         					success:function(result){
         						console.log(result);
-        						if(result>0){
-        							$("#telFUserPwd").val("111");
+        						if(result!=null){
+        							$("#telFUserPwd").val("비밀번호는"+result+"입니다");
         							$("#telFUserPwd").focus();
         						}else{
         							alert("가입한적이없는 전화번호입니다");	
@@ -1792,40 +1679,18 @@ $(document).ready(function() {
 				<div class="pwdF1_layer"></div>
 				<div>
 				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-				<span id="pwdFF3">회원정보에등록된이메일을 통해 비밀번호를 찾을수있습니다<br/></span>
-				<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">이메일로 비밀번호찾기</a><br/></span>
 				<div>
 		 		<input type="text" id="to4" name="to4" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
-			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"class="autBtn"/><br> <!-- 문자보내는 전송버튼 -->
+			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"/><br> <!-- 문자보내는 전송버튼 -->
 			 </div>
 			 <div>
 				<input type="text" id="userNum4" placeholder="인증번호 입력" style="width:68%">   <!-- 인증번호 입력창 -->
-			  	<input type="button" id="enterBtn4" value="확인" style="width:30%;border:1px solid gray"class="idFNoBtn">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+			  	<input type="button" id="enterBtn4" value="확인" style="width:30%;border:1px solid gray">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
 			 </div>
 		     <input type="hidden" name="text3" id="text4">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
-		     <input type="text" placeholder="인증시 이메일이나타납니다" id="telFUserpwd" readonly/>
+		     <input type="text" placeholder="인증시 비밀번호가나타납니다" id="telFUserPwd" readonly/>
 				</div>	
 			</form>
 		</div>
 	</div>
 	<!-- 비밀번호 찾기 끝 -->
-	<div id="pwdF2" class="join">
-		<div id="pwdF2Form" class="col-xs-12 col-md-12">
-			<form>
-				<div id="pwdF2Btm">
-					<button type="button" class="btn btn-primary" id="pwdF2Close" style="color:gray">X</button>
-				</div>
-				<div class="pwdF2_layer"></div>
-					<div>
-					<img src="/gachi/img/logo.png" class="mainLogoImg"/>
-							<span id="pwdFF3">회원정보에등록된전화번호을 통해 비밀번호를 찾을수있습니다<br/></span>
-							<span id="pwdFF4"><a href="#" id="pwd1FindReturnBtn">전화번호로 비밀번호찾기</a><br/></span>
-							<input type="text" placeholder="이메일를 입력해주세요" id="pwdFEmail" name="pwdFEmail"/>
-						<button class="autBtn">인증</button>
-						<input type="text" placeholder="인증번호" id="pwdFNo2" name="pwdFNo2"/>
-						<button class="pwdFNoBtn">확인</button>
-					</div>
-				
-			</form>
-		</div>
-	</div>	
