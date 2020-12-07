@@ -15,6 +15,30 @@ select {
 	height: 30px;
 }
 </style> 
+<script type="text/javascript">
+	$(()=>{
+		$("#adminNotice").submit(()=>{
+			if($("#option").val()=='전체'){
+				$("#option").val(null);	
+			}
+			if($("#date1").val()!=''&& $("#date2").val()==''){
+				alert("시작/종료일자를 입력하여주십시오.");
+				return false;
+			}
+			if($("#date1").val()==''&& $("#date2").val()!=''){
+				alert("시작/종료일자를 입력하여주십시오.");
+				return false;
+			}
+			if($("#date1").val()>$("#date2").val()){
+				alert("시작일보다 종료일이 더 빠릅니다.\n다시 입력하여 주십시오.");
+				return false;
+			}
+			return true;
+		});
+	});
+
+
+</script>
 <div class="container ad_font">
 <h1>공지사항</h1>
 <!-- 1:1문의 영역 -->
@@ -24,14 +48,21 @@ select {
 <div>
 	총 레코드 수:${npvo.totalRecord}
 </div>
-<form action="#">
-	<select id="searchType2" name="option2">
-			<option selected="selected">제목</option>
-			<option>작성자</option>
-			<option>등록일</option>
-	</select>
-<input type="text" id="searchWord" placeholder="내용 입력" size="40"/>
-<input type="submit" class="btn" value="검색"/>
+<form method="post" id="adminNotice" action="/gachi/adminNotice">
+<div>
+	등록일 <input type="date" id="date1" name="date1"/>&nbsp;~
+	&nbsp;<input type="date" id="date2" name="date2"/>
+</div>
+	<div style="margin-top:10px;">
+		<select id="option" name="option">
+				<option value="전체">전체</option>
+				<option value="subject">제목</option>
+				<option value="content">내용</option>
+				<option value="writer">작성자닉네임</option>
+		</select>
+		<input type="text" id="searchWord" name="searchWord" placeholder="내용 입력" size="40"/>
+		<input type="submit" class="btn" value="검색"/>
+	</div>
 </form>
 </div>
 <ul id="ad_notice_lst">
@@ -66,7 +97,8 @@ select {
 			<c:forEach var="p" begin="${npvo.startPageNum}" end="${npvo.startPageNum + npvo.onePageRecord-1 }">
 				<c:if test="${p<=npvo.totalPage}">
 					<li <c:if test="${p==npvo.nowPage}"> style="color:#437299"</c:if>>
-						<a href="/gachi/adminNotice?nowPage=${p}" class="paging_num">${p}</a>
+						<a href="/gachi/adminNotice?nowPage=${p}&date1=${date1}&date2=${date2}&
+							searchWord=${searchWord}&option=${option}" class="paging_num">${p}</a>
 					</li>
 				</c:if>
 			</c:forEach>

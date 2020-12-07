@@ -450,8 +450,8 @@ input{text-align:center;}
 	}
 	.ad_list_menu{
 		margin-top:10px;
-		height:50px;
 		text-align: right;
+		overflow: auto;
 	}
 	.ad_list_menu li{
 		height:38px;

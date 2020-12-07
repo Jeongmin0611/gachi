@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -383,13 +384,13 @@ public class AdminController {
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
 	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		
-		System.out.println("bbbbbbb=> ");
-		for (String name:vo.getImgList()) {
-			System.out.println("aaaaaa=> "+name);
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		for(String name:vo.getImgList()) {
+			File file =new File(path,name);
+			if(!file.exists()) {
+				file.delete();
+			}
 		}
-		
-		
 		int result=dao.updateClass(vo);
 		ModelAndView mav=new ModelAndView();
 		if(result>0) {
@@ -400,18 +401,27 @@ public class AdminController {
 	}
 	@RequestMapping(value="/imgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
 	@ResponseBody
-	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr) {
+	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+			@RequestParam("code") String code) {
 		MultipartFile file=mhsr.getFile("file");
 		OutputStream ops=null;
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		
+		System.out.println("CODE==> "+code);
+		
+		
 		boolean isc=file.isEmpty();
 		String filePath=null;
 		if(!isc){
+			String filename=code+"_"+file.getOriginalFilename();
+			File newFile=new File(path,filename);
+			if () {
+				
+			}
 			try {
-				ops=new FileOutputStream(new File(path,file.getOriginalFilename()));
+				ops=new FileOutputStream();
 				ops.write(file.getBytes());
-				filePath="/gachi/upload/classImg/"+file.getOriginalFilename();
+				filePath="/gachi/upload/classImg/"+filename;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -552,6 +562,9 @@ public class AdminController {
 		if(nowPageRequest!=null) {
 			npvo.setNowPage(Integer.parseInt(nowPageRequest));
 		}
+		
+		System.out.println("option==>"+npvo.getOption());
+		System.out.println("searchWord==>"+npvo.getSearchWord());
 		int totalRecord=dao.getAllRecord(npvo);
 		npvo.setTotalRecord(totalRecord);
 		
