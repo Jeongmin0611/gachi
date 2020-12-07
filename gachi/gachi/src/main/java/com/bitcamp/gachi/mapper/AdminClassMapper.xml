@@ -108,4 +108,10 @@
 		full_price='${full_price}',real_price='${real_price}',class_state='${class_state}',
 		class_info='${class_info}',class_img='${class_img}' where code='${code}'  
 	</update>
+	<select id="selectClassImg" parameterType="String" resultType="String">
+		select class_img from class where code='${code}'
+	</select>
+	<update id="updateClassImg" parameterType="String">
+		update class set class_img='${param1}' where code='${param2}'
+	</update>
 </mapper>
