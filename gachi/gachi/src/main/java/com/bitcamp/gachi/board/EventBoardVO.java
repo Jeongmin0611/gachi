@@ -14,6 +14,8 @@ public class EventBoardVO {
 	private String userid;
 	private String ip;
 	private String nickname;
+	private int reply_num;
+	
 	
 	public int getEvent_num() {
 		return event_num;
@@ -80,5 +82,11 @@ public class EventBoardVO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public int getReply_num() {
+		return reply_num;
+	}
+	public void setReply_num(int reply_num) {
+		this.reply_num = reply_num;
 	}
 }

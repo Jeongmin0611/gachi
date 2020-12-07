@@ -2,6 +2,8 @@ package com.bitcamp.gachi.board;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bitcamp.gachi.admin.PagingVO;
 
 public interface BoardDaoImp {
@@ -14,20 +16,22 @@ public interface BoardDaoImp {
 	
 	
 	//이벤트 레코드 한 개 선택 (진행, 종료)
-	public EventBoardVO eventBoardSelect(int no);	
+	public EventBoardVO eventBoardSelect(int event_num);	
 	//이벤트 전체 레코드 선택
-	public List<EventBoardVO> eventBoardAllRecord();
+	public List<EventBoardVO> eventBoardAllRecord(PagingVO vo);
 	//이벤트 총 레코드 수
-	public int eventGetAllRecordCount(PagingVO pvo);
+	public int eventBoardAllRecordCount(PagingVO pvo);
 
 	//종료된 이벤트 전체 선택
-	public List<EventBoardVO> endEventBoardAllRecord();
+	public List<EventBoardVO> endEventBoardAllRecord(PagingVO vo);
 	//종료된 이벤트 총 레코드 수
-	public int endEvnetGetAllRecordCount(PagingVO pvo);	
+	public int endEventBoardAllRecordCount(PagingVO pvo);	
 	
 	//이벤트 댓글 저장
 	public int insertReply(EventBoardVO vo);
 	//이벤트 댓글 전체 선택
-	public List<EventBoardVO> replyAllRecord(int no);
+	public List<EventBoardVO> replyAllRecord(int event_num);
+	//이벤트 댓글 삭제
+	public int replyDel(EventBoardVO vo);
 	
 }

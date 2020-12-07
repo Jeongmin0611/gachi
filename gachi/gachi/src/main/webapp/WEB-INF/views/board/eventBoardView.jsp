@@ -79,6 +79,15 @@
 }
 
 </style>
+<script>
+	function delCheck(no){
+		var a=no;
+		if(confirm("댓글을 삭제 하시겠습니까?")){
+			location.href="/gachi/eventReplyDel?no=${vo.event_num}&reply_num="+a;
+		}
+	}
+
+</script>
 <div class="container cfont">
 	<div >
 		<h3 id="eventTitle">이벤트</h3>
@@ -90,17 +99,19 @@
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				${vo.content }
+				<img src="/gachi/img/board/${vo.content }"/>
 			</div>
 		</div>
 		
 	</div>
 	<!-- 버튼 -->
 	<div id="eventDetailBtnDiv">
-		<button type="button" class="btn btn-light">목록</button>
+		<a href="/gachi/eventBoard?nowPage=${pvo.nowPage }"><button type="button" class="btn btn-light">목록</button></a>
 	</div>
 	<!-- 댓글 -->
-	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk">
+	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk?event_num=${vo.event_num }">
+		<input type="hidden" value="${vo.event_num }" name="event_num"/>
+		<input type="hidden" value="${pvo.nowPage }" name="nowPage"/>
 		댓글<br/> <textarea rows="3" cols="90%" name="content"></textarea>
 		<div><input type="submit" class="btn btn-outline-primary" value="등록"></div>
 	</form>
@@ -110,8 +121,13 @@
 			<c:forEach var="list" items="${list }">
 				<li>${list.nickname }</li>
 				<li>${list.content }</li>
-				<li>${list.sysdate }</li>
-				<li><a href="#">삭제</a></li>
+				<li>${list.writedate }</li>
+				<c:if test="${userid==list.userid }">
+					<li><a href="javascript:delCheck(${list.reply_num })">삭제</a></li>
+				</c:if>
+				<c:if test="${userid!=list.userid }">
+					<li>&nbsp;</li>
+				</c:if>
 			</c:forEach>
 		</ul>
 	</div>
