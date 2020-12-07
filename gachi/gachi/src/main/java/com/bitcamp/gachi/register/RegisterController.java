@@ -77,7 +77,6 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		public int useridChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String okid=req.getParameter("okid");
-			System.out.println("aaaa===>"+okid);
 			int result=dao.useridChk(okid);
 			return result;
 		}
@@ -86,26 +85,23 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		public int useridChk2(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String okid2=req.getParameter("okid2");
-			System.out.println("aaaa===>"+okid2);
 			int result=dao.useridChk2(okid2);
 			return result;
 		}
 		@RequestMapping("/useridFChk")
 		@ResponseBody
-		public int useridFChk(HttpServletRequest req,Model model) {
+		public String useridFChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String useridF=req.getParameter("useridF");
-			System.out.println("aaaa===>"+useridF);
-			int result=dao.useridF(useridF);
+			String result=dao.useridF(useridF);
 			return result;
 		}
 		@RequestMapping("/userpwdFChk")
 		@ResponseBody
-		public int userpwdFChk(HttpServletRequest req,Model model) {
+		public String userpwdFChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String userpwdF=req.getParameter("userpwdF");
-			System.out.println("aaaa===>"+userpwdF);
-			int result=dao.userpwdF(userpwdF);
+			String result=dao.userpwdF(userpwdF);
 			return result;
 		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
