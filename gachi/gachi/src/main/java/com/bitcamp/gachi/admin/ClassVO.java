@@ -1,7 +1,9 @@
 package com.bitcamp.gachi.admin;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class ClassVO {
 
@@ -22,7 +24,7 @@ public class ClassVO {
 	private String class_state;
 	private String class_img;
 	private String nickname;
-	private String[] imgList;
+	private List<String> imgList;
 	
 	public String getCode() {
 		return code;
@@ -126,17 +128,10 @@ public class ClassVO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String[] getImgList() {
+	public List<String> getImgList() {
 		return imgList;
 	}
-	public void setImgList(String[] imgList) {
+	public void setImgList(List<String> imgList) {
 		this.imgList = imgList;
-		String txt="";
-		for (int i = 0; i < imgList.length; i++) {
-			txt+=imgList[i]+",";
-		}
-		setClass_img(txt);
 	}
-	
-	
 }

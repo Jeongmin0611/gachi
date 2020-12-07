@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	h3{
 	 	margin:15px 0px;
@@ -48,9 +48,13 @@
 		</ul>
 	</li>
 	<li>
-		<ul style="width:50%; margin:auto; text-align: center;">
+		<ul style="margin:auto; text-align: center;">
 			<li>대표이미지</li>
-			<li><img src="upload/classImg/${vo.class_img}"/></li>
+			<li>
+			<c:forEach var="imgList" items="${vo.imgList}">
+				<img src="upload/classImg/${imgList}" style="width:150px;height:150px;"/>
+			</c:forEach>
+			</li>
 		</ul>
 	</li>
 </ul>

@@ -40,4 +40,9 @@ public interface ClassDaoImp {
 	//강좌 영상 간략 조회
 	public List<ClassVideoVO> getClassVideoListSample(String code);
 	
+	//이미지파일 조회
+	public String selectClassImg(String code);
+	
+	//이미지파일 수정
+	public int updateClassImg(String classImg,String code);
 }
