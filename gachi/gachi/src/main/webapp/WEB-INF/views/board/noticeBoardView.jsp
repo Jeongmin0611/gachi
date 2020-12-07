@@ -47,7 +47,7 @@
 				<h3 style="margin-top:20px ">${vo.subject }</h3>
 				<div id="noticeDetailDateDiv"><span>${vo.writer }</span> <span>${vo.writedate }</span></div>
 			</div>
-			<!-- 이벤트 내용 -->
+			<!-- 공지사항 내용 -->
 			<div id="noticeDetailContent">
 				${vo.content }
 			</div>

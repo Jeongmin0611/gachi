@@ -145,23 +145,25 @@ button:focus, button:active{
 	<!-- 이벤트 리스트 -->
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
-			<div class="col-sm-4">
-				<a href="/gachi/eventBoardView?no=${vo.event_num }&event=종료 이벤트" id="eventThumbnail">${vo.event_img }</a><br/>
-				<div class="homeClassListTxt">
-					<p><span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>${vo.event_num }
-					<a href="/gachi/eventBoardView?no=${vo.event_num }&event=종료 이벤트">${vo.subject }</a>
-				</div>				
-			</div>
+		<div class="col-sm-4">
+			<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event=종료이벤트&nowPage=${pvo.nowPage}" id="eventThumbnail">
+			<img src="/gachi/img/board/${vo.event_img}"/></a><br/>
+			<div class="homeClassListTxt">
+				<!-- <span class="badge " id="eventNew">new</span>&nbsp; -->
+				<p> <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
+				<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event=종료이벤트&nowPage=${pvo.nowPage}">${vo.subject }</a>
+			</div>				
+		</div>
 		</c:forEach>
 	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			<li class="page-item"><a class="page-link" href="/gachi/eventBoardEnd?nowPage=${pvo.nowPage-1 }">Prev</a></li>
+			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
+				<c:if test="${p<=pvo.totalPage }">
+					<li class="page-item"><a class="page-link" href="/gachi/eventBoardEnd?nowPage=${p }"<c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>${p }</a></li>
+				</c:if>
+			</c:forEach>
+			<li class="page-item"><a class="page-link" href="/gachi/eventBoardEnd?nowPage=${pvo.nowPage+1 }">Next</a></li>
 		</ul>
 </div>
