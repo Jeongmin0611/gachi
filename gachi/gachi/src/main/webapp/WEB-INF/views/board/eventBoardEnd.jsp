@@ -137,7 +137,7 @@ button:focus, button:active{
 	<div>
 		<h3>이벤트</h3>
 		<div id="CEventBtnDiv">
-			<button id="ingEvent">진행 중 이벤트</button>
+			<button id="ingEvent">진행 이벤트</button>
 			<button id="endEvent">종료 이벤트</button>
 		</div>
 	</div>
