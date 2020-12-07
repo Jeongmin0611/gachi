@@ -331,7 +331,7 @@ public class AdminController {
 		}
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
-		List<ClassVO> list=dao.getClassListLookUp(vo);
+		List<ClassVO> list=dao.getClassListLookUp(vo); 
 		
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
@@ -415,11 +415,9 @@ public class AdminController {
 		if(!isc){
 			String filename=code+"_"+file.getOriginalFilename();
 			File newFile=new File(path,filename);
-			if () {
-				
-			}
+
 			try {
-				ops=new FileOutputStream();
+				ops=new FileOutputStream(newFile);
 				ops.write(file.getBytes());
 				filePath="/gachi/upload/classImg/"+filename;
 			} catch (Exception e) {

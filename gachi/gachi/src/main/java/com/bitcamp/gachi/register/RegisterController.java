@@ -119,7 +119,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("userid", resultVO.getUserid());
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
-						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid()));
+						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid())); 
 						ses.setAttribute("cntGood", uDao.countGood(resultVO.getUserid()));
 						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
