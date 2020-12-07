@@ -181,7 +181,7 @@ public class BoardController {
 	
 	
 	@RequestMapping("/eventBoardEnd")
-	public ModelAndView eventBoardEnd(PagingVO vo, HttpServletRequest req) {
+	public ModelAndView eventBoardEnd(PagingVO vo, HttpServletRequest req) {		
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		vo.setOnePageRecord(9);
 		//현재 페이지
@@ -198,8 +198,7 @@ public class BoardController {
 		mav.addObject("pvo", vo);
 		mav.setViewName("board/eventBoardEnd");
 		
-		return mav;
-		
+		return mav;		
 	}
 
 	@RequestMapping("/companyBoard")
