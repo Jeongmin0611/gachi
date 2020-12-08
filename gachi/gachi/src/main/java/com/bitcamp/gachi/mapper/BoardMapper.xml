@@ -18,8 +18,7 @@
 			where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc)
 			where <![CDATA[rownum<=${lastPageRecordCount} ]]>order by notice_num desc
       	</when>      	
-      </choose>
-      
+      </choose>      
 	</select>
 	<select id="noticeBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.NoticeBoardVO">
 		select notice_num, subject, content, writer, to_char(writedate, 'YYYY-MM-DD') writedate 
@@ -34,23 +33,40 @@
 		</choose>
 	</select>
 	<select id="eventBoardAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
-		from event where enddate>=sysdate order by enddate
+		select * from 
+		(select * from 
+		(select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
+		from event where enddate<![CDATA[ >= ]]> sysdate order by enddate asc)
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by enddate desc)
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by enddate asc
 	</select>
 	<select id="endEventBoardAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
-		from event where enddate<![CDATA[ < ]]> sysdate order by enddate desc
+		select * from 
+		(select * from 
+		(select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, event_img 
+		from event where enddate<![CDATA[ < ]]> sysdate order by enddate desc)
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by enddate asc)
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by enddate desc		
 	</select>
 	<select id="eventBoardSelect" parameterType="int" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, to_char(writedate, 'YYYY-MM-DD') writedate, content
+		select event_num, subject, to_char(startdate,'YYYY-MM-DD') startdate, to_char(enddate, 'YYYY-MM-DD') enddate, to_char(writedate, 'YYYY-MM-DD') writedate, content
 		from event where event_num=${param1}
 	</select>
+	<select id="eventBoardAllRecordCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		select count(event_num) from event where enddate<![CDATA[ >= ]]> sysdate order by enddate
+	</select>
+	<select id="endEventBoardAllRecordCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		select count(event_num) from event where enddate<![CDATA[ <= ]]> sysdate order by enddate
+	</select>
 	<insert id="insertReply" parameterType="com.bitcamp.gachi.board.EventBoardVO">
-		insert into event_reply values(${event_num}, '${userid}', '${content}', sysdate, '${ip}')
+		insert into event_reply values(${event_num}, a_sq.nextval, '${userid}', '${content}', sysdate, '${ip}')
 	</insert>
 	<select id="replyAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select nickname, content, to_char(sysdate, 'YYYY-MM-DD') writedate, ip 
+		select e.userid userid, reply_num, nickname, content, to_char(sysdate, 'YYYY-MM-DD') writedate, ip 
 		from event_reply e join member m on e.userid = m.userid 
 		where event_num=${param1}
 	</select>
+	<delete id="replyDel" parameterType="com.bitcamp.gachi.board.EventBoardVO">
+		delete from event_reply where reply_num=${reply_num} and userid='${userid}'
+	</delete>
 </mapper>

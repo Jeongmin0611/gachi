@@ -14,7 +14,7 @@
 		$("textarea").css("height","800px");
 		$(".ad_box img").css("width","200px").css("height","200px");
 		$(".ad_box>div").css("margin","20px 0px;");
-		$(".ad_box>div:first-child").css("float","left");
+		$(".ad_box>div").css("float","left");
 		let imgCount=2;
 		 $(".add_img").on("dragenter dragover", function(event){
 		        event.preventDefault();
@@ -48,50 +48,22 @@
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
-					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></span></div>';
+					tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
 					$(".ad_box").append(tagTxt);
 				}
 			});
 		});
-			$(document).on('change',".class_img",(event)=>{
-			console.log("aaaaaa");
-			event.preventDefault();
-			var file =event.target.files[0];
-			console.log(file);
-			var formData= new FormData();
-			formData.append("file",file);
-			$.ajax({
-				type:"post",
-				enctype: 'multipart/form-data',
-				url:"/gachi/imgThumbnail",
-				//ajax로 넘길경우 form-data 형식
-				processData: false,
-				contentType: false,
-				//////////////////////////
-				data: formData,
-				success:function(result){
-					$(event.target).parent().prev().children().attr("src",result);
-				}
-			});
-		});
-			let num=1;
-			
 			$(document).on('click','b',(event)=>{
-				let delName=$(event.target).prev().val();
-				$(event.target).parent().parent().parent().remove();
-				
-				var formData=new formData();
-				formData.append("");
+				let imageName=$(event.target).prev().text();
+				let code=$("#code").val();
 				$.ajax({
-					type:"post",
-					enctype: 'multipart/form-data',
-					url:"/gachi/imgDelete",
-					//ajax로 넘길경우 form-data 형식
-					processData: false,
-					contentType: false,
-					//////////////////////////
-					
+					url:'/gachi/imageDelete?imageName='+imageName+"&code="+code,
+					type:'get',
+					success:(result)=>{
+						$(event.target).parent().parent().remove();
+					},error:(e)=>{
+						alert("이미지파일 삭제를 실패하였습니다.");
+					}
 				});
 			});	
 			
@@ -189,16 +161,19 @@
 </ul>
 <h3>클래스 이미지 목록</h3>
 <div class="text_center ad_box">
+<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
-		<div style="text-align:center;height:24px;">이미지1</div>
-		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}"/>
+		<div style="text-align:center;height:24px;">이미지${status.index+1}		
 		</div>
-		<div style="padding:0 auto;">
-			<!--<input type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"/>-->
-			<label><input type="hidden" name="imgList" value="${vo.class_img}"/> ${vo.class_img}<b>x</b></label>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/classImg/${imgList}"/>
+		</div>
+		<div>
+			<input type="hidden" name="imgList" value="${imgList}"/> 
+			<span class="wordCut">${imgList}</span><b>x</b>
 		</div>
 	</div>
+</c:forEach>
 </div>
 <h3>상품설명</h3>
 <ul id="ad_goods_write">
