@@ -441,7 +441,7 @@ $(function() {
 
 		<!-- 클래스 문의 -->
 		<div id="myclassQna">
-			<label>질문&답변</label>
+			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
 				<input type="text" name="searchWord" />
 				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
@@ -495,7 +495,6 @@ $(function() {
 					</ul>
 				</li>
 			</ul>
-
 		</div>
 
 	</div>
