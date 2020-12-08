@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +29,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.abercap.mediainfo.api.MediaInfo;
 import com.google.gson.JsonObject;
 
 
@@ -600,10 +598,15 @@ public class AdminController {
 	}
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
-	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
+	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload,
+			@RequestParam("type") String type) {
 		HttpSession session=req.getSession();
-		String path=session.getServletContext().getRealPath("/upload/classImg");
-		
+		String path = null;
+		if(type.equals("classEdit")) {
+			path=session.getServletContext().getRealPath("/upload/classImg");
+		}else if(type.equals("eventWrite")){
+			path=session.getServletContext().getRealPath("/upload/event_img");
+		}
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
 		try {
@@ -616,7 +619,6 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return json;
 	}
 	

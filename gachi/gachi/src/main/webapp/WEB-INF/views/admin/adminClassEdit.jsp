@@ -7,6 +7,17 @@
 			imageUploadUrl:'/gachi/imageUpload',
 			extraPlugins:'uploadimage'
 		});
+		editor.on('fileUploadRequest', function( evt ) {
+		    var fileLoader = evt.data.fileLoader,
+		        formData = new FormData(),
+		        xhr = fileLoader.xhr;
+		    xhr.open( 'POST', fileLoader.uploadUrl, true );
+		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+		    formData.append('type','classEdit');
+		    fileLoader.xhr.send( formData );
+		    evt.stop();
+		}, null, null, 4 ); 
+		
 		CKEDITOR.config.height=500;
 		$("#ad_goods_writeForm>li").slice(2).css("width","100%");
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
@@ -20,8 +31,6 @@
 		        event.preventDefault();
 		    });
 		
-		 
-		 
 		$(document).on("drop",".add_img",(event)=>{
 			event.preventDefault();
 			var files =event.originalEvent.dataTransfer.files;

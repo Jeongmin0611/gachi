@@ -25,14 +25,12 @@
 		width:10%;
 		height:40px;
 		border-bottom:1px solid gray;
+		border-right:1px solid gray;
 	}
-	#ad_video_addList li:nth-child(7n+1){
+	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+8){
 		width:5%;
 	}
-	#ad_video_addList li:nth-child(7n+4){
-		width:15%;
-	}
-	#ad_video_addList li:nth-child(7n+2),#ad_video_addList li:nth-child(7n+3){
+	#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+4){
 		width:25%;
 	}
 	#ad_video_addList li>input[type=text]{
@@ -160,6 +158,7 @@
 <ul class="text_center ad_box" id="ad_video_addList">
 	<li>차시</li>
 	<li>차시명</li>
+	<li>순서</li>
 	<li>영상제목</li>	
 	<li>파일명</li>
 	<li>영상길이</li>
