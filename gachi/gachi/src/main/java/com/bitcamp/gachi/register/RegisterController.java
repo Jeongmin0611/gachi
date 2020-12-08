@@ -1,7 +1,6 @@
 package com.bitcamp.gachi.register;
-
-
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -103,6 +102,20 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			String userpwdF=req.getParameter("userpwdF");
 			String result=dao.userpwdF(userpwdF);
 			return result;
+		}
+		@RequestMapping("/searchTextChk") 
+		@ResponseBody
+		public ModelAndView searchTextChk(RegisterVO vo) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			ModelAndView mav=new ModelAndView();
+			List<SearchPageVO> result=dao.searchTextChk(vo);
+			List<SearchPageVO> result2=dao.searchTextChk2(vo);
+			List<SearchPageVO> result3=dao.searchTextChk3(vo);
+			mav.addObject("result",result);
+			mav.addObject("result2",result2);
+			mav.addObject("result3",result3);
+			mav.setViewName("searchPage/searchPage");
+			return mav;
 		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
