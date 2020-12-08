@@ -29,7 +29,7 @@
 		</choose>
 	</select>
 	<select id="classView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category, class_name, real_price, stack, nickname, class_img from class join member on class.userid=member.userid	
+		select code, category, class_name, real_price, stack, nickname, class_img from class join member on class.userid=member.userid	
 		where code='${param1}'
 	</select>
 	<select id="homeClassPopular" resultType="com.bitcamp.gachi.admin.AllVO">
