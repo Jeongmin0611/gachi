@@ -416,7 +416,6 @@ public class AdminController {
 		MultipartFile file=mhsr.getFile("file");
 		OutputStream ops=null;
 		String path=session.getServletContext().getRealPath("/upload/classImg");
-		
 		boolean isc=file.isEmpty();
 		String filePath=null;
 		if(!isc){
@@ -471,7 +470,6 @@ public class AdminController {
 		}
 	} 
 
-	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -483,6 +481,13 @@ public class AdminController {
 		}
 		return mav;
 	} 
+	
+	@RequestMapping(value="/imgDelete",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public void imgDelete() {
+		
+	}
+	
 	
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {
