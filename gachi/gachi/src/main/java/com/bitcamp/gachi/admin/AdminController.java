@@ -408,18 +408,14 @@ public class AdminController {
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		
 		System.out.println("CODE==> "+code);
-		
-		
+
 		boolean isc=file.isEmpty();
 		String filePath=null;
 		if(!isc){
 			String filename=code+"_"+file.getOriginalFilename();
 			File newFile=new File(path,filename);
-			if () {
-				
-			}
 			try {
-				ops=new FileOutputStream();
+				ops=new FileOutputStream(newFile);
 				ops.write(file.getBytes());
 				filePath="/gachi/upload/classImg/"+filename;
 			} catch (Exception e) {
@@ -428,9 +424,7 @@ public class AdminController {
 		}
 		return filePath;
 	}
-	
 
-	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -442,6 +436,13 @@ public class AdminController {
 		}
 		return mav;
 	} 
+	
+	@RequestMapping(value="/imgDelete",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public void imgDelete() {
+		
+	}
+	
 	
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {

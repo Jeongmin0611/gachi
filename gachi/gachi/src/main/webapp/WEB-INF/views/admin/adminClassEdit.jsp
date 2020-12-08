@@ -75,8 +75,24 @@
 				}
 			});
 		});
+			let num=1;
+			
 			$(document).on('click','b',(event)=>{
+				let delName=$(event.target).prev().val();
 				$(event.target).parent().parent().parent().remove();
+				
+				var formData=new formData();
+				formData.append("");
+				$.ajax({
+					type:"post",
+					enctype: 'multipart/form-data',
+					url:"/gachi/imgDelete",
+					//ajax로 넘길경우 form-data 형식
+					processData: false,
+					contentType: false,
+					//////////////////////////
+					
+				});
 			});	
 			
 		$("#adminClassEditOk").submit(()=>{
