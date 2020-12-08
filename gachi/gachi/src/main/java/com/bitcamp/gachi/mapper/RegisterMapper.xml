@@ -16,8 +16,26 @@
 	 insert into creator(userid,business_number,category,bankname,account,license_img1,license_img2,license_img3,sns_addr,creator_info,creator_state)
 	    			values('${userid3}','${business_number}','${interest2}','${bankname}','${account}','${creatorLicense_img1}','${creatorLicense_img2}','${creatorLicense_img3}','${sns_addr}','${creator_info}',0)                 
 	</insert>
-	<select id="useridChk" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="int">
-		select userid from member where userid='${userid2}'
+	<select id="useridChk" parameterType="String" resultType="int">
+		select count(userid) from member where userid='${param1}'
+	</select>
+	<select id="useridChk2" parameterType="String" resultType="int">
+		select count(userid) from member where userid='${param1}'
+	</select>
+	<select id="useridF" parameterType="String" resultType="string">
+		select userid from member where tel='${param1}'
+	</select>
+	<select id="userpwdF" parameterType="String" resultType="string">
+		select userpwd from member where tel='${param1}'
+	</select>
+    <select id="searchTextChk" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.SearchPageVO">
+		select code,class_name,class_img,category,m.nickname,real_price from class c FULL OUTER JOIN member m on c.userid=m.userid where c.class_name like '%${searchSubmitText}%'
+	</select>
+	<select id="searchTextChk2" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.SearchPageVO">
+		select code,goods_name,category,goods_img1,real_price from goods where goods_name like '%${searchSubmitText}%'
+	</select>
+	<select id="searchTextChk3" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.SearchPageVO">
+		select username from member where username like '%${searchSubmitText}%' and grade='크리에이터'
 	</select>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
 		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'

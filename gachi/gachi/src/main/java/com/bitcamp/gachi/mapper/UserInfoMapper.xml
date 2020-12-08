@@ -61,4 +61,56 @@
 		delete from cart 
 	 	 where userid='${userid}'
 	</delete>
+	<insert id="orderInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
+		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type)
+		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}')
+	</insert>
+	<select id="countClass" resultType="int">
+		select count(code) 
+		 from orderlist o, class_order co 
+		 where o.order_code = co.order_code
+		 and o.userid = '${userid}'
+	</select>
+	<select id="myclassList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select co.code, class_img, category, class_name, username
+		 from orderlist o, class_order co, class c, member m
+		 where o.order_code = co.order_code 
+		 and co.code = c.code
+		 and c.userid = m.userid
+		 and o.userid = '${userid}'
+	</select>
+	<select id="myclassView" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select co.code, class_img, category, class_name, username
+		 from orderlist o, class_order co, class c, member m
+		 where o.order_code = co.order_code 
+		 and co.code = c.code
+		 and c.userid = m.userid
+		 and o.userid = '${userid}'
+		 and co.code = '${code}'
+	</select>
+	<select id="countGood" resultType="int">
+		select count(code) from good where userid='${userid}'
+	</select>
+	<select id="classWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select class_img, category, class_name, username, c.code code
+		 from good gd, member m, class c
+		 where  gd.code = c.code
+		 and c.userid = m.userid
+		 and gd.userid = '${userid}'
+	</select>
+	<select id="goodsWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select goods_img1, category, goods_name, g.code code
+		 from good gd, goods g
+		 where gd.code = g.code
+		 and gd.userid = '${userid}'
+	</select>
+	<insert id="wishListAdd">
+		insert into good values ('${userid}','${code}')
+	</insert>
+	<delete id="wishListDel">
+		delete from good where userid='${userid}' and code='${code}'
+	</delete>
+	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select * from good where userid='${userid}' and code='${code}'
+	</select>
 </mapper>

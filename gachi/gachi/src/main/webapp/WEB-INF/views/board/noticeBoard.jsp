@@ -49,12 +49,6 @@ table a, table a:hover{
 </style>
 <script>
 	$(function(){
-		$('#noticeBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/noticeBoard";
-		});
-		$('#eventBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/eventBoard";
-		});
 		//검색어 폼에서 검색 버튼 클릭
 		$('#searchForm').submit(function(){
 			if($('#searchWord').val()==""){
@@ -107,7 +101,7 @@ table a, table a:hover{
 		<ul class="pagination justify-content-center">
 			<c:if test="${pvo.nowPage>1 }">
 				<li class="page-item">
-					<a class="page-link" href="/gachi/noticeBoard?nowPage=${pageVO.nowPage-1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Prev</a>
+					<a class="page-link" href="/gachi/noticeBoard?nowPage=${pvo.nowPage-1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Prev</a>
 				</li>
 			</c:if>
 			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1}">
@@ -118,7 +112,7 @@ table a, table a:hover{
 				</c:if>
 			</c:forEach>
 			<c:if test="${pvo.nowPage<pvo.totalPage }">
-				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/noticeBoard?nowPage=${pageVO.nowPage+1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Next</a></li>
+				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/noticeBoard?nowPage=${pvo.nowPage+1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Next</a></li>
 			</c:if>
 		</ul>
 	</div>

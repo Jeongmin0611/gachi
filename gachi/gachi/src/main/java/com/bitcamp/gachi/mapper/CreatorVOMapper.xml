@@ -33,14 +33,33 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
 	<select id="countDeletedCreator" resultType="_int">
 		select count(*) from member where deleted='탈퇴' and grade = '크리에이터'
 	</select>
-	<select id="creatorBoardSelectAll" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category, m.nickname, picture, c.userid from creator c join member m on c.userid = m.userid
+	<select id="creatorBoardSelectAll" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="com.bitcamp.gachi.admin.AllVO">
+		select * from (select * from (select category, m.nickname, picture, c.userid from creator c join member m on c.userid = m.userid  where creator_state='승인'
+		<choose>
+			<when test="searchWord==null">
+				order by m.nickname asc)
+				where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+				where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+			<when test="searchWord!=null and searchKey.equals('전체')">
+					and m.nickname like '%${searchWord}%'
+					order by m.nickname asc)
+					where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+					where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+			<when test="searchWord!=null and searchKey!='전체'">
+					and category like '%${searchKey}%' and m.nickname like '%${searchWord}%'
+					order by m.nickname asc)
+					where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+					where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+		</choose>		
 	</select>	
 	<select id="creatorBoardViewSelect" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select picture, nickname, sns_addr, creator_info from member m join creator cre on m.userid=cre.userid  where cre.userid='${param1}'
 	</select>
 	<select id="creatorBoardViewSelectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select creator_info, class_name, real_price, class_img1 from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
+		select creator_info, class_name, real_price, class_img from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
 	</select>
 
 	
@@ -108,6 +127,17 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
             )
     group by labels
 	
+	</select>
+	<select id="introCreatorSelectAllCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		select count(*) from  creator c join member m on c.userid = m.userid  where creator_state='승인'
+		<choose>
+			<when test="searchWord!=null and searchKey=='전체'" >
+				and m.nickname like '%${searchWord}%'
+			</when>
+			<when test="searchWord!=null and searchKey!='전체'" >
+				and category like '${searchKey}' and m.nickname like '%${searchWord}%'
+			</when>
+		</choose>
 	</select>
 	
 </mapper>

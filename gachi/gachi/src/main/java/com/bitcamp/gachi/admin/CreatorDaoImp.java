@@ -18,7 +18,7 @@ public interface CreatorDaoImp {
 
 	public int countDeletedCreator(); // 탈퇴 크리에이터 명 수 
 	
-	public List<AllVO> creatorBoardSelectAll();//크리에이터 소개 페이지 리스트	
+	public List<AllVO> creatorBoardSelectAll(PagingVO vo);//크리에이터 소개 페이지 리스트	
 
 	public AllVO creatorBoardViewSelect(String userid);//크리에이터 소개 상세 (사진, 닉네임, 소개글)
 	
@@ -39,6 +39,8 @@ public interface CreatorDaoImp {
 	public List<Map<String, Integer>> CreatorForAge(Map<String, String> dbParam_pie); //크리에이터 파이 
 
 	public List<Map<String, Integer>> CreatorForCategory(Map<String, String> dbParam_pie);	//크리에이터 파이
+	
+	public int introCreatorSelectAllCount(PagingVO vo);//크리에이터 소개 페이지 (현재 크리에이터 전체 명 수)
 
 }
 

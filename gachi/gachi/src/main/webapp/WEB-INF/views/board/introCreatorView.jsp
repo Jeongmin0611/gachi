@@ -38,7 +38,6 @@
 #createClass{
 	clear:left;
 	margin:30px 0;
-	overflow: auto;
 }
 #createClass li{
 	float:left;
@@ -57,6 +56,7 @@
 #createClass li:nth-child(1), #createClass li:nth-child(2), #createClass li:nth-child(3){
 	height: 30px;
 	line-height: 30px;
+	padding:0;
 }
 </style>
 <div class="container cfont" style="height: auto;">
@@ -85,12 +85,12 @@
 	<!-- 개설한 클래스 -->
 	<div id="createClass" class="row" >
 		<h4 class="col-sm-12">개설한 클래스</h4>
-		<ul class="col-sm">
+		<ul class="col-sm-12">
 			<li>&nbsp;</li>
 			<li>클래스명</li>
 			<li>가격</li>
 			<c:forEach var ="list" items="${list}">
-				<li><a href="/gachi/classMain"><img src="/gachi/img/${list.class_img1 }"/></a></li>
+				<li><a href="/gachi/classMain"><img src="/gachi/img/${list.class_img }"/></a></li>
 				<li><a href="/gachi/classMain">${list.class_name }</a></li>
 				<li>${list.real_price }원</li>
 			</c:forEach>

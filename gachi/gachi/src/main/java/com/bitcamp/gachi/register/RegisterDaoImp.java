@@ -1,5 +1,6 @@
 package com.bitcamp.gachi.register;
 
+import java.util.List;
 
 public interface RegisterDaoImp {
 	public int registerInsert(RegisterVO vo);
@@ -7,5 +8,11 @@ public interface RegisterDaoImp {
 	public int creatorInsert2(RegisterVO vo);
 	public String selectList(RegisterVO vo);
 	public RegisterVO memberLogin(RegisterVO vo);
-	public int useridChk(RegisterVO vo);
+	public int useridChk(String okid);
+	public int useridChk2(String okid2);
+	public String useridF(String useridF);
+	public String userpwdF(String userpwdF);
+	public List<SearchPageVO> searchTextChk(RegisterVO vo);
+	public List<SearchPageVO> searchTextChk2(RegisterVO vo);
+	public List<SearchPageVO> searchTextChk3(RegisterVO vo);
 }

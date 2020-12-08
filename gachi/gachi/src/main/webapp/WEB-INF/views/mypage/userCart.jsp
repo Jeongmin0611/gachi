@@ -80,7 +80,7 @@
 				<c:forEach var="cvo" items="${cList }">
 					<div class="row">
 						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${cvo.code }" checked/></div>
-						<input type="hidden" name="orderVOList[${cnt }].class_img1" value="${cvo.class_img }"/>
+						<input type="hidden" name="orderVOList[${cnt }].class_img" value="${cvo.class_img }"/>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].class_name" value="${cvo.class_name }"/><br/>${cvo.username }</div>
 						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${cvo.amount }" style="width:15%"/>개
@@ -121,6 +121,7 @@
 						<c:set var="ship" value="0"/>
 						<div><b>배송비 무료</b></div>
 					</c:if>
+					<input type="hidden" id="shipLbl" value="${ship }"/>
 					<hr class="userHr"/>
 					<div style="font-size:1.2em;"><b>총 금액</b> ${sum+ship }원</div>
 				</div>

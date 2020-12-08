@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.abercap.mediainfo.api.MediaInfo;
 import com.google.gson.JsonObject;
 
 
@@ -426,7 +429,7 @@ public class AdminController {
 		}
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
-		List<ClassVO> list=dao.getClassListLookUp(vo);
+		List<ClassVO> list=dao.getClassListLookUp(vo); 
 		
 		ModelAndView mav =new ModelAndView();
 		mav.addObject("list",list);
@@ -459,6 +462,13 @@ public class AdminController {
 	public ModelAndView adminClassView(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		ClassVO vo=dao.selectClass(code);
+		StringTokenizer st=new StringTokenizer(vo.getClass_img(),",");
+		List<String> list=new ArrayList<String>();
+		while(st.hasMoreTokens()) {
+			list.add(st.nextToken());
+		}
+		vo.setImgList(list);
+		
 		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
@@ -470,6 +480,13 @@ public class AdminController {
 	public ModelAndView adminClassEdit(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		ClassVO vo=dao.selectClass(code);
+		StringTokenizer st=new StringTokenizer(vo.getClass_img(),",");
+		List<String> list=new ArrayList<String>();
+		while(st.hasMoreTokens()) {
+			list.add(st.nextToken());
+		}
+		vo.setImgList(list);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
 		mav.setViewName("admin/adminClassEdit");
@@ -479,13 +496,7 @@ public class AdminController {
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
 	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		
-		System.out.println("bbbbbbb=> ");
-		for (String name:vo.getImgList()) {
-			System.out.println("aaaaaa=> "+name);
-		}
-		
-		
+		String path=session.getServletContext().getRealPath("/upload/classImg");
 		int result=dao.updateClass(vo);
 		ModelAndView mav=new ModelAndView();
 		if(result>0) {
@@ -496,27 +507,69 @@ public class AdminController {
 	}
 	@RequestMapping(value="/imgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
 	@ResponseBody
-	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr) {
+	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+			@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		MultipartFile file=mhsr.getFile("file");
 		OutputStream ops=null;
 		String path=session.getServletContext().getRealPath("/upload/classImg");
-		
 		boolean isc=file.isEmpty();
 		String filePath=null;
 		if(!isc){
-			try {
-				ops=new FileOutputStream(new File(path,file.getOriginalFilename()));
-				ops.write(file.getBytes());
-				filePath="/gachi/upload/classImg/"+file.getOriginalFilename();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			String fName=file.getOriginalFilename();
+			if(fName!=null&&!fName.equals("")) {
+				String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+				String oriExt=fName.substring(fName.lastIndexOf("."));
+				File newFile=new File(path,code+"_"+fName);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							fName=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					file.transferTo(newFile);
+					String classImg=dao.selectClassImg(code);
+					classImg=classImg+newFile.getName()+",";
+					dao.updateClassImg(classImg, code);
+					filePath="/gachi/upload/classImg/"+newFile.getName();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}//if
 		}
 		return filePath;
 	}
 	
+	@RequestMapping(value="imageDelete",method = RequestMethod.GET)
+	@ResponseBody
+	public void imageDelete(HttpServletRequest req,HttpSession session) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String imageName=req.getParameter("imageName");
+		String code=req.getParameter("code");
+		File file=new File(path,imageName);
+		if(file.exists()) {
+			file.delete();
+			String classImg=dao.selectClassImg(code);
+			StringTokenizer st=new StringTokenizer(classImg,",");
+			String txt="";
+			while (st.hasMoreTokens()) {
+				String img=st.nextToken();
+				if(img.equals(imageName)) {
+					continue;
+				}
+				txt+=img+",";
+			}
+			dao.updateClassImg(txt, code);
+		}
+	} 
 
-	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -529,6 +582,13 @@ public class AdminController {
 		return mav;
 	} 
 	
+	@RequestMapping(value="/imgDelete",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public void imgDelete() {
+		
+	}
+	
+	
 	@RequestMapping("/adminClassDel")
 	public ModelAndView adminClassDel(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -538,7 +598,6 @@ public class AdminController {
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
-	
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
@@ -786,6 +845,9 @@ public class AdminController {
 		if(nowPageRequest!=null) {
 			npvo.setNowPage(Integer.parseInt(nowPageRequest));
 		}
+		
+		System.out.println("option==>"+npvo.getOption());
+		System.out.println("searchWord==>"+npvo.getSearchWord());
 		int totalRecord=dao.getAllRecord(npvo);
 		npvo.setTotalRecord(totalRecord);
 		
@@ -2116,6 +2178,46 @@ public class AdminController {
 	public String adminVideo() {
 		return "admin/adminVideo";
 	}
+	
+	@RequestMapping(value="/videoUpload",method = RequestMethod.POST)
+	@ResponseBody
+	public String videoUpload(HttpSession session, MultipartHttpServletRequest mhsr,
+			@RequestParam("code") String code){
+		String path=session.getServletContext().getRealPath("/upload/class_video");
+		MultipartFile file=mhsr.getFile("file");
+		boolean isc=file.isEmpty();
+		String filePath=null;
+		if(!isc){
+			String fName=file.getOriginalFilename();
+			if(fName!=null&&!fName.equals("")) {
+				String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+				String oriExt=fName.substring(fName.lastIndexOf("."));
+				File newFile=new File(path,code+"_"+fName);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							fName=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					file.transferTo(newFile);
+					filePath="/gachi/upload/class/class_video/"+newFile.getName();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}//if
+		}
+		return filePath;
+	}
+	@RequestMapping("/adminVideoWrite")
+	public String adminVideoWrite() {
+		return "admin/adminVideoWrite";
+	}
 	@RequestMapping("/adminReply")	
 	public String adminReply() {
 		return "admin/adminReply";
@@ -2129,3 +2231,4 @@ public class AdminController {
 		return "admin/adminAnswer";
 	}
 }
+
