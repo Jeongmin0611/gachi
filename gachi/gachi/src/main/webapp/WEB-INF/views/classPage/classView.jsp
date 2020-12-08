@@ -210,29 +210,38 @@
 </style>
 <script>
 	$(function() {
-		//모달창 띄우기(수강평)
-	    $("#myclassReviewFrm").click(function(){
+		//세션의 아이디 가져오기
+    	var id = '<%=(String)session.getAttribute("userid")%>'; 
+    	
+		//모달창 띄우기(수강평)		
+	    $("#myclassReviewFrm").click(function(){	    	
     		$("#myclassModalR").css({
                "top": (($(window).height()-$("#myclassModalR").outerHeight())/2+$(window).scrollTop())+"px",
                "left": (($(window).width()-$("#myclassModalR").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-            
+               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정            
             });
 	        $("#myclassModalR").fadeIn();
+	        
 	    });
 	    $("#myclassReviewWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalR").fadeOut();
 	    });  
 	  //모달창 띄우기(질문)
 	    $("#myclassQnaFrm").click(function(){
-    		$("#myclassModalQ").css({
-               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
-               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-            
-            });
-	        $("#myclassModalQ").fadeIn();
+			if(id==null ||id =='null'){
+				swal('로그인 후 이용가능한 기능입니다.');
+				return false;
+			}
+			if(id!=null){
+	    		$("#myclassModalQ").css({
+	               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
+	               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
+	               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정	            
+	            });
+		        $("#myclassModalQ").fadeIn();
+			}
 	    });
+	  
 	    $("#myclassQnaWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalQ").fadeOut();
 	    });  
@@ -256,9 +265,8 @@
 	    
 	  //좋아요 클릭이벤트
 		$('i').on('click',function(){
-			var id = '<%=(String)session.getAttribute("userid")%>';
 			if(id==null ||id =='null'){
-				alert('로그인 후 이용가능한 기능입니다.');
+				swal('로그인 후 이용가능한 기능입니다.');
 				return false;
 			}
 			if(id!=null){
@@ -409,7 +417,7 @@
 
 		<!-- 클래스 문의 -->
 		<div id="myclassQna">
-			<label>질문&답변</label>
+			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
 				<input type="text" name="searchWord" />
 				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
@@ -466,7 +474,15 @@
 
 		</div>
 
-
+		<ul class="pagination justify-content-center" id="myclassReviewPg">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
 	</div>
 </div>
 <div id="myclassModalR" class="cfont">
