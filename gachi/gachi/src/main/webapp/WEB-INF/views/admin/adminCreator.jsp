@@ -1,7 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
-
+<script>
+$(function(){
+	
+	if('${status}' != '') {
+		$("#status").val("${status}");
+	} else{
+		$("#status").val('');
+	}
+	if('${search}' != '') {
+		$("#search").val("${search}");
+	}
+	$("#frm_submit").click(function(){
+		var url = "/adminCreator";
+		var data = "status=" + $("#status").val() + "&search=" + $("#search").val().trim();
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+		
+	});
+});
+</script>
 <div class="container ad_font">
 <h1>크리에이터 관리</h1>
 <div id="ad_search_header">
@@ -13,23 +43,23 @@
 	</ul>
 </div>
 <div>
-	<form action="">
-		<select name="#">
+	<form action="adminCreator" method="post" id="frm">
+		<!-- <select name="">
 			<option>전체</option>
 			<option>크리에이터명</option>
 			<option>이름</option>
 			<option>이메일</option>
 			<option>연락처</option>
-		</select>
-		<select name="#">
-			<option>전체</option>
-			<option>승인</option>
-			<option>미승인</option>
-			<option>승인거절</option>
+		</select> -->
+		<select name="status" id="status">
+			<option value="">전체</option>
+			<option value="승인">승인</option>
+			<option value="미승인">미승인</option>
+			<option value="승인거절">승인거절</option>
 			
 		</select>
-		<input type="text" id="" name=""/>
-		<input type="submit" class="btn" value="검색" />
+		<input type="text" id="search" name="search"/>
+		<input type="submit" id="frm_submit" class="btn" value="검색" />
 		</form>
 </div>
 </div>

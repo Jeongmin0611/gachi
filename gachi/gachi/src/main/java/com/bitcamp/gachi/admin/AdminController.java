@@ -96,29 +96,44 @@ public class AdminController {
 					
 			// dbParam for member chart 
 			Map<String, String> dashmember_cnt = new HashMap<String, String>();
+			Map<String, String> dbParam1 = new HashMap<String, String>();
 			dashmember_cnt.put("startMonth", startMonth.toString());
 			dashmember_cnt.put("endMonth", endMonth.toString());
+			dbParam1.put("startMonth", startMonth.toString());
+			dbParam1.put("endMonth", endMonth.toString());
 		
+			
+			
 			//chart1 member 
 			dao = sqlSession.getMapper(MemberDaoImp.class);
-			List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
-			List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
-			List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
-
-			// ChartJs 전송 데이터
-			List<String> dashMemberData = new ArrayList<String>();
-			List<String> dashAllMemberData = new ArrayList<String>();
-			List<String> dashCreatorData = new ArrayList<String>();
+//			List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+//			List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+//			List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+			int  dashMember = dao.dashboardMember(dashmember_cnt);
+			int  dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+			int dashCreator = dao.dashboardCreator(dashmember_cnt);	
 			
-			for(int i=0; i<dashMember.size(); i++) {
-			     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
-			}
-			for(int i=0; i<dashCreator.size();i++) {
-				dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
-			}
-			for(int i=0; i<dashAllMember.size();i++) {
-				 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
-			}
+			
+			SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+			List<SettleVO> result = dao1.managePaymentClass_Dash(dbParam1);
+			dao1 = sqlSession.getMapper(SettleDaoImp.class);
+			Integer Allpayment = dao1.paymentAll_Dash(dbParam1);
+			Integer AllPaymentClass = dao1.paymentClassAll_Dash(dbParam1);
+			Integer AllPaymentStore = dao1.paymentStoreAll_Dash(dbParam1);
+			// ChartJs 전송 데이터
+//			List<String> dashMemberData = new ArrayList<String>();
+//			List<String> dashAllMemberData = new ArrayList<String>();
+//			List<String> dashCreatorData = new ArrayList<String>();
+			
+//			for(int i=0; i<dashMember.size(); i++) {
+//			     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
+//			}
+//			for(int i=0; i<dashCreator.size();i++) {
+//				dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
+//			}
+//			for(int i=0; i<dashAllMember.size();i++) {
+//				 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+//			}
 			for(int i=0; i<dataSize; i++) {
 				String tmp = dbParam2.get(i);
 //					System.out.println(tmp);
@@ -126,9 +141,16 @@ public class AdminController {
 //					System.out.println(dbParam2.get(i));
 			}
 			
-			mav.addObject("dashMemberData", dashMemberData);
-			mav.addObject("dashAllMemberData",dashAllMemberData);
-			mav.addObject("dashCreatorData", dashCreatorData);
+//			mav.addObject("dashMemberData", dashMemberData);
+//			mav.addObject("dashAllMemberData",dashAllMemberData);
+//			mav.addObject("dashCreatorData", dashCreatorData);
+			mav.addObject("dashMemberData", dashMember);
+			mav.addObject("dashAllMemberData", dashAllMember);
+			mav.addObject("dashCreatorData", dashCreator);
+			mav.addObject("AllPaymentClass", AllPaymentClass);
+			mav.addObject("AllPaymentStore", AllPaymentStore);
+			mav.addObject("Allpayment", Allpayment);
+			
 			mav.addObject("labelData", dbParam2);
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
@@ -191,33 +213,44 @@ public class AdminController {
 		
 		// chart1 data
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		
 		List<Integer> newMember = dao.dashForMember(dbParam); // return type
 				
 		// dbParam for member chart 
 		Map<String, String> dashmember_cnt = new HashMap<String, String>();
+		Map<String, String> dbParam1 = new HashMap<String, String>();
 		dashmember_cnt.put("startMonth", startMonth.toString());
 		dashmember_cnt.put("endMonth", endMonth.toString());
-	
+		dbParam1.put("startMonth", startMonth.toString());
+		dbParam1.put("endMonth", endMonth.toString());
 		//chart1 member 
 		dao = sqlSession.getMapper(MemberDaoImp.class);
-		List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
-		List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
-		List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+//		List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
+//		List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+//		List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
+		int  dashMember = dao.dashboardMember(dashmember_cnt);
+		int  dashAllMember = dao.dashboardAllMember(dashmember_cnt);
+		int  dashCreator = dao.dashboardCreator(dashmember_cnt);
 
 		// ChartJs 전송 데이터
-		List<String> dashMemberData = new ArrayList<String>();
-		List<String> dashAllMemberData = new ArrayList<String>();
-		List<String> dashCreatorData = new ArrayList<String>();
-		
-		for(int i=0; i<dashMember.size(); i++) {
-		     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
-		}
-		for(int i=0; i<dashCreator.size();i++) {
-			dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
-		}
-		for(int i=0; i<dashAllMember.size();i++) {
-			 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
-		}
+//		List<String> dashMemberData = new ArrayList<String>();
+//		List<String> dashAllMemberData = new ArrayList<String>();
+//		List<String> dashCreatorData = new ArrayList<String>();
+		SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao1.managePaymentClass_Dash(dbParam1);
+		dao1 = sqlSession.getMapper(SettleDaoImp.class);
+		Integer Allpayment = dao1.paymentAll_Dash(dbParam1);
+		Integer AllPaymentClass = dao1.paymentClassAll_Dash(dbParam1);
+		Integer AllPaymentStore = dao1.paymentStoreAll_Dash(dbParam1);
+//		for(int i=0; i<dashMember.size(); i++) {
+//		     dashMemberData.add(String.valueOf(dashMember.get(i).get("CNT")));
+//		}
+//		for(int i=0; i<dashCreator.size();i++) {
+//			dashCreatorData.add(String.valueOf(dashCreator.get(i).get("CNT")));
+//		}
+//		for(int i=0; i<dashAllMember.size();i++) {
+//			 dashAllMemberData.add(String.valueOf(dashAllMember.get(i).get("CNT")));
+//		}
 		if(startMonth != null && endMonth != null) {
 			for(int i=0; i<dataSize; i++) {
 				String tmp = dbParam2.get(i);
@@ -226,9 +259,14 @@ public class AdminController {
 
 			}
 			
-			mav.addObject("dashMemberData", dashMemberData);
-			mav.addObject("dashAllMemberData",dashAllMemberData);
-			mav.addObject("dashCreatorData",dashCreatorData);
+//			mav.addObject("dashMemberData", dashMemberData);
+//			mav.addObject("dashAllMemberData",dashAllMemberData);
+//			mav.addObject("dashCreatorData",dashCreatorData);
+			mav.addObject("dashMemberData", dashMember);
+			mav.addObject("dashAllMemberData", dashAllMember);
+			mav.addObject("dashCreatorData", dashCreator);
+			mav.addObject("Allpayment", Allpayment);
+			
 			mav.addObject("labelData", dbParam2);
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
@@ -257,19 +295,77 @@ public class AdminController {
 	}
 	@RequestMapping("/adminCreator")
 	public ModelAndView adminCreator() {
+		ModelAndView mav=new ModelAndView();
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("status", null);
+		dbParam.put("search", null);
+
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-		List<AllVO> list = dao.selectAllCreator();
+		List<AllVO> list = dao.selectAllCreator(dbParam);
 		int countAllCreator = dao.countAllCreator();
 		int countNowCreator =dao.countNowCreator();
 		int countDeletedCreator = dao.countDeletedCreator();
-		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("creatorList", list);
 		mav.addObject("countAllCreator", countAllCreator);
 		mav.addObject("countNowCreator", countNowCreator);
 		mav.addObject("countDeletedCreator", countDeletedCreator);
+		mav.addObject("status", null);
+		mav.addObject("search", null);
 		mav.setViewName("admin/adminCreator");
 		return mav;
 	}
+	
+	@RequestMapping(value="/adminCreator", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminCreator(HttpServletResponse resp, @RequestParam(value="status", required=false) String status, @RequestParam(value="search", required=false) String search) {
+		ModelAndView mav=new ModelAndView();
+		
+		if(status.length() <= 0) status = null;
+		if(!search.equals(null)) {
+			if(search.length() <= 0) search = null;
+		}
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("status", status);
+		dbParam.put("search", search);
+		
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		List<AllVO> list = dao.selectAllCreator(dbParam);
+		int countAllCreator = dao.countAllCreator();
+		int countNowCreator =dao.countNowCreator();
+		int countDeletedCreator = dao.countDeletedCreator();
+		
+		if(list != null) {
+			mav.addObject("creatorList", list);
+			mav.addObject("countAllCreator", countAllCreator);
+			mav.addObject("countNowCreator", countNowCreator);
+			mav.addObject("countDeletedCreator", countDeletedCreator);
+			mav.addObject("status", status);
+			mav.addObject("search", search);
+			
+			try {
+				mav.setViewName("admin/adminCreator");
+				resp.getWriter().write("{\"result\":\"success\"}");
+				System.out.println("ajax success");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		} else {
+
+			try{
+				System.out.println("ajax error");
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	
 	@RequestMapping("/adminCreatorView")
 	public ModelAndView adminCreatorView(String userid) {
 		
@@ -526,14 +622,51 @@ public class AdminController {
 	
 	
 	
-//	public String adminMember() {
-//		
-//		return "admin/adminMember";
 //	}
+//	@RequestMapping("/adminNotice")
+//	public ModelAndView adminNotice(NoticePageVO npvo,HttpServletRequest req) {
+//		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
+//		String nowPageRequest=req.getParameter("nowPage");
+//		if(nowPageRequest!=null) {
+//			npvo.setNowPage(Integer.parseInt(nowPageRequest));
+//		}
+//		int totalRecord=dao.getAllRecord(npvo);
+//		npvo.setTotalRecord(totalRecord);
+//		
+//		List<NoticeVO> list=dao.selectList(npvo);
+//		ModelAndView mav=new ModelAndView();
+//		mav.addObject("list",list);
+//		mav.addObject("npvo",npvo);
+//		mav.setViewName("admin/adminNotice");
+//		return mav;
+//	}
+//	
 	@RequestMapping("/adminMember")
-	public ModelAndView adminMember() {
+	public ModelAndView adminMember(@RequestParam(value="now", required=false) String now) {
+		
+		int nowPage = 1;
+		if(!now.equals(null) && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-		List<MemberVO> list = dao.selectAllMember(); // 전체 회원 리스트
+		
+//		String nowPageRequest=req.getParameter("nowPage");
+//		if(nowPageRequest!=null) {
+//			pvo.setNowPage(Integer.parseInt(nowPageRequest));
+//		}
+//		int totalRecord=dao.getAllRecord(pvo);
+//		pvo.setTotalRecord(totalRecord);
+//		
+//		List<MemberVO> pvolist=dao.selectList(pvo);
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("withdraw", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", 20*(nowPage-1)+"");
+		dbParam.put("endNum", 20*(nowPage)+"");
+		
+//	
+		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
+		
 		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
 		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
 		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
@@ -542,13 +675,114 @@ public class AdminController {
 		
 		ModelAndView mav=new ModelAndView();
 		
+		int lastPage = 1;
+		if(list.size() % 20 == 0) {
+			lastPage = list.size() / 20;
+		} else {
+			lastPage = list.size() / 20 + 1;
+		}
+		
+		mav.addObject("method", "get");
 		mav.addObject("memberList",list);
-		mav.addObject("pageVO",pageVO);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+//		mav.addObject("pageVO",pageVO);
 		mav.addObject("countAllMember", countAllMember);
 		mav.addObject("countNowMember", countNowMember);
 		mav.addObject("countDeletedMember", countDeletedMember);
 		mav.setViewName("admin/adminMember");
+		
+//		mav.addObject("Paginglist",pvolist);
+//		mav.addObject("pvo",pvo);
+		
 		return mav;
+	}
+	
+	@RequestMapping(value="/adminMember", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminMember(HttpServletResponse resp, @RequestParam(value="withdraw", required=false) String withdraw, @RequestParam(value="search", required=false) String search, @RequestParam(value="now", required=false) String now) {
+		System.out.println("adminMember post page");
+		
+		int nowPage = 1;
+		if(!now.equals(null) && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		
+//		String nowPageRequest=req.getParameter("nowPage");
+//		if(nowPageRequest!=null) {
+//			pvo.setNowPage(Integer.parseInt(nowPageRequest));
+//		}
+//		int totalRecord=dao.getAllRecord(pvo);
+//		pvo.setTotalRecord(totalRecord);
+//		
+//		List<MemberVO> pvolist=dao.selectList(pvo);
+		
+		
+		if(withdraw.length() <= 0) withdraw = null;
+		if(!search.equals(null)) {
+			if(search.length() <= 0) search = null;
+		}
+		
+		System.out.println("withdraw:" + withdraw);
+		System.out.println("search:" + search);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("withdraw", withdraw);
+		dbParam.put("search", search);
+		dbParam.put("startNum", 20*(nowPage-1)+"");
+		dbParam.put("endNum", 20*(nowPage)+"");
+		
+		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
+		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
+		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
+		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
+		
+//		PagingVO pageVO = new PagingVO();
+//		for(MemberVO tmp : list) {
+//			System.out.println(tmp);
+//		}
+		int lastPage = 1;
+		if(list.size() % 20 == 0) {
+			lastPage = list.size() / 20;
+		} else {
+			lastPage = list.size() / 20 + 1;
+		}
+		
+		if(list != null) {
+			mav.addObject("method", "post");
+			mav.addObject("memberList",list);
+			mav.addObject("withdraw", withdraw);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("search", search);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+//			mav.addObject("pageVO",pageVO);
+			mav.addObject("countAllMember", countAllMember);
+			mav.addObject("countNowMember", countNowMember);
+			mav.addObject("countDeletedMember", countDeletedMember);
+			try {
+				mav.setViewName("admin/adminMember");
+				resp.getWriter().write("{\"result\":\"success\"}");
+				System.out.println("ajax success");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+//		} else {
+//
+//			try{
+//				System.out.println("ajax error");
+//				resp.getWriter().write("{\"result\":\"fail\"}");
+//			} catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+		}
+		
+		return null;
 	}
 	@RequestMapping("/adminMemberView")
 	public ModelAndView adminMemberView(String userid) {
@@ -725,6 +959,21 @@ public class AdminController {
 	public String admin1on1Write() {
 		return "admin/admin1on1Write";
 	}
+//	@RequestMapping("/adminOrder")
+//	public ModelAndView adminOrder() {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+//		String todate =  yyyymmdd.format(new Date());
+//		String startDate = todate.substring(0, 8) + "01";
+//		String endDate = todate;
+//		
+//		Map<String, String> dbParam = new HashMap<String, String>();
+//		dbParam.put("startDate", startDate);
+//		dbParam.put("endDate", endDate);
+//		dashForMember
+//		return mav;
+//	}
 	@RequestMapping("/adminOrder")
 	public String adminOrder() {
 		return "admin/adminOrder";
@@ -742,8 +991,83 @@ public class AdminController {
 		return "admin/adminDelivery";
 	}
 	@RequestMapping("/adminGoods")
-	public String adminGoodsList() {
-		return "admin/adminGoods";
+	public ModelAndView adminGoods() {
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		List<GoodsVO> result = dao.selectAllGoods(dbParam);
+		dao = sqlSession.getMapper(GoodsDaoImp.class);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+
+		mav.addObject("data", result);
+		mav.setViewName("admin/adminGoods");
+	
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminGoods", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminGoods(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		List<GoodsVO> result = dao.selectAllGoods(dbParam);
+		dao = sqlSession.getMapper(GoodsDaoImp.class);
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+
+			mav.addObject("data", result);
+			mav.setViewName("admin/adminGoods");
+
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminGoods");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		
+		return null;
 	}
 	@RequestMapping("/adminGoodsView")
 	public String adminGoodsView() {
@@ -764,43 +1088,238 @@ public class AdminController {
 //		return "admin/adminStatStore";
 //	}
 	
-	@RequestMapping(value="/adminStatStore",method=RequestMethod.GET)
+	@RequestMapping("/adminStatStore")
 	public ModelAndView adminStatStore(@RequestParam(value="startMonth", required=false) String startMonth, @RequestParam(value="endMonth", required=false) String endMonth) {
 		ModelAndView mav = new ModelAndView();
 		
-		if(startMonth==null || endMonth == null) {
-			SimpleDateFormat  yyyymm = new SimpleDateFormat("yyyy-MM");
-			String todate =  yyyymm.format(new Date());
-			if(Integer.parseInt(todate.substring(5, 7))-1 <= 0) {
-				startMonth = (Integer.parseInt(todate.substring(0,3))-1) + "-" + (Integer.parseInt(todate.substring(5, 7))+12-1);
-			}
-			startMonth = todate.substring(0, 4) +  "-" + (Integer.parseInt(todate.substring(5, 7))-1);
-			endMonth = todate;
-			
-			mav.addObject("startMonth", startMonth);
-			mav.addObject("endMonth", endMonth);
-		}
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+	
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer countStoreAll = dao.cntStoreAll(dbParam);
+		Integer countStoreN = dao.cntStoreN(dbParam);
+		Integer countStoreY = dao.cntStoreY(dbParam);
 		
-		int dataSize = 0;
-		if((Integer.parseInt(endMonth.substring(0, 4))) == (Integer.parseInt(startMonth.substring(0, 4)))) { // 2019-11 2020-02
-			dataSize = Integer.parseInt(endMonth.substring(5,7)) - Integer.parseInt(startMonth.substring(5,7));
-		} else{
-			dataSize = (Integer.parseInt(endMonth.substring(0,4)) - Integer.parseInt(startMonth.substring(0,4)))*12;
-			dataSize += Integer.parseInt(endMonth.substring(5,7)); 
-			dataSize -= Integer.parseInt(startMonth.substring(5,7)); 
-		}
+		if(countStoreAll == null) countStoreAll = 0;
+		if(countStoreN == null) countStoreN = 0;
+		if(countStoreY == null) countStoreY = 0;
+		if(countStoreN == null) countStoreN =0;
+		
+		System.out.println(countStoreAll);
+		System.out.println(countStoreN);
+		System.out.println(countStoreY);
 		
 		
-		System.out.println("startMonth:" + startMonth);
-		System.out.println("endMonth:" + endMonth);
-		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+
+		mav.addObject("data", result);
+		mav.addObject("countStoreAll", countStoreAll);
+		mav.addObject("countStoreN", countStoreN);
+		mav.addObject("countStoreY", countStoreY);
 		mav.setViewName("admin/adminStatStore");
+		
 		return mav;
 	}
-	@RequestMapping("/adminStatClass")
-	public String adminStatClass() {
-		return "admin/adminStatClass";
+	@RequestMapping(value="/adminStatStore", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminStatStore(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer countStoreAll = dao.cntStoreAll(dbParam);
+		Integer countStoreN = dao.cntStoreN(dbParam);
+		Integer countStoreY = dao.cntStoreY(dbParam);
+		
+		if(countStoreAll == null) countStoreAll = 0;
+		if(countStoreN == null) countStoreN = 0;
+		if(countStoreY == null) countStoreY = 0;
+		if(countStoreN == null) countStoreN = 0;
+				
+
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+
+			mav.addObject("data", result);
+			mav.addObject("countStoreAll", countStoreAll);
+			mav.addObject("countStoreN", countStoreN);
+			mav.addObject("countStoreY", countStoreY);
+			mav.setViewName("admin/adminStatStore");
+
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminStatStore");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+		
 	}
+	
+	
+	@RequestMapping("/adminStatClass")
+	public ModelAndView adminStatClass() {
+
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+	
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("username", null);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer countStatClassAll = dao.cntStatClassAll(dbParam);
+		Integer countClassN = dao.cntClassN(dbParam);
+		Integer countClassY = dao.cntClassY(dbParam);
+		
+		if(countStatClassAll == null) countStatClassAll = 0;
+		if(countClassN == null) countClassN = 0;
+		if(countClassY == null) countClassY = 0;
+		
+		System.out.println(countStatClassAll);
+		System.out.println(countClassN);
+		System.out.println(countClassY);
+		
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("username", null);
+		mav.addObject("data", result);
+		mav.addObject("countStatClassAll", countStatClassAll);
+		mav.addObject("countClassN", countClassN);
+		mav.addObject("countClassY", countClassY);
+		mav.setViewName("admin/adminStatClass");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminStatClass", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminStatClass(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(username.length() <= 0) username = null;
+		
+		System.out.println(username);
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("username", username);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer countStatClassAll = dao.cntStatClassAll(dbParam);
+		Integer countClassN = dao.cntClassN(dbParam);
+		Integer countClassY = dao.cntClassY(dbParam);
+		
+		if(countStatClassAll == null) countStatClassAll = 0;
+		if(countClassN == null) countClassN = 0;
+		if(countClassY == null) countClassY = 0;
+		
+		System.out.println(countStatClassAll);
+		System.out.println(countClassN);
+		System.out.println(countClassY);
+				
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("username", username);
+			mav.addObject("data", result);
+			mav.addObject("countStatClassAll", countStatClassAll);
+			mav.addObject("countClassN", countClassN);
+			mav.addObject("countClassY", countClassY);
+			mav.setViewName("admin/adminStatClass");
+
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminStatClass");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+		
+	}
+	
+	
+	
 	@RequestMapping("/adminStatCreator")
 	public ModelAndView adminStatCreator() {
 		ModelAndView mav = new ModelAndView();
@@ -1311,9 +1830,346 @@ public class AdminController {
 		return null;
 	}
 	@RequestMapping("/adminSettle")
-	public String adminSettle() {
-		return "admin/adminSettle";
+	public ModelAndView adminSettle() {
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+	
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("username", null);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllSales = dao.countAllSales(dbParam);
+		Integer cntSalesN = dao.countSalesN(dbParam);
+		Integer cntSalesY = dao.countSalesY(dbParam);
+		
+		if(cntAllSales == null) cntAllSales = 0;
+		if(cntSalesN == null) cntSalesN = 0;
+		if(cntSalesY == null) cntSalesY = 0;
+		
+		System.out.println(cntAllSales);
+		System.out.println(cntSalesN);
+		System.out.println(cntSalesY);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("username", null);
+		mav.addObject("data", result);
+		mav.addObject("cntAllSales", cntAllSales);
+		mav.addObject("cntSalesN", cntSalesN);
+		mav.addObject("cntSalesY", cntSalesY);
+		mav.setViewName("admin/adminSettle");
+		
+		return mav;
 	}
+	
+	@RequestMapping(value="/adminSettle", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminSettle(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(username.length() <= 0) username = null;
+		
+		System.out.println(username);
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("username", username);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.manageSettle(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllSales = dao.countAllSales(dbParam);
+		Integer cntSalesN = dao.countSalesN(dbParam);
+		Integer cntSalesY = dao.countSalesY(dbParam);
+		
+		
+		if(cntAllSales == null) cntAllSales = 0;
+		if(cntSalesN == null) cntSalesN = 0;
+		if(cntSalesY == null) cntSalesY = 0;
+		
+				
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("username", username);
+			mav.addObject("data", result);
+			mav.addObject("cntAllSales", cntAllSales);
+			mav.addObject("cntSalesN", cntSalesN);
+			mav.addObject("cntSalesY", cntSalesY);
+			
+			System.out.println("data"+result);
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminSettle");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+		
+	}
+	
+	@RequestMapping("/adminPaymentStore")
+	public ModelAndView adminPaymentStore() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+	
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("username", null);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.managePaymentStore(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllPayment = dao.paymentStoreAll(dbParam);
+		Integer cntPaymentN = dao.paymentStoreN(dbParam);
+		Integer cntPaymentY = dao.paymentStoreY(dbParam);
+		
+		if(cntAllPayment == null) cntAllPayment = 0;
+		if(cntPaymentN == null) cntPaymentN = 0;
+		if(cntPaymentY == null) cntPaymentY = 0;
+		
+		System.out.println(cntAllPayment);
+		System.out.println(cntPaymentN);
+		System.out.println(cntPaymentY);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("username", null);
+		mav.addObject("data", result);
+		mav.addObject("cntAllPayment", cntAllPayment);
+		mav.addObject("cntPaymentN", cntPaymentN);
+		mav.addObject("cntPaymentY", cntPaymentY);
+		mav.setViewName("admin/adminPaymentStore");
+		
+		return mav;
+
+	}
+	@RequestMapping(value="/adminPaymentStore", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminPaymentStore(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(username.length() <= 0) username = null;
+		
+		System.out.println(username);
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("username", username);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.managePaymentStore(dbParam);
+		System.out.println("result="+result);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllPayment = dao.paymentStoreAll(dbParam);
+		Integer cntPaymentN = dao.paymentStoreN(dbParam);
+		Integer cntPaymentY = dao.paymentStoreY(dbParam);
+		
+		if(cntAllPayment == null) cntAllPayment = 0;
+		if(cntPaymentN == null) cntPaymentN = 0;
+		if(cntPaymentY == null) cntPaymentY = 0;
+		
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("username", username);
+			mav.addObject("data", result);
+			mav.addObject("cntAllPayment", cntAllPayment);
+			mav.addObject("cntPaymentN", cntPaymentN);
+			mav.addObject("cntPaymentY", cntPaymentY);
+			
+
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminPaymentStore");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+		
+	}
+
+	@RequestMapping("/adminPaymentClass")
+	public ModelAndView adminPaymentClass() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+	
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("username", null);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.managePaymentClass(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
+		Integer cntPaymentClassY = dao.paymentClassY(dbParam);
+		
+		if(cntAllPaymentClass == null) cntAllPaymentClass = 0;
+		if(cntPaymentClassY == null) cntPaymentClassY = 0;
+		
+		System.out.println(cntAllPaymentClass);
+		System.out.println(cntPaymentClassY);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("username", null);
+		mav.addObject("data", result);
+		mav.addObject("cntAllPaymentClass", cntAllPaymentClass);
+		mav.addObject("cntPaymentClassY", cntPaymentClassY);
+		mav.setViewName("admin/adminPaymentClass");
+		
+		return mav;
+
+	}
+	@RequestMapping(value="/adminPaymentClass", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminPaymentClass(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		ModelAndView mav = new ModelAndView();
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(username.length() <= 0) username = null;
+		
+		System.out.println(username);
+		// sql 검색 값 셋팅
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("username", username);
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		List<SettleVO> result = dao.managePaymentClass(dbParam);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
+		Integer cntPaymentClassY = dao.paymentClassY(dbParam);
+		
+		if(cntAllPaymentClass == null) cntAllPaymentClass = 0;
+		if(cntPaymentClassY == null) cntPaymentClassY = 0;
+		
+		
+		if(startDate != null && endDate != null) {
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("username", username);
+			mav.addObject("data", result);
+			mav.addObject("cntAllPaymentClass", cntAllPaymentClass);
+			mav.addObject("cntPaymentClassY", cntPaymentClassY);
+			
+
+			System.out.println("ajax success");
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminPaymentClass");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+		
+	}
+
+	
 	@RequestMapping("/adminReturn")
 	public String adminReturn() {
 		return "admin/adminReturn";

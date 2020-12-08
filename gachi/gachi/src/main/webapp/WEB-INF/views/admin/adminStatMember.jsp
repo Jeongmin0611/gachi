@@ -43,10 +43,10 @@
         	    } else{
         	    	
         	    }
-        	    $('#frm').on('submit',function(){
+        	   /*  $('#frm').on('submit',function(){
         	         frmSubmit();
         	         return false;
-        	     });//submit
+        	     });//submit */
         	     
 		$("#frm").click(function(){
 			var url = "/adminStatMember";
@@ -64,14 +64,14 @@
 			});
 		});
         	              
-         function addData(chart, label, data) {
+        /*  function addData(chart, label, data) {
         	 
         	    chart.data.labels.push(label);
         	    chart.data.datasets.forEach((dataset) => {
         	        dataset.data.push(data);
         	    });
         	    chart.update();
-        	}
+        	} */
         	
          function chkPeriod(){
         		var startMonth = $('#startMonth').val();

@@ -50,7 +50,31 @@ public class AllVO {
 	private int stack;//적립마일리지
 	private int good;//좋아요
 	private String goods_info;//상품내용
-		
+	
+/*	
+	//오더리스트
+	private String order_code;
+	private int full_price;
+	private int discount;
+	private int price;
+	private String payment_type;
+	private String card_type;
+	private String orderdate;
+	private String fix_state;
+	private int shipping_fee;
+	
+	//클래스오더
+	private String class_order_code;
+	private String settlement;
+	
+	//굿즈오더
+	private String goods_order_code;
+	private int amount;
+	private String state;
+	private String etc;
+	private String finished;
+*/	
+	
 	public int getRownum() {
 		return rownum;
 	}
@@ -292,5 +316,7 @@ public class AllVO {
 	public void setGoods_info(String goods_info) {
 		this.goods_info = goods_info;
 	}
+	
+	
 	
 }
