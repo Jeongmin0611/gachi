@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.abercap.mediainfo.api.MediaInfo;
 import com.google.gson.JsonObject;
 
 
@@ -412,7 +413,7 @@ public class AdminController {
 	@ResponseBody
 	public String imgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
 			@RequestParam("code") String code) {
-		
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		MultipartFile file=mhsr.getFile("file");
 		OutputStream ops=null;
 		String path=session.getServletContext().getRealPath("/upload/classImg");
@@ -437,6 +438,9 @@ public class AdminController {
 				}//if
 				try {
 					file.transferTo(newFile);
+					String classImg=dao.selectClassImg(code);
+					classImg=classImg+newFile.getName()+",";
+					dao.updateClassImg(classImg, code);
 					filePath="/gachi/upload/classImg/"+newFile.getName();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -498,7 +502,6 @@ public class AdminController {
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
-	
 	@RequestMapping(value="/imageUpload",method=RequestMethod.POST)
 	@ResponseBody
 	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload) {
@@ -1318,6 +1321,42 @@ public class AdminController {
 	@RequestMapping("/adminVideo")
 	public String adminVideo() {
 		return "admin/adminVideo";
+	}
+	
+	@RequestMapping(value="/videoUpload",method = RequestMethod.POST)
+	@ResponseBody
+	public String videoUpload(HttpSession session, MultipartHttpServletRequest mhsr,
+			@RequestParam("code") String code){
+		String path=session.getServletContext().getRealPath("/upload/class_video");
+		MultipartFile file=mhsr.getFile("file");
+		boolean isc=file.isEmpty();
+		String filePath=null;
+		if(!isc){
+			String fName=file.getOriginalFilename();
+			if(fName!=null&&!fName.equals("")) {
+				String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+				String oriExt=fName.substring(fName.lastIndexOf("."));
+				File newFile=new File(path,code+"_"+fName);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							fName=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					file.transferTo(newFile);
+					filePath="/gachi/upload/class/class_video/"+newFile.getName();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}//if
+		}
+		return filePath;
 	}
 	@RequestMapping("/adminVideoWrite")
 	public String adminVideoWrite() {
