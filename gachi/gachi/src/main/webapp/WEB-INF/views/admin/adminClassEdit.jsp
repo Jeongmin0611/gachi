@@ -48,30 +48,8 @@
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
-					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></span></div>';
+					tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
 					$(".ad_box").append(tagTxt);
-				}
-			});
-		});
-			$(document).on('change',".class_img",(event)=>{
-			console.log("aaaaaa");
-			event.preventDefault();
-			var file =event.target.files[0];
-			console.log(file);
-			var formData= new FormData();
-			formData.append("file",file);
-			$.ajax({
-				type:"post",
-				enctype: 'multipart/form-data',
-				url:"/gachi/imgThumbnail",
-				//ajax로 넘길경우 form-data 형식
-				processData: false,
-				contentType: false,
-				//////////////////////////
-				data: formData,
-				success:function(result){
-					$(event.target).parent().prev().children().attr("src",result);
 				}
 			});
 		});
