@@ -15,7 +15,7 @@
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul style="margin:15px 0px">
-			<li class="content_center">클래스코드</li>
+			<li class="content_center">상품코드</li>
 			<li>cla001</li>
 			<li class="content_center">카테고리</li>
 			<li>
@@ -40,7 +40,7 @@
 					<option>마스터</option>
 				</select>
 			</li>
-			<li class="content_center">수업차시</li>
+			<li class="content_center">재고</li>
 			<li><input type="text" id="" name=""/></li>
 			<li class="content_center">가격</li>
 			<li><input type="text" id="" name=""/></li>

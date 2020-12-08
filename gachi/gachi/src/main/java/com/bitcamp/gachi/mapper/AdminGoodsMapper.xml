@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.gachi.admin.GoodsDaoImp">
+
+<select id="selectAllGoods" parameterType="map" resultType="com.bitcamp.gachi.admin.GoodsVO">
+	  select code , category, goods_name, prime_cost, real_price , stock, to_char(writedate , 'yyyy-mm-dd')writedate, sale_state from goods
+	  where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}	   
+</select>
+
+</mapper>

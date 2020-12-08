@@ -135,7 +135,7 @@ a, h1, li {
 		<li><a href="/gachi/adminDashboard">대시보드</a></li>
 		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
 		<li><a href="/gachi/adminMember">회원관리</a></li>
-		<li><a href="/gachi/adminClass">카테고리 관리</a></li>
+<!-- 		<li><a href="/gachi/adminClass">카테고리 관리</a></li> -->
 		<li><a href="/gachi/adminClass">클래스 관리</a></li>
 		<li><a href="/gachi/adminVideo">동영상 관리</a></li>
 		<li data-target="#menu2" data-toggle="collapse"><a href="#">게시글관리</a>
@@ -167,9 +167,17 @@ a, h1, li {
 		<li>
 			<a href="/gachi/adminGoods">스토어 관리</a>
 		</li>
-		<li><a href="/gachi/adminSettle">정산 관리</a></li>
-		<li data-target="#menu5" data-toggle="collapse">통계
-			<div id="menu5" class="collapse">
+		<li><a href="/gachi/adminSettle">크리에이터 정산</a></li>
+		
+		<li data-target="#menu5" data-toggle="collapse"><a href="#">결제내역</a>
+		<div id="menu5" class="collapse">
+			<ul class="submenu">
+				<li><a href="/gachi/adminPaymentStore">스토어 결제내역</a></li>
+				<li><a href="/gachi/adminPaymentClass">클래스 결제내역</a></li>
+			</ul>		
+		</div>
+		<li data-target="#menu6" data-toggle="collapse">통계
+			<div id="menu6" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/adminStatStore">스토어</a></li>
 	            <li><a href="/gachi/adminStatClass">클래스</a></li>

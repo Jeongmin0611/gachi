@@ -4,9 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.bitcamp.gachi.admin.MemberDaoImp">
-	<select id="selectAllMember" resultType="com.bitcamp.gachi.admin.MemberVO">
-		select rownum, userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
-		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade = '회원'
+	<select id="selectAllMember" parameterType="map" resultType="com.bitcamp.gachi.admin.MemberVO">
+		select *
+			from (SELECT *
+        			FROM (
+           				 rownum, userid, nickname, grade, username, tel, to_char(signupdate, 'yyyy-mm-dd') signupdate, 
+           				 to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade='회원'
+		<choose>
+				<when test='withdraw==null and search==null'></when>
+				<when test='withdraw!=null and search==null'>
+					 and deleted='${withdraw}'
+				</when>
+				<when test='withdraw==null and search!=null'>
+					and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+				</when>
+				<when test='withdraw!=null and search!=null'>
+					and deleted='${withdraw}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+				</when>
+				<otherwise></otherwise>
+		</choose>
+		) pagetable
+        			where rownum &lt;= ${endNum}
+    		)
+		where rownum &gt;= ${startNum};
 	</select>
 	<select id="countAllMember" resultType="_int">
 		select count(*) from member where grade = '회원'
@@ -42,21 +62,21 @@
 		</foreach>
 	</select>
 	
-	<select id="dashboardMember" parameterType="map" resultType="map">		
+	<select id="dashboardMember" parameterType="map" resultType="_int">		
 		select count(*) cnt from member where withdrawdate is null and 
 		grade ='회원' and deleted='회원'
 		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
 	</select>
 	
-	<select id="dashboardCreator" parameterType="map" resultType="map">
+	<select id="dashboardCreator" parameterType="map" resultType="_int">
 		select count(*) cnt from member where withdrawdate is null and 
 		grade ='크리에이터' and deleted='회원'
 		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
 	</select>
 	
-	<select id="dashboardAllMember" parameterType="map" resultType="map">
+	<select id="dashboardAllMember" parameterType="map" resultType="_int">
 		select count(*) cnt from member where withdrawdate is null and 
-		deleted='회원'
+		deleted='회원' and grade != '관리자'
 		and to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm') &lt;= #{endMonth}
 	</select>
 	
@@ -79,7 +99,7 @@
 	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
 	                    WHEN age &gt;= 60 THEN '60대이상'
 	                END age_gb
-	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+응가) as age
 	                  FROM member where withdrawdate is null and grade ='회원' and
 	                  to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
 	                )
@@ -88,4 +108,3 @@
 	</select>
 	
 </mapper>
-

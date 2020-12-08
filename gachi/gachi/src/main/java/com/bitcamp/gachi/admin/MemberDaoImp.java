@@ -8,7 +8,7 @@ import com.bitcamp.gachi.admin.MemberVO;
 
 public interface MemberDaoImp {
 
-	public List<MemberVO> selectAllMember(); // 전체 회원 리스트 가져오기
+	public List<MemberVO> selectAllMember(Map<String, String> dbParam); // 전체 회원 리스트 가져오기
 	
 	public int countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
 
@@ -29,11 +29,18 @@ public interface MemberDaoImp {
 	public List<Map<String, Integer>> dashForAge(Map<String, String> dbParam_pie); //회원통계 나이 파이형
 	
 
-	public List<Map<String, Integer>> dashboardMember(Map<String, String> dashmember_cnt); //대쉬보드 회원수
+//	public List<Map<String, Integer>> dashboardMember(Map<String, String> dashmember_cnt); //대쉬보드 회원수
+	public int dashboardMember(Map<String, String> dashmember_cnt); //대쉬보드 회원수
 
-	public List<Map<String, Integer>> dashboardAllMember(Map<String, String> dashmember_cnt); //대쉬보드 전체회원수
+//	public List<Map<String, Integer>> dashboardAllMember(Map<String, String> dashmember_cnt); //대쉬보드 전체회원수
+	public int dashboardAllMember(Map<String, String> dashmember_cnt); //대쉬보드 전체회원수
 
-	public List<Map<String, Integer>> dashboardCreator(Map<String, String> dashmember_cnt); //대쉬보드 크리에이터수
+//	public List<Map<String, Integer>> dashboardCreator(Map<String, String> dashmember_cnt); //대쉬보드 크리에이터수
+	public int dashboardCreator(Map<String, String> dashmember_cnt); //대쉬보드 크리에이터수
+
+	public int getAllRecord(PagingVO pvo); //멤버 페이징
+
+	public List<MemberVO> selectList(PagingVO pvo); //멤버 페이징
 	
 
 }
