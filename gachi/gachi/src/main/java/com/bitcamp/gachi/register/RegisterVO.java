@@ -68,6 +68,8 @@ public class RegisterVO {
 	private String creator_info;
 
 	private int deleted;
+	
+	private String searchSubmitText;
 
 	public int getDeleted() {
 		return deleted;
@@ -457,6 +459,14 @@ public class RegisterVO {
 
 	public void setCreator_info(String creator_info) {
 		this.creator_info = creator_info;
+	}
+
+	public String getSearchSubmitText() {
+		return searchSubmitText;
+	}
+
+	public void setSearchSubmitText(String searchSubmitText) {
+		this.searchSubmitText = searchSubmitText;
 	}
 	
 }
