@@ -15,6 +15,14 @@ public class OrderListVO {
 	private int amount;
 	private int stack;
 	private String orderdate;
+	private String userid;	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getCode() {
 		return code;
 	}

@@ -2,6 +2,7 @@ package com.bitcamp.gachi.register;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.mypage.MileageDaoImp;
+import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
 import oracle.jdbc.internal.OracleConnection.TransactionState;
@@ -124,6 +126,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
+
 						mav.setViewName("redirect:/");
 				
 					}else if(voGrade.equals("크리에이터")){
@@ -147,7 +150,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		@RequestMapping("/logout")
 		public String logout(HttpSession s) {
 			s.invalidate();
-			return "home";
+			return "redirect:/";
 		}
 		@RequestMapping(value="/telChkOk",method={RequestMethod.GET, RequestMethod.POST})
 		@ResponseBody

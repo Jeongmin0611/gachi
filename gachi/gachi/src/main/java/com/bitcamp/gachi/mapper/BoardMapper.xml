@@ -64,7 +64,7 @@
 	<select id="replyAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
 		select e.userid userid, reply_num, nickname, content, to_char(sysdate, 'YYYY-MM-DD') writedate, ip 
 		from event_reply e join member m on e.userid = m.userid 
-		where event_num=${param1}
+		where event_num=${param1} order by writedate desc
 	</select>
 	<delete id="replyDel" parameterType="com.bitcamp.gachi.board.EventBoardVO">
 		delete from event_reply where reply_num=${reply_num} and userid='${userid}'

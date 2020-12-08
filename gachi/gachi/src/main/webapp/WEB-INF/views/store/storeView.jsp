@@ -285,6 +285,27 @@ $(function() {
 		readOnly:true,
 		space:false
 		});
+  //좋아요 클릭이벤트
+	$('i').on('click',function(){
+		var id = '<%=(String)session.getAttribute("userid")%>';
+		if(id==null ||id =='null'){
+			alert('로그인 후 이용가능한 기능입니다.');
+			return false;
+		}
+		if(id!=null){
+			var good_choice_code;
+			var atr = $(this).attr('class');
+			if (atr=='far fa-heart fa-lg'){
+				$(this).attr('class','fas fa-heart fa-lg');
+				good_choice_code=$(this).attr('id');
+				location.href="/gachi/storeView?code="+good_choice_code+"&good_add="+good_choice_code;
+			}else if(atr=='fas fa-heart fa-lg'){
+				$(this).attr('class','far fa-heart fa-lg');				
+				good_choice_code=$(this).attr('id');
+				location.href="/gachi/storeView?code="+good_choice_code+"&good_del="+good_choice_code;
+			}				
+		}			
+	});
 });
 	function purchase(){
 		location.href="/gachi/purchase";
@@ -328,7 +349,14 @@ $(function() {
 			<h3>${vo.goods_name } </h3><br/>
 			재고 &nbsp; ${vo.stock }개<br/>
 			가격 &nbsp; ${vo.real_price }원<br/>
-			적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg" style="float:right; height: 15px; color: red;"></i><br/>
+			적립금 &nbsp; ${vo.stack }원 
+			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
+			<c:if test="${goodVo.code eq vo.code }">
+				<script>
+					$('#${vo.code}').attr('class','fas fa-heart fa-lg');
+				</script>
+			</c:if>
+			<br/>
 			<p><p/>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue;" onclick="purchase()">구매</button>
@@ -345,13 +373,6 @@ $(function() {
 		<div class="col-sm-12" style="min-height: 300px; background-color: #eee; text-align: center;" id="detail-info">
 			<img src="/gachi/img/store/${vo.goods_info }"/>
 		</div>
-		
-		<!-- 설명글 -->
-		<h4 style="margin-top: 10px; padding-left: 10px;">클래스 소개</h4>
-		<br />&nbsp; 차시 | 112차 총 시간 | 896시간
-
-		<div class="col-sm-12"
-			style="min-height: 300px; background-color: #eee">클래스 설명글</div>
 
 		<!-- 클래스 리뷰 -->
 		<div id="myclassReview">
@@ -479,12 +500,23 @@ $(function() {
 
 	</div>
 </div>
+<div id="myclassModalR" class="cfont">
+	<div class="myclassModal_content">
+		<label>수강평작성</label>
+		<div>만족도 : </div>
+		<div class="classRating"></div>
+		<input type="text" placeholder="제목"/>
+		<textarea placeholder="내용을 입력해주세요."></textarea>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassReviewWrite">등록</button>
+	</div>
+	<div class="myclassModal_layer"></div>
+</div>
 <div id="myclassModalQ" class="cfont">
 	<div class="myclassModal_content">
-		<label>질문작성</label> <input type="text" placeholder="제목" />
+		<label>질문작성</label>
+		<input type="text" placeholder="제목"/>
 		<textarea placeholder="내용을 입력해주세요."></textarea>
-		<button type="button" class="btn btn-outline-light btn-block"
-			id="myclassQnaWrite">등록</button>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassQnaWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>

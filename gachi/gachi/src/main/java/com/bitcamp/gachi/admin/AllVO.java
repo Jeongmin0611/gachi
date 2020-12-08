@@ -50,7 +50,7 @@ public class AllVO {
 	private int stack;//적립마일리지
 	private int good;//좋아요
 	private String goods_info;//상품내용
-	
+		
 	public int getRownum() {
 		return rownum;
 	}
