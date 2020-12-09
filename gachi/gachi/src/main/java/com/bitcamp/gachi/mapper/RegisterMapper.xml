@@ -25,7 +25,7 @@
 	<select id="useridF" parameterType="String" resultType="string">
 		select userid from member where tel='${param1}'
 	</select>
-	<select id="userpwdF" parameterType="String" resultType="string">
+	<select id="userpwdF" parameterType="String" resultType="string"> 
 		select userpwd from member where tel='${param1}'
 	</select>
     <select id="searchTextChk" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.SearchPageVO">
