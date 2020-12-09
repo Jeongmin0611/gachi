@@ -5,28 +5,58 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.MemberDaoImp">
 	<select id="selectAllMember" parameterType="map" resultType="com.bitcamp.gachi.admin.MemberVO">
-		select *
-			from (SELECT *
-        			FROM (
-           				 rownum, userid, nickname, grade, username, tel, to_char(signupdate, 'yyyy-mm-dd') signupdate, 
-           				 to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted from member where grade='회원'
+	
+	SELECT
+		    *
+		FROM
+		    (
+		        SELECT
+		            A.*,
+		            ROWNUM AS RNUM
+		        FROM
+		            (
+		                SELECT
+		                    rownum, userid, nickname, grade, username, tel, to_char(signupdate, 'yyyy-mm-dd') signupdate, 
+	        		to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted 
+		                FROM
+		                    member
+		                WHERE
+		                	grade='회원'
+		             		<choose>
+								<when test='withdraw==null and search==null'></when>
+								<when test='withdraw!=null and search==null'>
+									 and deleted='${withdraw}'
+								</when>
+								<when test='withdraw==null and search!=null'>
+									and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<when test='withdraw!=null and search!=null'>
+									and deleted='${withdraw}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<otherwise></otherwise>
+							</choose>
+		            ) A
+		        WHERE
+		            ROWNUM &lt;= ${endNum}
+		    )
+		WHERE
+		    RNUM &gt;=${startNum}
+   	</select>
+	<select id="selectCntAllMember" parameterType="map" resultType="_int">
+		select count(*) as cnt from member where grade='회원'
 		<choose>
-				<when test='withdraw==null and search==null'></when>
-				<when test='withdraw!=null and search==null'>
-					 and deleted='${withdraw}'
-				</when>
-				<when test='withdraw==null and search!=null'>
-					and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
-				</when>
-				<when test='withdraw!=null and search!=null'>
-					and deleted='${withdraw}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
-				</when>
-				<otherwise></otherwise>
+			<when test='withdraw==null and search==null'></when>
+			<when test='withdraw!=null and search==null'>
+				 and deleted='${withdraw}'
+			</when>
+			<when test='withdraw==null and search!=null'>
+				and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<when test='withdraw!=null and search!=null'>
+				and deleted='${withdraw}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<otherwise></otherwise>
 		</choose>
-		) pagetable
-        			where rownum &lt;= ${endNum}
-    		)
-		where rownum &gt;= ${startNum};
 	</select>
 	<select id="countAllMember" resultType="_int">
 		select count(*) from member where grade = '회원'
@@ -99,7 +129,7 @@
 	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
 	                    WHEN age &gt;= 60 THEN '60대이상'
 	                END age_gb
-	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+응가) as age
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
 	                  FROM member where withdrawdate is null and grade ='회원' and
 	                  to_char(signupdate, 'yyyy-mm')&gt;= #{startMonth} and to_char(signupdate, 'yyyy-mm')&lt;= #{endMonth}
 	                )

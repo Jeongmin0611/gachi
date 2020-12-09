@@ -9,6 +9,7 @@ import com.bitcamp.gachi.admin.MemberVO;
 public interface MemberDaoImp {
 
 	public List<MemberVO> selectAllMember(Map<String, String> dbParam); // 전체 회원 리스트 가져오기
+	public int selectCntAllMember(Map<String, String> dbParam); // paging 하기 위한 검색 결과 데이터 개수
 	
 	public int countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
 
