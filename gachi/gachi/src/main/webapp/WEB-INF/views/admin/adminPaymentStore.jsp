@@ -139,7 +139,7 @@
 		<li><input type="checkbox"/></li>
 		<li>${data.order_code}</li>
 		<li>${data.category } </li>
-		<li>${data.goods_name}</li>
+		<li class="wordCut">${data.goods_name}</li>
 		<li>${data.userid}</li>
 		<li>${data.username}</li>
 		<li>${data.real_price }</li>

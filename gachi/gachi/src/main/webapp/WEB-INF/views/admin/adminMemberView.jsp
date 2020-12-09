@@ -43,11 +43,4 @@
 			<button type="button" id="ad_leaveBtn" class="btn" onclick="location.href='/gachi/adminMemberLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
 		</div>
 	</form>	
-	<h3>시청 중인 클래스</h3>
-	<div class="ad_member_Box">
-	</div>
-	<h3>구매내역</h3>
-	<div class="ad_member_Box">
-	
-	</div>
 </div>

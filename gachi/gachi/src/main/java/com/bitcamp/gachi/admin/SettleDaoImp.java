@@ -49,7 +49,11 @@ public interface SettleDaoImp {
 
 	public Integer paymentAll_Dash(Map<String, String> dbParam1);
 
-	public List<Integer> ClasschartData(Map<String, List> dbParam); // 대쉬 클래스그래프
+	public List<Integer> dashClassChart(Map<String, List> dbParam);
+
+	public List<Integer> dashStoreChart(Map<String, List> dbParam);
+
+	public List<Integer> dashAllChart(Map<String, List> dbParam);
 	
 	
 	
