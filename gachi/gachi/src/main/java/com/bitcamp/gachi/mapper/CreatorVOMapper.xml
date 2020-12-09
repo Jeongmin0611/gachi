@@ -4,14 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
-	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-<!-- 		select rownum,a.userid ,nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd')
-	  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
-	  	 from member a join creator c on a.userid = c.userid where grade = '크리에이터' -->
-	  
+	<select id="selectAllCreator" parameterType="map" resultType="com.bitcamp.gachi.admin.AllVO">
 	  	 select m.userid, rownum, m.userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
 		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted ,creator_state
 		 from member m full outer join creator c on m.userid = c.userid where grade = '크리에이터'
+		 <choose>
+				<when test='status==null and search==null'></when>
+				<when test='status!=null and search==null'>
+					and creator_state='${status}'
+				</when>
+				<when test='status==null and search!=null'>
+					and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+				</when>
+				<when test='status!=null and search!=null'>
+					and creator_state='${status}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+				</when>
+				<otherwise></otherwise>
+		</choose>
 	</select>
 		<select id="countAllCreator" resultType="_int">
 		select count(*) from creator

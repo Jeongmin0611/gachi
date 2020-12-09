@@ -210,29 +210,38 @@
 </style>
 <script>
 	$(function() {
-		//모달창 띄우기(수강평)
-	    $("#myclassReviewFrm").click(function(){
+		//세션의 아이디 가져오기
+    	var id = '<%=(String)session.getAttribute("userid")%>'; 
+    	
+		//모달창 띄우기(수강평)		
+	    $("#myclassReviewFrm").click(function(){	    	
     		$("#myclassModalR").css({
                "top": (($(window).height()-$("#myclassModalR").outerHeight())/2+$(window).scrollTop())+"px",
                "left": (($(window).width()-$("#myclassModalR").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-            
+               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정            
             });
 	        $("#myclassModalR").fadeIn();
+	        
 	    });
 	    $("#myclassReviewWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalR").fadeOut();
 	    });  
 	  //모달창 띄우기(질문)
 	    $("#myclassQnaFrm").click(function(){
-    		$("#myclassModalQ").css({
-               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
-               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-            
-            });
-	        $("#myclassModalQ").fadeIn();
+			if(id==null ||id =='null'){
+				swal('로그인 후 이용가능한 기능입니다.');
+				return false;
+			}
+			if(id!=null){
+	    		$("#myclassModalQ").css({
+	               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
+	               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
+	               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정	            
+	            });
+		        $("#myclassModalQ").fadeIn();
+			}
 	    });
+	  
 	    $("#myclassQnaWrite, .myclassModal_layer").click(function(){
 	       $("#myclassModalQ").fadeOut();
 	    });  
@@ -253,6 +262,27 @@
     		readOnly:true,
     		space:false
    		});
+	    
+	  //좋아요 클릭이벤트
+		$('i').on('click',function(){
+			if(id==null ||id =='null'){
+				swal('로그인 후 이용가능한 기능입니다.');
+				return false;
+			}
+			if(id!=null){
+				var good_choice_code;
+				var atr = $(this).attr('class');
+				if (atr=='far fa-heart fa-lg'){
+					$(this).attr('class','fas fa-heart fa-lg');
+					good_choice_code=$(this).attr('id');
+					location.href="/gachi/classView?code="+good_choice_code+"&good_add="+good_choice_code;
+				}else if(atr=='fas fa-heart fa-lg'){
+					$(this).attr('class','far fa-heart fa-lg');				
+					good_choice_code=$(this).attr('id');
+					location.href="/gachi/classView?code="+good_choice_code+"&good_del="+good_choice_code;
+				}				
+			}			
+		});
 	});
 	function purchase() {
 		location.href = "/gachi/purchase";
@@ -295,8 +325,14 @@
 			<span class="badge badge-info" style="font-size: 0.9em">${vo.category }</span><br />
 			<h3>${vo.class_name }</h3>
 			<br /> by ${vo.nickname }<br /> 가격 &nbsp; ${vo.real_price }원<br />
-			적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
-				style="float: right; height: 15px; color: red;"></i><br />
+			적립금 &nbsp; ${vo.stack }원 
+			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
+			<c:if test="${goodVo.code eq vo.code }">
+				<script>
+					$('#${vo.code}').attr('class','fas fa-heart fa-lg');
+				</script>
+			</c:if>
+			<br />
 			<p>
 			<p />
 			<button
@@ -381,7 +417,7 @@
 
 		<!-- 클래스 문의 -->
 		<div id="myclassQna">
-			<label>질문&답변</label>
+			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
 				<input type="text" name="searchWord" />
 				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
@@ -438,15 +474,34 @@
 
 		</div>
 
-
+		<ul class="pagination justify-content-center" id="myclassReviewPg">
+			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
 	</div>
+</div>
+<div id="myclassModalR" class="cfont">
+	<div class="myclassModal_content">
+		<label>수강평작성</label>
+		<div>만족도 : </div>
+		<div class="classRating"></div>
+		<input type="text" placeholder="제목"/>
+		<textarea placeholder="내용을 입력해주세요."></textarea>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassReviewWrite">등록</button>
+	</div>
+	<div class="myclassModal_layer"></div>
 </div>
 <div id="myclassModalQ" class="cfont">
 	<div class="myclassModal_content">
-		<label>질문작성</label> <input type="text" placeholder="제목" />
+		<label>질문작성</label>
+		<input type="text" placeholder="제목"/>
 		<textarea placeholder="내용을 입력해주세요."></textarea>
-		<button type="button" class="btn btn-outline-light btn-block"
-			id="myclassQnaWrite">등록</button>
+		<button type="button" class="btn btn-outline-light btn-block" id="myclassQnaWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>

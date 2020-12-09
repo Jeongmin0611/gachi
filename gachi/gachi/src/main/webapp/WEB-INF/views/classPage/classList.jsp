@@ -189,6 +189,27 @@ $(function(){
 			}
 		}
 	});
+	//좋아요 클릭이벤트
+	$('i').on('click',function(){
+		var id = '<%=(String)session.getAttribute("userid")%>';
+		if(id==null ||id =='null'){
+			swal('로그인 후 이용가능한 기능입니다.');
+			return false;
+		}
+		if(id!=null){
+			var good_choice_code;
+			var atr = $(this).attr('class');
+			if (atr=='far fa-heart fa-lg p-2'){
+				$(this).attr('class','fas fa-heart fa-lg p-2');
+				good_choice_code=$(this).attr('id');
+				location.href="/gachi/classList?good_add="+good_choice_code;
+			}else if(atr=='fas fa-heart fa-lg p-2'){
+				$(this).attr('class','far fa-heart fa-lg p-2');				
+				good_choice_code=$(this).attr('id');
+				location.href="/gachi/classList?good_del="+good_choice_code;
+			}				
+		}			
+	});
 	});
 </script>
 
@@ -221,8 +242,15 @@ $(function(){
 				<img src="/gachi/img/${list.class_img }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
-						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span><i class="far fa-heart fa-lg p-2"
-							style="float: right; height: 15px;"></i>
+						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
+							<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" id="${list.code }"></i>
+							<c:forEach var="v" items="${cgoodList }">
+								<c:if test="${v.code eq list.code }">
+									<script>
+										$('#${list.code}').attr('class','fas fa-heart fa-lg p-2');
+									</script>
+								</c:if>
+							</c:forEach>
 					</p>
 					<a href="/gachi/classView?code=${list.code }"><span>${list.class_name }</span><br />
 						<span>by &nbsp;</span><span class=""> ${list.nickname }</span><br />

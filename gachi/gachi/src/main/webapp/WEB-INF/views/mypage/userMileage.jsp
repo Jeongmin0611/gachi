@@ -4,7 +4,6 @@
 
 	/* 마일리지 */
 	
-	/*******************/
 	/* 상단 */
 	#userMileageTop{
 		margin:50px 10px 5px;
@@ -24,94 +23,70 @@
 	#userMileageTop label:nth-child(2n){
 		font-size:1.3em;
 	}
-	
-	/*******************/
-	/* 내용 */
-	#userMileageContent{
-		margin-bottom:100px;
+	.mypageContent div{
+		text-align: center;
 	}
-	#userMileageContent>label:first-child{
-		width:100%;
-		font-size:0.8em;
-		text-align:right;
-		padding-right:10px;
+	.mypageContent input{
+		border:	none;
+		outline: none;
+		width: 100%;
 	}
-	#userMileageContent>label:nth-child(2){
-		margin-top:20px;
-		font-size:1.3em;
-		margin-left:10px;
+	.mypageContent button{
+		background-color: ;
+		margin-top: 100px;
 	}
-	#userMileageContent ul{
-		overflow:auto;
-	}
-	#userMileageContent li{
-		width:33%;
-		line-height:50px;
-		float:left;
-		text-align:center;
-	}
-	/* 리스트 제목 */
-	#userMileageTtl li{
-		line-height:30px;
-	}
-	
-	/*******************/
-	/* 하단 */
-	.userMileageBtm{margin:50px 0;width:100%;}
 	
 </style>
+<script>
+	$(function(){
+		//더보기 페이징 -> userProfile.jspf
+	    moreContent();
+	});
+</script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<div id="userMileageTop">
-			<div>
-				<label>현재 마일리지</label>
-				<label>${mileageAllSum }p</label>
+		<div class="mypageContent col-md-10">
+			<label style="color:gray">주문/결제 ></label>
+			<label style="font-size:1.1em"><b>마일리지</b></label>
+			<hr class="userHr"/>
+			<div id="userMileageTop">
+				<div>
+					<label>현재 마일리지</label>
+					<label>${mileageAllSum }p</label>
+				</div>
+				<div>
+					<label>총 적립 마일리지</label>
+					<label>${mileagePosiSum }p</label>
+				</div>
+				<div>
+					<label>사용한 마일리지</label>
+					<label>${mileageNegaSum }p</label>
+				</div>
 			</div>
-			<div>
-				<label>총 적립 마일리지</label>
-				<label>${mileagePosiSum }p</label>
+			<div style="font-size:0.8em;text-align:right">*마일리지는 적립된 달로부터 12개월 이내에 사용하셔야 합니다</div>
+			<div class="row" style="margin-top:50px">
+				<div class="col-md-3" style="text-align:center">날짜</div>
+				<div class="col-md-6">내역</div>
+				<div class="col-md-3" style="text-align:center">마일리지</div>
 			</div>
-			<div>
-				<label>사용한 마일리지</label>
-				<label>${mileageNegaSum }p</label>
-			</div>
-		</div>
-		<div id="userMileageContent">
-			<label>*마일리지는 적립된 달로부터 12개월 이내에 사용하셔야 합니다</label>
-			<label>마일리지 적립/사용 내역</label>
-			<hr style="background:#000;"/>
-			<ul id="userMileageTtl">
-				<li>날짜</li>
-				<li>내역</li>
-				<li>마일리지</li>
-			</ul>
-			<hr/>
-			<ul>
+			<hr class="userHr"/>
 				<c:forEach var="vo" items="${list }">
-					<li>${vo.occurence_date }</li>
-					<li>${vo.breakdown }</li>
-					<c:if test="${vo.mileage>0 }">
-						 <li style="color:#f29886">+${vo.mileage }</li>
-					</c:if>
-					<c:if test="${vo.mileage<0 }">
-						 <li style="color:#6fabcf">${vo.mileage }</li>
-					</c:if>
+					<div class="row moreContent">
+						<div class="col-md-3" style="text-align:center">${vo.occurence_date }</div>
+						<div class="col-md-6">${vo.breakdown }</div>
+						<c:if test="${vo.mileage>0 }">
+							 <div class="col-md-3"style="color:#f29886;text-align:center">+${vo.mileage }</div>
+						</c:if>
+						<c:if test="${vo.mileage<0 }">
+							 <div class="col-md-3"style="color:#6fabcf;text-align:center">${vo.mileage }</div>
+						</c:if>
+					</div>
+					<hr class="moreContent"/>
 				</c:forEach>
-			</ul>
-			
-			<hr/>
-		</div>
-		<div class="userMileageBtm">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
+			<div>
+				<button type="button" class="btn btn-outline-lignt" id="moreContentLoad">더보기</button>
+			</div>
 		</div>
 	</div>
 </div>

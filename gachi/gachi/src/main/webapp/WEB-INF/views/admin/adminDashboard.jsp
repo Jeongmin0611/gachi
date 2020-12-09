@@ -11,7 +11,7 @@
 .ad_dash_board {
 	border: 2px solid #437299;
 	border-radius:10px;
-	width: 250px;
+	width: 300px;
 	height: 200px;
 	padding: 10px;
 	margin-top: 50px;
@@ -21,7 +21,59 @@ b{
 }
 
 </style>    
-    
+<script>
+$(function(){ // 로딩시,
+	$('#ad_all').css('display', 'block');
+	$('#ad_member').css('display', 'none');
+	$('#ad_creator').css('display', 'none');
+	
+	
+	$("#ad_dash_settleAll").text("￦ " + numberWithCommas("${Allpayment}"));
+	$("#ad_dash_settleStore").text("￦ " + numberWithCommas("${AllPaymentStore}"));
+	$("#ad_dash_settleClass").text("￦ " + numberWithCommas("${AllPaymentClass}")); 
+	
+	$('#ad_dash_settleAll').css('display', 'block');
+	$('#ad_dash_settleStore').css('display', 'none');
+	$('#ad_dash_settleClass').css('display', 'none');
+	
+	 // 라디오버튼 클릭시 이벤트 발생
+    $("input:radio[name=ad_dash_User]").click(function(){
+        if($("input[name=ad_dash_User]:checked").val() == "전체"){
+        	$('#ad_all').css('display', 'block');
+        	$('#ad_member').css('display', 'none');
+        	$('#ad_creator').css('display', 'none');	
+        }else if($("input[name=ad_dash_User]:checked").val() == "회원"){
+        	$('#ad_all').css('display', 'none');
+        	$('#ad_member').css('display', 'block');
+        	$('#ad_creator').css('display', 'none');	
+        }else if($("input[name=ad_dash_User]:checked").val() == "크리에이터"){
+        	$('#ad_all').css('display', 'none');
+        	$('#ad_member').css('display', 'none');
+        	$('#ad_creator').css('display', 'block');	
+        }
+    });
+	 
+    $("input:radio[name=ad_dash_pay]").click(function(){
+        if($("input[name=ad_dash_pay]:checked").val() == "전체"){
+        	$('#ad_dash_settleAll').css('display', 'block');
+        	$('#ad_dash_settleStore').css('display', 'none');
+        	$('#ad_creator').css('display', 'none');	
+        }else if($("input[name=ad_dash_pay]:checked").val() == "스토어"){
+        	$('#ad_dash_settleAll').css('display', 'none');
+        	$('#ad_dash_settleStore').css('display', 'block');
+        	$('#ad_dash_settleClass').css('display', 'none');	
+        }else if($("input[name=ad_dash_pay]:checked").val() == "클래스"){
+        	$('#ad_dash_settleAll').css('display', 'none');
+        	$('#ad_dash_settleStore').css('display', 'none');
+        	$('#ad_dash_settleClass').css('display', 'block');	
+        }
+    });
+});
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+</script>
 
 <div class="container ad_dash_center text-center ad_font">
 <h1 style="text-align:center;"> 관리자 대시보드 </h1>
@@ -35,16 +87,23 @@ b{
          
 		<ul id="ad_dash_board_ul">
 			<li><div class="ad_dash_board"><input type="radio" name="ad_dash_User" value="전체" checked/>전체
-					<input type="radio" name="ad_dash_User" value="회원"/>회원
+					<input type="radio" name="ad_dash_User" value="회원" />회원
 					<input type="radio" name="ad_dash_User" value="크리에이터"/>크리에이터<br/>
-						<b>신규 가입자 수</b><br/>
-						<span style="font-size:50px;line-height:100px"> ${dashAllMemberData},${dashMemberData},${dashCreatorData} 명</span>
+						<b>가입자 수</b><br/>
+						<span style="font-size:50px;line-height:100px" id="ad_all"> ${dashAllMemberData} 명</span>
+						<span style="font-size:50px;line-height:100px" id="ad_member"> ${dashMemberData} 명</span>
+						<span style="font-size:50px;line-height:100px" id="ad_creator"> ${dashCreatorData} 명</span>
 					</div></li>
 			<li><div class="ad_dash_board"><input type="radio" name="ad_dash_pay" value="전체" checked/>전체
 					<input type="radio" name="ad_dash_pay" value="스토어"/>스토어
 					<input type="radio" name="ad_dash_pay" value="클래스"/>클래스<br/>
-						<b>이번달 총 매출</b><br/>
-						<span style="font-size:50px;line-height:100px">0 원</span>
+						<b>총 매출</b><br/>
+						<span style="font-size:50px;line-height:100px" id="ad_dash_settleAll"> ${Allpayment}</span>
+						<span style="font-size:50px;line-height:100px" id="ad_dash_settleStore"> ${AllPaymentStore}</span>
+						<span style="font-size:50px;line-height:100px" id="ad_dash_settleClass"> ${AllPaymentClass}</span>
+						<%-- <span style="font-size:50px;line-height:100px" id="ad_allsales">￦ ${dashAllMemberData}å</span>
+						<span style="font-size:50px;line-height:100px" id="ad_storesales">￦ ${dashMemberData}</span>
+						<span style="font-size:50px;line-height:100px" id="ad_classsales">￦ ${dashCreatorData}</span> --%>
 					</div></li>
 			<li><div class="ad_dash_board">
 						<b>답변 대기 문의</b><br/>
@@ -65,6 +124,9 @@ b{
      var labelData = "${labelData}";
      var startMonth = "${startMonth}";
      var endMonth = "${endMonth}";
+     var Allpayment = "${Allpayment}";
+     var AllPaymentStore ="${AllPaymentStore}";
+     var AllPaymentClass = "${AllPaymentClass}";
      
      $(function(){
  		console.log('loading');
@@ -85,7 +147,7 @@ b{
  	     });//submit
  	     
 	$("#frm").click(function(){
-		var url = "/adminStatMember";
+		var url = "/adminDashBoard";
 		var data = ${dashAllMemberData};
 		$.ajax({
 			url : url,

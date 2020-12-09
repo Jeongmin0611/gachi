@@ -7,6 +7,17 @@
 			imageUploadUrl:'/gachi/imageUpload',
 			extraPlugins:'uploadimage'
 		});
+		editor.on('fileUploadRequest', function( evt ) {
+		    var fileLoader = evt.data.fileLoader,
+		        formData = new FormData(),
+		        xhr = fileLoader.xhr;
+		    xhr.open( 'POST', fileLoader.uploadUrl, true );
+		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+		    formData.append('type','classEdit');
+		    fileLoader.xhr.send( formData );
+		    evt.stop();
+		}, null, null, 4 ); 
+		
 		CKEDITOR.config.height=500;
 		$("#ad_goods_writeForm>li").slice(2).css("width","100%");
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
@@ -20,8 +31,6 @@
 		        event.preventDefault();
 		    });
 		
-		 
-		 
 		$(document).on("drop",".add_img",(event)=>{
 			event.preventDefault();
 			var files =event.originalEvent.dataTransfer.files;
@@ -48,30 +57,8 @@
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
-					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+result+'<b>x</b></span></div>';
+					tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
 					$(".ad_box").append(tagTxt);
-				}
-			});
-		});
-			$(document).on('change',".class_img",(event)=>{
-			console.log("aaaaaa");
-			event.preventDefault();
-			var file =event.target.files[0];
-			console.log(file);
-			var formData= new FormData();
-			formData.append("file",file);
-			$.ajax({
-				type:"post",
-				enctype: 'multipart/form-data',
-				url:"/gachi/imgThumbnail",
-				//ajax로 넘길경우 form-data 형식
-				processData: false,
-				contentType: false,
-				//////////////////////////
-				data: formData,
-				success:function(result){
-					$(event.target).parent().prev().children().attr("src",result);
 				}
 			});
 		});

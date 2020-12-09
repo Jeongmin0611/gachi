@@ -9,7 +9,8 @@
 		line-height:40px;
 	}
 	.mypageContent button{
-		background-color: #abcee3;
+		width: 30%;
+		background-color: ;
 		margin-top: 100px;
 	}
 	
@@ -17,7 +18,7 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="color:gray">회원탈퇴 ></label>
 			<label style="font-size:1.1em"><b>탈퇴완료</b></label>
 			<hr class="userHr"/>
@@ -30,7 +31,7 @@
 			</div>
 			<hr/>
 			<div>
-				<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi'">홈으로</button>
+				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi'">홈으로</button>
 			</div>
 		</div>
 	</div>

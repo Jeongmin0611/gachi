@@ -4,7 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.mypage.UserInfoDaoImp">
 	<select id="orderList" parameterType="String" resultType="String">
-		select order_code from orderlist where userid='${userid}' order by order_code desc
+		select order_code from orderlist where userid='${userid}' order by orderdate desc
+	</select>
+	<select id="orderListDate" parameterType="String" resultType="String">
+		select order_code
+ 		 from orderlist
+ 		 where userid='${userid}' 
+ 		 and orderdate between to_date('${startDate}','YYYY-MM-DD') and to_date('${endDate}','YYYY-MM-DD') + 0.99999
+ 		 order by orderdate desc
 	</select>
 	<select id="classOrderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
 		select class_img, category, o.order_code, class_order_code, c.class_name, real_price, username, to_char(orderdate,'YYYY-MM-DD HH24:MI:SS') orderdate
@@ -21,6 +28,10 @@
 		 and go.code = g.code
 		 and o.order_code='${order_code}'
 	</select>
+	<update id="userOrderFix">
+		update goods_order set finished = '확정' 
+		 where goods_order_code = '${goods_order_code}'
+	</update>
 	<select id="userInfoView" parameterType="String" resultType="com.bitcamp.gachi.mypage.MemberVO">
 		select userid, username, nickname, to_char(birthdate, 'YYYY-MM-DD') birthdate, tel, gender, zipcode, addr, detailaddr,
 		 to_char(signupdate, 'YYYY-MM-DD') signupdate, interest from member where userid='${userid}'	
@@ -61,10 +72,40 @@
 		delete from cart 
 	 	 where userid='${userid}'
 	</delete>
+	<select id="classOrderList" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, class_img, class_name, username, amount, stack, real_price
+		 from cart ct, class c, member m
+		 where ct.code = c.code
+		 and c.userid = m.userid
+		 and c.code = '${code}'
+	</select>
+	<select id="goodsOrderList" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select ct.code, goods_img1, goods_name, amount, stack, real_price
+		 from cart ct, goods g
+		 where ct.code = g.code
+		 and g.code = '${code}'
+	</select>
 	<insert id="orderInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
-		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type)
-		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}')
+		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type, zipcode, addr, detailaddr, etc)
+		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}', '${zipcode}', '${addr}', '${detailaddr}', '${etc}')
 	</insert>
+	<insert id="classOrderInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
+		insert into class_order(class_order_code, order_code, code)
+		 values('c'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, '${order_code}', '${code}')
+	</insert>
+	<insert id="goodsOrderInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
+		insert into goods_order(goods_order_code, order_code, code, amount)
+		 values('g'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, '${order_code}', '${code}', ${amount})
+	</insert>
+	<select id="orderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderVO">
+		select o.order_code, price, payment_type, class_name, goods_name
+		 from orderlist o, class_order co, goods_order go, class c, goods g
+		 where o.order_code = co.order_code(+)
+		 and o.order_code = go.order_code(+)
+		 and co.code = c.code(+)
+		 and go.code = g.code(+)
+		 and o.order_code = '${order_code}'
+	</select>
 	<select id="countClass" resultType="int">
 		select count(code) 
 		 from orderlist o, class_order co 
@@ -92,16 +133,25 @@
 		select count(code) from good where userid='${userid}'
 	</select>
 	<select id="classWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select class_img, category, class_name, username 
+		select class_img, category, class_name, username, c.code code
 		 from good gd, member m, class c
 		 where  gd.code = c.code
 		 and c.userid = m.userid
 		 and gd.userid = '${userid}'
 	</select>
 	<select id="goodsWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select goods_img1, category, goods_name 
+		select goods_img1, category, goods_name, g.code code
 		 from good gd, goods g
 		 where gd.code = g.code
 		 and gd.userid = '${userid}'
+	</select>
+	<insert id="wishListAdd">
+		insert into good values ('${userid}','${code}')
+	</insert>
+	<delete id="wishListDel">
+		delete from good where userid='${userid}' and code='${code}'
+	</delete>
+	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select * from good where userid='${userid}' and code='${code}'
 	</select>
 </mapper>

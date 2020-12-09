@@ -13,17 +13,112 @@ canvas {
 	width: 100%;
 	margin-bottom: 20px;
 }
+
+#ad_StatClass_ul>li {
+	float: left;
+	width: 20%;
+	text-align: center;
+	margin-left: 100px;
+}
+
+.ad_StatClass_board {
+	border: 2px solid #437299;
+	border-radius:10px;
+	width: 250px;
+	height: 150px;
+	padding: 10px;
+	margin-top: 50px;
+}
+
+
 </style>
 
+<script type="text/javascript">
+	$(function(){
+		
+		$("#startDate").val("${startDate}");
+		$("#endDate").val("${endDate}");
+		if('${category}' != '') {
+			$("#category").val("${category}");
+		} else{
+			$("#category").val('');
+		}
+		if('${username}' != '') {
+			$("#username").val("${username}");
+		}
+		
+		$("#countStatClassAll").text( ${countStatClassAll});
+		$("#countClassN").text(${countClassN});
+		$("#countClassY").text(${countClassY});
+		
+		console.log(${countStatClassAll});
+		console.log(${countClassN});
+		console.log(${countClassY});
+		
+		
+		$("#frm").click(function(){
+			var url = "/adminStatClass";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() /*+ "&category=" + $('#category').val() + "&username=" + $('#username').val().trim()*/;
+			$.ajax({
+				url : url,
+				data : data,
+				success: function(data){
+				/* 	$("#startMonth").append("${startMonth}");
+					$("#endMonth").append("${endMonth}"); */
+					
+				},error:function(){
+					console.log("ajax에러발생");
+				}
+			});
+		});
+	});
+
+</script>		
+
 <div class="container ad_StatClass_center text-center">
-	<h1 style="text-align:center;"> 클래스 통계 </h1><br/>
-		<p>
-			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>
-			<input type="month" value="2020-11"/>
-			-
-			<input type="month" value="2020-11"/>
-			<button type="button" class="btn btn-outline-dark btn-sm">▶</button>
-			<button type="button" class="btn btn-outline-dark btn-sm">이번달</button></p>
+	<div class="container ad_font">
+	<h1>클래스 통계</h1>
+		<form action="adminStatClass" method="post" id="frm">
+		<div class="ad_StatClass_searchForm">
+			
+		<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
+		</div>
+<!--  		<div class="ad_StatClass_searchForm">
+			<select id="category" name="category">
+				<option value="">전체</option>
+				<option value="공예/창작">공예/창작</option>
+				<option value="요리">요리</option>
+				<option value="미술">미술</option>
+				<option value="음악">음악</option>
+				<option value="라이프스타일">라이프스타일</option>
+				<option value="운동">운동</option>
+				<option value="사진/영상">사진/영상</option>
+			</select>
+			<input type="text" name="username" id="username" placeholder="크리에이터명" size="40"/>
+			<input type="submit" class="btn" value="검색"/> 
+		</div>
+		
+		<div class="text-center textSize">
+			<input type="radio" name="" checked/>전체
+			<input type="radio" name=""/>스토어
+			<input type="radio" name=""/>크리에이터<br/>
+		</div> -->
+			<ul id="ad_StatClass_ul">
+				<li><div class="ad_StatClass_board">
+							<b>총 클래스</b><br/>
+							<span style="font-size:50px;line-height:100px" id="countStatClassAll"></span>
+						</div></li>
+				<li><div class="ad_StatClass_board">
+							<b>미승인 클래스</b><br/>
+							<span style="font-size:50px;line-height:100px" id="countClassN"></span>
+						</div></li>
+				<li><div class="ad_StatClass_board">
+							<b>승인 클래스</b><br/>
+							<span style="font-size:50px;line-height:120px" id="countClassY"></span>
+					</div></li>							
+			</ul>
+		</form>
+</div>
 		<div>
 			<canvas id="ad_StatClass_chart" style="margin-top:50px"></canvas>
 			<script type="text/javascript">

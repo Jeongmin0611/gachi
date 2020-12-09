@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.gachi.admin.SettleDaoImp">
+	<select id="manageSettle" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select class_order.order_code, class.category, class.userid, member.username, class.real_price, settlement.payday, class_order.settlement from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			join member on class.userid = member.userid
+			left join settlement on class_order.class_order_code = settlement.class_order_code
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	<select id="countAllSales" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			join member on class.userid = member.userid
+			left join settlement on class_order.class_order_code = settlement.class_order_code
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	<select id="countSalesN" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			join member on class.userid = member.userid
+			left join settlement on class_order.class_order_code = settlement.class_order_code
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and (class_order.settlement='n' or class_order.settlement='N')
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	<select id="countSalesY" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			join member on class.userid = member.userid
+			left join settlement on class_order.class_order_code = settlement.class_order_code
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and (class_order.settlement='y' or class_order.settlement='Y')
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+	<select id="cntStatClassAll" parameterType="map" resultType="_int">
+		select count(*) from class
+		where to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>		
+	</select>
+	
+	
+		<select id="cntClassN" parameterType="map" resultType="_int">
+		select count(*) from class
+		where to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate} and class_state !='판매중'
+					<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>		
+	</select>
+	
+		<select id="cntClassY"  parameterType="map" resultType="_int">
+		select count(*) from class
+		where to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate} and class_state ='판매중'
+					<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>		
+	</select>
+	
+	
+	<select id="cntStoreAll" parameterType="map" resultType="_int">
+		select count(*) from goods
+		where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+	</select>
+	
+	<select id="cntStoreY" parameterType="map" resultType="_int">
+		select count(*) from goods
+		where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		and sale_state = '판매중'
+	</select>
+	<select id="cntStoreN" parameterType="map" resultType="_int">
+		select count(*) from goods
+		where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		and sale_state != '판매중'
+	</select>
+	
+	
+	<select id="StatStoreSum" parameterType="map" resultType="_int">
+		select sum(orderlist.price)from orderlist 
+		join goods_order on goods_order.order_code = orderlist.order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} 
+		and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and (fix_state='Y' or fix_State='y')
+	</select>
+	
+	
+	<select id="managePaymentStore" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select goods_order.order_code, goods.category, goods.goods_name, orderlist.userid, member.username, goods.real_price, to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate , goods_order.finished from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and goods.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and goods.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+	
+		<select id="paymentStoreAll" parameterType="map" resultType="int">
+		select sum(goods.real_price) from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and goods.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and goods.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+	
+	
+	<select id="paymentStoreN" parameterType="map" resultType="int">
+			select sum(goods.real_price) from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			and goods_order.finished='미확정'
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and goods.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and goods.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	<select id="paymentStoreY" parameterType="map" resultType="_int">
+		select count(*) order_code from goods_order join orderlist on orderlist.order_code = goods_order.order_code
+		join goods on goods_order.code = goods.code
+		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and goods.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and goods.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+	<select id="managePaymentClass" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select class_order.order_code, class.category, class.class_name, orderlist.userid, member.username, class.real_price, to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate , 
+			orderlist.fix_state from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+		
+	
+		<select id="paymentClassAll" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+<!--	<select id="paymentClassN" parameterType="map" resultType="int">
+			select sum(goods.real_price) from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+			and goods_order.finished='미확정'
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select> -->
+	<select id="paymentClassY" parameterType="map" resultType="_int">
+		select count(*) order_code from class_order join orderlist on orderlist.order_code = class_order.order_code
+		join class on class_order.code = class.code	
+		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
+			<choose>
+				<when test='category==null and username==null'></when>
+				<when test='category!=null and username==null'>
+					and class.category='${category}'
+				</when>
+				<when test='category== null and username!=null'>
+					and member.username like '%${username}%'
+				</when>
+				<when test='category!= null and username!=null'>
+					and class.category='${category}' and member.username like '%${username}%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+	</select>
+	
+	
+	
+	
+	
+<!-- dashboard -->
+
+<select id="managePaymentClass_Dash" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select class_order.order_code, class.category, class.class_name, orderlist.userid, member.username, class.real_price, to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate , 
+			orderlist.fix_state from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm')&gt;=#{startMonth} and to_char(orderlist.orderdate, 'yyyy-mm')&lt;=#{endMonth}
+
+	</select>
+	<select id="paymentAll_Dash" parameterType="map" resultType="int">
+		select sum(price) from orderlist
+		where to_char(orderlist.orderdate, 'yyyy-mm')&gt;=#{startMonth} and to_char(orderlist.orderdate, 'yyyy-mm')&lt;=#{endMonth}
+	
+	</select>
+	<select id="paymentStoreAll_Dash" parameterType="map" resultType="int">
+		select sum(goods.real_price) from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm')&gt;=#{startMonth} and to_char(orderlist.orderdate, 'yyyy-mm')&lt;=#{endMonth}
+	</select>
+	
+	
+		<select id="paymentClassAll_Dash" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code
+			left join member on orderlist.userid = member.userid
+			where to_char(orderlist.orderdate, 'yyyy-mm')&gt;=#{startMonth} and to_char(orderlist.orderdate, 'yyyy-mm')&lt;=#{endMonth}
+		</select>
+</mapper>
+

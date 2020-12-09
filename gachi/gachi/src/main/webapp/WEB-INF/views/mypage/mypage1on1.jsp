@@ -4,40 +4,8 @@
 
 	/* 질문,문의 */
 	
-	/* 상단 */
-	#myqnaTop{
-		overflow:auto;
-		padding:20px 50px 0;
-	}
-	#myqnaTop li{
-		width:7%;
-		float:left;
-		text-align:center;
-	}
-	#myqnaTop li:nth-child(2n){
-		width:3%;
-	}
-	#myqnaTop li:nth-child(5){
-		font-weight:bold;
-	}
-	
 	/* 내용 */
 	
-	/* 분류바 */
-	#myqnaContent>div:first-child{
-		text-align:right;
-		width:100%;
-		overflow:auto;
-		height:50px;
-	}
-	#myqnaContent>div:first-child button{
-		background-color:#ABCEE3;
-	}
-	#myqnaContent>label{
-		margin:10px 30px;
-		padding:5px;
-		background-color:#fde9e2;
-	}
 	/* 클래스 질문답변 */
 	#myqnaClass{
 		overflow:auto;
@@ -184,17 +152,11 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<ul id="myqnaTop">
-			<li><a href="/gachi/myqnaClass">클래스</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaStore">스토어</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqna1on1">1:1문의</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaEvent">이벤트</a></li>
-		</ul>
-		<div id="myqnaContent">
-			<div>
+		<div class="mypageContent col-md-10">
+			<label style="color:gray">내 활동 ></label>
+			<label style="font-size:1.1em"><b>1:1문의</b></label>
+			<hr class="userHr"/>
+			<div style="text-align:right">
 				<select>
 					<option>분류전체</option>
 					<option>사이트 이용</option>

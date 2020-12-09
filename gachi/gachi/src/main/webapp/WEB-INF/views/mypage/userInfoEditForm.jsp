@@ -10,15 +10,18 @@
 	.mypageContent input{
 		width: 100%;
 	}.mypageContent button{
-		background-color: #abcee3;
+		background-color: ;
 	}
 	.mypageContent button[type=submit]{
+		width: 30%;
 		margin-top: 100px;
 	}
 	
 </style>
 <script>
 	$(function(){
+		$("#userInfoTelDiv").css("display","none");
+		
 		//관심사 체크하기
 		var userInter = $("#userInter").val();
 		var strInter = userInter.split(",");
@@ -32,7 +35,7 @@
 				alert("닉네임을 입력하세요.");
 				return false;
 			}
-			if($("#userInfoTel1").val()=="" || $("#userInfoTel2").val()=="" || $("#userInfoTel3").val()==""){
+			if($("#userInfoTel").val()==""){
 				alert("연락처를 입력하세요.");
 				return false;
 			}
@@ -53,13 +56,66 @@
 			}
 			return true;
 		});
-		//$("input:checkbox[id='id값']").prop("checked", true);
+		
+		$("#userInfoSend").click(function() {
+		    
+			$("#userInfoTelDiv").fadeIn();
+			
+			var number = Math.floor(Math.random() * 100000) + 100000;
+	      	if(number>100000){
+	        	number = number - 10000;
+	        }
+
+	        $("#userInfoText").val(number); 
+	       
+	      	var to = $("#userInfoTel").val();
+	      	var telReg = /^01(?:0)\d{8}$/;
+	       	if(!telReg.test(to)){
+	          	alert("010으로 시작하는 전화번호만 인증가능합니다.");
+	       	} else {
+				var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
+	          
+	       		if(con_test == true){
+	               $.ajax({
+	                   url:"telChkOk",
+	                   type:"post",
+	                   data:{to: $("#userInfoTel").val(),
+	                        text: $("#userInfoText").val()
+	                        },
+	                 success:function(){
+	                   alert("해당 휴대폰으로 인증번호를 발송했습니다");
+	                   }, error:function(){
+	                      
+	                   }
+	                });
+	          	}else{
+	        	  
+	          	}
+	      	}   
+	       
+	    });
+		$("#userInfoEnter").click(function() {  
+			var userNum = $("#userInfoNum").val();
+	       	var sysNum = $("#userInfoText").val();         
+	       	if(userNum == null || userNum == ""){
+	          	alert("휴대폰으로 발송된 인증번호를 입력해주세요");
+	       	} else {     
+	          	if(userNum.trim() == sysNum.trim()){
+	          		alert("인증이 완료되었습니다.");
+	          		$("#userInfoTel").attr("readonly",true);
+					$("#userInfoSend").attr("disabled",true);
+					$("#userInfoTelDiv").css("display","none");
+	           	} else {
+	           		alert("인증번호를 다시 확인해주세요");
+	           	}          
+	       	}
+	  	});
 	});
 </script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="color:gray">회원정보수정 ></label>
 			<label style="font-size:1.1em"><b>수정하기</b></label>
 			<hr class="userHr"/>
@@ -76,7 +132,7 @@
 				<hr/>
 				<div class="row">
 					<div class="col-md-4">생년월일</div>
-					<div class="col-md-8">${vo.birthdate }</div>
+					<div class="col-md-8">${vo.year }년 ${vo.month }월 ${vo.day }일</div>
 				</div>
 				<hr/>
 				<div class="row">
@@ -87,12 +143,20 @@
 				<div class="row">
 					<div class="col-md-4">연락처</div>
 					<div class="col-md-8">
-						<input type="text" name="tel1" id="userInfoTel1" value="${vo.tel1 }" style="width:25%"/>-
-						<input type="text" name="tel2" id="userInfoTel2" value="${vo.tel2 }" style="width:25%"/>-
-						<input type="text" name="tel3" id="userInfoTel3" value="${vo.tel3 }" style="width:25%"/>
-						<button type="button" class="btn btn-outline-light btn-sm" style="width:15%">인증</button>
+						<input type="text" name="tel" id="userInfoTel" value="${vo.tel }" style="width:82%"/>
+						<button type="button" class="btn btn-outline-light btn-sm" id="userInfoSend" style="width:15%">인증</button>
 					</div>
 				</div>
+				<div id="userInfoTelDiv">
+					<div class="row" style="margin-top:15px">
+						<div class="col-md-4"></div>
+						<div class="col-md-8">
+							<input type="text" id="userInfoNum" placeholder="인증번호입력" style="width:82%"/>
+							<button type="button" class="btn btn-outline-light btn-sm" id="userInfoEnter" style="width:15%">확인</button>
+						</div>
+					</div>
+				</div>	
+				<input type="hidden" name="text" id="userInfoText"/>
 				<hr/>
 				<div class="row">
 					<div class="col-md-4">주소</div>
@@ -138,7 +202,7 @@
 				</div>
 				<hr/>
 				<div>
-					<button type="submit" class="btn btn-outline-light btn-block">확인</button>
+					<button type="submit" class="btn btn-outline-light">확인</button>
 				</div>
 			</form>
 		</div>

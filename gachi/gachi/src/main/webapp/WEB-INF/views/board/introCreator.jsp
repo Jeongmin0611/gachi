@@ -100,7 +100,7 @@
 				<option value="운동">운동</option>
 				<option value="사진/영상">사진/영상</option>
 			</select>
-			<input type="text" name="searchWord" id="searchWord" />
+			<input type="text" name="searchWord" id="searchWord" placeholder="크리에이터 이름을 입력하세요" style="min-width: 250px; text-align: right;"/>
 			<input type="submit" value="검색"/>
 		</form>
 	</div>

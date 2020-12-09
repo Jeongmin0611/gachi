@@ -13,9 +13,6 @@ public class MemberVO {
 	private String day;
 	//연락처
 	private String tel; 
-	private String tel1;
-	private String tel2;
-	private String tel3;
 	
 	private String gender; // 성별 (m 남 / f 여)
 	private String zipcode; // 우편번호 
@@ -57,7 +54,7 @@ public class MemberVO {
 		this.nickname = nickname;
 	}
 	public String getBirthdate() {
-		birthdate = year + "-" + month + "-" + day;
+		birthdate = year + month + day;
 		return birthdate;
 	}
 	public void setBirthdate(String birthdate) {
@@ -87,34 +84,10 @@ public class MemberVO {
 		this.day = day;
 	}
 	public String getTel() {
-		tel = tel1 + "-" + tel2 + "-" + tel3;
 		return tel;
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
-		
-		String telCut[] = tel.split("-");
-		tel1 = telCut[0];
-		tel2 = telCut[1];
-		tel3 = telCut[2];
-	}
-	public String getTel1() {
-		return tel1;
-	}
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-	public String getTel2() {
-		return tel2;
-	}
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-	public String getTel3() {
-		return tel3;
-	}
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
 	}
 	public String getGender() {
 		return gender;

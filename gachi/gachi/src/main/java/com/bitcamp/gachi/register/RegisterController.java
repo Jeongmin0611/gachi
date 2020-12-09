@@ -1,7 +1,6 @@
 package com.bitcamp.gachi.register;
-
-
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.mypage.MileageDaoImp;
+import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
 import oracle.jdbc.internal.OracleConnection.TransactionState;
@@ -104,6 +104,20 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			String result=dao.userpwdF(userpwdF);
 			return result;
 		}
+		@RequestMapping("/searchTextChk") 
+		@ResponseBody
+		public ModelAndView searchTextChk(RegisterVO vo) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			ModelAndView mav=new ModelAndView();
+			List<SearchPageVO> result=dao.searchTextChk(vo);
+			List<SearchPageVO> result2=dao.searchTextChk2(vo);
+			List<SearchPageVO> result3=dao.searchTextChk3(vo);
+			mav.addObject("result",result);
+			mav.addObject("result2",result2);
+			mav.addObject("result3",result3);
+			mav.setViewName("searchPage/searchPage");
+			return mav;
+		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
@@ -124,6 +138,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
+
 						mav.setViewName("redirect:/");
 				
 					}else if(voGrade.equals("크리에이터")){
@@ -147,7 +162,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		@RequestMapping("/logout")
 		public String logout(HttpSession s) {
 			s.invalidate();
-			return "home";
+			return "redirect:/";
 		}
 		@RequestMapping(value="/telChkOk",method={RequestMethod.GET, RequestMethod.POST})
 		@ResponseBody

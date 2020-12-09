@@ -10,7 +10,7 @@ import com.bitcamp.gachi.admin.AllVO;
 
 public interface CreatorDaoImp {
 	
-	public List<AllVO> selectAllCreator(); //전체 크리에이터 회원리스트
+	public List<AllVO> selectAllCreator(Map<String, String> dbParam); //전체 크리에이터 회원리스트
 	
 	public int countAllCreator(); // 전체 크리에이터 명 수 (현재 크리에이터 + 탈퇴 크리에이터)
 
@@ -34,11 +34,11 @@ public interface CreatorDaoImp {
 	
 	public List<Integer> dashForCreator(Map<String, List> dbParam); // 크리에이터 통계 그래프
 
-	public List<Map<String, Integer>> CreatorForGender(Map<String, String> dbParam_pie);
+	public List<Map<String, Integer>> CreatorForGender(Map<String, String> dbParam_pie); //크리에이터 파이
 
-	public List<Map<String, Integer>> CreatorForAge(Map<String, String> dbParam_pie);
+	public List<Map<String, Integer>> CreatorForAge(Map<String, String> dbParam_pie); //크리에이터 파이 
 
-	public List<Map<String, Integer>> CreatorForCategory(Map<String, String> dbParam_pie);	
+	public List<Map<String, Integer>> CreatorForCategory(Map<String, String> dbParam_pie);	//크리에이터 파이
 	
 	public int introCreatorSelectAllCount(PagingVO vo);//크리에이터 소개 페이지 (현재 크리에이터 전체 명 수)
 
