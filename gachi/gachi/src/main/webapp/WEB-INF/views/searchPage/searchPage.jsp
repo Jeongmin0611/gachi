@@ -78,9 +78,14 @@
 	<div class="container cfont">
 		<!-- 검색에대한 클래스 -->
 		<h3 class="homeClassListTitle">클래스</h3>
+		<c:if test="${classMore != 0}">
+		<p style="text-align:right"><a href="/gachi/classPage">more</a></p>
+		</c:if>
+		<c:if test="${classMore == 0}">
+		<p style="text-align: center">검색결과가존재하지않습니다</p>
+		</c:if>
 		<div class="row">
 		<c:forEach var="result" items="${result }">
-		<p style="text-align: right"><a href="/gachi/classList?selectval=Ipopular">more</a></p>
 				<div class="col-sm-4">
 					<a href="/gachi/classView?code=${result.code }"><img src="img/${result.class_img }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
@@ -96,11 +101,16 @@
 		
 		<!-- 검색에대한 스토어 -->
 		<h3 class="homeClassListTitle" style="margin-top: 50px;">스토어</h3>
+		<c:if test="${storeMore != 0}">
+		<p style="text-align:right"><a href="/gachi/storePage">more</a></p>
+		</c:if>
+		<c:if test="${storeMore == 0}">
+		<p style="text-align: center">검색결과가존재하지않습니다</p>
+		</c:if>
 		<div class="row">
 		<c:forEach var="result2" items="${result2 }">
-		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
 				<div class="col-sm-4">
-					<a href="/gachi/classView?code=${result2.code }"><img src="img/${result2.goods_img1 }" class="homeClassListImg"/></a><br/>
+					<a href="/gachi/storeView?code=${result2.code }"><img src="img/store/${result2.goods_img1 }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
 							<p><span class="badge badge-info" style="font-size:0.9em">${result2.category }</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 							<a href="/gachi/classView?code=${result2.code }"><span>${result2.goods_name }</span><br/>			
@@ -113,8 +123,23 @@
 		
 		<!-- 검색에대한 크리에이터 -->
 		<h3 class="homeClassListTitle" style="margin-top: 50px;">크리에이터</h3>
-		<p style="text-align: right"><a href="/gachi/classPage">more</a></p>
+		<c:if test="${creatorMore != 0}">
+		<p style="text-align:right"><a href="/gachi/introCreator">more</a></p>
+		</c:if>
+		<c:if test="${creatorMore == 0}">
+		<p style="text-align: center">검색결과가존재하지않습니다</p>
+		</c:if>
 		<div class="row" style="margin-bottom:50px;">
-
+			<c:forEach var="result3" items="${result3 }">
+				<div class="col-sm-4">
+					<a href="/gachi/introCreatorView?userid=${result3.userid }"><img src="img/creator/${result3.picture }" class="homeClassListImg"/></a><br/>
+						<div class="homeClassListTxt">
+							<p><span class="badge badge-info" style="font-size:0.9em">${result3.category }</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
+							<a href="/gachi/introCreatorView?userid=${result3.userid }"><span>${result3.nickname }</span><br/>			
+							</a>
+						</div>				
+				</div>
+				</c:forEach>
 		</div>
 	</div>
+	<%@ include file="../inc/bottom.jspf" %>
