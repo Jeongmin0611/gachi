@@ -133,16 +133,25 @@
 		select count(code) from good where userid='${userid}'
 	</select>
 	<select id="classWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select class_img, category, class_name, username 
+		select class_img, category, class_name, username, c.code code
 		 from good gd, member m, class c
 		 where  gd.code = c.code
 		 and c.userid = m.userid
 		 and gd.userid = '${userid}'
 	</select>
 	<select id="goodsWishList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select goods_img1, category, goods_name 
+		select goods_img1, category, goods_name, g.code code
 		 from good gd, goods g
 		 where gd.code = g.code
 		 and gd.userid = '${userid}'
+	</select>
+	<insert id="wishListAdd">
+		insert into good values ('${userid}','${code}')
+	</insert>
+	<delete id="wishListDel">
+		delete from good where userid='${userid}' and code='${code}'
+	</delete>
+	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select * from good where userid='${userid}' and code='${code}'
 	</select>
 </mapper>

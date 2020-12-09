@@ -4,14 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
-	<select id="selectAllCreator" resultType="com.bitcamp.gachi.admin.AllVO">
-<!-- 		select rownum,a.userid ,nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd')
-	  	 signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,creator_state
-	  	 from member a join creator c on a.userid = c.userid where grade = '크리에이터' -->
-	  
+	<select id="selectAllCreator" parameterType="map" resultType="com.bitcamp.gachi.admin.AllVO">
 	  	 select m.userid, rownum, m.userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
 		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted ,creator_state
 		 from member m full outer join creator c on m.userid = c.userid where grade = '크리에이터'
+		 <choose>
+				<when test='status==null and search==null'></when>
+				<when test='status!=null and search==null'>
+					and creator_state='${status}'
+				</when>
+				<when test='status==null and search!=null'>
+					and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+				</when>
+				<when test='status!=null and search!=null'>
+					and creator_state='${status}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+				</when>
+				<otherwise></otherwise>
+		</choose>
 	</select>
 		<select id="countAllCreator" resultType="_int">
 		select count(*) from creator
@@ -24,14 +33,33 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
 	<select id="countDeletedCreator" resultType="_int">
 		select count(*) from member where deleted='탈퇴' and grade = '크리에이터'
 	</select>
-	<select id="creatorBoardSelectAll" resultType="com.bitcamp.gachi.admin.AllVO">
-		select category, m.nickname, picture, c.userid from creator c join member m on c.userid = m.userid
+	<select id="creatorBoardSelectAll" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="com.bitcamp.gachi.admin.AllVO">
+		select * from (select * from (select category, m.nickname, picture, c.userid from creator c join member m on c.userid = m.userid  where creator_state='승인'
+		<choose>
+			<when test="searchWord==null">
+				order by m.nickname asc)
+				where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+				where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+			<when test="searchWord!=null and searchKey.equals('전체')">
+					and m.nickname like '%${searchWord}%'
+					order by m.nickname asc)
+					where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+					where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+			<when test="searchWord!=null and searchKey!='전체'">
+					and category like '%${searchKey}%' and m.nickname like '%${searchWord}%'
+					order by m.nickname asc)
+					where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by nickname desc)
+					where <![CDATA[rownum<=${lastPageRecordCount}]]>order by nickname asc
+			</when>
+		</choose>		
 	</select>	
 	<select id="creatorBoardViewSelect" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select picture, nickname, sns_addr, creator_info from member m join creator cre on m.userid=cre.userid  where cre.userid='${param1}'
 	</select>
 	<select id="creatorBoardViewSelectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select creator_info, class_name, real_price, class_img1 from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
+		select creator_info, class_name, real_price, class_img from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
 	</select>
 
 	
@@ -99,6 +127,17 @@ creator c on m.userid=c.userid  where m.deleted='회원' and c.creator_state='�
             )
     group by labels
 	
+	</select>
+	<select id="introCreatorSelectAllCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		select count(*) from  creator c join member m on c.userid = m.userid  where creator_state='승인'
+		<choose>
+			<when test="searchWord!=null and searchKey=='전체'" >
+				and m.nickname like '%${searchWord}%'
+			</when>
+			<when test="searchWord!=null and searchKey!='전체'" >
+				and category like '${searchKey}' and m.nickname like '%${searchWord}%'
+			</when>
+		</choose>
 	</select>
 	
 </mapper>

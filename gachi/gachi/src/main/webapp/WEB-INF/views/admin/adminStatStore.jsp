@@ -2,90 +2,157 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="resources/Chart.js"></script>
 <style>
-	.ad_StatClass_Piechart {float:left;width:33%; margin:50px 0px; font-size:1.5em;}
-	canvas {width:100%; margin-bottom:20px;}
+.ad_StatClass_Piechart {
+	float: left;
+	width: 33%;
+	margin: 50px 0px;
+	font-size: 1.5em;
+}
+
+canvas {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#ad_StatStore_ul>li {
+	float: left;
+	width: 20%;
+	text-align: center;
+	margin-left: 100px;
+}
+
+.ad_StatStore_board {
+	border: 2px solid #437299;
+	border-radius:10px;	
+	width: 250px;
+	height: 150px;
+	padding: 10px;
+	margin-top: 50px;
+}
+
+
 </style>
-<div class="container store_StatClass_center text-center ad_font">
-	<h1 style="text-align:center;"> 스토어 통계 </h1><br/>
-			<form action="adminStatStore">
-			<input type="button" class="btn btn-outline-dark btn-sm" value="◀" />
-			<input type="month" id="startMonth" value="" onchange="return chkPeriod();"/>
-			-
-			<input type="month" id="endMonth" value="" onchange="return chkPeriod();"/>
-			</form>
-			<input type="button" class="btn btn-outline-dark btn-sm" value="▶" />
-			<input type="submit" class="btn btn-outline-dark btn-sm" value="조회"/>
-			<!-- <button type="button" class="btn btn-outline-dark btn-sm">이번달</button> -->
+
+<script type="text/javascript">
+
+
+var storeData = "${storeData}";
+var labelData = "${labelData}";
+var genderLabel = "${genderLabel}";
+var genderData = "${genderData}";
+var ageLabel = "${ageLabel}";
+var ageData = "${ageData}";
+var starLabel="${starLabel}";
+var starData = "${starData}";
+
+var startDate = "${startDate}";
+var endDate = "${endDate}";
+
+	$(function(){
+		
+		$("#startDate").val("${startDate}");
+		$("#endDate").val("${endDate}");
+		if('${category}' != '') {
+			$("#category").val("${category}");
+		} else{
+			$("#category").val('');
+		}
+		if('${username}' != '') {
+			$("#username").val("${username}");
+		}
+		
+		$("#countStoreAll").text( ${countStoreAll});
+		$("#countStoreN").text(${countStoreN});
+		$("#countStoreY").text(${countStoreY});
+		
+		console.log(${countStatClassAll});
+		console.log(${countClassN});
+		console.log(${countClassY});
+		
+		
+		$("#frm").click(function(){
+			var url = "/adminSettle";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() /*+ "&category=" + $('#category').val() + "&username=" + $('#username').val().trim()*/;
+			$.ajax({
+				url : url,
+				data : data,
+				success: function(data){
+				/* 	$("#startMonth").append("${startMonth}");
+					$("#endMonth").append("${endMonth}"); */
+					
+				},error:function(){
+					console.log("ajax에러발생");
+				}
+			});
+		});
+	});
+
 	
-<div>
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+</script>
+
+
+
+<div class="container store_StatClass_center text-center ad_font">
+	<div class="container ad_font text-center">
+	<h1>스토어 통계</h1>
+
+		<form action="adminStatStore" method="post" id="frm">
+		<div class="ad_StatStore_searchForm">
+			
+		<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
+		</div>
+<!--  		<div class="ad_StatClass_searchForm">
+			<select id="category" name="category">
+				<option value="">전체</option>
+				<option value="공예/창작">공예/창작</option>
+				<option value="요리">요리</option>
+				<option value="미술">미술</option>
+				<option value="음악">음악</option>
+				<option value="라이프스타일">라이프스타일</option>
+				<option value="운동">운동</option>
+				<option value="사진/영상">사진/영상</option>
+			</select>
+			<input type="text" name="username" id="username" placeholder="크리에이터명" size="40"/>
+			<input type="submit" class="btn" value="검색"/> 
+		</div>
+		
+		<div class="text-center textSize">
+			<input type="radio" name="" checked/>전체
+			<input type="radio" name=""/>스토어
+			<input type="radio" name=""/>크리에이터<br/>
+		</div> -->
+			<ul id="ad_StatStore_ul">
+				<li><div class="ad_StatStore_board">
+							<b>전체 상품 갯수</b><br/>
+							<span style="font-size:50px;line-height:100px" id="countStoreAll"></span>
+						</div></li>
+				<li><div class="ad_StatStore_board">
+							<b>판매대기 상품</b><br/>
+							<span style="font-size:50px;line-height:120px" id="countStoreN"></span>
+					</div></li>											
+				<li><div class="ad_StatStore_board">
+							<b>판매중 상품</b><br/>
+							<span style="font-size:50px;line-height:120px" id="countStoreY"></span>
+					</div></li>										
+			</ul>
+		</form>
+	</div>
 			<canvas id="ad_store_StatClass_chart" style="margin-top:50px"></canvas>
 			<script type="text/javascript" src="resources/Chart.js"></script>
-			<script type="text/javascript">
-			
-			$(function(){
-			    // 로딩될때
-			    if($('#startMonth').val() == '' && $('#endMonth').val() == '') {
-			    
-					$('#startMonth').val('${startMonth}');
-					$('#endMonth').val('${endMonth}');
-			
-					console.log($('#startMonth').val());
-					console.log($('#endMonth').val());
-
-			    }
-				/* loadDash(); */
-			}); 
-
-			function chkPeriod(){
-				var startMonth = $('#startMonth').val();
-				var endMonth = $('#endMonth').val();
-				
-				if(startMonth >= endMonth) {
-					alert('기간을 다시 선택해주세요.');
-					return false;
-				}			
-			}
-			function loadDash(){
-				var startMonth = $('#startMonth').val();
-				var endMonth = $('#endMonth').val();
-				
-				if(startMonth >= endMonth) {
-					alert('기간을 다시 선택해주세요.');
-					return false;
-				} else {
-					// 최초 페이지 로딩 시 호출,
-					// startMonth, endMonth changeEvent 발생 시 호출 
-					var dataSize;
-					var startYear = startMonth.substring(0, 4);
-					var endYear = endMonth.substring(0,4);
-					
-					var tmpMonth1 = startMonth.substring(5,7);
-					var tmpMonth2 = endMonth.substring(5,7);
-					console.log(tmpMonth1);
-					console.log(tmpMonth2);
-					dataSize = (endYear - startYear)* 12;
-					dataSize -= Number(tmpMonth1);
-					dataSize += (Number(tmpMonth2) + 1);
-					
-					console.log(dataSize);
-					
-					var monthNameArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-					var data = new Array(); // db 데이터를 담아둘 Array
-				}
-				
-			}
-			
-			
+			<script type="text/javascript">	
 			var ad_store_StatClass_context = document.getElementById('ad_store_StatClass_chart').getContext('2d');
 			var ad_store_StatClass_chart = new Chart(ad_store_StatClass_context, {
 			    type: 'line',
 			    data: {
 			        /* labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], */
-			        labels: ['${monthdate[0]}' ,'${monthdate[1]}', '3', '4'],
+			        labels: ${labelData},
 			        datasets: [{
 			            label: '월별 매출 기록',
 			           /*  data: [15, 30, 155, 20, 50, 80, 20, 30, 90, 100, 16, 55], */
-			           data: [11, 22, 33, 44],
+			           data: ${storeData},
 			            backgroundColor: [
 			                'rgba(255, 99, 132, 0.2)',
 			                'rgba(54, 162, 235, 0.2)',
@@ -119,18 +186,18 @@
 		
 	</script>
 	</div>
-		<div class="ad_StatClass_Piechart cfont" >
+		<div class="ad_StatClass_Piechart cfont text-center" >
 		<canvas id="ad_store_StatClass_gender_chart"></canvas>
 		<script type="text/javascript">
 		var ad_store_StatClass_gender_context = document.getElementById('ad_store_StatClass_gender_chart').getContext('2d');
 		var ad_store_StatClass_gender_chart = new Chart(ad_store_StatClass_gender_context, {
 		    type: 'pie',
 		    data: {
-			labels : ["Man" , "Woman"],
+			labels : ${genderLabel},
 			datasets : [{
 			backgroundColor : ["#2ecc71","#3498dd"],
 			hoverBackgroundColor : ["#a6a6a6","#d1b2ff"],
-			data : [10,9]
+			data : ${genderData}
 				}]
 			},
 			options : {
@@ -141,18 +208,18 @@
 		</script>
 		성별
 	</div>
-	<div class="ad_StatClass_Piechart cfont" >	
+	<div class="ad_StatClass_Piechart cfont text-center" >	
 		<canvas id="ad_store_StatClass_age_chart"></canvas>
 		<script type="text/javascript">
 		var ad_store_StatClass_age_context = document.getElementById('ad_store_StatClass_age_chart').getContext('2d');
 		var ad_store_StatClass_age_chart = new Chart(ad_store_StatClass_age_context, {
 		    type: 'pie',
 		    data: {
-			labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
+			labels :${ageLabel},
 			datasets : [{
 			backgroundColor : ["#2ecc71","#3498dd","pink","yellow","green","orange"],
 			hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","green","orange"],
-			data : [10,9,7,3,1,2]
+			data : ${ageData}
 				}]
 			},
 			options : {
@@ -163,18 +230,18 @@
 		</script>
 		연령별
 	</div>	
-	<div class="ad_StatClass_Piechart cfont" >	
+	<div class="ad_StatClass_Piechart cfont text-center" >	
 		<canvas id="ad_store_StatClass_star_chart"></canvas>
 		<script type="text/javascript">
 		var ad_store_StatClass_star_context = document.getElementById('ad_store_StatClass_star_chart').getContext('2d');
 		var ad_store_StatClass_star_chart = new Chart(ad_store_StatClass_star_context, {
 		    type: 'pie',
 		    data: {
-			labels : ["1점" ,"2점" , "3점", "4점", "5점"],
+			labels : ${starLabel},
 			datasets : [{
 			backgroundColor : ["#2ecc71","#3498dd","pink","yellow","orange"],
 			hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","orange"],
-			data : [10,9,7,3,1]
+			data : ${starData}
 				}]
 			},
 			options : {

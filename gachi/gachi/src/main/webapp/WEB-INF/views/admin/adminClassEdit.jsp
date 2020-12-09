@@ -7,6 +7,17 @@
 			imageUploadUrl:'/gachi/imageUpload',
 			extraPlugins:'uploadimage'
 		});
+		editor.on('fileUploadRequest', function( evt ) {
+		    var fileLoader = evt.data.fileLoader,
+		        formData = new FormData(),
+		        xhr = fileLoader.xhr;
+		    xhr.open( 'POST', fileLoader.uploadUrl, true );
+		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+		    formData.append('type','classEdit');
+		    fileLoader.xhr.send( formData );
+		    evt.stop();
+		}, null, null, 4 ); 
+		
 		CKEDITOR.config.height=500;
 		$("#ad_goods_writeForm>li").slice(2).css("width","100%");
 		$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
@@ -14,21 +25,21 @@
 		$("textarea").css("height","800px");
 		$(".ad_box img").css("width","200px").css("height","200px");
 		$(".ad_box>div").css("margin","20px 0px;");
-		$(".ad_box>div:first-child").css("float","left");
+		$(".ad_box>div").css("float","left");
 		let imgCount=2;
 		 $(".add_img").on("dragenter dragover", function(event){
 		        event.preventDefault();
 		    });
 		
-		 
-		 
 		$(document).on("drop",".add_img",(event)=>{
 			event.preventDefault();
 			var files =event.originalEvent.dataTransfer.files;
 			var file=files[0];
 			console.log(file);
+			let code=$("#code").val();
 			var formData= new FormData();
 			formData.append("file",file);
+			formData.append("code",code);
 			$.ajax({
 				type:"post",
 				enctype: 'multipart/form-data',
@@ -38,54 +49,63 @@
 				contentType: false,
 				//////////////////////////
 				data: formData,
-				success:function(result){
-					let num=1;
+				success:function(result){					
 					var filename=result.slice(result.lastIndexOf("/")+1);
+					console.log(filename);
 					let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
 					tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
-					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList['+num+']"/>'+filename+'<b>x</b></span></div>';
+					tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
 					$(".ad_box").append(tagTxt);
 				}
 			});
 		});
-			$(document).on('change',".class_img",(event)=>{
-			console.log("aaaaaa");
-			event.preventDefault();
-			var file =event.target.files[0];
-			console.log(file);
-			var formData= new FormData();
-			formData.append("file",file);
-			$.ajax({
-				type:"post",
-				enctype: 'multipart/form-data',
-				url:"/gachi/imgThumbnail",
-				//ajax로 넘길경우 form-data 형식
-				processData: false,
-				contentType: false,
-				//////////////////////////
-				data: formData,
-				success:function(result){
-					$(event.target).parent().prev().children().attr("src",result);
-				}
-			});
-		});
 			$(document).on('click','b',(event)=>{
-				$(event.target).parent().parent().parent().remove();
+				let imageName=$(event.target).prev().text();
+				let code=$("#code").val();
+				$.ajax({
+					url:'/gachi/imageDelete?imageName='+imageName+"&code="+code,
+					type:'get',
+					success:(result)=>{
+						$(event.target).parent().parent().remove();
+					},error:(e)=>{
+						alert("이미지파일 삭제를 실패하였습니다.");
+					}
+				});
 			});	
+			
+		$("#adminClassEditOk").submit(()=>{
+			let grpl = $("input[name=imgList]").length;
+			if(grpl==0){
+				alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
+				return false;
+			}
+			if($("#class_name").val()==null||$("#class_name").val()==""){
+				alert("클래스명을 입력하여 주세요.");
+				return false;
+			}
+			if($("#full_price").val()==null||$("#full_price").val()==""){
+				alert("원가격을 입력하여 주세요.");
+				return false;
+			}
+			if($("#real_price").val()==null||$("#real_price").val()==""){
+				alert("판매가를 입력하여 주세요.");
+				return false;
+			}
+			return true;
+		});	
 	});
 </script>
 <div class="container">
 <h1>클래스수정</h1>
-<form method="post" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
+<form method="post" id="adminClassEditOk" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
 			<li class="content_center">클래스코드</li>
-			<li><input type="hidden" name="code" value="${vo.code}"/>${vo.code}</li>
+			<li><input type="hidden" id="code" name="code" value="${vo.code}"/>${vo.code}</li>
 			<li class="content_center">카테고리</li>
 			<li>
 				<select id="category" name="category">
@@ -106,7 +126,7 @@
 				</select>
 			</li>
 			<li class="content_center">클래스명</li>
-			<li><input type="text" id="" name="class_name" value="${vo.class_name}" size="40"/></li>
+			<li><input type="text" id="class_name" name="class_name" value="${vo.class_name}" size="40"/></li>
 			<li class="content_center">난이도</li>
 			<li>
 				<select id="stage" name="stage">
@@ -121,9 +141,9 @@
 				</select>
 			</li>
 			<li class="content_center">원가격</li>
-			<li><input type="text" id="" name="full_price" value="${vo.full_price}"/></li>
+			<li><input type="text" id="full_price" name="full_price" value="${vo.full_price}"/></li>
 			<li class="content_center">가격</li>
-			<li><input type="text" id="" name="real_price" value="${vo.real_price}"/></li>
+			<li><input type="text" id="real_price" name="real_price" value="${vo.real_price}"/></li>
 			<li class="content_center">클래스상태</li>
 			<li>
 				<select id="stage" name="class_state">
@@ -150,16 +170,19 @@
 </ul>
 <h3>클래스 이미지 목록</h3>
 <div class="text_center ad_box">
+<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
-		<div style="text-align:center;height:24px;">이미지1</div>
-		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}"/>
+		<div style="text-align:center;height:24px;">이미지${status.index+1}		
 		</div>
-		<div style="padding:0 auto;">
-			<!--<input type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"/>-->
-			<label><input type="hidden" name="imgList[0]"/> ${vo.class_img}<b>x</b></label>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/classImg/${imgList}"/>
+		</div>
+		<div>
+			<input type="hidden" name="imgList" value="${imgList}"/> 
+			<span class="wordCut">${imgList}</span><b>x</b>
 		</div>
 	</div>
+</c:forEach>
 </div>
 <h3>상품설명</h3>
 <ul id="ad_goods_write">

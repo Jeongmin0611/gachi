@@ -19,19 +19,19 @@
 	width: 100%;
 }
 
-#createSearchTxt{
+#searchWord{
 	border: 0;
 	border-bottom: 1px solid black;
 	outline: none;
 }
 
-#CintroCreateSearch button {
+#CintroCreateSearch [type=button] {
 	background-color: white;
 	color: black;
 	border: 0;
 }
 
-#CintroCreateSearch button:focus {
+#CintroCreateSearch [type=button]:focus {
 	outline: none;
 	color: #888;
 }
@@ -73,7 +73,15 @@
 
 
 </style>
-
+<script>
+	//검색어 폼에서 검색 버튼 클릭
+	$('#searchForm').submit(function(){
+		if($('#searchWord').val()==""){
+			return false;
+		}	
+		return true;
+	});
+</script>
 <div class="container cfont">
 	<div id="introCreateTopDiv">
 		크리에이터 소개
@@ -81,22 +89,20 @@
 	
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-		<select name="introCreateSelect1">
-			<option value="Iall">전체</option>
-			<option value="Inew">최신순</option>
-		</select>
-		<select name="IntroCreateSelect2">
-			<option value="Iall">전체</option>
-			<option value="Icreation">공예/창작</option>
-			<option value="Ifood">요리</option>
-			<option value="Iart">미술</option>
-			<option value="Imusic">음악</option>
-			<option value="IlifeStyle">라이프스타일</option>
-			<option value="Isport">운동</option>
-			<option value="Iphoto">사진/영상</option>
-		</select>
-		<input type="text" name="createSearchTxt" id="createSearchTxt" />
-		<button name="createSearchBtn">검색하기</button>
+		<form method="get" action="/gachi/introCreator" id="searchForm">
+			<select name="searchKey" id="searchKey">
+				<option value="전체">전체</option>
+				<option value="공예/창작">공예/창작</option>
+				<option value="요리">요리</option>
+				<option value="미술">미술</option>
+				<option value="음악">음악</option>
+				<option value="라이프스타일">라이프스타일</option>
+				<option value="운동">운동</option>
+				<option value="사진/영상">사진/영상</option>
+			</select>
+			<input type="text" name="searchWord" id="searchWord" placeholder="크리에이터 이름을 입력하세요" style="min-width: 250px; text-align: right;"/>
+			<input type="submit" value="검색"/>
+		</form>
 	</div>
 
 	<!-- 리스트 -->

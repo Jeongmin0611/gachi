@@ -450,8 +450,8 @@ input{text-align:center;}
 	}
 	.ad_list_menu{
 		margin-top:10px;
-		height:50px;
 		text-align: right;
+		overflow: auto;
 	}
 	.ad_list_menu li{
 		height:38px;
@@ -595,10 +595,123 @@ input{text-align:center;}
 		line-height:50px;
 		
 	}
-	#ad_settle_lst li:nth-of-type(6n+1){
-		width:25%;
+	#ad_settle_lst li:nth-of-type(8n+1){
+		width:5%;
 	}
+	#ad_settle_lst li:nth-of-type(8n+2){
+		width:10%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+3){
+		width:15%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+4){
+		width:20%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+5){
+		width:20%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+6){
+		width:10%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+7){
+		width:10%;
+	}
+	#ad_settle_lst li:nth-of-type(8n+8){
+		width:10%;
+	}
+
 	/*愿�由ъ옄 �젙�궛愿�由� 由ъ뒪�듃 end*/
+	
+	
+	/* paymentStore start */
+		#ad_paymentStore_lst{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
+		text-align: center;
+	}
+	#ad_paymentStore_lst li{
+		border-bottom:1px solid gray;
+		float:left;
+		width:15%;
+		height:50px;
+		font-size:15px;
+		line-height:50px;
+		
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+1){
+		width:5%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+2){
+		width:10%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+3){
+		width:5%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+4){
+		width:20%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+5){
+		width:20%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+6){
+		width:10%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+7){
+		width:10%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+8){
+		width:10%;
+	}
+	#ad_paymentStore_lst li:nth-of-type(9n+9){
+		width:10%;
+	}
+	
+	/* payment Class */
+	
+	#ad_paymentClass_lst{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
+		text-align: center;
+	}
+	#ad_paymentClass_lst li{
+		border-bottom:1px solid gray;
+		float:left;
+		width:15%;
+		height:50px;
+		font-size:15px;
+		line-height:50px;
+		
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+1){
+		width:5%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+2){
+		width:10%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+3){
+		width:10%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+4){
+		width:15%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+5){
+		width:20%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+6){
+		width:10%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+7){
+		width:10%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+8){
+		width:10%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(9n+9){
+		width:10%;
+	}
+	
 	
 	/*愿�由ъ옄 �뒪�넗�뼱愿�由� start*/
 	#ad_goods_lst{
@@ -613,12 +726,33 @@ input{text-align:center;}
 		height:50px;
 		line-height:50px;
 		border-bottom:1px solid gray;
-	}	
-	#ad_goods_lst>li:nth-child(8n+2){
+	}
+	#ad_goods_lst>li:nth-child(9n+1){
+		width:5%;
+	}
+	#ad_goods_lst>li:nth-child(9n+2){
+		width:15%;
+	}
+	#ad_goods_lst>li:nth-child(9n+3){
+		width:10%;
+	}
+	#ad_goods_lst>li:nth-child(9n+4){
 		width:20%;
 	}
-	#ad_goods_lst>li:nth-child(8n+3){
-		width:20%;
+	#ad_goods_lst>li:nth-child(9n+5){
+		width:10%;
+	}
+	#ad_goods_lst>li:nth-child(9n+6){
+		width:10%;
+	}	
+	#ad_goods_lst>li:nth-child(9n+7){
+		width:10%;
+	}
+	#ad_goods_lst>li:nth-child(9n+8){
+		width:10%;
+	}
+	#ad_goods_lst>li:nth-child(9n+9){
+		width:10%;
 	}	
 	#ad_goods_viewForm{
 		overflow:auto;

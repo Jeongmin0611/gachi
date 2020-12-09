@@ -20,6 +20,14 @@ public class OrderListVO {
 	private String[] orderClassCode;
 	private String[] orderGoodsCode;
 	
+	private String userid;	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getCode() {
 		return code;
 	}

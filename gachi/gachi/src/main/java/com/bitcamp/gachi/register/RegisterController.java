@@ -1,7 +1,6 @@
 package com.bitcamp.gachi.register;
-
-
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.mypage.MileageDaoImp;
+import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
 import oracle.jdbc.internal.OracleConnection.TransactionState;
@@ -77,7 +77,6 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		public int useridChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String okid=req.getParameter("okid");
-			System.out.println("aaaa===>"+okid);
 			int result=dao.useridChk(okid);
 			return result;
 		}
@@ -86,27 +85,38 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		public int useridChk2(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String okid2=req.getParameter("okid2");
-			System.out.println("aaaa===>"+okid2);
 			int result=dao.useridChk2(okid2);
 			return result;
 		}
 		@RequestMapping("/useridFChk")
 		@ResponseBody
-		public int useridFChk(HttpServletRequest req,Model model) {
+		public String useridFChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String useridF=req.getParameter("useridF");
-			System.out.println("aaaa===>"+useridF);
-			int result=dao.useridF(useridF);
+			String result=dao.useridF(useridF);
 			return result;
 		}
 		@RequestMapping("/userpwdFChk")
 		@ResponseBody
-		public int userpwdFChk(HttpServletRequest req,Model model) {
+		public String userpwdFChk(HttpServletRequest req,Model model) {
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
 			String userpwdF=req.getParameter("userpwdF");
-			System.out.println("aaaa===>"+userpwdF);
-			int result=dao.userpwdF(userpwdF);
+			String result=dao.userpwdF(userpwdF);
 			return result;
+		}
+		@RequestMapping("/searchTextChk") 
+		@ResponseBody
+		public ModelAndView searchTextChk(RegisterVO vo) {
+			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
+			ModelAndView mav=new ModelAndView();
+			List<SearchPageVO> result=dao.searchTextChk(vo);
+			List<SearchPageVO> result2=dao.searchTextChk2(vo);
+			List<SearchPageVO> result3=dao.searchTextChk3(vo);
+			mav.addObject("result",result);
+			mav.addObject("result2",result2);
+			mav.addObject("result3",result3);
+			mav.setViewName("searchPage/searchPage");
+			return mav;
 		}
 		@RequestMapping(value="/memberLogin",method=RequestMethod.POST)
 		public ModelAndView login1(RegisterVO vo,HttpSession ses) {
@@ -123,11 +133,12 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("userid", resultVO.getUserid());
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
-						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid()));
+						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid())); 
 						ses.setAttribute("cntGood", uDao.countGood(resultVO.getUserid()));
 						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
+
 						mav.setViewName("redirect:/");
 				
 					}else if(voGrade.equals("크리에이터")){
@@ -151,7 +162,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		@RequestMapping("/logout")
 		public String logout(HttpSession s) {
 			s.invalidate();
-			return "home";
+			return "redirect:/";
 		}
 		@RequestMapping(value="/telChkOk",method={RequestMethod.GET, RequestMethod.POST})
 		@ResponseBody

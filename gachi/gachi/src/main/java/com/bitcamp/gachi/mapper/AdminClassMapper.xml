@@ -104,7 +104,14 @@
 		delete from class where code='${param1}'
 	</delete>	
 	<update id="updateClass" parameterType="com.bitcamp.gachi.admin.ClassVO">
-		update class set category='${category}',class_name='${class_name}',stage='${stage}',full_price='${full_price}',
-		real_price='${real_price}',class_state='${class_state}',class_info='${class_info}' where code='${code}'  
+		update class set category='${category}',class_name='${class_name}',stage='${stage}',
+		full_price='${full_price}',real_price='${real_price}',class_state='${class_state}',
+		class_info='${class_info}' where code='${code}'  
+	</update>
+	<select id="selectClassImg" parameterType="String" resultType="String">
+		select class_img from class where code='${code}'
+	</select>
+	<update id="updateClassImg" parameterType="String">
+		update class set class_img='${param1}' where code='${param2}'
 	</update>
 </mapper>
