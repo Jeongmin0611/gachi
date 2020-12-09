@@ -193,7 +193,7 @@ $(function(){
 	$('i').on('click',function(){
 		var id = '<%=(String)session.getAttribute("userid")%>';
 		if(id==null ||id =='null'){
-			alert('로그인 후 이용가능한 기능입니다.');
+			swal('로그인 후 이용가능한 기능입니다.');
 			return false;
 		}
 		if(id!=null){
