@@ -13,7 +13,10 @@
 		width: 100%;
 	}
 	.mypageContent button{
-		background-color: #abcee3;
+		background-color: ;
+	}
+	.mypageContent button[type=submit]{
+		width: 30%;
 	}
 	.mypageContent>div:last-child button{
 		margin-top: 100px;
@@ -52,18 +55,13 @@
 				$("input:checkbox").prop("checked",false);
 			}
 		});
-		
-		//선택상품삭제
-		$("#selectDel").click(function(){
-			
-		});
 	
 	});
 </script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="font-size:1.1em"><b>장바구니</b></label>
 			<label style="color:gray">> 주문/결제 ></label>
 			<label style="color:gray">주문완료</label>
@@ -79,28 +77,27 @@
 				<c:set var="cnt" value="0"/>
 				<c:forEach var="cvo" items="${cList }">
 					<div class="row">
-						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${cvo.code }" checked/></div>
-						<input type="hidden" name="orderVOList[${cnt }].class_img" value="${cvo.class_img }"/>
+						<div class="col-md-1"><input type="checkbox" name="orderClassCode[${cnt }]" value="${cvo.code }" checked/></div>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
-						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].class_name" value="${cvo.class_name }"/><br/>${cvo.username }</div>
-						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${cvo.amount }" style="width:15%"/>개
-											  <input type="text" name="orderVOList[${cnt }].stack" value="${cvo.stack }" style="width:15%"/>p
-									          <input type="text" name="orderVOList[${cnt }].real_price" value="${cvo.real_price }" style="width:30%"/>원
+						<div class="col-md-4"><input type="text" value="${cvo.class_name }"/><br/>${cvo.username }</div>
+						<div class="col-md-5"><input type="text" value="${cvo.amount }" style="width:15%"/>개
+											  <input type="text" value="${cvo.stack }" style="width:15%"/>p
+									          <input type="text" value="${cvo.real_price }" style="width:30%"/>원
 											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${cvo.code}'">X</button></div>
 					</div>
 					<hr/>
 					<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
 					<c:set var="cnt" value="${cnt+1 }"/>
 				</c:forEach>
+				<c:set var="cnt" value="0"/>
 				<c:forEach var="gvo" items="${gList }">
 					<div class="row">
-						<div class="col-md-1"><input type="checkbox" name="orderVOList[${cnt }].code" value="${gvo.code }" checked/></div>
-						<input type="hidden" name="orderVOList[${cnt }].goods_img1" value="${gvo.goods_img1 }"/>
+						<div class="col-md-1"><input type="checkbox" name="orderGoodsCode[${cnt }]" value="${gvo.code }" checked/></div>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
-						<div class="col-md-4"><input type="text" name="orderVOList[${cnt }].goods_name" value="${gvo.goods_name }"/></div>
-						<div class="col-md-5"><input type="text" name="orderVOList[${cnt }].amount" value="${gvo.amount }" style="width:15%"/>개
-											  <input type="text" name="orderVOList[${cnt }].stack" value="${gvo.stack }" style="width:15%"/>p
-											  <input type="text" name="orderVOList[${cnt }].real_price" value="${gvo.real_price }" style="width:30%"/>원
+						<div class="col-md-4"><input type="text" value="${gvo.goods_name }"/></div>
+						<div class="col-md-5"><input type="text" value="${gvo.amount }" style="width:15%"/>개
+											  <input type="text" value="${gvo.stack }" style="width:15%"/>p
+											  <input type="text" value="${gvo.real_price }" style="width:30%"/>원
 											  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'">X</button></div>
 					</div>
 					<hr/>

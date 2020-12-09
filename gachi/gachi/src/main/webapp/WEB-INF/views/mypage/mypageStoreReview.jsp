@@ -4,23 +4,6 @@
 
 	/* 질문,문의 */
 	
-	/* 상단 */
-	#myqnaTop{
-		overflow:auto;
-		padding:20px 50px 0;
-	}
-	#myqnaTop li{
-		width:7%;
-		float:left;
-		text-align:center;
-	}
-	#myqnaTop li:nth-child(2n){
-		width:3%;
-	}
-	#myqnaTop li:first-child{
-		font-weight:bold;
-	}
-	
 	/* 내용 */
 	#myqnaContent>div:first-child{
 		text-align:right;
@@ -33,7 +16,7 @@
 		padding:5px;
 		background-color:#fde9e2;
 	}
-	#myqnaContent a:hover{
+	#myqnaContent>label a:hover{
 		font-weight:bold;
 	}
 	/* 클래스 질문답변 */
@@ -104,28 +87,18 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<ul id="myqnaTop">
-			<li><a href="/gachi/myqnaClass">클래스</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaStore">스토어</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqna1on1">1:1문의</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaEvent">이벤트</a></li>
-		</ul>
-		<div id="myqnaContent">
-			<div>
+		<div class="mypageContent col-md-10">
+			<label style="color:gray">내 활동 ></label>
+			<label style="font-size:1.1em"><b>상품후기</b></label>
+			<hr class="userHr"/>
+			<div style="text-align:right">
+				<button type="button" class="btn btn-outline-light">후기작성</button>
 				<select>
-					<option>클래스명</option>
+					<option>상품명</option>
 					<option>카모마일 프랑스 자수</option>
 				</select>
-				<select>
-					<option>답변상태</option>
-					<option>답변완료</option>
-					<option>미답변</option>
-				</select>
 			</div>
-			<label><a href="/gachi/myclassView">카모마일 프랑스 자수</a></label>
+			<label><a href="#">캘리그라피 입문 세트</a></label>
 			<ul id="myqnaClass">
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
@@ -133,13 +106,13 @@
 				<li><a href="#">수정</a></li>
 				<li><a href="#">삭제</a></li>
 				<li>답변완료</li>
-				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
+				<li>필요한 재료를 추가로 별도 구매가 가능한가요?</li>
 				<li>
 				<hr/>
 					<ul>
 						<li><label class="badge badge-light">A</label>홍길동</li>
 						<li>20.11.15</li>
-						<li>네 처음 시작하시는 분들도 무리없이 따라오시는 난이도의 수업입니다 :)</li>
+						<li>해당 상품은 세트로만 판매되고 있는 상품이며, 구성품 개별 구매는 어렵습니다! 구성품에 관한 정보는 상세페이지 내에 기재되어 있으니, 참고하시어 즐거운 취미 생활 되시기를 바라겠습니다 :) 감사합니다!</li>
 					</ul>
 				</li>
 			</ul>

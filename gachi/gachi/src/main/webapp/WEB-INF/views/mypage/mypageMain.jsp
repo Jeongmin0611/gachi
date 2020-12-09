@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>	
 	
 	/* 마이페이지(메인) - 컨테이너 */
@@ -10,11 +11,14 @@
 	}
 	.mypageTop{
 		text-align: center;
-		margin: 10px auto 0px;	 
+		margin: 10px auto 40px;	 
+	}
+	.mypageTop>div:first-child{
+		text-align:left;
 	}
 	.mypageTop button,
 	.mypageContent button{
-		background-color: #abcee3;
+		background-color: ;
 		margin:5px 0;
 	}	
 	.mypageContent div{
@@ -27,7 +31,7 @@
 		text-align:left;
 	}
 	/*클래스썸네일*/
-	.mypageContent>div>div>img{
+	.mypageContent img{
 		width: 150px;
 	    height: 100px;
 	    object-fit: cover;
@@ -62,9 +66,6 @@
 		background-color:#ffdac3;
 		border-radius: 50%;
 		text-align:center;
-	}
-	.mypageModal_content>div:first-child img{
-		width:80%;
 	}
 	.mypageModal_content>div:nth-child(2){
 		margin-top:20px;
@@ -121,23 +122,44 @@
 	
 </style>
 <script>
+
 	$(function(){
+		$("input[name=option][value=all]").prop("checked","true");
+
 		//오늘 날짜 세팅
 		var date = new Date();
 		var yyyy = date.getFullYear();
 		var mm = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + date.getMonth()+1;
 		var dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
-		 
-		$("#mypageMainDate1").val(yyyy+"-"+mm+"-"+dd);
-		$("#mypageMainDate2").val(yyyy+"-"+mm+"-"+dd);
-
-		//날짜 조회
-		$("#orderListDate").click(function(){
-			var startDate = $("#mypageMainDate1").val();
-			var endDate = $("#mypageMainDate2").val();
-			
-		});
+			 
+		$("input[name=startDate]").val(yyyy+"-"+mm+"-"+dd);
+		$("input[name=endDate]").val(yyyy+"-"+mm+"-"+dd);		
 		
+		//구매확정
+		$(".userOrderFix").click(function(){
+			swal({
+				title: "구매확정",
+				text: "선택하신 상품을 구매확정 하시겠습니까?",
+				icon: "warning",
+				closeOnClickOutside: false,
+				buttons: {
+					cancle : {
+						text: "취소",
+						value: false,
+						className: "btn btn-outline-light"
+					},
+					confirm : {
+						text: "확인",
+						value: true,
+						className: "btn btn-outline-light"
+					}
+				}
+			}).then((result)=>{
+				if(result){
+					$(".orderFixFrm").submit();
+				}
+			});
+		});
 		//모달창 띄우기
 	    $(".mypageDelivery").click(function(){
     		$("#mypageModal").css({
@@ -151,124 +173,147 @@
 	    $("#mypageModalClose, .mypageModal_layer").click(function(){
 	       $("#mypageModal").fadeOut();
 	    });   
+	    
+	    //더보기 페이징 -> userProfile.jspf
+	    moreContent();
 	});
 	
 </script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
-	<!-- 마이페이지(메인) - 상단 -->
 	<div class="userMainDiv">
-		<div class="mypageTop col-lg-8 col-md-10">
-			<div class="d-none d-sm-none d-md-block">
-				<!-- xs, sm 크기에서만 숨기기  -->
-				<input type="radio" name="option"/><label>전체</label>
-				<input type="radio" name="option"/><label>상품</label>
-				<input type="radio" name="option"/><label>클래스</label>
-						
-				<input type="date" id="mypageMainDate1"/>
-				-
-				<input type="date" id="mypageMainDate2"/>
-			
-				<button type="button" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
-			</div>
-			<!-- xs, sm 크기에서만 보이기  -->
-			<div class="d-block d-sm-bolck d-md-none">
-				<div>
-					<input type="radio" name="option"/><label>전체</label>
-					<input type="radio" name="option"/><label>상품</label>
-					<input type="radio" name="option"/><label>클래스</label>
-				</div>
-				<div>	
-					<input type="date" id="mypageMainDate1"/>
-					-
-					<input type="date" id="mypageMainDate2"/>
-				
-				<button type="button" class="btn btn-outline-light btn-block" id="orderListDate">조회</button>
-				</div>
+		<!-- 상단 -->
+		<div class="mypageTop col-md-10">
+			<div>
+				<label style="color:gray">주문/결제 ></label>
+				<label style="font-size:1.1em"><b>결제내역확인</b></label>
 			</div>
 			<hr class="userHr"/>
+			<input type="hidden" id="mypageOption" value="${option }"/>
+			<input type="hidden" id="mypageStartDate" value="${startDate }"/>
+			<input type="hidden" id="mypageEndDate" value="${endDate }"/>
+			<form action="/gachi/mypage" method="post">
+				<!-- xs, sm 크기에서만 숨기기  -->
+				<div class="d-none d-sm-none d-md-block">
+					<input type="radio" name="option" value="all"/><label>전체</label>
+					<input type="radio" name="option" value="class"/><label>클래스</label>	
+					<input type="radio" name="option" value="goods"/><label>상품</label>
+						
+					<input type="date" name="startDate"/>-
+					<input type="date" name="endDate"/>
+					<button type="submit" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
+					<button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/mypage'">전체</button>
+				</div>
+			</form>
+			<form action="/gachi/mypage" method="post">
+				<!-- xs, sm 크기에서만 보이기  -->
+				<div class="d-block d-sm-bolck d-md-none">
+					<div>
+						<input type="radio" name="option" value="all"/><label>전체</label>
+						<input type="radio" name="option" value="class"/><label>클래스</label>	
+						<input type="radio" name="option" value="goods"/><label>상품</label>
+					</div>
+					<div>	
+						<input type="date" name="startDate"/>-
+						<input type="date" name="endDate"/>
+						<button type="submit" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
+						<button type="button" class="btn btn-outline-light btn-sm" id="orderListAll">전체</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div class="mypageContent col-lg-8 col-md-10">
+		<!-- 내용 -->
+		<div class="mypageContent col-md-10">
 			<c:forEach var="list" items="${map }">
 				<c:set var="key" value="${list.key }"/>
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
-					<div class="row">	
-						<div class="col-md-3"><img src="/gachi/img/${vo.class_img }"/></div>
-						<div class="col-md-6">
-							<ul class="mypageMainLst">
-								<li>
-									<label class="badge badge-info">${vo.category }</label>
-									<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.class_order_code }</a></label>
-								</li>
-								<li>클래스명 <a href="#">${vo.class_name }</a></li>
-								<li>크리에이터명 <a href="#">${vo.username }</a></li>
-								<li>가격 ${vo.real_price }원</li>
-								<li>결제일시 ${vo.orderdate }</li>
-							</ul>
+						<div class="row moreContent">	
+							<div class="col-md-3"><img src="/gachi/img/${vo.class_img }"/></div>
+							<div class="col-md-6">
+								<ul class="mypageMainLst">
+									<li>
+										<label class="badge badge-info">${vo.category }</label>
+										<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.class_order_code }</a></label>
+									</li>
+									<li>클래스명 <a href="#">${vo.class_name }</a></li>
+									<li>크리에이터명 <a href="#">${vo.username }</a></li>
+									<li>가격 ${vo.real_price }원</li>
+									<li>결제일시 ${vo.orderdate }</li>
+								</ul>
+							</div>
+							<div class="col-md-3">
+								<div><label class="badge badge-pill badge-primary">구매확정완료</label></div>
+							</div>
 						</div>
-						<!-- xs 크기에서만 숨기기  -->
-						<div class="col-md-3 col d-none d-sm-block">
-							<div><button type="button" class="btn btn-outline-light">결제취소</button></div>
-						</div>
-						<!-- xs 크기에서만 보이기  -->
-						<div class="col-md-3 d-block d-sm-none">
-							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-								<button type="button" class="btn btn-outline-light">결제취소</button></div>
-						</div>
-					</div>
-					<hr/>
+						<hr class="moreContent"/>
 					</c:forEach>
 				</c:if>
 				<c:if test="${fn:contains(key,'g')}">
 					<c:forEach var="vo" items="${list.value }">
-					<div class="row">	
-						<div class="col-md-3"><img src="/gachi/img/${vo.goods_img1 }"/></div>
-						<div class="col-md-6" style="text-align:left">
-							<ul class="mypageMainLst">
-								<li>
-									<label class="badge badge-info">${vo.category }</label>
-									<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
-								</li>
-								<li>상품명 <a href="#">${vo.goods_name }</a></li>
-								<li>수량 ${vo.amount }개</li>
-								<li>가격 ${vo.real_price }원</li>
-								<li>결제일시 ${vo.orderdate }</li>
-							</ul>
-						</div>
-						<!-- xs 크기에서만 숨기기  -->
-						<div class="col-md-3 col d-none d-sm-block">
-							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
-							<div><button type="button" class="btn btn-outline-light">결제취소</button></div>
-						</div>
-						<!-- xs 크기에서만 보이기  -->
-						<div class="col-md-3 d-block d-sm-none">
-							<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-								<button type="button" class="btn btn-outline-light">결제취소</button></div>
-						</div>
-					</div>
-					<hr/>
-			</c:forEach>
+						<form action="/gachi/userOrderFix" class="orderFixFrm" method="post">
+							<div class="row moreContent">	
+								<div class="col-md-3"><img src="/gachi/img/${vo.goods_img1 }"/></div>
+								<div class="col-md-6" style="text-align:left">
+									<ul class="mypageMainLst">
+										<li>
+											<label class="badge badge-info">${vo.category }</label>
+											<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
+											<input type="hidden" name="goods_order_code" value="${vo.goods_order_code }"/>
+										</li>
+										<li>상품명 <a href="#">${vo.goods_name }</a></li>
+										<li>수량 ${vo.amount }개</li>
+										<li>가격 ${vo.real_price }원</li>
+										<li>결제일시 ${vo.orderdate }</li>
+									</ul>
+								</div>
+								<!-- xs 크기에서만 숨기기  -->
+								<div class="col-md-3 col d-none d-sm-block">
+									<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
+									<div><button type="button" class="btn btn-outline-light userOrderFix">구매확정</button></div>
+								</div>
+								<!-- xs 크기에서만 보이기  -->
+								<div class="col-md-3 d-block d-sm-none">
+									<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+										 <button type="button" class="btn btn-outline-light userOrderFix">구매확정</button></div>
+								</div>
+							</div>
+						</form>
+						<hr class="moreContent"/>
+					</c:forEach>
 				</c:if>
 			</c:forEach>
+		<div>
+			<button type="button" class="btn btn-outline-lignt" id="moreContentLoad">더보기</button>
 		</div>
-		<div class="mypageMainBtm">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
 <div id="mypageModal" class="cfont">
 	<div class="mypageModal_content">
 		<div>
-			<img src="/gachi/img/icon_delivery.png">
+			<img src="/gachi/img/icon_deliveryFinish.png" style="width:80%"/>
+		</div>
+		<div>상품이 <label>배송완료</label> 상태입니다.</div>
+		<label>송장정보</label>
+		<ul>
+			<li>송장번호</li>
+			<li>10101010</li>
+			<li>택배사</li>
+			<li>한진택배</li>
+			<li>대표번호</li> 
+			<li>1588-0011</li>
+		</ul>
+		<div id="mypageModalBtm">
+			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
+		</div>
+	</div>
+	<div class="mypageModal_layer"></div>
+</div>
+<div id="mypageModal" class="cfont">
+	<div class="mypageModal_content">
+		<div>
+			<img src="/gachi/img/icon_delivery.png" style="width:85%"/>
 		</div>
 		<div>상품이 <label>배송진행중</label> 상태입니다.</div>
 		<label>송장정보</label>
@@ -284,5 +329,24 @@
 			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
 		</div>
 	</div>
-	<div class="mypageModal_layer"></div>
+</div>
+<div id="mypageModal" class="cfont">
+	<div class="mypageModal_content">
+		<div>
+			<img src="/gachi/img/icon_deliveryReady.png" style="width:95%"/>
+		</div>
+		<div>상품이 <label>배송준비중</label> 상태입니다.</div>
+		<label>송장정보</label>
+		<ul>
+			<li>송장번호</li>
+			<li>10101010</li>
+			<li>택배사</li>
+			<li>한진택배</li>
+			<li>대표번호</li> 
+			<li>1588-0011</li>
+		</ul>
+		<div id="mypageModalBtm">
+			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
+		</div>
+	</div>
 </div>

@@ -13,7 +13,8 @@
 		width: 100%;
 	}
 	.mypageContent button{
-		background-color: #abcee3;
+		width: 30%;
+		background-color: ;
 		margin-top: 100px;
 	}
 	
@@ -33,7 +34,7 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="color:gray">회원정보수정 ></label>
 			<label style="font-size:1.1em"><b>비밀번호확인</b></label>
 			<hr class="userHr"/>
@@ -44,7 +45,7 @@
 					<div class="col-md-8"><input type="password" name="userpwd" id="userInfoPwd" style="width:100%"/></div>
 				</div>
 				<div>
-					<button type="submit" class="btn btn-outline-light btn-block">확인</button>
+					<button type="submit" class="btn btn-outline-light">확인</button>
 				</div>
 			</form>
 		</div>
