@@ -49,7 +49,7 @@
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
 					//tagTxt+='<input multiple="multiple" type="file" name="class_img" class="class_img" accept=".jpg,.jpeg,.png,.gif,.bmp"><b>x</b></div>';
-					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></span></div>';
+					tagTxt+='<span><input type="hidden" name="imgList" value="'+filename+'"/>'+result+'<b>x</b></span></div>';
 					$(".ad_box").append(tagTxt);
 				}
 			});
