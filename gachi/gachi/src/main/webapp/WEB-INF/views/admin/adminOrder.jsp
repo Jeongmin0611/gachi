@@ -1,5 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+<script>
+$(function(){
+	
+	$("#startDate").val("${startDate}");
+	$("#endDate").val("${endDate}");
+	$('.ad_order_searchForm').css("text-align","right").css("margin","5px 0px");
+	
+	$("#OrderSelectAll").click(function(){
+		if($("#OrderSelectAll").prop("checked")){
+			$("input:checkbox").prop("checked",true);
+		}else{
+			$("input:checkbox").prop("checked",false);
+		}
+	});
+});
+	
+</script>
+
+
+
 <div class="container ad_font">
 <h1>주문조회</h1>
 <div id="ad_order_Area">
@@ -27,8 +49,7 @@
 			 <button class="btn">1개월</button>
 			 <button class="btn">3개월</button>
 			 <button class="btn">6개월</button>
-			 <input type="date"/>&nbsp;~
-			 <input type="date"/>
+			 <input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
 		</li>
 		<li>결제수단</li>
 		<li>
@@ -58,39 +79,29 @@
 </form>
 </div>
 <ul id="ad_order_lst" class="text-center">
+	<li><input type="checkbox" id="OrderSelectAll"/></li>
 	<li>주문번호</li>
-	<li>상품코드</li>
-	<li>상품명</li>
+	<li>회원아이디</li>
 	<li>구매자</li>
-	<li>가격</li>
-	<li>적립금액</li>
-	<li>미수금</li>
+	<li>결제금액</li>
 	<li>결제수단</li>
+	<li>결제카드</li>
 	<li>결제일</li>
 	<li>주문상태</li>
+	<li>구매확정여부</li>
 	
-	<li><a href="/gachi/adminOrderView">1234567891234</a></li>
-	<li>go123</li>
-	<li>해당사항없음</li>
-	<li>김구매</li>
-	<li>15,000원</li>
-	<li>150원</li>
-	<li>0원</li>
-	<li>카드</li>
-	<li>2020-11-16</li>
-	<li>배송준비</li>
-	
-	<li>1234567891234</li>
-	<li>go123</li>
-	<li>요가 매트</li>
-	<li>박구매</li>
-	<li>9,900원</li>
-	<li>99원</li>
-	<li>0원</li>
-	<li>카카오페이</li>
-	<li>2020-11-14</li>
-	<li>배송완료</li>
-	
+	<c:forEach items="${data }" var="data">
+	<li><input type="checkbox"/></li>
+	<li>${data.order_code }</li>
+	<li>${data.userid }</li>
+	<li>${data.username }</li>
+	<li>${data.price }</li>
+	<li>${data.payment_type }</li>
+	<li>${data.card_type }</li>
+	<li>${data.orderdate }</li>
+	<li>${data.state }</li>
+	<li><c:if test="${data.fix_state eq 'n' or data.fix_state eq 'N'}">미확정</c:if><c:if test="${data.fix_state eq 'y' or data.fix_state eq 'Y'}">구매확정</c:if></li>
+	</c:forEach>
 </ul>	
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

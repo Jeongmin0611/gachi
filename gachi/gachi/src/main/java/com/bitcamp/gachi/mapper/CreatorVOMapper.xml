@@ -5,7 +5,7 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.CreatorDaoImp">
 	<select id="selectAllCreator" parameterType="map" resultType="com.bitcamp.gachi.admin.AllVO">
-	  	 select m.userid, rownum, m.userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
+	  	 select rownum, m.userid, nickname, username, tel, to_char(signupdate, 'yyyy-mm-dd') 
 		signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted ,creator_state
 		 from member m full outer join creator c on m.userid = c.userid where grade = '크리에이터'
 		 <choose>
@@ -23,6 +23,47 @@
 		</choose>
 	</select>
 	
+		<select id="pagingAllCreator" parameterType="map" resultType="com.bitcamp.gachi.admin.AllVO">
+	
+	SELECT
+		    *
+		FROM
+		    (
+		        SELECT
+		            A.*,
+		            ROWNUM AS RNUM
+		        FROM
+		            (
+		                SELECT
+		                   rownum, m.userid, nickname, grade, username, tel, to_char(signupdate, 'yyyy-mm-dd') signupdate, 
+	        				to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate, deleted ,business_number,category,bankname,account,
+                   			license_img1,license_img2,license_img3, sns_addr, creator_info,creator_state,picture
+		                FROM
+		                    member m join creator c on m.userid = c.userid
+		                WHERE
+		                	grade='크리에이터'
+		             		<choose>
+								<when test='status==null and search==null'></when>
+								<when test='status!=null and search==null'>
+									 and creator_state='${status}'
+								</when>
+								<when test='status==null and search!=null'>
+									and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+								</when>
+								<when test='status!=null and search!=null'>
+									and creator_state ='${status}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
+								</when>
+								<otherwise></otherwise>
+							</choose>
+		            ) A
+		        WHERE
+		            ROWNUM &lt;= ${endNum}
+		    )
+		WHERE
+		    RNUM &gt;=${startNum}
+   	</select>
+	
+	
 		<select id="selectCntAllCreator" parameterType="map" resultType="_int">
 		select count(*) as cnt from member m join 
 		creator c on m.userid=c.userid where m.grade='크리에이터'
@@ -32,10 +73,10 @@
 				 and creator_state='${status}'
 			</when>
 			<when test='status==null and search!=null'>
-				and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+				and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
 			</when>
 			<when test='status!=null and search!=null'>
-				and creator_state='${status}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+				and creator_state='${status}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or m.userid like '%${search}%')
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -87,11 +128,14 @@
 	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
 		select u.userid, grade , username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
 	  	 birthdate, gender, zipcode, addr, detailaddr, to_char(signupdate, 'yyyy-mm-dd') signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
-	  	 deleted from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
+	  	 deleted ,creator_state from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
 	</select>
 	<update id="creatorMemberUpdate" parameterType="com.bitcamp.gachi.admin.AllVO"> 
 		update member set nickname =#{nickname}, username=#{username}, tel=#{tel} ,gender=#{gender},  zipcode=#{zipcode},
 		addr =#{addr},detailaddr =#{detailaddr} where userid = #{userid}
+	</update>
+	<update id ="creatorStateMemberUpdate" parameterType="String">
+		update creator set creator_state='승인' where userid =#{userid}
 	</update>
 	<update id="creatorleaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}

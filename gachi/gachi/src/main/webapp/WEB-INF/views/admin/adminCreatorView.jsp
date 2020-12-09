@@ -38,21 +38,16 @@
 		<li>가입일</li><li><input type="text" name="signupdate" value="${vo.signupdate }"readonly/></li>
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }"readonly/></li>
 		<li>회원상태</li><li><input type="text" name="deleted" id="deleted" value="${vo.deleted }"readonly/></li>
+		<li>승인상태</li><li><input type="text" name="state" id="state" value="${vo.creator_state }"readonly/></li>
 	</ul>
 	<div style="margin:10px 0px;">
 		<button type="button" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
 		<button type="button" id="cr_leaveBtn" class="btn" onclick="location.href='/gachi/adminCreatorLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
+		<button type="button" id="cr_stateBtn" class="btn" onclick="location.href='/gachi/adminCreatorStateEditOk?userid=${vo.userid}'">승인관리</button>
 		<!-- <input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/> -->
 	</div>
 	</form>	
 	
-	<h3>클래스 내역</h3>
-	<div class="ad_member_Box">
-	</div>
-	<h3>정산내역</h3>
-	<div class="ad_member_Box">
-	
-	</div>
 
 </div>

@@ -361,7 +361,7 @@ public class AdminController {
 		System.out.println("cntRecords:" + cntRecords);
 		System.out.println("lastPage:" + lastPage);
 
-		List<AllVO> list = dao.selectAllCreator(dbParam);
+		List<AllVO> list = dao.pagingAllCreator(dbParam);
 		
 		
 		int countAllCreator = dao.countAllCreator();
@@ -421,7 +421,7 @@ public class AdminController {
 			lastPage = cntRecords / 20 + 1;
 		}
 		
-		List<AllVO> list = dao.selectAllCreator(dbParam);
+		List<AllVO> list = dao.pagingAllCreator(dbParam);
 		int countAllCreator = dao.countAllCreator();
 		int countNowCreator =dao.countNowCreator();
 		int countDeletedCreator = dao.countDeletedCreator();
@@ -495,6 +495,20 @@ public class AdminController {
 
 		mav.addObject("result", result);
 		mav.setViewName("admin/adminCreatorLeaveEditOk");
+		
+	return mav;
+	}
+	
+	@RequestMapping("/adminCreatorStateEditOk")
+	public ModelAndView adminCreatorStateEditOk(String userid) {
+
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
+		int result = dao.creatorStateMemberUpdate(userid);
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("result", result);
+		mav.setViewName("admin/adminCreatorStateEditOk");
 		
 	return mav;
 	}
@@ -1049,24 +1063,32 @@ public class AdminController {
 	public String admin1on1Write() {
 		return "admin/admin1on1Write";
 	}
-//	@RequestMapping("/adminOrder")
-//	public ModelAndView adminOrder() {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
-//		String todate =  yyyymmdd.format(new Date());
-//		String startDate = todate.substring(0, 8) + "01";
-//		String endDate = todate;
-//		
-//		Map<String, String> dbParam = new HashMap<String, String>();
-//		dbParam.put("startDate", startDate);
-//		dbParam.put("endDate", endDate);
-//		dashForMember
-//		return mav;
-//	}
+
 	@RequestMapping("/adminOrder")
-	public String adminOrder() {
-		return "admin/adminOrder";
+	public ModelAndView adminOrder() {
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		
+		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
+		dao = sqlSession.getMapper(OrderDaoImp.class);
+		List<OrderVO> result = dao.selectAllOrder(dbParam);
+		
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+
+		mav.addObject("data", result);
+		mav.setViewName("admin/adminOrder");
+	
+		return mav;
 	}
 	@RequestMapping("/adminOrderView")
 	public String adminOrderView() {
