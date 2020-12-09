@@ -3,7 +3,7 @@
 <style>
 
    #bottom{
-      background-color: #ABCEE3;
+      background-color:#d3d3d3;
        overflow:auto;
    }
    #bottom ul {
@@ -26,9 +26,12 @@
 	#bottom>ul>li {
 		width: 16%;
 	}
+	.mMeun{
+		font-size: 1.3em;
+	}
 	
 	.sMeun {
-		font-size: 0.5em;
+		font-size: 1em;
 		float: left;
 	}
 	
@@ -43,12 +46,12 @@
 <div id="bottom">
 	<ul>
 		<li class="mMeun"><a href="/gachi/serviceCenterBoard">고객센터</a></li>
-		<li class="sMeun"><a href="#">운행시간</a><br /> <a href="#">평일09:00~18:00</a><br />
-			<a href="#">(점심시간12:00~12:30)</a><br /> <a href="#">주말,공휴일 제외</a>
-		<li class="mMeun"><a href="#">고객안내</a></li>
-		<li class="sMeun"><a href="noticeBoard">공지사항</a><br /> <a
-			href="#">자주묻는질문</a><br /> <a href="companyBoard">회사소개</a><br /> <a
-			href="#">이용약관</a></li>
+		<li class="sMeun"><a>운행시간</a><br /> <a> 평일09:00~18:00</a><br/>
+			<a>(점심시간12:00~13:30)</a><br /> <a>주말,공휴일 제외</a>
+		<li class="mMeun"><a href="noticeBoard">공지사항</a></li>
+		<li class="sMeun"><a href="deliveryBoard">배송정책</a><br />
+		<a href="serviceCenterBoard">자주묻는질문</a><br/> <a href="companyBoard">회사소개</a><br /> 
+		<a href="#">이용약관</a></li>
 		<li class="mMeun"><a href="#">크리에이터 지원</a><br />
 		<a href="#">채용</a></li>
 		<li class="mMeun"><a href="#">SNS계정</a></li>

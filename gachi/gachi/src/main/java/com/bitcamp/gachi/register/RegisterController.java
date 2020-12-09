@@ -41,9 +41,20 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		
 		@RequestMapping(value="/registerInsert",method={RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView registerInsert(RegisterVO vo) {
-			System.out.println();
+			DefaultTransactionDefinition def=new DefaultTransactionDefinition();
+			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+			
+			TransactionStatus status=transactionManager.getTransaction(def);
 			RegisterDaoImp dao=sqlSession.getMapper(RegisterDaoImp.class);
-			int result=dao.registerInsert(vo);
+			int result=0;
+			try {
+				 dao.registerInsert(vo); 
+				 dao.mileageInsert(vo);
+						
+			transactionManager.commit(status);
+			}catch(Exception e) {
+			transactionManager.rollback(status);
+			}
 		
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("result",result);
@@ -63,6 +74,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			try {
 					 dao.creatorInsert(vo); 
 					 dao.creatorInsert2(vo);
+					 dao.creatoemileageInsert(vo);
 							
 				transactionManager.commit(status);
 			}catch(Exception e) {
@@ -112,9 +124,15 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 			List<SearchPageVO> result=dao.searchTextChk(vo);
 			List<SearchPageVO> result2=dao.searchTextChk2(vo);
 			List<SearchPageVO> result3=dao.searchTextChk3(vo);
+			int classMore=dao.classMore(vo);
+			int storeMore=dao.storeMore(vo);
+			int creatorMore=dao.creatorMore(vo);
 			mav.addObject("result",result);
 			mav.addObject("result2",result2);
 			mav.addObject("result3",result3);
+			mav.addObject("classMore",classMore);
+			mav.addObject("storeMore",storeMore);
+			mav.addObject("creatorMore",creatorMore);
 			mav.setViewName("searchPage/searchPage");
 			return mav;
 		}
