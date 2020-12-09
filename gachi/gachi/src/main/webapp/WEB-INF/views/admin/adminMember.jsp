@@ -5,7 +5,8 @@
 $(function(){
 	
 	$('.container>div:nth-of-type(2)').css("margin-bottom","10px");
-	
+
+	console.log('${method}');
 	if('${withdraw}' != '') {
 		$("#withdraw").val("${withdraw}");
 	} else{
@@ -16,7 +17,7 @@ $(function(){
 	}
 	$("#frm_submit").click(function(){
 		var url = "/adminMember";
-		var data = "withdraw=" + $("#withdraw").val() + "&search=" + $("#search").val().trim(); + "&now=" + ${nowPage};
+		var data = "withdraw=" + $("#withdraw").val() + "&search=" + $("#search").val().trim(); + "&now=" + 1;
 		$.ajax({
 			url : url,
 			data : data,
@@ -35,6 +36,8 @@ $(function(){
 });
 
 function postPageMove(now) {
+	console.log(now);
+	return false;
 	var url = "/adminMember";
 	var data = "withdraw=" + $("#withdraw").val() + "&search=" + $("#search").val().trim(); + "&now=" + now;
 	$.ajax({
@@ -106,34 +109,34 @@ function postPageMove(now) {
 			<c:if test="${method eq 'get' }">
 				<c:if test="${nowPage > 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage - 1 }">Prev</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="1" end="${lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${i }">Prev</a>
+						<a class="btn" href="/gachi/adminMember?now=${i }">${i }</a>
 					</li>
 				</c:forEach>
-				<c:if test="${nowPage < lasttPage}">
+				<c:if test="${nowPage < lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage + 1 }">Next</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${nowPage > 1}">
 					<li class="btn">
-						<a class="btn" onClick="postPageMove(${nowPage -1});">Prev</a>
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="응가" end="${lastPage}">
+				<c:forEach var="i" begin="1" end="${lastPage}">
 					<li class="btn">
-						<a class="btn" href="postPageMove(${i });">Prev</a>
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
 					</li>
 				</c:forEach>
-				<c:if test="${nowPage < lasttPage}">
+				<c:if test="${nowPage < lastPage}">
 					<li class="btn">
-						<a class="btn" href="postPageMove(${nowPage + 응가 });">Next</a>
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
 					</li>
 				</c:if>
 			</c:if>

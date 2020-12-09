@@ -48,6 +48,8 @@ public interface SettleDaoImp {
 	public List<SettleVO> managePaymentClass_Dash(Map<String, String> dbParam1);
 
 	public Integer paymentAll_Dash(Map<String, String> dbParam1);
+
+	public List<Integer> ClasschartData(Map<String, List> dbParam); // 대쉬 클래스그래프
 	
 	
 	

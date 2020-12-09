@@ -586,26 +586,34 @@ public class AdminController {
 	public ModelAndView adminMember(@RequestParam(value="now", required=false) String now) {
 		
 		int nowPage = 1;
-		if(!now.equals(null) && now.length() > 0){
+		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 		
-//		String nowPageRequest=req.getParameter("nowPage");
-//		if(nowPageRequest!=null) {
-//			pvo.setNowPage(Integer.parseInt(nowPageRequest));
-//		}
-//		int totalRecord=dao.getAllRecord(pvo);
-//		pvo.setTotalRecord(totalRecord);
-//		
-//		List<MemberVO> pvolist=dao.selectList(pvo);
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("withdraw", null);
 		dbParam.put("search", null);
-		dbParam.put("startNum", 20*(nowPage-1)+"");
-		dbParam.put("endNum", 20*(nowPage)+"");
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
 		
-//	
+		System.out.println("startNum:" + startNum);
+		System.out.println("endNum:" + endNum);
+		
+		int cntRecords = dao.selectCntAllMember(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		System.out.println("cntRecords:" + cntRecords);
+		System.out.println("lastPage:" + lastPage);
+		
 		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
 		
 		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
@@ -616,26 +624,15 @@ public class AdminController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		int lastPage = 1;
-		if(list.size() % 20 == 0) {
-			lastPage = list.size() / 20;
-		} else {
-			lastPage = list.size() / 20 + 1;
-		}
-		
 		mav.addObject("method", "get");
 		mav.addObject("memberList",list);
 		mav.addObject("cntData", list.size());
 		mav.addObject("lastPage", lastPage);
 		mav.addObject("nowPage", nowPage);
-//		mav.addObject("pageVO",pageVO);
 		mav.addObject("countAllMember", countAllMember);
 		mav.addObject("countNowMember", countNowMember);
 		mav.addObject("countDeletedMember", countDeletedMember);
 		mav.setViewName("admin/adminMember");
-		
-//		mav.addObject("Paginglist",pvolist);
-//		mav.addObject("pvo",pvo);
 		
 		return mav;
 	}
@@ -646,22 +643,15 @@ public class AdminController {
 		System.out.println("adminMember post page");
 		
 		int nowPage = 1;
-		if(!now.equals(null) && now.length() > 0){
+		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
 		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
 		
 		ModelAndView mav = new ModelAndView();
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-		
-//		String nowPageRequest=req.getParameter("nowPage");
-//		if(nowPageRequest!=null) {
-//			pvo.setNowPage(Integer.parseInt(nowPageRequest));
-//		}
-//		int totalRecord=dao.getAllRecord(pvo);
-//		pvo.setTotalRecord(totalRecord);
-//		
-//		List<MemberVO> pvolist=dao.selectList(pvo);
-		
 		
 		if(withdraw.length() <= 0) withdraw = null;
 		if(!search.equals(null)) {
@@ -674,25 +664,29 @@ public class AdminController {
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("withdraw", withdraw);
 		dbParam.put("search", search);
-		dbParam.put("startNum", 20*(nowPage-1)+"");
-		dbParam.put("endNum", 20*(nowPage)+"");
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		System.out.println("startNum:" + startNum);
+		System.out.println("endNum:" + endNum);
+		
+		int cntRecords = dao.selectCntAllMember(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		System.out.println("cntRecords:" + cntRecords);
+		System.out.println("lastPage:" + lastPage);
 		
 		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
 		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
 		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
 		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
 		
-//		PagingVO pageVO = new PagingVO();
-//		for(MemberVO tmp : list) {
-//			System.out.println(tmp);
-//		}
-		int lastPage = 1;
-		if(list.size() % 20 == 0) {
-			lastPage = list.size() / 20;
-		} else {
-			lastPage = list.size() / 20 + 1;
-		}
-		
+		System.out.println("lastPage:" + lastPage);
 		if(list != null) {
 			mav.addObject("method", "post");
 			mav.addObject("memberList",list);
@@ -701,7 +695,6 @@ public class AdminController {
 			mav.addObject("search", search);
 			mav.addObject("cntData", list.size());
 			mav.addObject("lastPage", lastPage);
-//			mav.addObject("pageVO",pageVO);
 			mav.addObject("countAllMember", countAllMember);
 			mav.addObject("countNowMember", countNowMember);
 			mav.addObject("countDeletedMember", countDeletedMember);

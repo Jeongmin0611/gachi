@@ -122,6 +122,7 @@ function numberWithCommas(x) {
      var dashAllMemberData = "${dashAllMemberData}";
      var dashCreatorData = "${dashCreatorData}"
      var labelData = "${labelData}";
+     var ClasschartData = "${ClasschartData}";
      var startMonth = "${startMonth}";
      var endMonth = "${endMonth}";
      var Allpayment = "${Allpayment}";
@@ -195,7 +196,7 @@ function numberWithCommas(x) {
 	        labels: ${labelData},
 	        datasets: [{
 	            label: '월별 매출 기록',
-	            data: ${dashAllMemberData},
+	            data: ${ClasschartData},
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
