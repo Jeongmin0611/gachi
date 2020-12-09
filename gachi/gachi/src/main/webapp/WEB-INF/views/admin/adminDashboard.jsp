@@ -36,6 +36,11 @@ $(function(){ // 로딩시,
 	$('#ad_dash_settleStore').css('display', 'none');
 	$('#ad_dash_settleClass').css('display', 'none');
 	
+	$('#dashAllchart_Div').css('display', 'block');
+	$('#dashStorechart_Div').css('display', 'none');
+	$('#dashClasschart_Div').css('display', 'none');
+	
+	
 	 // 라디오버튼 클릭시 이벤트 발생
     $("input:radio[name=ad_dash_User]").click(function(){
         if($("input[name=ad_dash_User]:checked").val() == "전체"){
@@ -57,15 +62,27 @@ $(function(){ // 로딩시,
         if($("input[name=ad_dash_pay]:checked").val() == "전체"){
         	$('#ad_dash_settleAll').css('display', 'block');
         	$('#ad_dash_settleStore').css('display', 'none');
-        	$('#ad_creator').css('display', 'none');	
+        	$('#ad_dash_settleClass').css('display', 'none');
+        	
+        	$('#dashAllchart_Div').css('display', 'block');
+        	$('#dashStorechart_Div').css('display', 'none');
+        	$('#dashClasschart_Div').css('display', 'none');
         }else if($("input[name=ad_dash_pay]:checked").val() == "스토어"){
         	$('#ad_dash_settleAll').css('display', 'none');
         	$('#ad_dash_settleStore').css('display', 'block');
-        	$('#ad_dash_settleClass').css('display', 'none');	
+        	$('#ad_dash_settleClass').css('display', 'none');
+        	
+        	$('#dashAllchart_Div').css('display', 'none');
+        	$('#dashStorechart_Div').css('display', 'block');
+        	$('#dashClasschart_Div').css('display', 'none');
         }else if($("input[name=ad_dash_pay]:checked").val() == "클래스"){
         	$('#ad_dash_settleAll').css('display', 'none');
         	$('#ad_dash_settleStore').css('display', 'none');
-        	$('#ad_dash_settleClass').css('display', 'block');	
+        	$('#ad_dash_settleClass').css('display', 'block');
+        	
+        	$('#dashAllchart_Div').css('display', 'none');
+        	$('#dashStorechart_Div').css('display', 'none');
+        	$('#dashClasschart_Div').css('display', 'block');
         }
     });
 });
@@ -112,8 +129,8 @@ function numberWithCommas(x) {
 		</ul>
 		</form>
 	</div>
-	
-	<canvas id="ad_dash_chart" style="margin:100px 0 ;"></canvas>
+<div id="dashAllchart_Div">	
+	<canvas id="dashAllchart" style="margin:100px 0 ;"></canvas>
 	<script type="text/javascript" src="resources/Chart.js"></script>
 	<script type="text/javascript">
 
@@ -122,7 +139,10 @@ function numberWithCommas(x) {
      var dashAllMemberData = "${dashAllMemberData}";
      var dashCreatorData = "${dashCreatorData}"
      var labelData = "${labelData}";
-     var ClasschartData = "${ClasschartData}";
+     var dashClassChart = "${dashClassChart}";
+     var dashAllChart = "${dashAllChart}";
+     var dashStoreChart = "${dashStoreChart}";
+
      var startMonth = "${startMonth}";
      var endMonth = "${endMonth}";
      var Allpayment = "${Allpayment}";
@@ -189,14 +209,14 @@ function numberWithCommas(x) {
   });
 	
 	
-	var ad_dash_context = document.getElementById('ad_dash_chart').getContext('2d');
-	var ad_dash_chart = new Chart(ad_dash_context, {
+	var Dash_All_context = document.getElementById('dashAllchart').getContext('2d');
+	var dashAllchart = new Chart(Dash_All_context, {
 	    type: 'line',
 	    data: {
 	        labels: ${labelData},
 	        datasets: [{
 	            label: '월별 매출 기록',
-	            data: ${ClasschartData},
+	            data: ${dashAllChart},
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
@@ -229,4 +249,128 @@ function numberWithCommas(x) {
 	});
 	
 	</script>
+</div>	
+<div id="dashStorechart_Div">	
+	<canvas id="dashStorechart" style="margin:100px 0 ;"></canvas>
+	<script type="text/javascript" src="resources/Chart.js"></script>
+	<script type="text/javascript">
+
+     
+     var dashMemberData = "${dashMemberData}";
+     var dashAllMemberData = "${dashAllMemberData}";
+     var dashCreatorData = "${dashCreatorData}"
+     var labelData = "${labelData}";
+     var dashStoreChart = "${dashStoreChart}";
+     var dashClassChart = "${dashClassChart}";
+     var dashAllChart = "${dashAllChart}";
+
+     var startMonth = "${startMonth}";
+     var endMonth = "${endMonth}";
+     var Allpayment = "${Allpayment}";
+     var AllPaymentStore ="${AllPaymentStore}";
+     var AllPaymentClass = "${AllPaymentClass}";
+	
+	
+	var Dash_Store_context = document.getElementById('dashStorechart').getContext('2d');
+	var dashStorechart = new Chart(Dash_Store_context, {
+	    type: 'line',
+	    data: {
+	        labels: ${labelData},
+	        datasets: [{
+	            label: '월별 매출 기록',
+	            data: ${dashStoreChart},
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 120, 252, 0.2)',
+	                'rgba(180, 111, 220, 0.2)',
+	 
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255,1)',
+	                'rgba(255, 159, 64,1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+</div>
+<div id="dashClasschart_Div">	
+	<canvas id="dashClasschart" style="margin:100px 0 ;"></canvas>
+	<script type="text/javascript" src="resources/Chart.js"></script>
+	<script type="text/javascript">
+
+     
+     var dashMemberData = "${dashMemberData}";
+     var dashAllMemberData = "${dashAllMemberData}";
+     var dashCreatorData = "${dashCreatorData}"
+     var labelData = "${labelData}";
+     var dashAllChart = "${dashAllChart}";
+     var dashStoreChart = "${dashStoreChart}";
+     var dashClassChart = "${dashClassChart}";
+     var startMonth = "${startMonth}";
+     var endMonth = "${endMonth}";
+     var Allpayment = "${Allpayment}";
+     var AllPaymentStore ="${AllPaymentStore}";
+     var AllPaymentClass = "${AllPaymentClass}";
+	
+	
+	var Dash_Class_context = document.getElementById('dashClasschart').getContext('2d');
+	var dashClasschart = new Chart(Dash_Class_context, {
+	    type: 'line',
+	    data: {
+	        labels: ${labelData},
+	        datasets: [{
+	            label: '월별 매출 기록',
+	            data: ${dashClassChart},
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 120, 252, 0.2)',
+	                'rgba(180, 111, 220, 0.2)',
+	 
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255,1)',
+	                'rgba(255, 159, 64,1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	</script>
+</div>		
 </div>
