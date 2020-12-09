@@ -11,9 +11,8 @@
 	.mypageTop>div{
 		text-align:right;
 	}
-	.mypageTop button,
 	.mypageContent button{
-		background-color: #abcee3;
+		background-color: ;
 		margin:5px 0;
 	}	
 	.mypageContent div{
@@ -33,7 +32,7 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<div class="mypageTop col-lg-8 col-md-10">
+		<div class="mypageTop col-md-10">
 			<label style="color:gray">내 학습표 ></label>
 				<label style="font-size:1.1em"><b>클래스 목록</b></label>
 			<hr class="userHr"/>
@@ -49,7 +48,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<c:forEach var="vo" items="${list }">
 				<div class="row">
 					<div class="col-md-3"><a href="/gachi/myclassView?code=${vo.code }"><img src="/gachi/img/${vo.class_img }"/></a></div>

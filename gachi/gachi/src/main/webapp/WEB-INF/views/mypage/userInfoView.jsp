@@ -13,7 +13,8 @@
 		width: 100%;
 	}
 	.mypageContent button{
-		background-color: #abcee3;
+		width: 30%;
+		background-color: ;
 		margin-top: 100px;
 	}
 	
@@ -21,7 +22,7 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="color:gray">회원정보수정 ></label>
 			<label style="font-size:1.1em"><b>회원정보확인</b></label>
 			<hr class="userHr"/>
@@ -37,7 +38,7 @@
 			<hr/>
 			<div class="row">
 				<div class="col-md-4">생년월일</div>
-				<div class="col-md-8">${vo.birthdate }</div>
+				<div class="col-md-8">${vo.year }년 ${vo.month }월 ${vo.day }일</div>
 			</div>
 			<hr/>
 			<div class="row">
@@ -48,9 +49,7 @@
 			<div class="row">
 				<div class="col-md-4">연락처</div>
 				<div class="col-md-8">
-					<input type="text" name="tel1" value="${vo.tel1 }" style="width:25%" readonly/>-
-					<input type="text" name="tel2" value="${vo.tel2 }" style="width:25%" readonly/>-
-					<input type="text" name="tel3" value="${vo.tel3 }" style="width:25%" readonly/>
+					<input type="text" name="tel" value="${vo.tel }" readonly/>
 				</div>
 			</div>
 			<hr/>
@@ -78,7 +77,7 @@
 			</div>
 			<hr/>
 			<div>
-				<button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/userInfoEditChk'">수정하기</button>
+				<button type="button" class="btn btn-outline-light" onclick="location.href='/gachi/userInfoEditChk'">수정하기</button>
 			</div>
 		</div>
 	</div>

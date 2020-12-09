@@ -8,7 +8,8 @@
 		text-align: center;
 	}
 	.mypageContent button{
-		background-color: #abcee3;
+		width: 20%;
+		background-color: ;
 		margin-top: 100px;
 	}
 	#userLeaveNotice>div{
@@ -36,9 +37,9 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
-		<div class="mypageContent col-lg-8 col-md-10">
+		<div class="mypageContent col-md-10">
 			<label style="color:gray">회원탈퇴 ></label>
-			<label style="font-size:1.1em"><b>회원정보확인</b></label>
+			<label style="font-size:1.1em"><b>주의사항</b></label>
 			<hr class="userHr"/>
 			<div class="row">
 				<div class="col-md-4">탈퇴할 아이디</div>

@@ -16,6 +16,8 @@ public class OrderVO {
 	private String class_order_code; /* 클래스주문코드 */
 	private String goods_order_code; /* 상품주문코드 */
 	private String code; /* 코드 */
+	private String class_name;
+	private String goods_name;
 	private String settlement; /* 정산여부 */
 	
 	private int amount; /* 수량 */
@@ -102,6 +104,18 @@ public class OrderVO {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getClass_name() {
+		return class_name;
+	}
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+	public String getGoods_name() {
+		return goods_name;
+	}
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
 	}
 	public String getSettlement() {
 		return settlement;

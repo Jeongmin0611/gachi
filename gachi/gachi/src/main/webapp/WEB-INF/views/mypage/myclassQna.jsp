@@ -4,23 +4,6 @@
 
 	/* 질문,문의 */
 	
-	/* 상단 */
-	#myqnaTop{
-		overflow:auto;
-		padding:20px 50px 0;
-	}
-	#myqnaTop li{
-		width:7%;
-		float:left;
-		text-align:center;
-	}
-	#myqnaTop li:nth-child(2n){
-		width:3%;
-	}
-	#myqnaTop li:nth-child(7){
-		font-weight:bold;
-	}
-	
 	/* 내용 */
 	#myqnaContent>div:first-child{
 		text-align:right;
@@ -33,7 +16,7 @@
 		padding:5px;
 		background-color:#fde9e2;
 	}
-	#myqnaContent>label a:hover{
+	#myqnaContent a:hover{
 		font-weight:bold;
 	}
 	/* 클래스 질문답변 */
@@ -74,6 +57,12 @@
 		color:#aaa;
 	}
 	#myqnaClass li:nth-child(6){
+		float:right;
+		color:#ABCEE3;
+		font-weight:bold;
+		font-size:1.5em;
+	}
+	#myqnaClass li:nth-child(7){
 		width:100%;
 		text-align:left;
 		padding:0 15px;
@@ -98,30 +87,30 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<ul id="myqnaTop">
-			<li><a href="/gachi/myqnaClass">클래스</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaStore">스토어</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqna1on1">1:1문의</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaEvent">이벤트</a></li>
-		</ul>
-		<div id="myqnaContent">
-			<div>
+		<div class="mypageContent col-md-10">
+			<label style="color:gray">내 학습표 ></label>
+			<label style="font-size:1.1em"><b>질문/답변</b></label>
+			<hr class="userHr"/>
+			<div style="text-align:right">
+				<button type="button" class="btn btn-outline-light">질문작성</button>
 				<select>
-					<option>전체</option>
-					<option>진행중</option>
-					<option>종료</option>
+					<option>클래스명</option>
+					<option>카모마일 프랑스 자수</option>
+				</select>
+				<select>
+					<option>답변상태</option>
+					<option>답변완료</option>
+					<option>미답변</option>
 				</select>
 			</div>
-			<label><a href="/gachi/eventBoardDetail">신규회원 이벤트 3만원 지원</a></label>
+			<label><a href="/gachi/myclassView">카모마일 프랑스 자수</a></label>
 			<ul id="myqnaClass">
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
 				<li><a href="#">수정</a></li>
 				<li><a href="#">삭제</a></li>
+				<li>답변완료</li>
 				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
 				<li>
 				<hr/>

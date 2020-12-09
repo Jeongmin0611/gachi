@@ -55,6 +55,52 @@ public class MypageController {
 		mav.setViewName("mypage/mypageMain");
 		return mav;
 	}
+	/* 마이페이지 메인- 전체/클래스/상품 */
+	@RequestMapping(value="/mypage", method=RequestMethod.POST)
+	public ModelAndView Mypage(HttpSession ses, String option, String startDate, String endDate) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		List<String> list = dao.orderListDate(userid, startDate, endDate);
+		LinkedHashMap<String,List<OrderListVO>> map = null;
+		if(option.equals("all")) {
+			map  = new LinkedHashMap<String,List<OrderListVO>>();
+			for(int i=0; i<list.size(); i++) {
+				map.put(list.get(i)+"c", dao.classOrderView(list.get(i)));
+				map.put(list.get(i)+"g", dao.goodsOrderView(list.get(i)));
+			}
+		}else if(option.equals("class")) {
+			map  = new LinkedHashMap<String,List<OrderListVO>>();
+			for(int i=0; i<list.size(); i++) {
+				map.put(list.get(i)+"c", dao.classOrderView(list.get(i)));
+			}
+		}else if(option.equals("goods")) {
+			map  = new LinkedHashMap<String,List<OrderListVO>>();
+			for(int i=0; i<list.size(); i++) {
+				map.put(list.get(i)+"g", dao.goodsOrderView(list.get(i)));
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("map", map);
+		mav.addObject("option", option);
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.setViewName("mypage/mypageMain");
+		return mav;
+	}
+	/* 구매확정 */
+	@RequestMapping(value="/userOrderFix", method=RequestMethod.POST)
+	public ModelAndView userOrderFix(String goods_order_code) {
+		System.out.println(goods_order_code);
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.userOrderFix(goods_order_code);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", result);
+		mav.setViewName("mypage/userOrderFix");
+		return mav;
+	}
 	/* 회원정보확인 */
 	@RequestMapping("/userInfoView")
 	public ModelAndView userInfoView(HttpSession ses) {
@@ -188,21 +234,34 @@ public class MypageController {
 	}
 	/* 주문신청서 */
 	@RequestMapping(value="/orderSheet", method=RequestMethod.POST)
-	public ModelAndView orderSheet(OrderVOList orderVOList, HttpSession ses) {
+	public ModelAndView orderSheet(OrderListVO oVO, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("orderVOList", orderVOList.getOrderVOList());
+		
+		List<OrderListVO> cList = new ArrayList();
+		for(int i=0; i<oVO.getOrderClassCode().length; i++) {
+			String code = oVO.getOrderClassCode()[i];
+			cList.add(dao.classOrderList(code));
+		}
+		List<OrderListVO> gList = new ArrayList();
+		for(int i=0; i<oVO.getOrderGoodsCode().length; i++) {
+			String code = oVO.getOrderGoodsCode()[i];
+			gList.add(dao.goodsOrderList(code));
+		}
+		mav.addObject("cList", cList);
+		mav.addObject("gList", gList);
 		mav.addObject("vo", vo);
+		
 		mav.setViewName("mypage/orderSheet");
 		return mav;
 	}
 	/* 주문내역 넣기 */
 	@RequestMapping(value="/orderChk", method=RequestMethod.POST)
-	public void orderChk(@RequestBody Map<String, String> order) {
-		System.out.println(order);
-		/*
+	public @ResponseBody void orderChk(@RequestBody Map<String, String> order) {
+		//System.out.println(order);
+		
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		OrderVO vo = new OrderVO();
 		vo.setOrder_code((String)order.get("order_code"));
@@ -218,18 +277,25 @@ public class MypageController {
 		vo.setDetailaddr((String)order.get("detailaddr"));
 		vo.setEtc((String)order.get("etc"));
 		int result = dao.orderInsert(vo);
-		*/
-	}
-	/* 주문내역 넣기 (클래스)*/
-	@RequestMapping(value="/classOrderChk", method=RequestMethod.POST)
-	public void classOrderChk(@RequestBody Map<String, Object> order) {
-		
 	}
 	/* 주문완료 페이지 */
-	@RequestMapping("/orderConfirmed")
-	public ModelAndView orderConfirmed(String order_code) {
+	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
+	public ModelAndView orderConfirmed(OrderListVO vo) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		//System.out.println(vo.getOrder_code());
+		System.out.println(vo.getOrderClassCode()[0]);
+		for(int i=0;i<vo.getOrderClassCode().length;i++) {
+			vo.setCode(vo.getOrderClassCode()[i]);
+			int result = dao.classOrderInsert(vo);
+		}
+		//System.out.println(vo.getOrderGoodsCode());
+		for(int i=0;i<vo.getOrderGoodsCode().length;i++) {
+			vo.setCode(vo.getOrderGoodsCode()[i]);
+			int result = dao.goodsOrderInsert(vo);
+		}
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("order_code", order_code);
+		List<OrderVO> list = dao.orderView(vo.getOrder_code());
+		mav.addObject("vo", list.get(0));
 		mav.setViewName("mypage/orderConfirmed");
 		return mav;
 	}
@@ -291,20 +357,34 @@ public class MypageController {
 		mav.setViewName("mypage/userWishList");
 		return mav;
 	}
-	@RequestMapping("/myqnaClass")
-	public String myqnaClass() {
-		return "mypage/myqnaClass";
+	/* 내 학습표 - 질문/답변 */
+	@RequestMapping("/myclassQna")
+	public String myclassQna() {
+		return "mypage/myclassQna";
 	}
-	@RequestMapping("/myqnaStore")
-	public String myqnaStore() {
-		return "mypage/myqnaStore";
+	/* 내 학습표- 수강평 */
+	@RequestMapping("/myclassReview")
+	public String myclassReview() {
+		return "mypage/myclassReview";
 	}
-	@RequestMapping("/myqna1on1")
-	public String myqna1on1() {
-		return "mypage/myqna1on1";
+	/* 상품문의 */
+	@RequestMapping("/mypageStoreQna")
+	public String mypageStoreQna() {
+		return "mypage/mypageStoreQna";
 	}
-	@RequestMapping("/myqnaEvent")
-	public String myqnaEvent() {
-		return "mypage/myqnaEvent";
+	/* 상품리뷰 */
+	@RequestMapping("/mypageStoreReview")
+	public String mypageStoreReview() {
+		return "mypage/mypageStoreReview";
+	}
+	/* 1대1문의 */
+	@RequestMapping("/mypage1on1")
+	public String mypage1on1() {
+		return "mypage/mypage1on1";
+	}
+	/* 이벤트 댓글 */
+	@RequestMapping("/mypageEvent")
+	public String mypageEvent() {
+		return "mypage/mypageEvent";
 	}
 }

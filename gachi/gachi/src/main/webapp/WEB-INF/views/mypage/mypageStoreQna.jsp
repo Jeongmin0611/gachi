@@ -4,23 +4,6 @@
 
 	/* 질문,문의 */
 	
-	/* 상단 */
-	#myqnaTop{
-		overflow:auto;
-		padding:20px 50px 0;
-	}
-	#myqnaTop li{
-		width:7%;
-		float:left;
-		text-align:center;
-	}
-	#myqnaTop li:nth-child(2n){
-		width:3%;
-	}
-	#myqnaTop li:nth-child(3){
-		font-weight:bold;
-	}
-	
 	/* 내용 */
 	#myqnaContent>div:first-child{
 		text-align:right;
@@ -104,17 +87,16 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<ul id="myqnaTop">
-			<li><a href="/gachi/myqnaClass">클래스</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaStore">스토어</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqna1on1">1:1문의</a></li>
-			<li>|</li>
-			<li><a href="/gachi/myqnaEvent">이벤트</a></li>
-		</ul>
-		<div id="myqnaContent">
-			<div>
+		<div class="mypageContent col-md-10">
+			<label style="color:gray">내 활동 ></label>
+			<label style="font-size:1.1em"><b>상품문의</b></label>
+			<hr class="userHr"/>
+			<div style="text-align:right">
+				<button type="button" class="btn btn-outline-light">문의작성</button>
+				<select>
+					<option>상품명</option>
+					<option>카모마일 프랑스 자수</option>
+				</select>
 				<select>
 					<option>답변상태</option>
 					<option>답변완료</option>

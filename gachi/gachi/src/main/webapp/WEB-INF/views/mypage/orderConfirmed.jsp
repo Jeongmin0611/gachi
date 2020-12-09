@@ -124,13 +124,13 @@
 		<label>주문이 완료되었습니다.</label>
 		<ul id="orderConfirmedLst">
 			<li>주문번호</li>
-			<li>${order_code }</li>
+			<li>${vo.order_code }</li>
 			<li>결제금액</li>
-			<li>17,500원</li>
+			<li>${vo.price }원</li>
 			<li>결제수단</li>
-			<li>신용카드</li>
+			<li>${vo.payment_type }</li>
 			<li>주문내역</li>
-			<li>프랑스 자수 만들기</li>
+			<li>${vo.class_name }, ${vo.goods_name } 외</li>
 		</ul>
 	</div>
 	<div id="orderConfirmedBtm">

@@ -12,9 +12,14 @@ public class OrderListVO {
 	private String username;
 	private String  goods_name;
 	private int real_price;
+	private int price;
 	private int amount;
 	private int stack;
 	private String orderdate;
+	
+	private String[] orderClassCode;
+	private String[] orderGoodsCode;
+	
 	public String getCode() {
 		return code;
 	}
@@ -81,6 +86,12 @@ public class OrderListVO {
 	public void setReal_price(int real_price) {
 		this.real_price = real_price;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public int getAmount() {
 		return amount;
 	}
@@ -98,5 +109,17 @@ public class OrderListVO {
 	}
 	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
+	}
+	public String[] getOrderClassCode() {
+		return orderClassCode;
+	}
+	public void setOrderClassCode(String[] orderClassCode) {
+		this.orderClassCode = orderClassCode;
+	}
+	public String[] getOrderGoodsCode() {
+		return orderGoodsCode;
+	}
+	public void setOrderGoodsCode(String[] orderGoodsCode) {
+		this.orderGoodsCode = orderGoodsCode;
 	}
 }
