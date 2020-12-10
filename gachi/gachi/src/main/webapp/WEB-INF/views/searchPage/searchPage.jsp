@@ -79,7 +79,7 @@
 		<!-- 검색에대한 클래스 -->
 		<h3 class="homeClassListTitle">클래스</h3>
 		<c:if test="${classMore != 0}">
-		<p style="text-align:right"><a href="/gachi/classPage">more</a></p>
+		<p style="text-align:right"><a href="/gachi/classList">more</a></p>
 		</c:if>
 		<c:if test="${classMore == 0}">
 		<p style="text-align: center">검색결과가존재하지않습니다</p>
