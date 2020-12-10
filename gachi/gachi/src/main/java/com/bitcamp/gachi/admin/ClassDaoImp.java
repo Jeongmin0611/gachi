@@ -45,4 +45,14 @@ public interface ClassDaoImp {
 	
 	//이미지파일 수정
 	public int updateClassImg(String classImg,String code);
+	
+	//클래스 목차가져오기
+	public List<ClassVideoVO> selectSection(String code);
+	
+	//모든 클래스 가져오기
+	public List<ClassVO> getClassAllList(String category);
+	
+	//클래스 코드구하기
+	public String getCode(String class_name);
+	
 }

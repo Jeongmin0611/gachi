@@ -576,9 +576,11 @@ public class AdminController {
 		}
 		vo.setImgList(list);
 		
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
 		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("sectionList",sectionList);
 		mav.addObject("vList",vList);
 		mav.setViewName("admin/adminClassView");
 		return mav;
@@ -594,8 +596,11 @@ public class AdminController {
 		}
 		vo.setImgList(list);
 		
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("sectionList",sectionList);
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
@@ -2342,5 +2347,31 @@ public class AdminController {
 	public String adminAnswer() {
 		return "admin/adminAnswer";
 	}
+	
+	@RequestMapping("/adminGetClassList")
+	@ResponseBody
+	public List<ClassVO> adminGetClassList(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String category=req.getParameter("value");
+		List<ClassVO> list=dao.getClassAllList(category);
+		return list;
+	}
+	@RequestMapping("/adminGetSection")
+	@ResponseBody
+	public List<ClassVideoVO> adminGetSection(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String code=req.getParameter("code");
+		List<ClassVideoVO> list=dao.selectSection(code);
+		return list;
+	}
+	
+	@RequestMapping("/adminGetCode")
+	@ResponseBody
+	public String adminGetCode(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String class_name=req.getParameter("class_name");
+		String code=dao.getCode(class_name);
+		System.out.println("code===> "+code);
+		return code;
+	}
 }
-

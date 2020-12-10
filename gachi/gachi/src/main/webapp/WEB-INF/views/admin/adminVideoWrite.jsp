@@ -27,14 +27,17 @@
 		border-bottom:1px solid gray;
 		border-right:1px solid gray;
 	}
-	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+8){
+	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+8){
 		width:5%;
 	}
-	#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+4){
+	#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+4){
 		width:25%;
 	}
 	#ad_video_addList li>input[type=text]{
 		width:95%;
+	}
+	#ad_unit_box{
+		display:hidden;
 	}
 </style>
 <script type="text/javascript">
@@ -107,6 +110,67 @@
 				});
 			});	
 		
+			$(document).on('change','#category',(event)=>{
+				let value=$("#category option:selected").val();
+				$.ajax({
+					url:"/gachi/adminGetClassList?value="+value,
+					type:"get",
+					success:(list)=>{
+						let txt='';
+						let cnt=1;
+						let firstCode='';
+						list.forEach((vo)=>{
+							txt+='<option value='+vo.class_name+'>'+vo.class_name+'</option>';
+							if(list[0].class_name==vo.class_name){
+								firstCode=vo.code;
+							}
+						});
+						$('#class_name').html(txt);
+						$("#code").val(firstCode);
+						$('#code').val(firstCode).trigger('change');
+					},
+					error:(e)=>{
+						alert(e);
+					}
+				});
+			});
+			$(document).on('change','#class_name',(event)=>{
+				let value=$("#class_name option:selected").text();
+				$.ajax({
+					url:"/gachi/adminGetCode?class_name="+value,
+					type:"get",
+					success:(code)=>{
+						$("#code").val(code);
+						$('#code').val(code).trigger('change');
+					},
+					error:(e)=>{
+						alert(e);
+					}
+				});
+			});
+			
+			$(document).on('change','#code',(event)=>{
+				
+				let code=$(event.target).val();
+				console.log("aaaaaa");
+				$.ajax({
+					url:'/gachi/adminGetSection?code='+code,
+					type:"get",
+					success:(list)=>{
+						let txt='';
+						list.forEach((vo)=>{
+							txt+='<li>목차</li>';
+							txt+='<li>'+vo.unit+'</li>';
+							txt+='<li>목차명</li>';
+							txt+='<li>'+vo.unit_content+'</li>';
+						});
+						$("#ad_unit_box").html(txt);
+					},
+					error:(e)=>{
+						
+					}
+				});
+			});
 	});
 </script>
 <div class="container ad_font">
@@ -125,11 +189,18 @@
 			<option value="사진/영상">사진/영상</option>
 		</select>
 	등록할 클래스 :
-	<select name="option">
-		<option value="오늘부터 댄스뚱!">오늘부터 댄스뚱!</option>
+	<select id="class_name" name="class_name">
 	</select>
 	<input id="code" type="hidden" value=""/>
+	<button id="selectBtn" class="btn">선택</button>
 </div>
+<h3>동영상목차정보</h3>
+<ul class="ad_box" id="ad_unit_box">
+	<!--<c:forEach var="section" items="${sectionList}">
+		<li>${section.unit}</li>
+		<li>${section.unit_content}</li>
+	</c:forEach>-->
+</ul>
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_videoFile_list">
 	<li>
@@ -157,8 +228,8 @@
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_video_addList">
 	<li>차시</li>
-	<li>차시명</li>
 	<li>순서</li>
+	<li>차시명</li>
 	<li>영상제목</li>	
 	<li>파일명</li>
 	<li>영상길이</li>
