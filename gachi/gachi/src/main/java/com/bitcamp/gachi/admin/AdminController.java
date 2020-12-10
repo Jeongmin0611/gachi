@@ -2352,16 +2352,28 @@ public class AdminController {
 	public String adminVideoWrite() {
 		return "admin/adminVideoWrite";
 	}
-	@RequestMapping(value="/adminVideoWriteOk",method=RequestMethod.POST,produces ="application/json; UTF-8")
-	public ModelAndView adminVideoWriteOk(@RequestBody String dataJson) {
-		System.out.println(dataJson);
-		JSONObject json=null;
-		try {
-			JSONParser parser = new JSONParser(); 
-			json = (JSONObject) parser.parse(dataJson);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	@RequestMapping(value="/adminVideoWriteOk",method=RequestMethod.POST)
+	public ModelAndView adminVideoWriteOk(ClassVideoVO vo) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassvideoSort cvs=new ClassvideoSort();
+		List<ClassVideoVO> list=vo.getList();
+		Collections.sort(list,cvs);
+		for (int i = 0; i < list.size(); i++) {
+			ClassVideoVO vo1=list.get(i);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+			String dateStr = null;
+			try {
+				Date date = sdf.parse(vo1.getEnroll_date());
+				dateStr = sdf.format(date);
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int result=dao.videoInsert(vo1);
+			if(result<=0){
+				
+				break;
+			}
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("admin/adminVideo");

@@ -61,4 +61,7 @@ public interface ClassDaoImp {
 	//목차최대값 구하기
 	public int getUnitMax(String code);
 	
+	//비디오 목록 추가하기
+	public int videoInsert(ClassVideoVO vo);
+	
 }

@@ -54,11 +54,12 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		let cnt=0;
+		
 		 $("#add_mov").on("dragenter dragover", function(event){
 		        event.preventDefault();
 		    }); 
 		 
-		let count=0;
 		$(document).on("drop","#add_mov",(event)=>{
 			event.preventDefault();
 			if($("#code").val()==""||$("#code").val()==null){
@@ -97,25 +98,26 @@
 			}
 			var filename=result.filePath.slice(result.filePath.lastIndexOf("/")+1);
 			console.log(filename);
-			let tagTxt='<div><li><select name="unit">';
+			let tagTxt='<div><li><select name="list['+cnt+'].unit">';
 			for (var i = 1; i <=result.unitMax; i++) {
 				tagTxt+='<option value="'+i+'">'+i+'</option>';
 			}
 			tagTxt+='</select></li>';
-			tagTxt+='<li><select name="unit_content"/>';
+			tagTxt+='<li><select name="list['+cnt+'].unit_content"/>';
 			result.conList.forEach((content)=>{
 				tagTxt+='<option value="'+content+'">'+content+'</option>';
 			});
 			tagTxt+='</select></li>';
-			tagTxt+='<li><input type="text" name="section_index"/></li>';
-			tagTxt+='<li><input type="text" name="video_name"/></li>';
-			tagTxt+='<li><input type="hidden" name="video_filename" value="'+filename+'"/>';
+			tagTxt+='<li><input type="text" name="list['+cnt+'].section_index"/></li>';
+			tagTxt+='<li><input type="text" name="list['+cnt+'].video_name"/></li>';
+			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_filename" value="'+filename+'"/>';
 			tagTxt+=filename+'</li>';
-			tagTxt+='<li><input type="hidden" name="video_length"/>123</li>';
-			tagTxt+='<li><input type="hidden" name="enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
+			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_length value="333"/>123</li>';
+			tagTxt+='<li><input type="hidden" name="list['+cnt+'].enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
 			tagTxt+=year+'-'+month+'-'+day+'</li>'
 			tagTxt+='<li><b title="'+filename+'">x</b></li></div>'
-			count++;
+			cnt=cnt+1;
+			console.log(cnt);
 			$("#ad_video_addList").append(tagTxt);
 		}
 			$(document).on('change','#category',(event)=>{
@@ -179,6 +181,7 @@
 				});
 			});
 			$(document).on('click','b',(event)=>{
+				cnt=cnt-1;
 				let fileName=$(event.target).attr("title");
 				console.log("aaaaa=>"+fileName);
 				$.ajax({
@@ -192,32 +195,16 @@
 				});
 			});	
 			
-			
-			function send(){
-				let data=$("#adminVideoWriteOk").serializeArray();
-				let dataList=JSON.stringify(j);
-				$.ajax({
-					url:'/gachi/adminVideoWriteOk',
-					data:dataList,
-					success:()=>{
-						$("#adminVideoWriteOk").submit();
-					},
-					error:()=>{
-						
-					}
-				});
-			};
-			
-			$(document).on('submit','#adminVideoWriteOk',(event)=>{
-				let data=$("#adminVideoWriteOk").serializeArray();
-				let dataList=JSON.stringify(data);
-				console.log(dataList);
-				$.ajax({
-					url:'/gachi/adminVideoWriteOk',
-					data:dataList,
-					dataType:'json'
-				});
-			});
+			//$(document).on('submit','#adminVideoWriteOk',(event)=>{
+				//let data=$("#adminVideoWriteOk").serializeArray();
+				//let dataList=JSON.stringify(data);
+				//console.log(dataList);
+				//$.ajax({
+				//	url:'/gachi/adminVideoWriteOk',
+				//	data:dataList,
+			//	type:post,
+			//});
+		//});
 	});
 </script>
 <div class="container ad_font">

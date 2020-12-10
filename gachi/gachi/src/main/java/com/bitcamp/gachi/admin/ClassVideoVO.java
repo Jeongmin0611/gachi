@@ -1,6 +1,5 @@
 package com.bitcamp.gachi.admin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClassVideoVO {
@@ -15,7 +14,7 @@ public class ClassVideoVO {
 	private int video_length;
 	private String enroll_date;
 
-	private List<ClassVideoVO> videoVOList;
+	private List<ClassVideoVO> list;
 	
 	public ClassVideoVO() {
 		
@@ -68,11 +67,11 @@ public class ClassVideoVO {
 	public void setVideo_filename(String video_filename) {
 		this.video_filename = video_filename;
 	}
-	public List<ClassVideoVO> getVideoVOList() {
-		return videoVOList;
+	public List<ClassVideoVO> getList() {
+		return list;
 	}
-	public void setVideoVOList(List<ClassVideoVO> videoVOList) {
-		this.videoVOList = videoVOList;
+	public void setList(List<ClassVideoVO> list) {
+		this.list = list;
 	}
 	public String getSection_code() {
 		return section_code;
