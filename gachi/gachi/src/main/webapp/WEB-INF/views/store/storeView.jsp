@@ -306,6 +306,67 @@ $(function() {
 			}				
 		}			
 	});
+  
+	//장바구니 담기
+  	$('#userCart').on('click',function(){
+  		var code = $("#cartCode").val();
+  		$.ajax({
+  			url: "/gachi/userCartInsert",
+  			data: "code="+code+"&amount=1",
+  			type: "GET",
+  			success: function(result){ //0: 장바구니 중복, 1: 클래스 주문 중복, 2: insert 성공
+  				if(result==0){
+  					swal({
+	  					title: "확인",
+	  					text: "이미 장바구니에 담겨있는 상품입니다. \n장바구니로 이동하시겠습니까?",
+	  					icon: "warning",
+	  					closeOnClickOutside: false,
+	  					buttons: {
+	  						cancle : {
+	  							text: "취소",
+	  							value: false,
+	  							className: "btn btn-outline-light"
+	  						},
+	  						confirm : {
+	  							text: "확인",
+	  							value: true,
+	  							className: "btn btn-outline-light"
+	  						}
+	  					}
+	  				}).then((result)=>{
+	  					if(result){
+	  						location.href="/gachi/userCart";
+	  					}
+	  				});
+  				}else if(result==1){
+  					swal({
+	  					title: "완료",
+	  					text: "해당 상품을 장바구니에 담았습니다. \n장바구니로 이동하시겠습니까?",
+	  					icon: "success",
+	  					closeOnClickOutside: false,
+	  					buttons: {
+	  						cancle : {
+	  							text: "취소",
+	  							value: false,
+	  							className: "btn btn-outline-light"
+	  						},
+	  						confirm : {
+	  							text: "확인",
+	  							value: true,
+	  							className: "btn btn-outline-light"
+	  						}
+	  					}
+	  				}).then((result)=>{
+	  					if(result){
+	  						location.href="/gachi/userCart";
+	  					}
+	  				});
+  				}
+  			}, error: function(){
+  				console.log("장바구니담기 에러");
+  			}
+  		});
+  	});
 });
 	function purchase(){
 		location.href="/gachi/purchase";
@@ -351,6 +412,7 @@ $(function() {
 			가격 &nbsp; ${vo.real_price }원<br/>
 			적립금 &nbsp; ${vo.stack }원 
 			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
+			<input type="hidden" value="${vo.code }" id="cartCode"/>
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>
 					$('#${vo.code}').attr('class','fas fa-heart fa-lg');
@@ -358,7 +420,7 @@ $(function() {
 			</c:if>
 			<br/>
 			<p><p/>
-			<button style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
+			<button id="userCart" style="height:40px; width:50%; border:1px solid lightblue; background-color:white; float: left;">장바구니 담기</button>
 			<button style="height:40px; width:50%; border:1px solid lightblue; background-color: lightblue;" onclick="purchase()">구매</button>
 		</div>
 		<div id="storeViewTab">

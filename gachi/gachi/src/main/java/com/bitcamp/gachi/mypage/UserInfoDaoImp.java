@@ -15,7 +15,7 @@ public interface UserInfoDaoImp {
 	public List<OrderListVO> classOrderView(String order_code);
 	//주문내역 목록(상품)
 	public List<OrderListVO> goodsOrderView(String order_code);
-	//결제확정
+	//구매확정
 	public int userOrderFix(String goods_order_code);
 	//회원정보확인
 	public MemberVO userInfoView(String userid);
@@ -27,10 +27,20 @@ public interface UserInfoDaoImp {
 	public int userInfoEdit(MemberVO vo);
 	//회원탈퇴
 	public int userLeave(MemberVO vo);
+	//장바구니 수량 조절
+	public int cartUpdate(OrderListVO vo);
 	//장바구니(클래스)
 	public List<OrderListVO> classCartView(String userid);
 	//장바구니(상품)
 	public List<OrderListVO> goodsCartView(String userid);
+	//장바구니 비었는지 아닌지 검사
+	public int countUserCart(String userid);
+	//장바구니 중복검사
+	public int userCartCheck(OrderVO vo);
+	//장바구니 중복검사(수강중인 클래스인지)
+	public int userCartClassCheck(OrderVO vo);
+	//장바구니 추가
+	public int userCartInsert(OrderVO vo);
 	//장바구니 삭제
 	public int cartDelete(@Param("userid") String userid, @Param("code") String code);
 	//장바구니 전체삭제

@@ -151,9 +151,13 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 						ses.setAttribute("userid", resultVO.getUserid());
 						ses.setAttribute("nickname", resultVO.getNickname());
 						ses.setAttribute("grade", resultVO.getGrade());
-						ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid())); 
-						ses.setAttribute("cntGood", uDao.countGood(resultVO.getUserid()));
-						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid()));
+						if(mDao.countMileage(resultVO.getUserid())==0) { //마일리지 받은적 있는지 검사해서 없으면 합계 0
+							ses.setAttribute("mileage", 0); 
+						}else { //있으면 합계 구해서 저장
+							ses.setAttribute("mileage", mDao.mileageAllSum(resultVO.getUserid())); 
+						}
+						ses.setAttribute("cntGood", uDao.countGood(resultVO.getUserid())); //좋아요 개수 
+						ses.setAttribute("cntClass", uDao.countClass(resultVO.getUserid())); //구매한 클래스 개수
 						ses.setAttribute("logStatus","Y");
 						ses.setAttribute("userSort","user");
 

@@ -26,12 +26,12 @@
 						<div><a href="/gachi/myclassView"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></a></div>
 						<div><span class="badge badge-info">${cvo.category }</span></div>
 						<div><a href="/gachi/myclassView">${cvo.class_name }</a></div>
-						<div><a href="#">${cvo.username }</a></div>
+						<div><a href="#">${cvo.nickname }</a></div>
 					</div>
 				</c:forEach>
 				<c:forEach var="gvo" items="${gList }">
 				<div class="col-md-4">
-					<div><a href="/gachi/myclassView"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></a></div>
+					<div><a href="/gachi/myclassView"><img src="/gachi/img/store/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></a></div>
 					<div><span class="badge badge-info">${gvo.category }</span></div>
 					<div><a href="/gachi/myclassView">${gvo.goods_name }</a></div>
 				</div>
