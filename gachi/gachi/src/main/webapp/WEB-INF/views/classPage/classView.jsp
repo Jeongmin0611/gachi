@@ -1,53 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../inc/top.jspf"%>
 <style>
 .carousel-item img {
 	width: 100%;
 }
 /* 수강후기 */
-	#myclassReview{
-		margin-bottom:50px;
-		overflow:auto;
-	}
-	#myclassReview ul{
-		overflow:auto;
-	}
-	#myclassReview>label{
-		font-size:1.3em;
-	}	
-	#myclassReview>button{
-		float:right;
-		background-color:#ABCEE3;
-	}	
-	#myclassReview li{
-		float:left;
-		text-align:center;
-		padding:0 10px;
-	}
-	#myclassReview li:first-child{
-		color:#F4BFA9;
-	}
-	#myclassReview li:nth-child(2){
-		text-align:left;
-		font-weight:bold;
-		color:gray;
-	}
-	#myclassReview li:nth-child(3),
-	#myclassReview li:nth-child(4){
-		font-size:0.8em;
-	}
-	#myclassReview li:last-child{
-		width:100%;
-		text-align:left;
-		padding:15px;
-	}
-	
-	#myclassReviewPg a{
-		color:#ABCEE3;
-		margin-bottom:50px;
-	}
+#myclassReview {
+	margin-bottom: 50px;
+	overflow: auto;
+}
+
+#myclassReview ul {
+	overflow: auto;
+}
+
+#myclassReview>label {
+	font-size: 1.3em;
+}
+
+#myclassReview>button {
+	float: right;
+	background-color: #ABCEE3;
+}
+
+#myclassReview li {
+	float: left;
+	text-align: center;
+	padding: 0 10px;
+}
+
+#myclassReview li:first-child {
+	color: #F4BFA9;
+}
+
+#myclassReview li:nth-child(2) {
+	text-align: left;
+	font-weight: bold;
+	color: gray;
+}
+
+#myclassReview li:nth-child(3), #myclassReview li:nth-child(4) {
+	font-size: 0.8em;
+}
+
+#myclassReview li:last-child {
+	width: 100%;
+	text-align: left;
+	padding: 15px;
+}
+
+#myclassReviewPg a {
+	color: #ABCEE3;
+	margin-bottom: 50px;
+}
 /* 질문게시판 */
 #myclassQna {
 	margin-bottom: 50px;
@@ -137,152 +143,211 @@
 	font-size: 1em;
 }
 /* 모달 */
-	#myclassModalR, 
-	#myclassModalQ{
-		display:none;
-		position:absolute;
-		width:100%;
-		height:100vh;
-		z-index:1;
-	}
-	#myclassModalR input, 
-	#myclassModalR textarea, 
-	#myclassModalQ input, 
-	#myclassModalQ textarea{
-		border:none;
-		border-bottom:2px solid #ABCEE3;
-		text-align:left;
-		margin-top:10px;
-		padding:10px;
-	}
-	.myclassModal_content{
-		width:500px;
-		height:600px;
-		margin:100px auto;
-		padding:20px 10px;
-		background-color:#fff;
-		border:3px solid #ABCEE3;
-	}
-	.myclassModal_content>div{
-		padding:5px 10px;
-	}
-	.myclassModal_content>div:nth-child(2){
-		float:left;
-	}
-	.myclassModal_content>label{
-		width:100%;
-		padding:10px;
-		font-weight:;
-		background-color:#e3eef6;
-		text-align:center;
-		font-size:1.3em;
-	}
-	.myclassModal_content input{
-		width:100%;
-		margin-bottom:10px;
-		outline:none;
-	}
-	.myclassModal_content textarea{
-		width:100%;
-		height:300px;
-		margin-bottom:30px;
-		outline:none;
-	}
-	#myclassReviewWrite,
-	#myclassQnaWrite{
-		background-color:#ABCEE3;
-		margin:0 auto;
-		margin-top:20px;
-		border:none;
-	}
-	#myclassQnaWrite{
-		margin-top:50px;
-	}
-	.myclassModal_layer{
-		position:fixed;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background-color:rgba(0,0,0,0.5);
-		z-index:-1;
-	}
+#myclassModalR, #myclassModalQ {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
+}
+
+#myclassModalR input, #myclassModalR textarea, #myclassModalQ input,
+	#myclassModalQ textarea {
+	border: none;
+	border-bottom: 2px solid #ABCEE3;
+	text-align: left;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.myclassModal_content {
+	width: 500px;
+	height: 600px;
+	margin: 100px auto;
+	padding: 20px 10px;
+	background-color: #fff;
+	border: 3px solid #ABCEE3;
+}
+
+.myclassModal_content>div {
+	padding: 5px 10px;
+}
+
+.myclassModal_content>div:nth-child(2) {
+	float: left;
+}
+
+.myclassModal_content>label {
+	width: 100%;
+	padding: 10px;
+	font-weight:;
+	background-color: #e3eef6;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+.myclassModal_content input {
+	width: 100%;
+	margin-bottom: 10px;
+	outline: none;
+}
+
+.myclassModal_content textarea {
+	width: 100%;
+	height: 300px;
+	margin-bottom: 30px;
+	outline: none;
+}
+
+#myclassReviewWrite, #myclassQnaWrite {
+	background-color: #ABCEE3;
+	margin: 0 auto;
+	margin-top: 20px;
+	border: none;
+}
+
+#myclassQnaWrite {
+	margin-top: 50px;
+}
+
+.myclassModal_layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: -1;
+}
+
+input[type=text] {
+	text-align: left;
+}
 </style>
 <script>
 	$(function() {
-		//세션의 아이디 가져오기
-    	var id = '<%=(String)session.getAttribute("userid")%>'; 
-    	
-		//모달창 띄우기(수강평)		
-	    $("#myclassReviewFrm").click(function(){	    	
-    		$("#myclassModalR").css({
-               "top": (($(window).height()-$("#myclassModalR").outerHeight())/2+$(window).scrollTop())+"px",
-               "left": (($(window).width()-$("#myclassModalR").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정            
-            });
-	        $("#myclassModalR").fadeIn();
-	        
-	    });
-	    $("#myclassReviewWrite, .myclassModal_layer").click(function(){
-	       $("#myclassModalR").fadeOut();
-	    });  
-	  //모달창 띄우기(질문)
-	    $("#myclassQnaFrm").click(function(){
-			if(id==null ||id =='null'){
-				swal('로그인 후 이용가능한 기능입니다.');
-				return false;
-			}
-			if(id!=null){
-	    		$("#myclassModalQ").css({
-	               "top": (($(window).height()-$("#myclassModalQ").outerHeight())/2+$(window).scrollTop())+"px",
-	               "left": (($(window).width()-$("#myclassModalQ").outerWidth())/2+$(window).scrollLeft())+"px"
-	               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정	            
-	            });
-		        $("#myclassModalQ").fadeIn();
-			}
-	    });
-	  
-	    $("#myclassQnaWrite, .myclassModal_layer").click(function(){
-	       $("#myclassModalQ").fadeOut();
-	    });  
-	    
-	    //평점에 별넣기 https://www.wbotelhos.com/raty 참고
-	    $(".classRating").raty({
-	    		score:5,
-	    		path:"img/starImages",
-	    		half:true,
-	    		width:"100%",
-	    		space:false
-	    });
-	    $(".myclassStars").raty({
-    		score:5,
-    		path:"img/starImages",
-    		half:true,
-    		width:"100%",
-    		readOnly:true,
-    		space:false
-   		});
-	    
-	  //좋아요 클릭이벤트
-		$('i').on('click',function(){
-			if(id==null ||id =='null'){
-				swal('로그인 후 이용가능한 기능입니다.');
-				return false;
-			}
-			if(id!=null){
-				var good_choice_code;
-				var atr = $(this).attr('class');
-				if (atr=='far fa-heart fa-lg'){
-					$(this).attr('class','fas fa-heart fa-lg');
-					good_choice_code=$(this).attr('id');
-					location.href="/gachi/classView?code="+good_choice_code+"&good_add="+good_choice_code;
-				}else if(atr=='fas fa-heart fa-lg'){
-					$(this).attr('class','far fa-heart fa-lg');				
-					good_choice_code=$(this).attr('id');
-					location.href="/gachi/classView?code="+good_choice_code+"&good_del="+good_choice_code;
-				}				
-			}			
+		//textarea에 ckeditor편집기 적용. name속성값		
+		var editor=CKEDITOR.replace('message-text', {
+			allowedContent:true,
+			toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar']],
+				imageUploadUrl:'/gachi/clientImgUpload',
+				extraPlugins:'uploadimage'
+				
 		});
+		editor.on('fileUploadRequest', function( evt ) {
+		    var fileLoader = evt.data.fileLoader,
+		        formData = new FormData(),
+		        xhr = fileLoader.xhr;
+		    xhr.open( 'POST', fileLoader.uploadUrl, true );
+		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+		    formData.append('type','classView');
+		    fileLoader.xhr.send( formData );
+		    evt.stop();
+		}, null, null, 4 ); 
+
+		//세션의 아이디 가져오기
+    	var id = '<%=(String) session.getAttribute("userid")%>';
+
+		//모달창 띄우기(수강평)		
+		$("#myclassReviewFrm")
+				.click(
+						function() {
+							$("#myclassModalR")
+									.css(
+											{
+												"top" : (($(window).height() - $(
+														"#myclassModalR")
+														.outerHeight()) / 2 + $(
+														window).scrollTop())
+														+ "px",
+												"left" : (($(window).width() - $(
+														"#myclassModalR")
+														.outerWidth()) / 2 + $(
+														window).scrollLeft())
+														+ "px"
+											//팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정            
+											});
+							$("#myclassModalR").fadeIn();
+
+						});
+		$("#myclassReviewWrite, .myclassModal_layer").click(function() {
+			$("#myclassModalR").fadeOut();
+		});
+		//모달창 띄우기(질문)
+		$("#myclassQnaFrm").click(
+				function() {
+					if (id == null || id == 'null') {
+						swal('로그인 후 이용가능한 기능입니다.');
+						return false;
+					}
+					if (id != null) {
+						$("#myclassModalQ")
+								.css(
+										{
+											"top" : (($(window).height() - $(
+													"#myclassModalQ")
+													.outerHeight()) / 2 + $(
+													window).scrollTop())
+													+ "px",
+											"left" : (($(window).width() - $(
+													"#myclassModalQ")
+													.outerWidth()) / 2 + $(
+													window).scrollLeft())
+													+ "px"
+										//팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정	            
+										});
+						$("#myclassModalQ").fadeIn();
+					}
+				});
+
+		$("#myclassQnaWrite, .myclassModal_layer").click(function() {
+			$("#myclassModalQ").fadeOut();
+		});
+
+		//평점에 별넣기 https://www.wbotelhos.com/raty 참고
+		$(".classRating").raty({
+			score : 5,
+			path : "img/starImages",
+			half : true,
+			width : "100%",
+			space : false
+		});
+		$(".myclassStars").raty({
+			score : 5,
+			path : "img/starImages",
+			half : true,
+			width : "100%",
+			readOnly : true,
+			space : false
+		});
+
+		//좋아요 클릭이벤트
+		$('i').on(
+				'click',
+				function() {
+					if (id == null || id == 'null') {
+						swal('로그인 후 이용가능한 기능입니다.');
+						return false;
+					}
+					if (id != null) {
+						var good_choice_code;
+						var atr = $(this).attr('class');
+						if (atr == 'far fa-heart fa-lg') {
+							$(this).attr('class', 'fas fa-heart fa-lg');
+							good_choice_code = $(this).attr('id');
+							location.href = "/gachi/classView?code="
+									+ good_choice_code + "&good_add="
+									+ good_choice_code;
+						} else if (atr == 'fas fa-heart fa-lg') {
+							$(this).attr('class', 'far fa-heart fa-lg');
+							good_choice_code = $(this).attr('id');
+							location.href = "/gachi/classView?code="
+									+ good_choice_code + "&good_del="
+									+ good_choice_code;
+						}
+					}
+				});
+
 	  
 	  	//장바구니 담기
 	  	$('#userCart').on('click',function(){
@@ -368,7 +433,7 @@
 	  			}
 	  		});
 	  	});
-	
+
 	});
 	function purchase() {
 		location.href = "/gachi/purchase";
@@ -411,12 +476,13 @@
 			<span class="badge badge-info" style="font-size: 0.9em">${vo.category }</span><br />
 			<h3>${vo.class_name }</h3>
 			<br /> by ${vo.nickname }<br /> 가격 &nbsp; ${vo.real_price }원<br />
+
 			적립금 &nbsp; ${vo.stack }원 
 			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
 			<input type="hidden" value="${vo.code }" id="cartCode"/>
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>
-					$('#${vo.code}').attr('class','fas fa-heart fa-lg');
+					$('#${vo.code}').attr('class', 'fas fa-heart fa-lg');
 				</script>
 			</c:if>
 			<br />
@@ -509,9 +575,10 @@
 				<input type="text" name="searchWord" />
 				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
 				<button type="button" class="btn btn-outline-light"
-					id="myclassQnaFrm">질문작성</button>
+					data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
 			<hr style="background: #000" />
+			<c:forEach var="qna" items="${qnaList }">
 			<ul>
 				<li><label class="badge badge-light">Q</label>질문입니다</li>
 				<li>김유미</li>
@@ -541,23 +608,9 @@
 					</ul>
 				</li>
 			</ul>
+			</c:forEach>
 
-			<ul>
-				<li><label class="badge badge-light">Q</label>질문입니다</li>
-				<li>김유미</li>
-				<li>20.11.15</li>
-				<li>3월 26일 오픈 예정인 수업이랑 수준이 많이 다른가요? 프랑스 자수 처음인데 둘중에 어떤걸 해야할지
-					고민중이라서요... 3월 오픈 예정인 강의구성이나 완성품이 탐나긴하는데 지금 당장 신청도 하고싶고!! 고민이에요 ㅎㅎ</li>
-				<li>
-					<hr />
-					<ul>
-						<li><label class="badge badge-light">A</label>홍길동</li>
-						<li>20.11.15</li>
-						<li>안녕하세요 :) 두번째 수업과는 만드는 작품과 진행하는 스티치의 개수에서 차이가 있고 두 수업 모두
-							처음 시작하시는 초보자 분들도 충분히 수강이 가능합니다!</li>
-					</ul>
-				</li>
-			</ul>
+
 
 		</div>
 
@@ -566,8 +619,6 @@
 			<li class="page-item"><a class="page-link" href="#">1</a></li>
 			<li class="page-item"><a class="page-link" href="#">2</a></li>
 			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
 	</div>
@@ -575,21 +626,44 @@
 <div id="myclassModalR" class="cfont">
 	<div class="myclassModal_content">
 		<label>수강평작성</label>
-		<div>만족도 : </div>
+		<div>만족도 :</div>
 		<div class="classRating"></div>
-		<input type="text" placeholder="제목"/>
+		<input type="text" placeholder="제목" />
 		<textarea placeholder="내용을 입력해주세요."></textarea>
-		<button type="button" class="btn btn-outline-light btn-block" id="myclassReviewWrite">등록</button>
+		<button type="button" class="btn btn-outline-light btn-block"
+			id="myclassReviewWrite">등록</button>
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>
-<div id="myclassModalQ" class="cfont">
-	<div class="myclassModal_content">
-		<label>질문작성</label>
-		<input type="text" placeholder="제목"/>
-		<textarea placeholder="내용을 입력해주세요."></textarea>
-		<button type="button" class="btn btn-outline-light btn-block" id="myclassQnaWrite">등록</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">질문작성</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="qnaFormOk" method="post" action="/gachi/qnaFormOk">
+					<input type="hidden" value="${vo.code }" name="code"/>
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label">제목</label> <input
+							type="text" class="form-control" id="recipient-name" name="subject">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">내용</label>
+						<textarea class="form-control" id="message-text"
+							name="message-text" name="content"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<input type="button" class="btn btn-primary" value="등록"/>
+			</div>
+		</div>
 	</div>
-	<div class="myclassModal_layer"></div>
 </div>
-<%@ include file="../inc/bottom.jspf"%>

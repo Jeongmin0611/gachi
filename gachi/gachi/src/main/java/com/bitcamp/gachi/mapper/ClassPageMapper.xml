@@ -40,4 +40,11 @@
 		select * from (select code, category, class_name, real_price, nickname, class_img, good from class join member on class.userid=member.userid
 	order by allow desc ) where rownum<![CDATA[<=3]]>
 	</select>
+	<select id="qnaList" resultType="com.bitcamp.gachi.admin.QnaVO">
+		select subject, content, a.nickname, writedate, b.nickname writer, answer, answer_writedate 
+		from qna q, member a, member b
+		where q.userid=a.userid
+		and writer=b.userid
+		and code='${param1}' order by writedate desc
+	</select>
 </mapper>

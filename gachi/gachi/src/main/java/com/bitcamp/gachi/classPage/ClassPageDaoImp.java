@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.QnaVO;
 
 public interface ClassPageDaoImp {
 	//클래스 리스트
@@ -14,4 +15,6 @@ public interface ClassPageDaoImp {
 	public List<AllVO> homeClassPopular();
 	//메인화면 신규
 	public List<AllVO> homeClassNew();
+	//클래스 view에서 qna 리스트
+	public List<QnaVO> qnaList(String code);
 }
