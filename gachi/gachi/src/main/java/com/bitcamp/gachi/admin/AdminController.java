@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -721,6 +728,8 @@ public class AdminController {
 			path=session.getServletContext().getRealPath("/upload/classImg");
 		}else if(type.equals("eventWrite")){
 			path=session.getServletContext().getRealPath("/upload/event_img");
+		}else if(type.equals("notice")){
+			path=session.getServletContext().getRealPath("/upload/notice");
 		}
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
@@ -2299,7 +2308,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/videoUpload",method = RequestMethod.POST)
 	@ResponseBody
-	public String videoUpload(HttpSession session, MultipartHttpServletRequest mhsr,
+	public HashMap<String,Object> videoUpload(HttpSession session, MultipartHttpServletRequest mhsr,
 			@RequestParam("code") String code){
 		String path=session.getServletContext().getRealPath("/upload/class_video");
 		MultipartFile file=mhsr.getFile("file");
@@ -2330,11 +2339,34 @@ public class AdminController {
 				}
 			}//if
 		}
-		return filePath;
+		
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		int unitMax=dao.getUnitMax(code);
+		List<String> conList=dao.getUnitContent(code);
+		HashMap<String,Object> map =new HashMap<String, Object>();
+		map.put("filePath",filePath);
+		map.put("unitMax",unitMax);
+		map.put("conList",conList);
+		return map;
 	}
 	@RequestMapping("/adminVideoWrite")
 	public String adminVideoWrite() {
 		return "admin/adminVideoWrite";
+	}
+	@RequestMapping(value="/adminVideoWriteOk",method=RequestMethod.POST,produces ="application/json; UTF-8")
+	public ModelAndView adminVideoWriteOk(@RequestBody String dataJson) {
+		System.out.println(dataJson);
+		JSONObject json=null;
+		try {
+			JSONParser parser = new JSONParser(); 
+			json = (JSONObject) parser.parse(dataJson);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("admin/adminVideo");
+		return mav;	
 	}
 	@RequestMapping("/adminReply")	
 	public String adminReply() {
@@ -2375,4 +2407,15 @@ public class AdminController {
 		System.out.println("code===> "+code);
 		return code;
 	}
+	@RequestMapping("/videoDelete")
+	@ResponseBody
+	public void videoDelete(HttpServletRequest req) {
+		String fileName=req.getParameter("fileName");
+		String path=req.getSession().getServletContext().getRealPath("/upload/class_video");
+		File delFile=new File(path,fileName);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+	}
+	
 }

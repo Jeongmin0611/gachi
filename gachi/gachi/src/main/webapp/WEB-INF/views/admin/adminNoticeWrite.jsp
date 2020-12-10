@@ -2,10 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript">
 $(function(){
-	CKEDITOR.replace("content",{
-		imageUploadUrl:'/gachi/imageUpload2',
+	var editor=CKEDITOR.replace("content",{
+		imageUploadUrl:'/gachi/imageUpload',
 		extraPlugins:'uploadimage'
 	});
+	editor.on('fileUploadRequest', function( evt ) {
+	    var fileLoader = evt.data.fileLoader,
+	        formData = new FormData(),
+	        xhr = fileLoader.xhr;
+	    xhr.open( 'POST', fileLoader.uploadUrl, true );
+	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+	    formData.append('type','notice');
+	    fileLoader.xhr.send( formData );
+	    evt.stop();
+	}, null, null, 4 ); 
 	CKEDITOR.config.height=500;
 });
 </script>

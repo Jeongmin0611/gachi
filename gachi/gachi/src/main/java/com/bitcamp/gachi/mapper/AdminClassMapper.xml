@@ -124,4 +124,10 @@
 	<select id="getCode" parameterType="String" resultType="String">
 		select code from class where class_name='${param1}'
 	</select>
+	<select id="getUnitMax" parameterType="String" resultType="int">
+		select max(unit) unit from section where code='${param1}'
+	</select>
+	<select id="getUnitContent" parameterType="String" resultType="String">
+		select unit_content from section where code='${param1}' order by unit
+	</select>
 </mapper>

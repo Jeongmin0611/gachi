@@ -25,19 +25,31 @@
 		width:10%;
 		height:40px;
 		border-bottom:1px solid gray;
-		border-right:1px solid gray;
 	}
-	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+8){
+	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+8){
 		width:5%;
 	}
-	#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+4){
+	#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+4){
 		width:25%;
+	}
+	#ad_video_addList li:nth-child(8n+5){
+		width:15%;
 	}
 	#ad_video_addList li>input[type=text]{
 		width:95%;
 	}
 	#ad_unit_box{
 		display:hidden;
+	}
+	#ad_unit_box li{
+		float:left;
+		border-right:1px solid gray;
+		text-align: center;
+		width:10%;
+	}
+	#ad_unit_box li:nth-child(4n+4){
+		text-align:left;
+		width:70%;
 	}
 </style>
 <script type="text/javascript">
@@ -49,6 +61,10 @@
 		let count=0;
 		$(document).on("drop","#add_mov",(event)=>{
 			event.preventDefault();
+			if($("#code").val()==""||$("#code").val()==null){
+				alert("클래스를 먼저 선택해주세요.");
+				return;
+			}
 			var files =event.originalEvent.dataTransfer.files;
 			var file=files[0];
 			console.log(file);
@@ -56,6 +72,7 @@
 			var formData= new FormData();
 			formData.append("file",file);
 			formData.append("code",code);
+			
 			$.ajax({
 				type:"post",
 				enctype: 'multipart/form-data',
@@ -78,38 +95,29 @@
 			if(day<10){
 				day="0"+day;
 			}
-			var filename=result.slice(result.lastIndexOf("/")+1);
+			var filename=result.filePath.slice(result.filePath.lastIndexOf("/")+1);
 			console.log(filename);
-			let tagTxt='<li><select name="videoVOList['+ count +'].unit">';
-			for (var i = 1; i <=10; i++) {
+			let tagTxt='<div><li><select name="unit">';
+			for (var i = 1; i <=result.unitMax; i++) {
 				tagTxt+='<option value="'+i+'">'+i+'</option>';
 			}
 			tagTxt+='</select></li>';
-			tagTxt+='<li><input type="text" name="videoVOList['+ count +'].unit_content"/></li>';
-			tagTxt+='<li><input type="text" name="videoVOList['+ count +'].video_name"/></li>';
-			tagTxt+='<li><input type="hidden" name="videoVOList['+ count +'].video_filename"/>';
+			tagTxt+='<li><select name="unit_content"/>';
+			result.conList.forEach((content)=>{
+				tagTxt+='<option value="'+content+'">'+content+'</option>';
+			});
+			tagTxt+='</select></li>';
+			tagTxt+='<li><input type="text" name="section_index"/></li>';
+			tagTxt+='<li><input type="text" name="video_name"/></li>';
+			tagTxt+='<li><input type="hidden" name="video_filename" value="'+filename+'"/>';
 			tagTxt+=filename+'</li>';
-			tagTxt+='<li><input type="hidden" name="videoVOList['+ count +'].video_length"/>20:56</li>';
-			tagTxt+='<li><input type="hidden" name="videoVOList['+ count +'].enroll_date"/>';
+			tagTxt+='<li><input type="hidden" name="video_length"/>123</li>';
+			tagTxt+='<li><input type="hidden" name="enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
 			tagTxt+=year+'-'+month+'-'+day+'</li>'
-			tagTxt+='<li><b>x</b></li>'
+			tagTxt+='<li><b title="'+filename+'">x</b></li></div>'
 			count++;
 			$("#ad_video_addList").append(tagTxt);
 		}
-			$(document).on('click','b',(event)=>{
-				let imageName=$(event.target).prev().text();
-				let code=$("#code").val();
-				$.ajax({
-					url:'/gachi/imageDelete?imageName='+imageName+"&code="+code,
-					type:'get',
-					success:(result)=>{
-						$(event.target).parent().parent().remove();
-					},error:(e)=>{
-						alert("이미지파일 삭제를 실패하였습니다.");
-					}
-				});
-			});	
-		
 			$(document).on('change','#category',(event)=>{
 				let value=$("#category option:selected").val();
 				$.ajax({
@@ -150,7 +158,6 @@
 			});
 			
 			$(document).on('change','#code',(event)=>{
-				
 				let code=$(event.target).val();
 				console.log("aaaaaa");
 				$.ajax({
@@ -171,15 +178,54 @@
 					}
 				});
 			});
+			$(document).on('click','b',(event)=>{
+				let fileName=$(event.target).attr("title");
+				console.log("aaaaa=>"+fileName);
+				$.ajax({
+					url:'/gachi/videoDelete?fileName='+fileName,
+					type:'get',
+					success:()=>{
+						$(event.target).parent().parent().remove();
+					},error:(e)=>{
+						alert("이미지파일 삭제를 실패하였습니다.");
+					}
+				});
+			});	
+			
+			
+			function send(){
+				let data=$("#adminVideoWriteOk").serializeArray();
+				let dataList=JSON.stringify(j);
+				$.ajax({
+					url:'/gachi/adminVideoWriteOk',
+					data:dataList,
+					success:()=>{
+						$("#adminVideoWriteOk").submit();
+					},
+					error:()=>{
+						
+					}
+				});
+			};
+			
+			$(document).on('submit','#adminVideoWriteOk',(event)=>{
+				let data=$("#adminVideoWriteOk").serializeArray();
+				let dataList=JSON.stringify(data);
+				console.log(dataList);
+				$.ajax({
+					url:'/gachi/adminVideoWriteOk',
+					data:dataList,
+					dataType:'json'
+				});
+			});
 	});
 </script>
 <div class="container ad_font">
 <h1>영상등록</h1>
-<form action="/gachi/adminClass">
 <div class="text-center">
-	카테고리:
+		카테고리:
 		<select id="category" name="category">
-			<option value="전체">전체</option>
+			<option>--선택--</option>
 			<option value="공예/창작">공예/창작</option>
 			<option value="요리">요리</option>
 			<option value="미술">미술</option>
@@ -191,8 +237,8 @@
 	등록할 클래스 :
 	<select id="class_name" name="class_name">
 	</select>
-	<input id="code" type="hidden" value=""/>
-	<button id="selectBtn" class="btn">선택</button>
+	<input id="code" type="hidden"/>
+	<!--<button id="selectBtn" class="btn">선택</button>-->
 </div>
 <h3>동영상목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
@@ -225,23 +271,21 @@
 <div class="ad_box" id="add_mov" style="height:300px; text-align:center; "> 
 	<h3 style="line-height: 280px;">영상을 여기에 끌어주세요.</h3>
 </div>
+<form method="post" id="adminVideoWriteOk" action="/gachi/adminVideoWriteOk">
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_video_addList">
-	<li>차시</li>
+	<li>목차</li>
+	<li>목차명</li>
 	<li>순서</li>
-	<li>차시명</li>
 	<li>영상제목</li>	
 	<li>파일명</li>
 	<li>영상길이</li>
 	<li>등록일</li>
 	<li>취소</li>
 </ul>
-
-<!--<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">	
-</c:forEach>-->
 <ul>
 	<li class="content_center">
-		<input type="submit" class="btn" value="수정"/>
+		<button class="btn">등록</button>
 		<input type="reset" class="btn" value="다시쓰기"/>
 	</li>
 </ul>
