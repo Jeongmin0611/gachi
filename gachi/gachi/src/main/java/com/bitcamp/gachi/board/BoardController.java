@@ -134,7 +134,7 @@ public class BoardController {
 		mav.setViewName("board/eventBoardView");
 		return mav;
 	}
-
+	
 	//이벤트 댓글 리스트
 	@RequestMapping(value= "/eventReplyFormOk", method=RequestMethod.POST)
 	public ModelAndView eventReplyFormOk(EventBoardVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {

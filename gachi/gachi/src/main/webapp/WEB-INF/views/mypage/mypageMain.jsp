@@ -155,8 +155,34 @@
 					}
 				}
 			}).then((result)=>{
+				var goods_order_code = $(this).next().val();
 				if(result){
-					$(".orderFixFrm").submit();
+					$.ajax({
+			  			url: "/gachi/userOrderFix",
+			  			data: "goods_order_code="+goods_order_code,
+			  			type: "GET",
+			  			success: function(result){ 
+							if(result>0){
+								swal({
+									title: "완료",
+									text: "구매확정이 완료되었습니다! \n해당 상품에 대한 마일리지가 지급되었습니다.",
+									icon: "success",
+									closeOnClickOutside: false,
+									buttons: {
+										confirm : {
+											text: "확인",
+											value: true,
+											className: "btn btn-outline-light"
+										}
+									}
+								}).then((result)=>{
+									location.href=location.href;
+								});
+							}
+			  			}, error: function(){
+			  				console.log("구매확정 에러");
+			  			}
+			  		});	
 				}
 			});
 		});
@@ -236,14 +262,14 @@
 										<label class="badge badge-info">${vo.category }</label>
 										<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.class_order_code }</a></label>
 									</li>
-									<li>클래스명 <a href="#">${vo.class_name }</a></li>
-									<li>크리에이터명 <a href="#">${vo.username }</a></li>
+									<li><a href="#">${vo.class_name }</a></li>
+									<li>크리에이터명 <a href="#">${vo.nickname }</a></li>
 									<li>가격 ${vo.real_price }원</li>
 									<li>결제일시 ${vo.orderdate }</li>
 								</ul>
 							</div>
 							<div class="col-md-3">
-								<div><label class="badge badge-pill badge-primary">구매확정완료</label></div>
+								<div><label class="badge badge-pill badge-primary" style="font-size:0.9em">구매확정완료</label></div>
 							</div>
 						</div>
 						<hr class="moreContent"/>
@@ -251,34 +277,45 @@
 				</c:if>
 				<c:if test="${fn:contains(key,'g')}">
 					<c:forEach var="vo" items="${list.value }">
-						<form action="/gachi/userOrderFix" class="orderFixFrm" method="post">
-							<div class="row moreContent">	
-								<div class="col-md-3"><img src="/gachi/img/${vo.goods_img1 }"/></div>
-								<div class="col-md-6" style="text-align:left">
-									<ul class="mypageMainLst">
-										<li>
-											<label class="badge badge-info">${vo.category }</label>
-											<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
-											<input type="hidden" name="goods_order_code" value="${vo.goods_order_code }"/>
-										</li>
-										<li>상품명 <a href="#">${vo.goods_name }</a></li>
-										<li>수량 ${vo.amount }개</li>
-										<li>가격 ${vo.real_price }원</li>
-										<li>결제일시 ${vo.orderdate }</li>
-									</ul>
-								</div>
-								<!-- xs 크기에서만 숨기기  -->
-								<div class="col-md-3 col d-none d-sm-block">
+						<div class="row moreContent">	
+							<div class="col-md-3"><img src="/gachi/img/store/${vo.goods_img1 }"/></div>
+							<div class="col-md-6" style="text-align:left">
+								<ul class="mypageMainLst">
+									<li>
+										<label class="badge badge-info">${vo.category }</label>
+										<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
+									</li>
+									<li><a href="#">${vo.goods_name }</a></li>
+									<li>수량 ${vo.amount }개</li>
+									<li>가격 ${vo.real_price }원</li>
+									<li>결제일시 ${vo.orderdate }</li>
+								</ul>
+							</div>
+							<!-- xs 크기에서만 숨기기  -->
+							<div class="col-md-3 col d-none d-sm-block">
+								<c:if test="${vo.finished eq '미확정' }">
 									<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
-									<div><button type="button" class="btn btn-outline-light userOrderFix">구매확정</button></div>
-								</div>
-								<!-- xs 크기에서만 보이기  -->
-								<div class="col-md-3 d-block d-sm-none">
-									<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-										 <button type="button" class="btn btn-outline-light userOrderFix">구매확정</button></div>
+									<div><button type="button" class="btn btn-outline-light userOrderFix">구매확정</button>								 
+									     <input type="hidden" id="goods_order_code" value="${vo.goods_order_code }"/></div>
+								</c:if>	
+								<c:if test="${vo.finished eq '확정' }">
+									<div><label class="badge badge-pill badge-primary" style="font-size:0.9em">구매확정완료</label></div>
+								</c:if>						
+							</div>
+							<!-- xs 크기에서만 보이기  -->
+							<div class="col-md-3 d-block d-sm-none">
+								<div>
+									 <c:if test="${vo.finished eq '미확정' }">
+									 	 <button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
+										 <button type="button" class="btn btn-outline-light userOrderFix">구매확정</button>
+										 <input type="hidden" id="goods_order_code" value="${vo.goods_order_code }"/>
+									 </c:if>
+									 <c:if test="${vo.finished eq '확정' }">
+										<div><label class="badge badge-pill badge-primary" style="font-size:0.9em">구매확정완료</label></div>
+									</c:if>		 
 								</div>
 							</div>
-						</form>
+						</div>
 						<hr class="moreContent"/>
 					</c:forEach>
 				</c:if>

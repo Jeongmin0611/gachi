@@ -55,7 +55,7 @@
 					<div class="col-md-6">
 						<div><span class="badge badge-info">${vo.category }</span></div>
 						<div><a href="/gachi/myclassView?code=${vo.code }">${vo.class_name }</a></div>
-						<div><a href="#">${vo.username }</a></div>
+						<div><a href="#">${vo.nickname }</a></div>
 						<div>진도율 : 0.00%</div>
 						<div>기한 : 20.11.01 ~ 21.01.31</div>
 						<div><progress value="50" max="100"></progress></div>

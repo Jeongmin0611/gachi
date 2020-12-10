@@ -192,7 +192,7 @@
 				<div class="row">
 					<input type="hidden" name="orderClassCode" value="${cvo.code}"/>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
-						<div class="col-md-5">${cvo.class_name }<br/>${cvo.username }</div>
+						<div class="col-md-5">${cvo.class_name }<br/>${cvo.nickname }</div>
 					<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${cvo.stack }p</label>
 										  <label style="width:50%">${cvo.real_price }원</label></div>
@@ -206,7 +206,7 @@
 			<c:forEach var="gvo" items="${gList }">
 				<div class="row">
 					<input type="hidden" name="orderGoodsCode" value="${gvo.code}"/>
-						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/store/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${gvo.goods_name }</div>
 					<div class="col-md-5"><label style="width:20%">${gvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${gvo.stack }p</label>
