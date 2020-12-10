@@ -1,5 +1,8 @@
 package com.bitcamp.gachi.classPage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +12,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
+import com.google.gson.JsonObject;
 
 @Controller
 public class ClassPageController {
@@ -31,7 +40,7 @@ public class ClassPageController {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		String code = req.getParameter("code");
 		AllVO vo = dao.classView(code);
-		
+		List<QnaVO> qnaList = dao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
@@ -50,6 +59,7 @@ public class ClassPageController {
 			mav.addObject("goodVo", goodVo);	
 		}
 		
+		mav.addObject("qnaList", qnaList);
 		mav.addObject("vo", vo);
 		mav.setViewName("classPage/classView");
 		return mav;
@@ -81,6 +91,32 @@ public class ClassPageController {
 		mav.addObject("list", list);
 		mav.setViewName("classPage/classList");
 		return mav;
+	}
+	
+	@RequestMapping(value="/clientImgUpload",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonObject imageUpload(HttpServletRequest req,@RequestParam MultipartFile upload,
+			@RequestParam("type") String type) {
+		HttpSession session=req.getSession();
+		String path = null;
+		if(type.equals("classView")) {
+			path=session.getServletContext().getRealPath("/upload/classView");
+		}else if(type.equals("eventWrite")){
+			path=session.getServletContext().getRealPath("/upload/event_img");
+		}
+		JsonObject json=new JsonObject();
+		OutputStream ops=null;
+		try {
+			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
+			ops.write(upload.getBytes());
+			json.addProperty("uploaded",1);
+			json.addProperty("filename",upload.getOriginalFilename());
+			json.addProperty("url",path+upload.getOriginalFilename());
+			ops.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 }

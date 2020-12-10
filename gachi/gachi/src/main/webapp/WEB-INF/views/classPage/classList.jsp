@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ include file="../inc/top.jspf"%>
 <%@ include file="../inc/top2.jspf"%>
 <style>
 
@@ -272,6 +271,3 @@ $(function(){
 	</ul>
 
 </div>
-
-
-<%@ include file="../inc/bottom.jspf"%>

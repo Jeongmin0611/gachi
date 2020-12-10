@@ -90,7 +90,7 @@
 			<include-coda>/WEB-INF/views/inc/bottom.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
-			<url-pattern>/WEB-INF/views/searchPage/*</url-pattern>
+			<url-pattern>/WEB-INF/views/classPage/*</url-pattern>
 			<include-prelude>/WEB-INF/views/inc/top.jspf</include-prelude>
 			<include-coda>/WEB-INF/views/inc/bottom.jspf</include-coda>
 		</jsp-property-group>
