@@ -261,13 +261,18 @@ $(function(){
 
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center" id="mypageMainPage">
-		<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">4</a></li>
-		<li class="page-item"><a class="page-link" href="#">5</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		<li class="page-item">
+			<a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage-1 }">Prev</a>
+		</li>
+		
+		<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
+			<c:if test="${p<=pvo.totalPage }">
+				<li class="page-item">
+					<a class="page-link" href="/gachi/classList?nowPage=${p }">${p }</a>
+				</li>
+			</c:if>
+		</c:forEach>
+		<li class="page-item"><a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage+1 }">Next</a></li>
 	</ul>
 
 </div>

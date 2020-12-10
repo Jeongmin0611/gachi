@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.PagingVO;
 import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
@@ -35,11 +36,50 @@ public class ClassPageController {
 		this.sqlSession = sqlSession;
 	}
 	
+	@RequestMapping("/classList")
+	public ModelAndView classList(PagingVO vo, HttpServletRequest req, HttpSession ses) {
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		String category = req.getParameter("category");
+		String selectval = req.getParameter("selectval");
+		List<AllVO> list = dao.classPageAllRecord(category, selectval);
+		
+		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		//페이지
+		vo.setOnePageRecord(9);
+		//현재 페이지
+		String nowPageTxt=req.getParameter("nowPage");
+		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+		}
+		int totalRecord=dao.classBoardAllRecordCount(vo);
+		vo.setTotalRecord(totalRecord);
+		
+		ModelAndView mav = new ModelAndView();
+		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
+			String userid=(String)ses.getAttribute("userid");
+			if(req.getParameter("good_add")!=null) {//좋아요 추가
+				String good = req.getParameter("good_add");
+				uDao.wishListAdd(userid, good);			
+			}
+			if(req.getParameter("good_del")!=null) {//좋아요 삭제
+				String good = req.getParameter("good_del");
+				uDao.wishListDel(userid, good);			
+			}
+			//좋아요 클래스
+			List<OrderListVO> cgoodList = uDao.classWishList(userid);
+			mav.addObject("cgoodList", cgoodList);	
+		}
+		mav.addObject("list", list);
+		mav.addObject("pvo",vo);
+		mav.setViewName("classPage/classList");
+		return mav;
+	}
 	@RequestMapping("/classView")
 	public ModelAndView classMain(HttpServletRequest req, HttpSession ses) {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		String code = req.getParameter("code");
 		AllVO vo = dao.classView(code);
+		List<AllVO> reviewList = dao.reviewList(code);
 		List<QnaVO> qnaList = dao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
@@ -59,39 +99,29 @@ public class ClassPageController {
 			mav.addObject("goodVo", goodVo);	
 		}
 		
+		mav.addObject("reviewList", reviewList);
 		mav.addObject("qnaList", qnaList);
 		mav.addObject("vo", vo);
 		mav.setViewName("classPage/classView");
 		return mav;
 	}
-	@RequestMapping("/classList")
-	public ModelAndView classList(HttpServletRequest req, HttpSession ses) {
+	//클래스 수강평 작성
+	@RequestMapping(value="/reviewFormOk", method=RequestMethod.POST)
+	public String qnaFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
+		vo.setIp(req.getRemoteAddr());
+		vo.setUserid((String) ses.getAttribute("userid"));
+		
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
-		List<AllVO> list = dao.classPageAllRecord(category, selectval);
-		
-		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
-		
-		ModelAndView mav = new ModelAndView();
-		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
-			String userid=(String)ses.getAttribute("userid");
-			if(req.getParameter("good_add")!=null) {//좋아요 추가
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
-			}
-			if(req.getParameter("good_del")!=null) {//좋아요 삭제
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
-			}
-			//좋아요 클래스
-			List<OrderListVO> cgoodList = uDao.classWishList(userid);
-			mav.addObject("cgoodList", cgoodList);	
-		}
-		mav.addObject("list", list);
-		mav.setViewName("classPage/classList");
-		return mav;
+		dao.insertReview(vo);
+		String code = req.getParameter("code");
+		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
 	}
+	//클래스 질문답변 작성
+	@RequestMapping(value="/qnaFormOk", method=RequestMethod.POST)
+	public String qnaFormOk() {
+		return "redirect:classView";
+	}
+	
 	
 	@RequestMapping(value="/clientImgUpload",method=RequestMethod.POST)
 	@ResponseBody
@@ -118,5 +148,7 @@ public class ClassPageController {
 		}
 		return json;
 	}
+	
+	
 
 }

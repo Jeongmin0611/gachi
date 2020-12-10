@@ -241,6 +241,31 @@
 	}
 </style>
 <script>
+function reviewMoreContent(){
+	//더보기 페이징
+    $(".reviewMoreContent").css("display","none");
+    $(".reviewMoreContent").slice(0,6).show();
+    $("#reviewMoreContentLoad").click(function(e){
+    	e.preventDefault();
+    	$(".reviewMoreContent:hidden").slice(0,6).show();
+    	if($(".reviewMoreContent:hidden").length==0){
+			$("#reviewMoreContentLoad").css("display","none");	    	
+  	  	}
+    });
+}
+
+function qnaMoreContent(){
+	//더보기 페이징
+    $(".qnaMoreContent").css("display","none");
+    $(".qnaMoreContent").slice(0,3).show();
+    $("#qnaMoreContentLoad").click(function(e){
+    	e.preventDefault();
+    	$(".qnaMoreContent:hidden").slice(0,3).show();
+    	if($(".qnaMoreContent:hidden").length==0){
+			$("#qnaMoreContentLoad").css("display","none");	    	
+  	  	}
+    });
+}
 $(function() {
 	//textarea에 ckeditor편집기 적용. name속성값		
 	var editor=CKEDITOR.replace('message-text', {
@@ -390,6 +415,8 @@ $(function() {
   			}
   		});
   	});
+  	reviewMoreContent();
+  	qnaMoreContent();
 });
 	function purchase(){
 		location.href="/gachi/purchase";
@@ -465,7 +492,7 @@ $(function() {
 			<button type="button" class="btn btn-outline-light"
 				id="myclassReviewFrm">수강평작성</button>
 			<hr style="background: #000" />
-			<ul>
+			<ul class="reviewMoreContent">
 				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
@@ -473,8 +500,8 @@ $(function() {
 				<li>첫 프랑수자수 작품으로 골랐는데 매우 만족스럽습니다 꽃자수가 너무 예쁘고 파스텔톤 하늘색인 것도 마음에
 					듭니다!</li>
 			</ul>
-			<hr />
-			<ul>
+			<hr class="reviewMoreContent"/>
+			<ul class="reviewMoreContent">
 				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
@@ -483,8 +510,8 @@ $(function() {
 					하고 목련꽃은 마지막에 해서 모양이 많이 이상하긴 해요. ㅠㅠ 색도 중간에 힘들어서 원하는 색으로 바꿔 작업했고,
 					그라데이션은 진짜 힘들었어요.ㅠㅠ</li>
 			</ul>
-			<hr />
-			<ul>
+			<hr class="reviewMoreContent"/>
+			<ul class="reviewMoreContent">
 				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
@@ -495,16 +522,16 @@ $(function() {
 					설명 보면 충분히 따라할 수 있어요! 진짜 너무너무 뿌듯하고 맘에 들어요! 완성해서 엄마께 선물 드렸는데 좋아하셨어요.
 					구매 왕추천합니다! :) #뿌듯챌린지</li>
 			</ul>
-			<hr />
-			<ul>
+			<hr class="reviewMoreContent"/>
+			<ul class="reviewMoreContent">
 				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
 				<li>20.11.15</li>
 				<li>조금 실수한 부분도 있었지만 만들고 나니 이쁘네요~ 재밌는 프랑수자수 계속 부탁해요 : )</li>
 			</ul>
-			<hr />
-			<ul>
+			<hr class="reviewMoreContent"/>
+			<ul class="reviewMoreContent">
 				<li><div class="myclassStars"></div></li>
 				<li>추천합니다</li>
 				<li>김유미</li>
@@ -512,17 +539,11 @@ $(function() {
 				<li>원래 프랑스자수 했었는데 너어무 디자인이뻐서 구매했어요:) 스티치자체는 크게 어렵지 않지만 꼼꼼하게 해야
 					예뻐요~ 완성하고 나니 예쁘고 뿌듯했어요^^ 주변에서도 예쁘다고 하더라구요. 파우치 요긴하게 잘 사용 중이에요!</li>
 			</ul>
-			<hr />
+			<hr class="reviewMoreContent"/>
+			<div>			
+				<button type="button" class="btn btn-outline-lignt" id="reviewMoreContentLoad">더보기</button>
+			</div>
 		</div>
-		<ul class="pagination justify-content-center" id="myclassReviewPg">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
 
 		<!-- 클래스 문의 -->
 		<div id="myclassQna">
