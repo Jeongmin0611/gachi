@@ -40,6 +40,11 @@ public class AllVO {
 	private String class_name; /* 클래스명 */
 	private int real_price; /* 판매가 */
 	private String class_img; /* 클래스사진1 */
+	//클래스 리뷰
+	private int num;
+	private String ip;
+	private String subject;
+	private String content;
 	
 	//상품
 	private String code;/*코드*/
@@ -266,10 +271,35 @@ public class AllVO {
 	public void setClass_img(String class_img) {
 		this.class_img = class_img;
 	}	
+	//클래스 리뷰
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	//상품
 	public String getCode() {
 		return code;
-	}
+	}	
 	public void setCode(String code) {
 		this.code = code;
 	}
