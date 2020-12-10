@@ -58,7 +58,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 		
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("result",result);
-			mav.setViewName("redirect:/");
+			mav.setViewName("memberJoin/memberJoin");
 			return mav;
 	}
 		@RequestMapping(value="/creatorInsert",method={RequestMethod.GET, RequestMethod.POST})
@@ -81,7 +81,7 @@ import oracle.jdbc.internal.OracleConnection.TransactionState;
 				transactionManager.rollback(status);
 			}
 			mav.addObject("result",result);
-			mav.setViewName("redirect:/");
+			mav.setViewName("memberJoin/memberJoin");
 			return mav;
 	}
 		@RequestMapping("/useridChk")

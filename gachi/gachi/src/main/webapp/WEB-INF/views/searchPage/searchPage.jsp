@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jspf" %>
 <style>
 /* 클래스 리스트 */
 .homeClassListImg {
@@ -142,4 +141,3 @@
 				</c:forEach>
 		</div>
 	</div>
-	<%@ include file="../inc/bottom.jspf" %>

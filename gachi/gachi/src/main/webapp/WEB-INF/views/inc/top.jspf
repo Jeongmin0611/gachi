@@ -1320,7 +1320,7 @@ $(document).ready(function() {
 		<!-- 검색버튼 -->
 		<form class="form-inline d-flex justify-content-center md-form form-sm" id="searchSubmit" action="/gachi/searchTextChk">
 			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
-			<button type="submit" id="top-searchbtn"><i class="fas fa-search" aria-hidden="true"></i></button>
+			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
 		</form>
 		       
 		<ul class="nav navbar-nav pull-right  ml-auto ">
