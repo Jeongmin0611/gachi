@@ -1118,8 +1118,18 @@ public class AdminController {
 		return "admin/adminDelivery";
 	}
 	@RequestMapping("/adminGoods")
-	public ModelAndView adminGoods() {
+	public ModelAndView adminGoods(@RequestParam(value="now", required=false) String now) {
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
 		ModelAndView mav =new ModelAndView();
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
 		
 		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 		String todate =  yyyymmdd.format(new Date());
@@ -1129,14 +1139,43 @@ public class AdminController {
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("sale_State", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
 		
-		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		int cntRecords = sdao.selectCntAllGoods(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
+		
 		List<GoodsVO> result = dao.selectAllGoods(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
 		
+		mav.addObject("method", "get");
+		mav.addObject("StoreList",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("sale_State", null);
+		mav.addObject("search", null);
 
+		
+		System.out.println("nowPage===GET===="+nowPage);
+		System.out.println("lastPage====GET==="+lastPage);
+		System.out.println("list.size()===GET===="+list.size());
+		
+		
 		mav.addObject("data", result);
 		mav.setViewName("admin/adminGoods");
 	
@@ -1145,8 +1184,20 @@ public class AdminController {
 	
 	@RequestMapping(value="/adminGoods", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminGoods(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView adminGoods(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,
+			@RequestParam(value="category", required=false) String category, @RequestParam(value="sale_State", required=false) String sale_State , @RequestParam(value="search", required=false) String search,
+			@RequestParam(value="now", required=false) String now){
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
 
 		if(startDate==null || endDate == null) {
 			System.out.println("startMonth is null");
@@ -1157,23 +1208,53 @@ public class AdminController {
 			startDate = todate.substring(0, 8) + "01";
 			endDate = todate;
 		} 
+		
+		if(category.length() <= 0) category = null;
+		if(sale_State.length() <= 0) sale_State = null;
+		if(search.length() <= 0) search = null;
 
 		// sql 검색 값 셋팅
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
-
-		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		dbParam.put("category", category);
+		dbParam.put("sale_State", sale_State);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		int cntRecords = sdao.selectCntAllGoods(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
 		List<GoodsVO> result = dao.selectAllGoods(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
 		
-		if(startDate != null && endDate != null) {
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("StoreList",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
-
+			mav.addObject("category", category);
+			mav.addObject("sale_State", sale_State);
+			mav.addObject("search", search);
 			mav.addObject("data", result);
-			mav.setViewName("admin/adminGoods");
+
+			System.out.println("category======="+category);
+			System.out.println("search======="+search);
+			System.out.println("sale_State======="+sale_State);
+			System.out.println("nowPage======="+nowPage);
+			System.out.println("lastPage======="+lastPage);
+			System.out.println("list.size()======="+list.size());
 
 			System.out.println("ajax success");
 			try {
@@ -1197,9 +1278,19 @@ public class AdminController {
 		return null;
 	}
 	@RequestMapping("/adminGoodsView")
-	public String adminGoodsView() {
-		return "admin/adminGoodsView";
+	public ModelAndView adminGoodsView(String code) {
+		
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		GoodsVO vo = dao.selectGoods(code);
+		ModelAndView mav = new ModelAndView();	
+		
+		System.out.println("dasdasda");
+		System.out.println("vo123123"+vo.getCode());
+		mav.addObject("vo",vo);		
+		mav.setViewName("admin/adminGoodsView");
+		return mav;
 	}
+
 	@RequestMapping("/adminGoodsEdit")
 	public String adminGoodsEdit() {
 		return "admin/adminGoodsEdit";
@@ -1957,7 +2048,16 @@ public class AdminController {
 		return null;
 	}
 	@RequestMapping("/adminSettle")
-	public ModelAndView adminSettle() {
+	public ModelAndView adminSettle(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
 		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
@@ -1971,7 +2071,19 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", null);
 		dbParam.put("username", null);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		int cntRecords = dao.selectCntAllSettle(dbParam); //카운트
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		List<SettleVO> list = dao.selectAllSettle(dbParam); // 전체 리스트
+		
 		List<SettleVO> result = dao.manageSettle(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllSales = dao.countAllSales(dbParam);
@@ -1985,6 +2097,13 @@ public class AdminController {
 		System.out.println(cntAllSales);
 		System.out.println(cntSalesN);
 		System.out.println(cntSalesY);
+		
+		
+		mav.addObject("method", "get");
+		mav.addObject("SelectSettleList",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
@@ -2001,7 +2120,16 @@ public class AdminController {
 	
 	@RequestMapping(value="/adminSettle", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminSettle(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+	public ModelAndView adminSettle(@RequestParam(value="now", required=false) String now, HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 
 		if(startDate==null || endDate == null) {
@@ -2024,7 +2152,18 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", category);
 		dbParam.put("username", username);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		int cntRecords = dao.selectCntAllSettle(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		List<SettleVO> list = dao.selectAllSettle(dbParam);
 		List<SettleVO> result = dao.manageSettle(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllSales = dao.countAllSales(dbParam);
@@ -2038,7 +2177,13 @@ public class AdminController {
 		
 				
 		
-		if(startDate != null && endDate != null) {
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("SelectSettleList",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
@@ -2072,8 +2217,34 @@ public class AdminController {
 		
 	}
 	
+//	
+//	@RequestMapping("/adminSettleEditOk")
+//	public ModelAndView adminSettleEditOk(String userid) {
+//
+//		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);	
+//		int result = dao.SettleStateUpdate(userid);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.addObject("result", result);
+//		mav.setViewName("admin/adminSettleEditOk");
+//		
+//	return mav;
+//	}
+	
 	@RequestMapping("/adminPaymentStore")
-	public ModelAndView adminPaymentStore() {
+	public ModelAndView adminPaymentStore(@RequestParam(value="now", required=false) String now) {
+		
+
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dao = sqlSession.getMapper(SettleDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -2088,9 +2259,22 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", null);
 		dbParam.put("username", null);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		int cntRecords = dao.selectCntAllStore(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<SettleVO> list = dao.selectAllStore(dbParam); // 전체 회원 리스트
+		
+		
 		List<SettleVO> result = dao.managePaymentStore(dbParam);
-		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllPayment = dao.paymentStoreAll(dbParam);
 		Integer cntPaymentN = dao.paymentStoreN(dbParam);
 		Integer cntPaymentY = dao.paymentStoreY(dbParam);
@@ -2102,6 +2286,12 @@ public class AdminController {
 		System.out.println(cntAllPayment);
 		System.out.println(cntPaymentN);
 		System.out.println(cntPaymentY);
+		
+		mav.addObject("method", "get");
+		mav.addObject("SettleStoreList",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
@@ -2118,8 +2308,18 @@ public class AdminController {
 	}
 	@RequestMapping(value="/adminPaymentStore", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminPaymentStore(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+	public ModelAndView adminPaymentStore(@RequestParam(value="now", required=false) String now,HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
 		ModelAndView mav = new ModelAndView();
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
 
 		if(startDate==null || endDate == null) {
 			System.out.println("startMonth is null");
@@ -2141,7 +2341,19 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", category);
 		dbParam.put("username", username);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		int cntRecords = dao.selectCntAllStore(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+
+		List<SettleVO> list = dao.selectAllStore(dbParam); 
 		List<SettleVO> result = dao.managePaymentStore(dbParam);
 		System.out.println("result="+result);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
@@ -2154,8 +2366,13 @@ public class AdminController {
 		if(cntPaymentY == null) cntPaymentY = 0;
 		
 		
-		if(startDate != null && endDate != null) {
+		if(startDate != null && endDate != null && list != null) {
 			
+			
+			mav.addObject("method", "post");
+			mav.addObject("SettleStoreList",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("lastPage", lastPage);
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
 			mav.addObject("category", category);
@@ -2189,7 +2406,16 @@ public class AdminController {
 	}
 
 	@RequestMapping("/adminPaymentClass")
-	public ModelAndView adminPaymentClass() {
+	public ModelAndView adminPaymentClass(@RequestParam(value="now", required=false) String now) {
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -2204,18 +2430,38 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", null);
 		dbParam.put("username", null);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		int cntRecords = dao.selectCntAllClass(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		List<SettleVO> list = dao.selectAllClass(dbParam); // 전체 회원 리스트	
 		List<SettleVO> result = dao.managePaymentClass(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
 		Integer cntPaymentClassY = dao.paymentClassY(dbParam);
+		Integer cntPaymentClassN = dao.paymentClassN(dbParam);
+		
 		
 		if(cntAllPaymentClass == null) cntAllPaymentClass = 0;
 		if(cntPaymentClassY == null) cntPaymentClassY = 0;
+		if(cntPaymentClassN == null) cntPaymentClassN = 0;
 		
 		System.out.println(cntAllPaymentClass);
 		System.out.println(cntPaymentClassY);
 		
+		
+		mav.addObject("method", "get");
+		mav.addObject("SelectClassList",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
 		mav.addObject("category", null);
@@ -2223,6 +2469,7 @@ public class AdminController {
 		mav.addObject("data", result);
 		mav.addObject("cntAllPaymentClass", cntAllPaymentClass);
 		mav.addObject("cntPaymentClassY", cntPaymentClassY);
+		mav.addObject("cntPaymentClassN", cntPaymentClassN);
 		mav.setViewName("admin/adminPaymentClass");
 		
 		return mav;
@@ -2230,7 +2477,17 @@ public class AdminController {
 	}
 	@RequestMapping(value="/adminPaymentClass", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminPaymentClass(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+	public ModelAndView adminPaymentClass(@RequestParam(value="now", required=false) String now,HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,  @RequestParam(value="category", required=false) String category, @RequestParam(value="username", required=false) String username) {
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 
 		if(startDate==null || endDate == null) {
@@ -2253,18 +2510,39 @@ public class AdminController {
 		dbParam.put("endDate", endDate);
 		dbParam.put("category", category);
 		dbParam.put("username", username);
-		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		int cntRecords = dao.selectCntAllClass(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+
+		List<SettleVO> list = dao.selectAllClass(dbParam); // 전체 회원 리스트
 		List<SettleVO> result = dao.managePaymentClass(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
 		Integer cntPaymentClassY = dao.paymentClassY(dbParam);
+		Integer cntPaymentClassN = dao.paymentClassN(dbParam);
 		
 		if(cntAllPaymentClass == null) cntAllPaymentClass = 0;
 		if(cntPaymentClassY == null) cntPaymentClassY = 0;
+		if(cntPaymentClassN == null) cntPaymentClassN = 0;
+
 		
-		
-		if(startDate != null && endDate != null) {
+		if(startDate != null && endDate != null && list!= null) {
 			
+			
+			mav.addObject("method", "post");
+			mav.addObject("SelectClassList",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
 			mav.addObject("category", category);
@@ -2272,7 +2550,7 @@ public class AdminController {
 			mav.addObject("data", result);
 			mav.addObject("cntAllPaymentClass", cntAllPaymentClass);
 			mav.addObject("cntPaymentClassY", cntPaymentClassY);
-			
+			mav.addObject("cntPaymentClassN", cntPaymentClassN);
 
 			System.out.println("ajax success");
 			try {

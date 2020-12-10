@@ -7,4 +7,7 @@ public interface GoodsDaoImp {
 
 	List<GoodsVO> selectAllGoods(Map<String, String> dbParam);
 
+	GoodsVO selectGoods(String code);
+
+
 }

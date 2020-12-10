@@ -136,8 +136,8 @@
 		<c:forEach var="vo" items="${list}">
 		<li>${vo.code }</li>
 		<li>${vo.category }</li>
-		<li><a href="/gachi/adminClassView?code=${vo.code}">${vo.class_name}</a></li>
-		<li>${vo.nickname }</li>
+		<li class="wordCut"><a href="/gachi/adminClassView?code=${vo.code}">${vo.class_name}</a></li>
+		<li class="wordCut">${vo.nickname }</li>
 		<li>${vo.total_student }</li>
 		<li>${vo.signup }</li>
 		<li>${vo.allow }</li>

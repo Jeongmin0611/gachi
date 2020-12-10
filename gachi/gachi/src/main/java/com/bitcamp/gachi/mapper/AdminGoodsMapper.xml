@@ -9,5 +9,10 @@
 	  select code , category, goods_name, prime_cost, real_price , stock, to_char(writedate , 'yyyy-mm-dd')writedate, sale_state from goods
 	  where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}	   
 </select>
+<select id="selectGoods" parameterType="String" resultType="com.bitcamp.gachi.admin.GoodsVO">
+	  select code , category, goods_name, prime_cost, real_price , stock, sale_count,to_char(writedate , 'yyyy-mm-dd')writedate, sale_state from goods
+	  where code = #{code}
+</select>
+
 
 </mapper>

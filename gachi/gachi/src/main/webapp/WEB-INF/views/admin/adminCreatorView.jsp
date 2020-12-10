@@ -39,6 +39,7 @@
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }"readonly/></li>
 		<li>회원상태</li><li><input type="text" name="deleted" id="deleted" value="${vo.deleted }"readonly/></li>
 		<li>승인상태</li><li><input type="text" name="state" id="state" value="${vo.creator_state }"readonly/></li>
+
 	</ul>
 	<div style="margin:10px 0px;">
 		<button type="button" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
