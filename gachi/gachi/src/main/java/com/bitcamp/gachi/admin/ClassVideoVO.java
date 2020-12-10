@@ -4,8 +4,10 @@ import java.util.List;
 
 public class ClassVideoVO {
 	private String code;
+	private String section_code;
 	private String video_code;
 	private int unit;
+	private int section_index;
 	private String unit_content;
 	private String video_name;
 	private String video_filename;
@@ -67,6 +69,18 @@ public class ClassVideoVO {
 	}
 	public void setVideoVOList(List<ClassVideoVO> videoVOList) {
 		this.videoVOList = videoVOList;
+	}
+	public String getSection_code() {
+		return section_code;
+	}
+	public void setSection_code(String section_code) {
+		this.section_code = section_code;
+	}
+	public int getSection_index() {
+		return section_index;
+	}
+	public void setSection_index(int section_index) {
+		this.section_index = section_index;
 	}
 	
 	

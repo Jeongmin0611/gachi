@@ -25,7 +25,6 @@ public class HomeController {
 	public JdbcTemplate getTemplate() {
 		return template;
 	}
-
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;

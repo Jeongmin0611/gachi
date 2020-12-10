@@ -93,9 +93,13 @@
 	<select id="selectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVO">
 		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img from class where code=#{code}
 	</select>
+	<select id="selectSection" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		select unit,unit_content from section where code=#{param1} order by unit
+	</select>
 	<select id="getClassVideoListSample" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
-		select VIDEO_CODE,VIDEO_NAME,VIDEO_FILENAME,unit,unit_content,VIDEO_LENGTH,
-		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video where code=#{param}
+		select video_code,unit,section_index,s.unit_content,video_name,video_filename,video_length,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date from section s join class_video c on s.section_code=c.section_code 
+		where c.code=s.code and c.code='${param1}'
 	</select>
 	<update id="updateClassState" parameterType="String">
 		update class set class_state='등록승인' where code='${code}'
@@ -114,4 +118,10 @@
 	<update id="updateClassImg" parameterType="String">
 		update class set class_img='${param1}' where code='${param2}'
 	</update>
+	<select id="getClassAllList" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVO">
+		select code,class_name from class where category='${param1}' order by code
+	</select>
+	<select id="getCode" parameterType="String" resultType="String">
+		select code from class where class_name='${param1}'
+	</select>
 </mapper>
