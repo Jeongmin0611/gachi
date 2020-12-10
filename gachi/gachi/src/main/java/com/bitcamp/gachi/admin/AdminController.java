@@ -466,7 +466,6 @@ public class AdminController {
 			list.add(st.nextToken());
 		}
 		vo.setImgList(list);
-		
 		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);

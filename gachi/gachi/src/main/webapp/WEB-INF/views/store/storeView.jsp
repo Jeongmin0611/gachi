@@ -242,6 +242,29 @@
 </style>
 <script>
 $(function() {
+	//textarea에 ckeditor편집기 적용. name속성값		
+	var editor=CKEDITOR.replace('message-text', {
+		allowedContent:true,
+		toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar'],
+			'/',['Styles','Format','Font','FontSize']],
+			imageUploadUrl:'/gachi/clientImgUpload',
+			extraPlugins:'uploadimage'
+			
+	});
+	editor.on('fileUploadRequest', function( evt ) {
+	    var fileLoader = evt.data.fileLoader,
+	        formData = new FormData(),
+	        xhr = fileLoader.xhr;
+	    xhr.open( 'POST', fileLoader.uploadUrl, true );
+	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+	    formData.append('type','classView');
+	    fileLoader.xhr.send( formData );
+	    evt.stop();
+	}, null, null, 4 ); 
+	
+	//세션의 아이디 가져오기
+	var id = '<%=(String)session.getAttribute("userid")%>'; 
+
 	//모달창 띄우기(수강평)
     $("#myclassReviewFrm").click(function(){
 		$("#myclassModalR").css({
@@ -445,7 +468,7 @@ $(function() {
 			<div id="myclassQnaSearch">
 				<input type="text" name="searchWord" />
 				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
-				<button type="button" class="btn btn-outline-light"
+				<button type="button" class="btn btn-outline-light"  data-toggle="modal" data-target="#exampleModal"
 					id="myclassQnaFrm">질문작성</button>
 			</div>
 			<hr style="background: #000" />
@@ -510,12 +533,30 @@ $(function() {
 	</div>
 	<div class="myclassModal_layer"></div>
 </div>
-<div id="myclassModalQ" class="cfont">
-	<div class="myclassModal_content">
-		<label>질문작성</label>
-		<input type="text" placeholder="제목"/>
-		<textarea placeholder="내용을 입력해주세요."></textarea>
-		<button type="button" class="btn btn-outline-light btn-block" id="myclassQnaWrite">등록</button>
-	</div>
-	<div class="myclassModal_layer"></div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">질문작성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">제목</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">내용</label>
+            <textarea class="form-control" id="message-text" name="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">등록</button>
+      </div>
+    </div>
+  </div>
 </div>

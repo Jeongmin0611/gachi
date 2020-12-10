@@ -14,7 +14,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="resources/jquery.raty.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 <style>
 @font-face {
 	font-family: 'OSeongandHanEum';
