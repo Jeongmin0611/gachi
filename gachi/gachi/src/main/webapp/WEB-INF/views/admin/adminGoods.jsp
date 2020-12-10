@@ -17,7 +17,25 @@ $(function(){
 		}
 	});
 });
-	
+	function postPageMove(now) {
+	console.log(now);
+	return false;
+	var url = "/adminGoods";
+	var data = "category=" + $("#category").val() + "&sale_State=" + $("#sale_State").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
+	$.ajax({
+		url : url,
+		data : data,
+		type : "POST",
+		dataType : "json",
+		success: function(data){
+			var result = data.result;
+			console.log(result);
+		},error:function(){
+			var result = data.result;
+			console.log(result);
+		}
+	});
+}
 </script>
 <style>
 	#ad_goods_searchForm{
@@ -35,22 +53,22 @@ $(function(){
 			</div>
 				<div class="ad_goods_searchForm">	
 					<select name="category">
-						<option>전체</option>
-						<option>공예/창작</option>
-						<option>요리</option>
-						<option>미술</option>
-						<option>음악</option>
-						<option>라이프스타일</option>
-						<option>운동</option>
-						<option>사진영상</option>
+						<option value="전체">전체</option>
+						<option value="공예/창작">공예/창작</option>
+						<option value="요리">요리</option>
+						<option value="미술">미술</option>
+						<option value="음악">음악</option>
+						<option value="라이프스타일">라이프스타일</option>
+						<option value="운동">운동</option>
+						<option value="사진영상">사진영상</option>
 					</select>
-					<select name="state">
-						<option>전체</option>
-						<option>판매대기</option>
-						<option>판매중</option>
-						<option>판매종료</option>
+					<select name="sale_State">
+						<option value="전체">전체</option>
+						<option value="판매대기">판매대기</option>
+						<option value="판매중">판매중</option>
+						<option value="판매종료">판매종료</option>
 					</select>
-					<input type="text" id="" name=""/>
+					<input type="text" id="search" name="search"/>
 					<input type="submit" class="btn" value="검색" />
 				</div>
 			</form>
@@ -88,15 +106,43 @@ $(function(){
 		<button class="btn" onclick="location.href='/gachi/adminGoodsWrite'">상품등록</button>	
 	</div>
 </div>	
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${method eq 'get' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminGoods?now=${i }">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			
 	</ul>
 </div>
 </div>

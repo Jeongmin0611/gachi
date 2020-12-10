@@ -46,6 +46,7 @@
 		
 		$("#cntAllPaymentClass").text("￦ " + numberWithCommas("${cntAllPaymentClass}"));
 		$("#cntPaymentClassY").text(numberWithCommas("${cntPaymentClassY}"));
+		$("#cntPaymentClassN").text(numberWithCommas("${cntPaymentClassN}"));
 		
 	/* 	//선택상품삭제
 		$("#settleDel").click(function(){
@@ -70,6 +71,25 @@
 	
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/adminPaymentStore";
+		var data = "category=" + $("#category").val() + "&username=" + $("#username").val().trim(); + "&now=" + now;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
 	}
 </script>
 <div class="container ad_font">
@@ -109,7 +129,11 @@
 				<li><div class="ad_paymentClass_board">
 							<b>구매 횟수</b><br/>
 							<span style="font-size:50px;line-height:120px" id="cntPaymentClassY"></span>
-					</div></li>							
+					</div></li>	
+				<li><div class="ad_paymentClass_board">
+							<b>미정산 건수</b><br/>
+							<span style="font-size:50px;line-height:120px" id="cntPaymentClassN"></span>
+				</div></li>								
 			</ul>
 		</form>
 </div>
@@ -117,7 +141,7 @@
 <div>
 	<ul id="ad_paymentClass_lst">
 		
-		<li><input type="checkbox" id="paymentClassSelectAll"/></li>
+		
 		<li>주문코드</li>
 		<li>카테고리</li>
 		<li>클래스명</li>
@@ -129,7 +153,7 @@
 		<li>정산상태</li>
 		
 		<c:forEach items="${data }" var="data">
-		<li><input type="checkbox"/></li>
+		
 		<li>${data.order_code}</li>
 		<li>${data.category } </li>
 		<li class="wordCut">${data.class_name}</li>
@@ -138,19 +162,47 @@
 		<li>${data.real_price }</li>
 		<!-- <li>0</li> -->
 		<li>${data.orderdate}</li>
-		<li><c:if test="${data.fix_state eq 'n'  or data.fix_state eq 'N'}">미확정</c:if><c:if test="${data.fix_state eq 'y'  or data.fix_state eq 'Y'}">구매확정</c:if></li>
+		<li><c:if test="${data.fix_state eq 'n'  or data.fix_state eq 'N'}">미정산</c:if><c:if test="${data.fix_state eq 'y'  or data.fix_state eq 'Y'}">정산완료</c:if></li>
 		</c:forEach>
 	</ul>
 </div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${method eq 'get' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${i }">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			
 	</ul>
 </div>
 </div>

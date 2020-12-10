@@ -19,7 +19,7 @@
 		</select>
 		<select name="#">
 			<option>전체</option>
-			<option>배송대기</option>
+			<option>배송준비</option>
 			<option>배송중</option>
 			<option>배송완료</option>
 			
@@ -35,7 +35,6 @@
 	<li>상품번호</li>
 	<li>상품명</li>
 	<li>구매자</li>
-	<li>구매상태</li>
 	<li>운송장번호</li>
 	<li>배송상태</li>
 	
@@ -44,19 +43,14 @@
 	<li>S5124123</li>
 	<li>공예,비즈용품</li>
 	<li>박구매</li>
-	<li>결제완료</li>
-	<li><a href="#">15-12352-1234</a></li>
-	<li><a href="#">배송완료</a></li>
+	<li>15-12352-1234</li>
+	<li>배송완료</li>
 	
-	<li>030</li>
-	<li>미술</li>
-	<li>S5623123</li>
-	<li>드로잉용품</li>
-	<li>김구매</li>
-	<li>결제대기</li>
-	<li><a href="#">운송장번호 입력하기</a></li>
-	<li><a href="#">배송대기</a></li>
 </ul>	
+
+	<div class="ad_deliverylist_menu">
+		<button class="btn">삭제</button>
+	</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 			<li class="btn"><a class="btn" href="#">Prev</a></li>

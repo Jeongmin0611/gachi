@@ -54,6 +54,26 @@ public interface SettleDaoImp {
 	public List<Integer> dashStoreChart(Map<String, List> dbParam);
 
 	public List<Integer> dashAllChart(Map<String, List> dbParam);
+
+	public int selectCntAllStore(Map<String, String> dbParam);
+
+	public List<SettleVO> selectAllStore(Map<String, String> dbParam);
+
+	public Integer paymentClassN(Map<String, String> dbParam);
+
+	public int selectCntAllClass(Map<String, String> dbParam);
+
+	public List<SettleVO> selectAllClass(Map<String, String> dbParam);
+
+	public int selectCntAllSettle(Map<String, String> dbParam);
+
+	public List<SettleVO> selectAllSettle(Map<String, String> dbParam);
+
+	public List<SettleVO> selectStoreList(Map<String, String> dbParam);
+
+	public int selectCntAllGoods(Map<String, String> dbParam);
+
+//	public int SettleStateUpdate(String userid);
 	
 	
 	

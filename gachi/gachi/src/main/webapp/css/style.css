@@ -50,11 +50,29 @@ input{text-align:center;}
 	height:50px;
 	line-height: 50px;
 }
+#ad_class_lst li:nth-child(8n+1){
+	width:10%;
+}
 #ad_class_lst li:nth-child(8n+2){
-	width:15%;
+	width:10%;
 }
 #ad_class_lst li:nth-child(8n+3){
-	width:37%;
+	width:25%;
+}
+#ad_class_lst li:nth-child(8n+4){
+	width:15%;
+}
+#ad_class_lst li:nth-child(8n+5){
+	width:10%;
+}
+#ad_class_lst li:nth-child(8n+6){
+	width:10%;
+}
+#ad_class_lst li:nth-child(8n+7){
+	width:10%;
+}
+#ad_class_lst li:nth-child(8n+8){
+	width:10%;
 }
 
 /*愿�由ъ옄 �겢�옒�뒪愿�由� end*/
@@ -619,28 +637,31 @@ input{text-align:center;}
 		line-height:50px;
 		
 	}
-	#ad_settle_lst li:nth-of-type(8n+1){
+	#ad_settle_lst li:nth-of-type(9n+1){
 		width:5%;
 	}
-	#ad_settle_lst li:nth-of-type(8n+2){
+	#ad_settle_lst li:nth-of-type(9n+2){
 		width:10%;
 	}
-	#ad_settle_lst li:nth-of-type(8n+3){
+	#ad_settle_lst li:nth-of-type(9n+3){
+		width:10%;
+	}
+	#ad_settle_lst li:nth-of-type(9n+4){
+		width:20%;
+	}
+	#ad_settle_lst li:nth-of-type(9n+5){
 		width:15%;
 	}
-	#ad_settle_lst li:nth-of-type(8n+4){
-		width:20%;
-	}
-	#ad_settle_lst li:nth-of-type(8n+5){
-		width:20%;
-	}
-	#ad_settle_lst li:nth-of-type(8n+6){
+	#ad_settle_lst li:nth-of-type(9n+6){
 		width:10%;
 	}
-	#ad_settle_lst li:nth-of-type(8n+7){
+	#ad_settle_lst li:nth-of-type(9n+7){
 		width:10%;
 	}
-	#ad_settle_lst li:nth-of-type(8n+8){
+	#ad_settle_lst li:nth-of-type(9n+8){
+		width:10%;
+	}
+	#ad_settle_lst li:nth-of-type(9n+9){
 		width:10%;
 	}
 
@@ -708,31 +729,29 @@ input{text-align:center;}
 		line-height:50px;
 		
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+1){
-		width:5%;
-	}
-	#ad_paymentClass_lst li:nth-of-type(9n+2){
+
+	#ad_paymentClass_lst li:nth-of-type(8n+1){
 		width:10%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+3){
+	#ad_paymentClass_lst li:nth-of-type(8n+2){
 		width:10%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+4){
-		width:15%;
-	}
-	#ad_paymentClass_lst li:nth-of-type(9n+5){
+	#ad_paymentClass_lst li:nth-of-type(8n+3){
 		width:20%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+6){
+	#ad_paymentClass_lst li:nth-of-type(8n+4){
+		width:20%;
+	}
+	#ad_paymentClass_lst li:nth-of-type(8n+5){
 		width:10%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+7){
+	#ad_paymentClass_lst li:nth-of-type(8n+6){
 		width:10%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+8){
+	#ad_paymentClass_lst li:nth-of-type(8n+7){
 		width:10%;
 	}
-	#ad_paymentClass_lst li:nth-of-type(9n+9){
+	#ad_paymentClass_lst li:nth-of-type(8n+8){
 		width:10%;
 	}
 	

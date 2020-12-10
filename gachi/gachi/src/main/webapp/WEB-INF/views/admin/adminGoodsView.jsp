@@ -20,25 +20,26 @@
 </script>
 <div class="container ad_font">
 <h1>상품조회</h1>
-<ul id="ad_goods_viewForm">
-	<li class="text-center">
-		<ul>
-			<li>번호 001</li>
-			<li>카테고리 공예창작</li>
-			<li>상품명 곰돌이 인형div</li>
-			<li>원가 10000원</li>
-			<li>판매가 10000원</li>
-			<li>재고 1000개</li>
-			<li>누적판매수 50개</li>
-			<li>등록일 2020-08-12</li>
-			<li>상태 판매중</li>
-		</ul>
-	</li>
-	<li class="text-center">
-		대표이미지<br/>
-		<img src="/gachi/img/147.jpg"/>
-	</li>
-</ul>
+	<ul id="ad_goods_viewForm">
+		<li class="text-center">
+			<ul>
+				<li>상품번호  ${vo.code }</li>
+				<li>카테고리  ${vo.category }</li>
+				<li>상품명  ${vo.goods_name }</li>
+				<li>원가  ${vo.prime_cost }</li>
+				<li>판매가  ${vo.real_price }</li>
+				<li>재고  ${vo.stock }</li>
+				<li>누적판매수  ${vo.sale_count }</li>
+				<li>등록일  ${vo.writedate }</li>
+				<li>상태  ${vo.sale_state }</li>
+			</ul>
+		</li>
+		<li class="text-center">
+			대표이미지<br/>
+			<img src="/gachi/img/147.jpg"/>
+			<li>
+		</li>
+	</ul>
 <div>
 <h3>상품상세정보</h3>
 <div id="ad_goods_info">

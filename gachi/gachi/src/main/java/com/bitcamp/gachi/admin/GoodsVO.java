@@ -23,6 +23,9 @@ public class GoodsVO {
 	private String goods_img2; //상품이미지 
 	private String goods_img3; //상품이미지 
 	private String goods_img4; //상품이미지 
+	
+	
+	
 	public String getCode() {
 		return code;
 	}

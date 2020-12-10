@@ -47,10 +47,6 @@
 		$("#cntSalesN").text("￦ " + numberWithCommas("${cntSalesN}"));
 		$("#cntSalesY").text("￦ " + numberWithCommas("${cntSalesY}"));
 		
-	/* 	//선택상품삭제
-		$("#settleDel").click(function(){
-			
-		}); */
 		$("#frm").click(function(){
 			var url = "/adminSettle";
 			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $('#category').val() + "&username=" + $('#username').val().trim();
@@ -66,10 +62,35 @@
 				}
 			});
 		});
+/* 		$("#settle_btn").click(function(){
+			if(confirm("정산 하시겠습니까?")){
+				$("#settlement").val('정산완료');
+			}else{
+				return false;	
+		});	 */
 	});
 	
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/adminSettle";
+		var data = "category=" + $("#category").val() + "&username=" + $("#username").val().trim(); + "&now=" + now;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
 	}
 </script>
 <div class="container ad_font">
@@ -119,14 +140,15 @@
 
 <div style="margin:5px 5px;text-align:right">
 	<!-- <button class="btn" id="settleDel">선택정산</button> -->
-	<button class="btn">정산</button>
-</div>
+<%-- 	<button class="btn" id ="settle_btn" type="button" onclick="location.href='/gachi/adminSettleEditOk?userid=${vo.userid}'">정산</button>
+ --%></div>
 <div>
 	<ul id="ad_settle_lst">
 		
 		<li><input type="checkbox" id="settleSelectAll"/></li>
 		<li>주문코드</li>
 		<li>카테고리</li>
+		<li>클래스명</li>
 		<li>크리에이터아이디</li>
 		<li>크리에이터명</li>
 		<li>정산예정금액</li>
@@ -138,24 +160,53 @@
 		<li><input type="checkbox"/></li>
 		<li>${data.order_code}</li>
 		<li>${data.category }</li>
+		<li class="wordCut">${data.class_name }</li>
 		<li>${data.userid}</li>
 		<li>${data.username}</li>
 		<li>${data.real_price }</li>
 		<!-- <li>0</li> -->
 		<li><c:if test="${data.payday eq null}"></c:if></li>
-		<li><c:if test="${data.settlement eq 'n' or data.settlement eq 'N'}">정산대기</c:if><c:if test="${data.settlement eq 'y' or data.settlement eq 'Y'}">정산완료</c:if></li>
+		<li id="settlement"><c:if test="${data.settlement eq 'n' or data.settlement eq 'N'}">정산대기</c:if><c:if test="${data.settlement eq 'y' or data.settlement eq 'Y'}">정산완료</c:if></li>
 		</c:forEach>
 	</ul>
 </div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${method eq 'get' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${i }">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			
 	</ul>
 </div>
 </div>
