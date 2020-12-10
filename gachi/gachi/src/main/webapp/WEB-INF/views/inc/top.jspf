@@ -325,28 +325,10 @@ a {
     box-shadow:none;
     background-color:rgb(255,255,255);
 }
-.dropdown-menu a:hover:nth-child(7n+1), .dropdown-menu a.active:nth-child(7n+1) {
-  border-bottom: #C4E17F 3px solid;
+.dropdown-menu a:hover, .dropdown-menu a.active {
+	background: #eee;
+	color:black;
 }
-.dropdown-menu a:hover:nth-child(7n+2), .dropdown-menu a.active:nth-child(7n+2) {
-  border-bottom: #C3D2FE 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+3), .dropdown-menu a.active:nth-child(7n+3) {
-  border-bottom: #FECF71 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+4), .dropdown-menu a.active:nth-child(7n+4) {
-  border-bottom: #F0776C 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+5), .dropdown-menu a.active:nth-child(7n+5) {
-  border-bottom: #DB9DBE 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+6), .dropdown-menu a.active:nth-child(7n+6) {
-  border-bottom: #C49CDE 3px solid;
-}
-.dropdown-menu a:hover:nth-child(7n+7), .dropdown-menu a.active:nth-child(7n+7) {
-  border-bottom: #669AE1 3px solid;
-}
-
 
 
 .nav li:hover:nth-child(10n+1), .nav li.active:nth-child(10n+1){
@@ -484,7 +466,10 @@ a {
 	width: 100%;
 }
 #navbarContent>ul>li{
-	width: 16.6%;
+	width: 20%;
+}
+.dropdown-menu{
+	margin-top:0;
 }
 
 </style>
@@ -1356,63 +1341,36 @@ $(document).ready(function() {
      </div>
 </nav>
 <nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
-  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1">
+  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1" >
     <ul class="navbar-nav mr-auto">
-      <!-- Megamenu-->
-      <li class="nav-item dropdown megamenu"><a id="megamenu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">전체</a>
-        <div aria-labelledby="megamenu" class="dropdown-menu border-0 p-0 m-0">
-          <div class="container-fluid">
-            <div class="row rounded-0 m-0 shadow-sm">
-              <div class="col-12">
-                <div class="p-4">
-                  <div class="row">
-                    <div class="col-sm-6 col-lg-3 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">클래스</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
-                        <li class="nav-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
-                      </ul>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">스토어</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
-                        <li class="nav-item"><a href="/gachi/storeList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">이벤트</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="/gachi/eventBoard" class="nav-link text-small pb-0 ">진행 이벤트</a></li>
-                        <li class="nav-item"><a href="/gachi/eventBoardEnd" class="nav-link text-small pb-0 ">종료 이벤트</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">크리에이터 소개</h6>
-                      <ul class="list-unstyled">
-							<li class="nav-item"><a href="/gachi/introCreator" class="nav-link text-small pb-0">크리에이터 소개</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">클래스</a>
+         <ul class="dropdown-menu">
+           <li class="dropdown-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
+           <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
+         </ul>
       </li>
-      <li class="nav-item"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a></li>
-      <li class="nav-item"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase">스토어</a></li>
-      <li class="nav-item"><a href="/gachi/eventBoard" class="nav-link font-weight-bold text-uppercase">이벤트</a></li>
+      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
+		<ul class="dropdown-menu">
+            <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=사진/영상" class="nav-link text-small pb-0 ">사진/영상</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=요리" class="nav-link text-small pb-0 ">요리</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=운동" class="nav-link text-small pb-0 ">운동</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=음악" class="nav-link text-small pb-0 ">음악</a></li>
+            <li class="dropdown-item"><a href="/gachi/storeList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>
+		</ul>
+      </li>
+	 <li class="nav-item dropdown"><a href="/gachi/eventBoard" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">이벤트</a>
+			<ul class="dropdown-menu">
+				<li class="dropdown-item"><a href="/gachi/eventBoard" class="nav-link text-small pb-0 ">진행 이벤트</a></li>
+				<li class="dropdown-item"><a href="/gachi/eventBoardEnd" class="nav-link text-small pb-0 ">종료 이벤트</a></li>
+			</ul>
+      </li>
       <li class="nav-item"><a href="/gachi/introCreator" class="nav-link font-weight-bold text-uppercase">크리에이터 소개</a></li>
       <li class="nav-item"><a href="/gachi/companyBoard" class="nav-link font-weight-bold text-uppercase">회사 소개</a></li>
     </ul>
