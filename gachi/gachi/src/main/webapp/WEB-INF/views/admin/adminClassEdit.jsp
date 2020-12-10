@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	#ad_unit_box li{
+		border-bottom:1px solid gray;
+		border-right:1px solid gray;
+		float:left;
+		height:40px;
+		width:10%;
+		text-align:center;
+	}
+	#ad_unit_box li:nth-child(4n+4){
+		width:70%;
+		text-align:left;
+	}
+</style>
 <div class="container ad_font">
 <script type="text/javascript">
 	$(function(){
@@ -184,7 +198,16 @@
 	</div>
 </c:forEach>
 </div>
-<h3>상품설명</h3>
+<h3>목차정보</h3>
+<ul class="ad_box" id="ad_unit_box">
+	<c:forEach var="section" items="${sectionList}">
+		<li>목차</li>
+		<li><input type="text" value="${section.unit}" style="width:30%"/></li>
+		<li>목차명</li>
+		<li><input type="text" value="${section.unit_content}" style="width:30%"/></li>
+	</c:forEach>
+</ul>
+<h3>클래스정보</h3>
 <ul id="ad_goods_write">
 	<li><textarea name="class_info">${vo.class_info}</textarea></li>
 	<!--<li>첨부파일 <input type="file" name="class_img" value="${vo.class_img}"/></li> -->

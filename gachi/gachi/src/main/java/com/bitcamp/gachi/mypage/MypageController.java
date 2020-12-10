@@ -41,6 +41,16 @@ public class MypageController {
 	public ModelAndView Mypage(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		String userid = (String)ses.getAttribute("userid");
+		MileageDaoImp mDao=sqlSession.getMapper(MileageDaoImp.class);
+		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		
+		if(mDao.countMileage(userid)==0) { //마일리지 받은적 있는지 검사해서 없으면 합계 0
+			ses.setAttribute("mileage", 0); 
+		}else { //있으면 합계 구해서 저장
+			ses.setAttribute("mileage", mDao.mileageAllSum(userid)); 
+		}
+		ses.setAttribute("cntGood", uDao.countGood(userid)); //좋아요 개수 
+		ses.setAttribute("cntClass", uDao.countClass(userid)); //구매한 클래스 개수
 		List<String> list = dao.orderList(userid);
 		
 		LinkedHashMap<String,List<OrderListVO>> map = new LinkedHashMap<String,List<OrderListVO>>();
@@ -90,16 +100,19 @@ public class MypageController {
 		return mav;
 	}
 	/* 구매확정 */
-	@RequestMapping(value="/userOrderFix", method=RequestMethod.POST)
-	public ModelAndView userOrderFix(String goods_order_code) {
-		System.out.println(goods_order_code);
+	@RequestMapping("/userOrderFix")
+	@ResponseBody
+	public int userOrderFix(HttpSession ses, String goods_order_code) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		int result = dao.userOrderFix(goods_order_code);
+		MileageDaoImp mDao = sqlSession.getMapper(MileageDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("result", result);
-		mav.setViewName("mypage/userOrderFix");
-		return mav;
+		int result = dao.userOrderFix(goods_order_code);
+		if(result>0) {
+			int cnt = mDao.mileageInsert(userid, goods_order_code);
+		}
+
+		return result;
 	}
 	/* 회원정보확인 */
 	@RequestMapping("/userInfoView")
@@ -205,14 +218,40 @@ public class MypageController {
 	@RequestMapping("/userCart")
 	public ModelAndView userCart(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.countUserCart((String)ses.getAttribute("userid"));
 		List<OrderListVO> cList = dao.classCartView((String)ses.getAttribute("userid"));
 		List<OrderListVO> gList = dao.goodsCartView((String)ses.getAttribute("userid"));
 		ModelAndView mav = new ModelAndView();
-
+			
+		mav.addObject("result", result);
 		mav.addObject("cList", cList);
 		mav.addObject("gList", gList);	
 		mav.setViewName("mypage/userCart");
 		return mav;
+	}
+	/* 장바구니 추가 */
+	@RequestMapping("/userCartInsert")
+	@ResponseBody
+	public int userCartInsert(HttpSession ses, String code, int amount) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		
+		OrderVO vo = new OrderVO();
+		vo.setUserid((String)ses.getAttribute("userid"));
+		vo.setCode(code);
+		vo.setAmount(amount);
+		
+		int result;
+		if(dao.userCartClassCheck(vo)>0) {// 이미 주문한 클래스인 경우
+			result = 2;
+		}else { //주문한 적이 없는 경우
+			if(dao.userCartCheck(vo)>0) { //이미 장바구니에 담겨있는 경우
+				result = 0;
+			}else {
+				int cnt = dao.userCartInsert(vo);
+				result = 1;
+			}
+		}
+		return result; //0: 장바구니 중복, 1: insert 성공, 2: 클래스 주문 중복
 	}
 	/* 장바구니 삭제 */
 	@RequestMapping("/userCartDelete")
@@ -232,24 +271,38 @@ public class MypageController {
 		mav.setViewName("redirect:userCart");
 		return mav;
 	}
+	/* 장바구니 수량 변경 */
+	@RequestMapping("/cartUpdate")
+	@ResponseBody
+	public int orderSheet(HttpSession ses, int amount, String code) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		OrderListVO vo = new OrderListVO();
+		vo.setUserid((String)ses.getAttribute("userid"));
+		vo.setAmount(amount);
+		vo.setCode(code);
+		
+		int result = dao.cartUpdate(vo);
+
+		return result;
+	}
 	/* 주문신청서 */
 	@RequestMapping(value="/orderSheet", method=RequestMethod.POST)
 	public ModelAndView orderSheet(OrderListVO oVO, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
 		
-		ModelAndView mav = new ModelAndView();
-		
-		List<OrderListVO> cList = new ArrayList();
+		List<OrderListVO> cList = new ArrayList<OrderListVO>();
 		for(int i=0; i<oVO.getOrderClassCode().length; i++) {
 			String code = oVO.getOrderClassCode()[i];
 			cList.add(dao.classOrderList(code));
 		}
-		List<OrderListVO> gList = new ArrayList();
+		List<OrderListVO> gList = new ArrayList<OrderListVO>();
 		for(int i=0; i<oVO.getOrderGoodsCode().length; i++) {
 			String code = oVO.getOrderGoodsCode()[i];
 			gList.add(dao.goodsOrderList(code));
 		}
+		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("cList", cList);
 		mav.addObject("gList", gList);
 		mav.addObject("vo", vo);
@@ -331,10 +384,16 @@ public class MypageController {
 		String userid = (String)ses.getAttribute("userid");
 		List<MileageVO> list = dao.mileageAllRecord(userid);
 		
-		int mileageAllSum = dao.mileageAllSum(userid);
-		int mileagePosiSum = dao.mileagePosiSum(userid);
-		int mileageNegaSum = dao.mileageNegaSum(userid);
+		int mileageAllSum = 0;
+		int mileagePosiSum = 0;
+		int mileageNegaSum = 0;
 		
+		if(dao.countMileage(userid)!=0) { //한번이라도 마일리지 받은적 있으면 합계 구해서 저장
+			mileageAllSum = dao.mileageAllSum(userid);
+			mileagePosiSum = dao.mileagePosiSum(userid);
+			mileageNegaSum = dao.mileageNegaSum(userid);
+		}
+
 		ses.setAttribute("mileage", mileageAllSum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
@@ -348,6 +407,7 @@ public class MypageController {
 	@RequestMapping("/userWishList")
 	public ModelAndView userWishList(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		ses.setAttribute("cntGood", dao.countGood((String)ses.getAttribute("userid"))); //좋아요 개수 
 		List<OrderListVO> cList = dao.classWishList((String)ses.getAttribute("userid"));
 		List<OrderListVO> gList = dao.goodsWishList((String)ses.getAttribute("userid"));
 		

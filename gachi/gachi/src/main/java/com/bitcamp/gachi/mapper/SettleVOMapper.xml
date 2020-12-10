@@ -343,10 +343,7 @@
 			</choose>
 	</select>
 	
-	
-	
-	
-	
+
 <!-- dashboard -->
 
 <select id="managePaymentClass_Dash" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
@@ -379,5 +376,34 @@
 			left join member on orderlist.userid = member.userid
 			where to_char(orderlist.orderdate, 'yyyy-mm')&gt;=#{startMonth} and to_char(orderlist.orderdate, 'yyyy-mm')&lt;=#{endMonth}
 		</select>
+		
+		
+	<select id="dashClassChart" parameterType="map" resultType="_int">
+		<foreach collection="list" item="item" separator=" union all">
+ 			select NVL(sum(class.real_price),0) from class_order
+			join orderlist on class_order.order_code = orderlist.order_code
+			join class on class_order.code = class.code 
+			where to_char(orderlist.orderdate, 'yyyy-mm')= #{item}
+		</foreach>
+	</select>
+		
+				
+	<select id="dashStoreChart" parameterType="map" resultType="_int">
+		<foreach collection="list" item="item" separator=" union all">
+ 			select NVL(sum(goods.real_price),0) from goods_order
+			join orderlist on goods_order.order_code = orderlist.order_code
+			join goods on goods_order.code = goods.code 
+			where to_char(orderlist.orderdate, 'yyyy-mm')= #{item}
+		</foreach>
+	</select>
+	<select id="dashAllChart" parameterType="map" resultType="_int">
+		<foreach collection="list" item="item" separator=" union all">
+ 			select NVL(sum(price),0) from orderlist
+			where to_char(orderlist.orderdate, 'yyyy-mm')= #{item}
+		</foreach>
+	</select>
+	
+	
+	
 </mapper>
 

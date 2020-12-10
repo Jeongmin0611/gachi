@@ -42,6 +42,14 @@ public interface CreatorDaoImp {
 	
 	public int introCreatorSelectAllCount(PagingVO vo);//크리에이터 소개 페이지 (현재 크리에이터 전체 명 수)
 
+	public int selectCntAllCreator(Map<String, String> dbParam); // paging 하기 위한 검색 결과 데이터 개수
+
+	public List<AllVO> pagingAllCreator(Map<String, String> dbParam); // paging 전체크리에이터 
+
+	public int creatorStateMemberUpdate(String userid);
+
+	
+
 }
 
 

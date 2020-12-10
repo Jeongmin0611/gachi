@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.gachi.admin.OrderDaoImp">
+
+<select id="selectAllOrder" parameterType="map" resultType="com.bitcamp.gachi.admin.OrderVO">
+	  select  order_code , orderlist.userid, member.username, full_price, discount, price , payment_type, card_type ,to_char(orderdate , 'yyyy-mm-dd')orderdate, 
+       state, fix_state from orderlist join member on orderlist.userid= member.userid 
+	  where to_char(orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderdate, 'yyyy-mm-dd')&lt;=#{endDate}	   
+</select>
+
+</mapper>

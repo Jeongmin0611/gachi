@@ -10,6 +10,7 @@ public class OrderListVO {
 	private String goods_order_code;
 	private String class_name;
 	private String username;
+	private String nickname;
 	private String  goods_name;
 	private int real_price;
 	private int price;
@@ -21,6 +22,7 @@ public class OrderListVO {
 	private String[] orderGoodsCode;
 	
 	private String userid;	
+	private String finished;
 	
 	public String getUserid() {
 		return userid;
@@ -82,6 +84,12 @@ public class OrderListVO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getGoods_name() {
 		return goods_name;
 	}
@@ -129,5 +137,11 @@ public class OrderListVO {
 	}
 	public void setOrderGoodsCode(String[] orderGoodsCode) {
 		this.orderGoodsCode = orderGoodsCode;
+	}
+	public String getFinished() {
+		return finished;
+	}
+	public void setFinished(String finished) {
+		this.finished = finished;
 	}
 }

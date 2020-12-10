@@ -90,8 +90,14 @@ public class AdminController {
 			
 			// chart1 data
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+				
 			List<Integer> newMember = dao.dashForMember(dbParam); // return type
-					
+			List<Integer> dashClassChart = dao1.dashClassChart(dbParam);
+			List<Integer> dashStoreChart = dao1.dashStoreChart(dbParam);
+			List<Integer> dashAllChart = dao1.dashAllChart(dbParam);
+
+				
 			// dbParam for member chart 
 			Map<String, String> dashmember_cnt = new HashMap<String, String>();
 			Map<String, String> dbParam1 = new HashMap<String, String>();
@@ -104,17 +110,17 @@ public class AdminController {
 			
 			//chart1 member 
 			dao = sqlSession.getMapper(MemberDaoImp.class);
+			dao1 = sqlSession.getMapper(SettleDaoImp.class);
+
 //			List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
 //			List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
 //			List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
 			int  dashMember = dao.dashboardMember(dashmember_cnt);
 			int  dashAllMember = dao.dashboardAllMember(dashmember_cnt);
 			int dashCreator = dao.dashboardCreator(dashmember_cnt);	
-			
-			
-			SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+	
 			List<SettleVO> result = dao1.managePaymentClass_Dash(dbParam1);
-			dao1 = sqlSession.getMapper(SettleDaoImp.class);
+			
 			Integer Allpayment = dao1.paymentAll_Dash(dbParam1);
 			Integer AllPaymentClass = dao1.paymentClassAll_Dash(dbParam1);
 			Integer AllPaymentStore = dao1.paymentStoreAll_Dash(dbParam1);
@@ -138,6 +144,15 @@ public class AdminController {
 				dbParam2.set(i, "\'" + tmp +"\'");
 //					System.out.println(dbParam2.get(i));
 			}
+			for(int i=0; i<dashClassChart.size(); i++) {
+				System.out.println(dashClassChart.get(i));
+			}
+			for(int i=0; i<dashStoreChart.size(); i++) {
+				System.out.println(dashStoreChart.get(i));
+			}
+			for(int i=0; i<dashAllChart.size(); i++) {
+				System.out.println(dashAllChart.get(i));
+			}
 			
 //			mav.addObject("dashMemberData", dashMemberData);
 //			mav.addObject("dashAllMemberData",dashAllMemberData);
@@ -149,6 +164,9 @@ public class AdminController {
 			mav.addObject("AllPaymentStore", AllPaymentStore);
 			mav.addObject("Allpayment", Allpayment);
 			
+			mav.addObject("dashAllChart", dashAllChart);
+			mav.addObject("dashClassChart", dashClassChart);
+			mav.addObject("dashStoreChart", dashStoreChart);
 			mav.addObject("labelData", dbParam2);
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
@@ -211,9 +229,17 @@ public class AdminController {
 		
 		// chart1 data
 		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+		
+		dao = sqlSession.getMapper(MemberDaoImp.class);
+		dao1 =sqlSession.getMapper(SettleDaoImp.class);
 		
 		List<Integer> newMember = dao.dashForMember(dbParam); // return type
-				
+		List<Integer> dashClassChart = dao1.dashClassChart(dbParam);
+		List<Integer> dashStoreChart = dao1.dashStoreChart(dbParam);
+		List<Integer> dashAllChart = dao1.dashAllChart(dbParam);
+
+		
 		// dbParam for member chart 
 		Map<String, String> dashmember_cnt = new HashMap<String, String>();
 		Map<String, String> dbParam1 = new HashMap<String, String>();
@@ -222,7 +248,7 @@ public class AdminController {
 		dbParam1.put("startMonth", startMonth.toString());
 		dbParam1.put("endMonth", endMonth.toString());
 		//chart1 member 
-		dao = sqlSession.getMapper(MemberDaoImp.class);
+		
 //		List<Map<String, Integer>> dashMember = dao.dashboardMember(dashmember_cnt);
 //		List<Map<String, Integer>> dashAllMember = dao.dashboardAllMember(dashmember_cnt);
 //		List<Map<String, Integer>> dashCreator = dao.dashboardCreator(dashmember_cnt);
@@ -234,9 +260,9 @@ public class AdminController {
 //		List<String> dashMemberData = new ArrayList<String>();
 //		List<String> dashAllMemberData = new ArrayList<String>();
 //		List<String> dashCreatorData = new ArrayList<String>();
-		SettleDaoImp dao1 = sqlSession.getMapper(SettleDaoImp.class);
+		
 		List<SettleVO> result = dao1.managePaymentClass_Dash(dbParam1);
-		dao1 = sqlSession.getMapper(SettleDaoImp.class);
+		
 		Integer Allpayment = dao1.paymentAll_Dash(dbParam1);
 		Integer AllPaymentClass = dao1.paymentClassAll_Dash(dbParam1);
 		Integer AllPaymentStore = dao1.paymentStoreAll_Dash(dbParam1);
@@ -256,6 +282,15 @@ public class AdminController {
 				dbParam2.set(i, "\'" + tmp +"\'");
 
 			}
+			for(int i=0; i<dashClassChart.size(); i++) {
+				System.out.println(dashClassChart.get(i));
+			}
+			for(int i=0; i<dashStoreChart.size(); i++) {
+				System.out.println(dashStoreChart.get(i));
+			}
+			for(int i=0; i<dashAllChart.size(); i++) {
+				System.out.println(dashAllChart.get(i));
+			}
 			
 //			mav.addObject("dashMemberData", dashMemberData);
 //			mav.addObject("dashAllMemberData",dashAllMemberData);
@@ -264,13 +299,19 @@ public class AdminController {
 			mav.addObject("dashAllMemberData", dashAllMember);
 			mav.addObject("dashCreatorData", dashCreator);
 			mav.addObject("Allpayment", Allpayment);
-			
+			mav.addObject("AllPaymentClass", AllPaymentClass);
+			mav.addObject("AllPaymentStore", AllPaymentStore);
 			mav.addObject("labelData", dbParam2);
+			mav.addObject("dashClassChart", dashClassChart);
+			mav.addObject("dashStoreChart", dashStoreChart);
+			mav.addObject("dashAllChart", dashAllChart);
+
 			mav.addObject("dataSize", dataSize);
 			mav.addObject("startMonth", startMonth);
 			mav.addObject("endMonth", endMonth);
 			
 			System.out.println("ajax success");
+			
 
 			try {
 				mav.setViewName("admin/adminDashboard");
@@ -292,33 +333,73 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminCreator")
-	public ModelAndView adminCreator() {
-		ModelAndView mav=new ModelAndView();
+	public ModelAndView adminCreator(@RequestParam(value="now", required=false) String now) {
 		
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("status", null);
 		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		int cntRecords = dao.selectCntAllCreator(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		System.out.println("cntRecords:" + cntRecords);
+		System.out.println("lastPage:" + lastPage);
 
-		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-		List<AllVO> list = dao.selectAllCreator(dbParam);
+		List<AllVO> list = dao.pagingAllCreator(dbParam);
+		
+		
 		int countAllCreator = dao.countAllCreator();
 		int countNowCreator =dao.countNowCreator();
 		int countDeletedCreator = dao.countDeletedCreator();
 		
+		PagingVO pageVO = new PagingVO();
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("method", "get");
 		mav.addObject("creatorList", list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
 		mav.addObject("countAllCreator", countAllCreator);
 		mav.addObject("countNowCreator", countNowCreator);
 		mav.addObject("countDeletedCreator", countDeletedCreator);
-		mav.addObject("status", null);
-		mav.addObject("search", null);
 		mav.setViewName("admin/adminCreator");
+		
 		return mav;
 	}
 	
 	@RequestMapping(value="/adminCreator", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView adminCreator(HttpServletResponse resp, @RequestParam(value="status", required=false) String status, @RequestParam(value="search", required=false) String search) {
+	public ModelAndView adminCreator(HttpServletResponse resp, @RequestParam(value="status", required=false) String status, @RequestParam(value="search", required=false) String search , @RequestParam(value="now",required=false) String now) {
+		
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+
 		ModelAndView mav=new ModelAndView();
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
 		
 		if(status.length() <= 0) status = null;
 		if(!search.equals(null)) {
@@ -328,15 +409,29 @@ public class AdminController {
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("status", status);
 		dbParam.put("search", search);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
 		
-		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-		List<AllVO> list = dao.selectAllCreator(dbParam);
+		int cntRecords = dao.selectCntAllCreator(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<AllVO> list = dao.pagingAllCreator(dbParam);
 		int countAllCreator = dao.countAllCreator();
 		int countNowCreator =dao.countNowCreator();
 		int countDeletedCreator = dao.countDeletedCreator();
 		
 		if(list != null) {
+			mav.addObject("method", "post");
 			mav.addObject("creatorList", list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("lastPage", lastPage);
+			mav.addObject("cntData", list.size());
 			mav.addObject("countAllCreator", countAllCreator);
 			mav.addObject("countNowCreator", countNowCreator);
 			mav.addObject("countDeletedCreator", countDeletedCreator);
@@ -351,14 +446,14 @@ public class AdminController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
-		} else {
-
-			try{
-				System.out.println("ajax error");
-				resp.getWriter().write("{\"result\":\"fail\"}");
-			} catch (IOException e) {
-	            e.printStackTrace();
-	        }
+//		} else {
+//
+//			try{
+//				System.out.println("ajax error");
+//				resp.getWriter().write("{\"result\":\"fail\"}");
+//			} catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
 		}
 
 		return null;
@@ -400,6 +495,20 @@ public class AdminController {
 
 		mav.addObject("result", result);
 		mav.setViewName("admin/adminCreatorLeaveEditOk");
+		
+	return mav;
+	}
+	
+	@RequestMapping("/adminCreatorStateEditOk")
+	public ModelAndView adminCreatorStateEditOk(String userid) {
+
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
+		int result = dao.creatorStateMemberUpdate(userid);
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("result", result);
+		mav.setViewName("admin/adminCreatorStateEditOk");
 		
 	return mav;
 	}
@@ -466,9 +575,13 @@ public class AdminController {
 			list.add(st.nextToken());
 		}
 		vo.setImgList(list);
+
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
+
 		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("sectionList",sectionList);
 		mav.addObject("vList",vList);
 		mav.setViewName("admin/adminClassView");
 		return mav;
@@ -484,8 +597,11 @@ public class AdminController {
 		}
 		vo.setImgList(list);
 		
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
+		mav.addObject("sectionList",sectionList);
 		mav.setViewName("admin/adminClassEdit");
 		return mav;
 	}
@@ -953,24 +1069,32 @@ public class AdminController {
 	public String admin1on1Write() {
 		return "admin/admin1on1Write";
 	}
-//	@RequestMapping("/adminOrder")
-//	public ModelAndView adminOrder() {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
-//		String todate =  yyyymmdd.format(new Date());
-//		String startDate = todate.substring(0, 8) + "01";
-//		String endDate = todate;
-//		
-//		Map<String, String> dbParam = new HashMap<String, String>();
-//		dbParam.put("startDate", startDate);
-//		dbParam.put("endDate", endDate);
-//		dashForMember
-//		return mav;
-//	}
+
 	@RequestMapping("/adminOrder")
-	public String adminOrder() {
-		return "admin/adminOrder";
+	public ModelAndView adminOrder() {
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		
+		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
+		dao = sqlSession.getMapper(OrderDaoImp.class);
+		List<OrderVO> result = dao.selectAllOrder(dbParam);
+		
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+
+		mav.addObject("data", result);
+		mav.setViewName("admin/adminOrder");
+	
+		return mav;
 	}
 	@RequestMapping("/adminOrderView")
 	public String adminOrderView() {
@@ -2224,5 +2348,31 @@ public class AdminController {
 	public String adminAnswer() {
 		return "admin/adminAnswer";
 	}
+	
+	@RequestMapping("/adminGetClassList")
+	@ResponseBody
+	public List<ClassVO> adminGetClassList(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String category=req.getParameter("value");
+		List<ClassVO> list=dao.getClassAllList(category);
+		return list;
+	}
+	@RequestMapping("/adminGetSection")
+	@ResponseBody
+	public List<ClassVideoVO> adminGetSection(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String code=req.getParameter("code");
+		List<ClassVideoVO> list=dao.selectSection(code);
+		return list;
+	}
+	
+	@RequestMapping("/adminGetCode")
+	@ResponseBody
+	public String adminGetCode(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String class_name=req.getParameter("class_name");
+		String code=dao.getCode(class_name);
+		System.out.println("code===> "+code);
+		return code;
+	}
 }
-

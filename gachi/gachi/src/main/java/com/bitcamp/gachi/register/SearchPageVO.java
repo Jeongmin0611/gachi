@@ -2,6 +2,7 @@ package com.bitcamp.gachi.register;
 
 public class SearchPageVO {
 	private String code;
+	private String userid;
 	private String class_name;
 	private String class_img;
 	private String category;
@@ -9,11 +10,19 @@ public class SearchPageVO {
 	private String real_price;
 	private String goods_name;
 	private String goods_img1;
+	private String picture;
+	private int count;
 	public String getCode() {
 		return code;
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUseid(String userid) {
+		this.userid = userid;
 	}
 	public String getClass_name() {
 		return class_name;
@@ -57,5 +66,19 @@ public class SearchPageVO {
 	public void setGoods_img1(String goods_img1) {
 		this.goods_img1 = goods_img1;
 	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	
 	
 }

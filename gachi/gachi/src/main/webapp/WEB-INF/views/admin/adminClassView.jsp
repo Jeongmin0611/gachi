@@ -12,6 +12,19 @@
 	#ad_goods_viewForm>li{
 		height:100%;
 	}
+	#ad_unit_box li{
+		border-bottom:1px solid gray;
+		float:left;
+		height:40px;
+		line-height: 40px;
+	}
+	#ad_unit_box li:nth-child(2n+1){
+		width:10%;
+		text-align:center;
+	}
+	#ad_unit_box li:nth-child(2n){
+		width:90%;
+	}
 </style>
 <script type="text/javascript">
 	function classDel(){
@@ -62,6 +75,13 @@
 <div id="ad_goods_info">
 	<textarea name="class_info">${vo.class_info }</textarea>
 </div>
+<h3>클래스정보</h3>
+<ul class="ad_box" id="ad_unit_box">
+	<c:forEach var="section" items="${sectionList}">
+		<li>${section.unit}</li>
+		<li>${section.unit_content}</li>
+	</c:forEach>
+</ul>
 <h3>클래스영상정보</h3>
 	<ul id="ad_video_priview" class="text-center">
 		<li>동영상코드</li>

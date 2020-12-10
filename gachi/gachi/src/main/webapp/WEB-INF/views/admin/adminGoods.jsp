@@ -75,7 +75,7 @@ $(function(){
 		<li><input type="checkbox"/></li>
 		<li>${data.code }</li>
 		<li>${data.category }</li>
-		<li><a href="/gachi/adminGoodsView">${data.goods_name }</a></li>
+		<li class="wordCut"><a href="/gachi/adminGoodsView">${data.goods_name }</a></li>
 		<li>${data.prime_cost }</li>
 		<li>${data.real_price } </li>
 		<li>${data.stock }</li>
