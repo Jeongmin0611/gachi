@@ -15,8 +15,9 @@
 		background-color: ;
 		margin:5px 0;
 	}	
-	.mypageContent div{
-		text-align: center;
+	.mypageContent>div{
+		text-align: left;
+		margin-left: 50px;
 	}
 	.mypageContent>div>div{
 		margin:auto 0;
@@ -38,12 +39,8 @@
 			<hr class="userHr"/>
 			<div>
 				<select>
-					<option value="최근순">최근순</option>
-					<option value="제목순">제목순</option>
-				</select>
-				<select>
 					<option value="전체">전체</option>
-					<option value="수강중" selected>수강중</option>
+					<option value="수강중">수강중</option>
 					<option value="수강완료">수강완료</option>
 				</select>
 			</div>
@@ -51,16 +48,15 @@
 		<div class="mypageContent col-md-10">
 			<c:forEach var="vo" items="${list }">
 				<div class="row">
-					<div class="col-md-3"><a href="/gachi/myclassView?code=${vo.code }"><img src="/gachi/img/${vo.class_img }"/></a></div>
+					<div class="col-md-3" style="margin-right:30px"><a href="/gachi/myclassView?code=${vo.code }"><img src="/gachi/img/artEx/${vo.class_img }"/></a></div>
 					<div class="col-md-6">
 						<div><span class="badge badge-info">${vo.category }</span></div>
-						<div><a href="/gachi/myclassView?code=${vo.code }">${vo.class_name }</a></div>
-						<div><a href="#">${vo.nickname }</a></div>
-						<div>진도율 : 0.00%</div>
-						<div>기한 : 20.11.01 ~ 21.01.31</div>
-						<div><progress value="50" max="100"></progress></div>
+						<div><h5><a href="/gachi/myclassView?code=${vo.code }">${vo.class_name }</a></h5></div>
+						<div style="font-size:0.9em">${vo.nickname }</div>
+						<div style="margin-top:20px;font-size:0.9em">20.11.01 ~ 21.01.31</div>
+						<div class="progress" style="width:50%"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
 					</div>
-					<div class="col-md-3"><button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button></div>
+					<div class="col-md-2"><button type="button" class="btn btn-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button></div>
 				</div>
 				<hr/>
 			</c:forEach>

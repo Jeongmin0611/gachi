@@ -56,7 +56,11 @@ public interface UserInfoDaoImp {
 	//결제 후 주문정보 넣기(상품주문)
 	public int goodsOrderInsert(OrderListVO vo);
 	//결제 후 주문정보확인
-	public List<OrderVO> orderView(String order_code);
+	public OrderVO orderView(String order_code);
+	//클래스 이름
+	public String getClassName(String code);
+	//상품 이름
+	public String getGoodsName(String code);
 	//내 클래스 개수
 	public int countClass(String userid);
 	//내 클래스 목록
