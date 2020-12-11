@@ -286,10 +286,38 @@ public class MypageController {
 		return result;
 	}
 	/* 주문신청서 */
-	@RequestMapping(value="/orderSheet", method=RequestMethod.POST)
-	public ModelAndView orderSheet(OrderListVO oVO, HttpSession ses) {
+	@RequestMapping("/orderSheet")
+	public ModelAndView orderSheet(String[] orderClassCode, String[] orderGoodsCode, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
+
+		List<OrderListVO> classList = dao.classCartView((String)ses.getAttribute("userid"));
+		List<OrderListVO> goodsList = dao.goodsCartView((String)ses.getAttribute("userid"));
+		List<OrderListVO> cList = new ArrayList<OrderListVO>();
+		List<OrderListVO> gList = new ArrayList<OrderListVO>();
+		int result = 0; //0이면 상품없음, 1이면 상품있음
+		if(orderClassCode!=null) {
+			for(int i=0; i<classList.size(); i++) {
+				for(int j=0; j<orderClassCode.length; j++) {
+					if(classList.get(i).getCode().equals(orderClassCode[j])) {
+						cList.add(classList.get(i));
+					}
+				}
+			}
+		}
+		if(orderGoodsCode!=null) {
+			result = 1;
+			for(int i=0; i<goodsList.size(); i++) {
+				for(int j=0; j<orderGoodsCode.length; j++) {
+					if(goodsList.get(i).getCode().equals(orderGoodsCode[j])) {
+						gList.add(goodsList.get(i));
+					}
+				}
+			}
+		}
+
+		
+		/*
 		List<OrderListVO> cList = new ArrayList<OrderListVO>();
 		for(int i=0; i<oVO.getOrderClassCode().length; i++) {
 			String code = oVO.getOrderClassCode()[i];
@@ -300,13 +328,14 @@ public class MypageController {
 			String code = oVO.getOrderGoodsCode()[i];
 			gList.add(dao.goodsOrderList(code));
 		}
+		*/
 		MemberVO vo = dao.userInfoView((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("cList", cList);
 		mav.addObject("gList", gList);
 		mav.addObject("vo", vo);
-		
+		mav.addObject("result", result);
 		mav.setViewName("mypage/orderSheet");
 		return mav;
 	}
@@ -323,7 +352,7 @@ public class MypageController {
 		vo.setShipping_fee(Integer.parseInt(order.get("shipping_fee")));
 		vo.setDiscount(Integer.parseInt(order.get("discount")));
 		vo.setPrice(Integer.parseInt(order.get("price")));
-		vo.setPayment_type("html5_inicis");
+		vo.setPayment_type("신용카드");
 		vo.setCard_type((String)order.get("card_type"));
 		vo.setZipcode((String)order.get("zipcode"));
 		vo.setAddr((String)order.get("addr"));
@@ -335,20 +364,26 @@ public class MypageController {
 	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
 	public ModelAndView orderConfirmed(OrderListVO vo) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//System.out.println(vo.getOrder_code());
-		System.out.println(vo.getOrderClassCode()[0]);
-		for(int i=0;i<vo.getOrderClassCode().length;i++) {
-			vo.setCode(vo.getOrderClassCode()[i]);
-			int result = dao.classOrderInsert(vo);
+		OrderVO newVO = dao.orderView(vo.getOrder_code());
+		String class_name = "";
+		String goods_name = "";
+		int classCnt = 0;
+		int goodsCnt = 0;
+		
+		if(vo.getOrderClassCode()!=null) {
+			classCnt = vo.getOrderClassCode().length;
+			class_name = dao.getClassName(vo.getOrderClassCode()[0]);
+			
 		}
-		//System.out.println(vo.getOrderGoodsCode());
-		for(int i=0;i<vo.getOrderGoodsCode().length;i++) {
-			vo.setCode(vo.getOrderGoodsCode()[i]);
-			int result = dao.goodsOrderInsert(vo);
+		if(vo.getOrderGoodsCode()!=null) {
+			goodsCnt = vo.getOrderGoodsCode().length;
+			goods_name = dao.getGoodsName(vo.getOrderGoodsCode()[0]);
 		}
 		ModelAndView mav = new ModelAndView();
-		List<OrderVO> list = dao.orderView(vo.getOrder_code());
-		mav.addObject("vo", list.get(0));
+		mav.addObject("vo", newVO);
+		mav.addObject("class_name", class_name);
+		mav.addObject("goods_name", goods_name);
+		mav.addObject("cnt", classCnt+goodsCnt);
 		mav.setViewName("mypage/orderConfirmed");
 		return mav;
 	}

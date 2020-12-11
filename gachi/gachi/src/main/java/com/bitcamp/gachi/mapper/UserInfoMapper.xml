@@ -120,13 +120,15 @@
 		 values('g'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, '${order_code}', '${code}', ${amount})
 	</insert>
 	<select id="orderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderVO">
-		select o.order_code, price, payment_type, class_name, goods_name
-		 from orderlist o, class_order co, goods_order go, class c, goods g
-		 where o.order_code = co.order_code(+)
-		 and o.order_code = go.order_code(+)
-		 and co.code = c.code(+)
-		 and go.code = g.code(+)
-		 and o.order_code = '${order_code}'
+		select order_code, price, payment_type
+		 from orderlist
+		 where order_code = '${order_code}'
+	</select>
+	<select id="getClassName" resultType="String">
+		select class_name from class where code = '${code}'
+	</select>
+	<select id="getGoodsName" resultType="String">
+		select goods_name from goods where code = '${code}'
 	</select>
 	<select id="countClass" resultType="int">
 		select count(code) 

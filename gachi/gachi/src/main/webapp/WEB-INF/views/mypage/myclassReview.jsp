@@ -2,82 +2,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 
-	/* 질문,문의 */
-	
-	/* 내용 */
-	#myqnaContent>label{
-		margin:10px 30px;
-		padding:5px;
-		background-color:#fde9e2;
-	}
-	#myqnaContent a:hover{
-		font-weight:bold;
-	}
-	/* 클래스 질문답변 */
-	#myqnaClass{
-		overflow:auto;
-		margin-bottom:100px;
-		border:3px solid #eee;
-		padding:15px;
-	}
-	#myqnaClass li{
-		float:left;
-		text-align:center;
-		padding:0 10px;
-	}
-	#myqnaClass>li:first-child{
-		float:left;
-		text-align:left;
-		padding:0 15px;
-		font-weight:bold;
-		color:gray;
-	}
-	#myqnaClass>li:first-child>label{
-		font-size:1em;
-		color:#F4BFA9;
-		font-weight:bold;
-		margin-right:10px;
-	}
-	#myqnaClass li:nth-child(2),
-	#myqnaClass>li:nth-child(3),
-	#myqnaClass>li:nth-child(4),
-	#myqnaClass>li:nth-child(5){
-		font-size:0.8em;
-	}
-	#myqnaClass>li:nth-child(4) a{
-		color:#1b3da7;
-	}
-	#myqnaClass>li:nth-child(5) a{
-		color:#aaa;
-	}
-	#myqnaClass li:nth-child(6){
-		float:right;
-		color:#ABCEE3;
-		font-weight:bold;
-		font-size:1.5em;
-	}
-	#myqnaClass li:nth-child(7){
-		width:100%;
-		text-align:left;
-		padding:0 15px;
-	}
-	#myqnaClass>li:last-child{
-		padding:10px;
-	}
-	#myqnaClass>li:last-child label{
-		font-size:1em;
-		color:#ABCEE3;
-		font-weight:bold;
-		margin-right:10px;
-	}
-	#myqnaClass li:last-child{
-		width:100%;
-		text-align:left;
-		float:left;
-		padding:0 10px;
-	}
+	/* 클래스 수강평 */
 	
 </style>
+<script>
+	$(function(){
+		//평점에 별넣기 https://www.wbotelhos.com/raty 참고
+		$(".classRating").raty({
+				score:5,
+				path:"img/starImages",
+				half:true,
+				width:"100%",
+				space:false
+		});
+		$(".myclassStars").raty({
+			score:5,
+			path:"img/starImages",
+			half:true,
+			width:"100%",
+			readOnly:true,
+			space:false
+			});
+	});
+</script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
@@ -86,30 +33,28 @@
 			<label style="font-size:1.1em"><b>수강평</b></label>
 			<hr class="userHr"/>
 			<div style="text-align:right">
-				<button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myclassReviewModal">수강평작성</button>
-				<select>
-					<option>클래스명</option>
-					<option>카모마일 프랑스 자수</option>
-				</select>
+				<button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#myclassReviewModal">수강평작성</button>
 			</div>
-			<label><a href="/gachi/myclassView">카모마일 프랑스 자수</a></label>
-			<ul id="myqnaClass">
-				<li><label class="badge badge-light">Q</label>질문입니다</li>
-				<li>김유미</li>
-				<li>20.11.15</li>
-				<li><a href="#">수정</a></li>
-				<li><a href="#">삭제</a></li>
-				<li>답변완료</li>
-				<li>입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</li>
-				<li>
-				<hr/>
-					<ul>
-						<li><label class="badge badge-light">A</label>홍길동</li>
-						<li>20.11.15</li>
-						<li>네 처음 시작하시는 분들도 무리없이 따라오시는 난이도의 수업입니다 :)</li>
-					</ul>
-				</li>
-			</ul>
+			<p><b>사랑스러운 고양이 색연필 초상화</b></p>
+	        <div class="card">
+	        	<div class="row no-gutters">
+	            	<div class="col-3" style="margin:auto 0">
+	                	<img src="/gachi/img/artEx/artEx01.PNG" alt="" class="card-img" />
+	                </div>
+	            	<div class="col-9">
+	                	<div class="card-body">
+	                  		<p class="card-text">
+	                  			<div>
+	                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b style="float:left">정말 마음에 들어요~</b><div class="myclassStars"></div>
+	                  				<div style="margin:10px;font-size:0.9em">첫 프랑수자수 작품으로 골랐는데 매우 만족스럽습니다 꽃자수가 너무 예쁘고 파스텔톤 하늘색인 것도 마음에 듭니다!</div>
+	                  				<div style="text-align:right"><label class="badge badge-pill badge-light">20/11/15</label>
+	                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a><a href="#"style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
+		                  		</div>
+		                    </p>
+	                   </div>
+	                </div>
+	            </div>
+	        </div>
 		</div>
 	</div>
 </div>

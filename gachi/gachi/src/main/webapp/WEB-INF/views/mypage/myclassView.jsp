@@ -4,65 +4,8 @@
 	
 	/* 클래스 보기 */
 	
-	#myclassView{
-		overflow:auto;
-		margin:10px 50px 40px;
-	}
-	#myclassView>li{
-		width:45%;
-		float:left;
-		height:30px;
-		overflow:hidden;
-		margin:5px 20px;
-		line-height:25px;
-	}
-	#myclassView>li:first-child{
-		height:300px;
-	}
-	#myclassView>li:first-child img{
-		width:100%;
-		height:100%;
-		object-fit: cover;
-	}
-	#myclassView>li:nth-child(2){
-		margin-top:20px;
-		font-size:1.5em;
-	}
-	#myclassView>li:nth-child(2)>label:first-child{
-		font-size:0.5em;
-		margin-right:10px;
-	}
-
-	#myclassView>li:nth-child(4){
-		width:15%;
-		float:left;
-	}
-	#myclassView>li:nth-child(5){
-		width:30%;
-	}
-	#myclassView>li:nth-child(6) progress{
-		width:100%;
-	}
-	#myclassView>li:nth-child(7){
-		height:40px;
-	}
-	#myclassView>li:nth-child(7)>button{
-		background-color:#ABCEE3;
-	}
-	#myclassView>li:last-child{
-		height:40px;
-		magrin:0;
-		padding:0;
-	}
-	#myclassView>li:last-child>button{
-		width:49%;
-		background-color:#eee;
-		color:#000;
-		margin:0;
-	}
-	#myclassView>li:last-child>button:first-child{
-		float:left;
-		margin-right:5px;
+	#myclassView div{
+		
 	}
 
 	/* 클래스썸네일 */
@@ -357,19 +300,21 @@
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
-		<ul id="myclassView">
-			<li><img src="/gachi/img/${vo.class_img }"/></li>
-			<li><label class="badge badge-info">${vo.category }</label><label>${vo.class_name }</label></li>
-			<li>크리에이터명 <a href="#">${vo.nickname }</a></li>
-			<li><label>진도율 : 0.00%</label></li>
-			<li><label>기한 : 20.11.01 ~ 21.01.31</label></li>
-			<li><progress value="50" max="100"></progress></li>
-			<li><button type="button" class="btn btn-outline-light btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></li>
-			<li>
-				<button type="button" class="btn btn-outline-light btn-block" onclick="moveToReview()">수강후기</button>
-				<button type="button" class="btn btn-outline-light btn-block" onclick="moveToQna()">질문&답변</button>
-			</li>
-		</ul>
+		<div class="row">
+			<div class="col-md-6"><img src="/gachi/img/artEx/${vo.class_img }" style="width:100%"/></div>
+			<div class="col-md-6 myclassView">
+				<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
+				<div>크리에이터 : <a href="#">${vo.nickname }</a></div>
+				<div><label>진도율 : 50%</label></div>
+				<div><label>기한 : 20.11.01 ~ 21.01.31</label></div>
+				<div class="progress"><div class="progress-bar bg-info" style="width:50%">50%</div></div>
+				<div><button type="button" class="btn btn-light btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></div>
+				<div>
+					<button type="button" class="btn btn-light" style="width:50%" onclick="moveToReview()">수강후기</button>
+					<button type="button" class="btn btn-light" style="width:50%;float:right" onclick="moveToQna()">질문&답변</button>
+				</div>
+			</div>
+		</div>
 		<div id="myclassVideoLst">
 			<label>클래스 목차</label>
 			<hr style="background:#000"/>

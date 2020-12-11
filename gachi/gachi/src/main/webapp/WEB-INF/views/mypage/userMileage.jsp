@@ -9,7 +9,7 @@
 		margin:50px 10px 5px;
 		padding:10px;
 		height:150px;
-		border:3px solid #ABCEE3;
+		border:2px solid #44649f;
 	}
 	#userMileageTop>div{
 		width:33%;
@@ -76,10 +76,10 @@
 						<div class="col-md-3" style="text-align:center">${vo.occurence_date }</div>
 						<div class="col-md-6">${vo.breakdown }</div>
 						<c:if test="${vo.mileage>0 }">
-							 <div class="col-md-3"style="color:#f29886;text-align:center">+${vo.mileage }</div>
+							 <div class="col-md-3"style="color:#ee3e61;text-align:center">+${vo.mileage }</div>
 						</c:if>
 						<c:if test="${vo.mileage<0 }">
-							 <div class="col-md-3"style="color:#6fabcf;text-align:center">${vo.mileage }</div>
+							 <div class="col-md-3"style="color:#44649f;text-align:center">${vo.mileage }</div>
 						</c:if>
 					</div>
 					<hr class="moreContent"/>

@@ -43,83 +43,6 @@
 		width:100%;
 	}
 	
-	/* 모달 */
-	#mypageModal{
-		display:none;
-		position:absolute;
-		width:100%;
-		height:100%;
-		z-index:1;
-	}
-	.mypageModal_content{
-		width:500px;
-		height:500px;
-		margin:100px auto;
-		padding:20px 10px;
-		background-color:#fff;
-		border:2px solid #eee;
-	}
-	.mypageModal_content>div:first-child{
-		margin:0 auto;
-		width:100px;
-		height:100px;
-		background-color:#ffdac3;
-		border-radius: 50%;
-		text-align:center;
-	}
-	.mypageModal_content>div:nth-child(2){
-		margin-top:20px;
-		height:100px;
-		text-align:center;
-		border:2px solid #eee;
-		font-size:1.3em;
-		line-height:100px;
-	}
-	.mypageModal_content>div:nth-child(2) label{
-		color:#ABCEE3;
-	}
-	.mypageModal_content>label{
-		font-size:1em;
-	}
-	.mypageModal_content>label:nth-child(3){
-		margin-top:30px;
-	}
-	/* 송장정보 */
-	.mypageModal_content ul{
-		margin:0 auto;
-		overflow:auto;
-		border-top:1px solid gray;
-		margin-bottom:50px;
-	}
-	.mypageModal_content li{
-		width:70%;
-		float:left;
-		border-bottom:1px solid gray;
-		text-align:center;
-		padding:0 20px;
-	}
-	.mypageModal_content li:nth-child(2n+1){
-		text-align:left;
-		background-color:#eee;
-		width:30%;
-	}
-	.mypageModal_layer{
-		position:fixed;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background-color:rgba(0,0,0,0.5);
-		z-index:-1;
-	}
-	#mypageModalClose{
-		margin:0 auto;
-		background-color:#abcee3;
-	}
-	#mypageModalBtm{
-		text-align:center;
-	}
-	
 </style>
 <script>
 
@@ -132,7 +55,7 @@
 		var mm = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + date.getMonth()+1;
 		var dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
 			 
-		$("input[name=startDate]").val(yyyy+"-"+mm+"-"+dd);
+		$("input[name=startDate]").val(yyyy+"-"+mm+"-"+"01");
 		$("input[name=endDate]").val(yyyy+"-"+mm+"-"+dd);		
 		
 		//구매확정
@@ -185,20 +108,7 @@
 			  		});	
 				}
 			});
-		});
-		//모달창 띄우기
-	    $(".mypageDelivery").click(function(){
-    		$("#mypageModal").css({
-               "top": (($(window).height()-$("#mypageModal").outerHeight())/2+$(window).scrollTop())+"px",
-               "left": (($(window).width()-$("#mypageModal").outerWidth())/2+$(window).scrollLeft())+"px"
-               //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-            
-            });
-	        $("#mypageModal").fadeIn();
-	    });
-	    $("#mypageModalClose, .mypageModal_layer").click(function(){
-	       $("#mypageModal").fadeOut();
-	    });   
+		});  
 	    
 	    //더보기 페이징 -> userProfile.jspf
 	    moreContent();
@@ -221,14 +131,15 @@
 			<form action="/gachi/mypage" method="post">
 				<!-- xs, sm 크기에서만 숨기기  -->
 				<div class="d-none d-sm-none d-md-block">
+					
 					<input type="radio" name="option" value="all"/><label>전체</label>
 					<input type="radio" name="option" value="class"/><label>클래스</label>	
 					<input type="radio" name="option" value="goods"/><label>상품</label>
 						
 					<input type="date" name="startDate"/>-
 					<input type="date" name="endDate"/>
-					<button type="submit" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
-					<button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/gachi/mypage'">전체</button>
+					<button type="submit" class="btn btn-light btn-sm" id="orderListDate">조회</button>
+					<button type="button" class="btn btn-light btn-sm" onclick="location.href='/gachi/mypage'">전체기간</button>
 				</div>
 			</form>
 			<form action="/gachi/mypage" method="post">
@@ -242,8 +153,8 @@
 					<div>	
 						<input type="date" name="startDate"/>-
 						<input type="date" name="endDate"/>
-						<button type="submit" class="btn btn-outline-light btn-sm" id="orderListDate">조회</button>
-						<button type="button" class="btn btn-outline-light btn-sm" id="orderListAll">전체</button>
+						<button type="submit" class="btn btn-light btn-sm" id="orderListDate">조회</button>
+						<button type="button" class="btn btn-light btn-sm" id="orderListAll">전체</button>
 					</div>
 				</div>
 			</form>
@@ -255,7 +166,7 @@
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
 						<div class="row moreContent">	
-							<div class="col-md-3"><img src="/gachi/img/${vo.class_img }"/></div>
+							<div class="col-md-3"><img src="/gachi/img/artEx/${vo.class_img }"/></div>
 							<div class="col-md-6">
 								<ul class="mypageMainLst">
 									<li>
@@ -294,8 +205,8 @@
 							<!-- xs 크기에서만 숨기기  -->
 							<div class="col-md-3 col d-none d-sm-block">
 								<c:if test="${vo.finished eq '미확정' }">
-									<div><button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button></div>
-									<div><button type="button" class="btn btn-outline-light userOrderFix">구매확정</button>								 
+									<div><button type="button" class="btn btn-light mypageDelivery" data-toggle="modal" data-target="#myclassReviewModal">배송조회</button></div>
+									<div><button type="button" class="btn btn-light userOrderFix">구매확정</button>								 
 									     <input type="hidden" id="goods_order_code" value="${vo.goods_order_code }"/></div>
 								</c:if>	
 								<c:if test="${vo.finished eq '확정' }">
@@ -306,8 +217,8 @@
 							<div class="col-md-3 d-block d-sm-none">
 								<div>
 									 <c:if test="${vo.finished eq '미확정' }">
-									 	 <button type="button" class="btn btn-outline-light mypageDelivery">배송조회</button>
-										 <button type="button" class="btn btn-outline-light userOrderFix">구매확정</button>
+									 	 <button type="button" class="btn btn-light mypageDelivery">배송조회</button>
+										 <button type="button" class="btn btn-light userOrderFix">구매확정</button>
 										 <input type="hidden" id="goods_order_code" value="${vo.goods_order_code }"/>
 									 </c:if>
 									 <c:if test="${vo.finished eq '확정' }">
@@ -326,64 +237,38 @@
 		</div>
 	</div>
 </div>
-<div id="mypageModal" class="cfont">
-	<div class="mypageModal_content">
-		<div>
-			<img src="/gachi/img/icon_deliveryFinish.png" style="width:80%"/>
+<!-- Modal -->
+<div class="modal fade" id="myclassReviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">배송조회</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body" style="text-align:center">
+      	<div style="width:150px;height:150px;margin:0 auto;margin-bottom:50px;padding-top:1%;border-radius:50%;background:#e3eef6">
+			<img src="/gachi/img/icon_deliveryReady.png" style="width:90%"/>
 		</div>
-		<div>상품이 <label>배송완료</label> 상태입니다.</div>
-		<label>송장정보</label>
-		<ul>
-			<li>송장번호</li>
-			<li>10101010</li>
-			<li>택배사</li>
-			<li>한진택배</li>
-			<li>대표번호</li> 
-			<li>1588-0011</li>
-		</ul>
-		<div id="mypageModalBtm">
-			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
-		</div>
-	</div>
-	<div class="mypageModal_layer"></div>
-</div>
-<div id="mypageModal" class="cfont">
-	<div class="mypageModal_content">
-		<div>
-			<img src="/gachi/img/icon_delivery.png" style="width:85%"/>
-		</div>
-		<div>상품이 <label>배송진행중</label> 상태입니다.</div>
-		<label>송장정보</label>
-		<ul>
-			<li>송장번호</li>
-			<li>10101010</li>
-			<li>택배사</li>
-			<li>한진택배</li>
-			<li>대표번호</li> 
-			<li>1588-0011</li>
-		</ul>
-		<div id="mypageModalBtm">
-			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
-		</div>
-	</div>
-</div>
-<div id="mypageModal" class="cfont">
-	<div class="mypageModal_content">
-		<div>
-			<img src="/gachi/img/icon_deliveryReady.png" style="width:95%"/>
-		</div>
-		<div>상품이 <label>배송준비중</label> 상태입니다.</div>
-		<label>송장정보</label>
-		<ul>
-			<li>송장번호</li>
-			<li>10101010</li>
-			<li>택배사</li>
-			<li>한진택배</li>
-			<li>대표번호</li> 
-			<li>1588-0011</li>
-		</ul>
-		<div id="mypageModalBtm">
-			<button type="button" class="btn btn-outline-light" id="mypageModalClose">확인</button>
-		</div>
-	</div>
+		<h4>주문하신 상품이 <b>배송준비중</b> 상태입니다.</h4>
+		<hr class="userHr"/>
+        <div class="row">
+        	<div class="col-md-4">운송장 번호</div>
+        	<div class="col-md-8">10101010</div>
+        </div>
+        <hr/>
+        <div class="row">
+        	<div class="col-md-4">택배사</div>
+        	<div class="col-md-8">한진택배</div>
+        </div>
+        <hr/>
+        <div class="row">
+        	<div class="col-md-4">대표번호</div>
+        	<div class="col-md-8">1588-0011</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -65,25 +65,54 @@
 				data: "code="+code+"&amount="+amount,
 				type: "GET",
 				success: function(result){
-					$(this).prev().val(amount);
+					location.href = location.href;
 				}, error: function(){
 					console.log("카트 수량조절 에러");
 				}
 			});
 		});
 		
-		//선택주문
-		$("#selectOrder").click(function(){
+		//상품주문하기
+		$(".submitOrder").click(function(){
+			//전체주문
+			if($(this).attr("id")=="allOrder"){
+				$("input:checkbox").prop("checked",true);
+			}
+			//선택주문
+			var orderClassCode = [];
+			var orderGoodsCode = [];
 			
-			$("#cartFrm").submit();
+			$("input[name=class]:checked").each(function(){
+				orderClassCode.push(this.value);
+			});
+			$("input[name=goods]:checked").each(function(){
+					orderGoodsCode.push(this.value);
+			});
+			if(orderClassCode!="" && orderGoodsCode!=""){ //상품, 클래스 둘다 있을 떄
+				location.href="/gachi/orderSheet?orderClassCode="+orderClassCode+"&orderGoodsCode="+orderGoodsCode;
+			}else if(orderClassCode=="" && orderGoodsCode!=""){ //상품있고 클래스 없을때
+				location.href="/gachi/orderSheet?orderGoodsCode="+orderGoodsCode;
+			}else if(orderClassCode!="" && orderGoodsCode==""){ //클래스 있고 상품없을때
+				location.href="/gachi/orderSheet?orderClassCode="+orderClassCode;
+			}else{ //아무것도 없을 때
+				swal({
+					title: "알림",
+					text: "구매하실 상품을 하나 이상 선택해 주세요.",
+					icon: "warning",
+					closeOnClickOutside: false,
+					buttons: {
+						confirm : {
+							text: "확인",
+							value: true,
+							className: "btn btn-outline-light"
+						}
+					}
+				}).then((result)=>{
+
+				});
+			}
 		});
-		
-		//전체주문
-		$("#selectOrder").click(function(){
-			
-			$("#cartFrm").submit();
-	
-		});
+
 	});
 </script>
 <div class="container cfont">
@@ -96,7 +125,6 @@
 			<hr class="userHr"/>
 			<c:if test="${result ne 0 }">
 				<!-- /////////////////////////////////////////// -->
-				<form method="post" id="cartFrm" action="/gachi/orderSheet">
 					<div class="row">
 						<div class="col-md-1"><input type="checkbox" id="cartSelectAll" checked/></div>
 						<div class="col-md-2"></div>
@@ -107,8 +135,8 @@
 					<c:set var="cnt" value="0"/>
 					<c:forEach var="cvo" items="${cList }">
 						<div class="row">
-							<div class="col-md-1"><input type="checkbox" name="orderClassCode[${cnt }]" value="${cvo.code }" checked/></div>
-							<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
+							<div class="col-md-1"><input type="checkbox" name="class" value="${cvo.code }" checked/></div>
+							<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/artEx/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 							<div class="col-md-4"><input type="text" value="${cvo.class_name }" readonly/><br/>${cvo.nickname }</div>
 							<div class="col-md-5"><input type="hidden" value="${cvo.amount }" style="width:15%" readonly/>
 												  <input type="text" value="${cvo.stack }" style="width:30%;text-align:right" readonly/>p
@@ -122,12 +150,12 @@
 					<c:set var="cnt" value="0"/>
 					<c:forEach var="gvo" items="${gList }">
 						<div class="row">
-							<div class="col-md-1"><input type="checkbox" name="orderGoodsCode[${cnt }]" value="${gvo.code }" checked/></div>
+							<div class="col-md-1"><input type="checkbox" name="goods" value="${gvo.code }" checked/></div>
 							<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/store/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 							<div class="col-md-4"><input type="text" value="${gvo.goods_name }" readonly/></div>
 							<div class="col-md-5">		
 								<input type="number" min="1" max="99" value="${gvo.amount }" style="width:15%;border:1px solid #ddd;text-align:right"/>개
-								<button type="button" class="btn btn-primary btn-sm amountChange">수정</button>\
+								<button type="button" class="btn btn-primary btn-sm amountChange">수정</button>
 								<input type="hidden" value="${gvo.code }"/>
 								<input type="text" value="${gvo.stack }" style="width:15%;text-align:right" readonly/>p
 								<input type="text" value="${gvo.real_price }" style="width:30%;text-align:right" readonly/>원
@@ -158,14 +186,15 @@
 					</div>
 					<div>
 						<button type="button" class="btn btn-outline-light" onclick="history.go(-2)">쇼핑계속하기</button>
-						<button type="button" id="selectOrder" class="btn btn-outline-light">선택상품주문</button>
-						<button type="button" id="AllOrder" class="btn btn-outline-light">전체상품주문</button>
+						<button type="button" class="btn btn-outline-light submitOrder">선택상품주문</button>
+						<button type="button" id="allOrder" class="btn btn-outline-light submitOrder">전체상품주문</button>
 					</div>
-				</form>
 				<!-- /////////////////////////////////////////// -->
+				
 			</c:if>
 			<c:if test="${result eq 0 }">
-				<div>장바구니가 텅 비었어요~</div>
+				<div><img src="/gachi/img/icon_cart.png" style="width:10%;margin-bottom:20px"/></div>
+				<div><h4>장바구니가 텅 비었어요~</h4></div>
 				<div><button type="button" class="btn btn-outline-light" onclick="location.href='/gachi'">쇼핑하러가기</button></div>
 			</c:if>
 		</div>

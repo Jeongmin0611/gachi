@@ -13,6 +13,7 @@
 	a:hover{
 		text-decoration: none;
 		font-weight:bold;
+		color: #00498c;
 	}
 	.userMainDiv{
 		box-shadow: 0px 0px 10px 1px #eee;
@@ -25,6 +26,12 @@
 	}
 	.mypageContent, #mypageContent{	
 		margin: 10px auto 50px;	 	
+	}
+	.cobaltblue{
+		background-color: #44649f;
+	}
+	.cobalt{
+		color: #00498c;
 	}
 	
 	/* 프로필영역 */
@@ -44,14 +51,14 @@
 		margin: 0 auto;
 	    width: 80px;
 	    height: 80px; 
-	    border-radius: 30%;
+	    border-radius: 50%;
 	    overflow: hidden;
 	    background-color: #e3eef6;
 	}
 	/* 프사 */
 	#profileIcon {
 	    width: 100%;
-	    height: 100%;
+	    height: 110%;
 	    object-fit: cover;
 	}
 
@@ -60,6 +67,9 @@
 		float: left;
 		width: 20%;
 		text-align: center;
+	}
+	#userProfileNavi div{
+		margin-bottom: 5%;
 	}
 </style>
 <script>
@@ -90,70 +100,69 @@
 			<div id="profileBox">
 				<img src="/gachi/img/icon_user.png" id="profileIcon"/>
 			</div>
-			<h4><a href="/gachi/userInfoView">${nickname } 님</a></h4>
+			<h5 style="margin-top:5%"><b>${nickname }</b> 님</h5>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
-			<div>클래스</div>
-			<div><a href="/gachi/myclassList">${cntClass }</a></div>
+			<div><label class="badge badge-dark badge-pill" style="font-size:0.9em">클래스</label></div>
+			<div><a href="/gachi/myclassList" style="margin-top:3%">${cntClass }</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>클래스 <a href="/gachi/myclassList">${cntClass }</a></div>
+			<div><b>클래스</b> <a href="/gachi/myclassList" style="margin-top:3%">${cntClass }</a></div>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
-			<div>마일리지</div>
-			<div><a href="/gachi/userMileage">${mileage }p</a></div>
+			<div><label class="badge badge-secondary badge-pill" style="font-size:0.9em">마일리지</label></div>
+			<div><a href="/gachi/userMileage" style="margin-top:3%">${mileage }p</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>마일리지 <a href="/gachi/userMileage">${mileage }p</a></div>
+			<div><b>마일리지</b> <a href="/gachi/userMileage" style="margin-top:3%">${mileage }p</a></div>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
-			<div>좋아요</div>
-			<div><a href="/gachi/userWishList">${cntGood }</a></div>
+			<div><label class="badge badge-light badge-pill" style="font-size:0.9em">좋아요</label></div>
+			<div><a href="/gachi/userWishList" style="margin-top:3%">${cntGood }</a></div>
 		</div>
 		<!-- xs 크기에서만 보이기  -->
 		<div class="col-sm-3 d-block d-sm-none">
-			<div>좋아요 <a href="/gachi/userWishList">${cntGood }</a></div>
+			<div><b>좋아요</b> <a href="/gachi/userWishList" style="margin-top:3%">${cntGood }</a></div>
 		</div>
 	</div>
-	<hr/>
 	<ul id="userProfileNavi">
 		<li>
 			<div><img src="/gachi/img/icon_ordersheet.png" style="width:21px"/></div>
-			<div>주문/결제</div>
+			<div><b>주문/결제</b></div>
 			<div class="userProfileNavi" style="display:none">
-				<hr class="userHr"/>
+				<hr class="cobaltblue"/>
 				<div><a href="/gachi/mypage">결제내역확인</a></div>
 				<div><a href="/gachi/userMileage">마일리지</a></div>
 			</div>
 		</li>
 		<li>
 			<div><img src="/gachi/img/icon_userinfo.png" style="width:28px"/></div>
-			<div>회원정보</div>
+			<div><b>회원정보</b></div>
 			<div class="userProfileNavi" style="display:none">
-				<hr class="userHr"/>
+				<hr class="cobaltblue"/>
 				<div><a href="/gachi/userInfoView">회원정보수정</a></div>
 				<div><a href="/gachi/userLeave">회원탈퇴</a></div>
 			</div>
 		</li>	
 		<li>
 			<div><img src="/gachi/img/icon_cart.png" style="width:28px"/></div>
-			<div>장바구니</div>
+			<div><b>장바구니</b></div>
 			<div class="userProfileNavi" style="display:none">
-				<hr class="userHr"/>
+				<hr class="cobaltblue"/>
 				<div><a href="/gachi/userCart">장바구니</a></div>
 				<div><a href="/gachi/userWishList">좋아요</a></div>
 			</div>
 		</li>
 		<li>
 			<div><img src="/gachi/img/icon_myclass.png" style="width:28px"/></div>
-			<div>내 학습표</div>
+			<div><b>내 학습표</b></div>
 			<div class="userProfileNavi" style="display:none">
-				<hr class="userHr"/>
+				<hr class="cobaltblue"/>
 				<div><a href="/gachi/myclassList">클래스 목록</a></div>
 				<div><a href="/gachi/myclassQna">질문/답변</a></div>
 				<div><a href="/gachi/myclassReview">수강평</a></div>
@@ -161,12 +170,12 @@
 		</li>
 		<li>
 			<div><img src="/gachi/img/icon_myqna.png" style="width:28px"/></div>
-			<div>내 활동</div>
+			<div><b>내 활동</b></div>
 			<div class="userProfileNavi" style="display:none">
-				<hr class="userHr"/>
-				<div><a href="/gachi/mypageStoreQna">상품문의</a></div>
-				<div><a href="/gachi/mypageStoreReview">상품후기</a></div>
-				<div><a href="/gachi/mypage1on1">1:1문의</a></div>
+				<hr class="cobaltblue"/>
+				<div><a href="/gachi/mypageStoreQna">스토어 문의</a></div>
+				<div><a href="/gachi/mypageStoreReview">스토어 리뷰</a></div>
+				<div><a href="/gachi/mypage1on1">1:1 문의</a></div>
 				<div><a href="/gachi/mypageEvent">이벤트</a></div>
 			</div>
 		</li>

@@ -191,7 +191,7 @@
 			<c:forEach var="cvo" items="${cList }">
 				<div class="row">
 					<input type="hidden" name="orderClassCode" value="${cvo.code}"/>
-						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
+						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/artEx/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${cvo.class_name }<br/>${cvo.nickname }</div>
 					<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${cvo.stack }p</label>
@@ -208,7 +208,7 @@
 					<input type="hidden" name="orderGoodsCode" value="${gvo.code}"/>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/store/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${gvo.goods_name }</div>
-					<div class="col-md-5"><label style="width:20%">${gvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
+					<div class="col-md-5"><label style="width:20%">${gvo.amount }개</label><input type="hidden" name="amount" value="${gvo.amount }"/>
 										  <label style="width:20%">${gvo.stack }p</label>
 										  <label style="width:50%">${gvo.real_price }원</label></div>
 				</div>
@@ -249,44 +249,48 @@
 				<div class="col-md-4">상세주소</div>
 				<div class="col-md-8"><input type="text" name="detailaddr" id="orderDetailaddr" value="${vo.detailaddr }"/></div>
 			</div>
-			<label>배송지 정보</label>
-			<label style="float:right"><input type="checkbox" id="sameUserInfo"/>주문자 정보와 동일</label>
-			<hr class="userHr"/>
-			<div class="row">
-				<div class="col-md-4">이름</div>
-				<div class="col-md-8"><input type="text" name="username" id="shipUsername" readonly/></div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col-md-4">E-mail</div>
-				<div class="col-md-8"><input type="text" name="userid" id="shipUserid" readonly/></div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col-md-4">연락처</div>
-				<div class="col-md-8">
-					<input type="text" name="tel" id="shipTel"/>
+			<!-- ---------------------------------- -->
+			<c:if test="${result eq 1 }">
+				<label>배송지 정보</label>
+				<label style="float:right"><input type="checkbox" id="sameUserInfo"/>주문자 정보와 동일</label>
+				<hr class="userHr"/>
+				<div class="row">
+					<div class="col-md-4">이름</div>
+					<div class="col-md-8"><input type="text" name="username" id="shipUsername" readonly/></div>
 				</div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col-md-4">주소</div>
-				<div class="col-md-8">
-					<input type="text" name="zipcode" id="shipZipcode" style="width:15%;outline:none" readonly/>
-					<button type="button" class="btn btn-outline-light btn-sm" style="width:15%">검색</button>
-					<input type="text" name="addr" id="shipAddr" style="width:67%;outline:none" readonly/>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">E-mail</div>
+					<div class="col-md-8"><input type="text" name="userid" id="shipUserid" readonly/></div>
 				</div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col-md-4">상세주소</div>
-				<div class="col-md-8"><input type="text" name="detailaddr" id="shipDetailaddr"/></div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col-md-4">배송메세지</div>
-				<div class="col-md-8"><textarea name="orderMsg" id="orderMsg"></textarea></div>
-			</div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">연락처</div>
+					<div class="col-md-8">
+						<input type="text" name="tel" id="shipTel"/>
+					</div>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">주소</div>
+					<div class="col-md-8">
+						<input type="text" name="zipcode" id="shipZipcode" style="width:15%;outline:none" readonly/>
+						<button type="button" class="btn btn-outline-light btn-sm" style="width:15%">검색</button>
+						<input type="text" name="addr" id="shipAddr" style="width:67%;outline:none" readonly/>
+					</div>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">상세주소</div>
+					<div class="col-md-8"><input type="text" name="detailaddr" id="shipDetailaddr"/></div>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">배송메세지</div>
+					<div class="col-md-8"><textarea name="orderMsg" id="orderMsg"></textarea></div>
+				</div>
+			</c:if>	
+			<!-- ------------------------------------------------------------------------ -->
 			<label>결제정보</label>
 			<hr class="userHr"/>
 			<div class="row">
@@ -310,14 +314,19 @@
 			<label>결제금액</label>
 			<hr class="userHr"/>
 			<div><b>합계</b><input type="text" value="${sum }" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
-			<c:if test="${sum lt 50000}">
-				<c:set var="ship" value="2500"/>
-				<div><b>배송비</b> +${ship }원</div>
+			<c:set var="ship" value="0"/>
+			<!-- ------------------- -->
+			<c:if test="${result eq 1 }">
+				<c:if test="${sum lt 50000}"><!-- 50000원 미만 -->
+					<c:set var="ship" value="2500"/>
+					<div><b>배송비</b> +${ship }원</div>
+				</c:if>
+				<c:if test="${sum ge 50000}"><!-- 50000원 이상 -->
+					<c:set var="ship" value="0"/>
+					<div><b>배송비 무료</b></div>
+				</c:if>	
 			</c:if>
-			<c:if test="${sum ge 50000}">
-				<c:set var="ship" value="0"/>
-				<div><b>배송비 무료</b></div>
-			</c:if>	
+			<!-- ------------------ -->
 			<input type="hidden" id="shipLbl" value="${ship }"/>
 			<div><b>마일리지</b><input type="text" id="mileageUse" value="0" style="border:none;outline:none;width:10%" readonly/>원</div>
 			<hr class="userHr"/>
