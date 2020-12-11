@@ -52,7 +52,7 @@
 		$("#settleDel").click(function(){
 			
 		}); */
-		$("#frm").click(function(){
+/* 		$("#frm").click(function(){
 			var url = "/adminPaymentClass";
 			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $('#category').val() + "&username=" + $('#username').val().trim();
 			$.ajax({
@@ -61,13 +61,32 @@
 				success: function(data){
 				/* 	$("#startMonth").append("${startMonth}");
 					$("#endMonth").append("${endMonth}"); */
-					
+/* 					
 				},error:function(){
 					console.log("ajax에러발생");
 				}
 			});
+		}); 
+	}); */
+	$("#frm_submit").click(function(){
+		var url = "/adminPaymentClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $('#category').val() + "&username=" + $('#username').val().trim(); + "&now=" + 1;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
 		});
+		
 	});
+});
 	
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -75,8 +94,8 @@
 	function postPageMove(now) {
 		console.log(now);
 		return false;
-		var url = "/adminPaymentStore";
-		var data = "category=" + $("#category").val() + "&username=" + $("#username").val().trim(); + "&now=" + now;
+		var url = "/adminPaymentClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $('#category').val() + "&username=" + $('#username').val().trim(); + "&now=" + now;
 		$.ajax({
 			url : url,
 			data : data,
@@ -112,7 +131,8 @@
 				<option value="사진/영상">사진/영상</option>
 			</select>
 			<input type="text" name="username" id="username" placeholder="회원명" size="40"/>
-			<input type="submit" class="btn" value="검색"/> 
+			<input type="hidden" id="now" value="${nowPage }"/>
+			<input type="submit" id="frm_submit " class="btn" value="검색"/> 
 		</div>
 		
 <!-- 		<div class="text-center textSize">

@@ -10,9 +10,91 @@
 	  where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}	   
 </select>
 <select id="selectGoods" parameterType="String" resultType="com.bitcamp.gachi.admin.GoodsVO">
-	  select code , category, goods_name, prime_cost, real_price , stock, sale_count,to_char(writedate , 'yyyy-mm-dd')writedate, sale_state from goods
+	  select code , category, goods_name, prime_cost, real_price , stock, sale_count,to_char(writedate , 'yyyy-mm-dd')writedate, sale_state, goods_info from goods
 	  where code = #{code}
 </select>
+<select id="selectStoreList" parameterType="map" resultType="com.bitcamp.gachi.admin.GoodsVO">
 
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(SELECT
+		goods.code, goods.category, goods.goods_name, goods.prime_cost, goods.real_price , goods.stock,to_char(goods.writedate, 'yyyy-mm-dd') writedate , 
+		goods.sale_state from goods
+		join goods_order on goods_order.code = goods.code
+		join orderlist on goods_order.order_code = orderlist.order_code
+		<choose>
+			<when test='category==null and sale_State==null and search==null '></when>
+			<when test='category!=null and sale_State==null and search==null'>
+				and goods.category='${category}'
+			</when>
+			<when test='category==null and sale_State!=null and search==null'>
+				and sale_State='${sale_State}'
+			</when>
+			<when test='category==null and sale_State==null and search!=null'>
+				and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			</when> 
+			
+			<when test='category==null and sale_State!=null and search!=null'>
+				and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
+			</when>
+			<when test='category!=null and sale_State!=null and search==null'>
+				and goods.category='${category}' and sale_State='${sale_State}'
+			</when>
+			<when test='category!=null and sale_State==null and search!=null'>
+				and goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
+			</when>
+			
+			<when test='category!=null and sale_State!=null and search!=null'>
+				and goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A
+		WHERE
+		ROWNUM &lt;= ${endNum}
+		)
+		WHERE
+		RNUM &gt;= ${startNum}
+	</select>
+	<select id="selectCntAllGoods" parameterType="map" resultType="_int">
+		select count(*) as cnt from goods 
+		join goods_order on goods_order.code = goods.code
+		join orderlist on goods_order.order_code = orderlist.order_code
+		join member on orderlist.userid = member.userid
+		<choose>
+			<when test='category==null and sale_State==null and search==null '></when>
+			<when test='category!=null and sale_State==null and search==null'>
+				and goods.category='${category}'
+			</when>
+			<when test='category==null and sale_State!=null and search==null'>
+				and sale_State='${sale_State}'
+			</when>
+			<when test='category==null and sale_State==null and search!=null'>
+				and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			</when>
+			<when test='category==null and sale_State!=null and search!=null'>
+				and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
+			</when>
+			<when test='category!=null and sale_State!=null and search==null'>
+				and goods.category='${category}' and sale_State='${sale_State}'
+			</when>
+			<when test='category!=null and sale_State==null and search!=null'>
+				and goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
+			</when>
+			
+			<when test='category!=null and sale_State!=null and search!=null'>
+				and goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="selectStoreImg" parameterType="String" resultType="String">
+		select goods_img1 from goods where code='${code}'
+	</select>
+	<update id="updateStoreImg" parameterType="String">
+		update goods set goods_img1='${param1}' where code='${param2}'
+	</update>
 
 </mapper>

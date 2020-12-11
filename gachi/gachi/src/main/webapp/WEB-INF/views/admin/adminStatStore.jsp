@@ -148,11 +148,11 @@ var endDate = "${endDate}";
 			    type: 'line',
 			    data: {
 			        /* labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], */
-			        labels: ${labelData},
+			        labels: ['2020-12-01','2020-12-02','2020-12-03','2020-12-04'],
 			        datasets: [{
 			            label: '월별 매출 기록',
 			           /*  data: [15, 30, 155, 20, 50, 80, 20, 30, 90, 100, 16, 55], */
-			           data: ${storeData},
+			           data: [10,44,12,5,2,5,6],
 			            backgroundColor: [
 			                'rgba(255, 99, 132, 0.2)',
 			                'rgba(54, 162, 235, 0.2)',

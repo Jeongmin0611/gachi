@@ -15,13 +15,34 @@ $(function(){
 		}else{
 			$("input:checkbox").prop("checked",false);
 		}
+		
 	});
+	
+	$("#frm_submit").click(function(){
+		var url = "/adminGoods";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&sale_State=" + $("#sale_State").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+		
+	});
+	
 });
 	function postPageMove(now) {
 	console.log(now);
 	return false;
 	var url = "/adminGoods";
-	var data = "category=" + $("#category").val() + "&sale_State=" + $("#sale_State").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
+	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&sale_State=" + $("#sale_State").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
 	$.ajax({
 		url : url,
 		data : data,
@@ -69,7 +90,8 @@ $(function(){
 						<option value="판매종료">판매종료</option>
 					</select>
 					<input type="text" id="search" name="search"/>
-					<input type="submit" class="btn" value="검색" />
+					<input type="hidden" id="now" value="${nowPage }"/>
+					<input type="submit" id="frm_submit" class="btn" value="검색" />
 				</div>
 			</form>
 		</div>	
@@ -89,17 +111,17 @@ $(function(){
 		<li>등록일</li>
 		<li>상태</li>
 		
-		<c:forEach items="${data }" var="data">
+		<c:forEach items="${list }" var="list">
 		<li><input type="checkbox"/></li>
-		<li>${data.code }</li>
-		<li>${data.category }</li>
-		<li class="wordCut"><a href="/gachi/adminGoodsView">${data.goods_name }</a></li>
-		<li>${data.prime_cost }</li>
-		<li>${data.real_price } </li>
-		<li>${data.stock }</li>
-		<li>${data.writedate }</li>
-		<li><c:if test="${data.sale_state eq '판매대기'}">판매대기</c:if><c:if test="${data.sale_state eq '판매중'}">판매중</c:if>
-		<c:if test="${data.sale_state eq '판매종료'}">판매종료</c:if></li>
+		<li>${list.code }</li>
+		<li>${list.category }</li>
+		<li class="wordCut"><a href="/gachi/adminGoodsEdit?code=${list.code}">${list.goods_name }</a></li>
+		<li>${list.prime_cost }</li>
+		<li>${list.real_price } </li>
+		<li>${list.stock }</li>
+		<li>${list.writedate }</li>
+		<li><c:if test="${list.sale_state eq '판매대기'}">판매대기</c:if><c:if test="${list.sale_state eq '판매중'}">판매중</c:if>
+		<c:if test="${list.sale_state eq '판매종료'}">판매종료</c:if></li>
 		</c:forEach>
 	</ul>
 	<div style="height:50px;">

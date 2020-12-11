@@ -9,5 +9,13 @@ public interface GoodsDaoImp {
 
 	GoodsVO selectGoods(String code);
 
+	List<GoodsVO> selectStoreList(Map<String, String> dbParam);
+
+	int selectCntAllGoods(Map<String, String> dbParam);
+
+	String selectStoreImg(String code);
+
+	void updateStoreImg(String txt, String code);
+
 
 }
