@@ -78,6 +78,7 @@
 }
 </style>
 <script>
+
 	$(".hover").mouseleave(function() {
 		$(this).removeClass("hover");
 	});
@@ -245,7 +246,7 @@
 	<div class="row">
 		<c:forEach var="list" items="${list }">
 			<div class="col-sm-4">
-				<a href="/gachi/storeView?code=${list.code}"><img
+				<a href="/gachi/storeView?code=${list.code}?category=${list.category}"><img
 					src="/gachi/img/store/${list.goods_img1 }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
@@ -266,16 +267,20 @@
 			</div>
 		</c:forEach>
 	</div>
-
 	<!-- 페이징 -->
-	<ul class="pagination justify-content-center" id="mypageMainPage">
-		<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">4</a></li>
-		<li class="page-item"><a class="page-link" href="#">5</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
-	</ul>
-
+	<div id="storeListPaging">
+		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage-1 }">Prev</a>
+			</li>
+			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
+				<c:if test="${p<=pvo.totalPage }">
+					<li class="page-item">
+						<a class="page-link" href="/gachi/storeList?nowPage=${p }"<c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>${p }</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowpage=${pvo.nowPage+1 }">Next</a></li>
+		</ul>
+	</div>
 </div>

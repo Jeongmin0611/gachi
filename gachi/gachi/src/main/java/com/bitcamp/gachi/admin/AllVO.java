@@ -50,6 +50,9 @@ public class AllVO {
 	private int stack;//적립마일리지
 	private int good;//좋아요
 	private String goods_info;//상품내용
+	private int nowPage=1;//페이징할때쓰는 시작페이지
+	private int totalRecord=5;
+	private String selectval;
 	
 /*	
 	//오더리스트
@@ -315,6 +318,24 @@ public class AllVO {
 	}
 	public void setGoods_info(String goods_info) {
 		this.goods_info = goods_info;
+	}
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public int getTotalRecord() {
+		return totalRecord;
+	}
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
+	}
+	public String getSelectval() {
+		return selectval;
+	}
+	public void setSelectval(String selectval) {
+		this.selectval = selectval;
 	}
 	
 	
