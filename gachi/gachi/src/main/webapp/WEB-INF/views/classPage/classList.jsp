@@ -238,7 +238,7 @@ $(function(){
 		<c:forEach var="list" items="${list }">
 			<div class="col-sm-4">
 				<a href="/gachi/classView?code=${list.code }">
-				<img src="/gachi/img/${list.class_img }" class="homeClassListImg" /></a><br />
+				<img src="/gachi/upload/classImg/${list.class_img }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
