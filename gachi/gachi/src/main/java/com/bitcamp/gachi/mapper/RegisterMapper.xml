@@ -55,7 +55,7 @@
 		select count(nickname) count from member where nickname like '%${searchSubmitText}%'
 	</select>
 	<select id="memberLogin" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="com.bitcamp.gachi.register.RegisterVO">
-		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}'
+		select userid,nickname,grade from member where userid='${userid}' and userpwd='${userpwd}' and deleted='회원'
 	</select>
 	<select id="selectList" parameterType="com.bitcamp.gachi.register.RegisterVO" resultType="string">
 		select grade from member where userid='${userid}'

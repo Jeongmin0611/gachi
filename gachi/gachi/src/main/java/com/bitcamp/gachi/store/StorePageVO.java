@@ -23,6 +23,7 @@ public class StorePageVO {
 	private String real_price;/*실 가격*/
 	private String selectval;
 	private String enddate;
+	private String writedate;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -176,5 +177,13 @@ public class StorePageVO {
 
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+
+	public String getWritedate() {
+		return writedate;
+	}
+
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
 	}
 }
