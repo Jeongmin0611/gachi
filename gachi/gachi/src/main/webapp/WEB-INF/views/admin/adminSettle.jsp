@@ -139,10 +139,10 @@
 </div>
 
 <div style="margin:5px 5px;text-align:right">
-	<!-- <button class="btn" id="settleDel">선택정산</button> -->
-<%-- 	<button class="btn" id ="settle_btn" type="button" onclick="location.href='/gachi/adminSettleEditOk?userid=${vo.userid}'">정산</button>
- --%></div>
+ <button class="btn" id ="settle_btn" type="button" onclick="location.href='/gachi/adminSettleEditOk?order_code=${data.order_code}'">정산</button>
+</div>
 <div>
+	<%-- <input type="hidden" id="order_code" value="${data.order_code }"/> --%>
 	<ul id="ad_settle_lst">
 		
 		<li><input type="checkbox" id="settleSelectAll"/></li>

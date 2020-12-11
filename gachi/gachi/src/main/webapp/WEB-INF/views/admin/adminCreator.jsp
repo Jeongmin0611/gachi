@@ -14,7 +14,7 @@ $(function(){
 	}
 	$("#frm_submit").click(function(){
 		var url = "/adminCreator";
-		var data = "status=" + $("#status").val() + "&search=" + $("#search").val().trim();
+		var data = "status=" + $("#status").val() + "&search=" + $("#search").val().trim();+"&now=" + 1;
 		$.ajax({
 			url : url,
 			data : data,

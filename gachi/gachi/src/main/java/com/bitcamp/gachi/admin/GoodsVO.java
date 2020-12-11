@@ -1,5 +1,7 @@
 package com.bitcamp.gachi.admin;
 
+import java.util.List;
+
 public class GoodsVO {
 
 	
@@ -23,9 +25,16 @@ public class GoodsVO {
 	private String goods_img2; //상품이미지 
 	private String goods_img3; //상품이미지 
 	private String goods_img4; //상품이미지 
+	private List<String> imgList;
 	
 	
 	
+	public List<String> getImgList() {
+		return imgList;
+	}
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
 	public String getCode() {
 		return code;
 	}

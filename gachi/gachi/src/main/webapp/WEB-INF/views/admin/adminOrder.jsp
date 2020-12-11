@@ -79,7 +79,6 @@ $(function(){
 </form>
 </div>
 <ul id="ad_order_lst" class="text-center">
-	<li><input type="checkbox" id="OrderSelectAll"/></li>
 	<li>주문번호</li>
 	<li>회원아이디</li>
 	<li>구매자</li>
@@ -91,7 +90,6 @@ $(function(){
 	<li>구매확정여부</li>
 	
 	<c:forEach items="${data }" var="data">
-	<li><input type="checkbox"/></li>
 	<li>${data.order_code }</li>
 	<li>${data.userid }</li>
 	<li>${data.username }</li>

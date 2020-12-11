@@ -8,8 +8,7 @@
 		$("#ad_goods_viewForm>li:last-child").css("padding","20px 0px");
 	});
 	function goodsInquiryDel(){
-		if(confirm("해당 문의를 삭제하시겠습니까?")){
-			
+		if(confirm("해당 문의를 삭제하시겠습니까?")){		
 		}
 	}
 	function goodsDel(){
@@ -23,22 +22,21 @@
 	<ul id="ad_goods_viewForm">
 		<li class="text-center">
 			<ul>
-				<li>상품번호  ${vo.code }</li>
-				<li>카테고리  ${vo.category }</li>
-				<li>상품명  ${vo.goods_name }</li>
-				<li>원가  ${vo.prime_cost }</li>
-				<li>판매가  ${vo.real_price }</li>
-				<li>재고  ${vo.stock }</li>
-				<li>누적판매수  ${vo.sale_count }</li>
-				<li>등록일  ${vo.writedate }</li>
-				<li>상태  ${vo.sale_state }</li>
+				<li>상품번호</li><li><input type="text" name="code" value="${vo.code }" readonly/></li>
+				<li>카테고리</li><li><input type="text" name="category" value="${vo.category }" readonly/></li>
+				<li>상품명</li><li><input type="text" name="goods_name" size="50" value="${vo.goods_name }" readonly/></li>
+				<li>원가</li><li><input type="text" name="prime_cost" value="${vo.prime_cost }" readonly/></li>
+				<li>판매가</li><li><input type="text" name="real_price" value="${vo.real_price }" readonly/></li>
+				<li>재고</li><li><input type="text" name="stock" value="${vo.stock }" readonly/></li>
+				<li>누적판매수 </li><li><input type="text" name="sale_count" value="${vo.sale_count }" readonly/></li>
+				<li>등록일</li><li><input type="text" name="writedate" value="${vo.writedate }" readonly/></li>
+				<li>상태</li><li><input type="text" name="sale_state" value="${vo.sale_state }" readonly/></li>
 			</ul>
 		</li>
 		<li class="text-center">
 			대표이미지<br/>
 			<img src="/gachi/img/147.jpg"/>
-			<li>
-		</li>
+		</li> 
 	</ul>
 <div>
 <h3>상품상세정보</h3>

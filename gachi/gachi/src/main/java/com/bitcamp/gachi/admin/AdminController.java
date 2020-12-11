@@ -1114,7 +1114,7 @@ public class AdminController {
 		
 		ModelAndView mav =new ModelAndView();
 		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
-		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
 		
 		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 		String todate =  yyyymmdd.format(new Date());
@@ -1130,21 +1130,21 @@ public class AdminController {
 		dbParam.put("startNum", startNum+"");
 		dbParam.put("endNum", endNum+"");
 		
-		int cntRecords = sdao.selectCntAllGoods(dbParam);
-		
+//		int cntRecords = sdao.selectCntAllGoods(dbParam);
+		int cntRecords = dao.selectCntAllGoods(dbParam);
 		int lastPage = 1;
 		if(cntRecords % 20 == 0) {
 			lastPage = cntRecords / 20;
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
+//		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
 		
-		List<GoodsVO> result = dao.selectAllGoods(dbParam);
+		List<GoodsVO> list = dao.selectStoreList(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
 		
 		mav.addObject("method", "get");
-		mav.addObject("StoreList",list);
+		mav.addObject("list",list);
 		mav.addObject("cntData", list.size());
 		mav.addObject("lastPage", lastPage);
 		mav.addObject("nowPage", nowPage);
@@ -1161,7 +1161,7 @@ public class AdminController {
 		System.out.println("list.size()===GET===="+list.size());
 		
 		
-		mav.addObject("data", result);
+//		mav.addObject("data", result);
 		mav.setViewName("admin/adminGoods");
 	
 		return mav;
@@ -1182,7 +1182,7 @@ public class AdminController {
 		
 		ModelAndView mav =new ModelAndView();
 		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
-		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
 
 		if(startDate==null || endDate == null) {
 			System.out.println("startMonth is null");
@@ -1207,22 +1207,23 @@ public class AdminController {
 		dbParam.put("search", search);
 		dbParam.put("startNum", startNum+"");
 		dbParam.put("endNum", endNum+"");
-		int cntRecords = sdao.selectCntAllGoods(dbParam);
 		
+//		int cntRecords = sdao.selectCntAllGoods(dbParam);
+		int cntRecords = dao.selectCntAllGoods(dbParam);
 		int lastPage = 1;
 		if(cntRecords % 20 == 0) {
 			lastPage = cntRecords / 20;
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
-		List<GoodsVO> result = dao.selectAllGoods(dbParam);
+//		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
+		List<GoodsVO> list = dao.selectStoreList(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
 		
 		if(startDate != null && endDate != null && list != null) {
 			
 			mav.addObject("method", "post");
-			mav.addObject("StoreList",list);
+			mav.addObject("list",list);
 			mav.addObject("nowPage", nowPage);
 			mav.addObject("cntData", list.size());
 			mav.addObject("lastPage", lastPage);
@@ -1232,7 +1233,7 @@ public class AdminController {
 			mav.addObject("category", category);
 			mav.addObject("sale_State", sale_State);
 			mav.addObject("search", search);
-			mav.addObject("data", result);
+//			mav.addObject("data", result);
 
 			System.out.println("category======="+category);
 			System.out.println("search======="+search);
@@ -1245,6 +1246,7 @@ public class AdminController {
 			try {
 				//resp.getWriter().write("{\"result\":\"success\"}");
 				mav.setViewName("admin/adminGoods");
+				System.out.println("ajax success start");
 				return mav;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1262,26 +1264,84 @@ public class AdminController {
 		
 		return null;
 	}
-	@RequestMapping("/adminGoodsView")
-	public ModelAndView adminGoodsView(String code) {
+	@RequestMapping("/adminGoodsEdit")
+	public ModelAndView adminGoodsEdit(String code) {
 		
 		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
 		GoodsVO vo = dao.selectGoods(code);
 		ModelAndView mav = new ModelAndView();	
 		
-		System.out.println("dasdasda");
-		System.out.println("vo123123"+vo.getCode());
 		mav.addObject("vo",vo);		
-		mav.setViewName("admin/adminGoodsView");
+		mav.setViewName("admin/adminGoodsEdit");
 		return mav;
 	}
-
-	@RequestMapping("/adminGoodsEdit")
-	public String adminGoodsEdit() {
-		return "admin/adminGoodsEdit";
+	@RequestMapping(value="/StoreimgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String StoreimgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+			@RequestParam("code") String code) {
+		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
+		MultipartFile file=mhsr.getFile("file");
+		OutputStream ops=null;
+		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		boolean isc=file.isEmpty();
+		String filePath=null;
+		if(!isc){
+			String fName=file.getOriginalFilename();
+			if(fName!=null&&!fName.equals("")) {
+				String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+				String oriExt=fName.substring(fName.lastIndexOf("."));
+				File newFile=new File(path,code+"_"+fName);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							fName=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					file.transferTo(newFile);
+					String storeImg=dao.selectStoreImg(code);
+					storeImg=storeImg+newFile.getName()+",";
+					dao.updateStoreImg(storeImg, code);
+					filePath="/gachi/upload/classImg/"+newFile.getName();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}//if
+		}
+		return filePath;
 	}
+	
+	@RequestMapping(value="StoreimageDelete",method = RequestMethod.GET)
+	@ResponseBody
+	public void StoreimageDelete(HttpServletRequest req,HttpSession session) {
+		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
+		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		String imageName=req.getParameter("imageName");
+		String code=req.getParameter("code");
+		File file=new File(path,imageName);
+		if(file.exists()) {
+			file.delete();
+			String storeImg=dao.selectStoreImg(code);
+			StringTokenizer st=new StringTokenizer(storeImg,",");
+			String txt="";
+			while (st.hasMoreTokens()) {
+				String img=st.nextToken();
+				if(img.equals(imageName)) {
+					continue;
+				}
+				txt+=img+",";
+			}
+			dao.updateStoreImg(txt, code);
+		}
+	} 
+	
 	@RequestMapping("/adminGoodsWrite")
-	public String adminGoodsEnroll() {
+	public String adminGoodsWrite() {
 		return "admin/adminGoodsWrite";
 	}
 	

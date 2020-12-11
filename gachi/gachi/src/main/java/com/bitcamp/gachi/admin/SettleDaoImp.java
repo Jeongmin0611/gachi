@@ -69,9 +69,9 @@ public interface SettleDaoImp {
 
 	public List<SettleVO> selectAllSettle(Map<String, String> dbParam);
 
-	public List<SettleVO> selectStoreList(Map<String, String> dbParam);
-
-	public int selectCntAllGoods(Map<String, String> dbParam);
+//	public List<SettleVO> selectStoreList(Map<String, String> dbParam);
+//
+//	public int selectCntAllGoods(Map<String, String> dbParam);
 
 //	public int SettleStateUpdate(String userid);
 	
