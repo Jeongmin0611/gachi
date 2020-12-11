@@ -48,46 +48,26 @@
 			<li>&nbsp;</li>
 			<li>동영상코드</li>
 			<li>강좌명</li>
-			<li>차시</li>
-			<li>차시명</li>
+			<li>목차명</li>
+			<li>목차순서</li>
 			<li>영상명</li>
 			<li>파일명</li>
 			<li>크리에이터</li>
 			<li>영상길이</li>
 			<li>등록일</li>
 			
-			<li><input type="checkbox"/></li>
-			<li>동영상코드</li>
-			<li>강좌명</li>
-			<li>차시</li>
-			<li>차시명</li>
-			<li>영상명</li>
-			<li>파일명</li>
-			<li>크리에이터</li>
-			<li>영상길이</li>
-			<li>등록일</li>
-			
-			<li><input type="checkbox"/></li>
-			<li>동영상코드</li>
-			<li>강좌명</li>
-			<li>차시</li>
-			<li>차시명</li>
-			<li>영상명</li>
-			<li>파일명</li>
-			<li>크리에이터</li>
-			<li>영상길이</li>
-			<li>등록일</li>
-			
-			<li><input type="checkbox"/></li>
-			<li>동영상코드</li>
-			<li>강좌명</li>
-			<li>차시</li>
-			<li>차시명</li>
-			<li>영상명</li>
-			<li>파일명</li>
-			<li>크리에이터</li>
-			<li>영상길이</li>
-			<li>등록일</li>
+			<c:forEach var="vo" items="${vlist}">
+				<li><input type="checkbox"/></li>
+				<li>${vo.video_code}</li>
+				<li>${vo.class_name}</li>
+				<li>${vo.unit_content}</li>
+				<li>${vo.section_index}</li>
+				<li>${vo.video_name}</li>
+				<li>${vo.video_filename}</li>
+				<li>${vo.nickname}</li>
+				<li>${vo.video_length}</li>
+				<li>${vo.enroll_date}</li>
+			</c:forEach>
 		</ul>
 	</div>
 	<div class="ad_list_menu">

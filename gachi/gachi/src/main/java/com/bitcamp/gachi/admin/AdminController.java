@@ -584,12 +584,9 @@ public class AdminController {
 		vo.setImgList(list);
 
 		List<ClassVideoVO> sectionList=dao.selectSection(code);
-
-		List<ClassVideoVO> vList=dao.getClassVideoListSample(code);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
 		mav.addObject("sectionList",sectionList);
-		mav.addObject("vList",vList);
 		mav.setViewName("admin/adminClassView");
 		return mav;
 	}
@@ -2665,8 +2662,13 @@ public class AdminController {
 		return "admin/adminReturn";
 	}
 	@RequestMapping("/adminVideo")
-	public String adminVideo() {
-		return "admin/adminVideo";
+	public ModelAndView adminVideo() {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		List<ClassVideoVO> list=dao.getClassVideoList();
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vlist",list);
+		mav.setViewName("admin/adminVideo");
+		return mav;
 	}
 	
 	@RequestMapping(value="/videoUpload",method = RequestMethod.POST)
