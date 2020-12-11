@@ -1235,13 +1235,12 @@ input{text-align:center;}
 		border-bottom:1px solid gray;
 		text-align: center;
 	}
-	#ad_video_Lst li:nth-child(10n+1),#ad_video_Lst li:nth-child(10n+4){
-		width:3%;
+	#ad_video_Lst li:nth-child(10n+1){
+		width:5%;
 	}
 	#ad_video_Lst li:nth-child(10n+6){
-		width:24%;
+		width:15%;
 	}
-	
 	.ad_box{
 		margin:10px 0px;
 		border:3px solid #437299;

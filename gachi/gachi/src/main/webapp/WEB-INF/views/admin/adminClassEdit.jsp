@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+	#ad_unit_box{
+		overflow: auto;
+	}
 	#ad_unit_box li{
-		padding:5px;
+		padding:10px;
 		border-bottom:1px solid gray;
 		float:left;
-		height:40px;
+		height:60px;
 		width:10%;
 		text-align:center;
-		overflow: visible;
+		overflow: auto;
 	}
 	#ad_unit_box li:nth-child(5n+4){
 		width:60%;
@@ -20,6 +23,10 @@
 	#ad_unit_box>li{
 		width:100%;
 		text-align:center;
+	}
+	#ad_unit_box>li:last-child{
+		width:100%;
+		text-align: center;
 	}
 </style>
 <div class="container ad_font">
@@ -235,7 +242,7 @@
 		</ul>	
 		<c:set var="count" value="${count+1}"/>
 	</c:forEach>
-			<li><button>+</button></li>
+			<li><button id="add_btn" class="btn">+</button></li>
 </ul>
 <h3>클래스정보</h3>
 <ul id="ad_goods_write">

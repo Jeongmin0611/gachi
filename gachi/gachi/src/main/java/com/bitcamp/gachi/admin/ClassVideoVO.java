@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ClassVideoVO {
 	private String code;
+	private String class_name;
 	private String section_code;
 	private String video_code;
 	private int unit;
@@ -13,6 +14,7 @@ public class ClassVideoVO {
 	private String video_filename;
 	private int video_length;
 	private String enroll_date;
+	private String nickname;
 
 	private List<ClassVideoVO> list;
 	
@@ -84,6 +86,18 @@ public class ClassVideoVO {
 	}
 	public void setSection_index(int section_index) {
 		this.section_index = section_index;
+	}
+	public String getClass_name() {
+		return class_name;
+	}
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	

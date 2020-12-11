@@ -84,6 +84,7 @@
 		<li>${section.unit_content}</li>
 	</c:forEach>
 </ul>
+<!-- 
 <h3>클래스영상정보</h3>
 	<ul id="ad_video_priview" class="text-center">
 		<li>동영상코드</li>
@@ -147,7 +148,7 @@
 	</ul>	
 	<div style="height:50px;text-align:right;">
 		<button class="btn" onclick="goodsInquiryDel()">삭제</button>
-	</div>
+	</div> -->
 <div class="text-center">
 		<c:if test="${vo.class_state ne '등록승인'}">
 			<button class="btn" onclick="updateClassState()">등록처리</button>

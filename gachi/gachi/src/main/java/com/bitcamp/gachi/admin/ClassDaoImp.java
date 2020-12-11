@@ -38,7 +38,7 @@ public interface ClassDaoImp {
 	public List<ClassVO> getClassListSearch(TestVO vo);
 	
 	//강좌 영상 간략 조회
-	public List<ClassVideoVO> getClassVideoListSample(String code);
+	public List<ClassVideoVO> getClassVideoList();
 	
 	//이미지파일 조회
 	public String selectClassImg(String code);
