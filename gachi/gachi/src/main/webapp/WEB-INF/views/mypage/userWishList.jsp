@@ -23,7 +23,7 @@
 			<div class="row">
 				<c:forEach var="cvo" items="${cList }">
 					<div class="col-md-4">
-						<div><a href="/gachi/myclassView"><img src="/gachi/img/artEx/${cvo.class_img }" style="width:100%;height:180px;object-fit: cover"/></a></div>
+						<div><a href="/gachi/myclassView"><img src="upload/classImg/${cvo.class_img }" style="width:100%;height:180px;object-fit: cover"/></a></div>
 						<div><span class="badge badge-info">${cvo.category }</span></div>
 						<div><a href="/gachi/myclassView">${cvo.class_name }</a></div>
 						<div><a href="#">${cvo.nickname }</a></div>

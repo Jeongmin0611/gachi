@@ -32,9 +32,10 @@
 	}
 	/*클래스썸네일*/
 	.mypageContent img{
-		width: 150px;
-	    height: 100px;
+		width: 100%;
+	    height: 150px;
 	    object-fit: cover;
+	    border-radius:1em;
 	}
 
 	/* 페이징 */
@@ -166,18 +167,15 @@
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
 						<div class="row moreContent">	
-							<div class="col-md-3"><img src="/gachi/img/artEx/${vo.class_img }"/></div>
-							<div class="col-md-6">
-								<ul class="mypageMainLst">
-									<li>
+							<div class="col-md-3"><img src="upload/classImg/${vo.class_img }"/></div>
+							<div class="col-md-6" style="padding:0 40px">
+									<div style="text-align:left">
 										<label class="badge badge-info">${vo.category }</label>
-										<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.class_order_code }</a></label>
-									</li>
-									<li><a href="#">${vo.class_name }</a></li>
-									<li>크리에이터명 <a href="#">${vo.nickname }</a></li>
-									<li>가격 ${vo.real_price }원</li>
-									<li>결제일시 ${vo.orderdate }</li>
-								</ul>
+										<label class="badge badge-light">주문번호 ${vo.order_code }-${vo.class_order_code }</label>
+									</div>
+									<div style="text-align:left"><b>${vo.class_name }</b></div>
+									<div style="font-size:0.9em;text-align:left">${vo.nickname }</div>
+									<div style="font-size:0.9em;text-align:left">가격 ${vo.real_price }원</div>
 							</div>
 							<div class="col-md-3">
 								<div><label class="badge badge-pill badge-primary" style="font-size:0.9em">구매확정완료</label></div>
@@ -190,17 +188,15 @@
 					<c:forEach var="vo" items="${list.value }">
 						<div class="row moreContent">	
 							<div class="col-md-3"><img src="/gachi/img/store/${vo.goods_img1 }"/></div>
-							<div class="col-md-6" style="text-align:left">
-								<ul class="mypageMainLst">
-									<li>
-										<label class="badge badge-info">${vo.category }</label>
-										<label class="badge badge-light"><a href="#">주문번호 ${vo.order_code }-${vo.goods_order_code }</a></label>
-									</li>
-									<li><a href="#">${vo.goods_name }</a></li>
-									<li>수량 ${vo.amount }개</li>
-									<li>가격 ${vo.real_price }원</li>
-									<li>결제일시 ${vo.orderdate }</li>
-								</ul>
+							<div class="col-md-6" style="padding:0 40px">
+										<div style="text-align:left">
+											<label class="badge badge-info">${vo.category }</label>
+											<label class="badge badge-light">주문번호 ${vo.order_code }-${vo.goods_order_code }</label>
+										</div>
+										<div style="text-align:left"><b>${vo.goods_name }</b></div>
+										<div style="font-size:0.9em;text-align:left">수량 ${vo.amount }개</div>
+										<div style="font-size:0.9em;text-align:left">가격 ${vo.real_price }원</div>
+										<div style="font-size:0.9em;text-align:left">결제일시 ${vo.orderdate }</div>
 							</div>
 							<!-- xs 크기에서만 숨기기  -->
 							<div class="col-md-3 col d-none d-sm-block">

@@ -104,7 +104,7 @@
 		<div class="row">
 			<c:forEach var="list" items="${plist }">
 				<div class="col-sm-4">
-					<a href="/gachi/classView?code=${list.code }"><img src="img/${list.class_img }" class="homeClassListImg"/></a><br/>
+					<a href="/gachi/classView?code=${list.code }"><img src="upload/classImg/${list.class_img }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
 							<p><span class="badge badge-info" style="font-size:0.9em">${list.category }</span>							
 							<i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;" id="${list.code }"></i>
@@ -131,7 +131,7 @@
 		<div class="row">
 			<c:forEach var="nlist" items="${nlist }">
 				<div class="col-sm-4">
-					<a href="/gachi/classView?code=${nlist.code }"><img src="img/${nlist.class_img }" class="homeClassListImg"/></a><br/>
+					<a href="/gachi/classView?code=${nlist.code }"><img src="upload/classImg/${nlist.class_img }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
 							<p><span class="badge badge-info" style="font-size:0.9em">${nlist.category }</span>							
 								<i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;" id="${nlist.code }"></i>

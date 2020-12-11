@@ -191,7 +191,7 @@
 			<c:forEach var="cvo" items="${cList }">
 				<div class="row">
 					<input type="hidden" name="orderClassCode" value="${cvo.code}"/>
-						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/artEx/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
+						<div class="col-md-2" style="overflow:hidden"><img src="upload/classImg/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${cvo.class_name }<br/>${cvo.nickname }</div>
 					<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${cvo.stack }p</label>

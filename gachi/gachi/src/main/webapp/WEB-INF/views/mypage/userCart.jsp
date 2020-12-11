@@ -136,7 +136,7 @@
 					<c:forEach var="cvo" items="${cList }">
 						<div class="row">
 							<div class="col-md-1"><input type="checkbox" name="class" value="${cvo.code }" checked/></div>
-							<div class="col-md-2" style="overflow:hidden"><img src="/gachi/img/artEx/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
+							<div class="col-md-2" style="overflow:hidden"><img src="upload/classImg/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 							<div class="col-md-4"><input type="text" value="${cvo.class_name }" readonly/><br/>${cvo.nickname }</div>
 							<div class="col-md-5"><input type="hidden" value="${cvo.amount }" style="width:15%" readonly/>
 												  <input type="text" value="${cvo.stack }" style="width:30%;text-align:right" readonly/>p

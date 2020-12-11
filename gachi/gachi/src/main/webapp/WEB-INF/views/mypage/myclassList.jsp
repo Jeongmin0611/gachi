@@ -48,7 +48,7 @@
 		<div class="mypageContent col-md-10">
 			<c:forEach var="vo" items="${list }">
 				<div class="row">
-					<div class="col-md-3" style="margin-right:30px"><a href="/gachi/myclassView?code=${vo.code }"><img src="/gachi/img/artEx/${vo.class_img }"/></a></div>
+					<div class="col-md-3" style="margin-right:30px"><a href="/gachi/myclassView?code=${vo.code }"><img src="upload/classImg/${vo.class_img }"/></a></div>
 					<div class="col-md-6">
 						<div><span class="badge badge-info">${vo.category }</span></div>
 						<div><h5><a href="/gachi/myclassView?code=${vo.code }">${vo.class_name }</a></h5></div>
