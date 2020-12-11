@@ -64,4 +64,9 @@ public interface ClassDaoImp {
 	//비디오 목록 추가하기
 	public int videoInsert(ClassVideoVO vo);
 	
+	//목차코드 가져오기
+	public String selectSectionCode(String unit_content);
+	
+	//목차 삭제
+	public int deleteSection(String section_code);
 }

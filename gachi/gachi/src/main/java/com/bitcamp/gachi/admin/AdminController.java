@@ -2625,6 +2625,7 @@ public class AdminController {
 		map.put("filePath",filePath);
 		map.put("unitMax",unitMax);
 		map.put("conList",conList);
+		
 		return map;
 	}
 	@RequestMapping("/adminVideoWrite")
@@ -2632,13 +2633,16 @@ public class AdminController {
 		return "admin/adminVideoWrite";
 	}
 	@RequestMapping(value="/adminVideoWriteOk",method=RequestMethod.POST)
-	public ModelAndView adminVideoWriteOk(ClassVideoVO vo) {
+	public ModelAndView adminVideoWriteOk(ClassVideoVO vo,HttpServletRequest req) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String code=req.getParameter("code");
+		System.out.println("code=> "+vo.getCode());
 		ClassvideoSort cvs=new ClassvideoSort();
 		List<ClassVideoVO> list=vo.getList();
 		Collections.sort(list,cvs);
 		for (int i = 0; i < list.size(); i++) {
 			ClassVideoVO vo1=list.get(i);
+			vo1.setCode(code);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
 			String dateStr = null;
 			try {
@@ -2648,9 +2652,11 @@ public class AdminController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			vo1.setVideo_code("v"+dateStr);
+			String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
+			vo1.setSection_code(sectionCode);
 			int result=dao.videoInsert(vo1);
 			if(result<=0){
-				
 				break;
 			}
 		}
@@ -2707,5 +2713,11 @@ public class AdminController {
 			delFile.delete();
 		}
 	}
-	
+	@RequestMapping("/unitDel")
+	@ResponseBody
+	public void unitDel(HttpServletRequest req) {
+		String section_code=req.getParameter("section_code");
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		dao.deleteSection(section_code);
+	}
 }

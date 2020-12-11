@@ -75,8 +75,10 @@
 <div id="ad_goods_info">
 	<textarea name="class_info">${vo.class_info }</textarea>
 </div>
-<h3>클래스정보</h3>
+<h3>클래스목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
+	<li>목차순서</li>
+	<li>목차명</li>
 	<c:forEach var="section" items="${sectionList}">
 		<li>${section.unit}</li>
 		<li>${section.unit_content}</li>
