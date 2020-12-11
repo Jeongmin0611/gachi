@@ -301,15 +301,15 @@
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
 		<div class="row">
-			<div class="col-md-6"><img src="/gachi/img/artEx/${vo.class_img }" style="width:100%"/></div>
-			<div class="col-md-6 myclassView">
+			<div class="col-md-6" style="padding:20px 50px"><img src="upload/classImg/${vo.class_img }" style="width:100%;border-radius:1em"/></div>
+			<div class="col-md-6 myclassView" style="padding:20px 50px">
 				<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
-				<div>크리에이터 : <a href="#">${vo.nickname }</a></div>
+				<div>${vo.nickname }</div>
 				<div><label>진도율 : 50%</label></div>
 				<div><label>기한 : 20.11.01 ~ 21.01.31</label></div>
-				<div class="progress"><div class="progress-bar bg-info" style="width:50%">50%</div></div>
+				<div class="progress" style="margin:20px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
 				<div><button type="button" class="btn btn-light btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></div>
-				<div>
+				<div style="margin:10px 0">
 					<button type="button" class="btn btn-light" style="width:50%" onclick="moveToReview()">수강후기</button>
 					<button type="button" class="btn btn-light" style="width:50%;float:right" onclick="moveToQna()">질문&답변</button>
 				</div>
