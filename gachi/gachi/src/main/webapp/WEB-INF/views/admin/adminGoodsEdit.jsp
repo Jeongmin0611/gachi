@@ -105,7 +105,7 @@ function goodsDel(){
 </script>
 <div class="container">
 <h1>상품수정</h1>
-<form method="post" action="adminStoreEditOk" id="adminStoreEditOk" enctype="multipart/form-data">
+<form method="post" action="adminGoodsEditOk" id="adminGoodsEditOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
@@ -165,7 +165,7 @@ function goodsDel(){
 		<div style="text-align:center;height:24px;">이미지${status.index+1}		
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/classImg/${imgList}"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${imgList}"/>
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 

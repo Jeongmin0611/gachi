@@ -1290,6 +1290,31 @@ public class AdminController {
 		mav.setViewName("admin/adminGoodsEdit");
 		return mav;
 	}
+	
+	@RequestMapping(value="/adminGoodsEditOk",method = RequestMethod.POST)
+	public ModelAndView adminGoodsEditOk(GoodsVO vo,HttpSession session) {
+		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
+		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		int result=dao.updateStore(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",vo.getCode());
+			mav.setViewName("redirect:adminGoods");
+		}
+		return mav;
+	}
+	@RequestMapping(value="/adminGoodsWriteOk",method = RequestMethod.POST)
+	public ModelAndView adminGoodsWriteOk(GoodsVO vo,HttpSession session) {
+		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
+		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		int result=dao.updateStore(vo);
+		ModelAndView mav=new ModelAndView();
+		if(result>0) {
+			mav.addObject("code",vo.getCode());
+			mav.setViewName("redirect:adminGoods");
+		}
+		return mav;
+	}
 	@RequestMapping(value="/StoreimgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
 	@ResponseBody
 	public String StoreimgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
@@ -1322,7 +1347,7 @@ public class AdminController {
 					String storeImg=dao.selectStoreImg(code);
 					storeImg=storeImg+newFile.getName()+",";
 					dao.updateStoreImg(storeImg, code);
-					filePath="/gachi/upload/classImg/"+newFile.getName();
+					filePath="/gachi/upload/storeImg/"+newFile.getName();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

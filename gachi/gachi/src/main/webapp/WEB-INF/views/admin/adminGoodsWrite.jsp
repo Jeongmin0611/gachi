@@ -100,7 +100,7 @@ $(function(){
 </script>
 <div class="container">
 <h1>상품등록</h1>
-<form method="post" action="adminGoodsWrite" id="adminGoodsWrite" enctype="multipart/form-data">
+<form method="post" action="adminGoodsWriteOk" id="adminGoodsWriteOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
@@ -145,6 +145,22 @@ $(function(){
 		</div>
 	</li>
 </ul>
+<h3>스토어 이미지 목록</h3>
+<div class="text_center ad_box">
+<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
+	<div style="margin:0 15px; width:230px;height:100%;">
+		<div style="text-align:center;height:24px;">이미지${status.index+1}		
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${imgList}"/>
+		</div>
+		<div>
+			<input type="hidden" name="imgList" value="${imgList}"/> 
+			<span class="wordCut">${imgList}</span><b>x</b>
+		</div>
+	</div>
+</c:forEach>
+</div>
 		<ul id="ad_goods_write">
 			<li>상품설명</li>
 			<li><textarea name="goods_info" id="goods_info"></textarea></li>

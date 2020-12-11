@@ -95,13 +95,9 @@ $(function(){
 				</div>
 			</form>
 		</div>	
-	<div style="margin:5px 5px;text-align:right">
-	<!-- <button class="btn" id="settleDel">선택정산</button> -->
-	<button class="btn">상태변경</button>
-</div>
+
 	<ul id="ad_goods_lst">
 		
-		<li><input type="checkbox" id="GoodsSelectAll"/></li>
 		<li>상품코드</li>
 		<li>카테고리</li>
 		<li>상품명</li>
@@ -112,7 +108,6 @@ $(function(){
 		<li>상태</li>
 		
 		<c:forEach items="${list }" var="list">
-		<li><input type="checkbox"/></li>
 		<li>${list.code }</li>
 		<li>${list.category }</li>
 		<li class="wordCut"><a href="/gachi/adminGoodsEdit?code=${list.code}">${list.goods_name }</a></li>

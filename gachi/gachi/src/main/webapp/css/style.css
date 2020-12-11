@@ -768,31 +768,28 @@ input{text-align:center;}
 		line-height:50px;
 		border-bottom:1px solid gray;
 	}
-	#ad_goods_lst>li:nth-child(9n+1){
-		width:5%;
-	}
-	#ad_goods_lst>li:nth-child(9n+2){
+	#ad_goods_lst>li:nth-child(8n+1){
 		width:15%;
 	}
-	#ad_goods_lst>li:nth-child(9n+3){
+	#ad_goods_lst>li:nth-child(8n+2){
 		width:10%;
 	}
-	#ad_goods_lst>li:nth-child(9n+4){
-		width:20%;
+	#ad_goods_lst>li:nth-child(8n+3){
+		width:25%;
 	}
-	#ad_goods_lst>li:nth-child(9n+5){
+	#ad_goods_lst>li:nth-child(8n+4){
 		width:10%;
 	}
-	#ad_goods_lst>li:nth-child(9n+6){
+	#ad_goods_lst>li:nth-child(8n+5){
 		width:10%;
 	}	
-	#ad_goods_lst>li:nth-child(9n+7){
+	#ad_goods_lst>li:nth-child(8n+6){
 		width:10%;
 	}
-	#ad_goods_lst>li:nth-child(9n+8){
+	#ad_goods_lst>li:nth-child(8n+7){
 		width:10%;
 	}
-	#ad_goods_lst>li:nth-child(9n+9){
+	#ad_goods_lst>li:nth-child(8n+8){
 		width:10%;
 	}	
 	#ad_goods_viewForm{

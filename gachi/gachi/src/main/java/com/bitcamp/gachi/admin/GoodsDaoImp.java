@@ -17,5 +17,7 @@ public interface GoodsDaoImp {
 
 	void updateStoreImg(String txt, String code);
 
+	int updateStore(GoodsVO vo);
+
 
 }
