@@ -3,16 +3,14 @@
 <style>
 
    #bottom{
+   		height:auto;
       background-color:#d3d3d3;
        overflow:auto;
    }
    #bottom ul {
        list-style:none;
-       margin:15px;
-       padding:15px;
-       list-style: none;
-       margin: 15px;
-       padding: 15px;
+       margin:5px;
+       padding:5px;
        overflow:auto;
 	}
 
@@ -24,7 +22,7 @@
 	}
 	
 	#bottom>ul>li {
-		width: 16%;
+		width: 25%;
 	}
 	.mMeun{
 		font-size: 1.3em;
@@ -52,9 +50,6 @@
 		<li class="sMeun"><a href="deliveryBoard">배송정책</a><br />
 		<a href="serviceCenterBoard">자주묻는질문</a><br/> <a href="companyBoard">회사소개</a><br /> 
 		<a href="#">이용약관</a></li>
-		<li class="mMeun"><a>크리에이터 지원</a><br />
-		<a>채용</a></li>
-		<li class="mMeun"><a>SNS계정</a></li>
 	</ul>
 </div>
 

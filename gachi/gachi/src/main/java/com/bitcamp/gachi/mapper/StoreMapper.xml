@@ -3,8 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.store.StoreDaoImp">
-	<select id="storeAllRecord" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, goods_name, real_price, goods_img1 from goods
+	<select id="storeAllRecord" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="com.bitcamp.gachi.store.StorePageVO">
+		select * from 
+		(select * from 
+		(select code, category, goods_name, real_price, goods_img1, to_char(enddate, 'YYYY-MM-DD') enddate from goods
 		<choose>
 			<when test='category==null and selectval == null'></when>
 			<when test='category==null and selectval.equals("Iall")'></when>
@@ -15,21 +17,27 @@
 				order by good desc
 			</when>
 			<when test="category!=null and selectval==null">
-				where category='${param1}'
+				where category='${category}'
 			</when>
 			<when test='category!=null and selectval.equals("Iall")'>
-				where category='${param1}'
+				where category='${category}'
 			</when>
 			<when test='category!=null and selectval.equals("Inew")'>
-				where category='${param1}' order by writedate desc	
+				where category='${category}' order by writedate desc	
 			</when>			
 			<when test='category!=null and selectval.equals("Ipopular")'>
-				where category='${param1}' order by good desc	
+				where category='${category}' order by good desc	
 			</when>
 		</choose>
+		where enddate<![CDATA[ >= ]]> sysdate order by enddate asc)
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by enddate desc)
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by enddate asc
 	</select>
 	<select id="storeView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1
 		from goods where code='${param1}'
+	</select>
+	<select id="storeListAllRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
+		select count(goods_name) from goods where enddate<![CDATA[ >= ]]> sysdate order by enddate
 	</select>
 </mapper>

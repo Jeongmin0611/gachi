@@ -2,6 +2,8 @@ package com.bitcamp.gachi.admin;
 
 import java.util.List;
 
+import com.bitcamp.gachi.store.StorePageVO;
+
 public interface ClassDaoImp {
 	
 	//클래스목록
@@ -54,6 +56,7 @@ public interface ClassDaoImp {
 	
 	//클래스 코드구하기
 	public String getCode(String class_name);
+
 	
 	//목차명 구하기
 	public List<String> getUnitContent(String code);
