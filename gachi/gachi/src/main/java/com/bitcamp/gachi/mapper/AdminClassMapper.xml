@@ -94,7 +94,7 @@
 		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img from class where code=#{code}
 	</select>
 	<select id="selectSection" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
-		select unit,unit_content from section where code=#{param1} order by unit
+		select section_code,unit,unit_content from section where code=#{param1} order by unit
 	</select>
 	<select id="getClassVideoListSample" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
 		select video_code,unit,section_index,s.unit_content,video_name,video_filename,video_length,
@@ -130,4 +130,15 @@
 	<select id="getUnitContent" parameterType="String" resultType="String">
 		select unit_content from section where code='${param1}' order by unit
 	</select>
+	<select id="selectSectionCode" parameterType="String" resultType="String">
+		select section_code from section where unit_content='${param1}'
+	</select>
+	<insert id="videoInsert" parameterType="com.bitcamp.gachi.admin.ClassVideoVO">
+		insert into class_video(code,section_code,section_index,video_code,video_name,video_filename,
+		video_length,enroll_date) values('${code}','${section_code}',${section_index},
+		'${video_code}'||A_SQ.nextval,'${video_name}','${video_filename}',${video_length},sysdate)
+	</insert>
+	<delete id="deleteSection" parameterType="String">
+		delete from section where section_code='${param}'
+	</delete>
 </mapper>

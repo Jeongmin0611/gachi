@@ -112,7 +112,7 @@
 			tagTxt+='<li><input type="text" name="list['+cnt+'].video_name"/></li>';
 			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_filename" value="'+filename+'"/>';
 			tagTxt+=filename+'</li>';
-			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_length value="333"/>123</li>';
+			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_length" value="333"/>123</li>';
 			tagTxt+='<li><input type="hidden" name="list['+cnt+'].enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
 			tagTxt+=year+'-'+month+'-'+day+'</li>'
 			tagTxt+='<li><b title="'+filename+'">x</b></li></div>'
@@ -224,7 +224,6 @@
 	등록할 클래스 :
 	<select id="class_name" name="class_name">
 	</select>
-	<input id="code" type="hidden"/>
 	<!--<button id="selectBtn" class="btn">선택</button>-->
 </div>
 <h3>동영상목차정보</h3>
@@ -234,6 +233,7 @@
 		<li>${section.unit_content}</li>
 	</c:forEach>-->
 </ul>
+<!--
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_videoFile_list">
 	<li>
@@ -254,7 +254,7 @@
 			<li>41.8MB</li>
 		</ul>
 	</li>
-</ul>
+</ul> -->
 <div class="ad_box" id="add_mov" style="height:300px; text-align:center; "> 
 	<h3 style="line-height: 280px;">영상을 여기에 끌어주세요.</h3>
 </div>
@@ -272,6 +272,7 @@
 </ul>
 <ul>
 	<li class="content_center">
+		<input id="code" type="hidden" name="code"/>
 		<button class="btn">등록</button>
 		<input type="reset" class="btn" value="다시쓰기"/>
 	</li>

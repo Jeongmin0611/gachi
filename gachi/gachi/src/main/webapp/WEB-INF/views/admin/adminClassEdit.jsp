@@ -2,16 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	#ad_unit_box li{
+		padding:5px;
 		border-bottom:1px solid gray;
-		border-right:1px solid gray;
 		float:left;
 		height:40px;
 		width:10%;
 		text-align:center;
+		overflow: visible;
 	}
-	#ad_unit_box li:nth-child(4n+4){
-		width:70%;
+	#ad_unit_box li:nth-child(5n+4){
+		width:60%;
 		text-align:left;
+	}
+	#ad_unit_box li:nth-child(5n+1),#ad_unit_box li:nth-child(5n+3){
+		text-align: right;
+	}
+	#ad_unit_box>li{
+		width:100%;
+		text-align:center;
 	}
 </style>
 <div class="container ad_font">
@@ -76,7 +84,7 @@
 				}
 			});
 		});
-			$(document).on('click','b',(event)=>{
+			$(document).on('click','.img_del',(event)=>{
 				let imageName=$(event.target).prev().text();
 				let code=$("#code").val();
 				$.ajax({
@@ -89,7 +97,23 @@
 					}
 				});
 			});	
-			
+			$(document).on('click','.unit_del',(event)=>{
+				let section_code=$(event.target).attr("title");
+				if(section_code!=null){
+					$.ajax({
+						url:'/gachi/unitDel?section_code='+section_code,
+						type:'get',
+						success:(result)=>{
+							$(event.target).parent().parent().remove();
+						},error:(e)=>{
+							alert("이미지파일 삭제를 실패하였습니다.");
+						}
+					});
+				}
+				//else{
+					//$(event.target).parent().parent().remove();
+				//}
+			});	
 		$("#adminClassEditOk").submit(()=>{
 			let grpl = $("input[name=imgList]").length;
 			if(grpl==0){
@@ -193,19 +217,25 @@
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b>x</b>
+			<span class="wordCut">${imgList}</span><b class="img_del">x</b>
 		</div>
 	</div>
 </c:forEach>
 </div>
 <h3>목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
+	<c:set var="count" value="0"/>
 	<c:forEach var="section" items="${sectionList}">
-		<li>목차</li>
-		<li><input type="text" value="${section.unit}" style="width:30%"/></li>
-		<li>목차명</li>
-		<li><input type="text" value="${section.unit_content}" style="width:30%"/></li>
+		<ul>
+			<li>목차</li>
+			<li><input type="text" name="list[${count}].unit" value="${section.unit}" style="width:30%"/></li>
+			<li>목차명</li>
+			<li><input type="text" name="list[${count}].unit_content" value="${section.unit_content}" style="width:30%"/></li>
+			<li><b class="unit_del" title="${section.section_code}">x</b></li>
+		</ul>	
+		<c:set var="count" value="${count+1}"/>
 	</c:forEach>
+			<li><button>+</button></li>
 </ul>
 <h3>클래스정보</h3>
 <ul id="ad_goods_write">
