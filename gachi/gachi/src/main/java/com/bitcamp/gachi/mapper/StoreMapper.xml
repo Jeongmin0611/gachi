@@ -31,6 +31,11 @@
 		</choose>
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by enddate desc)
 		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by enddate asc
+		<choose>
+			<when test='category==null and selectval == null'>
+			)
+			</when>
+		</choose>
 	</select>
 	<select id="storeView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1

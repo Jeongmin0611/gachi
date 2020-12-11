@@ -1354,7 +1354,7 @@ $(document).ready(function() {
            <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
          </ul>
       </li>
-      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
+      <li class="nav-item dropdown"><a href="/gachi/storeList"class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
             <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>

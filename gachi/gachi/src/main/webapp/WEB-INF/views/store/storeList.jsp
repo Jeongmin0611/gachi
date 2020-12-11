@@ -280,7 +280,7 @@
 					</li>
 				</c:if>
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowpage=${pvo.nowPage+1 }">Next</a></li>
+			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage+1 }">Next</a></li>
 		</ul>
 	</div>
 </div>
