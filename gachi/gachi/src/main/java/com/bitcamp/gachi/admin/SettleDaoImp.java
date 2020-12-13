@@ -69,6 +69,24 @@ public interface SettleDaoImp {
 
 	public List<SettleVO> selectAllSettle(Map<String, String> dbParam);
 
+	public List<Integer> sumStoreSalesByDay(Map<String, Object> dbParam);
+	
+	public List<Integer> sumClassSalesByDay(Map<String, Object> dbParam);
+
+	public void SettleInfoInsert(Map<String, String> dbParam);
+
+	public int SettleStateUpdate(String order_code);
+
+	public int PaymentStateUpdate(String goods_order_code);
+
+	public List<Map<String, Integer>> ClassForAge(Map<String, String> dbParam_pie); //클래스 파이차트 연령정보 
+
+	public List<Map<String, Integer>> ClassForGender(Map<String, String> dbParam_pie); //클래스 파이차트 성별정보
+
+	public List<Map<String, Integer>> StoreForAge(Map<String, String> dbParam_pie); //스토어 파이 차트 연령정보
+
+	public List<Map<String, Integer>> StoreForGender(Map<String, String> dbParam_pie); //스토어 파이 차트 성별정보
+
 //	public List<SettleVO> selectStoreList(Map<String, String> dbParam);
 //
 //	public int selectCntAllGoods(Map<String, String> dbParam);

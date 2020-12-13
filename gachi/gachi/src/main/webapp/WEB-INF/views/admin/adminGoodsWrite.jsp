@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(function(){
 	var editor=CKEDITOR.replace('goods_info',{
-		imageUploadUrl:'/gachi/imageUpload',
+		imageUploadUrl:'/gachi/StoreimageUpload',
 		extraPlugins:'uploadimage'
 	});
 	editor.on('fileUploadRequest', function( evt ) {
@@ -13,7 +13,7 @@ $(function(){
 	        xhr = fileLoader.xhr;
 	    xhr.open( 'POST', fileLoader.uploadUrl, true );
 	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','classEdit');
+	    formData.append('type','GoodsWrite');
 	    fileLoader.xhr.send( formData );
 	    evt.stop();
 	}, null, null, 4 ); 
@@ -57,7 +57,7 @@ $(function(){
 				tagTxt+='<div style="text-align:center">';
 				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 				tagTxt+='<div style="padding:0 auto;">';
-				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
+				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
 				$(".ad_box").append(tagTxt);
 			}
 		});
@@ -67,7 +67,7 @@ $(function(){
 			let code=$("#code").val();
 			$.ajax({
 				url:'/gachi/StoreimageDelete?imageName='+imageName+"&code="+code,
-				type:'get',
+				type:'post',
 				success:(result)=>{
 					$(event.target).parent().parent().remove();
 				},error:(e)=>{
@@ -76,7 +76,7 @@ $(function(){
 			});
 		});	
 		
-	$("#adminStoreEditOk").submit(()=>{
+	$("#adminGoodsWrite").submit(()=>{
 		let grpl = $("input[name=imgList]").length;
 		if(grpl==0){
 			alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
@@ -97,6 +97,11 @@ $(function(){
 		return true;
 	});	
 });
+function goodsDel(){
+	if(confirm("해당 상품을 삭제하시겠습니까?")){
+		
+	}
+}
 </script>
 <div class="container">
 <h1>상품등록</h1>
@@ -105,7 +110,7 @@ $(function(){
 	<li>
 		<ul>
 			<li class="content_center">상품코드</li>
-			<li><input type="text" id="code" name="code" value="" readonly/> 생성시 시퀀스로 자동생성</li>
+			<li><input type="text" id="code" name="code" value=""/> 생성시 시퀀스로 자동생성</li>
 			<li class="content_center">카테고리</li>
 			<li>
 				<select id="category" name="category">
@@ -123,7 +128,7 @@ $(function(){
 			<li class="content_center">재고</li>
 			<li><input type="text" id="stock" name="stock" value=""/></li>
 			<li class="content_center">원가금액</li>
-			<li><input type="text" id="goods_name" name="prime_coast" size="40" value=""/></li>
+			<li><input type="text" id="prime_coast" name="prime_coast" size="40" value=""/></li>
 			<li class="content_center">판매금액</li>
 			<li><input type="text" id="real_price" name="real_price" value=""/></li>
 			<li class="content_center">판매상태</li>
@@ -156,7 +161,7 @@ $(function(){
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b>x</b>
+			<span class="wordCut">${imgList}</span><b>  x  </b>
 		</div>
 	</div>
 </c:forEach>

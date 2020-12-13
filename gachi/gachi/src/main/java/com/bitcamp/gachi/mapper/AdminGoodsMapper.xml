@@ -20,34 +20,32 @@
 		ROWNUM AS RNUM
 		FROM
 		(SELECT
-		goods.code, goods.category, goods.goods_name, goods.prime_cost, goods.real_price , goods.stock,to_char(goods.writedate, 'yyyy-mm-dd') writedate , 
-		goods.sale_state from goods
-		join goods_order on goods_order.code = goods.code
-		join orderlist on goods_order.order_code = orderlist.order_code
+		code, category, goods_name, prime_cost, real_price , stock,to_char(writedate, 'yyyy-mm-dd')writedate , 
+		sale_state from goods
 		<choose>
 			<when test='category==null and sale_State==null and search==null '></when>
 			<when test='category!=null and sale_State==null and search==null'>
-				and goods.category='${category}'
+				where category='${category}'
 			</when>
 			<when test='category==null and sale_State!=null and search==null'>
-				and sale_State='${sale_State}'
+				where sale_State='${sale_State}'
 			</when>
 			<when test='category==null and sale_State==null and search!=null'>
-				and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+				where (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
 			</when> 
 			
 			<when test='category==null and sale_State!=null and search!=null'>
-				and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
+				where sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )
 			</when>
 			<when test='category!=null and sale_State!=null and search==null'>
-				and goods.category='${category}' and sale_State='${sale_State}'
+				where category='${category}' and sale_State='${sale_State}'
 			</when>
 			<when test='category!=null and sale_State==null and search!=null'>
-				and goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
+				where category='${category}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )		
 			</when>
 			
 			<when test='category!=null and sale_State!=null and search!=null'>
-				and goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+				where category='${category}' and sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -66,26 +64,26 @@
 		<choose>
 			<when test='category==null and sale_State==null and search==null '></when>
 			<when test='category!=null and sale_State==null and search==null'>
-				and goods.category='${category}'
+				where goods.category='${category}'
 			</when>
 			<when test='category==null and sale_State!=null and search==null'>
-				and sale_State='${sale_State}'
+				where sale_State='${sale_State}'
 			</when>
 			<when test='category==null and sale_State==null and search!=null'>
-				and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+				where (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
 			</when>
 			<when test='category==null and sale_State!=null and search!=null'>
-				and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
+				where sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
 			</when>
 			<when test='category!=null and sale_State!=null and search==null'>
-				and goods.category='${category}' and sale_State='${sale_State}'
+				where goods.category='${category}' and sale_State='${sale_State}'
 			</when>
 			<when test='category!=null and sale_State==null and search!=null'>
-				and goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
+				where goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
 			</when>
 			
 			<when test='category!=null and sale_State!=null and search!=null'>
-				and goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+				where goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
 			</when>
 			<otherwise></otherwise>
 		</choose>
