@@ -140,6 +140,7 @@
 	<update id="creatorleaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
 	</update>
+
 	
 		<select id="dashForCreator" parameterType="map" resultType="_int">
 		<foreach collection="list" item="item" separator=" union all">

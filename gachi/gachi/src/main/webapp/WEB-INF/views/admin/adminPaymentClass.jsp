@@ -182,7 +182,7 @@
 		<li>${data.real_price }</li>
 		<!-- <li>0</li> -->
 		<li>${data.orderdate}</li>
-		<li><c:if test="${data.fix_state eq 'n'  or data.fix_state eq 'N'}">미정산</c:if><c:if test="${data.fix_state eq 'y'  or data.fix_state eq 'Y'}">정산완료</c:if></li>
+		<li><c:if test="${data.settlement eq 'n'  or data.settlement eq 'N'}">미정산</c:if><c:if test="${data.settlement eq 'y'  or data.settlement eq 'Y'}">정산완료</c:if></li>
 		</c:forEach>
 	</ul>
 </div>

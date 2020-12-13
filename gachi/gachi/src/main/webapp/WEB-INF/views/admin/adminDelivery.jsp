@@ -30,6 +30,7 @@
 </div>
 </div>
 <ul id="ad_delivery_lst" class="text-center">
+	
 	<li>번호</li>
 	<li>카테고리</li>
 	<li>상품번호</li>
