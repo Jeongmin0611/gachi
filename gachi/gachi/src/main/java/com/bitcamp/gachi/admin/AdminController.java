@@ -473,18 +473,22 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/adminCreatorEditOk",method=RequestMethod.POST)
-	public ModelAndView adminMemberEditOk(AllVO vo) {
+   @RequestMapping(value="/adminCreatorEditOk",method=RequestMethod.POST)
+   public ModelAndView adminMemberEditOk(AllVO vo) {
 
-		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-		int result = dao.creatorMemberUpdate(vo);
-		ModelAndView mav = new ModelAndView();	
-		
-			mav.addObject("result", result);
-			mav.setViewName("admin/adminCreatorEditOk");
-			
-		return mav;
-	}
+      CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+      int result = dao.creatorMemberUpdate(vo);
+      String state = vo.getCreator_state();
+      String userid= vo.getUserid();
+      int creator_state = dao.creatorStateUpdate(state,userid);
+      ModelAndView mav = new ModelAndView();   
+      
+         mav.addObject("result", result);
+         mav.addObject("creator_state", creator_state);
+         mav.setViewName("admin/adminCreatorEditOk");
+         
+      return mav;
+   }
 	
 	@RequestMapping("/adminCreatorLeaveEditOk")
 	public ModelAndView adminCrearotLeaveEditOk(String userid) {
@@ -1329,6 +1333,7 @@ public class AdminController {
 				}//if
 				try {
 					file.transferTo(newFile);
+					System.out.println("newFile:" + newFile);
 					String storeImg=dao.selectStoreImg(code);
 					storeImg=storeImg+newFile.getName()+",";
 					dao.updateStoreImg(storeImg, code);
@@ -1338,16 +1343,21 @@ public class AdminController {
 				}
 			}//if
 		}
+		System.out.println("filePath:" + filePath);
 		return filePath;
 	}
 	
-	@RequestMapping(value="StoreimageDelete",method = RequestMethod.GET)
+	@RequestMapping(value="StoreimageDelete",method = RequestMethod.POST)
 	@ResponseBody
-	public void StoreimageDelete(HttpServletRequest req,HttpSession session) {
+	public void StoreimageDelete(HttpServletRequest req,HttpSession session) throws UnsupportedEncodingException {
+		req.setCharacterEncoding("UTF-8");
+		
 		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/storeImg");
 		String imageName=req.getParameter("imageName");
+		System.out.println(imageName);
 		String code=req.getParameter("code");
+		System.out.println(code);
 		File file=new File(path,imageName);
 		if(file.exists()) {
 			file.delete();

@@ -27,6 +27,12 @@ $(function(){
 	$(".ad_box>div").css("margin","20px 0px;");
 	$(".ad_box>div").css("float","left");
 	let imgCount=2;
+	
+	$('#mainImg').on('change', handleImgFileSelect(mainImg));
+	$('#detailImg1').on('change', handleImgFileSelect(detailImg1));
+	$('#detailImg2').on('change', handleImgFileSelect(detailImg2));
+	$('#detailImg3').on('change', handleImgFileSelect(detailImg3));
+	
 	 $(".add_img").on("dragenter dragover", function(event){
 	        event.preventDefault();
 	    });
@@ -35,12 +41,14 @@ $(function(){
 		event.preventDefault();
 		var files =event.originalEvent.dataTransfer.files;
 		var file=files[0];
-		console.log(file);
+		console.log('file:' + file);
+
 		let code=$("#code").val();
 		var formData= new FormData();
 		formData.append("file",file);
 		formData.append("code",code);
-		$.ajax({
+		console.log(formData.file);
+		  $.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
 			url:"/gachi/StoreimgThumbnail",
@@ -102,6 +110,19 @@ function goodsDel(){
 		
 	}
 }
+
+/* function handleImgFileSelect(inputName, e) {
+	
+	var inputName = inputName;
+
+	let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
+	tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
+	tagTxt+='<div style="text-align:center">';
+	tagTxt+='<img id=' + inputName + ' name= ' + inputName + 'src="'+result+'" width=200 height=200 /></div>';
+	tagTxt+='<div style="padding:0 auto;">';
+	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
+	$(".ad_box").append(tagTxt);
+} */
 </script>
 <div class="container">
 <h1>상품등록</h1>
@@ -139,6 +160,14 @@ function goodsDel(){
 					<option value="판매종료">판매종료</option>
 				</select>
 			</li>
+			<li class="content_center">메인 이미지</li>
+			<li><input type="file" name="mainImg" id="mainImg" /></li>
+			<li class="content_center">상세 이미지1</li>
+			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
+			<li class="content_center">상세 이미지2</li>
+			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
+			<li class="content_center">상세 이미지3</li>
+			<li><input type="file" name="detailImg3" id="detailImg2" /></li>
 		</ul>
 	</li>
 	<li class="content_center">
