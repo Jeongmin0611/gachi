@@ -473,22 +473,27 @@ public class AdminController {
 		return mav;
 	}
 	
-   @RequestMapping(value="/adminCreatorEditOk",method=RequestMethod.POST)
-   public ModelAndView adminMemberEditOk(AllVO vo) {
+	@RequestMapping(value="/adminCreatorEditOk",method=RequestMethod.POST)
+	   public ModelAndView adminCreatorEditOk(AllVO vo) {
 
-      CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
-      int result = dao.creatorMemberUpdate(vo);
-      String state = vo.getCreator_state();
-      String userid= vo.getUserid();
-      int creator_state = dao.creatorStateUpdate(state,userid);
-      ModelAndView mav = new ModelAndView();   
-      
-         mav.addObject("result", result);
-         mav.addObject("creator_state", creator_state);
-         mav.setViewName("admin/adminCreatorEditOk");
-         
-      return mav;
-   }
+	      CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+	      int result = dao.creatorMemberUpdate(vo);
+	      String state = vo.getCreator_state();
+	      String userid= vo.getUserid();
+	      
+	      Map<String, String> dbParam = new HashMap<String, String>();
+	      dbParam.put("state", state);
+	      dbParam.put("userid", userid);
+	      
+	      int creator_state = dao.creatorStateUpdate(dbParam);
+	      ModelAndView mav = new ModelAndView();   
+	      
+	         mav.addObject("result", result);
+	         mav.addObject("creator_state", creator_state);
+	         mav.setViewName("admin/adminCreatorEditOk");
+	         
+	      return mav;
+	   }
 	
 	@RequestMapping("/adminCreatorLeaveEditOk")
 	public ModelAndView adminCrearotLeaveEditOk(String userid) {
@@ -793,8 +798,6 @@ public class AdminController {
 		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
 		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
 		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
-		
-		PagingVO pageVO = new PagingVO();
 		
 		ModelAndView mav=new ModelAndView();
 		
@@ -1103,9 +1106,180 @@ public class AdminController {
 		return "admin/adminStore";
 	}
 	@RequestMapping("/adminDelivery")
-	public String adminDelivery() {
-		return "admin/adminDelivery";
+	public ModelAndView adminDelivery(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("state", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		System.out.println("startNum:" + startNum);
+		System.out.println("endNum:" + endNum);
+		
+		int cntRecords = dao.selectCntAllDelivery(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		System.out.println("cntRecords:" + cntRecords);
+		System.out.println("lastPage:" + lastPage);
+		
+		List<MemberVO> list = dao.selectAllDelivery(dbParam); // 전체 리스트
+		
+		int countWaitDelivery = dao.countWaitDelivery(); // 배송대기 카운트 
+		int countDelivery = dao.countDelivery(); // 배송중 카운트
+		int countEndDelivery = dao.countEndDelivery(); // 배송완료 카운트
+		int countdeposit = dao.countdeposit(); // 결제완료 카운트
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("method", "get");
+		mav.addObject("deliveryList",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		mav.addObject("countWaitDelivery", countWaitDelivery);
+		mav.addObject("countDelivery", countDelivery);
+		mav.addObject("countEndDelivery", countEndDelivery);
+		mav.addObject("countdeposit", countdeposit);
+		mav.setViewName("admin/adminDelivery");
+		
+		return mav;
 	}
+	
+	@RequestMapping(value="/adminDelivery", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminDelivery(HttpServletResponse resp, @RequestParam(value="state", required=false) String state, @RequestParam(value="search", required=false) String search, @RequestParam(value="now", required=false) String now) {
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+			System.out.println(nowPage);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav = new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		if(state.length() <= 0) state = null;
+		if(!search.equals(null)) {
+			if(search.length() <= 0) search = null;
+		}
+		
+		System.out.println("state:" + state);
+		System.out.println("search:" + search);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("state", state);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum + "");
+		dbParam.put("endNum", endNum +"");
+		
+		System.out.println("startNum:" + startNum);
+		System.out.println("endNum:" + endNum);
+		
+		int cntRecords = dao.selectCntAllDelivery(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		System.out.println("cntRecords:" + cntRecords);
+		System.out.println("lastPage:" + lastPage);
+		
+		List<MemberVO> list = dao.selectAllDelivery(dbParam); // 전체 리스트
+		
+		int countWaitDelivery = dao.countWaitDelivery(); // 배송대기 카운트 
+		int countDelivery = dao.countDelivery(); // 배송중 카운트
+		int countEndDelivery = dao.countEndDelivery(); // 배송완료 카운트
+		int countdeposit = dao.countdeposit(); // 결제완료 카운트
+		
+		
+		if(list != null) {
+			mav.addObject("method", "post");
+			mav.addObject("deliveryList",list);
+			mav.addObject("state", state);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("search", search);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+			mav.addObject("countWaitDelivery", countWaitDelivery);
+			mav.addObject("countDelivery", countDelivery);
+			mav.addObject("countEndDelivery", countEndDelivery);
+			mav.addObject("countdeposit", countdeposit);
+			try {
+				mav.setViewName("admin/adminDelivery");
+				resp.getWriter().write("{\"result\":\"success\"}");
+				System.out.println("ajax success");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+
+		}
+		
+		return null;
+	}
+	
+	@RequestMapping("/adminDeliveryView")
+	public ModelAndView adminDeliveryView(String code) {
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		SettleVO list = dao.selectDelivery(code);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("admin/adminDeliveryView");
+		return mav;
+	}
+
+	@RequestMapping(value="/adminDeliveryEditOk",method=RequestMethod.POST)
+	   public ModelAndView adminDeliveryEditOk(SettleVO vo) {
+
+	      SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+	      
+	      String delivery = vo.getDelivery();
+	      String state= vo.getState();
+	      String order_code = vo.getOrder_code();
+	      
+	      
+	      Map<String, String> dbParam = new HashMap<String, String>();
+	      dbParam.put("state", state);
+	      dbParam.put("delivery", delivery);
+	      dbParam.put("order_code",order_code);
+	      
+	      int DeliveryUpdate = dao.DeliveryUpdate(dbParam);
+	      ModelAndView mav = new ModelAndView();   
+	      
+	         mav.addObject("state", state);
+	         mav.addObject("delivery", delivery);
+	         mav.addObject("order_code", order_code);
+	         
+	        System.out.println("order_code"+order_code);
+	        System.out.println("delivery"+delivery); 
+	        System.out.println("state"+state); 
+	        
+	         mav.setViewName("redirect:adminDelivery");
+	         
+	      return mav;
+	   }
+	
 	@RequestMapping("/adminGoods")
 	public ModelAndView adminGoods(@RequestParam(value="now", required=false) String now) {
 		

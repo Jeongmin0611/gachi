@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
-<link href="<c:url value="/img/logo6.png" />" rel="stylesheet">
+<link href="<c:url value="/img/mainlogo.png" />" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 <!-- Resources -->
