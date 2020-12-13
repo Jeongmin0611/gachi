@@ -762,6 +762,90 @@
 	         	)
  		GROUP BY age_gb ORDER BY age_gb	
 	</select>
+	
+	
+	
+	<!-- 배송관련 -->
+	
+	<select id="countdeposit" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '결제완료'		
+	</select>
+		<select id="countWaitDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state ='배송준비'		
+	</select>
+		<select id="countDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '배송중'		
+	</select>
+		<select id="countEndDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '배송완료'		
+	</select>
+		<select id="selectCntAllDelivery" parameterType="map" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		<choose>
+			<when test='state==null and search==null'></when>
+			<when test='state!=null and search==null'>
+				 and state='${state}'
+			</when>
+			<when test='state==null and search!=null'>
+				and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<when test='state!=null and search!=null'>
+				and state='${state}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="selectAllDelivery" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">	
+	SELECT * FROM
+		    ( SELECT A.*, ROWNUM AS RNUM FROM
+		            (SELECT rownum, category, goods_order.code, goods.goods_name, username, tel, 
+	        		delivery, to_char(orderlist.orderdate, 'yyyy-mm-dd')orderdate, orderlist.state from goods_order
+                        join orderlist on orderlist.order_code= goods_order.order_code
+                        join member on orderlist.userid = member.userid
+                        join goods on goods.code=goods_order.code
+		           
+		             		<choose>
+								<when test='state==null and search==null'></when>
+								<when test='state!=null and search==null'>
+									 and state='${state}'
+								</when>
+								<when test='state=null and search!=null'>
+									and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<when test='state!=null and search!=null'>
+									and state='${state}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<otherwise></otherwise>
+							</choose>
+		            ) A
+		        WHERE
+		            ROWNUM &lt;= ${endNum}
+		    )
+		WHERE
+		    RNUM &gt;=${startNum}
+   	</select>
+   	
+   		<select id="selectDelivery" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select orderlist.order_code,category, goods_order.code, goods.goods_name, username, tel, 
+	    	delivery, to_char(orderlist.orderdate, 'yyyy-mm-dd')orderdate, orderlist.state from goods_order
+            join orderlist on orderlist.order_code= goods_order.order_code
+            join member on orderlist.userid = member.userid
+            join goods on goods.code=goods_order.code
+            where goods.code = #{code}
+	</select>
+	
+	<update id ="DeliveryUpdate" parameterType="map">
+		update orderlist set state=#{state} , delivery=#{delivery} where order_code =#{order_code}
+	</update>
 </mapper>
 
 

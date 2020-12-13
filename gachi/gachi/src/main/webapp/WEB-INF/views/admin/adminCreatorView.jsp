@@ -52,11 +52,10 @@
 			</li> 
 
 	</ul>
-	<div style="margin:10px 0px;">
+	<div style="margin:10px 0px; float:rigth;">
 		<button type="button" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
 		<button type="button" id="cr_leaveBtn" class="btn" onclick="location.href='/gachi/adminCreatorLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
-		<button type="button" id="cr_stateBtn" class="btn" onclick="location.href='/gachi/adminCreatorStateEditOk?userid=${vo.userid}'">승인관리</button>
 		<!-- <input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/> -->
 	</div>
 	</form>	

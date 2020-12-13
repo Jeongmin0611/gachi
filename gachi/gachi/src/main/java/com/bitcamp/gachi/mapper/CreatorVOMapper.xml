@@ -134,8 +134,8 @@
 		update member set nickname =#{nickname}, username=#{username}, tel=#{tel} ,gender=#{gender},  zipcode=#{zipcode},
 		addr =#{addr},detailaddr =#{detailaddr} where userid = #{userid}
 	</update>
-	<update id ="creatorStateUpdate" parameterType="String">
-		update creator set creator_state=#{creator_state} where userid =#{userid}
+	<update id ="creatorStateUpdate" parameterType="map">
+		update creator set creator_state=#{state} where userid =#{userid}
 	</update>
 	<update id="creatorleaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}

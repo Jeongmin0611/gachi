@@ -9,10 +9,13 @@ public class SettleVO {
 	private String goods_order_code; // 상품 주문 코
 	private String userid; // 아이디(이메일) - 구매자 아이디 X, 클래스 담당 크리에이터 이메일
 	private String username;
+	private String tel; //구매자 연락처 
 	private String category; //카테고리
 	private int real_price; // 클래스 판매가
 	private String payday; // 정산 지급일
-	private String settlement; // 정산 여부	
+	private String settlement; // 정산 여부
+	private String delivery; //운송장번호
+	private String state; //배송단계 
 	
 	private String goods_name; //상품이름
 	private String code; //상품코드 
@@ -126,6 +129,24 @@ public class SettleVO {
 	}
 	public void setMileage(String mileage) {
 		this.mileage = mileage;
+	}
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 }
