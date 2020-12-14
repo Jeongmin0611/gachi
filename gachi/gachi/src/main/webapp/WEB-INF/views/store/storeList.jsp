@@ -266,7 +266,6 @@
 	<!-- 페이징 -->
 	<div id="storeListPaging">
 		<ul class="pagination justify-content-center">
-		<c:if test="${pvo.category==null}">
 			<c:if test="${pvo.nowPage>1}">
 			<li class="page-item">
 				<a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage-1 }">Prev</a>
@@ -281,7 +280,6 @@
 			</c:forEach>
 			<c:if test="${pvo.nowPage<pvo.totalPage }">
 			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage+1 }">Next</a></li>
-			</c:if>
 			</c:if>
 		</ul>
 	</div>

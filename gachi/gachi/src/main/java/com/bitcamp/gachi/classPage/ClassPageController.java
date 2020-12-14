@@ -41,16 +41,22 @@ public class ClassPageController {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		String category = req.getParameter("category");
+		String selectval = req.getParameter("selectval");
 		//현재 페이지
 		String nowPageTxt=req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
+		if(category==null) {
 		int totalRecord=dao.classBoardAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
+		}
+		if(category!=null) {
+			int totalRecord = dao.classPageCategoryRecordCount(vo);
+			vo.setTotalRecord(totalRecord);
+		}
 		
-		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
 		
 		List<AllVO> list = dao.classPageAllRecord(vo);
 		System.out.println(vo);

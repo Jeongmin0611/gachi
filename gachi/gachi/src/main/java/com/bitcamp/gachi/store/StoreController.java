@@ -35,18 +35,25 @@ public class StoreController {
 	public ModelAndView storeList(HttpServletRequest req, HttpSession ses,StorePageVO vo) throws Exception{
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
-		String nowPageTxt= req.getParameter("nowPage");
-		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
-			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
-		int totalRecord = dao.storeListAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		
 		String category=req.getParameter("category");
 		String selectval=req.getParameter("selectval");
+			String nowPageTxt= req.getParameter("nowPage");
+			System.out.println("0="+vo.getCategory());
+			if(nowPageTxt!=null) {//페이지 번호를 request한 경우
+				vo.setNowPage(Integer.parseInt(nowPageTxt));
+				}
+		if(category==null) {
+			int totalRecord = dao.storeListAllRecordCount(vo);
+				vo.setTotalRecord(totalRecord);
+				System.out.println("1="+vo.getTotalRecord());
+			}
+		if(category!=null) {
+			int totalRecord = dao.storeListCategoryRecordCount(vo);
+				vo.setTotalRecord(totalRecord);
+				System.out.println("2="+vo.getTotalRecord());
+			}
 		
 		List<AllVO> list=dao.storeAllRecord(vo);
-		System.out.println(vo);
 
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
@@ -64,6 +71,7 @@ public class StoreController {
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
 			mav.addObject("ggoodList", ggoodList);	
 		}
+		System.out.println("3="+vo.getTotalRecord());
 		mav.addObject("list", list);
 		mav.addObject("pvo", vo);
 		mav.setViewName("store/storeList");
