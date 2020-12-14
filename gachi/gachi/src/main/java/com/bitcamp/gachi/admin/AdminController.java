@@ -1071,8 +1071,110 @@ public class AdminController {
 		return "admin/admin1on1Write";
 	}
 
+	@RequestMapping(value="/adminOrder", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminOrder(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,
+			@RequestParam(value="state", required=false) String state, @RequestParam(value="paymentRadio", required=false) String paymentRadio , 
+			 @RequestParam(value="stateRadio", required=false) String stateRadio ,@RequestParam(value="search", required=false) String search,
+			@RequestParam(value="now", required=false) String now){
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(state.length() <= 0) state = null;
+		if(paymentRadio.length() <= 0) paymentRadio = null;
+		if(stateRadio.length() <= 0) stateRadio = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("state", state);
+		dbParam.put("paymentRadio", paymentRadio);
+		dbParam.put("stateRadio", stateRadio);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		dao = sqlSession.getMapper(OrderDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllOrder(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		;
+		List<OrderVO> result = dao.selectAllOrder(dbParam);
+		
+		
+		if(startDate != null && endDate != null && result != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("result",result);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", result.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("state", state);
+			mav.addObject("paymentRadio", paymentRadio);
+			mav.addObject("stateRadio", stateRadio);
+			mav.addObject("search", search);
+//			mav.addObject("data", result);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminOrder");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		
+		return null;
+	}
 	@RequestMapping("/adminOrder")
-	public ModelAndView adminOrder() {
+	public ModelAndView adminOrder(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
 		ModelAndView mav =new ModelAndView();
 		
 		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
@@ -1083,14 +1185,44 @@ public class AdminController {
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
+		dbParam.put("state", null);
+		dbParam.put("paymentRadio", null);
+		dbParam.put("stateRadio", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
 		
 		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
 		dao = sqlSession.getMapper(OrderDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllOrder(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		;
 		List<OrderVO> result = dao.selectAllOrder(dbParam);
 		
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("result",result);
+		mav.addObject("cntData", result.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("state", null);
+		mav.addObject("paymentRadio", null);
+		mav.addObject("stateRadio", null);
+		mav.addObject("search", null);
+
 
 		mav.addObject("data", result);
 		mav.setViewName("admin/adminOrder");

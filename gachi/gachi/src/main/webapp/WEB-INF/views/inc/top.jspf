@@ -1637,7 +1637,7 @@ $(document).ready(function() {
 				</div>
 				<div class="pwdF1_layer"></div>
 				<div>
-				<img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
+				<img src="/gachi/img/" class="mainLogoImg"/>
 				<div>
 		 		<input type="text" id="to4" name="to4" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
 			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"/><br> <!-- 문자보내는 전송버튼 -->
