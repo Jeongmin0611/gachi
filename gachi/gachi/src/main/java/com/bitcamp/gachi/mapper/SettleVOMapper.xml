@@ -849,7 +849,7 @@
 	
 	
 	<!-- 크리에이터 대쉬보드 -->
-		<select id="countWaitClass" parameterType="map" resultType="_int">
+		<select id="countWaitClass" parameterType="String" resultType="_int">
 			select count(class_state) cnt from class
 				join creator on class.userid = creator.userid
 				where class.userid = #{userid}
@@ -857,41 +857,198 @@
 		</select>
 		
 		<select id="totalPayment" parameterType="map" resultType="_int">
-			select sum(real_price) sum from class
+			select nvl(sum(nvl(real_price,0)),0) sum from class
 				join class_order on class.code = class_order.code
-				where class.userid =#{userid}
-				and class_order.settlement='Y';
+                join orderlist on class_order.order_code = orderlist.order_code
+				where class.userid=#{userid}
+				and class_order.settlement='Y'
+				and to_char(orderdate,'yyyy-MM-dd')&gt;=#{startDate} and to_char(orderdate,'yyyy-MM-dd')&lt;=#{endDate}
 		</select>
 		
-		<select id="non-Payment" parameterType="map" resultType="_int">
+		<select id="non_Payment" parameterType="String" resultType="_int">
 			select sum(real_price) sum from class
 				join class_order on class.code = class_order.code
 				where class.userid =#{userid}
-				and class_order.settlement='N';
+				and class_order.settlement='N'
 		</select>
 		
 		<select id="creatorPayment" parameterType="map" resultType="int">
-		<foreach collection="list" item="item" separator=" union all">
-			<!-- select nvl(sum(nvl(goods.real_price, 0)),0) as sum from orderlist
-			join goods_order on orderlist.order_code = goods_order.order_code
-			join goods on goods_order.code = goods.code
-			where to_char(orderdate, 'yyyy-MM-dd') = #{item} -->
-		</foreach>
+			<foreach collection="list" item="item" separator=" union all">
+					select nvl(sum(nvl(real_price,0)),0) sum from class
+						join class_order on class.code = class_order.code
+		                join orderlist on class_order.order_code = orderlist.order_code
+						where class.userid=#{userid}
+						and class_order.settlement='Y'
+						and to_char(orderdate,'yyyy-MM-dd')=#{item}
+			</foreach>
+		</select>
+		
+		<select id="classTotalMember" parameterType="map" resultType="int">
+			<foreach collection="list" item="item" separator=" union all">
+					select count(*) as cnt from class_order
+					join class on class.code = class_order.code
+					join orderlist on class_order.order_code = orderlist.order_code
+					where class.userid = #{userid}
+					and to_char(orderdate,'yyyy-MM-dd')=#{item}
+			</foreach>
+		</select>
+		
+		<select id="StatClassForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM orderlist join class_order on orderlist.order_code = class_order.order_code
+            			join member on orderlist.userid= member.userid
+                        join class on class.code = class_order.code
+                        where class.userid =#{userid}
+           			 	and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
 	</select>
+	
+	<select id="StatClassForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from orderlist join class_order on orderlist.order_code = class_order.order_code
+            join member on orderlist.userid= member.userid
+            join class on class.code = class_order.code
+            where class.userid =#{userid}
+            and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+            )
+      )
+    group by gender_gb
+	</select>
+	
+	
+	<select id="CreatorCntAllSettle" parameterType="map" resultType="_int">
+		select count(*) as cnt from class_order join class on class_order.code= class.code
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		where class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and class_name!=null'>
+				and class.class_name like '%${class_name}%'
+			</when>
+			<when test='category!=null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="CreatorAllSettle" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
+		(SELECT
+		class_order.order_code, class.category, class.class_name, class.userid,
+		member.username,class.real_price, to_char(settlement.payday,
+		'yyyy-mm-dd') payday, settlement from class_order
+		join class on class_order.code = class.code
+		join orderlist on orderlist.order_code= class_order.order_code
+        join member on orderlist.userid = member.userid
+		left join settlement on class_order.class_order_code =settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+		and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and class_name!=null'>
+				and class.class_name like '%${class_name}%'
+			</when>
+			<when test='category!=null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A WHERE ROWNUM &lt;= ${endNum} ) WHERE RNUM &gt;=${startNum}
+	</select>
+	
+	<select id="creatorSalesY" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and (class_order.settlement='y' or class_order.settlement='Y')
+		and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="creatorSalesN" parameterType="map" resultType="_int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and
+		(class_order.settlement='n' or class_order.settlement='N') and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="creatorAllSales" parameterType="map" resultType="_int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and
+		class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	
+	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

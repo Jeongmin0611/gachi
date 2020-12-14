@@ -1952,7 +1952,6 @@ public class AdminController {
 			mav.addObject("genderData", genderPieData);
 			mav.addObject("ageLabel", agePieLbl);
 			mav.addObject("ageData", agePieData);
-			mav.setViewName("admin/adminStatStore");
 
 			System.out.println("ajax success");
 			try {
