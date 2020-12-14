@@ -261,10 +261,11 @@ $(function(){
 
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center" id="mypageMainPage">
+	<c:if test="${pvo.nowPage>1}">
 		<li class="page-item">
 			<a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage-1 }">Prev</a>
 		</li>
-		
+		</c:if>
 		<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
 			<c:if test="${p<=pvo.totalPage }">
 				<li class="page-item">
