@@ -109,7 +109,7 @@
 	</select>
 	<insert id="orderInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
 		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type, zipcode, addr, detailaddr, etc)
-		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}', '${zipcode}', '${addr}', '${detailaddr}', '${etc}')
+		values('${order_code}'||a_sq.nextval, '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}', '${zipcode}', '${addr}', '${detailaddr}', '${etc}')
 	</insert>
 	<insert id="classOrderInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
 		insert into class_order(class_order_code, order_code, code)
@@ -118,6 +118,10 @@
 	<insert id="goodsOrderInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
 		insert into goods_order(goods_order_code, order_code, code, amount)
 		 values('g'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, '${order_code}', '${code}', ${amount})
+	</insert>
+	<insert id="courseInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
+		insert into course(course_code, code, userid, startdate, enddate, success)
+		 values('cou'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, 'c2020112601', 'member0@gachi.com', sysdate, sysdate+90, 'N');
 	</insert>
 	<select id="orderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderVO">
 		select order_code, price, payment_type
@@ -177,5 +181,46 @@
 	</delete>
 	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
 		select * from good where userid='${userid}' and code='${code}'
+	</select>
+	<select id="qnaView" resultType="com.bitcamp.gachi.mypage.QnaVO">
+		select num, class_img, class_name, subject, content, to_char(writedate, 'YY/MM/DD HH:MI') writedate, nickname, answer, to_char(answer_writedate, 'YY/MM/DD') answer_writedate
+		 from class c, qna q, member m
+		 where q.code = c.code
+		 and q.writer = m.userid
+		 and q.userid='${userid}'
+		 order by writedate desc
+	</select>
+	<delete id="qnaDelete" parameterType="int">
+		delete from qna where num = ${num}
+	</delete>
+	<delete id="classReviewDelete" parameterType="int">
+		delete from class_review where num = ${num}
+	</delete>
+	<delete id="goodsReviewDelete" parameterType="int">
+		delete from goods_review where num = ${num}
+	</delete>
+	<delete id="eventReplyDelete" parameterType="int">
+		delete from event_reply where num = ${num}
+	</delete>
+	<select id="classReview" resultType="com.bitcamp.gachi.mypage.QnaVO">
+		select num, class_name, class_img, subject, cr.grade, content, to_char(writedate, 'YY/MM/DD HH:MI') writedate
+		 from class c, class_review cr
+		 where c.code = cr.code
+		 and cr.userid = '${userid}'	
+		 order by writedate desc
+	</select>
+	<select id="goodsReview" resultType="com.bitcamp.gachi.mypage.QnaVO">
+		select num, goods_name, goods_img1, subject, gr.grade, content, to_char(gr.writedate, 'YY/MM/DD HH:MI') writedate
+		 from goods g, goods_review gr
+		 where g.code = gr.code
+		 and gr.userid = '${userid}'	
+		 order by writedate desc
+	</select>
+	<select id="eventReplyView" resultType="com.bitcamp.gachi.board.EventBoardVO">
+		select reply_num, subject, event_img, r.content, to_char(r.writedate, 'YY-MM-DD HH:MI') writedate
+		from event e, event_reply r
+		where e.event_num = r.event_num
+		and userid = '${userid}'
+		order by writedate desc
 	</select>
 </mapper>

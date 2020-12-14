@@ -139,11 +139,11 @@
 			</ul>
 		</form>
 </div>
-
-<div style="margin:5px 0px;text-align:right">
-	<!-- <button class="btn" id="settleDel">선택정산</button> -->
-	<button class="btn">구매확정</button>
-</div>
+	<form id="storeEdit" action="adminStoreEditOk" method="post">
+		<div style="margin:5px 0px;text-align:right">
+			<!-- <button class="btn" id="settleDel">선택정산</button> -->
+			<button type="submit" class="btn">구매확정</button>
+		</div>
 <div>
 	<ul id="ad_paymentStore_lst">
 		
@@ -159,7 +159,7 @@
 		<li>결제상태</li>
 		
 		<c:forEach items="${data }" var="data">
-		<li><input type="checkbox"/></li>
+		<li><c:if test="${data.finished eq '미확정' }"><input type="checkbox" name="chk_${data.goods_order_code }"/></c:if></li>
 		<li>${data.order_code}</li>
 		<li>${data.category } </li>
 		<li class="wordCut">${data.goods_name}</li>
@@ -169,8 +169,10 @@
 		<!-- <li>0</li> -->
 		<li>${data.orderdate}</li>
 		<li><c:if test="${data.finished eq '미확정'}">미확정</c:if><c:if test="${data.finished eq '확정'}">구매확정</c:if></li>
+		<input type="hidden" name="code_${data.goods_order_code }" value="${data.goods_order_code }" />
 		</c:forEach>
 	</ul>
+	</form>
 </div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

@@ -34,7 +34,7 @@
 			<hr/>
 			<div class="row">
 				<div class="col-md-4">결제금액</div>
-				<div class="col-md-8">${vo.price }원</div>
+				<div class="col-md-8"><fmt:formatNumber value="${vo.price }" pattern="#,###" />원</div>
 			</div>
 			<hr/>
 			<div class="row">
@@ -45,10 +45,9 @@
 			<div class="row">
 				<div class="col-md-4">주문내역</div>
 				<div class="col-md-8">
-					<div>${class_name }</div>
+					<div>${class_name }<c:if test="${cnt>1 }">외 ${cnt-1 }개</c:if></div>
 					<div>${goods_name }</div>
 				</div>
-				
 			</div>
 			<hr/>
 			<div>

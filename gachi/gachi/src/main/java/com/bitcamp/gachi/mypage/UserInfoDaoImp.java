@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bitcamp.gachi.board.EventBoardVO;
 import com.bitcamp.gachi.register.RegisterVO;
 
 public interface UserInfoDaoImp {
@@ -79,4 +80,20 @@ public interface UserInfoDaoImp {
 	public int wishListDel(@Param("userid") String userid, @Param("code") String code);
 	//좋아요 (클래스, 상품 view화면)
 	public OrderListVO wishOneRecord(@Param("userid") String userid, @Param("code") String code);
+	//클래스 질문답변
+	public List<QnaVO> qnaView(String userid);
+	//클래스 질문답변 삭제
+	public int qnaDelete(int num);
+	//클래스 수강평 삭제
+	public int classReviewDelete(int num);
+	//스토어 질문답변 삭제
+	public int goodsReviewDelete(int num);
+	//이벤트댓글 삭제
+	public int eventReplyDelete(int num);
+	//클래스 수강평
+	public List<QnaVO> classReview(String userid);
+	//상품 리뷰
+	public List<QnaVO> goodsReview(String userid);
+	//이벤트 댓글
+	public List<EventBoardVO> eventReplyView(String userid);
 }
