@@ -5,12 +5,17 @@ public class SettleVO {
 	// 정상 관리 용 필드
 	private int rownum;
 	private String order_code; // 주문코드
+	private String class_order_code; // 클래스 주문 코드
+	private String goods_order_code; // 상품 주문 코
 	private String userid; // 아이디(이메일) - 구매자 아이디 X, 클래스 담당 크리에이터 이메일
 	private String username;
+	private String tel; //구매자 연락처 
 	private String category; //카테고리
 	private int real_price; // 클래스 판매가
 	private String payday; // 정산 지급일
-	private String settlement; // 정산 여부	
+	private String settlement; // 정산 여부
+	private String delivery; //운송장번호
+	private String state; //배송단계 
 	
 	private String goods_name; //상품이름
 	private String code; //상품코드 
@@ -33,6 +38,18 @@ public class SettleVO {
 	}
 	public void setOrder_code(String order_code) {
 		this.order_code = order_code;
+	}
+	public String getGoods_order_code() {
+		return goods_order_code;
+	}
+	public void setGoods_order_code(String goods_order_code) {
+		this.goods_order_code = goods_order_code;
+	}
+	public String getClass_order_code() {
+		return class_order_code;
+	}
+	public void setClass_order_code(String class_order_code) {
+		this.class_order_code = class_order_code;
 	}
 	public String getUserid() {
 		return userid;
@@ -112,6 +129,24 @@ public class SettleVO {
 	}
 	public void setMileage(String mileage) {
 		this.mileage = mileage;
+	}
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 }

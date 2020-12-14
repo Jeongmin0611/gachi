@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 	
 	/* 회원탈퇴 - 약관동의 */
@@ -53,7 +54,7 @@
 			<hr/>
 			<div class="row">
 				<div class="col-md-4">보유 마일리지</div>
-				<div class="col-md-8">${mileage }p</div>
+				<div class="col-md-8"><fmt:formatNumber value="${mileage }" pattern="#,###" />p</div>
 			</div>
 			<hr/>
 			<div id="userLeaveNotice">

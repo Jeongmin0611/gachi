@@ -62,8 +62,8 @@
 				<li>${vo.class_name}</li>
 				<li>${vo.unit_content}</li>
 				<li>${vo.section_index}</li>
-				<li>${vo.video_name}</li>
-				<li>${vo.video_filename}</li>
+				<li><a href="/gachi/adminVideoView?code=${vo.code}&video_filename=${vo.video_filename}">${vo.video_name}</a></li>
+				<li class="wordCut">${vo.video_filename}</li>
 				<li>${vo.nickname}</li>
 				<li>${vo.video_length}</li>
 				<li>${vo.enroll_date}</li>

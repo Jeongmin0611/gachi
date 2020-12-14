@@ -134,12 +134,13 @@
 		update member set nickname =#{nickname}, username=#{username}, tel=#{tel} ,gender=#{gender},  zipcode=#{zipcode},
 		addr =#{addr},detailaddr =#{detailaddr} where userid = #{userid}
 	</update>
-	<update id ="creatorStateMemberUpdate" parameterType="String">
-		update creator set creator_state='승인' where userid =#{userid}
+	<update id ="creatorStateUpdate" parameterType="map">
+		update creator set creator_state=#{state} where userid =#{userid}
 	</update>
 	<update id="creatorleaveMemberUpdate" parameterType="String">
 		update member set deleted='탈퇴',withdrawdate=sysdate where userid =#{userid}
 	</update>
+
 	
 		<select id="dashForCreator" parameterType="map" resultType="_int">
 		<foreach collection="list" item="item" separator=" union all">

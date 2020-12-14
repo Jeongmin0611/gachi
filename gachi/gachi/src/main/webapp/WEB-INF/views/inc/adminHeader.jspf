@@ -6,17 +6,18 @@
 <head>
 <meta name="viewport" content="width=device, initial-scale=1"/>  
 <link rel="stylesheet" href ="resources/bootstrap.css" type="text/css"/>
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
-<link href="<c:url value="/img/logo.png" />" rel="stylesheet">
+<link href="<c:url value="/img/mainlogo.png" />" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
 <!-- Resources -->
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-
+ <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
 <style>
 #admintop img {
 	widht: 150px;
@@ -160,7 +161,7 @@ a, h1, li {
 			<ul class="submenu">
 				<li><a href="/gachi/adminOrder">주문</a></li>
 	            <li><a href="/gachi/adminDelivery">배송</a></li>
-	            <li><a href="/gachi/adminReturn">반품</a></li>
+	            <!-- <li><a href="/gachi/adminReturn">반품</a></li> -->
 			</ul>
 			</div>
 		</li>

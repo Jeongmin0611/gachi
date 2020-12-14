@@ -224,18 +224,22 @@ input{text-align:center;}
 
 
 /* 愿�由ъ옄 二쇰Ц 愿�由� start*/
+
 #ad_order_lst{
-	margin-top:20px;
+	overflow:auto;
+	border:3px solid #437299;
+	border-radius:10px;
+	
 	margin-bottom:20px;
 }
 #ad_order_lst li{
-	width:8%;
+	width:10%;
 	float:left;
 	height:40px;
 	line-height:40px;
-	border:1px solid gray;
-	font-size:0.8em;
+	border-bottom:1px solid gray;
 }
+
 
 #ad_order_lst>li:nth-child(9n+1){
 	width:15%;
@@ -321,7 +325,7 @@ input{text-align:center;}
 
 #ad_delivery_info li{
 	float:left;
-	width:33%;
+	width:10%;
 }
 #ad_delivery_lst{
 	overflow:auto;
@@ -347,16 +351,16 @@ input{text-align:center;}
 	width:15%;
 }
 #ad_delivery_lst li:nth-child(8n+4){
-	width:15%;
+	width:20%;
 }
 #ad_delivery_lst li:nth-child(8n+5){
 	width:10%;
 }
 #ad_delivery_lst li:nth-child(8n+6){
-	width:7%;
+	width:15%;
 }
 #ad_delivery_lst li:nth-child(8n+7){
-	width:23%;
+	width:10%;
 }
 #ad_delivery_lst li:nth-child(8n+8){
 	width:10%;

@@ -25,6 +25,10 @@ public class ClassVO {
 	private String class_img;
 	private String nickname;
 	private List<String> imgList;
+	private int unit;
+	private String unit_content;
+	private String section_code;
+	private List<ClassVO> unitList;
 	
 	public String getCode() {
 		return code;
@@ -134,4 +138,29 @@ public class ClassVO {
 	public void setImgList(List<String> imgList) {
 		this.imgList = imgList;
 	}
+	public int getUnit() {
+		return unit;
+	}
+	public void setUnit(int unit) {
+		this.unit = unit;
+	}
+	public String getUnit_content() {
+		return unit_content;
+	}
+	public void setUnit_content(String unit_content) {
+		this.unit_content = unit_content;
+	}
+	public String getSection_code() {
+		return section_code;
+	}
+	public void setSection_code(String section_code) {
+		this.section_code = section_code;
+	}
+	public List<ClassVO> getUnitList() {
+		return unitList;
+	}
+	public void setUnitList(List<ClassVO> unitList) {
+		this.unitList = unitList;
+	}
+	
 }

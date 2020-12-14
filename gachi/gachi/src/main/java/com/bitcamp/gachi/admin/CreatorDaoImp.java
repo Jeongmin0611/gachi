@@ -48,6 +48,8 @@ public interface CreatorDaoImp {
 
 	public int creatorStateMemberUpdate(String userid);
 
+	public int creatorStateUpdate(Map<String, String> dbParam);
+
 	
 
 }

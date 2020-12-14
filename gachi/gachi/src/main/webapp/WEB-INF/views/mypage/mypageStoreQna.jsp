@@ -36,7 +36,7 @@
 	                  			<div>
 	                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b>질문입니다.</b> 
 	                  				<div style="margin:10px;font-size:0.9em">입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</div>
-	                  				<div style="text-align:right"><label class="badge badge-pill badge-light">20/11/15</label><a href="#" style="font-size:0.9em;margin:0 5px">수정</a><a href="#"style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
+	                  				<div style="text-align:right"><label class="badge badge-pill badge-light">20/11/15</label><a href="#" style="font-size:0.9em;margin:0 5px">수정</a><a class="focusEffect" href="#" style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
 			                  		<div style="margin-left:10%;width:90%;margin-top:3%;padding:15px;height:100px;background:#e3eef6;border-radius: 1em;">
 			                  			<div><b style="font-size:0.9em">크리에이터</b> <label class="badge badge-pill badge-light" style="float:right">20/11/16</label></div>
 			                  			<div style="font-size:0.9em">네, 처음 시작하시는 분들도 무리없이 따라오시는 난이도의 수업입니다 :)</div>

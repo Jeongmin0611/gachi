@@ -16,6 +16,14 @@
 		width: 30%;
 		margin-top: 100px;
 	}
+	#userInterest>label{
+		width:12%;
+		font-size:0.9em;
+	}
+	#userInterest>label:nth-child(4),
+	#userInterest>label:last-child{
+		width:15%;
+	}
 	
 </style>
 <script>
@@ -179,7 +187,7 @@
 				<hr/>
 				<div class="row">
 					<div class="col-md-4">관심사</div>
-					<div class="col-md-8">
+					<div class="col-md-8" id="userInterest">
 						<input type="hidden" id="userInter" value="${vo.interest }"/>
 						<label><input type="checkbox" name="interest" value="미술">미술</label>
 						<label><input type="checkbox" name="interest" value="요리">요리</label>
