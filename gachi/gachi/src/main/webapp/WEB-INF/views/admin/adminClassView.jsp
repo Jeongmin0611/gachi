@@ -65,16 +65,12 @@
 			<li>대표이미지</li>
 			<li>
 			<c:forEach var="imgList" items="${vo.imgList}">
-				<img src="upload/classImg/${imgList}" style="width:150px;height:150px;"/>
+				<img src="upload/classImg/${imgList}" style="width:300px;height:300px;"/>
 			</c:forEach>
 			</li>
 		</ul>
 	</li>
 </ul>
-<h3>클래스 상세정보</h3>
-<div id="ad_goods_info">
-	<textarea name="class_info">${vo.class_info }</textarea>
-</div>
 <h3>클래스목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
 	<li>목차순서</li>
@@ -84,71 +80,10 @@
 		<li>${section.unit_content}</li>
 	</c:forEach>
 </ul>
-<!-- 
-<h3>클래스영상정보</h3>
-	<ul id="ad_video_priview" class="text-center">
-		<li>동영상코드</li>
-		<li>차시</li>
-		<li>차시명</li>
-		<li>영상제목</li>
-		<li>파일명</li>
-		<li>영상길이</li>
-		<li>등록일</li>
-		<c:forEach var="vList" items="${vList}">
-			<li>${vList.video_code}</li>
-			<li>${vList.unit}</li>
-			<li class="wordCut">${vList.unit_content}</li>
-			<li>${vList.video_name}</li>
-			<li>${vList.video_filename}</li>
-			<li>${vList.video_length}</li>
-			<li>${vList.enroll_date}</li>	
-		</c:forEach>
-	</ul>
-<h3>질문답변</h3>
-	<ul id="ad_goods_inquiry" class="text-center">
-		<li>선택</li>
-		<li>번호</li>
-		<li>제목</li>
-		<li>작성자</li>
-		<li>작성일</li>
-		<li>조회수</li>
-		<li>답변여부</li>
-		
-		<li><input type="checkbox"/></li>
-		<li>10</li>
-		<li>난이도는 어느정도인가요?</li>
-		<li>홍길동</li>
-		<li>2020-10-29</li>
-		<li>224</li>
-		<li><a href="#">답변하기</a></li>
-	</ul>
-	<div style="height:50px;text-align:right;">	
-		<button class="ad_right_align btn" onclick="goodsInquiryDel()">삭제</button>
-	</div>
-<h3>수강리뷰</h3>
-	<ul id="ad_goods_review" class="text-center">
-		<li>선택</li>
-		<li>번호</li>
-		<li>제목</li>
-		<li>평점</li>
-		<li>작성자</li>
-		<li>작성일</li>
-		<li>조회수</li>
-		<li>답변여부</li>
-		
-		<li><input type="checkbox"/></li>
-		<li>10</li>
-		<li>재입고는 언제쯤인가요?</li>
-		<li>★★★★</li>
-		<li>홍길동</li>
-		<li>2020-10-29</li>
-		<li>224</li>
-		<li><a href="#">답변하기</a></li>
-	
-	</ul>	
-	<div style="height:50px;text-align:right;">
-		<button class="btn" onclick="goodsInquiryDel()">삭제</button>
-	</div> -->
+<h3>클래스 상세정보</h3>
+<div id="ad_goods_info">
+	<textarea name="class_info">${vo.class_info }</textarea>
+</div>
 <div class="text-center">
 		<c:if test="${vo.class_state ne '등록승인'}">
 			<button class="btn" onclick="updateClassState()">등록처리</button>

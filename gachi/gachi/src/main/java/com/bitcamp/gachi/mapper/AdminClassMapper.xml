@@ -94,10 +94,10 @@
 		select code,category,class_name,stage,full_price,real_price,good,allow,class_state,class_info,class_img from class where code=#{code}
 	</select>
 	<select id="selectSection" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
-		select section_code,unit,unit_content from section where code=#{param1} order by unit
+		select code,section_code,unit,unit_content from section where code=#{param1} order by unit
 	</select>
 	<select id="getClassVideoList" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
-		select video_code,class.class_name,unit, unit_content,class_video.section_index, 
+		select code,video_code,class.class_name,unit, unit_content,class_video.section_index, 
 		video_name,video_filename,member.nickname,video_length,to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video
 		join section on class_video.section_code=section.section_code
 		join class on class.code=class_video.code
@@ -143,4 +143,35 @@
 	<delete id="deleteSection" parameterType="String">
 		delete from section where section_code='${param}'
 	</delete>
+	<update id="updateSection" parameterType="com.bitcamp.gachi.admin.ClassVO">
+		MeRGE into section using dual on (section_code='${section_code}')
+		when matched then 
+		update set unit=${unit},unit_content='${unit_content}' 
+		where section_code='${section_code}'
+		when not matched then
+		insert (code,section_code,unit,unit_content) values(
+		'${code}','${section_code}',${unit},'${unit_content}')
+	</update>
+	<select id="selectNextSeq" resultType="int">
+		select A_SQ.nextval from dual
+	</select>
+	<select id="selectClassVideoList" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		select c.video_code,c.section_code,unit,unit_content,section_index,video_name,video_name,
+		video_filename,video_length,to_char(enroll_date,'YYYY-MM-DD') enroll_date
+		from class_video c join section s 
+		on c.section_code=s.section_code where c.code='${param1}'
+		order by s.unit asc,c.section_index asc
+	</select>
+	<select id="selectVideoCategory" parameterType="String" resultType="String">
+		select category from class where code='${param1}'
+	</select>
+	<select id="selectVideoClassName" parameterType="String" resultType="String">
+		select class_name from class where code='${param1}' 
+	</select>
+	<delete id="videoDelete" parameterType="String">
+		delete from class_video where video_code='${param1}'
+	</delete>
+	<select id="getUnit" parameterType="String" resultType="int">
+		select unit from section where unit_content='${param1}'
+	</select>
 </mapper>
