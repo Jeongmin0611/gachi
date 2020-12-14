@@ -45,10 +45,8 @@ public class StoreController {
 		String category=req.getParameter("category");
 		String selectval=req.getParameter("selectval");
 		
-		
-		String sql = sqlSession.getConfiguration().getMappedStatement("storeAllRecord").getBoundSql(vo).getSql();
-		System.out.println("sql->"+sql);
-		List<AllVO> list=dao.storeAllRecord(vo);		
+		List<AllVO> list=dao.storeAllRecord(vo);
+		System.out.println(vo);
 
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		

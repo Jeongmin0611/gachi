@@ -3,35 +3,38 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.classPage.ClassPageDaoImp">
-	<select id="classPageAllRecord" parameterType="String"
-		resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, nickname, class_img
-		from class join member on class.userid=member.userid
+	<select id="classPageAllRecord" parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="com.bitcamp.gachi.classPage.ClassPageVO">
+		select * from 
+		(select * from 
+		(select c.code,c.category,c.class_name,c.real_price,m.nickname,c.class_img,c.allow
+		from class c join member m on c.userid=m.userid
 		<choose>
-			<when test="category==null and selectval==null"></when>
-			<when test="category==null and selectval.equals('Iall')"></when>
-			<when test="category==null and selectval.equals('Inew')">
-				order by allow desc
+			<when test='category==null and selectval == null'></when>
+			<when test='category==null and selectval.equals("Iall")'></when>
+			<when test='category==null and selectval.equals("Inew")'>
+				where allow<![CDATA[ >= ]]> sysdate order by allow desc) 
 			</when>
-			<when test="category==null and selectval.equals('Ipopular')">
-				order by good desc
+			<when test='category==null and selectval.equals("Ipopular")'>
+				where allow<![CDATA[ >= ]]> sysdate order by good desc) 
 			</when>
 			<when test="category!=null and selectval==null">
-				where category='${param1}'
-				order by allow desc
+				where allow<![CDATA[ >= ]]> sysdate and category='${category}'order by allow asc) 
 			</when>
-			<when test="category!=null and selectval.equals('Iall')">
-				where category='${param1}'
-				order by allow desc
+			<when test='category!=null and selectval.equals("Iall")'>
+				where allow<![CDATA[ >= ]]> sysdate and category='${category}'order by allow asc) 
 			</when>
-			<when test="category!=null and selectval.equals('Inew')">
-				where category='${param1}' order by allow desc
-				order
-				by allow desc
+			<when test='category!=null and selectval.equals("Inew")'>
+				where allow<![CDATA[ >= ]]> sysdate and category='${category}' order by allow desc) 	
+			</when>			
+			<when test='category!=null and selectval.equals("Ipopular")'>
+				where allow<![CDATA[ >= ]]> sysdate and category='${category}' order by good desc)	
 			</when>
-			<when test="category!=null and selectval.equals('Ipopular')">
-				where category='${param1}'
-				order by good desc
+		</choose>
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by allow desc)
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by allow asc
+		<choose>
+			<when test='category==null and selectval==null'>
+			)
 			</when>
 		</choose>
 	</select>
@@ -43,7 +46,7 @@
 		where code='${param1}'
 	</select>
 	<select id="classBoardAllRecordCount"
-		parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="int">
 		select
 		count(code) from class
 	</select>

@@ -105,7 +105,7 @@
 				case '운동':
 					$('#aExercise').attr('style', 'font-weight:bold');
 					break;
-				case '공예%2F창작':
+				case '공예/창작':
 					$('#aCrafts').attr('style', 'font-weight:bold');
 					break;
 				case '미술':
@@ -114,7 +114,7 @@
 				case '라이프스타일':
 					$('#aLifeStyle').attr('style', 'font-weight:bold');
 					break;
-				case '사진%2F영상':
+				case '사진/영상':
 					$('#aPhoto').attr('style', 'font-weight:bold');
 					break;
 				default:
@@ -219,21 +219,14 @@
 <div class="container cfont">
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-		<span> <a href="/gachi/storeList" id="aAll">전체</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("공예/창작", "UTF-8")%>"
-			title="공예/창작" id="aCrafts">공예/창작</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("요리", "UTF-8")%>"
-			title="요리" id="aFood">요리</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("미술", "UTF-8")%>"
-			title="미술" id="aArt">미술</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("음악", "UTF-8")%>"
-			title="음악" id="aMusic">음악</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("라이프스타일", "UTF-8")%>"
-			title="라이프스타일" id="aLifeStyle">라이프스타일</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("운동", "UTF-8")%>"
-			title="운동" id="aExercise">운동</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("사진/영상", "UTF-8")%>"
-			title="사진/영상" id="aPhoto">사진/영상</a> &nbsp;
+		<span> <a href="/gachi/storeList" id="aAll">전체</a> &nbsp; 
+			<a href="/gachi/storeList?category=공예/창작" id="aCrafts">공예/창작</a> &nbsp; 
+			<a href="/gachi/storeList?category=요리" id="aFood">요리</a> &nbsp; 
+			<a href="/gachi/storeList?category=미술" id="aArt">미술</a>&nbsp; 
+			<a href="/gachi/storeList?category=음악" id="aMusic">음악</a> &nbsp; 
+			<a href="/gachi/storeList?category=라이프스타일" id="aLifeStyle">라이프스타일</a> &nbsp; 
+			<a href="/gachi/storeList?category=운동" id="aExercise">운동</a> &nbsp; 
+			<a href="/gachi/storeList?category=사진/영상" id="aPhoto">사진/영상</a> &nbsp;
 		</span> 
 		<select id="storeListSelect" name="storeListSelect">
 			<option value="Iall" id="Iall">전체</option>
@@ -246,8 +239,8 @@
 	<div class="row">
 		<c:forEach var="list" items="${list }">
 			<div class="col-sm-4">
-				<a href="/gachi/storeView?code=${list.code}?category=${list.category}"><img
-					src="/gachi/upload/storeImg/${list.goods_img1 }" class="homeClassListImg" /></a><br />
+				<a href="/gachi/storeView?code=${list.code}">
+				<img src="/gachi/upload/storeImg/${list.goods_img1 }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
@@ -270,6 +263,7 @@
 	<!-- 페이징 -->
 	<div id="storeListPaging">
 		<ul class="pagination justify-content-center">
+		<c:if test="${pvo.category==null}">
 			<c:if test="${pvo.nowPage>1}">
 			<li class="page-item">
 				<a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage-1 }">Prev</a>
@@ -284,6 +278,7 @@
 			</c:forEach>
 			<c:if test="${pvo.nowPage<pvo.totalPage }">
 			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage+1 }">Next</a></li>
+			</c:if>
 			</c:if>
 		</ul>
 	</div>
