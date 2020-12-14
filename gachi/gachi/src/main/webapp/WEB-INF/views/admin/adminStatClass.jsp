@@ -4,7 +4,7 @@
 <style>
 .ad_StatClass_Piechart {
 	float: left;
-	width: 33%;
+	width: 50%;
 	margin: 50px 0px;
 	font-size: 1.5em;
 }
@@ -34,18 +34,17 @@ canvas {
 </style>
 
 <script type="text/javascript">
+	
+	var genderLabel = "${genderLabel}";
+	var genderData = "${genderData}";
+	var ageLabel = "${ageLabel}";
+	var ageData = "${ageData}";
+	
 	$(function(){
 		
 		$("#startDate").val("${startDate}");
 		$("#endDate").val("${endDate}");
-		if('${category}' != '') {
-			$("#category").val("${category}");
-		} else{
-			$("#category").val('');
-		}
-		if('${username}' != '') {
-			$("#username").val("${username}");
-		}
+		
 		
 		$("#countStatClassAll").text( ${countStatClassAll});
 		$("#countClassN").text(${countClassN});
@@ -58,14 +57,12 @@ canvas {
 		
 		$("#frm").click(function(){
 			var url = "/adminStatClass";
-			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() /*+ "&category=" + $('#category').val() + "&username=" + $('#username').val().trim()*/;
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val();
 			$.ajax({
 				url : url,
 				data : data,
 				success: function(data){
-				/* 	$("#startMonth").append("${startMonth}");
-					$("#endMonth").append("${endMonth}"); */
-					
+
 				},error:function(){
 					console.log("ajax에러발생");
 				}
@@ -81,7 +78,8 @@ canvas {
 		<form action="adminStatClass" method="post" id="frm">
 		<div class="ad_StatClass_searchForm">
 			
-		<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
+		<input type="date" name="startDate" id="startDate" value=""/> ~ <input type="date" name="endDate" id="endDate" value=""/>
+		<input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
 		</div>
 <!--  		<div class="ad_StatClass_searchForm">
 			<select id="category" name="category">
@@ -126,10 +124,10 @@ canvas {
 			var ad_StatClass_chart = new Chart(ad_StatClass_context, {
 			    type: 'line',
 			    data: {
-			        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			        labels: ${labelData},
 			        datasets: [{
 			            label: '월별 매출 기록',
-			            data: [100, 50, 150, 100, 60, 60, 70, 30, 90, 200, 36, 88],
+			            data: ${dashData},
 			            backgroundColor: [
 			                'rgba(255, 99, 132, 0.2)',
 			                'rgba(54, 162, 235, 0.2)',
@@ -169,11 +167,11 @@ canvas {
 		var ad_StatClass_gender_chart = new Chart(ad_StatClass_gender_context, {
 		    type: 'pie',
 		    data: {
-			labels : ["Man" , "Woman"],
+			labels : ${genderLabel},
 			datasets : [{
 			backgroundColor : ["#2ecc71","#3498dd"],
 			hoverBackgroundColor : ["#a6a6a6","#d1b2ff"],
-			data : [10,9]
+			data : ${genderData}
 				}]
 			},
 			options : {
@@ -182,7 +180,7 @@ canvas {
 			});
 		
 		</script>
-		성별
+		구매고객 성별정보
 	</div>
 	<div class="ad_StatClass_Piechart cfont">	
 		<canvas id="ad_StatClass_age_chart" data-aos="fade-up"
@@ -192,11 +190,11 @@ canvas {
 		var ad_StatClass_age_chart = new Chart(ad_StatClass_age_context, {
 		    type: 'pie',
 		    data: {
-			labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
+			labels : ${ageLabel},
 			datasets : [{
 			backgroundColor : ["#2ecc71","#3498dd","pink","yellow","green","orange"],
 			hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","green","orange"],
-			data : [10,9,7,3,1,2]
+			data : ${ageData}
 				}]
 			},
 			options : {
@@ -205,29 +203,8 @@ canvas {
 			});
 		
 		</script>
-		연령별
+		구매고객 연령정보
 		</div>
-		<div class="ad_StatClass_Piechart cfont">
-		<canvas id="ad_StatClass_star_chart" data-aos="fade-up"
-     data-aos-anchor-placement="top-center"></canvas>
-		<script type="text/javascript">
-		var ad_StatClass_star_context = document.getElementById('ad_StatClass_star_chart').getContext('2d');
-		var ad_StatClass_star_chart = new Chart(ad_StatClass_star_context, {
-		    type: 'pie',
-		    data: {
-			labels : ["1점" ,"2점" , "3점", "4점", "5점"],
-			datasets : [{
-			backgroundColor : ["#2ecc71","#3498dd","pink","yellow","orange"],
-			hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","orange"],
-			data : [10,9,7,3,1]
-				}]
-			},
-			options : {
-				responsive: false
-				}
-				});	
-			</script>
-			평점
-		</div>
+
 </div>	
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="count" value="0"/> 
 <style>
 	#ad_unit_box{
 		overflow: auto;
@@ -104,23 +105,6 @@
 					}
 				});
 			});	
-			$(document).on('click','.unit_del',(event)=>{
-				let section_code=$(event.target).attr("title");
-				if(section_code!=null){
-					$.ajax({
-						url:'/gachi/unitDel?section_code='+section_code,
-						type:'get',
-						success:(result)=>{
-							$(event.target).parent().parent().remove();
-						},error:(e)=>{
-							alert("이미지파일 삭제를 실패하였습니다.");
-						}
-					});
-				}
-				//else{
-					//$(event.target).parent().parent().remove();
-				//}
-			});	
 		$("#adminClassEditOk").submit(()=>{
 			let grpl = $("input[name=imgList]").length;
 			if(grpl==0){
@@ -139,6 +123,18 @@
 				alert("판매가를 입력하여 주세요.");
 				return false;
 			}
+			
+			let array=new Array();
+			for (var i = 0; i < count; i++) {
+				var unit=document.getElementsByName("unitList["+i+"].unit");
+				array.push(unit[0].value);
+			}
+			const set = new Set(array);
+			if(array.length !== set.size) {
+			  alert("목차가 중복됩니다. 다시 입력해주세요.");
+			  return false;
+			}
+			
 			return true;
 		});	
 	});
@@ -229,21 +225,54 @@
 	</div>
 </c:forEach>
 </div>
+<div>
+
+</div>
 <h3>목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
-	<c:set var="count" value="0"/>
 	<c:forEach var="section" items="${sectionList}">
 		<ul>
-			<li>목차</li>
-			<li><input type="text" name="list[${count}].unit" value="${section.unit}" style="width:30%"/></li>
-			<li>목차명</li>
-			<li><input type="text" name="list[${count}].unit_content" value="${section.unit_content}" style="width:30%"/></li>
+			<li>목차<input type="hidden" name="unitList[${count}].section_code" value="${section.section_code}"/></li>
+			<li><input type="text" name="unitList[${count}].unit" value="${section.unit}" style="width:30%"/></li>
+			<li>목차명<input type="hidden" name="unitList[${count}].code" value="${section.code}"/></li>
+			<li><input type="text" name="unitList[${count}].unit_content" value="${section.unit_content}" style="width:30%"/></li>
 			<li><b class="unit_del" title="${section.section_code}">x</b></li>
 		</ul>	
 		<c:set var="count" value="${count+1}"/>
 	</c:forEach>
-			<li><button id="add_btn" class="btn">+</button></li>
+			<li><button type="button" id="add_btn" class="btn">+</button></li>
 </ul>
+<script type="text/javascript">
+let count=${count};
+$(document).on('click','#add_btn',()=>{
+	let txt='<ul><li>목차<input type="hidden" name="unitList['+count+'].section_code"/></li>';
+	txt+='<li><input type="text" name="unitList['+count+'].unit"'; 
+	txt+='style="width:30%"/></li><li>목차명<input type="hidden"'; 
+	txt+='name="unitList['+count+'].code" value="${vo.code}"/></li>';
+	txt+='<li><input type="text" name="unitList['+count+'].unit_content"'; 
+	txt+='style="width:30%"/><input type="hidden" name="unitList['+count+'].section_code"';
+	txt+='value="null" /></li>';
+	txt+='<li><b class="unit_del">x</b></li></ul>';
+	$("#ad_unit_box>li:last-child").before(txt);
+	count++;
+});
+$(document).on('click','.unit_del',(event)=>{
+	let section_code=$(event.target).attr("title");
+	if(section_code!=null){
+		$.ajax({
+			url:'/gachi/unitDel?section_code='+section_code,
+			type:'get',
+			success:(result)=>{
+				$(event.target).parent().parent().remove();
+			},error:(e)=>{
+				alert("이미지파일 삭제를 실패하였습니다.");
+			}
+		});
+	}else{
+		$(event.target).parent().parent().remove();
+	}
+});	
+</script>
 <h3>클래스정보</h3>
 <ul id="ad_goods_write">
 	<li><textarea name="class_info">${vo.class_info}</textarea></li>

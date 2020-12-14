@@ -69,6 +69,44 @@ public interface SettleDaoImp {
 
 	public List<SettleVO> selectAllSettle(Map<String, String> dbParam);
 
+	public List<Integer> sumStoreSalesByDay(Map<String, Object> dbParam);
+	
+	public List<Integer> sumClassSalesByDay(Map<String, Object> dbParam);
+
+	public void SettleInfoInsert(Map<String, String> dbParam);
+
+	public int SettleStateUpdate(String order_code);
+
+	public int PaymentStateUpdate(String goods_order_code);
+
+	public List<Map<String, Integer>> ClassForAge(Map<String, String> dbParam_pie); //클래스 파이차트 연령정보 
+
+	public List<Map<String, Integer>> ClassForGender(Map<String, String> dbParam_pie); //클래스 파이차트 성별정보
+
+	public List<Map<String, Integer>> StoreForAge(Map<String, String> dbParam_pie); //스토어 파이 차트 연령정보
+
+	public List<Map<String, Integer>> StoreForGender(Map<String, String> dbParam_pie); //스토어 파이 차트 성별정보
+
+	public int countEndDelivery(); //배송완료건수 
+
+	public int countDelivery(); //배송중인건수 
+
+	public int countWaitDelivery(); //배송준비건수 
+
+	public int countdeposit(); //결제완료건수
+
+	public List<MemberVO> selectAllDelivery(Map<String, String> dbParam); //배송 리스트
+
+	public int selectCntAllDelivery(Map<String, String> dbParam); //배송 전체 건수 카운트
+
+	public SettleVO selectDelivery(String code); //딜리버리 뷰페이지 정보전달
+
+	public int DeliveryUpdate(Map<String, String> dbParam); //딜리버리 정보수정
+	
+	
+	
+	
+
 //	public List<SettleVO> selectStoreList(Map<String, String> dbParam);
 //
 //	public int selectCntAllGoods(Map<String, String> dbParam);

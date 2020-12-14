@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(function(){
 	var editor=CKEDITOR.replace('goods_info',{
-		imageUploadUrl:'/gachi/imageUpload',
+		imageUploadUrl:'/gachi/StoreimageUpload',
 		extraPlugins:'uploadimage'
 	});
 	editor.on('fileUploadRequest', function( evt ) {
@@ -13,7 +13,7 @@ $(function(){
 	        xhr = fileLoader.xhr;
 	    xhr.open( 'POST', fileLoader.uploadUrl, true );
 	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','classEdit');
+	    formData.append('type','GoodsWrite');
 	    fileLoader.xhr.send( formData );
 	    evt.stop();
 	}, null, null, 4 ); 
@@ -27,6 +27,12 @@ $(function(){
 	$(".ad_box>div").css("margin","20px 0px;");
 	$(".ad_box>div").css("float","left");
 	let imgCount=2;
+	
+	$('#mainImg').on('change', handleImgFileSelect(mainImg));
+	$('#detailImg1').on('change', handleImgFileSelect(detailImg1));
+	$('#detailImg2').on('change', handleImgFileSelect(detailImg2));
+	$('#detailImg3').on('change', handleImgFileSelect(detailImg3));
+	
 	 $(".add_img").on("dragenter dragover", function(event){
 	        event.preventDefault();
 	    });
@@ -35,12 +41,14 @@ $(function(){
 		event.preventDefault();
 		var files =event.originalEvent.dataTransfer.files;
 		var file=files[0];
-		console.log(file);
+		console.log('file:' + file);
+
 		let code=$("#code").val();
 		var formData= new FormData();
 		formData.append("file",file);
 		formData.append("code",code);
-		$.ajax({
+		console.log(formData.file);
+		  $.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
 			url:"/gachi/StoreimgThumbnail",
@@ -57,7 +65,7 @@ $(function(){
 				tagTxt+='<div style="text-align:center">';
 				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 				tagTxt+='<div style="padding:0 auto;">';
-				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
+				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
 				$(".ad_box").append(tagTxt);
 			}
 		});
@@ -67,7 +75,7 @@ $(function(){
 			let code=$("#code").val();
 			$.ajax({
 				url:'/gachi/StoreimageDelete?imageName='+imageName+"&code="+code,
-				type:'get',
+				type:'post',
 				success:(result)=>{
 					$(event.target).parent().parent().remove();
 				},error:(e)=>{
@@ -76,7 +84,7 @@ $(function(){
 			});
 		});	
 		
-	$("#adminStoreEditOk").submit(()=>{
+	$("#adminGoodsWrite").submit(()=>{
 		let grpl = $("input[name=imgList]").length;
 		if(grpl==0){
 			alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
@@ -97,6 +105,24 @@ $(function(){
 		return true;
 	});	
 });
+function goodsDel(){
+	if(confirm("해당 상품을 삭제하시겠습니까?")){
+		
+	}
+}
+
+/* function handleImgFileSelect(inputName, e) {
+	
+	var inputName = inputName;
+
+	let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
+	tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
+	tagTxt+='<div style="text-align:center">';
+	tagTxt+='<img id=' + inputName + ' name= ' + inputName + 'src="'+result+'" width=200 height=200 /></div>';
+	tagTxt+='<div style="padding:0 auto;">';
+	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
+	$(".ad_box").append(tagTxt);
+} */
 </script>
 <div class="container">
 <h1>상품등록</h1>
@@ -105,7 +131,7 @@ $(function(){
 	<li>
 		<ul>
 			<li class="content_center">상품코드</li>
-			<li><input type="text" id="code" name="code" value="" readonly/> 생성시 시퀀스로 자동생성</li>
+			<li><input type="text" id="code" name="code" value=""/> 생성시 시퀀스로 자동생성</li>
 			<li class="content_center">카테고리</li>
 			<li>
 				<select id="category" name="category">
@@ -123,7 +149,7 @@ $(function(){
 			<li class="content_center">재고</li>
 			<li><input type="text" id="stock" name="stock" value=""/></li>
 			<li class="content_center">원가금액</li>
-			<li><input type="text" id="goods_name" name="prime_coast" size="40" value=""/></li>
+			<li><input type="text" id="prime_coast" name="prime_coast" size="40" value=""/></li>
 			<li class="content_center">판매금액</li>
 			<li><input type="text" id="real_price" name="real_price" value=""/></li>
 			<li class="content_center">판매상태</li>
@@ -134,6 +160,14 @@ $(function(){
 					<option value="판매종료">판매종료</option>
 				</select>
 			</li>
+			<li class="content_center">메인 이미지</li>
+			<li><input type="file" name="mainImg" id="mainImg" /></li>
+			<li class="content_center">상세 이미지1</li>
+			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
+			<li class="content_center">상세 이미지2</li>
+			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
+			<li class="content_center">상세 이미지3</li>
+			<li><input type="file" name="detailImg3" id="detailImg2" /></li>
 		</ul>
 	</li>
 	<li class="content_center">
@@ -156,7 +190,7 @@ $(function(){
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b>x</b>
+			<span class="wordCut">${imgList}</span><b>  x  </b>
 		</div>
 	</div>
 </c:forEach>

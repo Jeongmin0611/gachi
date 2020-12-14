@@ -302,6 +302,7 @@ a {
 }
 .mainLogoImg{
 	margin:50px 0;
+	width:100%;
 }
 .logRadioBtnInterval{
 	margin:0 0 0 10px;
@@ -313,7 +314,7 @@ a {
 .nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
   border-bottom: 3px solid transparent;
   }
-.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
+.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
   border-bottom: 3px solid transparent;
   background: none;
 }
@@ -1297,7 +1298,7 @@ $(document).ready(function() {
    <!-- 메뉴 -->
 
 	<nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
-	<a href="/gachi"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+	<a href="/gachi"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>    
@@ -1389,7 +1390,7 @@ $(document).ready(function() {
                <button type="button" class="btn btn-primary" id="mdClose" style="color:gray;">X</button>
             </div>
          <div>
-          <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+          <img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
             <div class="md_layer"></div>
                <input type="text" placeholder="아이디(이메일)" id="userid" name="userid"/><br />
                <input type="password" placeholder="비밀번호" id="userpwd" name="userpwd"/><br />
@@ -1410,7 +1411,7 @@ $(document).ready(function() {
             <div id="mdJBtm">
                <button type="button" class="btn btn-primary" id="mdJClose" style="color:gray;">X</button>
             </div>
-            <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="joinRadioBtn" checked class="logRadioBtnInterval"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="joinRadioBtn" class="logRadioBtnInterval" onclick="mdJchange()"/>크리에이터<br/>
             <div class="mdJ_layer"></div>
              <input type="text" placeholder="이메일" name="userid2" id="userid2" style="width:68%"/>
@@ -1506,7 +1507,7 @@ $(document).ready(function() {
             <div id="mdJ2Btm">
                <button type="button" class="btn btn-primary" id="mdJ2Close" style="color:gray;">X</button>
             </div>
-            <img src="/gachi/img/logo.png" class="mainLogoImg"/>
+            <img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
             <input type="radio" value="회원" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioMemberBtn"  class="logRadioBtnInterval" onclick="mdJ2change()"/>회원<input type="radio" value="크리에이터" style="width:15px;height:15px;" name="join2RadioBtn" id="join2RadioCreatorBtn" class="logRadioBtnInterval" checked />크리에이터<br/>
             <div class="mdJ2_layer"></div>
                 <input type="text" placeholder="이메일" name="userid3" id="userid3"style="width:68%"/>
@@ -1611,7 +1612,7 @@ $(document).ready(function() {
 				</div>
 				<div class="idF1_layer"></div>
 				<div>
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+				<img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
 				<div>
 		 		<input type="text" id="to3" name="to3" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
 			    <input type="button" id="send3" value="전송" style="width:30%;border:1px solid gray"class="autBtn"/><br> <!-- 문자보내는 전송버튼 -->
@@ -1636,7 +1637,7 @@ $(document).ready(function() {
 				</div>
 				<div class="pwdF1_layer"></div>
 				<div>
-				<img src="/gachi/img/logo.png" class="mainLogoImg"/>
+				<img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
 				<div>
 		 		<input type="text" id="to4" name="to4" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
 			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"/><br> <!-- 문자보내는 전송버튼 -->
