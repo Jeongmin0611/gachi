@@ -282,7 +282,7 @@
 					</li>
 				</c:if>
 			</c:forEach>
-			<c:if test="">
+			<c:if test="${pvo.nowPage<pvo.totalPage }">
 			<li class="page-item"><a class="page-link" href="/gachi/storeList?nowPage=${pvo.nowPage+1 }">Next</a></li>
 			</c:if>
 		</ul>
