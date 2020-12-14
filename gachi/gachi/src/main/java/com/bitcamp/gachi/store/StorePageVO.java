@@ -17,7 +17,7 @@ public class StorePageVO {
 	private String searchKey;
 	private String searchWord;
 	private String code;/*코드*/
-	private String category; // 카테고리
+	private String category; // 카테고리   
 	private String goods_name;/*상품명*/
 	private String goods_img1;/*상품 사진1*/
 	private String real_price;/*실 가격*/

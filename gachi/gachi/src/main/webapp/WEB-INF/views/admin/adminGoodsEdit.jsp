@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(function(){
 	var editor=CKEDITOR.replace('goods_info',{
-		imageUploadUrl:'/gachi/imageUpload',
+		imageUploadUrl:'/gachi/StoreimageUpload',
 		extraPlugins:'uploadimage'
 	});
 	editor.on('fileUploadRequest', function( evt ) {
@@ -13,7 +13,7 @@ $(function(){
 	        xhr = fileLoader.xhr;
 	    xhr.open( 'POST', fileLoader.uploadUrl, true );
 	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','classEdit');
+	    formData.append('type','GoodsEdit');
 	    fileLoader.xhr.send( formData );
 	    evt.stop();
 	}, null, null, 4 ); 
@@ -32,6 +32,7 @@ $(function(){
 	    });
 	
 	$(document).on("drop",".add_img",(event)=>{
+		// 삭제
 		event.preventDefault();
 		var files =event.originalEvent.dataTransfer.files;
 		var file=files[0];
@@ -57,7 +58,7 @@ $(function(){
 				tagTxt+='<div style="text-align:center">';
 				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 				tagTxt+='<div style="padding:0 auto;">';
-				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
+				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
 				$(".ad_box").append(tagTxt);
 			}
 		});
@@ -76,7 +77,7 @@ $(function(){
 			});
 		});	
 		
-	$("#adminStoreEditOk").submit(()=>{
+	$("#adminGoodsEdit").submit(()=>{
 		let grpl = $("input[name=imgList]").length;
 		if(grpl==0){
 			alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
@@ -169,7 +170,7 @@ function goodsDel(){
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b>x</b>
+			<span class="wordCut">${imgList}</span><b>  x  </b>
 		</div>
 	</div>
 </c:forEach>

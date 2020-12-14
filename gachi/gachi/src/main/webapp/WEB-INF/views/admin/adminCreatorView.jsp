@@ -38,14 +38,24 @@
 		<li>가입일</li><li><input type="text" name="signupdate" value="${vo.signupdate }"readonly/></li>
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }"readonly/></li>
 		<li>회원상태</li><li><input type="text" name="deleted" id="deleted" value="${vo.deleted }"readonly/></li>
-		<li>승인상태</li><li><input type="text" name="state" id="state" value="${vo.creator_state }"readonly/></li>
+<%--   		<li>승인상태</li><li><input type="text" name="state" id="state" value="${vo.creator_state }"readonly/></li> 
+ --%> 		<li>승인상태</li>
+			<li>
+				<select id="creator_state" name="creator_state">
+					<option value="미승인" 
+						<c:if test="${vo.creator_state eq '미승인'}"> selected</c:if>>미승인</option>
+					<option value="승인" 
+						<c:if test="${vo.creator_state eq '승인'}"> selected</c:if>>승인</option>
+					<option value="승인거절" 
+						<c:if test="${vo.creator_state eq '승인거절'}"> selected</c:if>>승인거절</option>
+				</select>
+			</li> 
 
 	</ul>
-	<div style="margin:10px 0px;">
+	<div style="margin:10px 0px; float:rigth;">
 		<button type="button" class="btn" onclick="location.href='/gachi/adminCreator'">회원목록</button>
 		<input type="submit" class="btn" value="회원정보수정"/>
 		<button type="button" id="cr_leaveBtn" class="btn" onclick="location.href='/gachi/adminCreatorLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
-		<button type="button" id="cr_stateBtn" class="btn" onclick="location.href='/gachi/adminCreatorStateEditOk?userid=${vo.userid}'">승인관리</button>
 		<!-- <input type="button" id="cr_delBtn" class="btn" value="회원정보삭제"/> -->
 	</div>
 	</form>	

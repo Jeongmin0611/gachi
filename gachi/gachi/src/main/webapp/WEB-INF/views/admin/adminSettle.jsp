@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
 #ad_settle_board_ul>li {
@@ -11,7 +12,7 @@
 
 .ad_settle_board {
 	border: 2px solid #437299;
-	border-radius:10px;
+	border-radius: 10px;
 	width: 300px;
 	height: 150px;
 	padding: 10px;
@@ -95,118 +96,126 @@
 </script>
 <div class="container ad_font">
 	<div class="container ad_font">
-	<h1>크리에이터 정산관리</h1>
+		<h1>크리에이터 정산관리</h1>
 		<form action="adminSettle" method="post" id="frm">
-		<div class="ad_settle_searchForm">
-			
-			<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
-		</div>
-		<div class="ad_settle_searchForm">
-			<select id="category" name="category">
-				<option value="">전체</option>
-				<option value="공예/창작">공예/창작</option>
-				<option value="요리">요리</option>
-				<option value="미술">미술</option>
-				<option value="음악">음악</option>
-				<option value="라이프스타일">라이프스타일</option>
-				<option value="운동">운동</option>
-				<option value="사진/영상">사진/영상</option>
-			</select>
-			<input type="text" name="username" id="username" placeholder="크리에이터명" size="40"/>
-			<input type="submit" class="btn" value="검색"/> 
-		</div>
-		
-<!-- 		<div class="text-center textSize">
+			<div class="ad_settle_searchForm">
+
+				<input type="date" name="startDate" id="startDate" value="" />~<input
+					type="date" name="endDate" id="endDate" value="" />
+			</div>
+			<div class="ad_settle_searchForm">
+				<select id="category" name="category">
+					<option value="">전체</option>
+					<option value="공예/창작">공예/창작</option>
+					<option value="요리">요리</option>
+					<option value="미술">미술</option>
+					<option value="음악">음악</option>
+					<option value="라이프스타일">라이프스타일</option>
+					<option value="운동">운동</option>
+					<option value="사진/영상">사진/영상</option>
+				</select> <input type="text" name="username" id="username"
+					placeholder="크리에이터명" size="40" /> <input type="submit" class="btn"
+					value="검색" />
+			</div>
+
+			<!-- 		<div class="text-center textSize">
 			<input type="radio" name="" checked/>전체
 			<input type="radio" name=""/>스토어
 			<input type="radio" name=""/>크리에이터<br/>
 		</div> -->
 			<ul id="ad_settle_board_ul">
 				<li><div class="ad_settle_board">
-							<b>총 매출 금액</b><br/>
-							<span style="font-size:50px;line-height:100px" id="cntSalesAll"></span>
-						</div></li>
+						<b>총 매출 금액</b><br /> <span
+							style="font-size: 50px; line-height: 100px" id="cntSalesAll"></span>
+					</div></li>
 				<li><div class="ad_settle_board">
-							<b>미정산 금액</b><br/>
-							<span style="font-size:50px;line-height:100px" id="cntSalesN"></span>
-						</div></li>
+						<b>미정산 금액</b><br /> <span
+							style="font-size: 50px; line-height: 100px" id="cntSalesN"></span>
+					</div></li>
 				<li><div class="ad_settle_board">
-							<b>정산 금액</b><br/>
-							<span style="font-size:50px;line-height:120px" id="cntSalesY"></span>
-					</div></li>							
+						<b>정산 금액</b><br /> <span
+							style="font-size: 50px; line-height: 120px" id="cntSalesY"></span>
+					</div></li>
 			</ul>
 		</form>
-</div>
+	</div>
 
-<%-- <div style="margin:5px 5px;text-align:right">
- <button class="btn" id ="settle_btn" type="button" onclick="location.href='/gachi/adminSettleEditOk?order_code=${data.order_code}'">정산</button>
-</div> --%>
-<div>
-	<%-- <input type="hidden" id="order_code" value="${data.order_code }"/> --%>
-	<ul id="ad_settle_lst">
-		
-		<li><input type="checkbox" id="settleSelectAll"/></li>
-		<li>주문코드</li>
-		<li>카테고리</li>
-		<li>클래스명</li>
-		<li>크리에이터아이디</li>
-		<li>크리에이터명</li>
-		<li>정산예정금액</li>
-		<!-- <li>지급금액</li> -->
-		<li>지급일</li>
-		<li>정산상태</li>
-		
-		<c:forEach items="${data }" var="data">
-		<li><input type="checkbox"/></li>
-		<li>${data.order_code}</li>
-		<li>${data.category }</li>
-		<li class="wordCut">${data.class_name }</li>
-		<li>${data.userid}</li>
-		<li>${data.username}</li>
-		<li>${data.real_price }</li>
-		<!-- <li>0</li> -->
-		<li><c:if test="${data.payday eq null}"></c:if></li>
-		<li id="settlement"><c:if test="${data.settlement eq 'n' or data.settlement eq 'N'}">정산대기</c:if><c:if test="${data.settlement eq 'y' or data.settlement eq 'Y'}">정산완료</c:if></li>
-		</c:forEach>
-	</ul>
+	<form id="settle" action="adminSettleEditOk" method="post">
+		<div style="margin: 5px 5px; text-align: right">
+			<button class="btn" id="settle_btn" type="submit">정산</button>
+		</div>
+		<div>
+			<ul id="ad_settle_lst">
+
+				<li><input type="checkbox" id="settleSelectAll" /></li>
+				<li>주문코드</li>
+				<li>카테고리</li>
+				<li>클래스명</li>
+				<li>크리에이터아이디</li>
+				<li>크리에이터명</li>
+				<li>정산예정금액</li>
+				<!-- <li>지급금액</li> -->
+				<li>지급일</li>
+				<li>정산상태</li>
+
+				<c:forEach items="${data }" var="data">
+					<li><c:if
+							test="${data.settlement eq 'n' or data.settlement eq 'N'}">
+							<input type="checkbox" name="chk_${data.class_order_code }" />
+						</c:if></li>
+					<li>${data.order_code}</li>
+					<li>${data.category }</li>
+					<li class="wordCut">${data.class_name }</li>
+					<li>${data.userid}</li>
+					<li>${data.username}</li>
+					<li>${data.real_price }</li>
+					<!-- <li>0</li> -->
+					<li><c:if test="${data.payday eq null}"></c:if>
+						<c:if test="${data.payday ne null }">${data.payday }</c:if></li>
+					<li id="settlement"><c:if
+							test="${data.settlement eq 'n' or data.settlement eq 'N'}">정산대기</c:if>
+						<c:if test="${data.settlement eq 'y' or data.settlement eq 'Y'}">정산완료</c:if></li>
+					<input type="hidden" name="code_${data.class_order_code }"
+						value="${data.class_order_code }" />
+					<input type="hidden" name="userid_${data.class_order_code }"
+						value="${data.userid }" />
+					<input type="hidden" name="price_${data.class_order_code }"
+						value="${data.real_price }" />
+				</c:forEach>
+			</ul>
+	</form>
 </div>
-	<div id="paging">
+<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<c:if test="${method eq 'get' }">
-				<c:if test="${nowPage > 1}">
-					<li class="btn">
-						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage-1}">Prev</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<li class="btn">
-						<a class="btn" href="/gachi/adminPaymentClass?now=${i }">${i }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
-					<li class="btn">
-						<a class="btn" href="/gachi/adminPaymentClass?now=${nowPage+1}">Next</a>
-					</li>
-				</c:if>
+		<c:if test="${method eq 'get' }">
+			<c:if test="${nowPage > 1}">
+				<li class="btn"><a class="btn"
+					href="/gachi/adminPaymentClass?now=${nowPage-1}">Prev</a></li>
 			</c:if>
-			<c:if test="${method eq 'post' }">
-				<c:if test="${nowPage > 1}">
-					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
-					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
-					</li>
-				</c:if>
+			<c:forEach var="i" begin="1" end="${lastPage}">
+				<li class="btn"><a class="btn"
+					href="/gachi/adminPaymentClass?now=${i }">${i }</a></li>
+			</c:forEach>
+			<c:if test="${nowPage < lastPage}">
+				<li class="btn"><a class="btn"
+					href="/gachi/adminPaymentClass?now=${nowPage+1}">Next</a></li>
 			</c:if>
-			
+		</c:if>
+		<c:if test="${method eq 'post' }">
+			<c:if test="${nowPage > 1}">
+				<li class="btn"><a class="btn" href="javascript:void(0);"
+					onClick="postPageMove(${nowPage+1});">Prev</a></li>
+			</c:if>
+			<c:forEach var="i" begin="1" end="${lastPage}">
+				<li class="btn"><a class="btn" href="javascript:void(0);"
+					onClick="postPageMove(${i });">${i }</a></li>
+			</c:forEach>
+			<c:if test="${nowPage < lastPage}">
+				<li class="btn"><a class="btn" href="javascript:void(0);"
+					onClick="postPageMove(${nowPage}-1);">Next</a></li>
+			</c:if>
+		</c:if>
+
 	</ul>
 </div>
 </div>

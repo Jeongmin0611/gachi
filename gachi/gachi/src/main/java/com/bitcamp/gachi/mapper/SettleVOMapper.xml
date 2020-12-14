@@ -12,7 +12,7 @@
 
 		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
 		(SELECT
-		class_order.order_code, class.category, class.class_name, orderlist.userid,
+		class_order.order_code, class_order.class_order_code, class.category, class.class_name, orderlist.userid,
 		member.username,class.real_price, to_char(orderlist.orderdate,
 		'yyyy-mm-dd') orderdate,settlement from class_order
 		join orderlist on class_order.order_code = orderlist.order_code
@@ -45,13 +45,13 @@
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and class.category='${category}'
+				where class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				and member.username like '%${username}%'
+				where member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				and class.category='${category}' and member.username like
+				where class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -67,7 +67,7 @@
 		ROWNUM AS RNUM
 		FROM
 		(SELECT
-		goods_order.order_code, goods.category, goods.goods_name, orderlist.userid, member.username,
+		goods_order.order_code, goods_order.goods_order_code, goods.category, goods.goods_name, orderlist.userid, member.username,
 		goods.real_price, to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate
 		, goods_order.finished from goods_order
 		join orderlist on goods_order.order_code = orderlist.order_code
@@ -76,13 +76,13 @@
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and goods.category='${category}'
+				where goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				and member.username like '%${username}%'
+				where member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				and goods.category='${category}' and member.username like
+				where goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -102,13 +102,13 @@
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and goods.category='${category}'
+				where goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				and member.username like '%${username}%'
+				where member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				and goods.category='${category}' and member.username like
+				where goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -136,13 +136,13 @@
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and class.category='${category}'
+				where class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				and member.username like '%${username}%'
+				where member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				and class.category='${category}' and member.username like
+				where class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -163,24 +163,21 @@
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and class.category='${category}'
+				where class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				and member.username like '%${username}%'
+				where member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				and class.category='${category}' and member.username like
+				where class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
 	</select>
-
-
-
 	<select id="manageSettle" parameterType="map"
 		resultType="com.bitcamp.gachi.admin.SettleVO">
-		select class_order.order_code, class.category,class.class_name ,class.userid,member.username, class.real_price, settlement.payday,
+		select class_order.order_code, class_order.class_order_code, class.category,class.class_name ,class.userid,member.username, class.real_price, to_char(settlement.payday,'yyyy-MM-dd') payday,
 		class_order.settlement from class_order
 		join orderlist on class_order.order_code = orderlist.order_code
 		join class on class_order.code = class.code
@@ -203,6 +200,22 @@
 			</when>
 			<otherwise></otherwise>
 		</choose>
+	</select>
+	<select id="sumStoreSalesByDay" parameterType="map" resultType="int">
+		<foreach collection="list" item="item" separator=" union all">
+			select nvl(sum(nvl(goods.real_price, 0)),0) as sum from orderlist
+			join goods_order on orderlist.order_code = goods_order.order_code
+			join goods on goods_order.code = goods.code
+			where to_char(orderdate, 'yyyy-MM-dd') = #{item}
+		</foreach>
+	</select>
+	<select id="sumClassSalesByDay" parameterType="map" resultType="int">
+		<foreach collection="list" item="item" separator=" union all">
+			select nvl(sum(nvl(class.real_price, 0)),0) as sum from orderlist
+			join class_order on orderlist.order_code = class_order.order_code
+			join class on class_order.code = class.code
+			where to_char(orderdate, 'yyyy-MM-dd') = #{item}
+		</foreach>
 	</select>
 	<select id="countAllSales" parameterType="map" resultType="int">
 		select sum(class.real_price) from class_order
@@ -299,8 +312,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
-
-
+	
 	<select id="cntClassN" parameterType="map" resultType="_int">
 		select count(*) from class
 		where to_char(signup,
@@ -343,7 +355,6 @@
 		</choose>
 	</select>
 
-
 	<select id="cntStoreAll" parameterType="map" resultType="_int">
 		select
 		count(*) from goods
@@ -380,34 +391,40 @@
 		(fix_state='Y' or fix_State='y')
 	</select>
 
-
 	<select id="managePaymentStore" parameterType="map"
 		resultType="com.bitcamp.gachi.admin.SettleVO">
-		select goods_order.order_code, goods.category, goods.goods_name,
-		orderlist.userid, member.username, goods.real_price,
-		to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate ,
-		goods_order.finished from goods_order
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(SELECT
+		goods_order.order_code, goods_order.goods_order_code, goods.category, goods.goods_name, orderlist.userid, member.username,
+		goods.real_price, to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate
+		, goods_order.finished from goods_order
 		join orderlist on goods_order.order_code = orderlist.order_code
 		join goods on goods_order.code = goods.code
 		left join member on orderlist.userid = member.userid
-		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
-		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				and goods.category='${category}'
+				where goods.category='${category}'
 			</when>
-			<when test='category== null and username!=null'>
-				and member.username like '%${username}%'
+			<when test='category==null and username!=null'>
+				where member.username like '%${username}%'
 			</when>
-			<when test='category!= null and username!=null'>
-				and goods.category='${category}' and member.username like
+			<when test='category!=null and username!=null'>
+				where goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
+		) A
+		WHERE
+		ROWNUM &lt;= ${endNum}
+		)
+		WHERE
+		RNUM &gt;=${startNum}
 	</select>
-
 
 	<select id="paymentStoreAll" parameterType="map"
 		resultType="int">
@@ -433,8 +450,6 @@
 		</choose>
 	</select>
 
-
-
 	<select id="paymentStoreN" parameterType="map" resultType="int">
 		select sum(goods.real_price) from goods_order
 		join orderlist on goods_order.order_code = orderlist.order_code
@@ -458,6 +473,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
+	
 	<select id="paymentStoreY" parameterType="map" resultType="_int">
 		select count(*) order_code from goods_order join orderlist on
 		orderlist.order_code = goods_order.order_code
@@ -490,9 +506,10 @@
 		select class_order.order_code, class.category, class.class_name,
 		orderlist.userid, member.username, class.real_price,
 		to_char(orderlist.orderdate, 'yyyy-mm-dd') orderdate ,
-		orderlist.fix_state from class_order
+		class_order.settlement from class_order
 		join orderlist on class_order.order_code = orderlist.order_code
 		join class on class_order.code = class.code
+		join class_order on orderlist.order_code = class_order.order_code
 		left join member on orderlist.userid = member.userid
 		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
 		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
@@ -511,9 +528,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
-
-
-
+	
 	<select id="paymentClassAll" parameterType="map"
 		resultType="int">
 		select sum(class.real_price) from class_order
@@ -537,6 +552,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
+	
 	<!-- <select id="paymentClassN" parameterType="map" resultType="int"> select 
 		sum(goods.real_price) from goods_order join orderlist on goods_order.order_code 
 		= orderlist.order_code join goods on goods_order.code = goods.code left join 
@@ -573,6 +589,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</select>
+	
 	<select id="paymentClassN" parameterType="map" resultType="_int">
 		select count(*) cnt from class_order
 		join orderlist on class_order.order_code = orderlist.order_code
@@ -671,9 +688,178 @@
 		</foreach>
 	</select>
 
-	<!-- <update id="SettleStateUpdate" parameterType="String"> update class_order 
-		set settlement='정산완료' where class_order_code =#{class_order_code} </update> -->
+	<insert id="SettleInfoInsert" parameterType="map">
+		insert into settlement(settle_num, class_order_code, userid, settlement_amount, balance, settle_date, payday, settle_turm1, settle_turm2)
+		values(a_sq.nextval, #{class_order_code}, #{userid}, ${price}, 0, sysdate, to_char(sysdate,'yyyy-MM-dd'), sysdate, sysdate)
+	</insert>
+	
+	<update id="SettleStateUpdate" parameterType="String">
+		update class_order set settlement='Y' where class_order_code = #{class_order_code}
+	</update>
 
-
+	<update id="PaymentStateUpdate" parameterType="String">
+		update goods_order set finished='확정' where goods_order_code = #{goods_order_code}
+	</update>
+	
+	
+	
+	
+	<select id="ClassForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from orderlist join class_order on orderlist.order_code = class_order.order_code
+            join member on orderlist.userid= member.userid
+            and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+            )
+      )
+    group by gender_gb
+	</select>
+	<select id="ClassForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM orderlist join class_order on orderlist.order_code = class_order.order_code
+            			join member on orderlist.userid= member.userid
+           			 	and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
+	</select>
+	
+	
+		<select id="StoreForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from orderlist join goods_order on orderlist.order_code = goods_order.order_code
+            join member on orderlist.userid= member.userid
+            and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+            )
+      )
+    group by gender_gb
+	</select>
+	<select id="StoreForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM orderlist join goods_order on orderlist.order_code = goods_order.order_code
+            			join member on orderlist.userid= member.userid
+           			 	and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
+	</select>
+	
+	
+	
+	<!-- 배송관련 -->
+	
+	<select id="countdeposit" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '결제완료'		
+	</select>
+		<select id="countWaitDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state ='배송준비'		
+	</select>
+		<select id="countDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '배송중'		
+	</select>
+		<select id="countEndDelivery" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		where state = '배송완료'		
+	</select>
+		<select id="selectCntAllDelivery" parameterType="map" resultType="_int">
+		select count(state) from orderlist 
+		join goods_order on orderlist.order_code= goods_order.order_code
+		<choose>
+			<when test='state==null and search==null'></when>
+			<when test='state!=null and search==null'>
+				 and state='${state}'
+			</when>
+			<when test='state==null and search!=null'>
+				and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<when test='state!=null and search!=null'>
+				and state='${state}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="selectAllDelivery" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">	
+	SELECT * FROM
+		    ( SELECT A.*, ROWNUM AS RNUM FROM
+		            (SELECT rownum, category, goods_order.code, goods.goods_name, username, tel, 
+	        		delivery, to_char(orderlist.orderdate, 'yyyy-mm-dd')orderdate, orderlist.state from goods_order
+                        join orderlist on orderlist.order_code= goods_order.order_code
+                        join member on orderlist.userid = member.userid
+                        join goods on goods.code=goods_order.code
+		           
+		             		<choose>
+								<when test='state==null and search==null'></when>
+								<when test='state!=null and search==null'>
+									 and state='${state}'
+								</when>
+								<when test='state=null and search!=null'>
+									and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<when test='state!=null and search!=null'>
+									and state='${state}' and (username like '%${search}%' or nickname like '%${search}%' or tel like '%${search}%' or userid like '%${search}%')
+								</when>
+								<otherwise></otherwise>
+							</choose>
+		            ) A
+		        WHERE
+		            ROWNUM &lt;= ${endNum}
+		    )
+		WHERE
+		    RNUM &gt;=${startNum}
+   	</select>
+   	
+   		<select id="selectDelivery" resultType="com.bitcamp.gachi.admin.SettleVO">
+		select orderlist.order_code,category, goods_order.code, goods.goods_name, username, tel, 
+	    	delivery, to_char(orderlist.orderdate, 'yyyy-mm-dd')orderdate, orderlist.state from goods_order
+            join orderlist on orderlist.order_code= goods_order.order_code
+            join member on orderlist.userid = member.userid
+            join goods on goods.code=goods_order.code
+            where goods.code = #{code}
+	</select>
+	
+	<update id ="DeliveryUpdate" parameterType="map">
+		update orderlist set state=#{state} , delivery=#{delivery} where order_code =#{order_code}
+	</update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

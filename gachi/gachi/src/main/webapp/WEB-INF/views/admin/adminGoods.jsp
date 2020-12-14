@@ -7,6 +7,9 @@ $(function(){
 	
 	$("#startDate").val("${startDate}");
 	$("#endDate").val("${endDate}");
+	$("#category").val("${category}").attr("selected", "selected");
+	$("#sale_State").val("${sale_State}").attr("selected", "selected");
+	$("#search").val("${search}");
 	$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
 	
 	$("#GoodsSelectAll").click(function(){
@@ -73,8 +76,8 @@ $(function(){
 			<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
 			</div>
 				<div class="ad_goods_searchForm">	
-					<select name="category">
-						<option value="전체">전체</option>
+					<select name="category" id="category">
+						<option value="">전체</option>
 						<option value="공예/창작">공예/창작</option>
 						<option value="요리">요리</option>
 						<option value="미술">미술</option>
@@ -83,8 +86,8 @@ $(function(){
 						<option value="운동">운동</option>
 						<option value="사진영상">사진영상</option>
 					</select>
-					<select name="sale_State">
-						<option value="전체">전체</option>
+					<select name="sale_State" id="sale_State">
+						<option value="">전체</option>
 						<option value="판매대기">판매대기</option>
 						<option value="판매중">판매중</option>
 						<option value="판매종료">판매종료</option>

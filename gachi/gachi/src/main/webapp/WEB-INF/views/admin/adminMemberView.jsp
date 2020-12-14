@@ -37,7 +37,7 @@
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }" readonly/></li>
 		<li>회원탈퇴여부</li><li><input type="text" name="deleted" value="${vo.deleted }" readonly/></li>	
 	</ul>
-		<div style="margin:10px 0px;">
+		<div style="margin:10px 0px; float:right;">
 			<button class="btn" onclick="history.back()">회원목록</button>
 			<input type="submit" class="btn" value="회원정보수정"/>
 			<button type="button" id="ad_leaveBtn" class="btn" onclick="location.href='/gachi/adminMemberLeaveEditOk?userid=${vo.userid}'">회원탈퇴</button>
