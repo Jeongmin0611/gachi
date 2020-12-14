@@ -5,6 +5,61 @@
 	/* 질문,문의 */
 	
 </style>
+<script>
+	$(function(){
+		$(".eventReplyDelete").click(function(){
+			swal({
+				title: "댓글 삭제",
+				text: "선택하신 댓글을 삭제하시겠습니까?",
+				icon: "warning",
+				closeOnClickOutside: false,
+				buttons: {
+					cancle : {
+						text: "취소",
+						value: false,
+						className: "btn btn-outline-light"
+					},
+					confirm : {
+						text: "확인",
+						value: true,
+						className: "btn btn-outline-light"
+					}
+				}
+			}).then((result)=>{
+				var num = $(this).prev().val();
+				if(result){
+					$.ajax({
+						url: "/gachi/eventReplyDelete",
+						data: "num="+num,
+						type: "GET",
+						success: function(result){
+							if(result>0){
+								swal({
+									title: "완료",
+									text: "삭제가 완료되었습니다!",
+									icon: "success",
+									closeOnClickOutside: false,
+									buttons: {
+										confirm : {
+											text: "확인",
+											value: true,
+											className: "btn btn-outline-light"
+										}
+									}
+								}).then((result)=>{
+									location.href = "/gachi/mypageEvent";
+								});
+							}
+						}, error: function(){
+							console.log("댓글 삭제 실패");
+						}
+					});
+				}
+			});
+			
+		});
+	});
+</script>
 <div class="container cfont">
 	<%@ include file="../inc/userProfile.jspf" %>
 	<div class="userMainDiv">
@@ -12,25 +67,31 @@
 			<label style="color:gray">내 활동 ></label>
 			<label style="font-size:1.1em"><b>이벤트</b></label>
 			<hr class="userHr"/>
-			<p><b>진행중 하비가이드 72시간 릴레이할인!2020</b></p>
-	        <div class="card">
-	        	<div class="row no-gutters">
-	            	<div class="col-3" style="margin:auto 0">
-	                	<img src="/gachi/img/board/eventThumbnail1.jpg" style="object-fit: cover;height:150px" alt="" class="card-img" />
-	                </div>
-	            	<div class="col-9">
-	                	<div class="card-body">
-	                  		<p class="card-text">
-	                  			<div>
-	                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b>질문입니다.</b> 
-	                  				<div style="margin:10px;font-size:0.9em">입문자도 충분히 가능한가요?? 난이도가 어느정도인지 궁금합니다.</div>
-	                  				<div style="text-align:right"><label class="badge badge-pill badge-light">20/11/15</label><a href="#" style="font-size:0.9em;margin:0 5px">수정</a><a href="#"style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
-		                  		</div>
-		                    </p>
-	                   </div>
-	                </div>
-	            </div>
-	        </div>
+			<c:forEach var="vo" items="${list }">
+				<input type="hidden" value="${vo.reply_num }"/>
+				<p><b>${vo.subject }</b></p>
+		        <div class="card">
+		        	<div class="row no-gutters">
+		            	<div class="col-3" style="margin:auto 0">
+		                	<img src="/gachi/img/board/${vo.event_img }" style="object-fit: cover;height:150px" alt="" class="card-img" />
+		                </div>
+		            	<div class="col-9">
+		                	<div class="card-body">
+		                  		<p class="card-text">
+		                  			<div>
+		                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em">
+		                  				<div style="margin:10px;font-size:0.9em">${vo.content }</div>
+		                  				<div style="text-align:right"><label class="badge badge-pill badge-light">${vo.writedate }</label>
+		                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a>
+		                  				<input type="hidden" value="${vo.reply_num }"/>
+		                  				<a href="#" class="eventReplyDelete" style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
+			                  		</div>
+			                    </p>
+		                   </div>
+		                </div>
+		            </div>
+		        </div>
+		   </c:forEach>
 		</div>
 	</div>
 </div>

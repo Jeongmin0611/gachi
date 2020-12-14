@@ -49,9 +49,11 @@ public class HomeController {
 		UserInfoDaoImp uDao = sqlsession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
+
 		if(ses.getAttribute("logStatus")!=null) {//濡쒓렇�씤 �긽�깭
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//醫뗭븘�슂 異붽�
+
 				String good = req.getParameter("good_add");
 				uDao.wishListAdd(userid, good);			
 			}

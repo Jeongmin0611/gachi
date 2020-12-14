@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 
 	/* 주문신청서 */
@@ -55,7 +56,7 @@
 		IMP.request_pay({
 		   pg : 'html5_inicis', // 결제방식
 		    pay_method : 'card',	// 결제 수단
-		    merchant_uid : 'o' + new Date().getTime(), //주문번호 생성,
+		    merchant_uid : new Date().getTime(), //주문번호 생성
 		   name : '결제테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
 		    amount : '100', //$("finalPrice").val(),	// 결제 금액
 		    buyer_email : $("#orderUserid").val(),	
@@ -69,9 +70,10 @@
 		      // jQuery로 HTTP 요청
 		      	var order_code = rsp.merchant_uid;
 	      		var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid; 
-                msg += '상점 거래ID : ' + rsp.merchant_uid; 
-                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '고유ID : ' + rsp.imp_uid+"\n"; 
+                msg += '거래ID : ' + rsp.merchant_uid+"\n"; 
+                msg += '주문번호 : ' + order_code+"\n"; 
+                msg += '결제 금액 : ' + rsp.paid_amount+"\n";
                 msg += '카드 승인번호 : ' + rsp.apply_num;
                 
 		        jQuery.ajax({
@@ -80,7 +82,7 @@
 		          headers: { "Content-Type": "application/json" },
 		          data: JSON.stringify({
 		                imp_uid: rsp.imp_uid, //거래고유번호
-		                order_code: rsp.merchant_uid, //주문번호
+		                order_code: rsp.merchant_uid,
 		                userid: rsp.buyer_email,
 		                full_price: $("#sumPrice").val(),
 		                shipping_fee: $("#shipLbl").val(),
@@ -195,7 +197,7 @@
 						<div class="col-md-5">${cvo.class_name }<br/>${cvo.nickname }</div>
 					<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${cvo.stack }p</label>
-										  <label style="width:50%">${cvo.real_price }원</label></div>
+										  <label style="width:50%"><fmt:formatNumber value="${cvo.real_price }" pattern="#,###" />원</label></div>
 				</div>
 				<hr/>
 				<c:set var="sum" value="${sum+cvo.real_price*cvo.amount }"/>
@@ -210,7 +212,7 @@
 						<div class="col-md-5">${gvo.goods_name }</div>
 					<div class="col-md-5"><label style="width:20%">${gvo.amount }개</label><input type="hidden" name="amount" value="${gvo.amount }"/>
 										  <label style="width:20%">${gvo.stack }p</label>
-										  <label style="width:50%">${gvo.real_price }원</label></div>
+										  <label style="width:50%"><fmt:formatNumber value="${gvo.real_price }" pattern="#,###" />원</label></div>
 				</div>
 				<hr/>
 				<c:set var="sum" value="${sum+gvo.real_price*gvo.amount }"/>
@@ -319,7 +321,7 @@
 			<c:if test="${result eq 1 }">
 				<c:if test="${sum lt 50000}"><!-- 50000원 미만 -->
 					<c:set var="ship" value="2500"/>
-					<div><b>배송비</b> +${ship }원</div>
+					<div><b>배송비</b> +<fmt:formatNumber value="${ship }" pattern="#,###" />원</div>
 				</c:if>
 				<c:if test="${sum ge 50000}"><!-- 50000원 이상 -->
 					<c:set var="ship" value="0"/>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 	
 	/* 장바구니 */
@@ -19,7 +20,7 @@
 		width: 20%;
 	}
 	.mypageContent>div:last-child button{
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 	#userCartContent{
 		text-align: center;
@@ -140,7 +141,7 @@
 							<div class="col-md-4"><input type="text" value="${cvo.class_name }" readonly/><br/>${cvo.nickname }</div>
 							<div class="col-md-5"><input type="hidden" value="${cvo.amount }" style="width:15%" readonly/>
 												  <input type="text" value="${cvo.stack }" style="width:30%;text-align:right" readonly/>p
-										          <input type="text" value="${cvo.real_price }" style="width:30%;text-align:right" readonly/>원
+										          <input type="text" value="<fmt:formatNumber value="${cvo.real_price }" pattern="#,###" />" style="width:30%;text-align:right" readonly/>원
 												  <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${cvo.code}'" style="float:right">X</button></div>
 						</div>
 						<hr/>
@@ -158,7 +159,7 @@
 								<button type="button" class="btn btn-primary btn-sm amountChange">수정</button>
 								<input type="hidden" value="${gvo.code }"/>
 								<input type="text" value="${gvo.stack }" style="width:15%;text-align:right" readonly/>p
-								<input type="text" value="${gvo.real_price }" style="width:30%;text-align:right" readonly/>원
+								<input type="text" value="<fmt:formatNumber value="${gvo.real_price }" pattern="#,###" />" style="width:30%;text-align:right" readonly/>원
 								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'" style="float:right">X</button>
 							</div>
 						</div>
@@ -171,10 +172,10 @@
 					<label style="font-size:0.7em;margin:10px">*주문 시 상품 합계 금액이 50,000원 이상은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
 					<hr/>
 					<div id="userCartBtm">
-						<div><b>합계</b> ${sum }원</div>	
+						<div><b>합계</b> <fmt:formatNumber value="${sum }" pattern="#,###" />원</div>	
 						<c:if test="${sum lt 50000}">
 							<c:set var="ship" value="2500"/>
-							<div><b>배송비</b> +${ship }원</div>
+							<div><b>배송비</b> +<fmt:formatNumber value="${ship }" pattern="#,###" />원</div>
 						</c:if>
 						<c:if test="${sum ge 50000}">
 							<c:set var="ship" value="0"/>
@@ -182,20 +183,20 @@
 						</c:if>
 						<input type="hidden" id="shipLbl" value="${ship }"/>
 						<hr class="userHr"/>
-						<div style="font-size:1.2em;"><b>총 금액</b> ${sum+ship }원</div>
+						<div style="font-size:1.2em;"><b>총 금액</b> <fmt:formatNumber value="${sum+ship }" pattern="#,###" />원</div>
 					</div>
 					<div>
-						<button type="button" class="btn btn-outline-light" onclick="history.go(-2)">쇼핑계속하기</button>
-						<button type="button" class="btn btn-outline-light submitOrder">선택상품주문</button>
-						<button type="button" id="allOrder" class="btn btn-outline-light submitOrder">전체상품주문</button>
+						<button type="button" class="btn btn-light" onclick="history.go(-2)">쇼핑계속하기</button>
+						<button type="button" class="btn btn-light submitOrder">선택상품주문</button>
+						<button type="button" id="allOrder" class="btn btn-light submitOrder">전체상품주문</button>
 					</div>
 				<!-- /////////////////////////////////////////// -->
 				
 			</c:if>
 			<c:if test="${result eq 0 }">
-				<div><img src="/gachi/img/icon_cart.png" style="width:10%;margin-bottom:20px"/></div>
-				<div><h4>장바구니가 텅 비었어요~</h4></div>
-				<div><button type="button" class="btn btn-outline-light" onclick="location.href='/gachi'">쇼핑하러가기</button></div>
+				<div><img src="/gachi/img/icon_cart.png" style="width:10%;margin:50px 0"/></div>
+				<div><h4>장바구니 목록이 없습니다.</h4></div>
+				<div><button type="button" class="btn btn-light" onclick="location.href='/gachi'">쇼핑하러가기</button></div>
 			</c:if>
 		</div>
 	</div>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.gachi.board.EventBoardVO;
 import com.bitcamp.gachi.register.RegisterVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -452,25 +453,83 @@ public class MypageController {
 		mav.setViewName("mypage/userWishList");
 		return mav;
 	}
+	/* 좋아요 삭제 */
+	@RequestMapping("/delWishList")
+	@ResponseBody
+	public int delWishList(HttpSession ses, String code) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		ses.setAttribute("cntGood", dao.countGood((String)ses.getAttribute("userid"))); //좋아요 개수
+		int result = dao.wishListDel((String)ses.getAttribute("userid"), code);
+
+		return result;
+	}
 	/* 내 학습표 - 질문/답변 */
 	@RequestMapping("/myclassQna")
-	public String myclassQna() {
-		return "mypage/myclassQna";
+	public ModelAndView myclassQna(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<QnaVO> list = dao.qnaView((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("mypage/myclassQna");
+		return mav;
+	}
+	/* 내 학습표 - 질문/답변 삭제 */
+	@RequestMapping("/qnaDelete")
+	@ResponseBody
+	public int qnaDelete(int num) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.qnaDelete(num);
+		return result;
 	}
 	/* 내 학습표- 수강평 */
 	@RequestMapping("/myclassReview")
-	public String myclassReview() {
-		return "mypage/myclassReview";
+	public ModelAndView myclassReview(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<QnaVO> list = dao.classReview((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("mypage/myclassReview");
+		return mav;
+	}
+	/* 내 학습표 - 수강평 삭제 */
+	@RequestMapping("/classReviewDelete")
+	@ResponseBody
+	public int classReviewDelete(int num) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.classReviewDelete(num);
+		return result;
 	}
 	/* 상품문의 */
 	@RequestMapping("/mypageStoreQna")
-	public String mypageStoreQna() {
-		return "mypage/mypageStoreQna";
+	public ModelAndView mypageStoreQna(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		//List<QnaVO> list = dao.classReview((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("list", list);
+		mav.setViewName("mypage/mypageStoreQna");
+		return mav;
 	}
 	/* 상품리뷰 */
 	@RequestMapping("/mypageStoreReview")
-	public String mypageStoreReview() {
-		return "mypage/mypageStoreReview";
+	public ModelAndView mypageStoreReview(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<QnaVO> list = dao.goodsReview((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("mypage/mypageStoreReview");
+		return mav;
+	}
+	/* 상품리뷰 삭제 */
+	@RequestMapping("/goodsReviewDelete")
+	@ResponseBody
+	public int goodsReviewDelete(int num) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.goodsReviewDelete(num);
+		return result;
 	}
 	/* 1대1문의 */
 	@RequestMapping("/mypage1on1")
@@ -479,7 +538,21 @@ public class MypageController {
 	}
 	/* 이벤트 댓글 */
 	@RequestMapping("/mypageEvent")
-	public String mypageEvent() {
-		return "mypage/mypageEvent";
+	public ModelAndView mypageEvent(HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		List<EventBoardVO> list = dao.eventReplyView((String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("mypage/mypageEvent");
+		return mav;
+	}
+	/* 내 학습표 - 수강평 삭제 */
+	@RequestMapping("/eventReplyDelete")
+	@ResponseBody
+	public int eventReplyDelete(int num) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		int result = dao.eventReplyDelete(num);
+		return result;
 	}
 }
