@@ -689,8 +689,8 @@
 	</select>
 
 	<insert id="SettleInfoInsert" parameterType="map">
-		insert into settlement(settle_num, class_order_code, userid, settlement_amount, balance, settle_date, payday, settle_turm1, settle_turm2)
-		values(a_sq.nextval, #{class_order_code}, #{userid}, ${price}, 0, sysdate, to_char(sysdate,'yyyy-MM-dd'), sysdate, sysdate)
+		insert into settlement(settle_num, class_order_code, userid, settlement_amount, payday)
+		values(a_sq.nextval, #{class_order_code}, #{userid}, ${price}, to_char(sysdate,'yyyy-MM-dd'))
 	</insert>
 	
 	<update id="SettleStateUpdate" parameterType="String">
@@ -846,6 +846,38 @@
 	<update id ="DeliveryUpdate" parameterType="map">
 		update orderlist set state=#{state} , delivery=#{delivery} where order_code =#{order_code}
 	</update>
+	
+	
+	<!-- 크리에이터 대쉬보드 -->
+		<select id="countWaitClass" parameterType="map" resultType="_int">
+			select count(class_state) cnt from class
+				join creator on class.userid = creator.userid
+				where class.userid = #{userid}
+				and class_state ='미승인'
+		</select>
+		
+		<select id="totalPayment" parameterType="map" resultType="_int">
+			select sum(real_price) sum from class
+				join class_order on class.code = class_order.code
+				where class.userid =#{userid}
+				and class_order.settlement='Y';
+		</select>
+		
+		<select id="non-Payment" parameterType="map" resultType="_int">
+			select sum(real_price) sum from class
+				join class_order on class.code = class_order.code
+				where class.userid =#{userid}
+				and class_order.settlement='N';
+		</select>
+		
+		<select id="creatorPayment" parameterType="map" resultType="int">
+		<foreach collection="list" item="item" separator=" union all">
+			<!-- select nvl(sum(nvl(goods.real_price, 0)),0) as sum from orderlist
+			join goods_order on orderlist.order_code = goods_order.order_code
+			join goods on goods_order.code = goods.code
+			where to_char(orderdate, 'yyyy-MM-dd') = #{item} -->
+		</foreach>
+	</select>
 </mapper>
 
 

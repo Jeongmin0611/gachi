@@ -102,6 +102,13 @@ public interface SettleDaoImp {
 	public SettleVO selectDelivery(String code); //딜리버리 뷰페이지 정보전달
 
 	public int DeliveryUpdate(Map<String, String> dbParam); //딜리버리 정보수정
+
+	public Integer countWaitClass(Map<String, String> dbParam); // 크리에이터 대쉬보드 미승인클래스
+
+	public Integer totalPayment(Map<String, String> dbParam); //크리에이터 대쉬보드 정산금액 
+
+	public Integer non_Payment(Map<String, String> dbParam); // 크리에이터 대쉬보드 미정산금액
+	
 	
 	
 	

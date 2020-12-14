@@ -1197,7 +1197,7 @@ $(document).ready(function() {
 			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
 			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
 		</form>
-		       <a href="/gachi" style="margin-left: 33%;"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+		       <a href="/gachi" style="margin-left: 33%;"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 		<ul class="nav navbar-nav pull-right  ml-auto ">
         <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
