@@ -39,7 +39,7 @@
 	</select>
 	<select id="storeView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
 		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1
-		from goods where code='${param1}'
+		from goods where code='${code}'
 	</select>
 	<select id="storeListAllRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
 		select count(goods_name) from goods where enddate<![CDATA[ >= ]]> sysdate order by enddate
