@@ -18,4 +18,5 @@ public interface StoreDaoImp {
 	//상품 질문답변 리스트
 	public List<QnaVO> qnaList(String code);
 	
+	
 }

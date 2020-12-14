@@ -37,15 +37,10 @@ public class ClassPageController {
 	}
 	
 	@RequestMapping("/classList")
-	public ModelAndView classList(PagingVO vo, HttpServletRequest req, HttpSession ses) {
+	public ModelAndView classList(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
-		List<AllVO> list = dao.classPageAllRecord(category, selectval);
 		
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//페이지
-		vo.setOnePageRecord(9);
 		//현재 페이지
 		String nowPageTxt=req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
@@ -53,6 +48,12 @@ public class ClassPageController {
 		}
 		int totalRecord=dao.classBoardAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
+		
+		String category = req.getParameter("category");
+		String selectval = req.getParameter("selectval");
+		
+		List<AllVO> list = dao.classPageAllRecord(vo);
+		System.out.println(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
