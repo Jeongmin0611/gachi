@@ -51,7 +51,8 @@ public class HomeController {
 		
 		ModelAndView mav = new ModelAndView();
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
-			String userid=(String)ses.getAttribute("userid");
+			String userid=(String)ses.getAttribute(""
+					+ "userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
 				String good = req.getParameter("good_add");
 				uDao.wishListAdd(userid, good);			

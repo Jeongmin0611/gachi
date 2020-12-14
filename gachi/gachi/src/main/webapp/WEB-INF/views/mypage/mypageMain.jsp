@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>	
 	
 	/* 마이페이지(메인) - 컨테이너 */
@@ -35,7 +35,6 @@
 		width: 100%;
 	    height: 150px;
 	    object-fit: cover;
-	    border-radius:1em;
 	}
 
 	/* 페이징 */
@@ -100,7 +99,7 @@
 										}
 									}
 								}).then((result)=>{
-									location.href=location.href;
+									location.href = location.href;
 								});
 							}
 			  			}, error: function(){
@@ -175,7 +174,8 @@
 									</div>
 									<div style="text-align:left"><b>${vo.class_name }</b></div>
 									<div style="font-size:0.9em;text-align:left">${vo.nickname }</div>
-									<div style="font-size:0.9em;text-align:left">가격 ${vo.real_price }원</div>
+									<div style="font-size:0.9em;text-align:left">가격 <fmt:formatNumber value="${vo.real_price }" pattern="#,###" />원</div>
+									<div style="font-size:0.9em;text-align:left">결제일시 ${vo.orderdate }</div>
 							</div>
 							<div class="col-md-3">
 								<div><label class="badge badge-pill badge-primary" style="font-size:0.9em">구매확정완료</label></div>
@@ -195,7 +195,7 @@
 										</div>
 										<div style="text-align:left"><b>${vo.goods_name }</b></div>
 										<div style="font-size:0.9em;text-align:left">수량 ${vo.amount }개</div>
-										<div style="font-size:0.9em;text-align:left">가격 ${vo.real_price }원</div>
+										<div style="font-size:0.9em;text-align:left">가격 <fmt:formatNumber value="${vo.real_price }" pattern="#,###" />원</div>
 										<div style="font-size:0.9em;text-align:left">결제일시 ${vo.orderdate }</div>
 							</div>
 							<!-- xs 크기에서만 숨기기  -->
@@ -227,8 +227,8 @@
 					</c:forEach>
 				</c:if>
 			</c:forEach>
-		<div>
-			<button type="button" class="btn btn-outline-lignt" id="moreContentLoad">더보기</button>
+		<div style="text-align:center;margin-top:50px">
+			<button type="button" class="btn focusEffectSm" id="moreContentLoad" style="width:150px">더보기</button>
 		</div>
 		</div>
 	</div>

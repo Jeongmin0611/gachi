@@ -23,6 +23,58 @@
 			readOnly:true,
 			space:false
 			});
+	
+		$(".classReviewDelete").click(function(){
+			swal({
+				title: "질문/답변 삭제",
+				text: "선택하신 수강평을 삭제하시겠습니까?",
+				icon: "warning",
+				closeOnClickOutside: false,
+				buttons: {
+					cancle : {
+						text: "취소",
+						value: false,
+						className: "btn btn-outline-light"
+					},
+					confirm : {
+						text: "확인",
+						value: true,
+						className: "btn btn-outline-light"
+					}
+				}
+			}).then((result)=>{
+				var num = $(this).prev().val();
+				if(result){
+					$.ajax({
+						url: "/gachi/classReviewDelete",
+						data: "num="+num,
+						type: "GET",
+						success: function(result){
+							if(result>0){
+								swal({
+									title: "완료",
+									text: "삭제가 완료되었습니다!",
+									icon: "success",
+									closeOnClickOutside: false,
+									buttons: {
+										confirm : {
+											text: "확인",
+											value: true,
+											className: "btn btn-outline-light"
+										}
+									}
+								}).then((result)=>{
+									location.href = "/gachi/myclassReview";
+								});
+							}
+						}, error: function(){
+							console.log("수강평 삭제 실패");
+						}
+					});
+				}
+			});
+			
+		});
 	});
 </script>
 <div class="container cfont">
@@ -35,26 +87,31 @@
 			<div style="text-align:right">
 				<button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#myclassReviewModal">수강평작성</button>
 			</div>
-			<p><b>사랑스러운 고양이 색연필 초상화</b></p>
-	        <div class="card">
-	        	<div class="row no-gutters">
-	            	<div class="col-3" style="margin:auto 0">
-	                	<img src="/gachi/img/artEx/artEx01.PNG" alt="" class="card-img" />
-	                </div>
-	            	<div class="col-9">
-	                	<div class="card-body">
-	                  		<p class="card-text">
-	                  			<div>
-	                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b style="float:left">정말 마음에 들어요~</b><div class="myclassStars"></div>
-	                  				<div style="margin:10px;font-size:0.9em">첫 프랑수자수 작품으로 골랐는데 매우 만족스럽습니다 꽃자수가 너무 예쁘고 파스텔톤 하늘색인 것도 마음에 듭니다!</div>
-	                  				<div style="text-align:right"><label class="badge badge-pill badge-light">20/11/15</label>
-	                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a><a href="#"style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
-		                  		</div>
-		                    </p>
-	                   </div>
-	                </div>
-	            </div>
-	        </div>
+			<c:forEach var="vo" items="${list }">
+				<input type="hidden" value="${vo.num }"/>
+				<p><b>${vo.class_name }</b></p>
+		        <div class="card" style="margin-bottom:50px">
+		        	<div class="row no-gutters">
+		            	<div class="col-3" style="margin:auto 0">
+		                	<img src="upload/classImg/${vo.class_img }" alt="" class="card-img" />
+		                </div>
+		            	<div class="col-9">
+		                	<div class="card-body">
+		                  		<p class="card-text">
+		                  			<div>
+		                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b style="float:left">${vo.subject }</b><div class="myclassStars"></div>
+		                  				<div style="margin:10px;font-size:0.9em">${vo.content }</div>
+		                  				<div style="text-align:right"><label class="badge badge-pill badge-light">${vo.writedate }</label>
+		                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a>
+		                  				<input type="hidden" value="${vo.num }"/>
+		                  				<a href="#" class="classReviewDelete" style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
+			                  		</div>
+			                    </p>
+		                   </div>
+		                </div>
+		            </div>
+		        </div>
+	        </c:forEach>
 		</div>
 	</div>
 </div>
