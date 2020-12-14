@@ -20,24 +20,71 @@
 	border-radius: 0.5rem;
 }
 </style>
+
+<script>
+
+var countWaitClass = "${countWaitClass}";
+var totalPayment = "${totalPayment}";
+var non_Payment = "${non_Payment}"
+var labelData = "${labelData}";
+var dashData = "${dashData}";
+
+var startDate = "${startDate}";
+var endDate = "${endDate}";
+
+$(function(){
+	
+	$("#startDate").val("${startDate}");
+	$("#endDate").val("${endDate}");
+	
+ 	$("#countWaitClass").text("${countWaitClass}");
+	$("#totalPayment").text("￦ " + numberWithCommas("${totalPayment}"));
+	$("#non_Payment").text("￦ " + numberWithCommas("${non_Payment}"));  
+
+	$("#frm").click(function(){
+		var url = "/creatorDashboard";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val();
+		$.ajax({
+			url : url,
+			data : data,
+			success: function(data){
+
+			},error:function(){
+				console.log("ajax에러발생");
+			}
+		});
+	});
+});
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+</script>
 <div class="container cr_dash_center text-center ad_font">
 <h1> 크리에이터 대시보드 </h1>
-	<br/>
+	<br/>	
 	<div style="height:200px;">
+	<form action="adminStatStore" method="post" id="frm">
+		<div class="cr_Dashboard_searchForm">
+			
+		<input type="date" name="startDate" id="startDate" value=""/> ~ <input type="date" name="endDate" id="endDate" value=""/>
+		<input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
+		</div>
 		<ul id="cr_dash_board_ul">
 			<li><div class="cr_dash_board">
 						<b>승인 대기 클래스</b><br/>
-						<span style="font-size:50px;line-height:120px">0 명</span>
+						<span style="font-size:50px;line-height:120px" id="countWaitClass">${countWaitClass } 건</span>
 					</div></li>
 			<li><div class="cr_dash_board">
-						<b>전월 총 매출</b><br/>
-						<span style="font-size:50px;line-height:120px">0 원</span>
+						<b>정산 금액</b><br/>
+						<span style="font-size:50px;line-height:120px" id="totalPayment">${totalPayment }</span>
 					</div></li>
 			<li><div class="cr_dash_board">
-						<b>클래스 답변 대기</b><br/>
-						<span style="font-size:50px;line-height:120px">0 건</span>
+						<b>미정산 금액</b><br/>
+						<span style="font-size:50px;line-height:120px" id="non_Payment">${non_Payment }</span>
 					</div></li>							
 		</ul>
+		</form>
 	</div>
 	<canvas id="cr_dash_chart" style="margin:30px 0 ;"></canvas>
 	
@@ -47,9 +94,9 @@
 	var cr_dash_chart = new Chart(cr_dash_context, {
 	    type: 'line',
 	    data: {
-	        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	        labels: ${labelDate},
 	        datasets: [{
-	            label: '월별 매출 기록',
+	            label: ${dashData},
 	            data: [100, 50, 150, 100, 60, 60, 70, 30, 90, 200, 36, 88],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
