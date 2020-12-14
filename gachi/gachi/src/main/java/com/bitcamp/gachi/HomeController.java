@@ -45,7 +45,7 @@ public class HomeController {
 		ClassPageDaoImp dao = sqlsession.getMapper(ClassPageDaoImp.class);
 		List<AllVO> plist = dao.homeClassPopular();
 		List<AllVO> nlist = dao.homeClassNew();
-
+		List<AllVO> rlist;
 		UserInfoDaoImp uDao = sqlsession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
@@ -67,9 +67,15 @@ public class HomeController {
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
 			mav.addObject("cgoodList", cgoodList);
 			mav.addObject("ggoodList", ggoodList);	
+			//관심사 찾기
+			String interest = dao.homeClassInterestFind(userid);
+			rlist = dao.homeClassRecommandUser(interest);
+		}else {//로그인 안 한 상태
+			rlist = dao.homeClassRecommand();
 		}		
 		mav.addObject("plist", plist);
 		mav.addObject("nlist", nlist);
+		mav.addObject("rlist", rlist);
 		mav.setViewName("home");
 		return mav;
 	}

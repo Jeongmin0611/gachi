@@ -78,6 +78,7 @@ public class ClassPageController {
 	public ModelAndView classMain(HttpServletRequest req, HttpSession ses) {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		String code = req.getParameter("code");
+		System.out.println("code= "+code);
 		AllVO vo = dao.classView(code);
 		List<AllVO> reviewList = dao.reviewList(code);
 		List<QnaVO> qnaList = dao.qnaList(code);
@@ -94,6 +95,7 @@ public class ClassPageController {
 				String good = req.getParameter("good_del");
 				uDao.wishListDel(userid, good);			
 			}
+
 			//좋아요 클래스
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);
 			mav.addObject("goodVo", goodVo);	
@@ -110,18 +112,48 @@ public class ClassPageController {
 	public String qnaFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
 		vo.setIp(req.getRemoteAddr());
 		vo.setUserid((String) ses.getAttribute("userid"));
-		
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+
+		String code = req.getParameter("code");
+		vo.setCode(code);
+		System.out.println("code= "+code);
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		dao.insertReview(vo);
-		String code = req.getParameter("code");
-		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
+//		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
+		return "redirect:classView";
 	}
 	//클래스 질문답변 작성
 	@RequestMapping(value="/qnaFormOk", method=RequestMethod.POST)
-	public String qnaFormOk() {
+	public String qnaFormOk(AllVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {
+		String userid = (String)ses.getAttribute("userid");
+		vo.setUserid(userid);
+		vo.setCode(req.getParameter("code"));
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+		vo.setIp(req.getRemoteAddr());
+		
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		dao.insertQna(vo);
+		
+		
 		return "redirect:classView";
 	}
 	
+	//클래스 View에서 검색
+	@RequestMapping("/qnaSearch")
+	public void qnaSearch(AllVO vo, HttpServletRequest req) {
+		vo.setCode(req.getParameter("code"));
+		vo.setSearchKey(req.getParameter("searchKey"));
+		vo.setSearchWord(req.getParameter("searchWord"));
+		System.out.println("code= "+req.getParameter("code"));
+		System.out.println("Key= "+req.getParameter("searchKey"));
+		System.out.println("Word= "+req.getParameter("searchWord"));
+		
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		dao.qnaListSearch(vo);
+		
+	}
 	
 	@RequestMapping(value="/clientImgUpload",method=RequestMethod.POST)
 	@ResponseBody

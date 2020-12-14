@@ -40,6 +40,10 @@ public class AllVO {
 	private String class_name; /* 클래스명 */
 	private int real_price; /* 판매가 */
 	private String class_img; /* 클래스사진1 */
+	private String class_img2;/* 클래스 서브 이미지*/
+	private String searchKey;/* 클래스 질문 답변 검색*/
+	private String searchWord;/* 클래스 질문 답변 검색*/
+	
 	//클래스 리뷰
 	private int num;
 	private String ip;
@@ -273,7 +277,30 @@ public class AllVO {
 	}
 	public void setClass_img(String class_img) {
 		this.class_img = class_img;
-	}	
+	}		
+	public String getClass_img2() {
+		return class_img2;
+	}
+	public void setClass_img2(String class_img2) {
+		this.class_img2 = class_img2;
+		
+		//,이미지 분리
+		String img[]=class_img2.split(",");
+
+		
+	}
+	public String getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
 	//클래스 리뷰
 	public int getNum() {
 		return num;

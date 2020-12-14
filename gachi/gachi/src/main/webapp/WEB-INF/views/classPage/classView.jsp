@@ -180,25 +180,13 @@ input[type=text] {
 		}
 	    
 	$(function() {
-		//textarea에 ckeditor편집기 적용. name속성값		
-		var editor=CKEDITOR.replace('message-text', {
-			allowedContent:true,
-			toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar']],
-				imageUploadUrl:'/gachi/clientImgUpload',
-				extraPlugins:'uploadimage'
+		CKEDITOR.replace('content', {
+			//allowedContent:true,
+			toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar']]
+			//,imageUploadUrl:'/gachi/clientImgUpload',
+			//extraPlugins:'uploadimage'
 				
 		});
-		editor.on('fileUploadRequest', function( evt ) {
-		    var fileLoader = evt.data.fileLoader,
-		        formData = new FormData(),
-		        xhr = fileLoader.xhr;
-		    xhr.open( 'POST', fileLoader.uploadUrl, true );
-		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-		    formData.append('type','classView');
-		    fileLoader.xhr.send( formData );
-		    evt.stop();
-		}, null, null, 4 ); 
-
 		//세션의 아이디 가져오기
     	var id = '<%=(String) session.getAttribute("userid")%>';
     	
@@ -224,7 +212,9 @@ input[type=text] {
 				'click',
 				function() {
 					if (id == null || id == 'null') {
-						swal('로그인 후 이용가능한 기능입니다.');
+						swal({
+							title:'로그인 후 이용가능한 기능입니다.',
+							icon:"warning"});
 						return false;
 					}
 					if (id != null) {
@@ -244,7 +234,13 @@ input[type=text] {
 	  
 	  	//장바구니 담기
 	  	$('#userCart').on('click',function(){
-	  		var code = $("#cartCode").val();
+	  		if(id == 'null'){
+	  			swal({
+					title:'로그인 후 이용가능한 기능입니다.',
+					icon:"warning"});
+				return false;
+			  }
+	  		else{var code = $("#cartCode").val();
 	  		$.ajax({
 	  			url: "/gachi/userCartInsert",
 	  			data: "code="+code+"&amount=1",
@@ -325,12 +321,123 @@ input[type=text] {
 	  				console.log("장바구니담기 에러");
 	  			}
 	  		});
+	  		}
+	  	});
+	  	//수강평 버튼 클릭시 로그인 확인, 구매여부 확인
+	  	$('#myclassReviewFrm').on('click',function(){
+	  		if(id == 'null'){
+	  			swal({
+					title:'로그인 후 이용가능한 기능입니다.',
+					icon:"warning"});
+				return false;
+			  }else{
+				  return true;
+			  }
+	  	});
+	  	//리뷰 작성
+	  	$('#reviewForm').click(function(){
+	  		CKupdate();
+	  		if($('#reviewSubject').val()==null || $('#reviewSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;
+	  		}
+	  		if($('#reviewContent').val()==null||$('#reviewContent').val()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/reviewFormOk",
+	  			data:{
+	  				code:'${vo.code}',
+	  				subject : $('#reviewSubject').val(),
+	  				content: $('#reviewContent').val()
+	  			},
+	  			success:function(){
+	  				swal({
+	  				  title: "수강평이 등록 되었습니다.",
+	  				  icon: "success"
+	  				});
+	  				location.reload();
+	  			},error:function(){
+	  				swal('수강평 등록이 실패하였습니다. ');
+	  			}
+	  			
+	  		});
+	  	});
+
+	  	//질문답변 검색
+	  	$('#qnaSearchBtn').on('click',function(){
+	  		$.ajax({
+	  			type:"GET",
+	  			url:"/gachi/qnaSearch",
+	  			data:{
+	  				code:'${vo.code}',
+	  				searchKey:$('#qnaSearchKey').val(),
+	  				searchWord:$('#qnaSearchWord').val()
+	  			},
+	  			success:function(result){
+	  				console.log("성공= "+result);
+	  			},error:function(error){
+	  				console.log("에러"+error);
+	  			}
+	  		})
+	  	});
+	  	
+	  	//질문답변 버튼 클릭시 로그인 확인
+	  	$('#myclassQnaFrm').on('click',function(){
+			  if(id == 'null'){
+				swal({
+					title:'로그인 후 이용가능한 기능입니다.',
+					icon:"warning"});
+				return false;
+			  }else{
+				  return true;
+			  }
+		  });
+	  	//qna작성
+	  	$('#qnaForm').click(function(){
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/qnaFormOk",
+	  			data:{	  				
+	  				code:'${vo.code}',
+	  				subject:$('#qnaSubject').val(),
+	  				content:$('#qnaContent').val()},
+	  			success:function(){
+	  				swal('질문이 등록 되었습니다.');
+	  				swal({
+		  				  title: "수강평이 등록 되었습니다.",
+		  				  icon: "success",
+		  				  buttons: true
+		  				});
+	  				location.reload();
+	  			},error:function(){
+	  				swal('질문등록이 실패하였습니다.');
+	  			}
+	  		});
+			
 	  	});
 	  	reviewMoreContent();
 	  	qnaMoreContent();
 	});
+	//ckeditor
+	function CKupdate(){
+		for(instance in CKEDITOR.instances){
+			CKEDITOR.instances[instance].updateElement();
+		}
+	}
+	//구매 버튼 클릭시 마이페이지의 구매 화면으로 이동
 	function purchase() {
-		location.href = "/gachi/purchase";
+		if(id == 'null'){
+  			swal({
+				title:'로그인 후 이용가능한 기능입니다.',
+				icon:"warning"});
+			return false;
+		  }else{
+		location.href="/gachi/orderSheet?orderClassCode="+${vo.code};
+		  }
 	};
 </script>
 <div class="container cfont">
@@ -346,13 +453,14 @@ input[type=text] {
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/gachi/img/artEx/artEx14.PNG" class="d-block w-100">
+					<img src="/gachi/upload/classImg/${vo.class_img}"
+						class="d-block w-100">
 				</div>
 				<div class="carousel-item">
-					<img src="/gachi/img/artEx/artEx15.PNG" class="d-block w-100">
+					<img src="/gachi/upload/classImg/" class="d-block w-100">
 				</div>
 				<div class="carousel-item">
-					<img src="/gachi/img/artEx/artEx16.PNG" class="d-block w-100">
+					<img src="/gachi/upload/classImg/" class="d-block w-100">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -367,13 +475,20 @@ input[type=text] {
 		</div>
 		<!-- bxslide 옆에 글 -->
 		<div class="col-sm-6 pt-2">
-			<span class="badge badge-info" style="font-size: 0.9em">${vo.category }</span><br />
+			<span class="badge badge-info"
+				style="font-size: 0.9em; margin-bottom: 10px;">${vo.category }</span><br />
 			<h3>${vo.class_name }</h3>
-			<br /> by ${vo.nickname }<br /> 가격 &nbsp; ${vo.real_price }원<br />
-
-			적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
+			<br />
+			<p style="font-weight: bold; margin-bottom: 10px;">by
+				${vo.nickname }</p>
+			<br />
+			<p style="font-size: 1.2em; margin-bottom: 10px;">가격 &nbsp;
+				${vo.real_price }원</p>
+			<br />
+			<hr />
+			<span>적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
 				style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
-			<input type="hidden" value="${vo.code }" id="cartCode" />
+			</span> <input type="hidden" value="${vo.code }" id="cartCode" />
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>
 					$('#${vo.code}').attr('class', 'fas fa-heart fa-lg');
@@ -382,12 +497,14 @@ input[type=text] {
 			<br />
 			<p>
 			<p />
-			<button id="userCart"
-				style="height: 40px; width: 50%; border: 1px solid lightblue; background-color: white; float: left;">장바구니
-				담기</button>
-			<button
-				style="height: 40px; width: 50%; border: 1px solid lightblue; background-color: lightblue;"
-				onclick="purchase()">구매</button>
+			<div>
+				<button id="userCart"
+					style="height: 60px; width: 50%; border: 1px solid lightblue; background-color: white; font-size: 18px; float: left;">장바구니
+					담기</button>
+				<button
+					style="height: 60px; width: 50%; border: 1px solid lightblue; background-color: lightblue; font-size: 18px"
+					onclick="purchase()">구매</button>
+			</div>
 		</div>
 
 		<!-- 설명글 -->
@@ -436,15 +553,22 @@ input[type=text] {
 		<div id="myclassQna">
 			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
-				<input type="text" name="searchWord" />
-				<button type="button" class="btn btn-outline-light btn-sm">검색</button>
+				<select name="searchKey" id="qnaSearchKey">
+					<option value="작성자">작성자</option>
+					<option value="제목">제목</option>
+					<option value="내용">내용</option>
+				</select> 
+				<input type="text" name="searchWord" id="qnaSearchWord" />
+				<button type="button" class="btn btn-outline-light btn-sm"
+					id="qnaSearchBtn">검색</button>
 				<button type="button" class="btn btn-outline-light"
 					data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
 			<hr style="background: #000" />
 			<c:choose>
 				<c:when test="${empty qnaList }">
-				<div style="height: 100px; width: 100%; line-height: 100px; text-align: center; background-color: #eee">
+					<div
+						style="height: 100px; width: 100%; line-height: 100px; text-align: center; background-color: #eee">
 						첫 번째로 질문을 남겨주세요 :)</div>
 				</c:when>
 				<c:otherwise>
@@ -490,25 +614,24 @@ input[type=text] {
 			</div>
 			<div class="modal-body">
 				<form id="reviewFormOk" method="post" action="/gachi/reviewFormOk">
+					<!-- 클래스코드, 제목, 내용 -->
 					<input type="hidden" value="${vo.code }" name="code" />
-
 					<div>
 						만족도 <span class="classRating"></span>
 					</div>
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">제목</label> <input
-							type="text" class="form-control" id="recipient-name"
+							type="text" class="form-control" id="reviewSubject"
 							name="subject">
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">내용</label>
-						<textarea class="form-control" id="message-text" name="content"></textarea>
+						<textarea class="form-control" id="reviewContent" name="content"></textarea>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<input type="button" class="btn btn-outline-light btn-block"
-					value="등록" />
+				<button type="button" class="btn btn-primary" id="reviewForm">등록</button>
 			</div>
 		</div>
 	</div>
@@ -531,17 +654,16 @@ input[type=text] {
 					<input type="hidden" value="${vo.code }" name="code" />
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">제목</label> <input
-							type="text" class="form-control" id="recipient-name"
-							name="subject">
+							type="text" class="form-control" id="qnaSubject" name="subject">
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label">내용</label>
-						<textarea class="form-control" id="message-text" name="content"></textarea>
+						<textarea class="form-control" id="qnaContent" name="content2"></textarea>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<input type="button" class="btn btn-primary" value="등록" />
+				<button type="button" class="btn btn-primary" id="qnaForm">등록</button>
 			</div>
 		</div>
 	</div>

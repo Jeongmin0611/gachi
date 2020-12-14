@@ -15,6 +15,8 @@
 <script type="text/javascript" src="resources/jquery.raty.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
+<!-- Bootstrap Dropdown Hover JS -->
+<script src="js/bootstrap-dropdownhover.min.js"></script>
 <style>
 @font-face {
 	font-family: 'OSeongandHanEum';
@@ -311,57 +313,6 @@ a {
 	margin:0 0 0 20px;
 }
 /* 메뉴 */
-.nav>li>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .dropdown-menu>a, .dropdown-menu>li{
-  border-bottom: 3px solid transparent;
-  }
-.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>a:focus, .dropdown-menu>a:hover{
-  border-bottom: 3px solid transparent;
-  background: none;
-}
-.navbar a, .dropdown-menu>a, .dropdown-menu>a:focus, .dropdown-menu>a:hover, .navbar-toggle{
- color: black;
-}
-.dropdown-menu{
-    -webkit-box-shadow: none;
-    box-shadow:none;
-    background-color:rgb(255,255,255);
-}
-.dropdown-menu a:hover, .dropdown-menu a.active {
-	background: #eee;
-	color:black;
-}
-
-
-.nav li:hover:nth-child(10n+1), .nav li.active:nth-child(10n+1){
-  border-bottom: #C4E17F 3px solid;
-}
-.nav li:hover:nth-child(10n+2), .nav li.active:nth-child(10n+2){
-  border-bottom: #C3D2FE 3px solid;
-}
-.nav li:hover:nth-child(10n+3), .nav li.active:nth-child(10n+3){
-  border-bottom: #FECF71 3px solid;
-}
-.nav li:hover:nth-child(10n+4), .nav li.active:nth-child(10n+4){
-  border-bottom: #F0776C 3px solid;
-}
-.nav li:hover:nth-child(10n+5), .nav li.active:nth-child(10n+5){
-  border-bottom: #DB9DBE 3px solid;
-}
-.nav li:hover:nth-child(10n+6), .nav li.active:nth-child(10n+6){
-  border-bottom: #C49CDE 3px solid;
-}
-.nav li:hover:nth-child(10n+7), .nav li.active:nth-child(10n+7){
-  border-bottom: #669AE1 3px solid;
-}
-.nav li:hover:nth-child(10n+8), .nav li.active:nth-child(10n+8){
-  border-bottom: #62C2E4 3px solid;
-}
-.nav li:hover:nth-child(10n+9), .nav li.active:nth-child(10n+9){
-  border-bottom: #C4E17F 3px solid;
-}
-.nav li:hover:nth-child(10n+10), .nav li.active:nth-child(10n+10){
-  border-bottom: #F7FDCA 3px solid;
-}
 
 /* 메뉴 끝 */
 /* 검색 버튼 */
@@ -373,6 +324,10 @@ a {
 /* 검색 버튼 끝 */
 .container{
 	margin-top: 50px;
+}
+.container .dropdown-menu{
+	position:relative;
+	z-index: 10;
 }
 </style>
 <style media="all">
@@ -445,14 +400,10 @@ a {
 	padding: 0;
 }
 
-.dropdown:hover> .dropdown-menu {
-	display: block;
-}
 .megamenu {
 	position: static;
 }
 .dropdown-menu {
-	border: none;
 	width: 100%;
 }
 #navbarContent>ul>li>a{
@@ -1298,7 +1249,6 @@ $(document).ready(function() {
    <!-- 메뉴 -->
 
 	<nav class="navbar fixed-top navbar-expand-md navbar-light " style="padding:0 12px; background-color: white; box-shadow:0 0 10px 0 #eee">
-	<a href="/gachi"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>    
@@ -1308,7 +1258,7 @@ $(document).ready(function() {
 			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
 			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
 		</form>
-		       
+		       <a href="/gachi" style="margin-left: 33%;"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 		<ul class="nav navbar-nav pull-right  ml-auto ">
         <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
@@ -1341,9 +1291,10 @@ $(document).ready(function() {
        
      </div>
 </nav>
+<div class="container" style="overflow: visible;">
 <nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
-  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1" >
-    <ul class="navbar-nav mr-auto">
+  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1 "  >
+    <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
       <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">클래스</a>
          <ul class="dropdown-menu">
            <li class="dropdown-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
@@ -1380,7 +1331,7 @@ $(document).ready(function() {
 		<span class="navbar-toggler-icon"></span>
 	</button>
 </nav>
-
+</div>
    <!-- 메뉴 끝 -->
    <!-- 로그인폼 -->
    <div id="md" class="join">
