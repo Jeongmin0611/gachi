@@ -94,10 +94,10 @@ function numberWithCommas(x) {
 	var cr_dash_chart = new Chart(cr_dash_context, {
 	    type: 'line',
 	    data: {
-	        labels: ${labelDate},
+	        labels: ${labelData},
 	        datasets: [{
-	            label: ${dashData},
-	            data: [100, 50, 150, 100, 60, 60, 70, 30, 90, 200, 36, 88],
+	            label: '날짜별 매출 총액',
+	            data: ${dashData},
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
