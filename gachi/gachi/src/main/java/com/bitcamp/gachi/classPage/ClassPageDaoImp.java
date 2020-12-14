@@ -34,5 +34,6 @@ public interface ClassPageDaoImp {
 	public int insertReview(AllVO vo);
 	//클래스 qnq 등록
 	public int insertQna(AllVO vo);
+	public int classPageCategoryRecordCount(ClassPageVO vo);
 	
 }

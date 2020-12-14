@@ -33,6 +33,9 @@
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by allow desc)
 		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by allow asc
 		<choose>
+			<when test='category==null and selectval.equals("Iall")'>
+			)
+			</when>
 			<when test='category==null and selectval==null'>
 			)
 			</when>
@@ -49,6 +52,11 @@
 		parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="int">
 		select
 		count(code) from class
+	</select>
+	<select id="classPageCategoryRecordCount"
+		parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="int">
+		select
+		count(code) from class where category='${category}'
 	</select>
 	<select id="homeClassPopular"
 		resultType="com.bitcamp.gachi.admin.AllVO">
