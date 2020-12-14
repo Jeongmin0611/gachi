@@ -10,7 +10,6 @@
 		height:100%;
 	}
 	#ad_videoFile_list>li:last-child li{
-		font-size:2em;
 		float:left;
 		width:50%;
 		border-bottom:1px solid gray;
@@ -24,19 +23,24 @@
 		float:left;
 		width:10%;
 		height:40px;
+		padding:3px 0px;
 		border-bottom:1px solid gray;
 	}
-	#ad_video_addList li:nth-child(8n+1),#ad_video_addList li:nth-child(8n+3),#ad_video_addList li:nth-child(8n+8){
+	#ad_video_addList li:nth-child(7n+2),#ad_video_addList li:nth-child(7n+7){
 		width:5%;
 	}
-	#ad_video_addList li:nth-child(8n+2),#ad_video_addList li:nth-child(8n+4){
-		width:25%;
+	#ad_video_addList li:nth-child(7n+1){
+		width:20%;
 	}
-	#ad_video_addList li:nth-child(8n+5){
+	#ad_video_addList li:nth-child(7n+3){
+		width:35%;
+	}
+	#ad_video_addList li:nth-child(7n+4){
 		width:15%;
 	}
 	#ad_video_addList li>input[type=text]{
 		width:95%;
+		line-height:0px;
 	}
 	#ad_unit_box{
 		display:hidden;
@@ -88,6 +92,9 @@
 				}
 			});
 		});
+		
+		
+		
 		function addVideoList(result){
 			let date=new Date();
 			let year=date.getFullYear();
@@ -98,20 +105,15 @@
 			}
 			var filename=result.filePath.slice(result.filePath.lastIndexOf("/")+1);
 			console.log(filename);
-			let tagTxt='<div><li><select name="list['+cnt+'].unit">';
-			for (var i = 1; i <=result.unitMax; i++) {
-				tagTxt+='<option value="'+i+'">'+i+'</option>';
-			}
-			tagTxt+='</select></li>';
-			tagTxt+='<li><select name="list['+cnt+'].unit_content"/>';
+			tagTxt='<div><li><select name="list['+cnt+'].unit_content"/>';
 			result.conList.forEach((content)=>{
 				tagTxt+='<option value="'+content+'">'+content+'</option>';
 			});
 			tagTxt+='</select></li>';
 			tagTxt+='<li><input type="text" name="list['+cnt+'].section_index"/></li>';
 			tagTxt+='<li><input type="text" name="list['+cnt+'].video_name"/></li>';
-			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_filename" value="'+filename+'"/>';
-			tagTxt+=filename+'</li>';
+			tagTxt+='<li class="wordCut"><input type="hidden" name="list['+cnt+'].video_filename"'; 
+			tagTxt+='value="'+filename+'"/>'+filename+'</li>';
 			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_length" value="333"/>123</li>';
 			tagTxt+='<li><input type="hidden" name="list['+cnt+'].enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
 			tagTxt+=year+'-'+month+'-'+day+'</li>'
@@ -163,23 +165,27 @@
 				let code=$(event.target).val();
 				console.log("aaaaaa");
 				$.ajax({
-					url:'/gachi/adminGetSection?code='+code,
+					url:'/gachi/adminGetVideoInfo?code='+code,
 					type:"get",
 					success:(list)=>{
-						let txt='';
-						list.forEach((vo)=>{
-							txt+='<li>목차</li>';
-							txt+='<li>'+vo.unit+'</li>';
-							txt+='<li>목차명</li>';
-							txt+='<li>'+vo.unit_content+'</li>';
-						});
-						$("#ad_unit_box").html(txt);
+						addUnit(list);
 					},
 					error:(e)=>{
 						
 					}
 				});
 			});
+			function addUnit(list){
+				let txt='';
+				list.forEach((vo)=>{
+					txt+='<li>목차</li>';
+					txt+='<li>'+vo.unit+'</li>';
+					txt+='<li>목차명</li>';
+					txt+='<li>'+vo.unit_content+'</li>';
+					$("#ad_unit_box").html(txt);
+				});
+				
+			}
 			$(document).on('click','b',(event)=>{
 				cnt=cnt-1;
 				let fileName=$(event.target).attr("title");
@@ -194,17 +200,6 @@
 					}
 				});
 			});	
-			
-			//$(document).on('submit','#adminVideoWriteOk',(event)=>{
-				//let data=$("#adminVideoWriteOk").serializeArray();
-				//let dataList=JSON.stringify(data);
-				//console.log(dataList);
-				//$.ajax({
-				//	url:'/gachi/adminVideoWriteOk',
-				//	data:dataList,
-			//	type:post,
-			//});
-		//});
 	});
 </script>
 <div class="container ad_font">
@@ -228,40 +223,17 @@
 </div>
 <h3>동영상목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
-	<!--<c:forEach var="section" items="${sectionList}">
-		<li>${section.unit}</li>
-		<li>${section.unit_content}</li>
-	</c:forEach>-->
+	
 </ul>
-<!--
-<h3>영상등록정보</h3>
-<ul class="text_center ad_box" id="ad_videoFile_list">
-	<li>
-		<ul>
-			<li>영상썸네일</li>
-			<li><img src="<%=request.getContextPath()%>/upload/classImg/147.jpg"/></li>
-		</ul>
-	</li>
-	<li>
-		<ul>
-			<li>파일명</li>
-			<li>147.mp4</li>
-			<li>영상길이</li>
-			<li>20:56</li>
-			<li>확장자</li>
-			<li>.mp4</li>
-			<li>파일용량</li>
-			<li>41.8MB</li>
-		</ul>
-	</li>
-</ul> -->
-<div class="ad_box" id="add_mov" style="height:300px; text-align:center; "> 
-	<h3 style="line-height: 280px;">영상을 여기에 끌어주세요.</h3>
+<div class="ad_box" id="add_mov" style="height:300px; text-align:center; padding:auto; "> 
+	<div style="margin-top:60px">
+		<h3 style="line-height:80px;">강좌를 선택하신 후,</h3>
+		<h3 style="line-height:80px;">영상을 여기에 끌어주세요.</h3>
+	</div>
 </div>
 <form method="post" id="adminVideoWriteOk" action="/gachi/adminVideoWriteOk">
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_video_addList">
-	<li>목차</li>
 	<li>목차명</li>
 	<li>순서</li>
 	<li>영상제목</li>	

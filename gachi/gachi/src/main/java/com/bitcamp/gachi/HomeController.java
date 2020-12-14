@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
@@ -41,7 +40,7 @@ public class HomeController {
 
 	////////////////////////////////////////////////
 	@RequestMapping("/")
-	//@ResponseBody //ajax 매핑 메소드는 view 리턴이 안 됨
+	//@ResponseBody //ajax 留ㅽ븨 硫붿냼�뱶�뒗 view 由ы꽩�씠 �븞 �맖
 	public ModelAndView home(HttpSession ses, HttpServletRequest req) {
 		ClassPageDaoImp dao = sqlsession.getMapper(ClassPageDaoImp.class);
 		List<AllVO> plist = dao.homeClassPopular();
@@ -50,19 +49,19 @@ public class HomeController {
 		UserInfoDaoImp uDao = sqlsession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
-		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
+		if(ses.getAttribute("logStatus")!=null) {//濡쒓렇�씤 �긽�깭
 			String userid=(String)ses.getAttribute("userid");
-			if(req.getParameter("good_add")!=null) {//좋아요 추가
+			if(req.getParameter("good_add")!=null) {//醫뗭븘�슂 異붽�
 				String good = req.getParameter("good_add");
 				uDao.wishListAdd(userid, good);			
 			}
-			if(req.getParameter("good_del")!=null) {//좋아요 삭제
+			if(req.getParameter("good_del")!=null) {//醫뗭븘�슂 �궘�젣
 				String good = req.getParameter("good_del");
 				uDao.wishListDel(userid, good);			
 			}
-			//좋아요 클래스
+			//醫뗭븘�슂 �겢�옒�뒪
 			List<OrderListVO> cgoodList = uDao.classWishList(userid);			
-			//좋아요 상품
+			//醫뗭븘�슂 �긽�뭹
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
 			mav.addObject("cgoodList", cgoodList);
 			mav.addObject("ggoodList", ggoodList);	

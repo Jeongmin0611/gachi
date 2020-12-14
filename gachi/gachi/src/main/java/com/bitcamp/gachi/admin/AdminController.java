@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -131,7 +132,7 @@ public class AdminController {
 			Integer Allpayment = dao1.paymentAll_Dash(dbParam1);
 			Integer AllPaymentClass = dao1.paymentClassAll_Dash(dbParam1);
 			Integer AllPaymentStore = dao1.paymentStoreAll_Dash(dbParam1);
-			// ChartJs 전송 데이터
+			// ChartJs �쟾�넚 �뜲�씠�꽣
 //			List<String> dashMemberData = new ArrayList<String>();
 //			List<String> dashAllMemberData = new ArrayList<String>();
 //			List<String> dashCreatorData = new ArrayList<String>();
@@ -263,7 +264,7 @@ public class AdminController {
 		int  dashAllMember = dao.dashboardAllMember(dashmember_cnt);
 		int  dashCreator = dao.dashboardCreator(dashmember_cnt);
 
-		// ChartJs 전송 데이터
+		// ChartJs �쟾�넚 �뜲�씠�꽣
 //		List<String> dashMemberData = new ArrayList<String>();
 //		List<String> dashAllMemberData = new ArrayList<String>();
 //		List<String> dashCreatorData = new ArrayList<String>();
@@ -613,7 +614,25 @@ public class AdminController {
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
 	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		String path=session.getServletContext().getRealPath("/upload/classImg");
+		List<ClassVO> unitList=vo.getUnitList();
+		ClassUnitSort cus=new ClassUnitSort();
+		Collections.sort(unitList,cus);
+		for (int i = 0; i < unitList.size(); i++) {
+				ClassVO vo1=unitList.get(i);
+				if(vo1.getCode()!=null) {
+					if(vo1.getSection_code().equals(",null")) {
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+						String dateStr = null;
+						Date date = new Date();
+						dateStr = sdf.format(date); 
+						int naxtval=dao.selectNextSeq();
+						dateStr="sc"+dateStr+naxtval;
+						System.out.println("dateStr==> "+dateStr);
+						vo1.setSection_code(dateStr);
+					}
+					dao.updateSection(vo1);
+				}
+		}
 		int result=dao.updateClass(vo);
 		ModelAndView mav=new ModelAndView();
 		if(result>0) {
@@ -742,28 +761,6 @@ public class AdminController {
 		}
 		return json;
 	}
-	
-	
-	
-//	}
-//	@RequestMapping("/adminNotice")
-//	public ModelAndView adminNotice(NoticePageVO npvo,HttpServletRequest req) {
-//		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
-//		String nowPageRequest=req.getParameter("nowPage");
-//		if(nowPageRequest!=null) {
-//			npvo.setNowPage(Integer.parseInt(nowPageRequest));
-//		}
-//		int totalRecord=dao.getAllRecord(npvo);
-//		npvo.setTotalRecord(totalRecord);
-//		
-//		List<NoticeVO> list=dao.selectList(npvo);
-//		ModelAndView mav=new ModelAndView();
-//		mav.addObject("list",list);
-//		mav.addObject("npvo",npvo);
-//		mav.setViewName("admin/adminNotice");
-//		return mav;
-//	}
-//	
 	@RequestMapping("/adminMember")
 	public ModelAndView adminMember(@RequestParam(value="now", required=false) String now) {
 		
@@ -796,11 +793,11 @@ public class AdminController {
 		System.out.println("cntRecords:" + cntRecords);
 		System.out.println("lastPage:" + lastPage);
 		
-		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
+		List<MemberVO> list = dao.selectAllMember(dbParam); // �쟾泥� �쉶�썝 由ъ뒪�듃
 		
-		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
-		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
-		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
+		int countAllMember = dao.countAllMember(); // �쟾泥� �쉶�썝 紐� �닔 (�쁽�옱 �쉶�썝 + �깉�눜 �쉶�썝)
+		int countNowMember = dao.countNowMember(); // �쁽�옱 �쉶�썝 紐� �닔
+		int countDeletedMember = dao.countDeletedMember(); // �깉�눜 �쉶�썝 紐� �닔
 		
 		PagingVO pageVO = new PagingVO();
 		
@@ -863,10 +860,10 @@ public class AdminController {
 		System.out.println("cntRecords:" + cntRecords);
 		System.out.println("lastPage:" + lastPage);
 		
-		List<MemberVO> list = dao.selectAllMember(dbParam); // 전체 회원 리스트
-		int countAllMember = dao.countAllMember(); // 전체 회원 명 수 (현재 회원 + 탈퇴 회원)
-		int countNowMember = dao.countNowMember(); // 현재 회원 명 수
-		int countDeletedMember = dao.countDeletedMember(); // 탈퇴 회원 명 수
+		List<MemberVO> list = dao.selectAllMember(dbParam); // �쟾泥� �쉶�썝 由ъ뒪�듃
+		int countAllMember = dao.countAllMember(); // �쟾泥� �쉶�썝 紐� �닔 (�쁽�옱 �쉶�썝 + �깉�눜 �쉶�썝)
+		int countNowMember = dao.countNowMember(); // �쁽�옱 �쉶�썝 紐� �닔
+		int countDeletedMember = dao.countDeletedMember(); // �깉�눜 �쉶�썝 紐� �닔
 		
 		System.out.println("lastPage:" + lastPage);
 		if(list != null) {
@@ -1008,7 +1005,7 @@ public class AdminController {
 			mav.addObject("nowPage",nowPage);
 			mav.setViewName("redirect:adminNoticeView");
 		}else {
-			mav.addObject("msg","공지사항 수정에 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.addObject("msg","怨듭��궗�빆 �닔�젙�뿉 �떎�뙣�븯���뒿�땲�떎. �뮘濡� �룎�븘媛묐땲�떎.");
 			mav.setViewName("admin/adminNoticeResult");
 		}
 		return mav;
@@ -1025,7 +1022,7 @@ public class AdminController {
 			mav.addObject("npvo", npvo);
 			mav.setViewName("redirect:adminNotice");
 		}else{
-			mav.addObject("msg","공지사항 삭제를 실패하였습니다. 뒤로 돌아갑니다.");
+			mav.addObject("msg","怨듭��궗�빆 �궘�젣瑜� �떎�뙣�븯���뒿�땲�떎. �뮘濡� �룎�븘媛묐땲�떎.");
 			mav.setViewName("admin/adminNoticeResult");
 		}
 		return mav;
@@ -1045,7 +1042,7 @@ public class AdminController {
 		if(result>0) {
 			mav.setViewName("redirect:adminNotice");	
 		}else{
-			String msg="공지사항 등록을 실패하였습니다. 공지사항 쓰기로 돌아갑니다.";
+			String msg="怨듭��궗�빆 �벑濡앹쓣 �떎�뙣�븯���뒿�땲�떎. 怨듭��궗�빆 �벐湲곕줈 �룎�븘媛묐땲�떎.";
 			mav.addObject("msg", msg);
 			mav.setViewName("admin/adminNoticeResult");
 		}
@@ -1150,7 +1147,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-//		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
+//		List<SettleVO> list = sdao.selectStoreList(dbParam); // �쟾泥� �긽�뭹 由ъ뒪�듃
 		
 		List<GoodsVO> list = dao.selectStoreList(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
@@ -1210,7 +1207,7 @@ public class AdminController {
 		if(sale_State.length() <= 0) sale_State = null;
 		if(search.length() <= 0) search = null;
 
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -1228,7 +1225,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-//		List<SettleVO> list = sdao.selectStoreList(dbParam); // 전체 상품 리스트
+//		List<SettleVO> list = sdao.selectStoreList(dbParam); // �쟾泥� �긽�뭹 由ъ뒪�듃
 		List<GoodsVO> list = dao.selectStoreList(dbParam);
 		dao = sqlSession.getMapper(GoodsDaoImp.class);
 		
@@ -1397,7 +1394,7 @@ public class AdminController {
 		String startDate = todate.substring(0, 8) + "01";
 		String endDate = todate;
 	
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -1445,7 +1442,7 @@ public class AdminController {
 			endDate = todate;
 		} 
 
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -1508,7 +1505,7 @@ public class AdminController {
 		String startDate = todate.substring(0, 8) + "01";
 		String endDate = todate;
 	
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -1562,7 +1559,7 @@ public class AdminController {
 		if(username.length() <= 0) username = null;
 		
 		System.out.println(username);
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -1688,7 +1685,7 @@ public class AdminController {
 			dao = sqlSession.getMapper(CreatorDaoImp.class);
 			List<Map<String, Integer>> categoryResult = dao.CreatorForCategory(dbParam_pie);
 
-			// ChartJs 전송 데이터
+			// ChartJs �쟾�넚 �뜲�씠�꽣
 			List<String> genderPieLbl = new ArrayList<String>();
 			List<String> genderPieData = new ArrayList<String>();
 			
@@ -1814,7 +1811,7 @@ public class AdminController {
 		dao = sqlSession.getMapper(CreatorDaoImp.class);
 		List<Map<String, Integer>> categoryResult = dao.CreatorForCategory(dbParam_pie);
 
-		// ChartJs 전송 데이터
+		// ChartJs �쟾�넚 �뜲�씠�꽣
 		List<String> genderPieLbl = new ArrayList<String>();
 		List<String> genderPieData = new ArrayList<String>();
 		
@@ -1950,7 +1947,7 @@ public class AdminController {
 			dao = sqlSession.getMapper(MemberDaoImp.class);
 			List<Map<String, Integer>> ageResult = dao.dashForAge(dbParam_pie);
 
-			// ChartJs 전송 데이터
+			// ChartJs �쟾�넚 �뜲�씠�꽣
 			List<String> genderPieLbl = new ArrayList<String>();
 			List<String> genderPieData = new ArrayList<String>();
 			
@@ -2064,7 +2061,7 @@ public class AdminController {
 		dao = sqlSession.getMapper(MemberDaoImp.class);
 		List<Map<String, Integer>> ageResult = dao.dashForAge(dbParam_pie);
 
-		// ChartJs 전송 데이터
+		// ChartJs �쟾�넚 �뜲�씠�꽣
 		List<String> genderPieLbl = new ArrayList<String>();
 		List<String> genderPieData = new ArrayList<String>();
 		
@@ -2147,7 +2144,7 @@ public class AdminController {
 		String startDate = todate.substring(0, 8) + "01";
 		String endDate = todate;
 	
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2156,7 +2153,7 @@ public class AdminController {
 		dbParam.put("startNum", startNum+"");
 		dbParam.put("endNum", endNum+"");
 		
-		int cntRecords = dao.selectCntAllSettle(dbParam); //카운트
+		int cntRecords = dao.selectCntAllSettle(dbParam); //移댁슫�듃
 		
 		int lastPage = 1;
 		if(cntRecords % 20 == 0) {
@@ -2164,7 +2161,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-		List<SettleVO> list = dao.selectAllSettle(dbParam); // 전체 리스트
+		List<SettleVO> list = dao.selectAllSettle(dbParam); // �쟾泥� 由ъ뒪�듃
 		
 		List<SettleVO> result = dao.manageSettle(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
@@ -2228,7 +2225,7 @@ public class AdminController {
 		if(username.length() <= 0) username = null;
 		
 		System.out.println(username);
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2335,7 +2332,7 @@ public class AdminController {
 		String startDate = todate.substring(0, 8) + "01";
 		String endDate = todate;
 	
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2353,7 +2350,7 @@ public class AdminController {
 			lastPage = cntRecords / 20 + 1;
 		}
 		
-		List<SettleVO> list = dao.selectAllStore(dbParam); // 전체 회원 리스트
+		List<SettleVO> list = dao.selectAllStore(dbParam); // �쟾泥� �쉶�썝 由ъ뒪�듃
 		
 		
 		List<SettleVO> result = dao.managePaymentStore(dbParam);
@@ -2417,7 +2414,7 @@ public class AdminController {
 		if(username.length() <= 0) username = null;
 		
 		System.out.println(username);
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2506,7 +2503,7 @@ public class AdminController {
 		String startDate = todate.substring(0, 8) + "01";
 		String endDate = todate;
 	
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2523,7 +2520,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-		List<SettleVO> list = dao.selectAllClass(dbParam); // 전체 회원 리스트	
+		List<SettleVO> list = dao.selectAllClass(dbParam); // �쟾泥� �쉶�썝 由ъ뒪�듃	
 		List<SettleVO> result = dao.managePaymentClass(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
@@ -2586,7 +2583,7 @@ public class AdminController {
 		if(username.length() <= 0) username = null;
 		
 		System.out.println(username);
-		// sql 검색 값 셋팅
+		// sql 寃��깋 媛� �뀑�똿
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -2604,7 +2601,7 @@ public class AdminController {
 			lastPage = cntRecords / 20 + 1;
 		}
 
-		List<SettleVO> list = dao.selectAllClass(dbParam); // 전체 회원 리스트
+		List<SettleVO> list = dao.selectAllClass(dbParam); // �쟾泥� �쉶�썝 由ъ뒪�듃
 		List<SettleVO> result = dao.managePaymentClass(dbParam);
 		dao = sqlSession.getMapper(SettleDaoImp.class);
 		Integer cntAllPaymentClass = dao.paymentClassAll(dbParam);
@@ -2679,6 +2676,8 @@ public class AdminController {
 		MultipartFile file=mhsr.getFile("file");
 		boolean isc=file.isEmpty();
 		String filePath=null;
+		String filename=null;
+		String sizeStr=null;
 		if(!isc){
 			String fName=file.getOriginalFilename();
 			if(fName!=null&&!fName.equals("")) {
@@ -2698,7 +2697,9 @@ public class AdminController {
 				}//if
 				try {
 					file.transferTo(newFile);
-					filePath="/gachi/upload/class/class_video/"+newFile.getName();
+					filePath="/gachi/upload/class_video/"+newFile.getName();
+					filename=newFile.getName();
+					sizeStr=byteCalculation(newFile.length());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -2712,7 +2713,8 @@ public class AdminController {
 		map.put("filePath",filePath);
 		map.put("unitMax",unitMax);
 		map.put("conList",conList);
-		
+		map.put("filename",filename);
+		map.put("sizeStr",sizeStr);
 		return map;
 	}
 	@RequestMapping("/adminVideoWrite")
@@ -2726,31 +2728,88 @@ public class AdminController {
 		System.out.println("code=> "+vo.getCode());
 		ClassvideoSort cvs=new ClassvideoSort();
 		List<ClassVideoVO> list=vo.getList();
-		Collections.sort(list,cvs);
-		for (int i = 0; i < list.size(); i++) {
-			ClassVideoVO vo1=list.get(i);
-			vo1.setCode(code);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
-			String dateStr = null;
-			try {
-				Date date = sdf.parse(vo1.getEnroll_date());
-				dateStr = sdf.format(date);
-			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			vo1.setVideo_code("v"+dateStr);
-			String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
-			vo1.setSection_code(sectionCode);
-			int result=dao.videoInsert(vo1);
-			if(result<=0){
-				break;
-			}
-		}
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("admin/adminVideo");
+		if(list==null) {
+			mav.addObject("msg","등록할 영상이 없습니다. 영상등록화면으로 돌아갑니다.");
+			mav.setViewName("admin/adminResult");
+		}else {
+			Collections.sort(list,cvs);
+			for (int i = 0; i < list.size(); i++) {
+				ClassVideoVO vo1=list.get(i);
+				vo1.setCode(code);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+				String dateStr = null;
+				try {
+					Date date = sdf.parse(vo1.getEnroll_date());
+					dateStr = sdf.format(date);
+				} catch (java.text.ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				vo1.setVideo_code("v"+dateStr);
+				String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
+				vo1.setSection_code(sectionCode);
+				int result=dao.videoInsert(vo1);
+				if(result<=0){
+					break;
+				}
+			}
+			mav.setViewName("redirect:adminVideo");
+		}
 		return mav;	
 	}
+	 public String byteCalculation(Long bytes) {
+         String retFormat = null;
+         Double size=bytes.doubleValue();
+         String[] s = { "bytes", "KB", "MB", "GB", "TB", "PB" };
+         if (bytes != 0) {
+               int idx = (int) Math.floor(Math.log(size) / Math.log(1024));
+               DecimalFormat df = new DecimalFormat("#,###.##");
+               double ret = ((size / Math.pow(1024, Math.floor(idx))));
+               retFormat = df.format(ret) + " " + s[idx];
+          } else {
+               retFormat += " " + s[0];
+          }
+
+          return retFormat;
+	 }	
+	@RequestMapping("/adminVideoView")
+	public ModelAndView adminVideoView(HttpServletRequest req){
+		String code=req.getParameter("code");
+		String filename=req.getParameter("video_filename");
+		System.out.println("filename==>"+filename);
+		String path=req.getSession().getServletContext().getRealPath("/upload/class_video");
+		File file =new File(path, filename);
+		//String fullPath="/upload/class_video/"+filename;
+		ModelAndView mav=new ModelAndView();
+		if(file.exists()){
+			long fileSize=file.length();
+			System.out.println("fileSize==>"+fileSize);
+			String sizeStr=null;
+			if(fileSize!=0){
+				sizeStr=byteCalculation(fileSize);
+				System.out.println("sizeStr==>"+sizeStr);
+			}
+			mav.addObject("filesize",sizeStr);
+		}
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String category=dao.selectVideoCategory(code);
+		String className=dao.selectVideoClassName(code);
+		List<ClassVideoVO> videoList=dao.selectClassVideoList(code);
+		List<ClassVideoVO> unitList=dao.selectSection(code);
+		
+		mav.addObject("videoList", videoList);
+		mav.addObject("unitList", unitList);
+		mav.addObject("category",category);
+		mav.addObject("className",className);
+		mav.addObject("filename",filename);
+		mav.addObject("code",code);
+		mav.setViewName("admin/adminVideoView");
+		return mav;
+	} 
+	
+	
+	
 	@RequestMapping("/adminReply")	
 	public String adminReply() {
 		return "admin/adminReply";
@@ -2772,9 +2831,9 @@ public class AdminController {
 		List<ClassVO> list=dao.getClassAllList(category);
 		return list;
 	}
-	@RequestMapping("/adminGetSection")
+	@RequestMapping("/adminGetVideoInfo")
 	@ResponseBody
-	public List<ClassVideoVO> adminGetSection(HttpServletRequest req){
+	public List<ClassVideoVO> adminGetVideoInfo(HttpServletRequest req){
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		String code=req.getParameter("code");
 		List<ClassVideoVO> list=dao.selectSection(code);
@@ -2807,4 +2866,61 @@ public class AdminController {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		dao.deleteSection(section_code);
 	}
+	
+	@RequestMapping(value="/adminVideoUpdate",method=RequestMethod.POST)
+	public ModelAndView adminVideoUpdate(ClassVideoVO vo) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		List<ClassVideoVO> list=vo.getList();
+		ClassvideoSort cvs=new ClassvideoSort();
+		for (int i = 0; i < list.size(); i++) {
+			ClassVideoVO vo1=list.get(i);
+			int unit=dao.getUnit(vo1.getUnit_content());
+			vo1.setUnit(unit);
+		}
+		Collections.sort(list,cvs);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("redirect:adminVideoView");
+		return mav;
+	}
+	
+	@RequestMapping("/getVideoOption")
+	@ResponseBody
+	public HashMap<String,Object> getVideoOption(HttpServletRequest req){
+		String code=req.getParameter("code");
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		List<String> ucList=dao.getUnitContent(code);
+		int unitMax=dao.getUnitMax(code);
+		map.put("ucList",ucList);
+		map.put("unitMax",unitMax);
+		return map;
+	}
+	
+	@RequestMapping("/videoDel")
+	@ResponseBody
+	public int videoDel(HttpServletRequest req) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String path=req.getSession().getServletContext().getRealPath("/upload/class_video");
+		String videoCode=req.getParameter("video_code");
+		String filename=req.getParameter("filename");
+		File file=new File(path, filename);
+		if(file.exists()) {
+			file.delete();
+		}
+		int result=0;
+		if(videoCode!=null&&!videoCode.equals("")) {
+			result=dao.videoDelete(videoCode);
+		}
+		return result; 
+	}
+	@RequestMapping("/getUnit")
+	@ResponseBody
+	public int getUnit(HttpServletRequest req) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String unitContent=req.getParameter("unit_content");
+		int unit=dao.getUnit(unitContent);
+		return unit;
+	}
+	
 }
