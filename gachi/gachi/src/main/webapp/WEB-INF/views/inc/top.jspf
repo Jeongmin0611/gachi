@@ -31,53 +31,12 @@ a {
 	font-family: 'OSeongandHanEum';
 }
 
-#idFF, #idFF2, #pwdFF1, #pwdFF2,#pwdFF3,#pwdFF4 {
-	font-Size: 0.7em;
-}
 
-.ipbox {
-	width: 20%;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	float: left;
-	margin: 0 10px 0 10px;
-}
-
-.ipbox1 {
-	width: 65%;
-	margin: 0 10px 0 10px;
-	float: left;
-	margin: 10px;
-}
-
-#ipbox {
-	width: 150px;
-	height: 40px;
-	float: left;
-	background-color: red;
-}
-
-#meunBM {
-	list-style-type: none;
-	width: 1000px;
-	height: 50px;
-}
-
-#meunBM li {
-	font-size: 0.7em;
-	background-color: red;
-}
 #loginFrm,#joinForm,#joinForm2,#idF1Form,#pwdF1Form{
 	border: 1px solid gray;
 	width: 100%;
 	height: 100%;
 	background-color:white;
-}
-
-
-#listFontColor{
-	color:black;
 }
 #mdBtm,#mdJBtm,#mdJ2Btm,#idF1Btm,#pwdF1Btm{
 	float:right;
@@ -90,32 +49,23 @@ a {
 		height:100%;
 		background-color:rgba(0,0,0,0.5);
 		z-index:-1;
-	}
-	#md,#md2,#mdJ,#mdJ2,#idF1,#pwdF1{
-		display:none;
-		position:absolute;
-		width:100%;
-		height:100%;
-		z-index:1;
-	}
-.navbar-new-bottom{
-    background-color: #f7f7f7;
-    box-shadow: 0 5px 6px -2px rgba(0,0,0,.3);
-    border-top: 1px solid #e0e0e0;
-    margin-top: 4%;
-    height: 40px;
 }
-.navbar-new-bottom ul li{
-    margin-left: 2%;
-    margin-right: 2%;
+#md,#md2,#mdJ,#mdJ2,#idF1,#pwdF1{
+	display:none;
+	position:absolute;
+	width:100%;
+	height:100%;
+	z-index:1;
 }
-.navbar-nav .nav-item a {
+
+
+.navbar-nav .nav-item a { /*마이페이지 ~ 고객센터, 메뉴 ul*/
     color: #333;
     font-size: 14px;
     font-weight: 600;
     /*transition: 1s ease;*/
 }
-.navbar-nav .nav-item a:hover{
+.navbar-nav .nav-item a:hover{ /*클래스 , 스토어, 이벤트 드롭다운 a태그 마우스 오버시 색깔 파란색으로 변경*/
     color: #0062cc;
 }
 .dropdown-menu.show{
@@ -125,10 +75,7 @@ a {
 .navbar-new-top{
     background: #f1f7fa;
 }
-.navbar-new-bottom{
-	margin-top:83px;
-	margin-bottom:5px;
-}
+
 #mdClose,#mdJClose,#mdJ2Close,#idF1Close,#pwdF1Close{
 	background-color:white;
 	border:0;
@@ -406,7 +353,7 @@ a {
 	position: static;
 }
 .dropdown-menu {
-	width: 100%;
+	width: 100%;margin-top:0;
 }
 #navbarContent>ul>li>a{
 	font-size: 1.2em;
@@ -422,26 +369,10 @@ a {
 #navbarContent>ul>li{
 	width: 20%;
 }
-.dropdown-menu{
-	margin-top:0;
-}
 
 </style>
 <script>
-	$(function(){		
-		function toggleDropdown (e) {
-			  const _d = $(e.target).closest('.dropdown'),
-			    _m = $('.dropdown-menu', _d);
-			  setTimeout(function(){
-			    const shouldOpen = e.type !== 'click' && _d.is(':hover');
-			    _m.toggleClass('show', shouldOpen);
-			    _d.toggleClass('show', shouldOpen);
-			    $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
-			  }, e.type === 'mouseleave' ? 300 : 0);
-			}
-		$('body')
-		  .on('mouseenter mouseleave','.dropdown',toggleDropdown)
-		  .on('click', '.dropdown-menu a', toggleDropdown);
+	$(function(){
 		
 	//로그인모달창 띄우기
     $("#loginFormBtn").click(function(){
@@ -1297,7 +1228,7 @@ $(document).ready(function() {
 <nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
   <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1 "  >
     <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
-      <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">클래스</a>
+      <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a>
          <ul class="dropdown-menu">
            <li class="dropdown-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
            <li class="dropdown-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
@@ -1308,7 +1239,7 @@ $(document).ready(function() {
            <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
          </ul>
       </li>
-      <li class="nav-item dropdown"><a href="/gachi/storeList"class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
+      <li class="nav-item dropdown"><a href="/gachi/storeList"class="nav-link font-weight-bold text-uppercase" >스토어</a>
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
             <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
@@ -1319,7 +1250,7 @@ $(document).ready(function() {
             <li class="dropdown-item"><a href="/gachi/storeList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>
 		</ul>
       </li>
-	 <li class="nav-item dropdown"><a href="/gachi/eventBoard" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">이벤트</a>
+	 <li class="nav-item dropdown"><a href="/gachi/eventBoard" class="nav-link font-weight-bold text-uppercase" >이벤트</a>
 			<ul class="dropdown-menu">
 				<li class="dropdown-item"><a href="/gachi/eventBoard" class="nav-link text-small pb-0 ">진행 이벤트</a></li>
 				<li class="dropdown-item"><a href="/gachi/eventBoardEnd" class="nav-link text-small pb-0 ">종료 이벤트</a></li>
