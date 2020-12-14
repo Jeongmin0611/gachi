@@ -461,7 +461,7 @@ $(function() {
 		<!-- 설명글 -->
 		<h4 style="margin-top:10px; padding-left:10px;">상품소개글</h4>
 		<div class="col-sm-12" style="min-height: 300px; background-color: #eee; text-align: center;" id="detail-info">
-			<img src="/gachi/img/store/${vo.goods_info }"/>
+			<img src="/gachi/upload/storeImg/${vo.goods_info }"/>
 		</div>
 
 		<!-- 클래스 리뷰 -->

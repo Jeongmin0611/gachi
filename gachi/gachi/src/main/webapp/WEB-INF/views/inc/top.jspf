@@ -313,7 +313,9 @@ a {
 	margin:0 0 0 20px;
 }
 /* 메뉴 */
-
+#homeTopMenu > .nav-item{
+	width: 25%;
+}
 /* 메뉴 끝 */
 /* 검색 버튼 */
 #top-searchbtn{
@@ -1291,7 +1293,7 @@ $(document).ready(function() {
        
      </div>
 </nav>
-<div class="container" style="overflow: visible;">
+<div class="container" style="overflow: visible;" id="homeTopMenu">
 <nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
   <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1 "  >
     <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
@@ -1324,7 +1326,6 @@ $(document).ready(function() {
 			</ul>
       </li>
       <li class="nav-item"><a href="/gachi/introCreator" class="nav-link font-weight-bold text-uppercase">크리에이터 소개</a></li>
-      <li class="nav-item"><a href="/gachi/companyBoard" class="nav-link font-weight-bold text-uppercase">회사 소개</a></li>
     </ul>
   </div>  
 	<button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler order-md-1" style="margin-top:50px;">
