@@ -246,7 +246,7 @@
 	<div class="row">
 		<c:forEach var="list" items="${list }">
 			<div class="col-sm-4">
-				<a href="/gachi/storeView?code=${list.code}?category=${list.category}"><img
+				<a href="/gachi/storeView?code=${list.code}&category=${list.category}"><img
 					src="/gachi/upload/storeImg/${list.goods_img1 }" class="homeClassListImg" /></a><br />
 				<div class="homeClassListTxt">
 					<p>
@@ -260,7 +260,7 @@
 							</c:if>
 						</c:forEach>
 					</p>
-					<a href="/gachi/storeView?code=${list.code}"><span>${list.goods_name }</span><br />
+					<a href="/gachi/storeView?code=${list.code}&category=${list.category}"><span>${list.goods_name }</span><br />
 						<span style="float: right">가격 &nbsp; ${list.real_price }원</span><br />
 						<span style="float: right">배송비 &nbsp;2,500원</span> </a>
 				</div>
