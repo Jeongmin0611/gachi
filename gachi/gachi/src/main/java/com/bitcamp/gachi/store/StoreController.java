@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.ClassDaoImp;
+import com.bitcamp.gachi.admin.QnaVO;
+import com.bitcamp.gachi.classPage.ClassPageDaoImp;
 import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
@@ -74,7 +77,9 @@ public class StoreController {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		String code = req.getParameter("code");
 		AllVO vo = dao.storeView(code);
-
+		ClassPageDaoImp cdao = sqlSession.getMapper(ClassPageDaoImp.class);
+		List<AllVO> reviewList = cdao.reviewList(code);
+		List<QnaVO> qnaList = cdao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
@@ -92,6 +97,8 @@ public class StoreController {
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);
 			mav.addObject("goodVo", goodVo);	
 		}
+		mav.addObject("reviewList", reviewList);
+		mav.addObject("qnaList", qnaList);
 		mav.addObject("vo", vo);
 		mav.setViewName("store/storeView");
 		return mav;

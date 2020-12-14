@@ -3,8 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.classPage.ClassPageDaoImp">
-	<select id="classPageAllRecord" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, nickname, class_img from class join member on class.userid=member.userid
+	<select id="classPageAllRecord" parameterType="String"
+		resultType="com.bitcamp.gachi.admin.AllVO">
+		select code, category, class_name, real_price, nickname, class_img
+		from class join member on class.userid=member.userid
 		<choose>
 			<when test="category==null and selectval==null"></when>
 			<when test="category==null and selectval.equals('Iall')"></when>
@@ -24,42 +26,110 @@
 			</when>
 			<when test="category!=null and selectval.equals('Inew')">
 				where category='${param1}' order by allow desc
-				order by allow desc
+				order
+				by allow desc
 			</when>
 			<when test="category!=null and selectval.equals('Ipopular')">
-				where category='${param1}' 
+				where category='${param1}'
 				order by good desc
 			</when>
 		</choose>
 	</select>
-	<select id="classView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, stack, nickname, class_img from class join member on class.userid=member.userid	
+	<select id="classView" parameterType="String"
+		resultType="com.bitcamp.gachi.admin.AllVO">
+		select code, category, class_name, real_price, stack,
+		nickname, class_img, class_img2
+		from class join member on class.userid=member.userid
 		where code='${param1}'
 	</select>
-	<select id="classBoardAllRecordCount" parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
-		select count(code) from class
+	<select id="classBoardAllRecordCount"
+		parameterType="com.bitcamp.gachi.admin.PagingVO" resultType="int">
+		select
+		count(code) from class
 	</select>
-	<select id="homeClassPopular" resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price, nickname, class_img, good from class join member on class.userid=member.userid
-	order by good desc ) where rownum<![CDATA[<=3]]>
+	<select id="homeClassPopular"
+		resultType="com.bitcamp.gachi.admin.AllVO">
+		select * from (select code, category, class_name, real_price,
+		nickname, class_img, good from class join member on
+		class.userid=member.userid
+		order by good desc ) where rownum<![CDATA[<=3]]>
 	</select>
-	<select id="homeClassNew" resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price, nickname, class_img, good from class join member on class.userid=member.userid
-	order by allow desc ) where rownum<![CDATA[<=3]]>
+	<select id="homeClassNew"
+		resultType="com.bitcamp.gachi.admin.AllVO">
+		select * from (select code, category, class_name, real_price,
+		nickname, class_img, good from class join member on
+		class.userid=member.userid
+		order by allow desc ) where rownum<![CDATA[<=3]]>
 	</select>
-	<select id="reviewList" resultType="com.bitcamp.gachi.admin.AllVO">
-		select num, code, nickname, subject, content, to_char(writedate, 'YY.MM.DD') writedate, c.grade from class_review c join member m on c.userid=m.userid 
+	<select id="homeClassRecommand" resultType="com.bitcamp.gachi.admin.AllVO">
+		select code, category, class_name, real_price,
+		nickname, class_img, good from class join member on
+		class.userid=member.userid  where rownum<![CDATA[<=3]]>
+	</select>
+	<select id="homeClassInterestFind" resultType="String">
+		select interest from member where userid='${userid}'
+	</select>
+	<select id="homeClassRecommandUser" resultType="com.bitcamp.gachi.admin.AllVO">
+		select * from (select code, category, class_name, real_price,
+		nickname, class_img, good from class join member on
+		class.userid=member.userid
+		where category='${interest}' order by good desc ) where rownum<![CDATA[<=3]]>
+	</select>
+	<select id="reviewList"
+		resultType="com.bitcamp.gachi.admin.AllVO">
+		select num, code, nickname, subject, content,
+		to_char(writedate, 'YY.MM.DD') writedate, c.grade from class_review c
+		join member m on c.userid=m.userid
 		where code='${param1}' order by writedate desc
 	</select>
 	<select id="qnaList" resultType="com.bitcamp.gachi.admin.QnaVO">
-		select subject, content, a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate 
+		select subject, content,
+		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname
+		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate
 		from qna q, member a, member b
 		where q.userid=a.userid
 		and writer=b.userid(+)
-		and code='${param1}' order by writedate desc
+		and code='${code}'
+		order by writedate desc
 	</select>
-	<insert id="insertReview" parameterType="com.bitcamp.gachi.admin.AllVO">
-		insert into class_review (num, code, userid, subject, content, writedate, grade, ip) 		
-		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate, ${grade}, '${ip}')
+	<select id="qnaListSearch" parameterType="com.bitcamp.gachi.admin.AllVO" resultType="com.bitcamp.gachi.admin.QnaVO">
+		select subject, content,
+		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname
+		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate
+		from qna q, member a, member b
+		where q.userid=a.userid
+		and writer=b.userid(+)
+		and code='${code}'
+		<choose>
+			<when test="searchWord!=null and searchWord.equals('작성자')">
+				and a.nickname like'%${searchWord}%'
+				order by writedate desc
+			</when>
+			<when test="searchWord!=null and searchWord.equals('제목')">
+				and subject like'%${searchWord}%'
+				order by writedate desc
+			</when>
+			<when test="searchWord!=null and searchWord.equals('내용')">
+				and content like '%${searchWord}%'
+				order by writedate desc
+			</when>
+			<otherwise>
+				order by writedate desc
+			</otherwise>
+		</choose>
+	</select>
+	<insert id="insertReview"
+		parameterType="com.bitcamp.gachi.admin.AllVO">
+		insert into class_review (num, code, userid, subject,
+		content, writedate, grade, ip)
+		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
+		5, '${ip}')
+	</insert>
+	<insert id="insertQna"
+		parameterType="com.bitcamp.gachi.admin.AllVO">
+		insert into qna (code, num, subject, content, writedate,
+		ip, userid)
+		values ('${code}', a_sq.nextval,
+		'${subject}','${content}',sysdate, '${ip}', '${userid}')
 	</insert>
 </mapper>
