@@ -31,8 +31,8 @@
 		<li>생년월일</li><li><input type="text" name="birthdate" value="${vo.birthdate }" readonly/></li>
 		<li>성별</li><li><input type="text" name="gender" value="${vo.gender }"/></li>
 		<li>우편번호</li><li><input type="text" name="zipcode" value="${vo.zipcode }"/></li>
-		<li>주소</li><li><input type="text" name="addr" value="${vo.addr }"/></li>
-		<li>상세주소</li><li><input type="text" name="detailaddr" value="${vo.detailaddr }"/></li>
+		<li>주소</li><li><input type="text" name="addr" value="${vo.addr }" size="60"/></li>
+		<li>상세주소</li><li><input type="text" name="detailaddr" value="${vo.detailaddr }"size="60"/></li>
 		<li>가입일</li><li><input type="text" name="signupdate" value="${vo.signupdate }" readonly/></li>
 		<li>탈퇴일</li><li><input type="text" name="withdrawdate" value="${vo.withdrawdate }" readonly/></li>
 		<li>회원탈퇴여부</li><li><input type="text" name="deleted" value="${vo.deleted }" readonly/></li>	

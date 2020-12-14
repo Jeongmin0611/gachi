@@ -16,7 +16,7 @@
 		<li>상품번호</li><li><input type="text" name="order_code" value="${list.order_code }" readonly/></li>
 		<li>상품번호</li><li><input type="text" name="code" value="${list.code }" readonly/></li>
 		<li>카테고리</li><li><input type="text" name="category" value="${list.category }" readonly/></li>
-		<li>상품명</li><li><input type="text" name="goods_name" value="${list.goods_name }" readonly/></li>
+		<li class="wordCut">상품명</li><li><input type="text" name="goods_name" value="${list.goods_name }" size="60" readonly /></li>
 		<li>구매자</li><li><input type="text" name="username" value="${list.username }"readonly/></li>
 		<li>연락처</li><li><input type="text" name="tel" value="${list.tel }"readonly/></li>
 		<li>구매일</li><li><input type="text" name="orderdate" value="${list.orderdate }"readonly/></li>
