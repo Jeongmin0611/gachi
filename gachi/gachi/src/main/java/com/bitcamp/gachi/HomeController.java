@@ -43,6 +43,11 @@ public class HomeController {
 	//@ResponseBody //ajax 留ㅽ븨 硫붿냼�뱶�뒗 view 由ы꽩�씠 �븞 �맖
 	public ModelAndView home(HttpSession ses, HttpServletRequest req) {
 		ClassPageDaoImp dao = sqlsession.getMapper(ClassPageDaoImp.class);
+		String sql1 = sqlsession.getConfiguration().getMappedStatement("homeClassPopular").getBoundSql("").getSql();
+		System.out.println("sql1->"+sql1);
+		String sql2 = sqlsession.getConfiguration().getMappedStatement("homeClassNew").getBoundSql("").getSql();
+		System.out.println("sql1->"+sql2);
+		
 		List<AllVO> plist = dao.homeClassPopular();
 		List<AllVO> nlist = dao.homeClassNew();
 		List<AllVO> rlist;

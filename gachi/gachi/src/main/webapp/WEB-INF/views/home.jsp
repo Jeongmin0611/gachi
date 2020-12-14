@@ -87,11 +87,11 @@
 				var atr = $(this).attr('class');
 				if (atr == 'far fa-heart fa-lg p-2') {
 					$(this).attr('class', 'fas fa-heart fa-lg p-2');
-					good_choice_code = $(this).attr('id');
+					good_choice_code = $(this).attr('data-name');
 					location.href = "/gachi?good_add=" + good_choice_code;
 				} else if (atr == 'fas fa-heart fa-lg p-2') {
 					$(this).attr('class', 'far fa-heart fa-lg p-2');
-					good_choice_code = $(this).attr('id');
+					good_choice_code = $(this).attr('data-name');
 					location.href = "/gachi?good_del=" + good_choice_code;
 				}
 			}
@@ -114,11 +114,11 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${list.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" id="${list.code }"></i>
+								style="float: right; height: 15px;" data-name="${list.code }"></i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq list.code }">
 									<script>
-										$('#${list.code}').attr('class',
+										$('i[data-name=${list.code }]').attr('class',
 												'fas fa-heart fa-lg p-2');
 									</script>
 								</c:if>
@@ -147,12 +147,12 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${nlist.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" id="${nlist.code }"></i>
+								style="float: right; height: 15px;" data-name="${nlist.code }"></i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq nlist.code }">
 									<script>
-										$('#${nlist.code}').attr('class',
-												'fas fa-heart fa-lg p-2');
+									$('i[data-name=${nlist.code }]').attr('class',
+									'fas fa-heart fa-lg p-2');
 									</script>
 								</c:if>
 							</c:forEach>
@@ -180,12 +180,12 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${nlist.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" id="${nlist.code }"></i>
+								style="float: right; height: 15px;" data-name="${nlist.code }"></i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq nlist.code }">
 									<script>
-										$('#${nlist.code}').attr('class',
-												'fas fa-heart fa-lg p-2');
+									$('i[data-name=${nlist.code }]').attr('class',
+									'fas fa-heart fa-lg p-2');
 									</script>
 								</c:if>
 							</c:forEach>
