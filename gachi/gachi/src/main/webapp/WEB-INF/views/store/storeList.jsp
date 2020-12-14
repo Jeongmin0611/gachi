@@ -194,24 +194,25 @@
 		});
 		//좋아요 클릭이벤트
 		$('i').on('click',function(){
-			var id = '<%=(String)session.getAttribute("userid")%>';
-			if(id==null ||id =='null'){
+			var id = '<%=(String) session.getAttribute("userid")%>';
+			if (id == null || id == 'null') {
 				swal('로그인 후 이용가능한 기능입니다.');
 				return false;
 			}
-			if(id!=null){
+			if (id != null) {
+				var url = "/home";
 				var good_choice_code;
 				var atr = $(this).attr('class');
-				if (atr=='far fa-heart fa-lg p-2'){
-					$(this).attr('class','fas fa-heart fa-lg p-2');
-					good_choice_code=$(this).attr('id');
-					location.href="/gachi/storeList?good_add="+good_choice_code;
-				}else if(atr=='fas fa-heart fa-lg p-2'){
-					$(this).attr('class','far fa-heart fa-lg p-2');				
-					good_choice_code=$(this).attr('id');
-					location.href="/gachi/storeList?good_del="+good_choice_code;
-				}				
-			}			
+				if (atr == 'far fa-heart fa-lg p-2') {
+					$(this).attr('class', 'fas fa-heart fa-lg p-2');
+					good_choice_code = $(this).attr('data-name');
+					location.href = "/gachi?good_add=" + good_choice_code;
+				} else if (atr == 'fas fa-heart fa-lg p-2') {
+					$(this).attr('class', 'far fa-heart fa-lg p-2');
+					good_choice_code = $(this).attr('data-name');
+					location.href = "/gachi?good_del=" + good_choice_code;
+				}
+			}
 		});
 	});
 </script>
@@ -251,11 +252,12 @@
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
-						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" id="${list.code }"></i>
+						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }"></i>
 						<c:forEach var="v" items="${ggoodList }">
 							<c:if test="${v.code eq list.code }">
 								<script>
-									$('#${list.code}').attr('class','fas fa-heart fa-lg p-2');
+									$('i[data-name=${list.code }]').attr('class',
+									'fas fa-heart fa-lg p-2');
 								</script>
 							</c:if>
 						</c:forEach>
