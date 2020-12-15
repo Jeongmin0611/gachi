@@ -1,6 +1,8 @@
 package com.bitcamp.gachi.classPage;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.QnaVO;
 

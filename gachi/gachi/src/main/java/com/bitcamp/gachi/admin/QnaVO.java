@@ -12,6 +12,10 @@ public class QnaVO {
 	private String userid;
 	private String nickname;
 	private String writer;
+	private String goods_name;
+	private String username;
+	private String category;
+	private int grade;
 	
 	public String getCode() {
 		return code;
@@ -79,4 +83,29 @@ public class QnaVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public String getGoods_name() {
+		return goods_name;
+	}
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	
 }
