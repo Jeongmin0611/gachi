@@ -134,11 +134,10 @@ a, h1, li {
 <div id="headerDiv">
 	<ul id="adminMenu">
 		<li><a href="/gachi/adminDashboard">대시보드</a></li>
-		<li><a href="/gachi/adminCreator">크리에이터 관리</a></li>
+		<li><a href="/gachi/adminCreator">크리에이터관리</a></li>
 		<li><a href="/gachi/adminMember">회원관리</a></li>
-<!-- 		<li><a href="/gachi/adminClass">카테고리 관리</a></li> -->
-		<li><a href="/gachi/adminClass">클래스 관리</a></li>
-		<li><a href="/gachi/adminVideo">동영상 관리</a></li>
+		<li><a href="/gachi/adminClass">클래스관리</a></li>
+		<li><a href="/gachi/adminVideo">동영상관리</a></li>
 		<li data-target="#menu2" data-toggle="collapse"><a href="#">게시글관리</a>
 		<div id="menu2" class="collapse">
 			<ul class="submenu">

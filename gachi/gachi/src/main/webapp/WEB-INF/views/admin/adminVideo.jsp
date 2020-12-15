@@ -8,14 +8,10 @@ $(function(){
 	$("#endDate").val("${endDate}");
 	$("#searchWord").val("${searchWord}");
 	$("#category").val("${category}").attr("selected", "selected");
-	$("#payment_type").val("${payment_type}").attr("selected", "selected");
-	
-	
-	$('input:radio[name=payment_type]').is(':checked');
-	
+	$("#payment_type").val("${payment_type}").attr("selected", "selected");	
 	$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
 	
-	$("#frm_submit").click(function(){
+	$("#searchBtn").click(function(){
 		var url = "/adminVideo";
 		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
 		$.ajax({
@@ -26,6 +22,7 @@ $(function(){
 			success: function(data){
 				var result = data.result;
 				console.log(result);
+				
 			},error:function(){
 				var result = data.result;
 				console.log(result);
@@ -53,7 +50,6 @@ $(function(){
 			console.log(result);
 		}
 	});
-}
 </script>
 
 <div class="container ad_font">
@@ -120,7 +116,7 @@ $(function(){
 	<div class="ad_list_menu">
 		<button class="btn" onclick="location.href='/gachi/adminVideoWrite'">등록</button>
 	</div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 			<c:if test="${method eq 'get' }">
 				<c:if test="${nowPage > 1}">
@@ -156,7 +152,6 @@ $(function(){
 					</li>
 				</c:if>
 			</c:if>
-			
 	</ul>
 </div>
 </div>
