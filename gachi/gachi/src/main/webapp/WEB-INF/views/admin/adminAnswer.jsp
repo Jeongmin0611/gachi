@@ -112,7 +112,7 @@ $(function(){
 		<li>${list.category }</li>
 		<li>${list.code }</li>
 		<li class="wordCut">${list.goods_name }</li>
-		<li class="wordCut"><a href="/gachi/adminAnswer?num=${list.num}">${list.subject }</a></li>
+		<li class="wordCut"><a href="/gachi/adminAnswerView?num=${list.num}">${list.subject }</a></li>
 		<li>${list.username }</li>
 		<li>${list.writedate }</li>
 		<li><c:if test="${list.answer eq null }"></c:if><c:if test="${list.answer ne null }">${list.answer_writedate}</c:if></li>

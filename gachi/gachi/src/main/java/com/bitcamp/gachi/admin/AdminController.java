@@ -4009,6 +4009,18 @@ public class AdminController {
 
 		return null;
 	}
+	
+	@RequestMapping("/adminReplyView")
+	public ModelAndView adminReplyView(int num) {
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		QnaVO list = dao.selectReplyView(num);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("admin/adminReplyView");
+		return mav;
+	}
 		
 	@RequestMapping("/adminClassReviewView")
 	public ModelAndView adminClassReviewView(int num) {
@@ -4168,6 +4180,17 @@ public class AdminController {
 		}
 
 		return null;
+	}
+	@RequestMapping("/adminAnswerView")
+	public ModelAndView adminAnswerView(int num) {
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		QnaVO list = dao.selectAnswerView(num);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("admin/adminAnswerView");
+		return mav;
 	}
 	
 	@RequestMapping("/adminGetClassList")
