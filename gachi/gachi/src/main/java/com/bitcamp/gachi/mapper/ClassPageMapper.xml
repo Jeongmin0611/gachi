@@ -5,12 +5,12 @@
 <mapper namespace="com.bitcamp.gachi.classPage.ClassPageDaoImp">
 	<select id="classPageAllRecord" parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="com.bitcamp.gachi.classPage.ClassPageVO">
 		select * from 
-		(select * from 
+		(select * from  
 		(select c.code ,c.category ,c.class_name ,c.real_price ,m.nickname,
     c.class_img, c.class_img2, c.allow, c.good
 		from class c join member m on c.userid=m.userid
 		<choose>
-			<when test='category==null and selectval == null'></when>
+			<when test='category==null and selectval == null'></when>			
 			<when test='category==null and selectval.equals("Iall")'></when>
 			<when test='category==null and selectval.equals("Inew")'>
 				where allow<![CDATA[ >= ]]> sysdate order by allow desc) 

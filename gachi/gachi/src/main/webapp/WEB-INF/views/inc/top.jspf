@@ -268,9 +268,7 @@ a {
 	margin:0 0 0 20px;
 }
 /* 메뉴 */
-#homeTopMenu > .nav-item{
-	width: 25%;
-}
+
 /* 메뉴 끝 */
 /* 검색 버튼 */
 #top-searchbtn{
@@ -375,7 +373,7 @@ a {
 	width: 100%;
 }
 #navbarContent>ul>li{
-	width: 20%;
+	width: 25%;
 }
 .dropdown:hover > .dropdown-menu{display:block; margin:0;}
 
@@ -1230,9 +1228,8 @@ $(document).ready(function() {
        
      </div>
 </nav>
-<div class="container" style="overflow: visible;" id="homeTopMenu">
-<nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
-  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1 "  >
+<div class="container" style="overflow: visible;">
+  <nav class="navbar navbar-expand-lg"  style=" padding:16px 16px 0; border-bottom: 1px solid #eee" id="navbarContent">
     <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
       <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a>
          <ul class="dropdown-menu">
@@ -1245,7 +1242,7 @@ $(document).ready(function() {
            <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
          </ul>
       </li>
-      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
+      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase">스토어</a>
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
             <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
@@ -1264,9 +1261,15 @@ $(document).ready(function() {
       </li>
       <li class="nav-item"><a href="/gachi/introCreator" class="nav-link font-weight-bold text-uppercase">크리에이터 소개</a></li>
     </ul>
+  </nav>
+</div><!-- 
+<div class="container" style="overflow: visible;" id="homeTopMenu">
+<nav class="navbar navbar-expand-lg " style="margin-top:50px; padding:16px 16px 0; border-bottom: 1px solid #eee">
+  <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1 "  >
+    
   </div>  
 </nav>
-</div>
+</div> -->
    <!-- 메뉴 끝 -->
    <!-- 로그인폼 -->
    <div id="md" class="join">

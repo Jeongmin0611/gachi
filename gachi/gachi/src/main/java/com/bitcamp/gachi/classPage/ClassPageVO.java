@@ -27,6 +27,7 @@ public class ClassPageVO {
 	private String class_img;
 	private String class_name;
 	private String nickname;
+	private int good;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -212,5 +213,12 @@ public class ClassPageVO {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
 	}
 }

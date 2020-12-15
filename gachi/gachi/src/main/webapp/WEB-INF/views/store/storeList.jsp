@@ -199,20 +199,40 @@
 				swal('로그인 후 이용가능한 기능입니다.');
 				return false;
 			}
+			var good_choice_code;
+			var atr = $(this).attr('class');
 			if (id != null) {
-				var url = "/home";
-				var good_choice_code;
-				var atr = $(this).attr('class');
 				if (atr == 'far fa-heart fa-lg p-2') {
 					$(this).attr('class', 'fas fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi/sotreList?good_add=" + good_choice_code;
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_add",
+						data:{
+							good_add:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
+						}
+					});//ajax			
+					
 				} else if (atr == 'fas fa-heart fa-lg p-2') {
 					$(this).attr('class', 'far fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi/sotreList?good_del=" + good_choice_code;
-				}
-			}
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_del",
+						data:{
+							good_del:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
+						}
+					});//ajax
+				}//elif
+			}//id가 널이 아닐 때 if문
 		});
 	});
 </script>
@@ -246,7 +266,7 @@
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
-						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }"></i>
+						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }">${list.good }</i>
 						<c:forEach var="v" items="${ggoodList }">
 							<c:if test="${v.code eq list.code }">
 								<script>

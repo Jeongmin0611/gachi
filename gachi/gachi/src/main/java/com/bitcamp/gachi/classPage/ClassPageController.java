@@ -39,8 +39,8 @@ public class ClassPageController {
 	@RequestMapping("/classList")
 	public ModelAndView classList(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		
-		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+				
 		String category = req.getParameter("category");
 		String selectval = req.getParameter("selectval");
 		//현재 페이지
@@ -49,19 +49,18 @@ public class ClassPageController {
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
 		if(category==null) {
-		int totalRecord=dao.classBoardAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
+			int totalRecord=dao.classBoardAllRecordCount(vo);
+			vo.setTotalRecord(totalRecord);
+			System.out.println("카테0 총데이터 수="+vo.getTotalRecord());
 		}
 		if(category!=null) {
 			int totalRecord = dao.classPageCategoryRecordCount(vo);
 			vo.setTotalRecord(totalRecord);
-		}
-		
-		
+			System.out.println("카테x 총데이터 수="+vo.getTotalRecord());
+		}		
+		System.out.println("vo="+vo.getCategory());
 		List<AllVO> list = dao.classPageAllRecord(vo);
-		System.out.println(vo);
-		
-		ModelAndView mav = new ModelAndView();
+		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
