@@ -37,22 +37,29 @@ public class ClassPageController {
 	}
 	
 	@RequestMapping("/classList")
-	public ModelAndView classList(PagingVO vo, HttpServletRequest req, HttpSession ses) {
+	public ModelAndView classList(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
-		List<AllVO> list = dao.classPageAllRecord(category, selectval);
 		
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//페이지
-		vo.setOnePageRecord(9);
+		String category = req.getParameter("category");
+		String selectval = req.getParameter("selectval");
 		//현재 페이지
 		String nowPageTxt=req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
+		if(category==null) {
 		int totalRecord=dao.classBoardAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
+		}
+		if(category!=null) {
+			int totalRecord = dao.classPageCategoryRecordCount(vo);
+			vo.setTotalRecord(totalRecord);
+		}
+		
+		
+		List<AllVO> list = dao.classPageAllRecord(vo);
+		System.out.println(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		

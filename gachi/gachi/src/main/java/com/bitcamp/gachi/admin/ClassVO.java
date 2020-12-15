@@ -30,6 +30,13 @@ public class ClassVO {
 	private String section_code;
 	private List<ClassVO> unitList;
 	
+	private int num;
+	private String username;
+	private String subject;
+	private String content;
+	private String writedate;
+	private String ip;
+	
 	public String getCode() {
 		return code;
 	}
@@ -161,6 +168,42 @@ public class ClassVO {
 	}
 	public void setUnitList(List<ClassVO> unitList) {
 		this.unitList = unitList;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }

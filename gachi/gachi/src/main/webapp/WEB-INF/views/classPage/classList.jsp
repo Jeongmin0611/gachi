@@ -88,8 +88,8 @@ $(function(){
 	if(url.indexOf('?')==-1){
 		$('#aAll').attr('style','font-weight:bold');
 	}else{
-		if(param[0].substring(0,param[0].indexOf('='))=='category'){
-			var cate = param[0].substring(param[0].indexOf('=')+1);
+		if(param[0].substring(0,param[0].indexOf("="))=='category'){
+			var cate = param[0].substring(param[0].indexOf("=")+1);
 			switch(cate){
 			case '요리':
 				$('#aFood').attr('style','font-weight:bold');
@@ -264,10 +264,11 @@ $(function(){
 
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center" id="mypageMainPage">
+	<c:if test="${pvo.nowPage>1}">
 		<li class="page-item">
 			<a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage-1 }">Prev</a>
 		</li>
-		
+		</c:if>
 		<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
 			<c:if test="${p<=pvo.totalPage }">
 				<li class="page-item">
@@ -275,7 +276,8 @@ $(function(){
 				</li>
 			</c:if>
 		</c:forEach>
+		<c:if test="${pvo.nowPage<pvo.totalPage }">
 		<li class="page-item"><a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage+1 }">Next</a></li>
+		</c:if>
 	</ul>
-
 </div>

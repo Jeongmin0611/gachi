@@ -100,7 +100,7 @@ a {
 		width:35%;
 		height:auto;
 		border-radius:10px;
-		margin:200px 0px;
+		margin:95px 0px;
 
 	}
 	
@@ -109,23 +109,25 @@ a {
 		width:35%; 
 		height:auto;
 		border-radius:10px;
-		margin:350px 0px;
+		margin:345px 0px;
 	}
 	#mdJ2{
 		width:35%;
 		height:auto;
 		border-radius:10px;
-		margin:560px 0px;
+		margin:555px 0px;
 	}
 	#idF1{
 		width:35%;
 		height:auto;
 		border-radius:10px;
+		margin:95px 0px;
 	}
 	#pwdF1{
 		width:35%;
 		height:auto;
 		border-radius:10px;
+		margin:95px 0px;
 	}
 
 	#kokoBtn{
@@ -176,6 +178,10 @@ a {
 		margin-right:10px;
 		margin-bottom:10px;
 		text-align: center;
+	}
+	#send3,#enterBtn3,#send4,#enterBtn4{
+		background: linear-gradient(to right, rgb(171, 206, 227), rgb(244, 191, 169));
+		color: rgb(63, 84, 251);
 	}
 	#emailChkBtn{
 		text-align:center;
@@ -1194,11 +1200,8 @@ $(document).ready(function() {
 			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
 			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
 		</form>
-		       <a href="/gachi" style="margin-left: 33%;"><img src="img/logo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+		       <a href="/gachi" style="margin-left: 33%;"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 		<ul class="nav navbar-nav pull-right  ml-auto ">
-        <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
-        <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
-        <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
           <c:if test="${logStatus==null&&logStatus!='Y'}">
          	 <li class="nav-item" id="loginFormBtn"><a class="nav-link">로그인</a></li>
          	 <li class="nav-item" id="joinFormBtn"><a class="nav-link">회원가입</a></li>
@@ -1242,7 +1245,7 @@ $(document).ready(function() {
            <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
          </ul>
       </li>
-      <li class="nav-item dropdown"><a href="/gachi/storeList"class="nav-link font-weight-bold text-uppercase" >스토어</a>
+      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">스토어</a>
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
             <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
@@ -1520,7 +1523,7 @@ $(document).ready(function() {
 				</div>
 				<div class="pwdF1_layer"></div>
 				<div>
-				<img src="/gachi/img/" class="mainLogoImg"/>
+				<img src="/gachi/img/mainlogo.png" class="mainLogoImg"/>
 				<div>
 		 		<input type="text" id="to4" name="to4" placeholder="전화번호 입력" style="width:68%"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
 			    <input type="button" id="send4" value="전송" style="width:30%;border:1px solid gray"/><br> <!-- 문자보내는 전송버튼 -->

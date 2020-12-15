@@ -1,6 +1,7 @@
 package com.bitcamp.gachi.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bitcamp.gachi.store.StorePageVO;
 
@@ -91,4 +92,11 @@ public interface ClassDaoImp {
 	public int videoDelete(String video_code);
 	
 	public int getUnit(String unit_content);
+
+	public int selectCntAllReview(Map<String, String> dbParam); // 리뷰 카운트 
+
+	public List<ClassVO> selectAllReview(Map<String, String> dbParam); // 리뷰 리스트 
+
+	public ClassVO selectReviewView(int num);  // 리뷰 내용보기 
+	
 }

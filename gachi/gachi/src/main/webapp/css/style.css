@@ -1134,6 +1134,52 @@ input{text-align:center;}
 		text-align: center;
 	}
 	/*�겕由ъ뿉�씠�꽣 1:1臾몄쓽 蹂닿린 end*/
+	
+	/* 크리에이터 정산관리 */
+	
+	#creator_settle_lst{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
+		text-align: center;
+	}
+	#creator_settle_lst li{
+		border-bottom:1px solid gray;
+		float:left;
+		width:15%;
+		height:50px;
+		font-size:15px;
+		line-height:50px;
+		
+	}
+	#creator_settle_lst li:nth-of-type(8n+1){
+		width:10%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+2){
+		width:10%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+3){
+		width:25%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+4){
+		width:15%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+5){
+		width:15%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+6){
+		width:10%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+7){
+		width:10%;
+	}
+	#creator_settle_lst li:nth-of-type(8n+8){
+		width:5%;
+	}
+
+	
+	
+	
 
 	/* �겕由ъ뿉�씠�꽣 媛��씠�뱶 start*/
 		
