@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.ClassDaoImp;
+import com.bitcamp.gachi.admin.ClassVideoVO;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
 import com.bitcamp.gachi.admin.MemberVO;
@@ -773,8 +775,74 @@ public class CreatorController {
 		return "creator/creator1on1Write";
 	}
 	@RequestMapping("/creatorVideo")
-	public String creatorVideo(){
-		return "creator/creatorVideo";
+	public ModelAndView creatorVideo(
+			@RequestParam(value="now", required=false) String now,
+			HttpSession session){
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("searchWord", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);		
+		dao = sqlSession.getMapper(ClassDaoImp.class);
+		
+		String userid=String.valueOf(session.getAttribute("userid"));
+		
+		
+		
+		
+		int cntRecords = dao.getVideoRecordCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
+		
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("vlist",vlist);
+		mav.addObject("cntData", vlist.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("searchWord", null);
+		
+		
+		
+		
+		
+		
+//		mav.addObject("data", result);
+		mav.setViewName("creator/creatorVideo");
+	
+		return mav;
 	}
 	@RequestMapping("/creatorVideoRequest")
 	public String creatorVideoEdit() {
