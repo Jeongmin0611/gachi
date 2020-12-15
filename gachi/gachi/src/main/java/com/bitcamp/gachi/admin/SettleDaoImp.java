@@ -127,6 +127,14 @@ public interface SettleDaoImp {
 
 	public int CreatorCntAllSettle(Map<String, String> dbParam); //크리에이터 > 정산 카운트
 
+	public List<QnaVO> selectAllQna(Map<String, String> dbParam); // 어드민 > 질문/답변 
+
+	public int selectCntAllQna(Map<String, String> dbParam); //어드민 > 질문답변 카운트 
+
+	public List<QnaVO> selectAllReply(Map<String, String> dbParam); //어드민 >수강리뷰 리스트 
+
+	public int selectCntAllReply(Map<String, String> dbParam); //어드민>수강리뷰 카운트 
+
 
 	
 	
