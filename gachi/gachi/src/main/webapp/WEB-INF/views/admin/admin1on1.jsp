@@ -58,7 +58,7 @@
 				<button class="btn" onclick="location.href='/gachi/admin1on1Write'">글쓰기</button>
 				<button class="btn">삭제</button> 
 			</div>
-			<div id="paging">
+<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 			<li class="btn"><a class="btn" href="#">Prev</a></li>
 			<li><a href="#" class="paging_num">1</a></li>
