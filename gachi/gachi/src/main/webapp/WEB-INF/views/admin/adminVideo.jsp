@@ -30,26 +30,26 @@ $(function(){
 		});
 		
 	});
-	
-});
 	function postPageMove(now) {
-	console.log(now);
-	return false;
-	var url = "/adminVideo";
-	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now ;
-	$.ajax({
-		url : url,
-		data : data,
-		type : "POST",
-		dataType : "json",
-		success: function(data){
-			var result = data.result;
-			console.log(result);
-		},error:function(){
-			var result = data.result;
-			console.log(result);
-		}
-	});
+		console.log(now);
+		return false;
+		var url = "/adminVideo";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now ;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+	}
+});
 </script>
 
 <div class="container ad_font">

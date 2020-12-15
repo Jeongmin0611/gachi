@@ -45,6 +45,7 @@
 		$("#dateOption").val("${dateOption}").attr("selected", "selected");
 		$("#category").val("${category}").attr("selected", "selected");
 		$("#search").val("${search}");
+		
 		$("#searchBtn").click(function(){
 			var url = "/adminClass";
 			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
@@ -87,7 +88,7 @@
 </script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
-	<form method="get" id="ad_class_lookup" action="/gachi/adminClass">
+	<form method="post" action="adminClass">
 	<h3>검색옵션</h3>
 			<ul id="search_area">
 				<li>날짜옵션</li>
@@ -114,7 +115,7 @@
 				</li>
 				<li>클래스상태</li>
 				<li>
-					<select name="class_state">
+					<select id="class_state" name="class_state">
 						<option value="">전체</option>
 						<option value="등록대기">등록대기</option>
 						<option value="판매중">판매중</option>
