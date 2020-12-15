@@ -1,14 +1,14 @@
 
-package com.bitcamp.gachi.admin;
+package com.bitcamp.gachi.classPage;
 
-public class PagingVO {
+public class ClassPageVO {
 	private int nowPage = 1; // 현재 페이지
 	private int totalRecord; // 총 레코드 수
 	private int totalPage; // 총 페이지 수
-	private int onePageRecord = 20; // 한 페이지에 표시할 레코드
-	private int onePageNumCount = 10; // 한 번에 표시할 페이지 번호 숫자
+	private int onePageRecord = 9; // 한 페이지에 표시할 레코드
+	private int onePageNumCount = 5; // 한 번에 표시할 페이지 번호 숫자
 	private int startPageNum = 1; // 페이지 번호의 시작 페이지
-	private int lastPageRecordCount = 10; // 마지막 페이지의 선택 레코드 수 onePageRecord 수
+	private int lastPageRecordCount = 9; // 마지막 페이지의 선택 레코드 수 onePageRecord 수
 
 	private int startRow;// 한페이지의 시작글번호
 	private int endRow;// 한 페이지의 마지막 글번호
@@ -16,7 +16,17 @@ public class PagingVO {
 	//검색어
 	private String searchKey;
 	private String searchWord;
-	private String category;
+	private String code;/*코드*/
+	private String category; // 카테고리   
+	private String goods_name;/*상품명*/
+	private String goods_img1;/*상품 사진1*/
+	private String real_price;/*실 가격*/
+	private String selectval;
+	private String enddate;
+	private String writedate;
+	private String class_img;
+	private String class_name;
+	private String nickname;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -116,11 +126,91 @@ public class PagingVO {
 		this.lastPageRecordCount = lastPageRecordCount;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getGoods_name() {
+		return goods_name;
+	}
+
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
+	}
+
+	public String getGoods_img1() {
+		return goods_img1;
+	}
+
+	public void setGoods_img1(String goods_img1) {
+		this.goods_img1 = goods_img1;
+	}
+
+	public String getReal_price() {
+		return real_price;
+	}
+
+	public void setReal_price(String real_price) {
+		this.real_price = real_price;
+	}
+
+	public String getSelectval() {
+		return selectval;
+	}
+
+	public void setSelectval(String selectval) {
+		this.selectval = selectval;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
+	public String getWritedate() {
+		return writedate;
+	}
+
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+
+	public String getClass_img() {
+		return class_img;
+	}
+
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
+	}
+
+	public String getClass_name() {
+		return class_name;
+	}
+
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }

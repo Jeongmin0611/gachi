@@ -179,6 +179,28 @@
 	<delete id="wishListDel">
 		delete from good where userid='${userid}' and code='${code}'
 	</delete>
+	<update id="goodClassUpdate">
+		update class
+		<choose>
+			<when test="msg.equals('add')">
+				set good=good+1 where code='${code}'
+			</when>
+			<when test="msg.equals('del')">
+				set good=good-1 where code='${code}'
+			</when>
+		</choose>
+	</update>
+	<update id="goodStoreUpdate">
+		update goods
+		<choose>
+			<when test="msg.equals('add')">
+				set good=good+1 where code='${code}'
+			</when>
+			<when test="msg.equals('del')">
+				set good=good-1 where code='${code}'
+			</when>
+		</choose>
+	</update>
 	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
 		select * from good where userid='${userid}' and code='${code}'
 	</select>

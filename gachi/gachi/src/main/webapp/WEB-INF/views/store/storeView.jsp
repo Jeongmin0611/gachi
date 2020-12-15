@@ -441,7 +441,8 @@ $(function() {
 			<span class="badge badge-info" style="font-size:0.9em;  margin-bottom: 10px;">${vo.category }</span><br/>
 			<h3>${vo.goods_name } </h3><br/>
 			<p style=" margin-bottom: 10px;">재고 &nbsp; ${vo.stock }개</p><br/>
-			<p style="font-size: 1.2em; margin-bottom: 10px;">가격 &nbsp; ${vo.real_price }원</p><br/>
+			<p style="font-size: 1.2em; margin-bottom: 10px;">가격 &nbsp; 
+			<fmt:formatNumber value="${vo.real_price }" pattern="#,###"/>원</p><br/>
 			<hr/>
 			<span>적립금 &nbsp; ${vo.stack }원 
 			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i></span>
@@ -461,7 +462,7 @@ $(function() {
 		<!-- 설명글 -->
 		<h4 style="margin-top:10px; padding-left:10px;">상품소개글</h4>
 		<div class="col-sm-12" style="min-height: 300px; background-color: #eee; text-align: center;" id="detail-info">
-			<img src="/gachi/img/store/${vo.goods_info }"/>
+			<img src="/gachi/upload/storeImg/${vo.goods_info }"/>
 		</div>
 
 		<!-- 클래스 리뷰 -->

@@ -13,17 +13,14 @@
        margin:5px;
        padding:5px;
        overflow:auto;
-       text-decoration: underline;
 	}
 
 	#bottom li {
 		margin: 0;
 		padding: 0;
 		float: left;
-		text-decoration: underline;
 		
 	}
-	
 	#bottom>ul>li {
 		width: 25%;
 	}

@@ -88,8 +88,8 @@ $(function(){
 	if(url.indexOf('?')==-1){
 		$('#aAll').attr('style','font-weight:bold');
 	}else{
-		if(param[0].substring(0,param[0].indexOf('='))=='category'){
-			var cate = param[0].substring(param[0].indexOf('=')+1);
+		if(param[0].substring(0,param[0].indexOf("="))=='category'){
+			var cate = param[0].substring(param[0].indexOf("=")+1);
 			switch(cate){
 			case '요리':
 				$('#aFood').attr('style','font-weight:bold');
@@ -190,24 +190,25 @@ $(function(){
 	});
 	//좋아요 클릭이벤트
 	$('i').on('click',function(){
-		var id = '<%=(String)session.getAttribute("userid")%>';
-		if(id==null ||id =='null'){
+		var id = '<%=(String) session.getAttribute("userid")%>';
+		if (id == null || id == 'null') {
 			swal('로그인 후 이용가능한 기능입니다.');
 			return false;
 		}
-		if(id!=null){
+		if (id != null) {
+			var url = "/home";
 			var good_choice_code;
 			var atr = $(this).attr('class');
-			if (atr=='far fa-heart fa-lg p-2'){
-				$(this).attr('class','fas fa-heart fa-lg p-2');
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/classList?good_add="+good_choice_code;
-			}else if(atr=='fas fa-heart fa-lg p-2'){
-				$(this).attr('class','far fa-heart fa-lg p-2');				
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/classList?good_del="+good_choice_code;
-			}				
-		}			
+			if (atr == 'far fa-heart fa-lg p-2') {
+				$(this).attr('class', 'fas fa-heart fa-lg p-2');
+				good_choice_code = $(this).attr('data-name');
+				location.href = "/gachi/classList?good_add=" + good_choice_code;
+			} else if (atr == 'fas fa-heart fa-lg p-2') {
+				$(this).attr('class', 'far fa-heart fa-lg p-2');
+				good_choice_code = $(this).attr('data-name');
+				location.href = "/gachi/classList?good_del=" + good_choice_code;
+			}
+		}
 	});
 	});
 </script>
@@ -242,18 +243,20 @@ $(function(){
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
-							<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" id="${list.code }"></i>
+							<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }"></i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq list.code }">
 									<script>
-										$('#${list.code}').attr('class','fas fa-heart fa-lg p-2');
-									</script>
+										$('i[data-name=${list.code }]').attr('class',
+										'fas fa-heart fa-lg p-2');
+								</script>
 								</c:if>
 							</c:forEach>
 					</p>
 					<a href="/gachi/classView?code=${list.code }"><span>${list.class_name }</span><br />
 						<span>by &nbsp;</span><span class=""> ${list.nickname }</span><br />
-						<span style="float: right">가격 &nbsp; ${list.real_price }원</span> </a>
+						<span style="float: right">가격 &nbsp;
+						<fmt:formatNumber value="${list.real_price }" pattern="#,###"/> 원</span> </a>
 				</div>
 			</div>
 		</c:forEach>
@@ -273,7 +276,8 @@ $(function(){
 				</li>
 			</c:if>
 		</c:forEach>
+		<c:if test="${pvo.nowPage<pvo.totalPage }">
 		<li class="page-item"><a class="page-link" href="/gachi/classList?nowPage=${pvo.nowPage+1 }">Next</a></li>
+		</c:if>
 	</ul>
-
 </div>

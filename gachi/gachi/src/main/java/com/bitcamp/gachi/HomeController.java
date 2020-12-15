@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
@@ -40,28 +41,38 @@ public class HomeController {
 
 	////////////////////////////////////////////////
 	@RequestMapping("/")
-	//@ResponseBody //ajax 留ㅽ븨 硫붿냼�뱶�뒗 view 由ы꽩�씠 �븞 �맖
+	@ResponseBody
 	public ModelAndView home(HttpSession ses, HttpServletRequest req) {
 		ClassPageDaoImp dao = sqlsession.getMapper(ClassPageDaoImp.class);
+		//String sql1 = sqlsession.getConfiguration().getMappedStatement("homeClassPopular").getBoundSql("").getSql();
+		//System.out.println("sql1->"+sql1);
+		//String sql2 = sqlsession.getConfiguration().getMappedStatement("homeClassNew").getBoundSql("").getSql();
+		//System.out.println("sql1->"+sql2);
+		
 		List<AllVO> plist = dao.homeClassPopular();
 		List<AllVO> nlist = dao.homeClassNew();
 		List<AllVO> rlist;
 		UserInfoDaoImp uDao = sqlsession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
-
-		if(ses.getAttribute("logStatus")!=null) {//濡쒓렇�씤 �긽�깭
+		
+		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
+		if(ses.getAttribute("logStatus")!=null) {//로그인 한 상태
 			String userid=(String)ses.getAttribute("userid");
-			if(req.getParameter("good_add")!=null) {//醫뗭븘�슂 異붽�
+			if(req.getParameter("good_add")!=null) {//좋아요 추가
+				msg="add";
 
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);	
+				uDao.goodClassUpdate(goodCode, msg);
 			}
-			if(req.getParameter("good_del")!=null) {//醫뗭븘�슂 �궘�젣
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
+			if(req.getParameter("good_del")!=null) {//좋아요 취소
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodClassUpdate(goodCode, msg);			
 			}
-			//醫뗭븘�슂 �겢�옒�뒪
+			//좋아요 클래스
 			List<OrderListVO> cgoodList = uDao.classWishList(userid);			
 			//醫뗭븘�슂 �긽�뭹
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
@@ -69,7 +80,27 @@ public class HomeController {
 			mav.addObject("ggoodList", ggoodList);	
 			//관심사 찾기
 			String interest = dao.homeClassInterestFind(userid);
-			rlist = dao.homeClassRecommandUser(interest);
+			//관심사, 구분
+			String[] interestArr = interest.split(",");
+			String interest1="";
+			String interest2="";
+			String interest3="";
+			
+			switch(interestArr.length) {
+			case 1:
+				interest1 = interestArr[0];
+				break;
+			case 2:
+				interest1 = interestArr[0];
+				interest2 = interestArr[1];
+				break;
+			case 3:
+				interest1 = interestArr[0];
+				interest2 = interestArr[1];
+				interest3 = interestArr[2];
+				break;
+			}
+			rlist = dao.homeClassRecommandUser(interest1, interest2, interest3);			
 		}else {//로그인 안 한 상태
 			rlist = dao.homeClassRecommand();
 		}		
