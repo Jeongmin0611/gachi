@@ -45,7 +45,7 @@
         <!-- 이미지 목록 (컨텐츠) -->
         <div class="carousel-inner" >
             <div class="carousel-item active">
-               <a href="#"> <img src="img/bxslide1.jpg"/></a>
+               <a href="#"> <img src="img/eventImg1.png"/></a>
                 <!-- 이미지 위의 설명쓰기-->
                 <div class="carousel-caption">
                 </div>

@@ -1280,11 +1280,10 @@ input{text-align:center;}
 		border-bottom:1px solid gray;
 		text-align: center;
 	}
-	#ad_video_Lst li:nth-child(10n+1){
-		width:5%;
+	#ad_video_Lst li:nth-child(9n+5){
+		width:20%;
 	}
-	#ad_video_Lst li:nth-child(10n+6){
-		width:15%;
+	#ad_video_Lst li:nth-child(9n+6){
 	}
 	.ad_box{
 		margin:10px 0px;

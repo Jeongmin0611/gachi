@@ -1193,12 +1193,7 @@ $(document).ready(function() {
 		<span class="navbar-toggler-icon"></span>
 	</button>    
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<!-- 검색버튼 -->
-		<form class="form-inline d-flex justify-content-center md-form form-sm" id="searchSubmit" action="/gachi/searchTextChk">
-			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
-			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
-		</form>
-		       <a href="/gachi" style="margin-left: 33%;"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
+		       <a href="/gachi" style="margin-left: 46%;"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 		<ul class="nav navbar-nav pull-right  ml-auto ">
           <c:if test="${logStatus==null&&logStatus!='Y'}">
          	 <li class="nav-item" id="loginFormBtn"><a class="nav-link">로그인</a></li>
@@ -1206,32 +1201,35 @@ $(document).ready(function() {
           </c:if>
 		<c:if test="${logStatus!=null	&& logStatus=='Y'}"> 
 			<c:if test="${userSort=='user'}">
-				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li><span class="nav-link" >${nickname}님</span></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
 			</c:if>
 			<c:if test="${userSort=='creator'}">
-				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li><span class="nav-link" >${nickname}님</span></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
 			</c:if>
 			<c:if test="${userSort=='admin'}">
-				<li><span class="nav-link" >${nickname}님 어세오세요</span></li>
+				<li><span class="nav-link" >${nickname}님</span></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
 				<li class="nav-item"><a class="nav-link" href="/gachi/logout">로그아웃</a></li>
 	        </c:if> 
-		</c:if>
-	          
+		</c:if>	          
 			<li class="nav-item"><a class="nav-link" href="/gachi/noticeBoard">공지사항</a></li>
 	        <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   
         </ul>
-       
+       		<!-- 검색버튼 -->
+		<form class="form-inline d-flex justify-content-center md-form form-sm" id="searchSubmit" action="/gachi/searchTextChk">
+			<input class="form-control form-control-sm mr-3" type="text" placeholder="Search" aria-label="Search" id="searchSubmitText" name="searchSubmitText">
+			<button type="submit" id="top-searchbtn"><span class="fas fa-search" aria-hidden="true"></span></button>
+		</form>
      </div>
 </nav>
 <div class="container" style="overflow: visible;">
   <nav class="navbar navbar-expand-lg"  style=" padding:16px 16px 0; border-bottom: 1px solid #eee" id="navbarContent">
     <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
-      <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a>
+      <li class="nav-item dropdown"><a class="nav-link font-weight-bold text-uppercase" data-toggle="dropdown">클래스</a>
          <ul class="dropdown-menu">
            <li class="dropdown-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
            <li class="dropdown-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
@@ -1242,7 +1240,9 @@ $(document).ready(function() {
            <li class="dropdown-item"><a href="/gachi/classList?category=라이프스타일" class="nav-link text-small pb-0 ">라이프스타일</a></li>            
          </ul>
       </li>
+
       <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase">스토어</a>
+
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
             <li class="dropdown-item"><a href="/gachi/storeList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>

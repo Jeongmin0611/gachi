@@ -40,16 +40,15 @@ public class ClassPageController {
 	public ModelAndView classList(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		ModelAndView mav = new ModelAndView();
-				
+
 		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
-		//현재 페이지
 		String nowPageTxt=req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
+			}
 		if(category==null) {
 			int totalRecord=dao.classBoardAllRecordCount(vo);
+
 			vo.setTotalRecord(totalRecord);
 			System.out.println("카테0 총데이터 수="+vo.getTotalRecord());
 		}
@@ -60,9 +59,11 @@ public class ClassPageController {
 		}		
 		System.out.println("vo="+vo.getCategory());
 		List<AllVO> list = dao.classPageAllRecord(vo);
+
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
+
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가

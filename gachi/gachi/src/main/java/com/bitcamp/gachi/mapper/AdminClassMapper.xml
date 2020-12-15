@@ -96,13 +96,7 @@
 	<select id="selectSection" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
 		select code,section_code,unit,unit_content from section where code=#{param1} order by unit
 	</select>
-	<select id="getClassVideoList" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
-		select code,video_code,class.class_name,unit, unit_content,class_video.section_index, 
-		video_name,video_filename,member.nickname,video_length,to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video
-		join section on class_video.section_code=section.section_code
-		join class on class.code=class_video.code
-		join member on class.userid = member.userid order by unit asc,section_index asc
-	</select>
+	
 	<update id="updateClassState" parameterType="String">
 		update class set class_state='등록승인' where code='${code}'
 	</update>	
@@ -157,7 +151,8 @@
 	</select>
 	<select id="selectClassVideoList" parameterType="String" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
 		select c.video_code,c.section_code,unit,unit_content,section_index,video_name,video_name,
-		video_filename,video_length,to_char(enroll_date,'YYYY-MM-DD') enroll_date
+		video_filename,substr(to_char(NUMTODSINTERVAL(video_length, 'second')),12,8) lengthStr,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date
 		from class_video c join section s 
 		on c.section_code=s.section_code where c.code='${param1}'
 		order by s.unit asc,c.section_index asc
@@ -174,7 +169,63 @@
 	<select id="getUnit" parameterType="String" resultType="int">
 		select unit from section where unit_content='${param1}'
 	</select>
-	
+	<select id="getVideoRecordCount" parameterType="map" resultType="_int">
+		select count(video_code) from class_video cv join class c on cv.code=c.code
+		join member m on c.userid=m.userid where enroll_date between '${startDate}' and '${endDate}'   
+		<choose>
+			<when test="category!=null and searchWord==null ">
+				and category='${category}'
+			</when>
+			<when test="category!=null and searchWord!=null">
+				and category='${category}' and cv.video_code like '%${searchWord}%' or 
+				cv.video_name like '%${searchWord}%' or c.class_name like '%${searchWord}%' or 
+				cv.video_filename like '%${searchWord}%' or m.nickname like '%${searchWord}%'
+			</when>
+			<when test="category==null and searchWord!=null">
+				and cv.video_code like '%${searchWord}%' or cv.video_name like '%${searchWord}%' or 
+				c.class_name like '%${searchWord}%' or cv.video_filename like '%${searchWord}%' or
+				 m.nickname like '%${searchWord}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="getClassVideoList" parameterType="map" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(select video_code,class_video.section_code,unit,unit_content,section_index,video_name,class_name,
+		substr(to_char(NUMTODSINTERVAL(video_length, 'second')),12,8) lengthStr,video_filename,nickname,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video join section 
+		on class_video.section_code=section.section_code join class on class.code=class_video.code
+		join member on member.userid=class.userid
+		where to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}' 
+		
+		<choose>
+			<when test="category==null and searchWord==null"></when>
+			<when test="category!=null and searchWord==null">
+				and class.category='${category}'
+			</when>
+			<when test="category!=null and searchWord!=null">
+				and class.category='${category}' and (class_video.video_code like '%${searchWord}%' or 
+				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
+			</when>
+			<when test="category==null and searchWord!=null">
+				and (class_video.video_code like '%${searchWord}%' or 
+				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
+		) A
+		WHERE
+		ROWNUM &lt;= 10
+		)
+		WHERE
+		RNUM &gt;=1
+	</select>
 	
 	<!-- Review  -->
 	
