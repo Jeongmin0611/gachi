@@ -22,30 +22,31 @@
 		(SELECT
 		code, category, goods_name, prime_cost, real_price , stock,to_char(writedate, 'yyyy-mm-dd')writedate , 
 		sale_state from goods
+		where to_char(writedate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;= #{endDate}
 		<choose>
 			<when test='category==null and sale_State==null and search==null '></when>
 			<when test='category!=null and sale_State==null and search==null'>
-				where category='${category}'
+				and category='${category}'
 			</when>
 			<when test='category==null and sale_State!=null and search==null'>
-				where sale_State='${sale_State}'
+				and sale_State='${sale_State}'
 			</when>
 			<when test='category==null and sale_State==null and search!=null'>
-				where (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
+				and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
 			</when> 
 			
 			<when test='category==null and sale_State!=null and search!=null'>
-				where sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )
+				and sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )
 			</when>
 			<when test='category!=null and sale_State!=null and search==null'>
-				where category='${category}' and sale_State='${sale_State}'
+				and category='${category}' and sale_State='${sale_State}'
 			</when>
 			<when test='category!=null and sale_State==null and search!=null'>
-				where category='${category}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )		
+				and category='${category}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )		
 			</when>
 			
 			<when test='category!=null and sale_State!=null and search!=null'>
-				where category='${category}' and sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
+				and category='${category}' and sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
 			</when>
 			<otherwise></otherwise>
 		</choose>

@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
+import com.bitcamp.gachi.admin.MemberVO;
 import com.bitcamp.gachi.admin.SettleDaoImp;
 import com.bitcamp.gachi.admin.SettleVO;
+import com.bitcamp.gachi.mypage.UserInfoDaoImp;
 
 @Controller
 public class CreatorController {
@@ -509,8 +513,80 @@ public class CreatorController {
 		return "creator/creatorNoticeWrite";
 	}	
 	@RequestMapping("/creatorEdit")
-	public String creatorEdit() {
-		return "creator/creatorEdit";
+	public ModelAndView creatorEdit(HttpSession ses) {
+		
+		String userid = (String)ses.getAttribute("userid");
+		ModelAndView mav = new ModelAndView();
+		
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		AllVO vo = dao.selectCreatorlist(userid);
+		
+		mav.addObject("vo",vo);		
+		mav.setViewName("creator/creatorEdit");	
+		
+		return mav;
+	}
+	@RequestMapping(value="/creatorEditOk",method=RequestMethod.POST)
+	public ModelAndView creatorEditOk(HttpSession ses,AllVO vo) {
+		String userid = (String)ses.getAttribute("userid");
+
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
+		
+		int result = dao.UpdateCreatorlist(vo);	
+		int result1 = dao.UpdateCreatorlist1(vo);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("result", result);
+		mav.addObject("result1", result1);
+		mav.setViewName("creator/creatorEditOk");
+		
+	return mav;
+	}
+	
+	/* 회원탈퇴 */
+	@RequestMapping("/creatorLeave")
+	public ModelAndView creatorLeave(HttpSession ses) {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		String username = dao.creatorInfoView(userid).getUsername();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid", userid);
+		mav.addObject("username", username);
+		mav.setViewName("creator/creatorLeave");
+		return mav;
+	}
+	/* 회원탈퇴-비밀번호입력 */
+	@RequestMapping("/creatorLeaveChk")
+	public ModelAndView creatorLeaveChk(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid",(String)ses.getAttribute("userid"));
+		mav.setViewName("creator/creatorLeaveChk");
+		return mav;
+	}
+	/* 회원탈퇴-비밀번호확인 */
+	@RequestMapping(value="/creatorLeaveOk", method=RequestMethod.POST)
+	public ModelAndView creatorLeaveOk(MemberVO vo, HttpSession ses) {
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		int result = dao.creatorInfoPwdChk(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result==0) { //비밀번호 틀리면
+			mav.setViewName("mypage/userInfoPwdResult");
+		}else if(result==1) { //비밀번호 맞으면
+			int LeaveResult = dao.creatorLeave(vo);
+			if(LeaveResult>0) { //탈퇴 성공
+				ses.invalidate();
+				mav.setViewName("creator/creatorLeaveConfirmed");
+			}else { //탈퇴 실패
+				mav.setViewName("creator/creatorLeaveResult");
+			}
+		}
+		return mav;
+	}
+	/* 회원탈퇴-성공 */
+	@RequestMapping("/creatorConfirmed")
+	public String creatorConfirmed() {
+		return "creator/creatorConfirmed";
 	}
 	
 	@RequestMapping("/creatorSettle")

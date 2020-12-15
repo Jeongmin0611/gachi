@@ -42,6 +42,7 @@
 		join orderlist on class_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
@@ -73,16 +74,18 @@
 		join orderlist on goods_order.order_code = orderlist.order_code
 		join goods on goods_order.code = goods.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -133,16 +136,18 @@
 		join orderlist on class_order.order_code = orderlist.order_code
 		join class on class_order.code = class.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -404,16 +409,18 @@
 		join orderlist on goods_order.order_code = orderlist.order_code
 		join goods on goods_order.code = goods.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate}
+		and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} 
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
