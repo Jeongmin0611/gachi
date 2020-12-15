@@ -6,8 +6,8 @@
 	<select id="classPageAllRecord" parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="com.bitcamp.gachi.classPage.ClassPageVO">
 		select * from 
 		(select * from 
-		(select c.code code ,c.category category,c.class_name class_name,c.real_price real_price,m.nickname nickname,
-    c.class_img class_img, class_img2, c.allow allow, good
+		(select c.code ,c.category ,c.class_name ,c.real_price ,m.nickname,
+    c.class_img, c.class_img2, c.allow, c.good
 		from class c join member m on c.userid=m.userid
 		<choose>
 			<when test='category==null and selectval == null'></when>
