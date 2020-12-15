@@ -39,29 +39,26 @@ public class ClassPageController {
 	@RequestMapping("/classList")
 	public ModelAndView classList(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		
-		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		ModelAndView mav = new ModelAndView();
 		String category = req.getParameter("category");
-		String selectval = req.getParameter("selectval");
-		//현재 페이지
 		String nowPageTxt=req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
+			}
 		if(category==null) {
-		int totalRecord=dao.classBoardAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		}
+			int totalRecord=dao.classBoardAllRecordCount(vo);
+				vo.setTotalRecord(totalRecord);
+				
+			}
 		if(category!=null) {
 			int totalRecord = dao.classPageCategoryRecordCount(vo);
-			vo.setTotalRecord(totalRecord);
-		}
-		
-		
+				vo.setTotalRecord(totalRecord);
+			}
 		List<AllVO> list = dao.classPageAllRecord(vo);
-		System.out.println(vo);
+		System.out.println("1212="+list);
 		
-		ModelAndView mav = new ModelAndView();
+		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가

@@ -30,7 +30,7 @@
 			</when>
 		</choose>
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by writedate desc)
-		where <![CDATA[rownubm<=${lastPageRecordCount}]]> order by writedate asc
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by writedate asc
 		<choose>
 			<when test='category==null and selectval == null'>
 			)
@@ -45,7 +45,7 @@
 		from goods where code='${param1}'
 	</select>
 	<select id="storeListAllRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
-		select count(goods_name) from goods order by enddate
+		select count(goods_name) from goods
 	</select>
 	<select id="storeListCategoryRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
 		select count(goods_name) from goods where category ='${category}' order by enddate

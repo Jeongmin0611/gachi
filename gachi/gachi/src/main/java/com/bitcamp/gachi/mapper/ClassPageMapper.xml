@@ -6,37 +6,37 @@
 	<select id="classPageAllRecord" parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="com.bitcamp.gachi.classPage.ClassPageVO">
 		select * from 
 		(select * from 
-		(select c.code,c.category,c.class_name,c.real_price,m.nickname,c.class_img,c.allow
-		from class c join member m on c.userid=m.userid
+		(select c.code,c.category,c.class_name,c.real_price,m.nickname,c.class_img, to_char(signup, 'YYYY-MM-DD') signup
+		from class c join member m on c.userid=m.userid 
 		<choose>
 			<when test='category==null and selectval == null'></when>
 			<when test='category==null and selectval.equals("Iall")'></when>
 			<when test='category==null and selectval.equals("Inew")'>
-				where allow<![CDATA[ >= ]]> sysdate order by allow desc) 
+				where signup<![CDATA[ <= ]]> sysdate order by signup desc) 
 			</when>
 			<when test='category==null and selectval.equals("Ipopular")'>
-				where allow<![CDATA[ >= ]]> sysdate order by good desc) 
+				where signup<![CDATA[ <= ]]> sysdate order by good desc) 
 			</when>
 			<when test="category!=null and selectval==null">
-				where allow<![CDATA[ >= ]]> sysdate and category='${category}'order by allow asc) 
+				where signup<![CDATA[ <= ]]> sysdate and category='${category}'order by signup asc) 
 			</when>
 			<when test='category!=null and selectval.equals("Iall")'>
-				where allow<![CDATA[ >= ]]> sysdate and category='${category}'order by allow asc) 
+				where signup<![CDATA[ <= ]]> sysdate and category='${category}'order by signup asc) 
 			</when>
 			<when test='category!=null and selectval.equals("Inew")'>
-				where allow<![CDATA[ >= ]]> sysdate and category='${category}' order by allow desc) 	
+				where signup<![CDATA[ <= ]]> sysdate and category='${category}' order by signup desc) 	
 			</when>			
 			<when test='category!=null and selectval.equals("Ipopular")'>
-				where allow<![CDATA[ >= ]]> sysdate and category='${category}' order by good desc)	
+				where signup<![CDATA[ <= ]]> sysdate and category='${category}' order by good desc)	
 			</when>
 		</choose>
-		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by allow desc)
-		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by allow asc
+		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by signup desc)
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by signup asc
 		<choose>
-			<when test='category==null and selectval.equals("Iall")'>
+			<when test='category==null and selectval==null'>
 			)
 			</when>
-			<when test='category==null and selectval==null'>
+			<when test='category==null and selectval.equals("Iall")'>
 			)
 			</when>
 		</choose>

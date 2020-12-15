@@ -1,6 +1,5 @@
 package com.bitcamp.gachi.admin;
 
-import java.sql.Date;
 
 public class AllVO {
 	
@@ -62,6 +61,7 @@ public class AllVO {
 	private int nowPage=1;//페이징할때쓰는 시작페이지
 	private int totalRecord=5;
 	private String selectval;
+	private String signup;
 	
 /*	
 	//오더리스트
@@ -393,6 +393,12 @@ public class AllVO {
 	}
 	public void setSelectval(String selectval) {
 		this.selectval = selectval;
+	}
+	public String getSignup() {
+		return signup;
+	}
+	public void setSignup(String signup) {
+		this.signup = signup;
 	}
 	
 	
