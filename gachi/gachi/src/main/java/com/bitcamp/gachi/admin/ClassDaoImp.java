@@ -1,5 +1,6 @@
 package com.bitcamp.gachi.admin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public interface ClassDaoImp {
 	public List<ClassVO> getClassListSearch(TestVO vo);
 	
 	//媛뺤쥖 �쁺�긽 媛꾨왂 議고쉶
-	public List<ClassVideoVO> getClassVideoList();
+	//public List<ClassVideoVO> getClassVideoList();
 	
 	//�씠誘몄��뙆�씪 議고쉶
 	public String selectClassImg(String code);
@@ -92,6 +93,12 @@ public interface ClassDaoImp {
 	public int videoDelete(String video_code);
 	
 	public int getUnit(String unit_content);
+	
+	//비디오 총 레코드수 
+	public int getVideoRecordCount(Map<String, String> dbParam);
+	
+	//비디오리스트
+	public List<ClassVideoVO> getClassVideoList(Map<String,String> map);
 
 	public int selectCntAllReview(Map<String, String> dbParam); // 리뷰 카운트 
 

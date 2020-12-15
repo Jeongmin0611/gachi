@@ -57,13 +57,13 @@
 <div id="search_area">
 	<ul>
 		<li>
-			<form method="post" id="ad_class_lookup" action="/gachi/adminClass">
+			<form method="get" id="ad_class_lookup" action="/gachi/adminClass">
 			<h3>조회옵션</h3>
 			<ul>
 				<li>날짜옵션</li>
 				<li>	
 					<select id="dateOption" name="dateOption">
-						<option>전체</option>
+						<option value="전체">전체</option>
 						<option value="allow">등록일</option>
 						<option value="signup">등록신청일</option>
 					</select>	
@@ -72,7 +72,7 @@
 				<li>카테고리</li>
 				<li>
 					<select id="category" name="category">	
-						<option>전체</option>
+						<option value="전체">전체</option>
 						<option value="공예/창작">공예/창작</option>
 						<option value="요리">요리</option>
 						<option value="미술">미술</option>
@@ -85,7 +85,7 @@
 				<li>클래스상태</li>
 				<li>
 					<select name="class_state">
-						<option>전체</option>
+						<option value="전체">전체</option>
 						<option value="등록대기">등록대기</option>
 						<option value="판매중">판매중</option>
 						<option value="종료">종료</option>
@@ -98,13 +98,13 @@
 			</form>
 	</li>
 		<li>
-		<form method="post" id="ad_class_search" action="/gachi/adminClass2">
+		<form method="get" id="ad_class_search" action="/gachi/adminClass2">
 			<h3>검색옵션</h3>
 			<ul style="margin-top:10px;height:200px;">
 				<li>검색옵션</li>
 				<li>
 					<select id="option" name="option">
-						<option>전체</option>
+						<option value="전체">전체</option>
 						<option value="code">클래스코드</option>
 						<option value="category">카테고리</option>
 						<option value="class_name">클래스명</option>
@@ -156,12 +156,12 @@
 					<li <c:if test="${p==pvo.nowPage}"> style="color:#437299"</c:if>>
 						<a href="/gachi/adminClass?nowPage=${p}
 						<c:choose>
-							<c:when test='searchWord==null||searchWord.equals("")'>
-								&dateOption=${dateOption}&date1=${date1}&date2=${date2}&category=${category}
-								&class_state=${class_state}
+							<c:when test='${pvo.searchWord==null}'>
+								&dateOption=${pvo.dateOption}&date1=${pvo.date1}&date2=${pvo.date2}&category=${pvo.category}
+								&class_state=${pvo.class_state}
 							</c:when>
-							<c:when test='searchWord!=null&&!searchWord.equals("")'>
-								&option=${option}&searchWord=${searchWord}
+							<c:when test='${pvo.searchWord!=null}'>
+								&option=${pvo.option}&searchWord=${pvo.searchWord}
 							</c:when>
 						</c:choose>
 						" class="paging_num">${p}</a>
