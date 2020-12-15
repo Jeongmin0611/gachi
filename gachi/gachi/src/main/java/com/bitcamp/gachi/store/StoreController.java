@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.mapping.ParameterMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
-import com.bitcamp.gachi.admin.ClassDaoImp;
 import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.classPage.ClassPageDaoImp;
 import com.bitcamp.gachi.mypage.OrderListVO;
@@ -35,32 +32,44 @@ public class StoreController {
 	public ModelAndView storeList(HttpServletRequest req, HttpSession ses,StorePageVO vo) throws Exception{
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+		
+		String category=req.getParameter("category");
+
+		String selectval=req.getParameter("selectval");
+		//현재 페이지
 		String nowPageTxt= req.getParameter("nowPage");
 		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
-		int totalRecord = dao.storeListAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		
-		String category=req.getParameter("category");
-		String selectval=req.getParameter("selectval");
-		
-		
-		String sql = sqlSession.getConfiguration().getMappedStatement("storeAllRecord").getBoundSql(vo).getSql();
-		System.out.println("sql->"+sql);
-		List<AllVO> list=dao.storeAllRecord(vo);		
+			}
+		if(category==null) {
+			int totalRecord = dao.storeListAllRecordCount(vo);
+				vo.setTotalRecord(totalRecord);
+
+			}
+		if(category!=null) {
+			int totalRecord = dao.storeListCategoryRecordCount(vo);
+				vo.setTotalRecord(totalRecord);
+			}
+		System.out.println("2121="+vo.getWritedate());
+		List<AllVO> list=dao.storeAllRecord(vo);
+		System.out.println("1212="+list);
 
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
+		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
+				msg="add";
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}
 			if(req.getParameter("good_del")!=null) {//좋아요 삭제
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}	
 			//좋아요 상품
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
@@ -83,15 +92,20 @@ public class StoreController {
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
+		String msg="";
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
+				msg="add";
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}
 			if(req.getParameter("good_del")!=null) {//좋아요 삭제
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}	
 			//좋아요 상품
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);

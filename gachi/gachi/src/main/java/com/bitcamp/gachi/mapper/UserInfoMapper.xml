@@ -174,11 +174,43 @@
 		 and gd.userid = '${userid}'
 	</select>
 	<insert id="wishListAdd">
-		insert into good values ('${userid}','${code}')
+		<![CDATA[
+			declare
+			cnt number;
+			begin
+			    select count(userid) into cnt from good 
+			    where userid='${userid}' and code='${code}';
+			if cnt<1 then
+			insert into good(userid, code) values('${userid}', '${code}');
+			end if;
+			end;
+		]]>
 	</insert>
 	<delete id="wishListDel">
 		delete from good where userid='${userid}' and code='${code}'
 	</delete>
+	<update id="goodClassUpdate">
+		update class
+		<choose>
+			<when test="msg.equals('add')">
+				set good=good+1 where code='${code}'
+			</when>
+			<when test="msg.equals('del')">
+				set good=good-1 where code='${code}'
+			</when>
+		</choose>
+	</update>
+	<update id="goodStoreUpdate">
+		update goods
+		<choose>
+			<when test="msg.equals('add')">
+				set good=good+1 where code='${code}'
+			</when>
+			<when test="msg.equals('del')">
+				set good=good-1 where code='${code}'
+			</when>
+		</choose>
+	</update>
 	<select id="wishOneRecord" resultType="com.bitcamp.gachi.mypage.OrderListVO">
 		select * from good where userid='${userid}' and code='${code}'
 	</select>

@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <script>
 $(function(){
+	
 	$("#startDate").val("${startDate}");
 	$("#endDate").val("${endDate}");
-	$("#category").val("${category}").attr("selected", "selected");
 	$("#searchWord").val("${searchWord}");
+	$("#category").val("${category}").attr("selected", "selected");
+	$("#payment_type").val("${payment_type}").attr("selected", "selected");	
+	$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
 	
-	$('#searchBtn').click(function(){
-		
-		if($("#searchWord").val()==""){
-			alert("검색어를 입력하세요.");
-			return false;
-		}
-		
+	$("#searchBtn").click(function(){
 		var url = "/adminVideo";
 		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
 		$.ajax({
@@ -30,33 +28,35 @@ $(function(){
 				console.log(result);
 			}
 		});
+		
 	});
 	
+});
 	function postPageMove(now) {
-		console.log(now);
-		return false;
-		var url = "/adminVideo";
-		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val()+ "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
-		$.ajax({
-			url : url,
-			data : data,
-			type : "POST",
-			dataType : "json",
-			success: function(data){
-				var result = data.result;
-				console.log(result);
-			},error:function(){
-				var result = data.result;
-				console.log(result);
-			}
-		});
-});	
+	console.log(now);
+	return false;
+	var url = "/adminVideo";
+	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now ;
+	$.ajax({
+		url : url,
+		data : data,
+		type : "POST",
+		dataType : "json",
+		success: function(data){
+			var result = data.result;
+			console.log(result);
+		},error:function(){
+			var result = data.result;
+			console.log(result);
+		}
+	});
 </script>
+
 <div class="container ad_font">
 	<h1>동영상 관리</h1>
 	<div>총 레코드 수 :${pvo.totalRecord}</div>
 	<div id="ad_video_searchArea">
-		<form method="post" action="">
+		<form method="post" action="adminVideo">
 		<ul id="ad_video_searchList">
 			<li>
 				카테고리
@@ -100,16 +100,16 @@ $(function(){
 			<li>영상길이</li>
 			<li>등록일</li>
 			
-			<c:forEach var="vo" items="${vlist}">
-				<li>${vo.video_code}</li>
-				<li>${vo.class_name}</li>
-				<li>${vo.unit_content}</li>
-				<li>${vo.section_index}</li>
-				<li><a href="/gachi/adminVideoView?code=${vo.code}&video_filename=${vo.video_filename}">${vo.video_name}</a></li>
-				<li class="wordCut">${vo.video_filename}</li>
-				<li>${vo.nickname}</li>
-				<li>${vo.lengthStr}</li>
-				<li>${vo.enroll_date}</li>
+			<c:forEach var="vlist" items="${vlist}">
+				<li>${vlist.video_code}</li>
+				<li>${vlist.class_name}</li>
+				<li>${vlist.unit_content}</li>
+				<li>${vlist.section_index}</li>
+				<li><a href="/gachi/adminVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
+				<li class="wordCut">${vlist.video_filename}</li>
+				<li>${vlist.nickname}</li>
+				<li>${vlist.lengthStr}</li>
+				<li>${vlist.enroll_date}</li>
 			</c:forEach>
 		</ul>
 	</div>

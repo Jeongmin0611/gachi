@@ -16,6 +16,7 @@ public class PagingVO {
 	//검색어
 	private String searchKey;
 	private String searchWord;
+	private String category;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -113,5 +114,13 @@ public class PagingVO {
 
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

@@ -42,16 +42,18 @@
 		join orderlist on class_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -73,16 +75,18 @@
 		join orderlist on goods_order.order_code = orderlist.order_code
 		join goods on goods_order.code = goods.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -99,16 +103,18 @@
 		join orderlist on goods_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -133,16 +139,18 @@
 		join orderlist on class_order.order_code = orderlist.order_code
 		join class on class_order.code = class.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -160,16 +168,18 @@
 		join orderlist on class_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -404,16 +414,18 @@
 		join orderlist on goods_order.order_code = orderlist.order_code
 		join goods on goods_order.code = goods.code
 		left join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate}
+		and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} 
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -689,8 +701,8 @@
 	</select>
 
 	<insert id="SettleInfoInsert" parameterType="map">
-		insert into settlement(settle_num, class_order_code, userid, settlement_amount, balance, settle_date, payday, settle_turm1, settle_turm2)
-		values(a_sq.nextval, #{class_order_code}, #{userid}, ${price}, 0, sysdate, to_char(sysdate,'yyyy-MM-dd'), sysdate, sysdate)
+		insert into settlement(settle_num, class_order_code, userid, settlement_amount, payday)
+		values(a_sq.nextval, #{class_order_code}, #{userid}, ${price}, to_char(sysdate,'yyyy-MM-dd'))
 	</insert>
 	
 	<update id="SettleStateUpdate" parameterType="String">
@@ -846,20 +858,342 @@
 	<update id ="DeliveryUpdate" parameterType="map">
 		update orderlist set state=#{state} , delivery=#{delivery} where order_code =#{order_code}
 	</update>
+	
+	
+	<!-- 크리에이터 대쉬보드 -->
+		<select id="countWaitClass" parameterType="String" resultType="_int">
+			select count(class_state) cnt from class
+				join creator on class.userid = creator.userid
+				where class.userid = #{userid}
+				and class_state ='미승인'
+		</select>
+		
+		<select id="totalPayment" parameterType="map" resultType="_int">
+			select nvl(sum(nvl(real_price,0)),0) sum from class
+				join class_order on class.code = class_order.code
+                join orderlist on class_order.order_code = orderlist.order_code
+				where class.userid=#{userid}
+				and class_order.settlement='Y'
+				and to_char(orderdate,'yyyy-MM-dd')&gt;=#{startDate} and to_char(orderdate,'yyyy-MM-dd')&lt;=#{endDate}
+		</select>
+		
+		<select id="non_Payment" parameterType="String" resultType="_int">
+			select sum(real_price) sum from class
+				join class_order on class.code = class_order.code
+				where class.userid =#{userid}
+				and class_order.settlement='N'
+		</select>
+		
+		<select id="creatorPayment" parameterType="map" resultType="int">
+			<foreach collection="list" item="item" separator=" union all">
+					select nvl(sum(nvl(real_price,0)),0) sum from class
+						join class_order on class.code = class_order.code
+		                join orderlist on class_order.order_code = orderlist.order_code
+						where class.userid=#{userid}
+						and class_order.settlement='Y'
+						and to_char(orderdate,'yyyy-MM-dd')=#{item}
+			</foreach>
+		</select>
+		
+		<select id="classTotalMember" parameterType="map" resultType="int">
+			<foreach collection="list" item="item" separator=" union all">
+					select count(*) as cnt from class_order
+					join class on class.code = class_order.code
+					join orderlist on class_order.order_code = orderlist.order_code
+					where class.userid = #{userid}
+					and to_char(orderdate,'yyyy-MM-dd')=#{item}
+			</foreach>
+		</select>
+		
+		<select id="StatClassForAge" parameterType="map" resultType="map">
+		SELECT age_gb, COUNT(*) cnt
+	  		FROM (SELECT CASE WHEN age &lt; 10 THEN '유아'
+	                    WHEN AGE &gt;= 10 AND age &lt; 20 THEN '10대'
+	                    WHEN age &gt;= 20 AND age &lt; 30 THEN '20대'
+	                    WHEN age &gt;= 30 AND age &lt; 40 THEN '30대'
+	                    WHEN age &gt;= 40 AND age &lt; 50 THEN '40대'
+	                    WHEN age &gt;= 50 AND age &lt; 60 THEN '50대'
+	                    WHEN age &gt;= 60 THEN '60대이상'
+	                END age_gb
+	          FROM (SELECT (to_number(to_char(sysdate, 'yyyy'))-to_number(to_char(birthdate, 'yyyy'))+1) as age
+	                  FROM orderlist join class_order on orderlist.order_code = class_order.order_code
+            			join member on orderlist.userid= member.userid
+                        join class on class.code = class_order.code
+                        where class.userid =#{userid}
+           			 	and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+	                )
+	         	)
+ 		GROUP BY age_gb ORDER BY age_gb	
+	</select>
+	
+	<select id="StatClassForGender" parameterType="map" resultType="map">
+		select gender_gb, count(*) cnt 
+      from (select case when gender= lower('f') then '여자' when gender=lower('m') then '남자' end gender_gb
+      from (select gender from orderlist join class_order on orderlist.order_code = class_order.order_code
+            join member on orderlist.userid= member.userid
+            join class on class.code = class_order.code
+            where class.userid =#{userid}
+            and to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;= #{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;= #{endDate}
+            )
+      )
+    group by gender_gb
+	</select>
+	
+	
+	<select id="CreatorCntAllSettle" parameterType="map" resultType="_int">
+		select count(*) as cnt from class_order join class on class_order.code= class.code
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		where class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and class_name!=null'>
+				and class.class_name like '%${class_name}%'
+			</when>
+			<when test='category!=null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="CreatorAllSettle" parameterType="map" resultType="com.bitcamp.gachi.admin.SettleVO">
+
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
+		(SELECT
+		class_order.order_code, class.category, class.class_name, class.userid,
+		member.username,class.real_price, to_char(settlement.payday,
+		'yyyy-mm-dd') payday, settlement from class_order
+		join class on class_order.code = class.code
+		join orderlist on orderlist.order_code= class_order.order_code
+        join member on orderlist.userid = member.userid
+		left join settlement on class_order.class_order_code =settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
+		and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and class_name!=null'>
+				and class.class_name like '%${class_name}%'
+			</when>
+			<when test='category!=null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A WHERE ROWNUM &lt;= ${endNum} ) WHERE RNUM &gt;=${startNum}
+	</select>
+	
+	<select id="creatorSalesY" parameterType="map" resultType="int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and (class_order.settlement='y' or class_order.settlement='Y')
+		and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<select id="creatorSalesN" parameterType="map" resultType="_int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and
+		(class_order.settlement='n' or class_order.settlement='N') and class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="creatorAllSales" parameterType="map" resultType="_int">
+		select sum(class.real_price) from class_order
+		join orderlist on class_order.order_code = orderlist.order_code
+		join class on class_order.code = class.code
+		left join settlement on class_order.class_order_code = settlement.class_order_code
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate} and
+		class.userid =#{userid}
+		<choose>
+			<when test='category==null and class_name==null'></when>
+			<when test='category!=null and class_name==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category== null and class_name!=null'>
+				and class.username like '%${class_name}%'
+			</when>
+			<when test='category!= null and class_name!=null'>
+				and class.category='${category}' and class.class_name like
+				'%${class_name}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<!-- QNA  -->
+	
+		<select id="selectAllQna" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
+		(SELECT
+		qna.num , goods.code ,goods.category , goods.goods_name , qna.subject,qna.content ,
+        member.username ,to_char(qna.writedate,'yyyy-mm-dd') writedate, to_char(answer_writedate,'yyyy-mm-dd') answer_writedate from qna
+		join goods on qna.code = goods.code
+        join member on qna.userid = member.userid
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A WHERE ROWNUM &lt;= ${endNum} ) WHERE RNUM &gt;=${startNum}
+	</select>
+	<select id="selectCntAllQna" parameterType="map" resultType="_int">
+		select count(*) as cnt from qna join member on member.userid = qna.userid
+        join goods on goods.code = qna.code
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+
+	
+	<select id="selectAllReply" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(select num , goods.code , goods.goods_name, category,subject,goods_review.grade ,member.username,to_char(goods_review.writedate, 'yyyy-mm-dd') writedate 
+		answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer
+		from goods_review
+		join goods on goods.code = goods_review.code
+		join member on goods_review.userid = member.userid
+       	where to_char(goods_review.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(goods_review.writedate, 'yyyy-mm-dd')&lt;=#{endDate}	
+		<choose>
+			<when test='category==null and grade==null and search==null'></when>
+			<when test='category!=null and grade==null and search==null'>
+				and category='${category}'
+			</when>
+			<when test='category==null and grade!=null and search==null'>
+				and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade==null and search!=null'>
+				and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')		
+			</when> 						
+			<when test='category!=null and grade!=null and search==null'>
+					and category='${category}' and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade!=null and search!=null'>
+				 and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>
+			<when test='category!=null and grade==null and search!=null'>
+				 and category='${category}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				 and category='${category}' and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')			
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A
+		WHERE
+		ROWNUM &lt;= ${endNum}
+		)
+		WHERE
+		RNUM &gt;= ${startNum}
+	</select>
+
+<select id="selectCntAllReply" parameterType="map" resultType="_int">
+		select count(*) as cnt from goods_review
+		join member on goods_review.userid = member.userid
+		join goods on goods.code = goods_review.code
+       	where to_char(goods_review.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(goods_review.writedate, 'yyyy-mm-dd')&lt;=#{endDate}	
+		<choose>
+			<when test='category==null and grade==null and search==null'></when>
+			<when test='category!=null and grade==null and search==null'>
+				and category='${category}'
+			</when>
+			<when test='category==null and grade!=null and search==null'>
+				and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade==null and search!=null'>
+				and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')		
+			</when> 						
+			<when test='category!=null and grade!=null and search==null'>
+					and category='${category}' and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade!=null and search!=null'>
+				 and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>
+			<when test='category!=null and grade==null and search!=null'>
+				 and category='${category}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				 and category='${category}' and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')			
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectReplyView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate from goods_review
+            join member on member.userid= goods_review.userid
+            where num = #{num}
+	</select>
+	<select id="selectAnswerView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate ,    
+			answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer from qna            
+			join member on member.userid= qna.userid
+            where num = #{num}
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

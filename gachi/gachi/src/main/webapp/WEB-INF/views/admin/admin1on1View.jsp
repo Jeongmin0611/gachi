@@ -113,37 +113,9 @@ span{
 	</div>
 	<!-- 댓글 -->
 	<form id="admin1on1View_ReplyForm">
-		댓글<br/> <textarea rows="3" cols="90%"></textarea>
+		답글<br/> <textarea rows="10" cols="90%"></textarea>
 		<div><button class="btn">등록</button></div>
 	</form>
 	<!-- 댓글 리스트 -->
-	<div>
-		<ul id="admin1on1View_ReplyDiv">
-			<li>닉네임</li>
-			<li>댓글내용 </li>
-			<li>작성날짜</li>
-			<li>변경여부</li>
-			
-			<li>홍길동</li>
-			<li>댓글 내용 </li>
-			<li><span>2020-10-11 12:41:21</span></li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
-			<li>홍길동</li>
-			<li>댓글 내용 </li>
-			<li><span>2020-10-11 12:41:21</span></li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용</li>
-			<li><span>2020-10-15 12:41:21</span></li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용</li>
-			<li><span>2020-10-19 12:41:21</span></li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
-		</ul>
-	</div>
+	
 </div>

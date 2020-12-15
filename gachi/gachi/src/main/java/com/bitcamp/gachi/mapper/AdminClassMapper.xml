@@ -199,24 +199,23 @@
 		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video join section 
 		on class_video.section_code=section.section_code join class on class.code=class_video.code
 		join member on member.userid=class.userid
-		where to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' 
-		and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}' 
-	
+		where to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}' 
 		<choose>
+			<when test="category==null and searchWord==null"></when>
 			<when test="category!=null and searchWord==null">
 				and class.category='${category}'
 			</when>
 			<when test="category!=null and searchWord!=null">
-				and class.category='${category}' and class_video.video_code like '%${searchWord}%' or 
+				and class.category='${category}' and (class_video.video_code like '%${searchWord}%' or 
 				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
-				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%'
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
 			</when>
-			<when test='category==null or category.equals("") and searchWord!=null'>
-				and class.category='${category}' and class_video.video_code like '%${searchWord}%' or 
+			<when test="category==null and searchWord!=null">
+				and (class_video.video_code like '%${searchWord}%' or 
 				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
-				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%'
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
 			</when>
-			<when test="category==null and searchWord==null"></when>
+			
 			<otherwise></otherwise>
 		</choose>
 		) A

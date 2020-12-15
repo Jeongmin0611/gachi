@@ -118,17 +118,17 @@ function postPageMove(now) {
 			<c:if test="${method eq 'get' }">
 				<c:if test="${nowPage > 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/adminDelivery?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="1" end="${lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${i }">${i }</a>
+						<a class="btn" href="/gachi/adminDelivery?now=${i }">${i }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${nowPage < lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/adminDelivery?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>

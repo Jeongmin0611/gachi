@@ -102,6 +102,48 @@ public interface SettleDaoImp {
 	public SettleVO selectDelivery(String code); //딜리버리 뷰페이지 정보전달
 
 	public int DeliveryUpdate(Map<String, String> dbParam); //딜리버리 정보수정
+
+	public Integer countWaitClass(String uerid); // 크리에이터 대쉬보드 미승인클래스
+
+	public Integer totalPayment(Map<String, Object> dbParam); //크리에이터 대쉬보드 정산금액 
+
+	public Integer non_Payment(String uerid); // 크리에이터 대쉬보드 미정산금액
+
+	public List<Integer> creatorPayment(Map<String, Object> dbParam);
+
+	public List<Integer> classTotalMember(Map<String, Object> dbParam); //크리에이터 스탯클래스 그래프 데이터 
+
+	public List<Map<String, Integer>> StatClassForAge(Map<String, Object> dbParam2); //크리에이터스탯클래스 파이 에이지
+
+	public List<Map<String, Integer>> StatClassForGender(Map<String, Object> dbParam2); //크리에이터스탯클래스 파이 젠더 
+
+	public Integer creatorSalesY(Map<String, String> dbParam); //크리에이터 > 크리에이터정산
+
+	public Integer creatorSalesN(Map<String, String> dbParam); //크리에이터 > 크리에이터 미정산 
+
+	public Integer creatorAllSales(Map<String, String> dbParam); //크리에이터 > 크리에이터 총정산
+
+	public List<SettleVO> CreatorAllSettle(Map<String, String> dbParam); // 크리에이터 > 정산리스트 
+
+	public int CreatorCntAllSettle(Map<String, String> dbParam); //크리에이터 > 정산 카운트
+
+	public List<QnaVO> selectAllQna(Map<String, String> dbParam); // 어드민 > 질문/답변 
+
+	public int selectCntAllQna(Map<String, String> dbParam); //어드민 > 질문답변 카운트 
+
+	public List<QnaVO> selectAllReply(Map<String, String> dbParam); //어드민 >수강리뷰 리스트 
+
+	public int selectCntAllReply(Map<String, String> dbParam); //어드민>수강리뷰 카운트 
+
+	public QnaVO selectReplyView(int num);  //어드민 상품리뷰 뷰 
+
+	public QnaVO selectAnswerView(int num); //어드민 질문답변
+
+
+	
+	
+	
+	
 	
 	
 	
