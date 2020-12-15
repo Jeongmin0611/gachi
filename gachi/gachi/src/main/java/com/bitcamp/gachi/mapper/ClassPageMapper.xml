@@ -9,7 +9,7 @@
 		(select c.code,c.category,c.class_name,c.real_price,m.nickname,c.class_img,c.class_img2, to_char(signup, 'YYYY-MM-DD') signup, c.good
 		from class c join member m on c.userid=m.userid 
 		<choose>
-			<when test='category==null and selectval == null'></when>
+			<when test='category==null and selectval == null'></when>			
 			<when test='category==null and selectval.equals("Iall")'></when>
 			<when test='category==null and selectval.equals("Inew")'>
 				where signup<![CDATA[ <= ]]> sysdate order by signup desc) 

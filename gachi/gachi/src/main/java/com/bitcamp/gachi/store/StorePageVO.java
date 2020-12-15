@@ -24,6 +24,7 @@ public class StorePageVO {
 	private String selectval;
 	private String enddate;
 	private String writedate;
+	private String good;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -186,4 +187,12 @@ public class StorePageVO {
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
+	
+	public String getGood() {
+		return good;
+	}
+
+	public void setGood(String good) {
+		this.good = good;
+	}	
 }

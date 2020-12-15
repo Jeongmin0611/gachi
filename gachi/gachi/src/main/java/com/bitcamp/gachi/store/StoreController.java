@@ -32,11 +32,15 @@ public class StoreController {
 	public ModelAndView storeList(HttpServletRequest req, HttpSession ses,StorePageVO vo) throws Exception{
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+		
 		String category=req.getParameter("category");
-			String nowPageTxt= req.getParameter("nowPage");
-			if(nowPageTxt!=null) {//페이지 번호를 request한 경우
-				vo.setNowPage(Integer.parseInt(nowPageTxt));
-				}
+
+		String selectval=req.getParameter("selectval");
+		//현재 페이지
+		String nowPageTxt= req.getParameter("nowPage");
+		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+			}
 		if(category==null) {
 			int totalRecord = dao.storeListAllRecordCount(vo);
 				vo.setTotalRecord(totalRecord);

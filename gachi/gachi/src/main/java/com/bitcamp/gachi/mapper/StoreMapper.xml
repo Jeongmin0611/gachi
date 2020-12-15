@@ -6,7 +6,7 @@
 	<select id="storeAllRecord" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="com.bitcamp.gachi.store.StorePageVO">
 		select * from 
 		(select * from 
-		(select code, category, goods_name, real_price, goods_img1, to_char(writedate, 'YYYY-MM-DD') writedate from goods 
+		(select code, category, goods_name, real_price, goods_img1, to_char(writedate, 'YYYY-MM-DD') writedate, good from goods 
 		<choose>
 			<when test='category==null and selectval == null'></when>
 			<when test='category==null and selectval.equals("Iall")'></when>
@@ -41,7 +41,7 @@
 		</choose>
 	</select>
 	<select id="storeView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1
+		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1, good
 		from goods where code='${param1}'
 	</select>
 	<select id="storeListAllRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
