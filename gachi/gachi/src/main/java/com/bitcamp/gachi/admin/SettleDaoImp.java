@@ -139,6 +139,8 @@ public interface SettleDaoImp {
 
 	public QnaVO selectAnswerView(int num); //어드민 질문답변
 
+	public int UpdateAnswer(Map<String, String> dbParam);  //어드민 답변 !
+
 
 	
 	

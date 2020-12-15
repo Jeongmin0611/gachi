@@ -4288,7 +4288,22 @@ public class AdminController {
 		mav.setViewName("admin/adminAnswerView");
 		return mav;
 	}
-	
+	@RequestMapping(value="/adminAnswerOk",method=RequestMethod.POST)
+	public ModelAndView adminAnswerOk(@RequestParam String num, HttpSession ses, @RequestParam String answer) {
+		String admin = (String)ses.getAttribute("userid");
+		ModelAndView mav = new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("num", num);
+		dbParam.put("answer", answer);
+		dbParam.put("writer", admin);
+		
+		int result = dao.UpdateAnswer(dbParam);
+			mav.setViewName("redirect:adminAnswerView?num="+num);	
+		
+		return mav;
+	}
 	@RequestMapping("/adminGetClassList")
 	@ResponseBody
 	public List<ClassVO> adminGetClassList(HttpServletRequest req){

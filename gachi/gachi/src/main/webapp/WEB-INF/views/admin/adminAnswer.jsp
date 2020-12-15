@@ -115,7 +115,7 @@ $(function(){
 		<li class="wordCut"><a href="/gachi/adminAnswerView?num=${list.num}">${list.subject }</a></li>
 		<li>${list.username }</li>
 		<li>${list.writedate }</li>
-		<li><c:if test="${list.answer eq null }"></c:if><c:if test="${list.answer ne null }">${list.answer_writedate}</c:if></li>
+		<li>${list.answer_writedate }</li>
 		</c:forEach>
 	</ul>
 	<div id="paging">

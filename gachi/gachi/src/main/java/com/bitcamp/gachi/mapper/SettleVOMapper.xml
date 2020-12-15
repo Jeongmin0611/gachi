@@ -1115,7 +1115,6 @@
 		ROWNUM AS RNUM
 		FROM
 		(select num , goods.code , goods.goods_name, category,subject,goods_review.grade ,member.username,to_char(goods_review.writedate, 'yyyy-mm-dd') writedate 
-		answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer
 		from goods_review
 		join goods on goods.code = goods_review.code
 		join member on goods_review.userid = member.userid
@@ -1192,8 +1191,12 @@
 	</select>
 	<select id="selectAnswerView" resultType="com.bitcamp.gachi.admin.QnaVO">
 			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate ,    
-			answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer from qna            
+			answer, to_char(answer_writedate,'yyyy-mm-dd HH:MI')answer_writedate , writer from qna            
 			join member on member.userid= qna.userid
             where num = #{num}
 	</select>
+	<update id="UpdateAnswer" parameterType="map">
+			update qna set answer=#{answer}, writer=#{writer}, answer_writedate=sysdate
+				where num=${num}
+	</update>
 </mapper>
