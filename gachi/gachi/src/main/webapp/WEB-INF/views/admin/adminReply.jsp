@@ -123,7 +123,7 @@ $(function(){
 			<li>${list.category }</li>
 			<li>${list.code }</li>
 			<li class="wordCut">${list.goods_name }</li>
-			<li class="wordCut"><a href="/gachi/adminClassReply?num=${list.num}">${list.subject }</a></li>
+			<li class="wordCut"><a href="/gachi/adminReplyView?num=${list.num}">${list.subject }</a></li>
 			<li>${list.grade }</li>
 			<li>${list.username }</li>
 			<li>${list.writedate }</li>

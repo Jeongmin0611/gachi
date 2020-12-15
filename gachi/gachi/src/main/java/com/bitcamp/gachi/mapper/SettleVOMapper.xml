@@ -1114,7 +1114,9 @@
 		(SELECT A.*,
 		ROWNUM AS RNUM
 		FROM
-		(select num , goods.code , goods.goods_name, category,subject,goods_review.grade ,member.username,to_char(goods_review.writedate, 'yyyy-mm-dd') writedate from goods_review
+		(select num , goods.code , goods.goods_name, category,subject,goods_review.grade ,member.username,to_char(goods_review.writedate, 'yyyy-mm-dd') writedate 
+		answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer
+		from goods_review
 		join goods on goods.code = goods_review.code
 		join member on goods_review.userid = member.userid
        	where to_char(goods_review.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(goods_review.writedate, 'yyyy-mm-dd')&lt;=#{endDate}	
@@ -1183,4 +1185,15 @@
 		</choose>
 	</select>
 	
+	<select id="selectReplyView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate from goods_review
+            join member on member.userid= goods_review.userid
+            where num = #{num}
+	</select>
+	<select id="selectAnswerView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate ,    
+			answer, to_char(answer_writedate,'yyyy-mm-dd')answer_writedate , writer from qna            
+			join member on member.userid= qna.userid
+            where num = #{num}
+	</select>
 </mapper>
