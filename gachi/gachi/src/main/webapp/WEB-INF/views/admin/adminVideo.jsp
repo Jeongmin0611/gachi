@@ -7,9 +7,36 @@ $(function(){
 	$("#category").val("${category}").attr("selected", "selected");
 	$("#searchWord").val("${searchWord}");
 	
-	('#searchBtn').click(()=>{
-		var url = "/videoSearch";
+	$('#searchBtn').click(function(){
+		
+		if($("#searchWord").val()==""){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+		
+		var url = "/adminVideo";
 		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+				
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+	});
+	
+	function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/adminVideo";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val()+ "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
 		$.ajax({
 			url : url,
 			data : data,
@@ -23,7 +50,6 @@ $(function(){
 				console.log(result);
 			}
 		});
-	});
 });	
 </script>
 <div class="container ad_font">
@@ -90,15 +116,42 @@ $(function(){
 	<div class="ad_list_menu">
 		<button class="btn" onclick="location.href='/gachi/adminVideoWrite'">등록</button>
 	</div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${method eq 'get' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${i }">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+					</li>
+				</c:if>
+			</c:if>
 	</ul>
 </div>
 </div>

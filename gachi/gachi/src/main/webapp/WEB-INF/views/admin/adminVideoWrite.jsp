@@ -6,15 +6,12 @@
 		float:left;
 		text-align:center;
 	}
-	#ad_videoFile_list>li:last-child{
-		height:100%;
-	}
 	#ad_videoFile_list>li:last-child li{
 		float:left;
 		width:50%;
 		border-bottom:1px solid gray;
-		height:69px;
-		line-height:69px;
+		height:72px;
+		line-height:72px;
 		text-align:left;
 	}
 	#ad_video_addList li{
@@ -55,10 +52,33 @@
 		text-align:left;
 		width:70%;
 	}
+	#file_info{
+		overflow: auto;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
 		let cnt=0;
+		$("#file_info>li:lt(6)").css("borderBottom","1px solid gray");
+		var video_sample=videojs('video_sample');
+		 video_sample.on("loadedmetadata", function() {
+		let fileIndex=video_sample.currentSrc().lastIndexOf("/")+1;
+		let filename=video_sample.currentSrc().substring(fileIndex); 
+		var duration=video_sample.duration();
+		var floor=Math.floor(duration);
+		var hour = parseInt(duration/3600);
+		var min = parseInt((duration%3600)/60);
+		var sec = floor%60;
+		var durationStr=hour+":"+min+":" + sec;
+		$("#file_info li:nth-child(2)").text(filename);
+		$("#file_info li:nth-child(4)").text(durationStr);
+		$('#ad_video_addList>ul:last-child>li:last>input:nth-of-type(1)').val(duration);
+		//$('#ad_video_addList>ul:last-child>li:eq(7)>input:hidden:first-child').trigger('change');
+		$("#ad_video_addList>ul:last-child>li:eq(4)").text(durationStr);
+			$("#file_info li:nth-child(6)").text($("#videoSrc").attr("type"));
+		}); 
+		 
+		$("#video_sample").prop("hidden");
 		
 		 $("#add_mov").on("dragenter dragover", function(event){
 		        event.preventDefault();
@@ -105,22 +125,37 @@
 			}
 			var filename=result.filePath.slice(result.filePath.lastIndexOf("/")+1);
 			console.log(filename);
-			tagTxt='<div><li><select name="list['+cnt+'].unit_content"/>';
+			tagTxt='<ul class="videoList"><li><select name="unitContent"/>';
 			result.conList.forEach((content)=>{
 				tagTxt+='<option value="'+content+'">'+content+'</option>';
 			});
+			tagTxt+='</select><input type="hidden" name="sectionCode"/></li>';
+			tagTxt+='<li><input type="hidden" name="unitArray" value="1"/>';
+			tagTxt+='<select name="sectionIndex">';
+			for (var i = 1; i <=10; i++) {
+				tagTxt+='<option value="'+i+'">'+i+'</option>';
+			}
 			tagTxt+='</select></li>';
-			tagTxt+='<li><input type="text" name="list['+cnt+'].section_index"/></li>';
-			tagTxt+='<li><input type="text" name="list['+cnt+'].video_name"/></li>';
-			tagTxt+='<li class="wordCut"><input type="hidden" name="list['+cnt+'].video_filename"'; 
+			tagTxt+='<li><input type="text" name="videoName"/></li>';
+			tagTxt+='<li class="wordCut"><input type="hidden" name="videoFileName"'; 
 			tagTxt+='value="'+filename+'"/>'+filename+'</li>';
-			tagTxt+='<li><input type="hidden" name="list['+cnt+'].video_length" value="333"/>123</li>';
-			tagTxt+='<li><input type="hidden" name="list['+cnt+'].enroll_date" value="'+year+'-'+month+'-'+day+'"/>';
-			tagTxt+=year+'-'+month+'-'+day+'</li>'
-			tagTxt+='<li><b title="'+filename+'">x</b></li></div>'
-			cnt=cnt+1;
-			console.log(cnt);
-			$("#ad_video_addList").append(tagTxt);
+			tagTxt+='<li></li>';
+			tagTxt+='<li><input type="hidden" name="enrollDate" value="'+year+'-'+month+'-'+day+'"/>';
+			tagTxt+=year+'-'+month+'-'+day+'</li>';
+			tagTxt+='<li><b class="video_del">x</b><input type="hidden" name="videoLength"/>';
+			tagTxt+='<input type="hidden" name="videoCode"/></li></ul>';
+			$("#ad_video_addList>ul:last-child").after(tagTxt);
+			$("#video_sample").attr("src","/gachi/upload/class_video/test2.mp4");
+			if(!video_sample.paused){
+				video_sample.pause();
+			}
+		 	 console.log("filePath=> "+result.filePath);
+		 	  video_sample.src({
+		            src:result.filePath,
+		            type: 'video/mp4'
+				});
+		   	 video_sample.load();
+			$("#file_info li:last-child").text(result.sizeStr);
 		}
 			$(document).on('change','#category',(event)=>{
 				let value=$("#category option:selected").val();
@@ -221,6 +256,36 @@
 	</select>
 	<!--<button id="selectBtn" class="btn">선택</button>-->
 </div>
+<ul class="ad_box" id="ad_videoFile_list">
+	<li>
+		<ul>
+			<li style="height:35px; line-height:30px">해당영상</li>
+			<li>
+			<video  id="video_sample" class="video-js vjs-default-skin vjs-controls-enabled vjs-big-play-centered" controls preload="metadata"
+	    		width="450" height="250" data-setup="{}">
+	    		<!--  <source id="videoSrc" src="<%=request.getContextPath() %>/upload/class_video/${filename}" type="video/mp4" />-->		
+				<source id="videoSrc" src="<%=request.getContextPath() %>/upload/class_video/c2020112613_11638.mp4" type="video/mp4" />		
+			</video> 
+			</li>
+		</ul>
+	</li>
+	<li style="border-left:3px solid #437299;">
+		<ul id="file_info">
+			<li>파일명</li>
+			<li></li>
+			<li>영상길이</li>
+			<li></li>
+			<li>확장자</li>
+			<li></li>
+			<li>파일용량</li>
+			<li>
+				<c:if test="${filesize!=null}">
+					${filesize}
+				</c:if>
+			</li>
+		</ul>
+	</li>
+</ul>
 <h3>동영상목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
 	
@@ -234,13 +299,17 @@
 <form method="post" id="adminVideoWriteOk" action="/gachi/adminVideoWriteOk">
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_video_addList">
-	<li>목차명</li>
-	<li>순서</li>
-	<li>영상제목</li>	
-	<li>파일명</li>
-	<li>영상길이</li>
-	<li>등록일</li>
-	<li>취소</li>
+	<li>
+		<ul class="videoList">
+			<li>목차명</li>
+			<li>순서</li>
+			<li>영상제목</li>	
+			<li>파일명</li>
+			<li>영상길이</li>
+			<li>등록일</li>
+			<li>취소</li>
+		</ul>
+	</li>
 </ul>
 <ul>
 	<li class="content_center">
