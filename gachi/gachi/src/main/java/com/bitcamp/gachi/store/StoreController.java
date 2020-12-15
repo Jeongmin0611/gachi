@@ -57,15 +57,20 @@ public class StoreController {
 
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
+		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
+				msg="add";
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}
 			if(req.getParameter("good_del")!=null) {//좋아요 삭제
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}	
 			//좋아요 상품
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
@@ -89,15 +94,20 @@ public class StoreController {
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
+		String msg="";
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
-				String good = req.getParameter("good_add");
-				uDao.wishListAdd(userid, good);			
+				msg="add";
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}
 			if(req.getParameter("good_del")!=null) {//좋아요 삭제
-				String good = req.getParameter("good_del");
-				uDao.wishListDel(userid, good);			
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodStoreUpdate(goodCode, msg);		
 			}	
 			//좋아요 상품
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);

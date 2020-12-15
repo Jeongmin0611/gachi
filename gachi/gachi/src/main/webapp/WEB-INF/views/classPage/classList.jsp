@@ -255,7 +255,8 @@ $(function(){
 					</p>
 					<a href="/gachi/classView?code=${list.code }"><span>${list.class_name }</span><br />
 						<span>by &nbsp;</span><span class=""> ${list.nickname }</span><br />
-						<span style="float: right">가격 &nbsp; ${list.real_price }원</span> </a>
+						<span style="float: right">가격 &nbsp;
+						<fmt:formatNumber value="${list.real_price }" pattern="#,###"/> 원</span> </a>
 				</div>
 			</div>
 		</c:forEach>

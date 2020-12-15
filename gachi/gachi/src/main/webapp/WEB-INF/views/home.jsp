@@ -82,6 +82,8 @@
 				return false;
 			}
 			if (id != null) {
+				
+				
 				var url = "/home";
 				var good_choice_code;
 				var atr = $(this).attr('class');
@@ -114,7 +116,7 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${list.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" data-name="${list.code }"></i>
+								style="float: right; height: 15px;" data-name="${list.code }">${list.good }</i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq list.code }">
 									<script>
@@ -126,7 +128,8 @@
 						</p>
 						<a href="/gachi/classView?code=${list.code }"><span>${list.class_name }</span><br />
 							<span>by &nbsp;</span><span class=""> ${list.nickname }</span><br />
-							<span style="float: right">가격 &nbsp; ${list.real_price }원</span>
+							<span style="float: right">가격 &nbsp; 
+							<fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</span>
 						</a>
 					</div>
 				</div>
@@ -147,7 +150,7 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${nlist.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" data-name="${nlist.code }"></i>
+								style="float: right; height: 15px;" data-name="${nlist.code }">${nlist.good }</i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq nlist.code }">
 									<script>
@@ -159,7 +162,8 @@
 						</p>
 						<a href="/gachi/classView?code=${nlist.code }"><span>${nlist.class_name }</span><br />
 							<span>by &nbsp;</span><span class=""> ${nlist.nickname }</span><br />
-							<span style="float: right">가격 &nbsp; ${nlist.real_price }원</span>
+							<span style="float: right">가격 &nbsp; 
+							<fmt:formatNumber value="${nlist.real_price }" pattern="#,###"/>원</span>
 						</a>
 					</div>
 				</div>
@@ -180,7 +184,7 @@
 						<p>
 							<span class="badge badge-info" style="font-size: 0.9em">${nlist.category }</span>
 							<i class="far fa-heart fa-lg p-2"
-								style="float: right; height: 15px;" data-name="${nlist.code }"></i>
+								style="float: right; height: 15px;" data-name="${nlist.code }">${nlist.good }</i>
 							<c:forEach var="v" items="${cgoodList }">
 								<c:if test="${v.code eq nlist.code }">
 									<script>
@@ -192,7 +196,8 @@
 						</p>
 						<a href="/gachi/classView?code=${nlist.code }"><span>${nlist.class_name }</span><br />
 							<span>by &nbsp;</span><span class=""> ${nlist.nickname }</span><br />
-							<span style="float: right">가격 &nbsp; ${nlist.real_price }원</span>
+							<span style="float: right">가격 &nbsp; 
+							<fmt:formatNumber value="${nlist.real_price }" pattern="#,###"/>원</span>
 						</a>
 					</div>
 				</div>
