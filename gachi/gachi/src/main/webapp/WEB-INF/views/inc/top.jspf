@@ -1199,9 +1199,6 @@ $(document).ready(function() {
 		</form>
 		       <a href="/gachi" style="margin-left: 33%;"><img src="img/mainlogo.png" class="navbar-brand" style=" height: 50px;" alt="logo"/></a>
 		<ul class="nav navbar-nav pull-right  ml-auto ">
-        <li class="nav-item"><a class="nav-link" href="/gachi/mypage">마이페이지</a></li>
-        <li class="nav-item"><a class="nav-link" href="/gachi/creatorDashboard">크리에이터</a></li>
-        <li class="nav-item"><a class="nav-link" href="/gachi/adminDashboard">어드민</a></li>
           <c:if test="${logStatus==null&&logStatus!='Y'}">
          	 <li class="nav-item" id="loginFormBtn"><a class="nav-link">로그인</a></li>
          	 <li class="nav-item" id="joinFormBtn"><a class="nav-link">회원가입</a></li>
