@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.mapping.ParameterMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
-import com.bitcamp.gachi.admin.ClassDaoImp;
 import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.classPage.ClassPageDaoImp;
 import com.bitcamp.gachi.mypage.OrderListVO;
@@ -36,24 +33,22 @@ public class StoreController {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		String category=req.getParameter("category");
-		String selectval=req.getParameter("selectval");
 			String nowPageTxt= req.getParameter("nowPage");
-			System.out.println("0="+vo.getCategory());
 			if(nowPageTxt!=null) {//페이지 번호를 request한 경우
 				vo.setNowPage(Integer.parseInt(nowPageTxt));
 				}
 		if(category==null) {
 			int totalRecord = dao.storeListAllRecordCount(vo);
 				vo.setTotalRecord(totalRecord);
-				System.out.println("1="+vo.getTotalRecord());
+
 			}
 		if(category!=null) {
 			int totalRecord = dao.storeListCategoryRecordCount(vo);
 				vo.setTotalRecord(totalRecord);
-				System.out.println("2="+vo.getTotalRecord());
 			}
-		
+		System.out.println("2121="+vo.getWritedate());
 		List<AllVO> list=dao.storeAllRecord(vo);
+		System.out.println("1212="+list);
 
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
@@ -76,7 +71,6 @@ public class StoreController {
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);
 			mav.addObject("ggoodList", ggoodList);	
 		}
-		System.out.println("3="+vo.getTotalRecord());
 		mav.addObject("list", list);
 		mav.addObject("pvo", vo);
 		mav.setViewName("store/storeList");
