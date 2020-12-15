@@ -285,10 +285,9 @@ public class AllVO {
 		this.class_img2 = class_img2;
 		
 		//,이미지 분리
-		String img[]=class_img2.split(",");
-
-		
-	}
+		String img[]=class_img2.split(",");	
+	}	
+	
 	public String getSearchKey() {
 		return searchKey;
 	}

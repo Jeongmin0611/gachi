@@ -538,19 +538,44 @@ public class AdminController {
 //		return mav;
 //	}
 	
+
 	@RequestMapping("/adminClass")
 	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
 		String nowPageRequest=req.getParameter("nowPage");
+		ModelAndView mav =new ModelAndView();
+		TestVO newVo=new TestVO();
 		if(nowPageRequest!=null) {
 			vo.setNowPage(Integer.parseInt(nowPageRequest));
+			String searchWord=req.getParameter("searchWord");
+			if(searchWord!=null) {
+				String option=req.getParameter("option");
+				vo.setOption(option);
+				vo.setSearchWord(searchWord);
+				List<ClassVO> wordList=dao.getClassListSearch(vo);
+				mav.addObject("list",wordList);
+			}else {
+				String dateOption=req.getParameter("dateOption");
+				String date1=req.getParameter("date1");
+				String date2=req.getParameter("date2");
+				String category=req.getParameter("category");
+				String classState=req.getParameter("class_state");
+			
+				vo.setDateOption(dateOption);
+				vo.setDate1(date1);
+				vo.setDate2(date2);
+				vo.setCategory(category);
+				vo.setClass_state(classState);
+				System.out.println("aaa");
+				List<ClassVO> lookup=dao.getClassListLookUp(vo);
+				mav.addObject("list",lookup);
+			}
+		}else if(nowPageRequest==null) {
+			List<ClassVO> lookup=dao.getClassListLookUp(vo);
+			mav.addObject("list",lookup);
 		}
 		int totalRecord=dao.getAllRecordCount(vo);
 		vo.setTotalRecord(totalRecord);
-		List<ClassVO> list=dao.getClassListLookUp(vo); 
-		
-		ModelAndView mav =new ModelAndView();
-		mav.addObject("list",list);
 		mav.addObject("pvo",vo);
 		mav.setViewName("admin/adminClass");
 		return mav;
@@ -3372,16 +3397,150 @@ public class AdminController {
 	public String adminReturn() {
 		return "admin/adminReturn";
 	}
+	
 	@RequestMapping("/adminVideo")
-	public ModelAndView adminVideo() {
+	public ModelAndView adminVideo(@RequestParam(value="now", required=false) String now) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		List<ClassVideoVO> list=dao.getClassVideoList();
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("vlist",list);
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate  = todate.substring(0, 8) + "01";
+		String endDate  = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("searchWord", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+				
+		int cntRecords = dao.getVideoRecordCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+				
+		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
+		
+		
+		mav.addObject("vlist",vlist);
+		mav.addObject("nowPage", nowPage);
+		mav.addObject("cntData", vlist.size());
+		mav.addObject("lastPage", lastPage);
+		
+		mav.addObject("startDate ",startDate);
+		mav.addObject("endDate ", endDate);
+		mav.addObject("category",null);
+		mav.addObject("searchWord",null);
+
+
+		mav.addObject("data", vlist);
 		mav.setViewName("admin/adminVideo");
 		return mav;
-	}
+		}
 	
+	@RequestMapping(value="/videoSearch", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView videoSearch(HttpServletRequest req, HttpServletResponse res,
+			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="startDate", required=false) String startDate,
+			@RequestParam(value="endDate", required=false) String endDate,
+			@RequestParam(value="searchWord", required=false) String searchWord,
+			@RequestParam(value="now", required=false) String now){
+		
+		System.out.println("category=>"+category);
+		System.out.println("startDate=>"+startDate);
+		System.out.println("endDate=>"+endDate);
+		System.out.println("searchWord=>"+searchWord);
+		
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(searchWord.length() <= 0) searchWord = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("searchWord", searchWord);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+				
+		int cntRecords = dao.getVideoRecordCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		
+		List<ClassVideoVO> list =dao.getClassVideoList(dbParam);
+		
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("result",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("date1", startDate);
+			mav.addObject("date2", endDate);
+			mav.addObject("category", category);
+			mav.addObject("searchWord", searchWord);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminOrder");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				res.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			}
+			return null;
+		}
 	@RequestMapping(value="/videoUpload",method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> videoUpload(HttpSession session, MultipartHttpServletRequest mhsr,
@@ -3441,35 +3600,35 @@ public class AdminController {
 		String code=req.getParameter("code");
 		System.out.println("code=> "+vo.getCode());
 		ClassvideoSort cvs=new ClassvideoSort();
-		List<ClassVideoVO> list=vo.getList();
+		//List<ClassVideoVO> list=vo.getList();
 		ModelAndView mav=new ModelAndView();
-		if(list==null) {
-			mav.addObject("msg","등록할 영상이 없습니다. 영상등록화면으로 돌아갑니다.");
-			mav.setViewName("admin/adminResult");
-		}else {
-			Collections.sort(list,cvs);
-			for (int i = 0; i < list.size(); i++) {
-				ClassVideoVO vo1=list.get(i);
-				vo1.setCode(code);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
-				String dateStr = null;
-				try {
-					Date date = sdf.parse(vo1.getEnroll_date());
-					dateStr = sdf.format(date);
-				} catch (java.text.ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				vo1.setVideo_code("v"+dateStr);
-				String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
-				vo1.setSection_code(sectionCode);
-				int result=dao.videoInsert(vo1);
-				if(result<=0){
-					break;
-				}
-			}
-			mav.setViewName("redirect:adminVideo");
-		}
+//		if(list==null) {
+//			mav.addObject("msg","등록할 영상이 없습니다. 영상등록화면으로 돌아갑니다.");
+//			mav.setViewName("admin/adminResult");
+//		}else {
+//			Collections.sort(list,cvs);
+//			for (int i = 0; i < list.size(); i++) {
+//				ClassVideoVO vo1=list.get(i);
+//				vo1.setCode(code);
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+//				String dateStr = null;
+//				try {
+//					Date date = sdf.parse(vo1.getEnroll_date());
+//					dateStr = sdf.format(date);
+//				} catch (java.text.ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				vo1.setVideo_code("v"+dateStr);
+//				String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
+//				vo1.setSection_code(sectionCode);
+//				int result=dao.videoInsert(vo1);
+//				if(result<=0){
+//					break;
+//				}
+//			}
+//			mav.setViewName("redirect:adminVideo");
+//		}
 		return mav;	
 	}
 	 public String byteCalculation(Long bytes) {
@@ -3749,17 +3908,55 @@ public class AdminController {
 	@RequestMapping(value="/adminVideoUpdate",method=RequestMethod.POST)
 	public ModelAndView adminVideoUpdate(ClassVideoVO vo) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		List<ClassVideoVO> list=vo.getList();
-		ClassvideoSort cvs=new ClassvideoSort();
-		for (int i = 0; i < list.size(); i++) {
-			ClassVideoVO vo1=list.get(i);
-			int unit=dao.getUnit(vo1.getUnit_content());
-			vo1.setUnit(unit);
-		}
-		Collections.sort(list,cvs);
+		int[] unitArray=vo.getUnitArray();
+		int[] sectionIndex=vo.getSectionIndex();
+		String[] enrollDate=vo.getEnrollDate();
+		String[] unitContent=vo.getUnitContent();
+		String[] videoName=vo.getVideoName();
+		String[] videoFileName=vo.getVideoFileName();
+		String[] videoCode=vo.getVideoCode();
+		double[] videoLength=vo.getVideoLength();
+		List<String> sectionCode=new ArrayList<String>();
+		List<ClassVideoVO> list=new ArrayList<ClassVideoVO>();
 		
+		for(int i=0;i<unitContent.length;i++){
+			String section_code=dao.selectSectionCode(unitContent[i]);
+			sectionCode.add(section_code);
+		}
+		
+		for(int i=0;i<unitArray.length;i++){
+			ClassVideoVO vo2=new ClassVideoVO();
+			System.out.println("videocode=> "+videoCode[i]);
+			System.out.println("videoLength=> "+videoLength[i]);
+			if(videoCode[i]==null||videoCode[i].equals("")){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+				String dateStr = null;
+				try {
+					Date date = sdf.parse(enrollDate[i]);
+					dateStr = sdf.format(date);
+				} catch (java.text.ParseException e) {
+					e.printStackTrace();
+				}
+				String vc="v"+dateStr;
+				vo2.setVideo_code(vc);
+				vo2.setUnit(unitArray[i]);
+				vo2.setSection_index(sectionIndex[i]);
+				vo2.setVideo_name(videoName[i]);
+				vo2.setVideo_filename(videoFileName[i]);
+				vo2.setCode(vo.getCode());
+				vo2.setVideo_length(videoLength[i]);
+				vo2.setSection_code(sectionCode.get(i));
+				list.add(vo2);
+			}
+		}
+		ClassvideoSort cvs=new ClassvideoSort();
+		Collections.sort(list,cvs);
+		for (int i=0;i<list.size();i++) {
+			ClassVideoVO vo3=list.get(i);
+			dao.videoInsert(vo3);
+		}
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:adminVideoView");
+		mav.setViewName("redirect:adminVideo");
 		return mav;
 	}
 	
