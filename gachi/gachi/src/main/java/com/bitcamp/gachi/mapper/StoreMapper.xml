@@ -30,7 +30,7 @@
 			</when>
 		</choose>
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by writedate desc)
-		where <![CDATA[rownubm<=${lastPageRecordCount}]]> order by writedate asc
+		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by writedate asc
 		<choose>
 			<when test='category==null and selectval == null'>
 			)

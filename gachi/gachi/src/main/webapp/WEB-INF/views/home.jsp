@@ -139,7 +139,7 @@
 		<!-- 신규 -->
 		<h3 class="homeClassListTitle" style="margin-top: 50px;">신규 클래스</h3>
 		<p style="text-align: right">
-			<a href="/gachi/classPage">more</a>
+			<a href="/gachi/classList?selectval=Inew">more</a>
 		</p>
 		<div class="row">
 			<c:forEach var="nlist" items="${nlist }">
