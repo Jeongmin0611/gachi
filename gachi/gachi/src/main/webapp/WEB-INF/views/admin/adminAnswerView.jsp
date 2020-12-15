@@ -28,24 +28,27 @@
 	border-radius: 10px;
 	margin-top:70px;
 }
-#reply_Div{
+/* #reply_Div{
 	border: 3px solid #437299;
 	border-radius: 10px;
-}
+} */
+#answer{
+	width : 100%;
+	height : 200px;
+	}
 </style>
 <script>
-/* function classDel(){
-	if(confirm("해당 클래스를 삭제하시겠습니까?")){
-		location.href='/gachi/adminClassDel?code=${vo.code}';	
+
+
+function chgVal() {
+	var answer = $("#answer").val().trim();
+	$("#h_answer").val(answer);
+	console.log(answer);
+	if(answer == '' || answer.length <= 0) {
+		alert("답변을 입력해주세요.");
+		return false;
 	}
-} */
-var answer = $("#answer").text();
-$(function(){
-	$("#frm_submit").click(function(){
-	$("#answer").text();
-	console.log($("#answer").text());
-	});
-});
+}
 </script>
 <div class="container ad_font">
 	<div >
@@ -63,11 +66,13 @@ $(function(){
 		</div>
 		
 	</div>
-	답글달기
+	<h2>답글달기</h2> <span style="float:right;">${list.answer_writedate }</span>
  	<div id="reply_Div">
- 	<form id="replyFrm" method="post" action="">
-		<textarea rows="5" cols="100%" id="answer"></textarea>
-		<div style="text-align: right;float:right; margin-top:10px;">
+ 	<form id="adminAnswerOk" method="post" action="adminAnswerOk" onsubmit="chgVal();">
+ 		<input type="hidden" name="num" value="${list.num }" />
+ 		<input type="hidden" name="answer" id="h_answer" value="" />
+		<textarea id="answer">${list.answer }</textarea>	
+		<div style="float:right; margin-top:10px;">
 			<a href="/gachi/adminAnswer"><button type="button" class="btn">목록</button></a>
 			<button type="button" class="btn">삭제</button>
 			<button class="btn" id="frm_submit">등록</button>
