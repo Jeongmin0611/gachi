@@ -178,7 +178,6 @@ input[type=text] {
 		  	  	}
 		    });
 		}
-	    
 	$(function() {
 		CKEDITOR.replace('content', {
 			//allowedContent:true,
@@ -189,24 +188,31 @@ input[type=text] {
 		});
 		//세션의 아이디 가져오기
     	var id = '<%=(String) session.getAttribute("userid")%>';
-    	
 		//평점에 별넣기 https://www.wbotelhos.com/raty 참고
+		var point=5;
 		$(".classRating").raty({
 			score : 5,
 			path : "img/starImages",
 			half : true,
 			width : "100%",
-			space : false
+			space : false,
+			click: function(score, evt) {
+                point = score
+            }
 		});
-		$(".myclassStars").raty({
-			score : 5,
+		/*$("#myclassStars"+$('div[data-num=${r.grade}]')).raty({
+
+			
+			score : function(){
+				return $('div[data-score=${r.grade}]');
+			},
 			path : "img/starImages",
 			half : true,
 			width : "100%",
 			readOnly : true,
 			space : false
-		});
-
+		});*/
+		
 		//좋아요 클릭이벤트
 		$('i').on(
 				'click',
@@ -345,14 +351,14 @@ input[type=text] {
 	  			swal('내용을 입력해주세요');
 	  			return false;
 	  		}
-	  		
 	  		$.ajax({
 	  			type:"POST",
 	  			url:"/gachi/reviewFormOk",
 	  			data:{
 	  				code:'${vo.code}',
 	  				subject : $('#reviewSubject').val(),
-	  				content: $('#reviewContent').val()
+	  				content: $('#reviewContent').val(),
+	  				grade:point
 	  			},
 	  			success:function(){
 	  				swal({
@@ -439,6 +445,7 @@ input[type=text] {
 		location.href="/gachi/orderSheet?orderClassCode="+${vo.code};
 		  }
 	};
+	
 </script>
 <div class="container cfont">
 	<div class="row">
@@ -483,7 +490,7 @@ input[type=text] {
 				${vo.nickname }</p>
 			<br />
 			<p style="font-size: 1.2em; margin-bottom: 10px;">가격 &nbsp;
-				${vo.real_price }원</p>
+				<fmt:formatNumber value="${vo.real_price }" pattern="#,###"/>원</p>
 			<br />
 			<hr />
 			<span>적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
@@ -530,7 +537,15 @@ input[type=text] {
 				<c:otherwise>
 					<c:forEach var="r" items="${reviewList }">
 						<ul class="reviewMoreContent">
-							<li><div class="myclassStars" data-score="${r.grade }"></div></li>
+							<li>
+							<div id="myclassStars${r.num }" data-score="${r.grade }" data-num="${r.num }"  data-score-name="teacher[teacher_categories][0][value]"></div>
+							<script>$('#myclassStars${r.num }').raty({score : ${r.grade },
+							path : "img/starImages",
+							half : true,
+							width : "100%",
+							readOnly : true,
+							space : false});</script>
+							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
 							<li>${r.writedate }</li>
@@ -594,8 +609,6 @@ input[type=text] {
 					</div>
 				</c:otherwise>
 			</c:choose>
-
-
 		</div>
 	</div>
 </div>

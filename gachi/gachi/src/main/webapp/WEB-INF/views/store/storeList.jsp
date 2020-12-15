@@ -206,11 +206,11 @@
 				if (atr == 'far fa-heart fa-lg p-2') {
 					$(this).attr('class', 'fas fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi?good_add=" + good_choice_code;
+					location.href = "/gachi/sotreList?good_add=" + good_choice_code;
 				} else if (atr == 'fas fa-heart fa-lg p-2') {
 					$(this).attr('class', 'far fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi?good_del=" + good_choice_code;
+					location.href = "/gachi/sotreList?good_del=" + good_choice_code;
 				}
 			}
 		});
@@ -263,7 +263,8 @@
 						</c:forEach>
 					</p>
 					<a href="/gachi/storeView?code=${list.code}&category=${list.category}"><span>${list.goods_name }</span><br />
-						<span style="float: right">가격 &nbsp; ${list.real_price }원</span><br />
+						<span style="float: right">가격 &nbsp; 
+						<fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</span><br />
 						<span style="float: right">배송비 &nbsp;2,500원</span> </a>
 				</div>
 			</div>

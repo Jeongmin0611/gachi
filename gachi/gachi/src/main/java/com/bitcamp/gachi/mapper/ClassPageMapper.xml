@@ -5,7 +5,7 @@
 <mapper namespace="com.bitcamp.gachi.classPage.ClassPageDaoImp">
 	<select id="classPageAllRecord" parameterType="String"
 		resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, nickname, class_img
+		select code, category, class_name, real_price, nickname, class_img, class_img2, good
 		from class join member on class.userid=member.userid
 		<choose>
 			<when test="category==null and selectval==null"></when>
@@ -38,7 +38,7 @@
 	<select id="classView" parameterType="String"
 		resultType="com.bitcamp.gachi.admin.AllVO">
 		select code, category, class_name, real_price, stack,
-		nickname, class_img, class_img2
+		nickname, class_img, class_img2, good
 		from class join member on class.userid=member.userid
 		where code='${param1}'
 	</select>
@@ -73,14 +73,30 @@
 		select * from (select code, category, class_name, real_price,
 		nickname, class_img, good from class join member on
 		class.userid=member.userid
-		where category='${interest}' order by good desc ) where rownum<![CDATA[<=3]]>
+		where category='${interest1}'
+		<choose>
+			<when test="!interest2.equals('')">
+				or category='${interest2}'
+				 order by good desc ) where rownum<![CDATA[<=3]]>
+			</when>
+			<when test="!interest3.equals('')">
+				or category='${interest2}'
+				or category=='${interest3}'
+				 order by good desc ) where rownum<![CDATA[<=3]]>
+			</when>
+			<otherwise>			
+				 order by good desc ) where rownum<![CDATA[<=3]]>
+			</otherwise>
+		</choose>
+		
+		
 	</select>
 	<select id="reviewList"
 		resultType="com.bitcamp.gachi.admin.AllVO">
 		select num, code, nickname, subject, content,
-		to_char(writedate, 'YY.MM.DD') writedate, c.grade from class_review c
+		to_char(c.writedate, 'YY.MM.DD') writedate, c.grade from class_review c
 		join member m on c.userid=m.userid
-		where code='${param1}' order by writedate desc
+		where code='${param1}' order by num desc
 	</select>
 	<select id="qnaList" resultType="com.bitcamp.gachi.admin.QnaVO">
 		select subject, content,
@@ -90,7 +106,7 @@
 		where q.userid=a.userid
 		and writer=b.userid(+)
 		and code='${code}'
-		order by writedate desc
+		order by num desc
 	</select>
 	<select id="qnaListSearch" parameterType="com.bitcamp.gachi.admin.AllVO" resultType="com.bitcamp.gachi.admin.QnaVO">
 		select subject, content,
@@ -101,15 +117,15 @@
 		and writer=b.userid(+)
 		and code='${code}'
 		<choose>
-			<when test="searchWord!=null and searchWord.equals('작성자')">
+			<when test="!searchWord.equals('') and searchWord.equals('작성자')">
 				and a.nickname like'%${searchWord}%'
 				order by writedate desc
 			</when>
-			<when test="searchWord!=null and searchWord.equals('제목')">
+			<when test="!searchWord.equals('') and searchWord.equals('제목')">
 				and subject like'%${searchWord}%'
 				order by writedate desc
 			</when>
-			<when test="searchWord!=null and searchWord.equals('내용')">
+			<when test="!searchWord.equals('') and searchWord.equals('내용')">
 				and content like '%${searchWord}%'
 				order by writedate desc
 			</when>
@@ -123,7 +139,7 @@
 		insert into class_review (num, code, userid, subject,
 		content, writedate, grade, ip)
 		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
-		5, '${ip}')
+		'${grade}', '${ip}')
 	</insert>
 	<insert id="insertQna"
 		parameterType="com.bitcamp.gachi.admin.AllVO">
