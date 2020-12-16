@@ -179,7 +179,7 @@
 <div class="cfont">
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
-			<div style="font-size:0.9em"><a href="/gachi/myclassList">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
+			<div style="font-size:0.9em"><a href="/gachi/myclassView?vode=${vo.code }">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
 			<div style="font-size:0.9em">
 				프랑스 자수 클래스를 소개합니다!
 				<button class="btn btn-light" id="videoLstClose">></button>
@@ -189,7 +189,7 @@
 		<div id="myclassVideoView">
 			<video  id="my-video" class="video-js" controls preload="auto"
     				data-setup="{}">
-    		<source src="upload/class_video/test2.mp4" type="video/mp4" />	
+    		<source src="upload/class_video/${vVO.video_filename }" type="video/mp4" />	
     				
 			</video>
 		</div>

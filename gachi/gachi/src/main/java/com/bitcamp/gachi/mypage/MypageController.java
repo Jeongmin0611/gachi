@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.gachi.admin.AllVO;
+import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.board.EventBoardVO;
+import com.bitcamp.gachi.classPage.ClassPageDaoImp;
 import com.bitcamp.gachi.register.RegisterVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -424,19 +427,28 @@ public class MypageController {
 			map.put(section.get(i).getUnit_content(), dao.classVideoList(code, section.get(i).getSection_code()));
 		}
 		
+		ClassPageDaoImp cDao = sqlSession.getMapper(ClassPageDaoImp.class);
+		List<AllVO> reviewList = cDao.reviewList(code);
+		List<QnaVO> qnaList = dao.qnaList(code);
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
 		mav.addObject("map", map);
+		mav.addObject("reviewList", reviewList);
+		mav.addObject("qnaList", qnaList);
 		mav.setViewName("mypage/myclassView");
 		return mav;
 	}
+	/* 내학습표-클래스 영상 */
 	@RequestMapping("/myclassVideo")
 	public ModelAndView myclassVideo(String code, String video_code, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
-		
+		ClassVideoVO vVO = dao.myclassVideoView(code, video_code);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("vVO", vVO);
 		mav.setViewName("myclass/myclassVideo");
 		return mav;
 	}
