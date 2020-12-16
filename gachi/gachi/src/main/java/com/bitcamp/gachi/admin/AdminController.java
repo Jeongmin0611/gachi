@@ -540,8 +540,8 @@ public class AdminController {
 	
 
 
-	@RequestMapping("/adminClass")
-	public ModelAndView adminClass(@RequestParam(value="now", required=false) String now) {
+/*	@RequestMapping("/adminClass")
+	public ModelAndView adminClass(@RequestParam (value="now", required=false) String now) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
 		int nowPage = 1;
 		if(now != null && now.length() > 0){
@@ -604,6 +604,7 @@ public class AdminController {
 		mav.setViewName("admin/adminClass");
 		return mav;
 	}
+	*/
 	@RequestMapping(value="/adminClass",method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView adminClass(@RequestParam(value="now", required=false) String now,

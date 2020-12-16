@@ -8,7 +8,7 @@ public interface MileageDaoImp {
 	//마일리지 있는지 없는지 검사
 	public int countMileage(String userid);
 	//전체 레코드 선택
-	public List<MileageVO> mileageAllRecord(String userid);
+	public List<MileageVO>mileageAllRecord(String userid);
 	//현재 마일리지
 	public int mileageAllSum(String userid);
 	//총 적립 마일리지
