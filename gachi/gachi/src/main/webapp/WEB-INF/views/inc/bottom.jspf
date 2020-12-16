@@ -44,7 +44,7 @@
 <div id="bottom">
 	<ul>
 		<li class="mMeun"><a href="/gachi/serviceCenterBoard">고객센터</a></li>
-		<li class="sMeun"><a>운행시간</a><br /> <a> 평일09:00~18:00</a><br/>
+		<li class="sMeun"><a>운영시간</a><br /> <a> 평일09:00~18:00</a><br/>
 			<a>(점심시간12:00~13:30)</a><br /> <a>주말,공휴일 제외</a>
 		<li class="mMeun"><a href="noticeBoard">공지사항</a></li>
 		<li class="sMeun"><a href="deliveryBoard">배송정책</a><br />
