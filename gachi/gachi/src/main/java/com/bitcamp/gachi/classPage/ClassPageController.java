@@ -100,8 +100,10 @@ public class ClassPageController {
 		ModelAndView mav = new ModelAndView();
 		
 		String msg="";
+		int courseCheck=0;
+		int creatorCheck=0;
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
-			String userid=(String)ses.getAttribute("userid");
+			String userid=(String)ses.getAttribute("userid");			
 			if(req.getParameter("good_add")!=null) {//좋아요 추가
 				msg="add";
 				String goodCode = req.getParameter("good_add");
@@ -117,9 +119,22 @@ public class ClassPageController {
 
 			//좋아요 클래스
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);
-			mav.addObject("goodVo", goodVo);	
-		}
-		
+			mav.addObject("goodVo", goodVo);
+			
+			//수강확인, 결과값이 1인 경우 구매(수강한) 클래스
+			courseCheck = dao.courseCheck(code, userid);
+			
+			String userSort = (String)ses.getAttribute("userSort");
+			if(userSort.equals("creator")){//크리에이터인지 확인
+				//크리에이터가 개설한 클래스인지 확인
+				//결과값이 1인 경우 개설한 클래스
+				creatorCheck = dao.creatorCheck(code, userid);
+			}
+			
+		}//로그인 상태 if문 end
+		System.out.println("creator Check = "+creatorCheck);
+		mav.addObject("creatorCheck", creatorCheck);//크리에이터의 개설여부 확인
+		mav.addObject("courseCheck", courseCheck);//수강확인
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("qnaList", qnaList);
 		mav.addObject("vo", vo);
@@ -134,12 +149,10 @@ public class ClassPageController {
 		vo.setUserid((String) ses.getAttribute("userid"));
 		vo.setSubject(req.getParameter("subject"));
 		vo.setContent(req.getParameter("content"));
-		System.out.println("grade= "+req.getParameter("grade"));
 		vo.setGrade(req.getParameter("grade"));
 
 		String code = req.getParameter("code");
 		vo.setCode(code);
-		System.out.println("code= "+code);
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
 		int result = dao.insertReview(vo);
 //		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();

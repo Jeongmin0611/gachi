@@ -6,7 +6,7 @@
 	<select id="classPageAllRecord" parameterType="com.bitcamp.gachi.classPage.ClassPageVO" resultType="com.bitcamp.gachi.classPage.ClassPageVO">
 		select * from 
 		(select * from 
-		(select c.code,c.category,c.class_name,c.real_price,m.nickname,c.class_img,c.class_img2, to_char(signup, 'YYYY-MM-DD') signup, c.good
+		(select c.code,c.category,c.class_name,c.real_price,m.nickname, c.stack, c.class_img,c.class_img2, to_char(signup, 'YYYY-MM-DD') signup, c.good
 		from class c join member m on c.userid=m.userid 
 		<choose>
 			<when test='category==null and selectval == null'></when>			
@@ -43,7 +43,7 @@
 	</select>
 	<select id="classView" parameterType="String"
 		resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price, stack,
+		select code, category, class_name, real_price, stack, class_info,
 		nickname, class_img, class_img2, good
 		from class join member on class.userid=member.userid
 		where code='${param1}'
@@ -110,7 +110,7 @@
 		where code='${param1}' order by num desc
 	</select>
 	<select id="qnaList" resultType="com.bitcamp.gachi.admin.QnaVO">
-		select subject, content,
+		select num, subject, content,
 		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname
 		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate
 		from qna q, member a, member b
@@ -159,4 +159,10 @@
 		values ('${code}', a_sq.nextval,
 		'${subject}','${content}',sysdate, '${ip}', '${userid}')
 	</insert>
+	<select id="courseCheck" resultType="int">
+		select count(*) from course where code='${code}' and userid='${userid}'
+	</select>
+	<select id="creatorCheck" resultType="int">
+		select count(*) from creator c join class m on c.userid=m.userid where m.userid='${userid}' and code='${code}'
+	</select>
 </mapper>

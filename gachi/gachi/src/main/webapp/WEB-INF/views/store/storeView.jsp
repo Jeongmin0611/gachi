@@ -214,24 +214,46 @@ $(function() {
 		});
   //좋아요 클릭이벤트
 	$('i').on('click',function(){
-		var id = '<%=(String)session.getAttribute("userid")%>';
-		if(id==null ||id =='null'){
+		var id = '<%=(String) session.getAttribute("userid")%>';
+		if (id == null || id == 'null') {
 			swal('로그인 후 이용가능한 기능입니다.');
 			return false;
 		}
-		if(id!=null){
-			var good_choice_code;
-			var atr = $(this).attr('class');
-			if (atr=='far fa-heart fa-lg'){
-				$(this).attr('class','fas fa-heart fa-lg');
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/storeView?code="+good_choice_code+"&good_add="+good_choice_code;
-			}else if(atr=='fas fa-heart fa-lg'){
-				$(this).attr('class','far fa-heart fa-lg');				
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/storeView?code="+good_choice_code+"&good_del="+good_choice_code;
-			}				
-		}			
+		
+		var good_choice_code;
+		var atr = $(this).attr('class');
+		if (id != null) {
+			if (atr == 'far fa-heart fa-lg') {
+				$(this).attr('class', 'fas fa-heart fa-lg');
+				good_choice_code = $(this).attr('data-name');
+				$.ajax({
+					type:"POST",
+					url:"/gachi/good_add",
+					data:{
+						good_add:good_choice_code
+					},success:function(){
+						location.reload();
+					}, error:function(){
+						swal('실패'+error);
+					}
+				});//ajax			
+				
+			} else if (atr == 'fas fa-heart fa-lg') {
+				$(this).attr('class', 'far fa-heart fa-lg');
+				good_choice_code = $(this).attr('data-name');
+				$.ajax({
+					type:"POST",
+					url:"/gachi/good_del",
+					data:{
+						good_del:good_choice_code
+					},success:function(){
+						location.reload();
+					}, error:function(){
+						swal('실패'+error);
+					}
+				});//ajax
+			}//elif
+		}//id가 널이 아닐 때 if문
 	});
   
 	//장바구니 담기

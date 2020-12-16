@@ -26,6 +26,7 @@ public class ClassPageVO {
 	private String nickname;
 	private int good;
 	private String signup;
+	private int stack;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -201,5 +202,12 @@ public class ClassPageVO {
 
 	public void setSignup(String signup) {
 		this.signup = signup;
+	}
+	public int getStack() {
+		return stack;
+	}
+
+	public void setStack(int stack) {
+		this.stack = stack;
 	}
 }

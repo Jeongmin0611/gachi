@@ -42,6 +42,7 @@ public class AllVO {
 	private String class_img2;/* 클래스 서브 이미지*/
 	private String searchKey;/* 클래스 질문 답변 검색*/
 	private String searchWord;/* 클래스 질문 답변 검색*/
+	private String class_info;
 	
 	//클래스 리뷰
 	private int num;
@@ -299,6 +300,12 @@ public class AllVO {
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
+	}	
+	public String getClass_info() {
+		return class_info;
+	}
+	public void setClass_info(String class_info) {
+		this.class_info = class_info;
 	}
 	//클래스 리뷰
 	public int getNum() {

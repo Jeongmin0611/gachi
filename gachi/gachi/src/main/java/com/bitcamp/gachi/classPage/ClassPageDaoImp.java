@@ -1,6 +1,8 @@
 package com.bitcamp.gachi.classPage;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.QnaVO;
 
@@ -32,5 +34,9 @@ public interface ClassPageDaoImp {
 	//클래스 qnq 등록
 	public int insertQna(AllVO vo);
 	public int classPageCategoryRecordCount(ClassPageVO vo);
+	//클래스 수강여부 확인 (수강평 등록 버튼 클릭시 필요)
+	public int courseCheck(@Param("code") String code, @Param("userid") String userid);
+	//크리에이터가 개설한 클래스인지 확인
+	public int creatorCheck(@Param("code") String code, @Param("userid") String userid);
 	
 }
