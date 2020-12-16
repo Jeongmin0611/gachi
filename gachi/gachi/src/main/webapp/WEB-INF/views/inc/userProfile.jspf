@@ -137,7 +137,7 @@
 			<div id="profileBox">
 				<img src="/gachi/img/icon_user.png" id="profileIcon"/>
 			</div>
-			<h5 style="margin-top:5%"><b>${nickname }</b> 님</h5>
+			<h5 style="margin-top:5%"><b>${nickname }</b> 님!</h5>
 		</div>
 		<!-- xs 크기에서만 숨기기  -->
 		<div class="col-sm-3 d-none d-sm-block">
