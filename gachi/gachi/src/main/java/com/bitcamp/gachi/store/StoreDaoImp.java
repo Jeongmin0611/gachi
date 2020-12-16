@@ -17,5 +17,8 @@ public interface StoreDaoImp {
 	public List<AllVO> reviewList(String code);
 	//상품 질문답변 리스트
 	public List<QnaVO> qnaList(String code);
-	
+	//상품 review 등록
+	public int insertReview(AllVO vo);
+	//상품 review 수정
+	public int updateReview(AllVO vo);
 }

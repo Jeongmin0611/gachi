@@ -109,7 +109,17 @@
 				}
 			});
 		});  
-	    
+		
+		//배송조회
+		$(".mypageDelivery").click(function(){
+			$("#deliveryNum").val(($(this).prev().val()));
+			$("#deliState").text($(this).prev().prev().val());
+			if($(this).prev().val()==0){
+				$("#deliveryDiv").css("display","none");
+			}else{
+				$("#deliveryDiv").css("display","block");
+			};
+		});
 	    //더보기 페이징 -> userProfile.jspf
 	    moreContent();
 	});
@@ -166,7 +176,7 @@
 				<c:if test="${fn:contains(key,'c')}">
 					<c:forEach var="vo" items="${list.value }">
 						<div class="row moreContent">	
-							<div class="col-md-3"><img src="upload/classImg/${vo.class_img }"/></div>
+							<div class="col-md-3"><img src="/gachi/upload/classImg/${vo.class_img }"/></div>
 							<div class="col-md-6" style="padding:0 40px">
 									<div style="text-align:left">
 										<label class="badge badge-info">${vo.category }</label>
@@ -187,7 +197,7 @@
 				<c:if test="${fn:contains(key,'g')}">
 					<c:forEach var="vo" items="${list.value }">
 						<div class="row moreContent">	
-							<div class="col-md-3"><img src="/gachi/img/store/${vo.goods_img1 }"/></div>
+							<div class="col-md-3"><img src="/gachi/upload/storeImg/${vo.goods_img1 }"/></div>
 							<div class="col-md-6" style="padding:0 40px">
 										<div style="text-align:left">
 											<label class="badge badge-info">${vo.category }</label>
@@ -200,8 +210,8 @@
 							</div>
 							<!-- xs 크기에서만 숨기기  -->
 							<div class="col-md-3 col d-none d-sm-block">
-								<c:if test="${vo.finished eq '미확정' }">
-									<div><button type="button" class="btn btn-light mypageDelivery" data-toggle="modal" data-target="#myclassReviewModal">배송조회</button></div>
+								<c:if test="${vo.finished eq '미확정' }">	
+									<div><input type="hidden" value="${vo.state }"/><input type="hidden" value="${vo.delivery }"/><button type="button" class="btn btn-light mypageDelivery" data-toggle="modal" data-target="#myclassReviewModal">배송조회</button></div>
 									<div><button type="button" class="btn btn-light userOrderFix">구매확정</button>								 
 									     <input type="hidden" id="goods_order_code" value="${vo.goods_order_code }"/></div>
 								</c:if>	
@@ -245,23 +255,25 @@
       	<div style="width:150px;height:150px;margin:0 auto;margin-bottom:50px;padding-top:1%;border-radius:50%;background:#e3eef6">
 			<img src="/gachi/img/icon_deliveryReady.png" style="width:90%"/>
 		</div>
-		<h4>주문하신 상품이 <b>배송준비중</b> 상태입니다.</h4>
-		<hr class="userHr"/>
-        <div class="row">
-        	<div class="col-md-4">운송장 번호</div>
-        	<div class="col-md-8">10101010</div>
-        </div>
-        <hr/>
-        <div class="row">
-        	<div class="col-md-4">택배사</div>
-        	<div class="col-md-8">한진택배</div>
-        </div>
-        <hr/>
-        <div class="row">
-        	<div class="col-md-4">대표번호</div>
-        	<div class="col-md-8">1588-0011</div>
-        </div>
-      </div>
+		<h4>주문하신 상품이 <b id="deliState"></b> 상태입니다.</h4>
+		<div id="deliveryDiv">
+			<hr class="userHr"/>
+	        <div class="row">
+	        	<div class="col-md-4">운송장 번호</div>
+	        	<div class="col-md-8"><input type="text" id="deliveryNum" style="border:none" readonly/></div>
+	        </div>
+	        <hr/>
+	        <div class="row">
+	        	<div class="col-md-4">택배사</div>
+	        	<div class="col-md-8">한진택배</div>
+	        </div>
+	        <hr/>
+	        <div class="row">
+	        	<div class="col-md-4">대표번호</div>
+	        	<div class="col-md-8">1588-0011</div>
+	        </div>
+	      </div>
+	    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>

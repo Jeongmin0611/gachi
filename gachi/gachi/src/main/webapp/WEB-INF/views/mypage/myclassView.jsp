@@ -28,9 +28,9 @@
 	}
 	#myclassVideoLst>ul>li>label{
 		padding:0 20px;
-		color:gray;
+		color:#fff;
 		width:100%;
-		background-color:#fbdfd3;
+		background-color:#116487;
 	}
 	#myclassVideoLst ol>li{
 		line-height:20px;
@@ -306,7 +306,7 @@
 				<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
 				<div>${vo.nickname }</div>
 				<div><label>진도율 : 50%</label></div>
-				<div><label>기한 : 20.11.01 ~ 21.01.31</label></div>
+				<div><label>기한 : ${vo.startdate } ~ ${vo.enddate }</label></div>
 				<div class="progress" style="margin:20px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
 				<div><button type="button" class="btn btn-light btn-block" onclick="location.href='/gachi/myclassVideo'">수강하기</button></div>
 				<div style="margin:10px 0">
@@ -319,44 +319,16 @@
 			<label>클래스 목차</label>
 			<hr style="background:#000"/>
 			<ul>
-				<li>
-					<label>프랑스 자수 클래스 소개</label>
-					<ol>
-						<li><a href="/gachi/myclassVideo">프랑스 자수 클래스를 소개합니다!<label>02:00</label></a></li>
-						<li><a href="/gachi/myclassVideo">클래스 준비물과 주의사항에 대해 알아볼까요?<label>04:00</label></a></li>
-					</ol>
-				</li>
-				<li>
-					<label>01 프랑스 자수의 기초</label>
-					<ol>
-						<li><a href="#">실을 다루는 방법과 매듭짓는 방법<label>00:00</label></a></li>
-						<li><a href="#">작품에 사용될 5가지 스티치 연습하기<label>00:00</label></a></li>
-					</ol>
-				</li>
-				<li>
-					<label>02 베개 커버에 수놓기</label>
-					<ol>
-						<li><a href="#">곰돌이 수놓기1<label>00:00</label></a></li>
-						<li><a href="#">곰돌이 수놓기2<label>00:00</label></a></li>
-					</ol>
-				</li>
-				<li>
-					<label>03 자수 블랭킷 만들기</label>
-					<ol>
-						<li><a href="#">블랭킷 도안선 그리고 위치잡기<label>00:00</label></a></li>
-						<li><a href="#">달모양 수놓기<label>00:00</label></a></li>
-						<li><a href="#">가글 보틀 수놓기<label>00:00</label></a></li>
-						<li><a href="#">잠옷입은 곰돌이 수놓기<label>00:00</label></a></li>
-						<li><a href="#">탁상조명 수놓기<label>00:00</label></a></li>
-					</ol>
-				</li>
-				<li>
-					<label>04 완성</label>
-					<ol>
-						<li><a href="#">세탁방법 알아보기<label>00:00</label></a></li>
-						<li><a href="#">상쾌한 아침을 기다려요!<label>00:00</label></a></li>
-					</ol>
-				</li>
+				<c:forEach var="map" items="${map}">
+					<li>
+						<label>${map.key }</label>
+						<ol>
+							<c:forEach var="list" items="${map.value }">
+								<li><a href="/gachi/myclassVideo?code=${list.code }&video_code=${list.video_code }">${list.video_name }<label>${list.video_length }:00</label></a></li>
+							</c:forEach>
+						</ol>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 		

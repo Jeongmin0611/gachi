@@ -45,8 +45,12 @@
 			<div class="row">
 				<div class="col-md-4">주문내역</div>
 				<div class="col-md-8">
-					<div>${class_name }<c:if test="${cnt>1 }">외 ${cnt-1 }개</c:if></div>
-					<div>${goods_name }</div>
+					<c:if test="${class_name ne null }">
+						<div>${class_name }<c:if test="${cnt>1 }"> 외 ${cnt-1 }개</c:if></div>
+					</c:if>
+					<c:if test="${class_name eq null }">
+						<div>${goods_name }<c:if test="${cnt>1 }"> 외 ${cnt-1 }개</c:if></div>
+					</c:if>
 				</div>
 			</div>
 			<hr/>

@@ -36,6 +36,8 @@ public interface UserInfoDaoImp {
 	public List<OrderListVO> goodsCartView(String userid);
 	//장바구니 비었는지 아닌지 검사
 	public int countUserCart(String userid);
+	//장바구니 상품 개수
+	public int countGoodsCart(@Param("userid") String userid, @Param("code") String code);
 	//장바구니 중복검사
 	public int userCartCheck(OrderVO vo);
 	//장바구니 중복검사(수강중인 클래스인지)
@@ -56,6 +58,8 @@ public interface UserInfoDaoImp {
 	public int classOrderInsert(OrderListVO vo);
 	//결제 후 주문정보 넣기(상품주문)
 	public int goodsOrderInsert(OrderListVO vo);
+	//결제후 수강테이블 넣기
+	public int courseInsert(OrderListVO vo);
 	//결제 후 주문정보확인
 	public OrderVO orderView(String order_code);
 	//클래스 이름
@@ -68,6 +72,10 @@ public interface UserInfoDaoImp {
 	public List<OrderListVO> myclassList(String userid);
 	//내 클래스 보기
 	public OrderListVO myclassView(@Param("userid") String userid, @Param("code") String code);
+	//차시 목록
+	public List<ClassVideoVO> sectionList(String code);
+	//동영상 목록
+	public List<ClassVideoVO> classVideoList(@Param("code") String code, @Param("section_code") String section_code);
 	//좋아요(클래스)
 	public List<OrderListVO> classWishList(String userid);
 	//좋아요(상품)
@@ -89,11 +97,15 @@ public interface UserInfoDaoImp {
 	//스토어 질문답변 삭제
 	public int goodsReviewDelete(int num);
 	//이벤트댓글 삭제
-	public int eventReplyDelete(int num);
+	public int eventReplyDelete(int reply_num);
 	//클래스 수강평
 	public List<QnaVO> classReview(String userid);
+	//상품 질문답변
+	public List<QnaVO> goodsQnaView(String userid);
 	//상품 리뷰
 	public List<QnaVO> goodsReview(String userid);
 	//이벤트 댓글
 	public List<EventBoardVO> eventReplyView(String userid);
+	//리뷰쓸 상품목록
+	public List<OrderListVO> goodsList(String userid);
 }

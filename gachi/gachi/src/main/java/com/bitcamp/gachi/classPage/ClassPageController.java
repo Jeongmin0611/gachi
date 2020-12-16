@@ -114,6 +114,7 @@ public class ClassPageController {
 		vo.setUserid((String) ses.getAttribute("userid"));
 		vo.setSubject(req.getParameter("subject"));
 		vo.setContent(req.getParameter("content"));
+		vo.setGrade(req.getParameter("grade"));
 
 		String code = req.getParameter("code");
 		vo.setCode(code);
@@ -122,6 +123,20 @@ public class ClassPageController {
 		dao.insertReview(vo);
 //		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
 		return "redirect:classView";
+	}
+	//클래스 수강평 수정
+	@RequestMapping(value="/reviewUpdateFormOk", method=RequestMethod.POST)
+	@ResponseBody
+	public void reviewUpdateFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
+		String userid = (String)ses.getAttribute("userid");
+		vo.setUserid(userid);
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+		vo.setGrade(req.getParameter("grade"));
+		vo.setNum(Integer.parseInt(req.getParameter("num")));
+
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		dao.updateReview(vo);
 	}
 	//클래스 질문답변 작성
 	@RequestMapping(value="/qnaFormOk", method=RequestMethod.POST)
@@ -138,6 +153,19 @@ public class ClassPageController {
 		
 		
 		return "redirect:classView";
+	}
+	//클래스 질문답변 수정
+	@RequestMapping(value="/qnaUpdateFormOk", method=RequestMethod.POST)
+	@ResponseBody
+	public void qnaUpdateFormOk(AllVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {
+		String userid = (String)ses.getAttribute("userid");
+		vo.setUserid(userid);
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+		vo.setNum(Integer.parseInt(req.getParameter("num")));
+		
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		int result = dao.updateQna(vo);
 	}
 	
 	//클래스 View에서 검색
