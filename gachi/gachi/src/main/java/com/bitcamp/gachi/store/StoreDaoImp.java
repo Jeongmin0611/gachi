@@ -2,6 +2,8 @@ package com.bitcamp.gachi.store;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.QnaVO;
 
@@ -21,5 +23,7 @@ public interface StoreDaoImp {
 	public int insertReview(AllVO vo);
 	//상품 review 수정
 	public int updateReview(AllVO vo);
-
+	//상품 구매여부 확인
+	public int orderCheck(@Param("code") String code, @Param("userid") String userid);
+	
 }

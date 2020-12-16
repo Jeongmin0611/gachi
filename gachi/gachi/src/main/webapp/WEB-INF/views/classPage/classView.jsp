@@ -193,7 +193,6 @@ input[type=text] {
 		$(".classRating").raty({
 			score : 5,
 			path : "img/starImages",
-			half : true,
 			width : "100%",
 			space : false,
 			click: function(score, evt) {
@@ -217,7 +216,9 @@ input[type=text] {
 		$('i').on('click',function(){
 			var id = '<%=(String) session.getAttribute("userid")%>';
 			if (id == null || id == 'null') {
-				swal('로그인 후 이용가능한 기능입니다.');
+				swal({
+					title:'로그인 후 이용가능한 기능입니다.',
+					icon:"warning"});
 				return false;
 			}
 			
@@ -388,8 +389,9 @@ input[type=text] {
 	  				swal({
 	  				  title: "수강평이 등록 되었습니다.",
 	  				  icon: "success"
+  					}).then((result)=>{
+						location.reload();
 	  				});
-	  				location.reload();
 	  			},error:function(){
 	  				swal('수강평 등록이 실패하였습니다. ');
 	  			}
@@ -440,35 +442,14 @@ input[type=text] {
 		  				  title: "수강평이 등록 되었습니다.",
 		  				  icon: "success",
 		  				  buttons: true
-		  				});
-	  				location.reload();
+	  				}).then((result)=>{
+  						location.reload();
+	  				});
 	  			},error:function(){
 	  				swal('질문등록이 실패하였습니다.');
 	  			}
 	  		});
 			
-	  	});
-	  	//qna답변
-	  	$('.qnaAnswerFrm').click(function(){
-	  		$.ajax({
-	  			type:"POST",
-	  			url:"/gachi/qnaFormUpdate",
-	  			data:{	  				
-	  				code:'${vo.code}',
-	  				num:$(this).
-	  				subject:$('#qnaSubject').val(),
-	  				content:$('#qnaContent').val()},
-	  			success:function(){
-	  				swal({
-		  				  title: "수강평이 등록 되었습니다.",
-		  				  icon: "success",
-		  				  buttons: true
-		  				});
-	  				location.reload();
-	  			},error:function(){
-	  				swal('질문등록이 실패하였습니다.');
-	  			}
-	  		});
 	  	});
 	  	reviewMoreContent();
 	  	qnaMoreContent();
@@ -479,17 +460,7 @@ input[type=text] {
 			CKEDITOR.instances[instance].updateElement();
 		}
 	}
-	//구매 버튼 클릭시 마이페이지의 구매 화면으로 이동
-	function purchase() {
-		if(id == 'null'){
-  			swal({
-				title:'로그인 후 이용가능한 기능입니다.',
-				icon:"warning"});
-			return false;
-		  }else{
-		location.href="/gachi/orderSheet?orderClassCode="+${vo.code};
-		  }
-	};
+	
 	
 </script>
 <div class="container cfont">
@@ -500,20 +471,23 @@ input[type=text] {
 			<ol class="carousel-indicators">
 				<li data-target="#carouselExampleIndicators" data-slide-to="0"
 					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<c:if test="${ bxImg !=null and bxImg !=''}">
+				<c:set var="ii" value="0"/>		
+					<c:forEach var="img" items="${bxImg }">			
+							<c:set var="ii" value="${ii+1 }"/>						
+							<li data-target="#carouselExampleIndicators" data-slide-to="${ii}"></li>
+					</c:forEach>
+				</c:if>
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/gachi/upload/classImg/${vo.class_img}"
-						class="d-block w-100">
+					<img src="/gachi/upload/classImg/${vo.class_img}" class="d-block w-100">
 				</div>
-				<div class="carousel-item">
-					<img src="/gachi/upload/classImg/" class="d-block w-100">
-				</div>
-				<div class="carousel-item">
-					<img src="/gachi/upload/classImg/" class="d-block w-100">
-				</div>
+				<c:forEach var="img" items="${bxImg }">
+					<div class="carousel-item">
+						<img src="/gachi/upload/classImg/${img }" class="d-block w-100">
+					</div>
+				</c:forEach>	
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators"
 				role="button" data-slide="prev"> <span
@@ -550,12 +524,9 @@ input[type=text] {
 			<p>
 			<p />
 			<div>
-				<button id="userCart"
-					style="height: 60px; width: 50%; border: 1px solid lightblue; background-color: white; font-size: 18px; float: left;">장바구니
+				<button id="userCart" class="btn btn btn-outline-light"
+					style="height: 60px; width: 100%; border: 1px solid lightblue; background-color: lightblue; font-size: 18px; float: left;">장바구니
 					담기</button>
-				<button
-					style="height: 60px; width: 50%; border: 1px solid lightblue; background-color: lightblue; font-size: 18px"
-					onclick="purchase()">구매</button>
 			</div>
 		</div>
 
@@ -583,12 +554,14 @@ input[type=text] {
 						<ul class="reviewMoreContent">
 							<li>
 							<div id="myclassStars${r.num }" data-score="${r.grade }" data-num="${r.num }"  data-score-name="teacher[teacher_categories][0][value]"></div>
-							<script>$('#myclassStars${r.num }').raty({score : ${r.grade },
-							path : "img/starImages",
-							half : true,
-							width : "100%",
-							readOnly : true,
-							space : false});</script>
+							<script>
+							$('#myclassStars${r.num }').raty({
+								score : ${r.grade },
+								path : "img/starImages",
+								width : "100%",
+								readOnly : true,
+								space : false});
+							</script>
 							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
@@ -641,12 +614,7 @@ input[type=text] {
 								<hr />
 								<ul>
 									<li><label class="badge badge-light">A</label>
-										<c:if test="${empty qna.writer and creatorCheck==1}">	
-										<input type="hidden" value="${qna.num }" name="num"/>									
-											<button type="button" class="btn btn-outline-light btn-sm" style="background-color:"
-													data-toggle="modal" data-target="#exampleModal" class="qnaAnswerFrm">
-											답변작성</button>
-										</c:if>${qna.writer }
+										${qna.writer }
 									</li>
 									
 									<li>${qna.answer_writedate }</li>

@@ -23,6 +23,7 @@ import com.bitcamp.gachi.admin.PagingVO;
 import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.mypage.OrderListVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
+import com.bitcamp.gachi.store.StoreDaoImp;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -97,6 +98,14 @@ public class ClassPageController {
 		List<QnaVO> qnaList = dao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
+		//스토어 bxslide이미지 , 구분
+		String[] bxImg= {};
+		String class_img2 = vo.getClass_img2();
+		System.out.println("class_img2: "+class_img2);
+		if(class_img2!=null) {
+			bxImg = class_img2.replace(" ","").split(",");
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		
 		String msg="";
@@ -132,7 +141,8 @@ public class ClassPageController {
 			}
 			
 		}//로그인 상태 if문 end
-		System.out.println("creator Check = "+creatorCheck);
+
+		mav.addObject("bxImg", bxImg);
 		mav.addObject("creatorCheck", creatorCheck);//크리에이터의 개설여부 확인
 		mav.addObject("courseCheck", courseCheck);//수강확인
 		mav.addObject("reviewList", reviewList);
@@ -144,7 +154,7 @@ public class ClassPageController {
 	//클래스 수강평 작성
 	@RequestMapping(value="/reviewFormOk", method=RequestMethod.POST)
 	@ResponseBody
-	public int qnaFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
+	public int reviewFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
 		vo.setIp(req.getRemoteAddr());
 		vo.setUserid((String) ses.getAttribute("userid"));
 		vo.setSubject(req.getParameter("subject"));
@@ -152,9 +162,18 @@ public class ClassPageController {
 		vo.setGrade(req.getParameter("grade"));
 
 		String code = req.getParameter("code");
+		char first = code.charAt(0);
+		System.out.println("first= "+first);
 		vo.setCode(code);
-		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		int result = dao.insertReview(vo);
+		int result=0;
+		if(first =='c') {
+			ClassPageDaoImp cdao = sqlSession.getMapper(ClassPageDaoImp.class);
+			result = cdao.insertReview(vo);
+		}else if(first =='g') {
+			StoreDaoImp gdao = sqlSession.getMapper(StoreDaoImp.class);
+			result = gdao.insertReview(vo);
+		}
+		
 //		return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
 		return result;
 	}
@@ -174,7 +193,8 @@ public class ClassPageController {
 	}
 	//클래스 질문답변 작성
 	@RequestMapping(value="/qnaFormOk", method=RequestMethod.POST)
-	public String qnaFormOk(AllVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {
+	@ResponseBody
+	public int qnaFormOk(AllVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {
 		String userid = (String)ses.getAttribute("userid");
 		vo.setUserid(userid);
 		vo.setCode(req.getParameter("code"));
@@ -183,10 +203,10 @@ public class ClassPageController {
 		vo.setIp(req.getRemoteAddr());
 		
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		dao.insertQna(vo);
+		int result = dao.insertQna(vo);
 		
 		
-		return "redirect:classView";
+		return result;
 	}
 	//클래스 질문답변 수정
 	@RequestMapping(value="/qnaUpdateFormOk", method=RequestMethod.POST)
