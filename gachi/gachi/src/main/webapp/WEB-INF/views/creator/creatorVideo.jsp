@@ -174,7 +174,6 @@
 	</div>
 	<div style="margin:10px 0px; text-align:center">
 			<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
-			<button class="btn" onclick="location.href='/gachi/creatorVideoRequest'">영상변경사항요청</button>
 		</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
