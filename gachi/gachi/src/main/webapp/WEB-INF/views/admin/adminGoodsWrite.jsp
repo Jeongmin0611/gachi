@@ -19,6 +19,7 @@ $(function(){
 	}, null, null, 4 ); 
 	
 	CKEDITOR.config.height=500;
+	$("#ad_goods_writeForm").css("height","500px");
 	$("#ad_goods_writeForm>li").slice(2).css("width","100%");
 	$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
 	$("#ad_goods_write li").css("margin-top","10px");
@@ -87,11 +88,11 @@ $(function(){
 	$("#adminGoodsWrite").submit(()=>{
 		let grpl = $("input[name=imgList]").length;
 		if(grpl==0){
-			alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
+			alert("스토어 이미지를 최소 1개 이상 선택하여야 합니다.");
 			return false;
 		}
 		if($("#store_name").val()==null||$("#store_name").val()==""){
-			alert("클래스명을 입력하여 주세요.");
+			alert("상품명을 입력하여 주세요.");
 			return false;
 		}
 		if($("#stock").val()==null||$("#stock").val()==""){
@@ -172,7 +173,7 @@ function goodsDel(){
 	</li>
 	<li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
-			클래스 이미지 추가
+			스토어 이미지 추가
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">

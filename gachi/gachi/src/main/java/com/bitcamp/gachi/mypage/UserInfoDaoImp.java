@@ -82,10 +82,14 @@ public interface UserInfoDaoImp {
 	public List<OrderListVO> goodsWishList(String userid);
 	//좋아요(숫자)
 	public int countGood(String userid);
-	//좋아요 추가
+	//좋아요 테이블에 추가
 	public int wishListAdd(@Param("userid") String userid, @Param("code") String code);
-	//좋아요 삭제
+	//좋아요 테이블에 삭제
 	public int wishListDel(@Param("userid") String userid, @Param("code") String code);
+	//좋아요 클래스 테이블 업데이트
+	public int goodClassUpdate(@Param("code") String code,@Param("msg") String msg);
+	//좋아요 상품 테이블 업데이트
+	public int goodStoreUpdate(@Param("code") String code,@Param("msg") String msg);
 	//좋아요 (클래스, 상품 view화면)
 	public OrderListVO wishOneRecord(@Param("userid") String userid, @Param("code") String code);
 	//클래스 질문답변

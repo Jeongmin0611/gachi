@@ -7,15 +7,18 @@ $(function(){
 	
 	$("#startDate").val("${startDate}");
 	$("#endDate").val("${endDate}");
-	$("#state").val("${state}").attr("selected", "selected");
-	$("#paymentRadio").val("${paymentRadio}").attr("selected", "selected");
-	$("#stateRadio").val("${stateRadio}").attr("selected", "selected");
 	$("#search").val("${search}");
+	$("#state").val("${state}").attr("selected", "selected");
+	$("#payment_type").val("${payment_type}").attr("selected", "selected");
+	
+	
+	$('input:radio[name=payment_type]').is(':checked');
+	
 	$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
 	
 	$("#frm_submit").click(function(){
 		var url = "/adminOrder";
-		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&state=" + $("#state").val() + "&paymentRadio=" + $("#paymentRadio").val()+ "&stateRadio=" + $("#stateRadio").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&state=" + $("#state").val() + "&payment_type=" + $("#payment_type").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
 		$.ajax({
 			url : url,
 			data : data,
@@ -37,7 +40,7 @@ $(function(){
 	console.log(now);
 	return false;
 	var url = "/adminOrder";
-	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&state=" + $("#state").val() + "&paymentRadio=" + $("#paymentRadio").val()+ "&stateRadio=" + $("#stateRadio").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&state=" + $("#state").val() + "&payment_type=" + $("#payment_type").val()+"&search=" + $("#search").val().trim(); + "&now=" + now;
 	$.ajax({
 		url : url,
 		data : data,
@@ -57,7 +60,7 @@ $(function(){
 <div class="container ad_font">
 <h1>주문조회</h1>
 <div id="ad_order_Area">
-<form method="post" action="">
+<form method="post" action="adminOrder">
 	<ul id="ad_order_searchForm">
 		<li>주문검색</li>
 		<li>
@@ -68,7 +71,7 @@ $(function(){
 				<option value="배송중">배송중</option>
 				<option value="배송완료">배송완료</option>
 			</select>
-			<input type="text" name="search" id="search" size="40" placeholder ="주문번호,구매자명,구매자아이디 검색"/>		
+			<input type="text" name="search" id="search" size="40" value="" placeholder ="주문번호,구매자명,구매자아이디 검색"/>		
 		</li>
 		<li>주문기간</li>
 		<li>
@@ -76,15 +79,15 @@ $(function(){
 		</li>
 		<li>결제수단</li>
 		<li>
-			<input type="radio" name="paymentRadio" value="" checked/>전체
-			<input type="radio" name="paymentRadio" value="무통장입금"/>무통장입금
-			<input type="radio" name="paymentRadio" value="카드"/>카드
-			<input type="radio" name="paymentRadio" value="네이버페이"/>네이버페이
-			<input type="radio" name="paymentRadio" value="카카오페이"/>카카오페이
-			<input type="radio" name="paymentRadio" value="페이코"/>페이코
-			<input type="radio" name="paymentRadio" value="삼성페이"/>삼성페이
+			<input type="radio" name="payment_type" value="" checked/>전체
+			<input type="radio" name="payment_type" value="무통장입금"/>무통장입금
+			<input type="radio" name="payment_type" value="카드"/>카드
+			<input type="radio" name="payment_type" value="네이버페이"/>네이버페이
+			<input type="radio" name="payment_type" value="카카오페이"/>카카오페이
+			<input type="radio" name="payment_type" value="페이코"/>페이코
+			<input type="radio" name="payment_type" value="삼성페이"/>삼성페이
 		</li>
-		<li>주문상태</li>
+		<!-- <li>주문상태</li>
 		<li>
 			<input type="radio" name="stateRadio" value="" checked/>전체
 			<input type="radio" name="stateRadio" value="입금대기"/>입금대기
@@ -93,7 +96,7 @@ $(function(){
 			<input type="radio" name="stateRadio" value="배송중"/>배송중
 			<input type="radio" name="stateRadio" value="배송완료"/>배송완료
 			<input type="radio" name="stateRadio" value="구매확정"/>구매확정
-		</li>
+		</li> -->
 	</ul>
 	<div style="text-align:center">
 		<input type="submit" class="btn" id= "frm_submit" value="검색">
@@ -112,51 +115,62 @@ $(function(){
 	<li>주문상태</li>
 	<li>구매확정여부</li>
 	
-	<c:forEach items="${data }" var="data">
-	<li>${data.order_code }</li>
-	<li>${data.userid }</li>
-	<li>${data.username }</li>
-	<li>${data.price }</li>
-	<li>${data.payment_type }</li>
-	<li>${data.card_type }</li>
-	<li>${data.orderdate }</li>
-	<li>${data.state }</li>
-	<li><c:if test="${data.fix_state eq 'n' or data.fix_state eq 'N'}">미확정</c:if><c:if test="${data.fix_state eq 'y' or data.fix_state eq 'Y'}">구매확정</c:if></li>
+	<c:forEach items="${result }" var="result">
+	<li>${result.order_code }</li>
+	<li>${result.userid }</li>
+	<li>${result.username }</li>
+	<li>${result.price }</li>
+	<li>${result.payment_type }</li>
+	<li>${result.card_type }</li>
+	<li>${result.orderdate }</li>
+	<li>${result.state }</li>
+	<li><c:if test="${result.fix_state eq 'n' or result.fix_state eq 'N'}">미확정</c:if><c:if test="${result.fix_state eq 'y' or result.fix_state eq 'Y'}">구매확정</c:if></li>
 	</c:forEach>
 </ul>	
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
 			<c:if test="${method eq 'get' }">
-				<c:if test="${nowPage > 1}">
+				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminGoods?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminGoods?now=${i }">${i }</a>
+						<a class="btn" href="/gachi/adminMember?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminGoods?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
-				<c:if test="${nowPage > 1}">
+				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+						<a class="btn" href="/gachi/adminMember?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>

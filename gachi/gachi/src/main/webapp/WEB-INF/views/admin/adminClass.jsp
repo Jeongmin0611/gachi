@@ -8,27 +8,23 @@
 		border-radius:10px;
 		overflow: auto;
 	}
-	#search_area ul{
+	#search_area{
 		padding-left:0px;
 		overflow: auto;
-		
 	}
 	#search_area h3{
-		margin-top:50px;
+		margin-top:20px;
 		text-align:center;
 	}
 	#search_area li{
 		margin:5px 0px;
-	}
-	#search_area ul>li{
-		width:50%;
 		float:left;
+	}
+	#search_area>li:nth-child(2n+1){
+		width:20%;
 		text-align:center;
 	}
-	#search_area ul>li li:nth-child(2n+1){
-		width:20%;
-	}
-	#search_area ul>li li:nth-child(2n){
+	#search_area>li:nth-child(2n){
 		width:80%;
 		text-align:left;
 	}
@@ -43,36 +39,71 @@
 </style>
 <script>
 	$(function(){
-		$("#ad_class_search").submit(()=>{
-			if($('#searchWord').val()==null||$('#searchWord').val()==""){
-				alert("검색어를 입력해주세요.");
-				return false;
+		$("#startDate").val("${startDate}");
+		$("#endDate").val("${endDate}");
+		$("#class_state").val("${class_state}").attr("selected", "selected");
+		$("#dateOption").val("${dateOption}").attr("selected", "selected");
+		$("#category").val("${category}").attr("selected", "selected");
+		$("#search").val("${search}");
+		
+		$("#searchBtn").click(function(){
+			var url = "/adminClass";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+			$.ajax({
+				url : url,
+				data : data,
+				type : "POST",
+				dataType : "json",
+				success: function(data){
+					var result = data.result;
+					console.log(result);
+				},error:function(){
+					var result = data.result;
+					console.log(result);
+				}
+			});
+			
+		});
+		
+	});
+		function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/adminClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
 			}
-			return true;
 		});
 	});
 </script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
-<div id="search_area">
-	<ul>
-		<li>
-			<form method="post" id="ad_class_lookup" action="/gachi/adminClass">
-			<h3>조회옵션</h3>
-			<ul>
+	<form method="post" action="adminClass">
+	<h3>검색옵션</h3>
+			<ul id="search_area">
 				<li>날짜옵션</li>
 				<li>	
 					<select id="dateOption" name="dateOption">
-						<option>전체</option>
+						<option value="">전체</option>
 						<option value="allow">등록일</option>
 						<option value="signup">등록신청일</option>
 					</select>	
-					<input type="date" name="date1">&nbsp;~&nbsp;<input type="date" name="date2">
+					<input type="date" id="startDate" name="startDate">&nbsp;~&nbsp;<input type="date" name="endDate">
 				</li>
 				<li>카테고리</li>
 				<li>
 					<select id="category" name="category">	
-						<option>전체</option>
+						<option value="">전체</option>
 						<option value="공예/창작">공예/창작</option>
 						<option value="요리">요리</option>
 						<option value="미술">미술</option>
@@ -84,44 +115,20 @@
 				</li>
 				<li>클래스상태</li>
 				<li>
-					<select name="class_state">
-						<option>전체</option>
+					<select id="class_state" name="class_state">
+						<option value="">전체</option>
 						<option value="등록대기">등록대기</option>
 						<option value="판매중">판매중</option>
 						<option value="종료">종료</option>
 					</select>
 				</li>
-				<li style="width:100%;text-align:center">
-					<input type="submit" class="btn" value="조회"/>
-				</li>	
-			</ul>
-			</form>
-	</li>
-		<li>
-		<form method="post" id="ad_class_search" action="/gachi/adminClass2">
-			<h3>검색옵션</h3>
-			<ul style="margin-top:10px;height:200px;">
-				<li>검색옵션</li>
-				<li>
-					<select id="option" name="option">
-						<option>전체</option>
-						<option value="code">클래스코드</option>
-						<option value="category">카테고리</option>
-						<option value="class_name">클래스명</option>
-						<option value="nickname">크리에이터닉네임</option>
-						<option value="class_state">클래스상태</option>
-					</select>
-				</li>
 				<li>검색</li>
-				<li>
-					<input type="text" id="searchWord" name="searchWord"/>
-					<input type="submit" class="btn" value="검색"/>
-				</li>
-			</ul>
-		</form>
-		</li>	
-	</ul>	
-</div>
+				<li><input type="text" id="search" name="search"/></li>
+				<li style="width:100%;text-align:center">
+					<input type="submit" id="searchBtn" class="btn" value="조회"/>
+				</li>	
+			</ul>	
+</form>
 	<ul id="ad_class_lst">
 		<li>클래스코드</li>
 		<li>카테고리</li>
@@ -132,8 +139,7 @@
 		<li>등록일</li>
 		<li>상태</li>
 		
-		
-		<c:forEach var="vo" items="${list}">
+		<c:forEach var="vo" items="${result}">
 		<li>${vo.code }</li>
 		<li>${vo.category }</li>
 		<li class="wordCut"><a href="/gachi/adminClassView?code=${vo.code}">${vo.class_name}</a></li>
@@ -142,38 +148,45 @@
 		<li>${vo.signup }</li>
 		<li>${vo.allow }</li>
 		<li>${vo.class_state }</li>
-		</c:forEach>
+		</c:forEach>	
 	</ul>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<c:if test="${pvo.nowPage>1}">
-				<li class="btn">
-					<a class="btn" href="/gachi/adminClass?nowPage=${pvo.nowPage-1}">Prev</a>
-				</li>
-			</c:if>
-			<c:forEach var="p" begin="${pvo.startPageNum}" end="${pvo.startPageNum + pvo.onePageRecord-1 }">
-				<c:if test="${p<=pvo.totalPage}">
-					<li <c:if test="${p==pvo.nowPage}"> style="color:#437299"</c:if>>
-						<a href="/gachi/adminClass?nowPage=${p}
-						<c:choose>
-							<c:when test='searchWord==null||searchWord.equals("")'>
-								&dateOption=${dateOption}&date1=${date1}&date2=${date2}&category=${category}
-								&class_state=${class_state}
-							</c:when>
-							<c:when test='searchWord!=null&&!searchWord.equals("")'>
-								&option=${option}&searchWord=${searchWord}
-							</c:when>
-						</c:choose>
-						" class="paging_num">${p}</a>
+			<c:if test="${method eq 'get' }">
+				<c:if test="${nowPage > 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-			</c:forEach>
-		
-			<c:if test="${pvo.nowPage<pvo.totalPage}">
-				<li class="btn">
-					<a class="btn" href="/gachi/adminClass?nowPage=${pvo.nowPage+1}">next</a>
-				</li>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li>
+						<a class="btn" href="/gachi/adminClass?now=${i }">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
 			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${nowPage > 1}">
+					<li>
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<li>
+						<a href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${nowPage < lastPage}">
+					<li>
+						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+					</li>
+				</c:if>
+			</c:if>	
 	</ul>
 </div>
+	
 </div>

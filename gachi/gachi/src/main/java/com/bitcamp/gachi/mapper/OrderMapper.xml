@@ -12,7 +12,6 @@
 </select> -->
 
 <select id="selectAllOrder" parameterType="map" resultType="com.bitcamp.gachi.admin.OrderVO">
-
 		SELECT * FROM
 		(SELECT A.*,
 		ROWNUM AS RNUM
@@ -21,29 +20,27 @@
        	state, fix_state from orderlist join member on orderlist.userid= member.userid 
        	where to_char(orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderdate, 'yyyy-mm-dd')&lt;=#{endDate}	
 		<choose>
-			<when test='category==null and paymentRadio==null and search==null'></when>
-			<when test='category!=null and paymentRadio==null and search==null'>
-				where category='${category}'
+			<when test='state==null and payment_type==null and search==null'></when>
+			<when test='state!=null and payment_type==null and search==null'>
+				and state='${state}'
 			</when>
-			<when test='category==null and sale_State!=null and search==null'>
-				where sale_State='${sale_State}'
+			<when test='state==null and payment_type!=null and search==null'>
+				and payment_type='${payment_type}'
 			</when>
-			<when test='category==null and sale_State==null and search!=null'>
-				where (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
-			</when> 
-			
-			<when test='category==null and sale_State!=null and search!=null'>
-				where sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )
+			<when test='state==null and payment_type==null and search!=null'>
+				and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')		
+			</when> 						
+			<when test='state!=null and payment_type!=null and search==null'>
+					and state='${state}' and payment_type='${payment_type}'
 			</when>
-			<when test='category!=null and sale_State!=null and search==null'>
-				where category='${category}' and sale_State='${sale_State}'
+			<when test='state==null and payment_type!=null and search!=null'>
+				 and payment_type='${payment_type}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')
 			</when>
-			<when test='category!=null and sale_State==null and search!=null'>
-				where category='${category}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%' )		
-			</when>
-			
-			<when test='category!=null and sale_State!=null and search!=null'>
-				where category='${category}' and sale_State='${sale_State}' and (goods_name like '%${search}%' or category like '%${search}%' or code like '%${search}%')		
+			<when test='state!=null and payment_type==null and search!=null'>
+				 and state='${state}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				and state='${state}' and payment_type='${payment_type}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')		
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -56,33 +53,31 @@
 	</select>
 
 <select id="selectCntAllOrder" parameterType="map" resultType="_int">
-		select count(*) as cnt from goods 
-		join goods_order on goods_order.code = goods.code
-		join orderlist on goods_order.order_code = orderlist.order_code
+		select count(*) as cnt from orderlist
 		join member on orderlist.userid = member.userid
+       	where to_char(orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderdate, 'yyyy-mm-dd')&lt;=#{endDate}	
 		<choose>
-			<when test='category==null and sale_State==null and search==null '></when>
-			<when test='category!=null and sale_State==null and search==null'>
-				where goods.category='${category}'
+			<when test='state==null and payment_type==null and search==null'></when>
+			<when test='state!=null and payment_type==null and search==null'>
+				and state='${state}'
 			</when>
-			<when test='category==null and sale_State!=null and search==null'>
-				where sale_State='${sale_State}'
+			<when test='state==null and payment_type!=null and search==null'>
+				and payment_type='${payment_type}'
 			</when>
-			<when test='category==null and sale_State==null and search!=null'>
-				where (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			<when test='state==null and payment_type==null and search!=null'>
+				and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')		
+			</when> 						
+			<when test='state!=null and payment_type!=null and search==null'>
+					and state='${state}' and payment_type='${payment_type}'
 			</when>
-			<when test='category==null and sale_State!=null and search!=null'>
-				where sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )
+			<when test='state==null and payment_type!=null and search!=null'>
+				 and payment_type='${payment_type}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')
 			</when>
-			<when test='category!=null and sale_State!=null and search==null'>
-				where goods.category='${category}' and sale_State='${sale_State}'
-			</when>
-			<when test='category!=null and sale_State==null and search!=null'>
-				where goods.category='${category}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%' )		
-			</when>
-			
-			<when test='category!=null and sale_State!=null and search!=null'>
-				where goods.category='${category}' and sale_State='${sale_State}' and (goods.goods_name like '%${search}%' or goods.category like '%${search}%' or goods.code like '%${search}%')		
+			<when test='state!=null and payment_type==null and search!=null'>
+				 and state='${state}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				and state='${state}' and payment_type='${payment_type}' and (order_code like '%${search}%' or orderlist.userid like '%${search}%' or member.username like '%${search}%')		
 			</when>
 			<otherwise></otherwise>
 		</choose>

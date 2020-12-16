@@ -9,7 +9,7 @@
 <style>
 .ad_StatClass_Piechart {
 	float: left;
-	width: 33%;
+	width: 50%;
 	margin: 50px 0px;
 	font-size: 1.5em;
 }
@@ -19,22 +19,57 @@ canvas {
 	margin-bottom: 20px;
 }
 </style>
+<script>
+
+var labelData = "${labelData}";
+var dashData = "${dashData}";
+var genderLabel ="${genderLabel}";
+var genderData = "${genderData}";
+var ageLabel ="${ageLabel}";
+var ageData="${ageData}";
+var startDate = "${startDate}";
+var endDate = "${endDate}";
+
+
+$(function(){
+	
+	$("#startDate").val("${startDate}");
+	$("#endDate").val("${endDate}");
+	$("#genderPieLbl").val("${genderPieLbl}");
+	$("#genderPieData").val("${genderPieData}");
+	$("#agePieLbl").val("${agePieLbl}");
+	$("#agePieData").val("${agePieData}");
+
+	$("#frm").click(function(){
+		var url = "/creatorStatClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val();
+		$.ajax({
+			url : url,
+			data : data,
+			success: function(data){
+
+			},error:function(){
+				console.log("ajax에러발생");
+			}
+		});
+	});
+});
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+</script>
 
 <div class="container cr_StatClass_center text-center ad_font">
 	<h1 style="text-align:center;"> 클래스시청 회원 통계 </h1>
 	<br/>
-
-		<p><input type="radio" name="searchKey" value="전체"/ checked>전체
-			<input type="radio" name="searchKey" value="성별"/>성별
-			<input type="radio" name="searchKey" value="연령별"/>연령별
-			<input type="radio" name="searchKey" value="평점"/>평점
-
-			<button type="button" class="btn btn-outline-dark btn-sm">◀</button>
-			<input type="date" value="2020-11-11"/>
-			-
-			<input type="date" value="2020-11-11"/>
-			<button type="button" class="btn btn-outline-dark btn-sm">▶</button>
-			<button type="button" class="btn btn-outline-dark btn-sm">이번달</button></p>
+		<form action="adminStatStore" method="post" id="frm">
+		<div class="cr_Dashboard_searchForm">
+			
+			<input type="date" name="startDate" id="startDate" value=""/> ~ <input type="date" name="endDate" id="endDate" value=""/>
+			<input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
+		</div>
+		</form>
 		<div>
 			<canvas id="cr_StatClass_chart" style="margin-top:50px"></canvas>
 			<script type="text/javascript" src="resources/Chart.js"></script>
@@ -43,10 +78,10 @@ canvas {
 			var cr_StatClass_chart = new Chart(cr_StatClass_context, {
 			    type: 'line',
 			    data: {
-			        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			        labels: ${labelData},
 			        datasets: [{
-			            label: '시청 회원수',
-			            data: [100, 50, 150, 100, 60, 60, 70, 30, 90, 200, 36, 88],
+			            label: '구매 회원수',
+			            data: ${dashData},
 			            backgroundColor: [
 			                'rgba(255, 99, 132, 0.2)',
 			                'rgba(54, 162, 235, 0.2)',
@@ -88,11 +123,11 @@ canvas {
 			var cr_StatClass_gender_chart = new Chart(cr_StatClass_gender_context, {
 			    type: 'pie',
 			    data: {
-				labels : ["Man" , "Woman"],
+				labels : ${genderLabel},
 				datasets : [{
 				backgroundColor : ["#2ecc71","#3498dd"],
 				hoverBackgroundColor : ["#a6a6a6","#d1b2ff"],
-				data : [10,9]
+				data : ${genderData}
 					}]
 				},
 				options : {
@@ -101,7 +136,7 @@ canvas {
 				});
 		
 		</script>
-		성별
+		구매고객 성별
 	</div>	
 	<div class="ad_StatClass_Piechart cfont" >
 		<canvas id="cr_StatClass_age_chart" data-aos="fade-up"
@@ -111,11 +146,11 @@ canvas {
 			var cr_StatClass_age_chart = new Chart(cr_StatClass_age_context, {
 			    type: 'pie',
 			    data: {
-				labels : ["유아" ,"10대" , "20대", "30대", "40대", "50대 이상"],
+				labels : ${ageLabel},
 				datasets : [{
 				backgroundColor : ["#2ecc71","#3498dd","pink","yellow","green","orange"],
 				hoverBackgroundColor : ["#a6a6a6","#d1b2ff","pink","yellow","green","orange"],
-				data : [10,9,7,3,1,2]
+				data : ${ageData}
 					}]
 				},
 				options : {
@@ -124,9 +159,9 @@ canvas {
 				});
 		
 		</script>
-		연령별
+		구매고객 연령별
 	</div>	
-	<div class="ad_StatClass_Piechart cfont" >	
+	<%-- <div class="ad_StatClass_Piechart cfont" >	
 		<canvas id="cr_StatClass_star_chart" data-aos="fade-up"
 	     data-aos-anchor-placement="top-center"></canvas>
 			<script type="text/javascript">
@@ -147,6 +182,6 @@ canvas {
 					});	
 			</script>
 			평점
-		</div>		
+		</div>	 --%>	
 </div>	
 	

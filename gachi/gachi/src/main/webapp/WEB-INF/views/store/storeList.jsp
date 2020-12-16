@@ -105,7 +105,7 @@
 				case '운동':
 					$('#aExercise').attr('style', 'font-weight:bold');
 					break;
-				case '공예%2F창작':
+				case '공예/창작':
 					$('#aCrafts').attr('style', 'font-weight:bold');
 					break;
 				case '미술':
@@ -114,7 +114,7 @@
 				case '라이프스타일':
 					$('#aLifeStyle').attr('style', 'font-weight:bold');
 					break;
-				case '사진%2F영상':
+				case '사진/영상':
 					$('#aPhoto').attr('style', 'font-weight:bold');
 					break;
 				default:
@@ -199,20 +199,40 @@
 				swal('로그인 후 이용가능한 기능입니다.');
 				return false;
 			}
+			var good_choice_code;
+			var atr = $(this).attr('class');
 			if (id != null) {
-				var url = "/home";
-				var good_choice_code;
-				var atr = $(this).attr('class');
 				if (atr == 'far fa-heart fa-lg p-2') {
 					$(this).attr('class', 'fas fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi?good_add=" + good_choice_code;
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_add",
+						data:{
+							good_add:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
+						}
+					});//ajax			
+					
 				} else if (atr == 'fas fa-heart fa-lg p-2') {
 					$(this).attr('class', 'far fa-heart fa-lg p-2');
 					good_choice_code = $(this).attr('data-name');
-					location.href = "/gachi?good_del=" + good_choice_code;
-				}
-			}
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_del",
+						data:{
+							good_del:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
+						}
+					});//ajax
+				}//elif
+			}//id가 널이 아닐 때 if문
 		});
 	});
 </script>
@@ -220,21 +240,14 @@
 <div class="container cfont">
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-		<span> <a href="/gachi/storeList" id="aAll">전체</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("공예/창작", "UTF-8")%>"
-			title="공예/창작" id="aCrafts">공예/창작</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("요리", "UTF-8")%>"
-			title="요리" id="aFood">요리</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("미술", "UTF-8")%>"
-			title="미술" id="aArt">미술</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("음악", "UTF-8")%>"
-			title="음악" id="aMusic">음악</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("라이프스타일", "UTF-8")%>"
-			title="라이프스타일" id="aLifeStyle">라이프스타일</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("운동", "UTF-8")%>"
-			title="운동" id="aExercise">운동</a> &nbsp; <a
-			href="/gachi/storeList?category=<%=URLEncoder.encode("사진/영상", "UTF-8")%>"
-			title="사진/영상" id="aPhoto">사진/영상</a> &nbsp;
+		<span> <a href="/gachi/storeList" id="aAll">전체</a> &nbsp; 
+			<a href="/gachi/storeList?category=공예/창작" id="aCrafts">공예/창작</a> &nbsp; 
+			<a href="/gachi/storeList?category=요리" id="aFood">요리</a> &nbsp; 
+			<a href="/gachi/storeList?category=미술" id="aArt">미술</a>&nbsp; 
+			<a href="/gachi/storeList?category=음악" id="aMusic">음악</a> &nbsp; 
+			<a href="/gachi/storeList?category=라이프스타일" id="aLifeStyle">라이프스타일</a> &nbsp; 
+			<a href="/gachi/storeList?category=운동" id="aExercise">운동</a> &nbsp; 
+			<a href="/gachi/storeList?category=사진/영상" id="aPhoto">사진/영상</a> &nbsp;
 		</span> 
 		<select id="storeListSelect" name="storeListSelect">
 			<option value="Iall" id="Iall">전체</option>
@@ -247,12 +260,13 @@
 	<div class="row">
 		<c:forEach var="list" items="${list }">
 			<div class="col-sm-4">
-				<a href="/gachi/storeView?code=${list.code}&category=${list.category}"><img
-					src="/gachi/upload/storeImg/${list.goods_img1 }" class="homeClassListImg" /></a><br />
+				<a href="/gachi/storeView?code=${list.code}">
+				<img src="/gachi/upload/storeImg/${list.goods_img1 }" class="homeClassListImg" /></a><br />
+
 				<div class="homeClassListTxt">
 					<p>
 						<span class="badge badge-info" style="font-size:0.9em">${list.category }</span>
-						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }"></i>
+						<i class="far fa-heart fa-lg p-2" style="float: right; height: 15px;" data-name="${list.code }">${list.good }</i>
 						<c:forEach var="v" items="${ggoodList }">
 							<c:if test="${v.code eq list.code }">
 								<script>
@@ -263,7 +277,8 @@
 						</c:forEach>
 					</p>
 					<a href="/gachi/storeView?code=${list.code}&category=${list.category}"><span>${list.goods_name }</span><br />
-						<span style="float: right">가격 &nbsp; ${list.real_price }원</span><br />
+						<span style="float: right">가격 &nbsp; 
+						<fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</span><br />
 						<span style="float: right">배송비 &nbsp;2,500원</span> </a>
 				</div>
 			</div>

@@ -61,96 +61,120 @@
 </style>
 <script>
 	$(()=>{
-		$("#cre_video_lst a").click(()=>{
-			$("#cre_video_info").css("display","block");
+		$(function(){
+			
+			$("#startDate").val("${startDate}");
+			$("#endDate").val("${endDate}");
+			$("#searchWord").val("${searchWord}");
+			$("#category").val("${category}").attr("selected", "selected");
+			$("#payment_type").val("${payment_type}").attr("selected", "selected");	
+			$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
+			
+			$("#searchBtn").click(function(){
+				var url = "/creatorVideo";
+				var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
+				$.ajax({
+					url : url,
+					data : data,
+					type : "POST",
+					dataType : "json",
+					success: function(data){
+						var result = data.result;
+						console.log(result);
+						
+					},error:function(){
+						var result = data.result;
+						console.log(result);
+					}
+				});
+				
+			});
+			function postPageMove(now) {
+				console.log(now);
+				return false;
+				var url = "/creatorVideo";
+				var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now ;
+				$.ajax({
+					url : url,
+					data : data,
+					type : "POST",
+					dataType : "json",
+					success: function(data){
+						var result = data.result;
+						console.log(result);
+					},error:function(){
+						var result = data.result;
+						console.log(result);
+					}
+				});
+			}
 		});
 	});
 </script>
 <div class="container ad_font">
 	<h1>동영상등록현황</h1>
-	<div id="cre_video_info">
-		<ul style="width:40%;">
-			<li style="margin-bottom:10px;">동영상 썸네일</li>
-			<li><img src="/gachi/img/147.jpg"/></li>
+	<div id="ad_video_searchArea">
+		<form method="post" action="creatorVideo">
+		<ul id="ad_video_searchList">
+			<li>
+				카테고리
+			</li>
+			<li>
+				<select id="category" name="category">
+					<option value="">전체</option>
+					<option value="공예/창작">공예/창작</option>
+					<option value="요리">요리</option>
+					<option value="미술">미술</option>
+					<option value="음악">음악</option>
+					<option value="라이프스타일">라이프스타일</option>
+					<option value="운동">운동</option>
+					<option value="사진/영상">사진/영상</option>
+				</select>	
+			</li>
+			<li>
+				등록일
+			</li>
+			<li> 
+			   <input type="date" id="startDate" name="startDate" />&nbsp;~
+			   <input type="date" id="endDate" name="endDate" />
+			</li>
+			<li>영상검색</li>
+			<li>
+				<input type="text"  id="searchWord" name="searchWord" size="40" placeholder="검색어를 입력하세요."/>
+				<input type="submit" id="searchBtn" class="btn" value="검색" />
+			</li>
 		</ul>
-			<ul style="width:60%">
-				<li>클래스 명:</li>
-				<li>이불에 지도그리기</li>
-				<li>차시명:</li>
-				<li>기본편</li>
-				<li>영상제목 : </li>
-				<li>영등포시장에 가서 이불을 구입해보자.mp4</li>
-				<li>영상길이 :</li>
-				<li>총 15분 46초</li>
-				<li>등록일 :</li>
-				<li>2020년 11월 16일</li>
-			</ul>
-	</div>
-	<div id="cre_video_searchForm">
-		<h3>크리에이터 '밥아저씨'님의 영상강좌</h3><br/>
-		<form method="post" action="" class="form-horizontal">
-			<select name="">
-				<option>전체</option>
-				<option>공예/창작</option>
-				<option>요리</option>
-				<option>미술</option>
-				<option>음악</option>
-				<option>라이프스타일</option>
-				<option>운동</option>
-				<option>사진/영상</option>
-			</select>
-			<select name="">
-				<option>전체</option>
-				<option>이불에 지도그리기</option>
-				<option>a4용지에 지도그리기</option>
-				<option>벽에 지도그리기</option>
-			</select>
-			<input type="submit" class="btn" value="검색" />
 		</form>
-		<div style="margin:10px 0px;">
+	</div>
+	<div id="ad_video_lstArea">
+		<ul id="ad_video_Lst">
+			<li>동영상코드</li>
+			<li>클래스명</li>
+			<li>목차명</li>
+			<li>목차순서</li>
+			<li>강좌명</li>
+			<li>파일명</li>
+			<li>크리에이터</li>
+			<li>영상길이</li>
+			<li>등록일</li>
+			
+			<c:forEach var="vlist" items="${vlist}">
+				<li class="wordCut">${vlist.video_code}</li>
+				<li class="wordCut">${vlist.class_name}</li>
+				<li class="wordCut">${vlist.unit_content}</li>
+				<li class="wordCut">${vlist.section_index}</li>
+				<li><a href="/gachi/adminVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
+				<li class="wordCut">${vlist.video_filename}</li>
+				<li class="wordCut">${vlist.nickname}</li>
+				<li class="wordCut">${vlist.lengthStr}</li>
+				<li class="wordCut">${vlist.enroll_date}</li>
+			</c:forEach>
+		</ul>
+	</div>
+	<div style="margin:10px 0px;">
 			<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
 			<button class="btn" onclick="location.href='/gachi/creatorVideoRequest'">영상변경사항요청</button>
 		</div>
-	</div>
-	<div>
-		<ul id="cre_video_lst">
-			<li>동영상코드</li>
-			<li>카테고리</li>
-			<li>클래스명</li>
-			<li>차시명</li>
-			<li>동영상명</li>
-			<li>영상길이</li>
-			<li>등록일</li>
-			<li>영상정보</li>
-			
-			<li>vid1234</li>
-			<li>미술</li>
-			<li>이불에 지도그리기</li>
-			<li>기본편</li>
-			<li>영등포시장에 가서 이불을 구입해보자!</li>
-			<li>15:46</li>
-			<li>2020-11-16</li>
-			<li><a href="#">영상정보</a></li>
-			
-			<li>vid1234</li>
-			<li>미술</li>
-			<li>이불에 지도그리기</li>
-			<li>기본편</li>
-			<li>영등포시장에 가서 이불을 구입해보자!</li>
-			<li>15:46</li>
-			<li>2020-11-16</li>
-			<li>영상정보</li>
-			
-			<li>vid1234</li>
-			<li>미술</li>
-			<li>이불에 지도그리기</li>
-			<li>기본편</li>
-			<li>영등포시장에 가서 이불을 구입해보자!</li>
-			<li>15:46</li>
-			<li>2020-11-16</li>
-			<li>영상정보</li>
-		</ul>	
-	</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 			<li class="btn"><a class="btn" href="#">Prev</a></li>

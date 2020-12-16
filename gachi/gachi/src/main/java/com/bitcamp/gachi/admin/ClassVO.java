@@ -30,6 +30,24 @@ public class ClassVO {
 	private String section_code;
 	private List<ClassVO> unitList;
 	
+	private int num;
+	private String username;
+	private String subject;
+	private String content;
+	private String writedate;
+	private String ip;
+	
+	private String[] unitContent;
+	private int[] unitArray;
+	private int[] sectionIndex;
+	private String[] videoCode;
+	private String[] enrollDate;
+	private double[] videoLength;
+	private String[] videoName;
+	private String[] videoFileName;
+	private String[] sectionCode;
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -162,5 +180,97 @@ public class ClassVO {
 	public void setUnitList(List<ClassVO> unitList) {
 		this.unitList = unitList;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String[] getUnitContent() {
+		return unitContent;
+	}
+	public void setUnitContent(String[] unitContent) {
+		this.unitContent = unitContent;
+	}
+	public int[] getUnitArray() {
+		return unitArray;
+	}
+	public void setUnitArray(int[] unitArray) {
+		this.unitArray = unitArray;
+	}
+	public int[] getSectionIndex() {
+		return sectionIndex;
+	}
+	public void setSectionIndex(int[] sectionIndex) {
+		this.sectionIndex = sectionIndex;
+	}
+	public String[] getVideoCode() {
+		return videoCode;
+	}
+	public void setVideoCode(String[] videoCode) {
+		this.videoCode = videoCode;
+	}
+	public String[] getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(String[] enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+	public double[] getVideoLength() {
+		return videoLength;
+	}
+	public void setVideoLength(double[] videoLength) {
+		this.videoLength = videoLength;
+	}
+	public String[] getVideoName() {
+		return videoName;
+	}
+	public void setVideoName(String[] videoName) {
+		this.videoName = videoName;
+	}
+	public String[] getVideoFileName() {
+		return videoFileName;
+	}
+	public void setVideoFileName(String[] videoFileName) {
+		this.videoFileName = videoFileName;
+	}
+	public String[] getSectionCode() {
+		return sectionCode;
+	}
+	public void setSectionCode(String[] sectionCode) {
+		this.sectionCode = sectionCode;
+	}
+	
+	
 	
 }

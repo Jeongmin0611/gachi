@@ -1,9 +1,9 @@
 
-package com.bitcamp.gachi.store;
+package com.bitcamp.gachi.classPage;
 
-public class StorePageVO {
+public class ClassPageVO {
 	private int nowPage = 1; // 현재 페이지
-	private int totalRecord; // 총 레코드 수
+	private int totalRecord; // 총 레코드
 	private int totalPage; // 총 페이지 수
 	private int onePageRecord = 9; // 한 페이지에 표시할 레코드
 	private int onePageNumCount = 5; // 한 번에 표시할 페이지 번호 숫자
@@ -18,13 +18,14 @@ public class StorePageVO {
 	private String searchWord;
 	private String code;/*코드*/
 	private String category; // 카테고리   
-	private String goods_name;/*상품명*/
-	private String goods_img1;/*상품 사진1*/
 	private String real_price;/*실 가격*/
 	private String selectval;
 	private String enddate;
-	private String writedate;
-	private String good;
+	private String class_img;
+	private String class_name;
+	private String nickname;
+	private int good;
+	private String signup;
 
 	public String getSearchKey() {
 		return searchKey;
@@ -140,22 +141,6 @@ public class StorePageVO {
 		this.category = category;
 	}
 
-	public String getGoods_name() {
-		return goods_name;
-	}
-
-	public void setGoods_name(String goods_name) {
-		this.goods_name = goods_name;
-	}
-
-	public String getGoods_img1() {
-		return goods_img1;
-	}
-
-	public void setGoods_img1(String goods_img1) {
-		this.goods_img1 = goods_img1;
-	}
-
 	public String getReal_price() {
 		return real_price;
 	}
@@ -180,19 +165,41 @@ public class StorePageVO {
 		this.enddate = enddate;
 	}
 
-	public String getWritedate() {
-		return writedate;
+	public String getClass_img() {
+		return class_img;
 	}
 
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
+	public void setClass_img(String class_img) {
+		this.class_img = class_img;
 	}
-	
-	public String getGood() {
+
+	public String getClass_name() {
+		return class_name;
+	}
+
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getGood() {
 		return good;
 	}
-
-	public void setGood(String good) {
+	public void setGood(int good) {
 		this.good = good;
-	}	
+	}
+	public String getSignup() {
+		return signup;
+	}
+
+	public void setSignup(String signup) {
+		this.signup = signup;
+	}
 }

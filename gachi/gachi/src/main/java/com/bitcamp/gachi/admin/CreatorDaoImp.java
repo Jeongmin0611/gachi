@@ -50,6 +50,20 @@ public interface CreatorDaoImp {
 
 	public int creatorStateUpdate(Map<String, String> dbParam);
 
+
+	public AllVO selectCreatorlist(String userid);// 크리에이터 > 크리에이터 수정 
+
+	public int UpdateCreatorlist(AllVO vo); // 크리에이터 > 크리에이터 멤버정보수정 
+
+	public int UpdateCreatorlist1(AllVO vo); // 크리에이터 > 크리에이터정보수정 
+
+	public int creatorLeave(MemberVO vo); //크리에이터 > 회원탈퇴 
+
+	public int creatorInfoPwdChk(MemberVO vo); //크리에이터 > 비밀번호 확인 
+
+	public AllVO creatorInfoView(String userid); //크리에이터 탈퇴 정보 
+	
+
 	
 
 }
