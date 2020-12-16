@@ -74,9 +74,8 @@
 	</select>
 	<select id="userCartClassCheck" parameterType="com.bitcamp.gachi.mypage.OrderVO" resultType="int">
 		select count(code) 
-		 from orderlist o, class_order co
-		 where o.order_code = co.order_code
-		 and userid='${userid}'
+		 from course
+		 where userid='${userid}'
 		 and code='${code}'
 	</select>
 	<insert id="userCartInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
@@ -138,10 +137,7 @@
 		select goods_name from goods where code = '${code}'
 	</select>
 	<select id="countClass" resultType="int">
-		select count(code) 
-		 from orderlist o, class_order co 
-		 where o.order_code = co.order_code
-		 and o.userid = '${userid}'
+		select count(code) from course where userid = '${userid}'
 	</select>
 	<select id="myclassList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
 		select cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
@@ -159,6 +155,13 @@
 		 and cou.userid = '${userid}'
 		 and cou.code = '${code}'
 	</select>
+	<select id="myclassVideoView" resultType="com.bitcamp.gachi.mypage.ClassVideoVO">
+		select cv.code, cv.section_code, unit_content, section_index, video_code, video_name, video_filename, video_length
+		 from class_video cv, section s
+		 where  cv.section_code = s.section_code
+		 and cv.code='${code}'
+		 and cv.video_code='${video_code}'
+	</select>
 	<select id="sectionList" resultType="com.bitcamp.gachi.mypage.ClassVideoVO">
 		select section_code, unit_content from section where code='${code}'
 	</select> 
@@ -168,6 +171,16 @@
 		 where  cv.section_code = s.section_code
 		 and cv.code='${code}'
 		 and cv.section_code='${section_code}'
+	</select>
+	<select id="qnaList" resultType="com.bitcamp.gachi.mypage.QnaVO">
+		select subject, content,
+		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname
+		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate
+		from qna q, member a, member b
+		where q.userid=a.userid
+		and writer=b.userid(+)
+		and code='${code}'
+		order by num desc
 	</select>
 	<select id="countGood" resultType="int">
 		select count(code) from good where userid='${userid}'

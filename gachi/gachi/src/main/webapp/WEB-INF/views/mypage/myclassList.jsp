@@ -37,13 +37,6 @@
 			<label style="color:gray">내 학습표 ></label>
 				<label style="font-size:1.1em"><b>클래스 목록</b></label>
 			<hr class="userHr"/>
-			<div>
-				<select>
-					<option value="전체">전체</option>
-					<option value="수강중">수강중</option>
-					<option value="수강완료">수강완료</option>
-				</select>
-			</div>
 		</div>
 		<div class="mypageContent col-md-10">
 			<c:forEach var="vo" items="${list }">

@@ -146,6 +146,7 @@
 		</ul>
 		</form>
 	</div>
+	<b style="color:red;">*동영상은 클래스 승인 처리시 일괄적으로 홈페이지에 개시됩니다.</b>
 	<div id="ad_video_lstArea">
 		<ul id="ad_video_Lst">
 			<li>동영상코드</li>
@@ -163,7 +164,7 @@
 				<li class="wordCut">${vlist.class_name}</li>
 				<li class="wordCut">${vlist.unit_content}</li>
 				<li class="wordCut">${vlist.section_index}</li>
-				<li><a href="/gachi/adminVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
+				<li><a href="/gachi/creatorVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
 				<li class="wordCut">${vlist.video_filename}</li>
 				<li class="wordCut">${vlist.nickname}</li>
 				<li class="wordCut">${vlist.lengthStr}</li>
@@ -171,9 +172,8 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<div style="margin:10px 0px;">
+	<div style="margin:10px 0px; text-align:center">
 			<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
-			<button class="btn" onclick="location.href='/gachi/creatorVideoRequest'">영상변경사항요청</button>
 		</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

@@ -103,14 +103,14 @@
 	  			},
 	  			success:function(){
 	  				swal({
-	  				  title: "수강평이 등록 되었습니다.",
+	  				  title: "수강평이 수정 되었습니다.",
 	  				  icon: "success",
 	  				  buttons: true
 	  				}).then((result)=>{
 	  					location.href = location.href;
 	  				});
 	  			},error:function(){
-	  				swal('수강평 등록이 실패하였습니다. ');
+	  				swal('수강평 수정이 실패하였습니다. ');
 	  			}
 	  			
 	  		});
@@ -183,6 +183,11 @@
 			<div style="text-align:right">
 				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#reviewModal" id="myclassReviewFrm">수강평작성</button>
 			</div>
+			<c:if test="${empty list }">
+				<div style="text-align:center"><img src="/gachi/img/icon_eventReply.png" style="width:10%;margin:40px 0"/>
+					 <h4>아직 작성한 수강평이 없습니다.</h4>
+				</div>
+			</c:if>
 			<c:forEach var="vo" items="${list }">
 				<input type="hidden" value="${vo.num }"/>
 				<p><b>${vo.class_name }</b></p>

@@ -90,9 +90,9 @@
 			<li>클래스명</li>
 			<li>가격</li>
 			<c:forEach var ="list" items="${list}">
-				<li><a href="/gachi/classMain"><img src="/gachi/img/${list.class_img }"/></a></li>
-				<li><a href="/gachi/classMain">${list.class_name }</a></li>
-				<li>${list.real_price }원</li>
+				<li><a href="/gachi/classMain"><img src="/gachi/upload/classImg/${list.class_img }"/></a></li>
+				<li><a href="/gachi/classMain">${list.class_name }</a></li>				
+				<li><fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</li>
 			</c:forEach>
 		</ul>
 	</div>

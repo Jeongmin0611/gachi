@@ -38,6 +38,10 @@ public interface ClassPageDaoImp {
 	//클래스 qna 수정
 	public int updateQna(AllVO vo);
 	public int classPageCategoryRecordCount(ClassPageVO vo);
+	//클래스 수강여부 확인 (수강평 등록 버튼 클릭시 필요)
+	public int courseCheck(@Param("code") String code, @Param("userid") String userid);
+	//크리에이터가 개설한 클래스인지 확인
+	public int creatorCheck(@Param("code") String code, @Param("userid") String userid);
 	
 
 }

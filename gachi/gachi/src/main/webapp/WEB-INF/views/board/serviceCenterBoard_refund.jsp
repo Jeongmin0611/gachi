@@ -33,9 +33,8 @@
 #CserviceContentDiv ul li:nth-child(4n+1){	/* 카테고리 */
 	width:15%;
 	height: 40px;
-	background-color: #F4BFA9;
+	background-color: #F1F7FA;
 	margin-right: 5%;
-	color: white;
 	text-align: center;
 	float: left;
 }

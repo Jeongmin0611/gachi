@@ -220,10 +220,10 @@
 		</choose>
 		) A
 		WHERE
-		ROWNUM &lt;= 10
+		ROWNUM &lt;=${endNum}
 		)
 		WHERE
-		RNUM &gt;=1
+		RNUM &gt;=${startNum}
 	</select>
 	
 	<!-- Review  -->
