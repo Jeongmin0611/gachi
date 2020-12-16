@@ -22,7 +22,7 @@
 		 and o.order_code='${order_code}'
 	</select>
 	<select id="goodsOrderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select goods_img1, category, o.order_code, goods_order_code, g.goods_name, real_price, amount, to_char(orderdate,'YYYY-MM-DD HH24:MI:SS') orderdate, finished
+		select state, delivery, goods_img1, category, o.order_code, goods_order_code, g.goods_name, real_price, amount, to_char(orderdate,'YYYY-MM-DD HH24:MI:SS') orderdate, finished
 		 from orderlist o, goods_order go, goods g
 		 where o.order_code = go.order_code(+)
 		 and go.code = g.code
@@ -65,6 +65,9 @@
 	</select>
 	<select id="countUserCart" resultType="int">
 		select count(code) from cart where userid='${userid}'
+	</select>
+	<select id="countGoodsCart" resultType="int">
+		select amount from cart where userid='${userid}' and code='${code}'
 	</select>
 	<select id="userCartCheck" parameterType="com.bitcamp.gachi.mypage.OrderVO" resultType="int">
 		select count(code) from cart where userid='${userid}' and code='${code}'
@@ -109,7 +112,7 @@
 	</select>
 	<insert id="orderInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">
 		insert into orderlist(order_code, userid, full_price, shipping_fee, discount, price, payment_type, card_type, zipcode, addr, detailaddr, etc)
-		values('${order_code}'||a_sq.nextval, '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}', '${zipcode}', '${addr}', '${detailaddr}', '${etc}')
+		values('${order_code}', '${userid}', ${full_price}, ${shipping_fee}, ${discount}, ${price}, '${payment_type}', '${card_type}', '${zipcode}', '${addr}', '${detailaddr}', '${etc}')
 	</insert>
 	<insert id="classOrderInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
 		insert into class_order(class_order_code, order_code, code)
@@ -121,7 +124,7 @@
 	</insert>
 	<insert id="courseInsert" parameterType="com.bitcamp.gachi.mypage.OrderListVO">
 		insert into course(course_code, code, userid, startdate, enddate, success)
-		 values('cou'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, 'c2020112601', 'member0@gachi.com', sysdate, sysdate+90, 'N');
+		 values('cou'||to_char(sysdate,'YYYYMMDD')||a_sq.nextval, '${code}', '${userid}', sysdate, sysdate+90, 'N')
 	</insert>
 	<select id="orderView" parameterType="String" resultType="com.bitcamp.gachi.mypage.OrderVO">
 		select order_code, price, payment_type
@@ -141,21 +144,30 @@
 		 and o.userid = '${userid}'
 	</select>
 	<select id="myclassList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select co.code, class_img, category, class_name, nickname
-		 from orderlist o, class_order co, class c, member m
-		 where o.order_code = co.order_code 
-		 and co.code = c.code
+		select cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
+		 from course cou, class c, member m
+		 where cou.code = c.code
 		 and c.userid = m.userid
-		 and o.userid = '${userid}'
+		 and cou.userid = '${userid}'
+		 order by enddate desc
 	</select>
 	<select id="myclassView" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select co.code, class_img, category, class_name, nickname
-		 from orderlist o, class_order co, class c, member m
-		 where o.order_code = co.order_code 
-		 and co.code = c.code
+		select cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
+		 from course cou, class c, member m
+		 where cou.code = c.code
 		 and c.userid = m.userid
-		 and o.userid = '${userid}'
-		 and co.code = '${code}'
+		 and cou.userid = '${userid}'
+		 and cou.code = '${code}'
+	</select>
+	<select id="sectionList" resultType="com.bitcamp.gachi.mypage.ClassVideoVO">
+		select section_code, unit_content from section where code='${code}'
+	</select> 
+	<select id="classVideoList" resultType="com.bitcamp.gachi.mypage.ClassVideoVO">
+		select cv.code, cv.section_code, unit_content, section_index, video_code, video_name, video_length
+		 from class_video cv, section s
+		 where  cv.section_code = s.section_code
+		 and cv.code='${code}'
+		 and cv.section_code='${section_code}'
 	</select>
 	<select id="countGood" resultType="int">
 		select count(code) from good where userid='${userid}'
@@ -215,10 +227,10 @@
 		select * from good where userid='${userid}' and code='${code}'
 	</select>
 	<select id="qnaView" resultType="com.bitcamp.gachi.mypage.QnaVO">
-		select num, class_img, class_name, subject, content, to_char(writedate, 'YY/MM/DD HH:MI') writedate, nickname, answer, to_char(answer_writedate, 'YY/MM/DD') answer_writedate
+		select num, class_img, class_name, subject, content, to_char(writedate, 'YY/MM/DD HH24:MI') writedate, nickname, answer, to_char(answer_writedate, 'YY/MM/DD') answer_writedate
 		 from class c, qna q, member m
 		 where q.code = c.code
-		 and q.writer = m.userid
+		 and q.writer = m.userid(+)
 		 and q.userid='${userid}'
 		 order by writedate desc
 	</select>
@@ -232,27 +244,42 @@
 		delete from goods_review where num = ${num}
 	</delete>
 	<delete id="eventReplyDelete" parameterType="int">
-		delete from event_reply where num = ${num}
+		delete from event_reply where reply_num = ${reply_num}
 	</delete>
 	<select id="classReview" resultType="com.bitcamp.gachi.mypage.QnaVO">
-		select num, class_name, class_img, subject, cr.grade, content, to_char(writedate, 'YY/MM/DD HH:MI') writedate
+		select cr.grade, num, class_name, class_img, subject, cr.grade, content, to_char(writedate, 'YY/MM/DD HH24:MI') writedate
 		 from class c, class_review cr
 		 where c.code = cr.code
 		 and cr.userid = '${userid}'	
 		 order by writedate desc
 	</select>
+	<select id="goodsQnaView" resultType="com.bitcamp.gachi.mypage.QnaVO">
+		select num, goods_img1, goods_name, subject, content, to_char(q.writedate, 'YY/MM/DD HH24:MI') writedate, nickname, answer, to_char(answer_writedate, 'YY/MM/DD') answer_writedate
+		 from goods g, qna q, member m
+		 where q.code = g.code
+		 and q.writer = m.userid(+)
+		 and q.userid='${userid}'
+		 order by writedate desc
+	</select>
 	<select id="goodsReview" resultType="com.bitcamp.gachi.mypage.QnaVO">
-		select num, goods_name, goods_img1, subject, gr.grade, content, to_char(gr.writedate, 'YY/MM/DD HH:MI') writedate
+		select num, goods_name, goods_img1, subject, gr.grade, content, to_char(gr.writedate, 'YY/MM/DD HH24:MI') writedate
 		 from goods g, goods_review gr
 		 where g.code = gr.code
 		 and gr.userid = '${userid}'	
 		 order by writedate desc
 	</select>
 	<select id="eventReplyView" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select reply_num, subject, event_img, r.content, to_char(r.writedate, 'YY-MM-DD HH:MI') writedate
+		select reply_num, subject, event_img, r.content, to_char(r.writedate, 'YY/MM/DD HH24:MI') writedate
 		from event e, event_reply r
 		where e.event_num = r.event_num
 		and userid = '${userid}'
 		order by writedate desc
+	</select>
+	<select id="goodsList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
+		select go.code, goods_name 
+		 from goods_order go, goods g, orderlist o
+		 where o.order_code = go.order_code
+		 and go.code = g.code
+		 and userid='${userid}'
 	</select>
 </mapper>

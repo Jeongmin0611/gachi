@@ -50,4 +50,14 @@
 	<select id="storeListCategoryRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
 		select count(goods_name) from goods where category ='${category}' order by enddate
 	</select>
+	<insert id="insertReview"
+		parameterType="com.bitcamp.gachi.admin.AllVO">
+		insert into goods_review (num, code, userid, subject,
+		content, writedate, grade, ip)
+		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
+		${grade}, '${ip}')
+	</insert>
+	<update id="updateReview" parameterType="com.bitcamp.gachi.admin.AllVO">
+		update goods_review set grade='${grade}', subject='${subject}', content='${content}' where num=${num}
+	</update>
 </mapper>

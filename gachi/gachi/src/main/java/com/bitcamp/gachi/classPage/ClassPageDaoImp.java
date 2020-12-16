@@ -31,8 +31,13 @@ public interface ClassPageDaoImp {
 	public List<QnaVO> qnaListSearch(AllVO vo);
 	//클래스 review 등록
 	public int insertReview(AllVO vo);
+	//클래스 review 수정
+	public int updateReview(AllVO vo);
 	//클래스 qnq 등록
 	public int insertQna(AllVO vo);
+	//클래스 qna 수정
+	public int updateQna(AllVO vo);
 	public int classPageCategoryRecordCount(ClassPageVO vo);
 	
+
 }
