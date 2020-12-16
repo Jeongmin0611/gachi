@@ -93,11 +93,21 @@ public class StoreController {
 		String code = req.getParameter("code");
 		AllVO vo = dao.storeView(code);
 		ClassPageDaoImp cdao = sqlSession.getMapper(ClassPageDaoImp.class);
-		List<AllVO> reviewList = cdao.reviewList(code);
+		List<AllVO> reviewList = dao.reviewList(code);
 		List<QnaVO> qnaList = cdao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
+		//스토어 bxslide이미지 , 구분
+		String[] bxImg= {};
+		String store_img2 = vo.getGoods_img2();
+		System.out.println("store_img2: "+store_img2);
+		if(store_img2!=null) {
+			bxImg = store_img2.replace(" ","").split(",");
+			System.out.println("배열길이: "+bxImg.length);
+		}
 		ModelAndView mav = new ModelAndView();
+		
+		int orderCheck=0;
 		String msg="";
 		if(ses.getAttribute("logStatus")!=null) {//로그인 상태
 			String userid=(String)ses.getAttribute("userid");
@@ -116,7 +126,12 @@ public class StoreController {
 			//좋아요 상품
 			OrderListVO goodVo = uDao.wishOneRecord(userid, code);
 			mav.addObject("goodVo", goodVo);	
+			
+			//구매여부 확인. 결과값이 1인 경우 구매한 상품
+			orderCheck = dao.orderCheck(code, userid);
 		}
+		mav.addObject("orderCheck", orderCheck);
+		mav.addObject("bxImg", bxImg);
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("qnaList", qnaList);
 		mav.addObject("vo", vo);
