@@ -8,12 +8,14 @@
 <link rel="stylesheet" href ="resources/bootstrap.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/bootstrap.js"></script>
-<link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+<link href="<c:url value="/css/style.css" />" rel="stylesheet" type="text/css"/>
 <script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 <!------- Resources ------>
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+ <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
 <script>
 
 window.GitpleConfig = {"appCode":"j2vNGCZzc42igrnPe6ofouihLQ2se3"};

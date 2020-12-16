@@ -546,8 +546,10 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
-		int startNum = 10 * (nowPage - 1) + 1;
+		//int startNum = 10 * (nowPage - 1) + 1;
+		int startNum=((nowPage-1)/5*5)+1;
 		int endNum = 10 * nowPage;
+
 		
 		ModelAndView mav =new ModelAndView();
 		
@@ -577,7 +579,6 @@ public class AdminController {
 			lastPage = cntRecords / 10 + 1;
 		}
 		List<ClassVO> result = dao.getClassRecord(dbParam);
-		
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
