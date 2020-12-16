@@ -67,6 +67,12 @@
 			<label style="color:gray">내 활동 ></label>
 			<label style="font-size:1.1em"><b>이벤트</b></label>
 			<hr class="userHr"/>
+			<c:if test="${empty list }">
+				<div style="text-align:center"><img src="/gachi/img/icon_eventReply.png" style="width:10%;margin:40px 0"/>
+					 <h4>아직 작성한 댓글이 없습니다.</h4>
+					 <button type="button" class="btn btn-light" onclick="location.href='/gachi/eventBoard'" style="margin-top:20px">이벤트 보러가기</button>
+				</div>
+			</c:if>
 			<c:forEach var="vo" items="${list }">
 				<input type="hidden" value="${vo.reply_num }"/>
 				<p><a href="/gachi/eventBoard"><b>${vo.subject }</b></a></p>

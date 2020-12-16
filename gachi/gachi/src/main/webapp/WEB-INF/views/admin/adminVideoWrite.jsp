@@ -21,7 +21,6 @@
 		width:10%;
 		height:55px;
 		padding:6px 0px;
-		overflow:visible;
 		border-bottom:1px solid gray;
 	}
 	#ad_video_addList li:nth-child(7n+2),#ad_video_addList li:nth-child(7n+7){
@@ -61,7 +60,7 @@
 	#video_sample{
 		margin:0 auto;
 	}
-	.videoList>li:first-child input{
+	.videoList>li:first-child select{
 		width:80%;
 	}
 </style>
@@ -146,9 +145,9 @@
 				tagTxt+='<li></li>';
 				tagTxt+='<li><input type="hidden" name="enrollDate" value="'+year+'-'+month+'-'+day+'"/>';
 				tagTxt+=year+'-'+month+'-'+day+'</li>';
-				tagTxt+='<li><b title="'+filename+'" class="video_del">x</b><input type="hidden" name="videoLength"/>';
+				tagTxt+='<li><b class="video_del">x</b><input type="hidden" name="videoLength"/>';
 				tagTxt+='<input type="hidden" name="videoCode"/></li></ul>';
-				$("#ad_video_addList>li:last-child").after(tagTxt);
+				$("#ad_video_addList>li:last").after(tagTxt);
 				$("#video_sample").attr("src","/gachi/upload/class_video/test2.mp4");
 				if(!video_sample.paused){
 					video_sample.pause();
@@ -228,15 +227,18 @@
 			$(document).on('click','b',(event)=>{
 				let fileName=$(event.target).attr("title");
 				console.log("aaaaa=>"+fileName);
-				$.ajax({
-					url:'/gachi/videoDelete?fileName='+fileName,
-					type:'get',
-					success:()=>{
-						$(event.target).parent().parent().remove();
-					},error:(e)=>{
-						alert("이미지파일 삭제를 실패하였습니다.");
-					}
-				});
+				if("삭제된 영상은 다시 복구되지 않습니다.\n삭제 하시겠습니까?"){
+					$.ajax({
+						url:'/gachi/videoDelete?fileName='+fileName,
+						type:'get',
+						success:()=>{
+							$(event.target).parent().parent().remove();
+						},error:(e)=>{
+							alert("이미지파일 삭제를 실패하였습니다.");
+						}
+					});
+				}
+				
 			});
 			
 			$("#adminVideoWriteOk").submit(()=>{

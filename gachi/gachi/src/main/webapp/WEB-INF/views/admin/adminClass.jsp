@@ -181,7 +181,9 @@
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
+
 						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
+
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">

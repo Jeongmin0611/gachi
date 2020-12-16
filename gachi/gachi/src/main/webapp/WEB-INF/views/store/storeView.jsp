@@ -195,43 +195,62 @@ $(function() {
 	
 	//세션의 아이디 가져오기
 	var id = '<%=(String)session.getAttribute("userid")%>'; 
-    
+	var point=5;
     //평점에 별넣기 https://www.wbotelhos.com/raty 참고
     $(".classRating").raty({
     		score:5,
     		path:"img/starImages",
-    		half:true,
     		width:"100%",
-    		space:false
+    		space:false,
+    		click: function(score, evt) {
+                point = score
+            }
     });
-    $(".myclassStars").raty({
-		score:5,
-		path:"img/starImages",
-		half:true,
-		width:"100%",
-		readOnly:true,
-		space:false
-		});
+   
   //좋아요 클릭이벤트
 	$('i').on('click',function(){
-		var id = '<%=(String)session.getAttribute("userid")%>';
-		if(id==null ||id =='null'){
-			swal('로그인 후 이용가능한 기능입니다.');
+		var id = '<%=(String) session.getAttribute("userid")%>';
+		if (id == null || id == 'null') {
+			swal({
+				title:'로그인 후 이용가능한 기능입니다.',
+				icon:"warning"});
 			return false;
 		}
-		if(id!=null){
-			var good_choice_code;
-			var atr = $(this).attr('class');
-			if (atr=='far fa-heart fa-lg'){
-				$(this).attr('class','fas fa-heart fa-lg');
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/storeView?code="+good_choice_code+"&good_add="+good_choice_code;
-			}else if(atr=='fas fa-heart fa-lg'){
-				$(this).attr('class','far fa-heart fa-lg');				
-				good_choice_code=$(this).attr('id');
-				location.href="/gachi/storeView?code="+good_choice_code+"&good_del="+good_choice_code;
-			}				
-		}			
+		
+		var good_choice_code;
+		var atr = $(this).attr('class');
+		if (id != null) {
+			if (atr == 'far fa-heart fa-lg') {
+				$(this).attr('class', 'fas fa-heart fa-lg');
+				good_choice_code = $(this).attr('data-name');
+				$.ajax({
+					type:"POST",
+					url:"/gachi/good_add",
+					data:{
+						good_add:good_choice_code
+					},success:function(){
+						location.reload();
+					}, error:function(){
+						swal('실패'+error);
+					}
+				});//ajax			
+				
+			} else if (atr == 'fas fa-heart fa-lg') {
+				$(this).attr('class', 'far fa-heart fa-lg');
+				good_choice_code = $(this).attr('data-name');
+				$.ajax({
+					type:"POST",
+					url:"/gachi/good_del",
+					data:{
+						good_del:good_choice_code
+					},success:function(){
+						location.reload();
+					}, error:function(){
+						swal('실패'+error);
+					}
+				});//ajax
+			}//elif
+		}//id가 널이 아닐 때 if문
 	});
   
 	//장바구니 담기
@@ -301,13 +320,18 @@ $(function() {
   		});
   		}
   	});
-	//수강평 버튼 클릭시 로그인 확인, 구매여부 확인
+	//리뷰 버튼 클릭시 로그인 확인, 구매여부 확인
   	$('#myclassReviewFrm').on('click',function(){
   		if(id == 'null'){
   			swal({
 				title:'로그인 후 이용가능한 기능입니다.',
 				icon:"warning"});
 			return false;
+		  }else if(${orderCheck}<1){
+	  			swal({
+					title:'구매 후 이용가능한 기능입니다.',
+					icon:"warning"});
+	  			return false;
 		  }else{
 			  return true;
 		  }
@@ -330,14 +354,16 @@ $(function() {
   			data:{
   				code:'${vo.code}',
   				subject : $('#reviewSubject').val(),
-  				content: $('#reviewContent').val()
+  				content: $('#reviewContent').val(),
+  				grade:point
   			},
   			success:function(){
   				swal({
   				  title: "수강평이 등록 되었습니다.",
   				  icon: "success"
+ 				}).then((result)=>{
+					location.reload();
   				});
-  				location.reload();
   			},error:function(){
   				swal('수강평 등록이 실패하였습니다. ');
   			}
@@ -389,8 +415,9 @@ $(function() {
 	  				  title: "수강평이 등록 되었습니다.",
 	  				  icon: "success",
 	  				  buttons: true
+  					}).then((result)=>{
+						location.reload();
 	  				});
-  				location.reload();
   			},error:function(){
   				swal('질문등록이 실패하였습니다.');
   			}
@@ -400,9 +427,12 @@ $(function() {
   	reviewMoreContent();
   	qnaMoreContent();
 });
-	function purchase(){
-		location.href="/gachi/purchase";
-	};
+//ckeditor
+function CKupdate(){
+	for(instance in CKEDITOR.instances){
+		CKEDITOR.instances[instance].updateElement();
+	}
+}
 </script>
 <div class="container cfont">
 	<div class="row">
@@ -412,19 +442,24 @@ $(function() {
 			<ol class="carousel-indicators">
 				<li data-target="#carouselExampleIndicators" data-slide-to="0"
 					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					
+				<c:if test="${ bxImg !=null and bxImg !=''}">
+				<c:set var="ii" value="0"/>		
+					<c:forEach var="img" items="${bxImg }">			
+							<c:set var="ii" value="${ii+1 }"/>						
+							<li data-target="#carouselExampleIndicators" data-slide-to="${ii}"></li>
+					</c:forEach>
+				</c:if>
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<img src="/gachi/upload/storeImg/${vo.goods_img1 }" class="d-block w-100">
 				</div>
-				<div class="carousel-item">
-					<img src="/gachi/upload/storeImg/" class="d-block w-100">
-				</div>
-				<div class="carousel-item">
-					<img src="/gachi/upload/storeImg/" class="d-block w-100">
-				</div>
+				<c:forEach var="img" items="${bxImg }">
+					<div class="carousel-item">
+						<img src="/gachi/upload/storeImg/${img }" class="d-block w-100">
+					</div>
+				</c:forEach>				
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators"
 				role="button" data-slide="prev"> <span
@@ -445,7 +480,7 @@ $(function() {
 			<fmt:formatNumber value="${vo.real_price }" pattern="#,###"/>원</p><br/>
 			<hr/>
 			<span>적립금 &nbsp; ${vo.stack }원 
-			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }"></i></span>
+			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" id="${vo.code }">${vo.good }</i></span>
 			<input type="hidden" value="${vo.code }" id="cartCode"/>
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>
@@ -455,8 +490,7 @@ $(function() {
 			<br/>
 			<p><p/>
 			<div>
-				<button id="userCart" style="height:60px; width:50%; border:1px solid lightblue; background-color:white; font-size: 18px; float: left;">장바구니 담기</button>
-				<button style="height:60px; width:50%; border:1px solid lightblue; background-color: lightblue; font-size: 18px;" onclick="purchase()">구매</button>
+				<button id="userCart" class="btn btn-outline-light" style="height:60px; width:100%; border:1px solid lightblue; background-color:lightblue; font-size: 18px; float: left;">장바구니 담기</button>
 			</div>
 		</div>
 		<!-- 설명글 -->
@@ -465,22 +499,32 @@ $(function() {
 			<img src="/gachi/upload/storeImg/${vo.goods_info }"/>
 		</div>
 
-		<!-- 클래스 리뷰 -->
+		<!-- 스토어 리뷰 -->
 		<div id="myclassReview">
-			<label>수강평</label>
+			<label>후기</label>
 			<button type="button" class="btn btn-outline-light"
-				data-toggle="modal" data-target="#reviewModal" id="myclassReviewFrm">수강평작성</button>
+				data-toggle="modal" data-target="#reviewModal" id="myclassReviewFrm">후기작성</button>
 			<hr style="background: #000" />
 			<c:choose>
 				<c:when test="${empty reviewList}">
 					<div
 						style="height: 100px; width: 100%; line-height: 100px; text-align: center; background-color: #eee">
-						첫 번째로 리뷰를 남겨주세요 :)</div>
+						첫 번째로 후기를 남겨주세요 :)</div>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="r" items="${reviewList }">
 						<ul class="reviewMoreContent">
-							<li><div class="myclassStars" data-score="${r.grade }"></div></li>
+							<li>
+							<div id="myclassStars${r.num }" data-score="${r.grade }" data-num="${r.num }"  data-score-name="teacher[teacher_categories][0][value]"></div>
+							<script>
+							$('#myclassStars${r.num }').raty({
+								score : ${r.grade },
+								path : "img/starImages",
+								width : "100%",
+								readOnly : true,
+								space : false});
+							</script>
+							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
 							<li>${r.writedate }</li>

@@ -20,6 +20,7 @@ public class StorePageVO {
 	private String category; // 카테고리   
 	private String goods_name;/*상품명*/
 	private String goods_img1;/*상품 사진1*/
+	private String goods_img2;/*상품 사진2*/
 	private String real_price;/*실 가격*/
 	private String selectval;
 	private String enddate;
@@ -154,6 +155,14 @@ public class StorePageVO {
 
 	public void setGoods_img1(String goods_img1) {
 		this.goods_img1 = goods_img1;
+	}
+
+	public String getGoods_img2() {
+		return goods_img2;
+	}
+
+	public void setGoods_img2(String goods_img2) {
+		this.goods_img2 = goods_img2;
 	}
 
 	public String getReal_price() {

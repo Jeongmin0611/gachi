@@ -538,7 +538,73 @@ public class AdminController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value="/adminClass", method=RequestMethod.POST)
+
+
+	@RequestMapping("/adminClass")
+	public ModelAndView adminClass(@RequestParam(value="now", required=false) String now) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		//int startNum = 10 * (nowPage - 1) + 1;
+		int startNum=((nowPage-1)/5*5)+1;
+		int endNum = 10 * nowPage;
+
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		
+		dbParam.put("dateOption", null);
+		dbParam.put("category", null);
+		dbParam.put("startDate", null);
+		dbParam.put("endDate", null);
+		dbParam.put("search", null);
+		dbParam.put("class_state", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+				
+		int cntRecords = dao.getClassAllRecordCount(dbParam);		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		List<ClassVO> result = dao.getClassRecord(dbParam);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("result",result);
+		mav.addObject("cntData", result.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		dbParam.put("dateOption", null);
+		dbParam.put("startDate", null);
+		dbParam.put("endDate", null);
+		dbParam.put("search", null);
+		dbParam.put("catogory", null);
+		dbParam.put("class_state", null);
+
+
+		//mav.addObject("data", result);		//dao.get
+		mav.setViewName("admin/adminClass");
+		return mav;
+	}
+	@RequestMapping(value="/adminClass",method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView adminClass(@RequestParam(value="now", required=false) String now,
 			@RequestParam(value="category", required=false) String category,

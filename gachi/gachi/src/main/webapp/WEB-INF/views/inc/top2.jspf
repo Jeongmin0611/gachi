@@ -39,36 +39,25 @@
             <li data-target="#slideimage" data-slide-to="0" class="active"></li>
             <li data-target="#slideimage" data-slide-to="1"></li>
             <li data-target="#slideimage" data-slide-to="2"></li>
-            <li data-target="#slideimage" data-slide-to="3"></li>
-            <li data-target="#slideimage" data-slide-to="4"></li>
         </ul>
         <!-- 이미지 목록 (컨텐츠) -->
         <div class="carousel-inner" >
             <div class="carousel-item active">
-               <a href="#"> <img src="img/eventImg1.png"/></a>
+               <a href="/gachi/eventBoardView?event_num=431&event=진행이벤트&nowPage=1"> <img src="img/eventImg1.png"/></a>
                 <!-- 이미지 위의 설명쓰기-->
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <a href=""><img src="img/bxslide2.jpg"/></a>
+                <a href="/gachi/eventBoardView?event_num=432&event=진행이벤트&nowPage=1"><img src="img/bxslide2.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
             <div class="carousel-item">
-                <a href=""><img src="img/bxslide3.jpg"/></a>
+                <a href="/gachi/eventBoardView?event_num=433&event=진행이벤트&nowPage=1"><img src="img/bxslide3.jpg"/></a>
                 <div class="carousel-caption">
                 </div>
             </div>
-            <div class="carousel-item">
-                <a href=""><img src="img/slide031.jpg"/></a>
-                <div class="carousel-caption">
-                </div>
-            </div>
-            <div class="carousel-item">
-                <a href=""><img src="img/slideimg33.jpg"/></a>
-                <div class="carousel-caption">
-                </div>
             </div>
         </div>
         <!-- 좌우 컨트롤러 -->

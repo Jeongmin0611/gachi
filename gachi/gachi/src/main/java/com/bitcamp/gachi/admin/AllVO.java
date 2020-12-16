@@ -42,6 +42,7 @@ public class AllVO {
 	private String class_img2;/* 클래스 서브 이미지*/
 	private String searchKey;/* 클래스 질문 답변 검색*/
 	private String searchWord;/* 클래스 질문 답변 검색*/
+	private String class_info;
 	
 	//클래스 리뷰
 	private int num;
@@ -53,6 +54,7 @@ public class AllVO {
 	private String code;/*코드*/
 	private String goods_name;/*상품명*/
 	private String goods_img1;/*상품 사진1*/
+	private String goods_img2;/*상품 사진2*/
 	private String writedate;
 	private int stock;//재고
 	private int stack;//적립마일리지
@@ -299,6 +301,12 @@ public class AllVO {
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
+	}	
+	public String getClass_info() {
+		return class_info;
+	}
+	public void setClass_info(String class_info) {
+		this.class_info = class_info;
 	}
 	//클래스 리뷰
 	public int getNum() {
@@ -343,14 +351,19 @@ public class AllVO {
 	}
 	public void setGoods_img1(String goods_img1) {
 		this.goods_img1 = goods_img1;
+	}	
+	public String getGoods_img2() {
+		return goods_img2;
+	}
+	public void setGoods_img2(String goods_img2) {
+		this.goods_img2 = goods_img2;
 	}
 	public String getWritedate() {
 		return writedate;
 	}
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
-	}
-	
+	}	
 	public int getStock() {
 		return stock;
 	}
