@@ -86,7 +86,7 @@
 	</update>
 	<select id="orderCheck" resultType="int">
 		select count(*) from member m join orderlist o on m.userid=o.userid join goods_order g on o.order_code=g.order_code 
-		where m.userid='${userid}' and code='${code}'
+		where m.userid='${userid}' and code='${code}' and g.finished='구매확정'
 	</select>
 	<select id="reviewList"
 		resultType="com.bitcamp.gachi.admin.AllVO">
