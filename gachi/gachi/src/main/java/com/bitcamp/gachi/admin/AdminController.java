@@ -3773,7 +3773,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 10 + 1;
 		}
-		;
+		
 		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
 		
 		

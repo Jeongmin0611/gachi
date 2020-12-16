@@ -19,10 +19,10 @@ $(function(){
 	}, null, null, 4 ); 
 	
 	CKEDITOR.config.height=500;
-	$("#ad_event_writeForm").css("height","500px");
-	$("#ad_event_writeForm>li").slice(2).css("width","100%");
-	$("#ad_event_writeForm>li:first-child li").css("margin","7px 0px");
-	$("#ad_event_write li").css("margin-top","10px");
+	$("#ad_Event_writeForm").css("height","500px");
+	$("#ad_Event_writeForm>li").slice(2).css("width","100%");
+	$("#ad_Event_writeForm>li:first-child li").css("margin","7px 0px");
+	$("#ad_Event_write li").css("margin-top","10px");
 	$("textarea").css("height","800px");
 	$(".ad_box img").css("width","200px").css("height","200px");
 	$(".ad_box>div").css("margin","20px 0px;");

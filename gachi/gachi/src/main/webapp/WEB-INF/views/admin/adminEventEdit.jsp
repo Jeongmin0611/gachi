@@ -19,9 +19,10 @@ $(function(){
 	}, null, null, 4 ); 
 	
 	CKEDITOR.config.height=500;
-	$("#ad_event_writeForm>li").slice(2).css("width","100%");
-	$("#ad_event_writeForm>li:first-child li").css("margin","7px 0px");
-	$("#ad_event_write li").css("margin-top","10px");
+	$("#ad_Event_edit").css("height","500px");
+	$("#ad_Event_editForm>li").slice(2).css("width","100%");
+	$("#ad_Event_editForm>li:first-child li").css("margin","7px 0px");
+	$("#ad_Event_edit li").css("margin-top","10px");
 	$("textarea").css("height","800px");
 	$(".ad_box img").css("width","200px").css("height","200px");
 	$(".ad_box>div").css("margin","20px 0px;");
@@ -99,13 +100,13 @@ function eventDel(){
 <div class="container">
 <h1>상품수정</h1>
 <form method="post" action="adminEventEditOk" id="adminEventEditOk" enctype="multipart/form-data">
-<ul id="ad_event_writeForm">
+<ul id="ad_Event_editForm">
 		<li>
 			<ul>
-				<li class="content_center">상품번호</li><li><input type="text" name="event_num" value="${vo.event_num }" readonly/></li>
-				<li class="content_center">제목</li><li><input type="text" name="subject" value="${vo.subject }" /></li>
-				<li class="content_center">시작날짜</li><li><input type="text" name="startdate" value="${vo.startdate }" /></li>
-				<li class="content_center">종료 기간</li><li><input type="text" id="enddate" name="enddate" value="${vo.enddate }"/></li>
+				<li class="content_center">상품번호</li><li><input type="text" name="event_num" value="${list.event_num }" readonly/></li>
+				<li class="content_center">제목</li><li><input type="text" name="subject" value="${list.subject }" /></li>
+				<li class="content_center">시작날짜</li><li><input type="text" name="startdate" value="${list.startdate }" /></li>
+				<li class="content_center">종료 기간</li><li><input type="text" id="enddate" name="enddate" value="${list.enddate }"/></li>
 		</ul>
 	</li>
 	<li class="content_center">
@@ -133,9 +134,9 @@ function eventDel(){
 	</div>
 </c:forEach>
 </div>
-		<ul id="ad_event_write">
+		<ul id="ad_Event_edit">
 			<li>이벤트설명</li>
-			<li><textarea name="event_info" id="event_info">${vo.event_info }</textarea></li>
+			<li><textarea name="event_info" id="event_info">${list.event_info }</textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li>
 			<li class="content_center">
 				<input type="submit" class="btn" value="수정"/>

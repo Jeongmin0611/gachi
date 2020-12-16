@@ -100,7 +100,13 @@ $(function(){
 	});	
 });
 
+function onlyNumber(){
 
+    if((event.keyCode<48)||(event.keyCode>57))
+
+       event.returnValue=false;
+
+}
 /* function handleImgFileSelect(inputName, e) {
 	
 	var inputName = inputName;
@@ -121,13 +127,13 @@ $(function(){
 	<li>
 		<ul>
 			<li class="content_center">이벤트 번호</li>
-			<li><input type="text" id="event_num" name="event_num" value="${list.event_num }"/></li>
+			<li><input type="text" id="event_num" name="event_num" value="${vo.event_num }"/></li>
 			<li class="content_center">제목</li>
-			<li><input type="text" id="subject" name="subject" size="40" value="${list.subject }"/></li>
+			<li><input type="text" id="subject" name="subject" size="40" value="${vo.subject }"/></li>
 			<li class="content_center">시작 기간</li>
-			<li><input type="text" id="startdate" name="startdate" value="${list.startdate }"/></li>
+			<li><input type="text" id="startdate" name="startdate" maxlength="8" oninput="maxLengthCheck(this)" value="${vo.startdate }"/></li>
 			<li class="content_center">종료 기간</li>
-			<li><input type="text" id="enddate" name="enddate" value="${list.enddate }"/></li>
+			<li><input type="text" id="enddate" name="enddate" maxlength="8" oninput="maxLengthCheck(this)" onkeypress="onlyNumber();" value="${vo.enddate }"/></li>
 			<li class="content_center">메인 이미지</li>
 			<li><input type="file" name="mainImg" id="mainImg" /></li>
 			<li class="content_center">슬라이드 이미지1</li>
@@ -151,7 +157,7 @@ $(function(){
 </ul>
 <h3>이벤트 이미지 목록</h3>
 <div class="text_center ad_box">
-<c:forEach var="imgList" items="${list.imgList}" varStatus="status">
+<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
 		<div style="text-align:center;height:24px;">이미지${status.index+1}		
 		</div>
@@ -165,7 +171,7 @@ $(function(){
 	</div>
 </c:forEach>
 </div>
-		<ul id="ad_goods_write">
+		<ul id="ad_event_write">
 			<li>상품설명</li>
 			<li><textarea name="event_info" id="event_info"></textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li>
