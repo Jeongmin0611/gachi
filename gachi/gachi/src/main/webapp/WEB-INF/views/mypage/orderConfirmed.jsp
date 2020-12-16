@@ -23,7 +23,7 @@
 			<label style="color:gray">주문완료</label>
 			<hr class="userHr"/>
 			<div style="margin-bottom:50px">
-				<img src="/gachi/img/icon_check.png" style="width:150px;margin-bottom:30px"/>
+				<img src="/gachi/img/icon_check.png" style="width:100px;margin:30px 0"/>
 				<h4>주문이 완료되었습니다.</h4>
 			</div>
 			<hr/>

@@ -159,6 +159,11 @@
 			<div style="text-align:right">
 				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
+			<c:if test="${empty list }">
+				<div style="text-align:center"><img src="/gachi/img/icon_eventReply.png" style="width:10%;margin:40px 0"/>
+					 <h4>아직 작성한 질문이 없습니다.</h4>
+				</div>
+			</c:if>
 			<c:forEach var="vo" items="${list }">
 				<p><b>${vo.class_name }</b>
 				<c:if test="${vo.answer ne null }"><label class="badge badge-pill badge-primary" style="margin:0 5px;font-size:0.9em">답변완료</label></c:if>

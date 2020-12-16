@@ -74,9 +74,8 @@
 	</select>
 	<select id="userCartClassCheck" parameterType="com.bitcamp.gachi.mypage.OrderVO" resultType="int">
 		select count(code) 
-		 from orderlist o, class_order co
-		 where o.order_code = co.order_code
-		 and userid='${userid}'
+		 from course
+		 where userid='${userid}'
 		 and code='${code}'
 	</select>
 	<insert id="userCartInsert" parameterType="com.bitcamp.gachi.mypage.OrderVO">

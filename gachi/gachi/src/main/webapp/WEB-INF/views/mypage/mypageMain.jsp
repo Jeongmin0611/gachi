@@ -169,6 +169,11 @@
 				</div>
 			</form>
 		</div>
+		<c:if test="${empty map }">
+			<div style="text-align:center"><img src="/gachi/img/icon_search.png" style="width:10%;margin:40px 0"/>
+				 <h4>조회 내역이 없습니다.</h4>
+			</div>
+		</c:if>
 		<!-- 내용 -->
 		<div class="mypageContent col-md-10">
 			<c:forEach var="list" items="${map }">
