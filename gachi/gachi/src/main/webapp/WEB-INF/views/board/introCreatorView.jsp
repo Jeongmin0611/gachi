@@ -51,7 +51,7 @@
 }
 #createClass li img{
 	width: 100%;
-	height: 150px;
+	height: 160px;
 }
 #createClass li:nth-child(1), #createClass li:nth-child(2), #createClass li:nth-child(3){
 	height: 30px;
@@ -90,8 +90,8 @@
 			<li>클래스명</li>
 			<li>가격</li>
 			<c:forEach var ="list" items="${list}">
-				<li><a href="/gachi/classMain"><img src="/gachi/upload/classImg/${list.class_img }"/></a></li>
-				<li><a href="/gachi/classMain">${list.class_name }</a></li>				
+				<li><a href="/gachi/classView?code=${list.code }"><img src="/gachi/upload/classImg/${list.class_img }"/></a></li>
+				<li><a href="/gachi/classView?code=${list.code }">${list.class_name }</a></li>				
 				<li><fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</li>
 			</c:forEach>
 		</ul>

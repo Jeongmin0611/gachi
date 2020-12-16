@@ -121,7 +121,7 @@
 		select picture, nickname, sns_addr, creator_info from member m join creator cre on m.userid=cre.userid  where cre.userid='${param1}'
 	</select>
 	<select id="creatorBoardViewSelectClass" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select creator_info, class_name, real_price, class_img from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
+		select creator_info, cla.code, class_name, real_price, class_img from creator cre join class cla on cla.userid=cre.userid where cre.userid='${param1}'
 	</select>
 
 	
