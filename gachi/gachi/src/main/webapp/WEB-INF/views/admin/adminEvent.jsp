@@ -10,10 +10,12 @@
 	overflow: auto;
 	border:3px solid #437299;
 	border-radius: 10px;
+	over-flow:hidden;
 }
 #ad_event_lst li {
 	vertical-align: middle;
 	border-bottom:1px solid gray;
+	over-flow:hidden;
 }
 #ad_event_header{
 	overflow:auto;
