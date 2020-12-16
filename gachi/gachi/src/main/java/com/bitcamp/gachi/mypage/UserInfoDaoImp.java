@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.board.EventBoardVO;
 import com.bitcamp.gachi.register.RegisterVO;
 
@@ -72,10 +73,14 @@ public interface UserInfoDaoImp {
 	public List<OrderListVO> myclassList(String userid);
 	//내 클래스 보기
 	public OrderListVO myclassView(@Param("userid") String userid, @Param("code") String code);
+	//내 클래스 영상
+	public ClassVideoVO myclassVideoView(@Param("code") String code, @Param("video_code") String video_code);
 	//차시 목록
 	public List<ClassVideoVO> sectionList(String code);
 	//동영상 목록
 	public List<ClassVideoVO> classVideoList(@Param("code") String code, @Param("section_code") String section_code);
+	//클래스 qna 리스트
+	public List<QnaVO> qnaList(String code);
 	//좋아요(클래스)
 	public List<OrderListVO> classWishList(String userid);
 	//좋아요(상품)
