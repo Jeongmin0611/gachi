@@ -6,37 +6,59 @@
 	<select id="storeAllRecord" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="com.bitcamp.gachi.store.StorePageVO">
 		select * from 
 		(select * from 
-		(select code, category, goods_name, real_price, goods_img1, to_char(writedate, 'YYYY-MM-DD') writedate, good from goods 
+		(select code,good,category, goods_name, real_price, goods_img1, to_char(writedate, 'YYYY-MM-DD') writedate from goods 
 		<choose>
-			<when test='category==null and selectval == null'></when>
-			<when test='category==null and selectval.equals("Iall")'></when>
+			<when test='category==null and selectval == null'>
+			where sale_state='판매중' )
+			</when>
+			<when test='category==null and selectval.equals("Iall")'>
+			where sale_state='판매중' )
+			</when>
 			<when test='category==null and selectval.equals("Inew")'>
-				where writedate<![CDATA[ <= ]]> sysdate order by writedate desc) 
+				where writedate<![CDATA[ <= ]]> sysdate and sale_state='판매중'  order by writedate desc) 
 			</when>
 			<when test='category==null and selectval.equals("Ipopular")'>
-				where writedate<![CDATA[ <= ]]> sysdate order by good desc) 
+				where writedate<![CDATA[ <= ]]> sysdate and sale_state='판매중'order by good asc) 
 			</when>
 			<when test="category!=null and selectval==null">
-				where writedate<![CDATA[ <= ]]> sysdate and category='${category}'order by enddate asc) 
+				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' and sale_state='판매중' order by enddate asc) 
 			</when>
 			<when test='category!=null and selectval.equals("Iall")'>
-				where writedate<![CDATA[ <= ]]> sysdate and category='${category}'order by enddate asc) 
+				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' and sale_state='판매중' order by enddate asc) 
 			</when>
 			<when test='category!=null and selectval.equals("Inew")'>
-				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' order by writedate desc) 	
+				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' and sale_state='판매중' order by writedate desc) 	
 			</when>			
 			<when test='category!=null and selectval.equals("Ipopular")'>
-				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' order by good desc)	
+				where writedate<![CDATA[ <= ]]> sysdate and category='${category}' and sale_state='판매중' order by good asc)	
 			</when>
 		</choose>
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]> order by writedate desc)
-		where <![CDATA[rownum<=${lastPageRecordCount}]]> order by writedate asc
+		where <![CDATA[rownum<=${lastPageRecordCount}]]>
 		<choose>
 			<when test='category==null and selectval == null'>
-			)
+			 order by writedate asc
 			</when>
 			<when test='category==null and selectval.equals("Iall")'>
-			)
+			 order by writedate asc
+			</when>
+			<when test='category==null and selectval.equals("Inew")'>
+			order by writedate desc
+			</when>
+			<when test='category==null and selectval.equals("Ipopular")'>
+				order by good desc 
+			</when>
+			<when test="category!=null and selectval==null">
+			order by writedate asc
+			</when>
+			<when test='category!=null and selectval.equals("Iall")'>
+				order by writedate asc
+			</when>
+			<when test='category!=null and selectval.equals("Inew")'>
+				order by writedate asc
+			</when>			
+			<when test='category!=null and selectval.equals("Ipopular")'>
+				order by good desc 
 			</when>
 		</choose>
 	</select>
