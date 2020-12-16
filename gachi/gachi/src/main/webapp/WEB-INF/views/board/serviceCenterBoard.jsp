@@ -33,9 +33,8 @@
 #CserviceContentDiv ul li:nth-child(4n+1){	/* 카테고리 */
 	width:15%;
 	height: 40px;
-	background-color: #F4BFA9;
+	background-color: #F1F7FA;
 	margin-right: 5%;
-	color: white;
 	text-align: center;
 	float: left;
 }
@@ -101,19 +100,4 @@
 			<li>내용</li>
 		</ul>
 	</div>
-	<!-- paging -->
-	<div id="CservicePaging">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
-	</div>
-	
-
-
 </div>

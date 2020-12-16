@@ -48,7 +48,7 @@
 			<a>(점심시간12:00~13:30)</a><br /> <a>주말,공휴일 제외</a>
 		<li class="mMeun"><a href="noticeBoard">공지사항</a></li>
 		<li class="sMeun"><a href="deliveryBoard">배송정책</a><br />
-		<a href="serviceCenterBoard">자주묻는질문</a><br/> <a href="companyBoard">회사소개</a><br /> 
+		<a href="serviceCenterBoard_TopFAQ">자주묻는질문</a><br/> <a href="companyBoard">회사소개</a><br /> 
 	</ul>
 </div>
 

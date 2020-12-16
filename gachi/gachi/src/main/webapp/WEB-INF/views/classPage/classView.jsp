@@ -214,29 +214,48 @@ input[type=text] {
 		});*/
 		
 		//좋아요 클릭이벤트
-		$('i').on(
-				'click',
-				function() {
-					if (id == null || id == 'null') {
-						swal({
-							title:'로그인 후 이용가능한 기능입니다.',
-							icon:"warning"});
-						return false;
-					}
-					if (id != null) {
-						var good_choice_code;
-						var atr = $(this).attr('class');
-						if (atr == 'far fa-heart fa-lg') {
-							$(this).attr('class', 'fas fa-heart fa-lg');
-							good_choice_code = $(this).attr('id');
-							location.href = "/gachi/classView?code="+ good_choice_code + "&good_add="+ good_choice_code;
-						} else if (atr == 'fas fa-heart fa-lg') {
-							$(this).attr('class', 'far fa-heart fa-lg');
-							good_choice_code = $(this).attr('id');
-							location.href = "/gachi/classView?code="+ good_choice_code + "&good_del="+ good_choice_code;
+		$('i').on('click',function(){
+			var id = '<%=(String) session.getAttribute("userid")%>';
+			if (id == null || id == 'null') {
+				swal('로그인 후 이용가능한 기능입니다.');
+				return false;
+			}
+			
+			var good_choice_code;
+			var atr = $(this).attr('class');
+			if (id != null) {
+				if (atr == 'far fa-heart fa-lg') {
+					$(this).attr('class', 'fas fa-heart fa-lg');
+					good_choice_code = $(this).attr('data-name');
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_add",
+						data:{
+							good_add:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
 						}
-					}
-				});
+					});//ajax			
+					
+				} else if (atr == 'fas fa-heart fa-lg') {
+					$(this).attr('class', 'far fa-heart fa-lg');
+					good_choice_code = $(this).attr('data-name');
+					$.ajax({
+						type:"POST",
+						url:"/gachi/good_del",
+						data:{
+							good_del:good_choice_code
+						},success:function(){
+							location.reload();
+						}, error:function(){
+							swal('실패'+error);
+						}
+					});//ajax
+				}//elif
+			}//id가 널이 아닐 때 if문
+		});
 	  
 	  	//장바구니 담기
 	  	$('#userCart').on('click',function(){
@@ -336,7 +355,12 @@ input[type=text] {
 					title:'로그인 후 이용가능한 기능입니다.',
 					icon:"warning"});
 				return false;
-			  }else{
+	  		}else if(${courseCheck}!=1){
+	  			swal({
+					title:'구매 후 이용가능한 기능입니다.',
+					icon:"warning"});
+	  			return false;
+	  		}else{
 				  return true;
 			  }
 	  	});
@@ -412,7 +436,6 @@ input[type=text] {
 	  				subject:$('#qnaSubject').val(),
 	  				content:$('#qnaContent').val()},
 	  			success:function(){
-	  				swal('질문이 등록 되었습니다.');
 	  				swal({
 		  				  title: "수강평이 등록 되었습니다.",
 		  				  icon: "success",
@@ -424,6 +447,28 @@ input[type=text] {
 	  			}
 	  		});
 			
+	  	});
+	  	//qna답변
+	  	$('.qnaAnswerFrm').click(function(){
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/qnaFormUpdate",
+	  			data:{	  				
+	  				code:'${vo.code}',
+	  				num:$(this).
+	  				subject:$('#qnaSubject').val(),
+	  				content:$('#qnaContent').val()},
+	  			success:function(){
+	  				swal({
+		  				  title: "수강평이 등록 되었습니다.",
+		  				  icon: "success",
+		  				  buttons: true
+		  				});
+	  				location.reload();
+	  			},error:function(){
+	  				swal('질문등록이 실패하였습니다.');
+	  			}
+	  		});
 	  	});
 	  	reviewMoreContent();
 	  	qnaMoreContent();
@@ -493,12 +538,12 @@ input[type=text] {
 				<fmt:formatNumber value="${vo.real_price }" pattern="#,###"/>원</p>
 			<br />
 			<hr />
-			<span>적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
-				style="float: right; height: 15px; color: red;" id="${vo.code }">${vo.good }</i>
+			<span>적립금 &nbsp; ${vo.stack }원 
+			<i class="far fa-heart fa-lg" style="float: right; height: 15px; color: red;" data-name="${vo.code }">${vo.good }</i>
 			</span> <input type="hidden" value="${vo.code }" id="cartCode" />
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>
-					$('#${vo.code}').attr('class', 'fas fa-heart fa-lg');
+					$('i[data-name=${vo.code }]').attr('class', 'fas fa-heart fa-lg');
 				</script>
 			</c:if>
 			<br />
@@ -515,11 +560,10 @@ input[type=text] {
 		</div>
 
 		<!-- 설명글 -->
-		<h4 style="margin-top: 10px; padding-left: 10px;">클래스 소개</h4>
-		<br />&nbsp; 차시 | 112차 총 시간 | 896시간
+		<h4 style="margin-top: 30px; padding-left: 10px;">클래스 소개</h4>
 
 		<div class="col-sm-12"
-			style="min-height: 300px; background-color: #eee">클래스 설명글</div>
+			style="min-height: 300px; background-color: #eee">${vo.class_info }</div>
 
 		<!-- 클래스 리뷰 -->
 		<div id="myclassReview">
@@ -596,7 +640,15 @@ input[type=text] {
 							<li>
 								<hr />
 								<ul>
-									<li><label class="badge badge-light">A</label>${qna.writer }</li>
+									<li><label class="badge badge-light">A</label>
+										<c:if test="${empty qna.writer and creatorCheck==1}">	
+										<input type="hidden" value="${qna.num }" name="num"/>									
+											<button type="button" class="btn btn-outline-light btn-sm" style="background-color:"
+													data-toggle="modal" data-target="#exampleModal" class="qnaAnswerFrm">
+											답변작성</button>
+										</c:if>${qna.writer }
+									</li>
+									
 									<li>${qna.answer_writedate }</li>
 									<li>${qna.answer }</li>
 								</ul>
