@@ -308,20 +308,20 @@
 						<div class="col-md-2">원</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8"><input type="text" name="mileage" id="mileageInput" placeholder="현재 마일리지 ${mileage }p"/></div>
+						<div class="col-md-8"><input type="text" name="mileage" id="mileageInput" placeholder="현재 마일리지 <fmt:formatNumber value="${mileage }" pattern="#,###" />p"/></div>
 						<div class="col-md-3"><button type="button" class="btn btn-outline-light btn-sm" id="mileageBtn">적용</button></div>
 					</div>
 				</div>
 			</div>
 			<label>결제금액</label>
 			<hr class="userHr"/>
-			<div><b>합계</b><input type="text" value="${sum }" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
+			<div><b>합계</b><input type="text" value="<fmt:formatNumber value="${sum }" pattern="#,###" />" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
 			<c:set var="ship" value="0"/>
 			<!-- ------------------- -->
 			<c:if test="${result eq 1 }">
 				<c:if test="${sum lt 50000}"><!-- 50000원 미만 -->
 					<c:set var="ship" value="2500"/>
-					<div><b>배송비</b> +<fmt:formatNumber value="${ship }" pattern="#,###" />원</div>
+					<div><b>배송비</b><label style="margin:0 25px">+<fmt:formatNumber value="${ship }" pattern="#,###" /></label>원</div>
 				</c:if>
 				<c:if test="${sum ge 50000}"><!-- 50000원 이상 -->
 					<c:set var="ship" value="0"/>
@@ -332,7 +332,7 @@
 			<input type="hidden" id="shipLbl" value="${ship }"/>
 			<div><b>마일리지</b><input type="text" id="mileageUse" value="0" style="border:none;outline:none;width:10%" readonly/>원</div>
 			<hr class="userHr"/>
-			<div style="font-size:1.2em"><b>총 금액</b><input type="text" value="${sum+ship }" id="finalPrice" style="border:none;outline:none;width:15%" readonly/>원</div>
+			<div style="font-size:1.2em"><b>총 금액</b><input type="text" value="<fmt:formatNumber value="${sum+ship }" pattern="#,###" />" id="finalPrice" style="border:none;outline:none;width:15%" readonly/>원</div>
 			<div>
 				<div><input type="checkbox" id="orderAgree"/>구매진행에 동의합니다.</div>
 				<button type="button" class="btn btn-outline-light" id="payBtn" style="width:20%">결제하기</button>

@@ -103,14 +103,14 @@
 	  			},
 	  			success:function(){
 	  				swal({
-	  				  title: "상품 리뷰가 등록 되었습니다.",
+	  				  title: "상품 리뷰가 수정 되었습니다.",
 	  				  icon: "success",
 	  				  buttons: true
 	  				}).then((result)=>{
 	  					location.href = location.href;
 	  				});
 	  			},error:function(){
-	  				swal('리뷰 등록이 실패하였습니다. ');
+	  				swal('리뷰 수정이 실패하였습니다. ');
 	  			}
 	  			
 	  		});
@@ -147,7 +147,7 @@
 							if(result>0){
 								swal({
 									title: "완료",
-									text: "삭제가 완료되었습니다!",
+									text: "리뷰 삭제가 완료되었습니다!",
 									icon: "success",
 									closeOnClickOutside: false,
 									buttons: {
@@ -181,6 +181,11 @@
 			<div style="text-align:right">
 				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#reviewModal" id="myclassReviewFrm">리뷰작성</button>
 			</div>
+			<c:if test="${empty list }">
+				<div style="text-align:center"><img src="/gachi/img/icon_eventReply.png" style="width:10%;margin:40px 0"/>
+					 <h4>아직 작성한 리뷰가 없습니다.</h4>
+				</div>
+			</c:if>
 			<c:forEach var="vo" items="${list }">
 				<input type="hidden" value="${vo.num }"/>
 				<p><b>${vo.goods_name }</b></p>

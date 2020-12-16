@@ -44,7 +44,7 @@
 	/****************/
 	/* 메인창 */
 	#myclassVideoMain{
-		width:70%;
+		width:74%;
 		height:100vh;
 		overflow:;
 		float:left;	
@@ -112,7 +112,7 @@
 	/****************/
 	/* 목차 */
 	#myclassVideoLst{
-		width:30%;
+		width:26%;
 		height:100vh;
 		overflow:auto;
 		border-left:1px solid gray;
@@ -168,7 +168,7 @@
 		});
 		$('#videoLstOpen').click(function(){
 			$('#myclassVideoLst').show();
-			$('#myclassVideoMain').css('width','70%');
+			$('#myclassVideoMain').css('width','74%');
 			$('#videoLstOpen').hide();
 			$('#videoLstClose').show();
 		});
@@ -179,7 +179,7 @@
 <div class="cfont">
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
-			<div style="font-size:0.9em"><a href="/gachi/myclassView?vode=${vo.code }">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
+			<div style="font-size:0.9em"><a href="/gachi/myclassView?code=${vo.code }">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
 			<div style="font-size:0.9em">
 				프랑스 자수 클래스를 소개합니다!
 				<button class="btn btn-light" id="videoLstClose">></button>
@@ -189,11 +189,11 @@
 		<div id="myclassVideoView">
 			<video  id="my-video" class="video-js" controls preload="auto"
     				data-setup="{}">
-    		<source src="upload/class_video/${vVO.video_filename }" type="video/mp4" />	
+    		<source src="/gachi/upload/class_video/${vVO.video_filename }" type="video/mp4" />	
     				
 			</video>
 		</div>
-		<div id="myclassVideoBtm" style="padding:5px">
+		<div id="myclassVideoBtm" style="padding:2px">
 			<button type="button" class="btn btn-light">< 이전 영상</button>
 			<button type="button" class="btn btn-primary">다 봤어요!</button>
 			<button type="button" class="btn btn-light">다음 영상 ></button>

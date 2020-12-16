@@ -53,11 +53,11 @@
 					<c:forEach var="cvo" items="${cList }">
 						<div class="col-md-4">
 							<div class="card focusEffectSm moreContent" style="margin:20px 0;border-radius:1em">
-								<a href="/gachi/myclassView"><img src="/gachi/upload/classImg/${cvo.class_img }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
+								<a href="/gachi/classView?code=${cvo.code }"><img src="/gachi/upload/classImg/${cvo.class_img }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
 								<div class="card-body" style="height:120px">
 									<div><span class="badge badge-info">${cvo.category }</span></div>
 									<i class="fas fa-heart fa-lg p-2 focusEffect" id="${cvo.code }" style="float:right"></i>
-									<b style="font-size:0.9em"><a href="/gachi/myclassView">${cvo.class_name }</a></b>
+									<b style="font-size:0.9em"><a href="/gachi/classView?code=${cvo.code }">${cvo.class_name }</a></b>
 									<div style="font-size:0.9em">by ${cvo.nickname }</div>
 								</div>
 							</div>
@@ -66,11 +66,11 @@
 					<c:forEach var="gvo" items="${gList }">
 						<div class="col-md-4">
 							<div class="card focusEffectSm moreContent" style="margin:20px 0;border-radius:1em">
-								<a href="/gachi/myclassView"><img src="/gachi/upload/storeImg/${gvo.goods_img1 }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
+								<a href="/gachi/storeView?code=${gvo.code }"><img src="/gachi/upload/storeImg/${gvo.goods_img1 }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
 								<div class="card-body" style="height:120px">
 									<div><span class="badge badge-info">${gvo.category }</span></div>
 									<i class="fas fa-heart fa-lg p-2 focusEffect" id="${gvo.code }" style="float:right"></i>
-									<b style="font-size:0.9em"><a href="/gachi/myclassView">${gvo.goods_name }</a></b>
+									<b style="font-size:0.9em"><a href="/gachi/myclassView?code=${gvo.code }">${gvo.goods_name }</a></b>
 								</div>
 							</div>
 						</div>
