@@ -363,20 +363,34 @@ public class MypageController {
 	}
 	/* 주문완료 페이지 */
 	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
-	public ModelAndView orderConfirmed(OrderListVO vo) {
+	public ModelAndView orderConfirmed(OrderListVO vo, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		
 		OrderVO newVO = dao.orderView(vo.getOrder_code());
-		String class_name = "";
-		String goods_name = "";
+		String class_name = null;
+		String goods_name = null;
 		int classCnt = 0;
 		int goodsCnt = 0;
-		
 		if(vo.getOrderClassCode()!=null) {
+			for(int i=0;i<vo.getOrderClassCode().length;i++) {
+				vo.setCode(vo.getOrderClassCode()[i]);
+				vo.setUserid((String)ses.getAttribute("userid"));
+				int courseResult = dao.courseInsert(vo);
+				int classResult = dao.classOrderInsert(vo);
+				int classCartResult = dao.cartDelete((String)ses.getAttribute("userid"), vo.getCode());
+			}
 			classCnt = vo.getOrderClassCode().length;
 			class_name = dao.getClassName(vo.getOrderClassCode()[0]);
 			
 		}
 		if(vo.getOrderGoodsCode()!=null) {
+			for(int i=0;i<vo.getOrderGoodsCode().length;i++) {
+				int amount = dao.countGoodsCart((String)ses.getAttribute("userid"), vo.getOrderGoodsCode()[i]);
+				vo.setCode(vo.getOrderGoodsCode()[i]);
+				vo.setAmount(amount);
+				int goodsResult = dao.goodsOrderInsert(vo);
+				int goodsCartResult = dao.cartDelete((String)ses.getAttribute("userid"), vo.getCode());
+			}
 			goodsCnt = vo.getOrderGoodsCode().length;
 			goods_name = dao.getGoodsName(vo.getOrderGoodsCode()[0]);
 		}
@@ -404,14 +418,27 @@ public class MypageController {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
 		
+		List<ClassVideoVO> section = dao.sectionList(code);
+		LinkedHashMap<String,List<ClassVideoVO>> map = new LinkedHashMap<String,List<ClassVideoVO>>();
+		for(int i=0;i<section.size();i++) {
+			map.put(section.get(i).getUnit_content(), dao.classVideoList(code, section.get(i).getSection_code()));
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("map", map);
 		mav.setViewName("mypage/myclassView");
 		return mav;
 	}
 	@RequestMapping("/myclassVideo")
-	public String myclassVideo() {
-		return "myclass/myclassVideo";
+	public ModelAndView myclassVideo(String code, String video_code, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("myclass/myclassVideo");
+		return mav;
 	}
 	/* 마일리지 */
 	@RequestMapping("/userMileage")
@@ -468,9 +495,11 @@ public class MypageController {
 	public ModelAndView myclassQna(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		List<QnaVO> list = dao.qnaView((String)ses.getAttribute("userid"));
+		List<OrderListVO> cList = dao.myclassList((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("cList", cList);
 		mav.setViewName("mypage/myclassQna");
 		return mav;
 	}
@@ -487,9 +516,11 @@ public class MypageController {
 	public ModelAndView myclassReview(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		List<QnaVO> list = dao.classReview((String)ses.getAttribute("userid"));
+		List<OrderListVO> cList = dao.myclassList((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("cList", cList);
 		mav.setViewName("mypage/myclassReview");
 		return mav;
 	}
@@ -505,10 +536,12 @@ public class MypageController {
 	@RequestMapping("/mypageStoreQna")
 	public ModelAndView mypageStoreQna(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		//List<QnaVO> list = dao.classReview((String)ses.getAttribute("userid"));
+		List<QnaVO> list = dao.goodsQnaView((String)ses.getAttribute("userid"));
+		List<OrderListVO> gList = dao.goodsList((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("list", list);
+		mav.addObject("list", list);
+		mav.addObject("gList", gList);
 		mav.setViewName("mypage/mypageStoreQna");
 		return mav;
 	}
@@ -517,9 +550,11 @@ public class MypageController {
 	public ModelAndView mypageStoreReview(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
 		List<QnaVO> list = dao.goodsReview((String)ses.getAttribute("userid"));
+		List<OrderListVO> gList = dao.goodsList((String)ses.getAttribute("userid"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("gList", gList);
 		mav.setViewName("mypage/mypageStoreReview");
 		return mav;
 	}
@@ -547,12 +582,12 @@ public class MypageController {
 		mav.setViewName("mypage/mypageEvent");
 		return mav;
 	}
-	/* 내 학습표 - 수강평 삭제 */
+	/* 이벤트 댓글 삭제 */
 	@RequestMapping("/eventReplyDelete")
 	@ResponseBody
-	public int eventReplyDelete(int num) {
+	public int eventReplyDelete(int reply_num) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		int result = dao.eventReplyDelete(num);
+		int result = dao.eventReplyDelete(reply_num);
 		return result;
 	}
 }

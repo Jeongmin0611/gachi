@@ -8,9 +8,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
+
+import com.bitcamp.gachi.admin.ClassDaoImp;
+import com.bitcamp.gachi.admin.PagingVO;
+
 import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.classPage.ClassPageDaoImp;
 import com.bitcamp.gachi.mypage.OrderListVO;
@@ -32,11 +38,15 @@ public class StoreController {
 	public ModelAndView storeList(HttpServletRequest req, HttpSession ses,StorePageVO vo) throws Exception{
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+		
 		String category=req.getParameter("category");
-			String nowPageTxt= req.getParameter("nowPage");
-			if(nowPageTxt!=null) {//페이지 번호를 request한 경우
-				vo.setNowPage(Integer.parseInt(nowPageTxt));
-				}
+
+		String selectval=req.getParameter("selectval");
+		//현재 페이지
+		String nowPageTxt= req.getParameter("nowPage");
+		if(nowPageTxt!=null) {//페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+			}
 		if(category==null) {
 			int totalRecord = dao.storeListAllRecordCount(vo);
 				vo.setTotalRecord(totalRecord);
@@ -116,5 +126,36 @@ public class StoreController {
 	@RequestMapping("/purchase")
 	public String purchase() {
 		return "store/purchase";
+	}
+	//스토어 수강평 작성
+	@RequestMapping(value="/storeReviewFormOk", method=RequestMethod.POST)
+	public String qnaFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
+		vo.setIp(req.getRemoteAddr());
+		vo.setUserid((String) ses.getAttribute("userid"));
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+		vo.setGrade(req.getParameter("grade"));
+
+		String code = req.getParameter("code");
+		vo.setCode(code);
+		System.out.println("code= "+code);
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		dao.insertReview(vo);
+//			return "redirect:classView?code="+code+"&nowPage="+pvo.getNowPage();
+		return "redirect:classView";
+	}
+	//스토어 수강평 수정
+	@RequestMapping(value="/storeReviewUpdateFormOk", method=RequestMethod.POST)
+	@ResponseBody
+	public void reviewUpdateFormOk(AllVO vo, HttpSession ses, HttpServletRequest req, PagingVO pvo) {
+		String userid = (String)ses.getAttribute("userid");
+		vo.setUserid(userid);
+		vo.setSubject(req.getParameter("subject"));
+		vo.setContent(req.getParameter("content"));
+		vo.setGrade(req.getParameter("grade"));
+		vo.setNum(Integer.parseInt(req.getParameter("num")));
+
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		dao.updateReview(vo);
 	}
 }

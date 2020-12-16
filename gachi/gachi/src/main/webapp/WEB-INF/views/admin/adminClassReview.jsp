@@ -164,12 +164,12 @@ $(function(){
 				</c:if>
 				<c:forEach var="i" begin="1" end="${lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/ClassReview?now=${i }">${i }</a>
+						<a class="btn" href="/gachi/adminClassReview?now=${i }">${i }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${nowPage < lastPage}">
 					<li class="btn">
-						<a class="btn" href="/gachi/ClassReview?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/adminClassReview?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>

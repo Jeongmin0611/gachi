@@ -63,7 +63,7 @@
 		</choose>
 	</select>
 	<select id="storeView" parameterType="String" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1
+		select code, category, goods_name, real_price, stock, stack, goods_info, goods_img1, good
 		from goods where code='${param1}'
 	</select>
 	<select id="storeListAllRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
@@ -72,4 +72,14 @@
 	<select id="storeListCategoryRecordCount" parameterType="com.bitcamp.gachi.store.StorePageVO" resultType="int">
 		select count(goods_name) from goods where category ='${category}' order by enddate
 	</select>
+	<insert id="insertReview"
+		parameterType="com.bitcamp.gachi.admin.AllVO">
+		insert into goods_review (num, code, userid, subject,
+		content, writedate, grade, ip)
+		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
+		${grade}, '${ip}')
+	</insert>
+	<update id="updateReview" parameterType="com.bitcamp.gachi.admin.AllVO">
+		update goods_review set grade='${grade}', subject='${subject}', content='${content}' where num=${num}
+	</update>
 </mapper>

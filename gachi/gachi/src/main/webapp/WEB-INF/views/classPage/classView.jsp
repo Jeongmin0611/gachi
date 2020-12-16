@@ -494,7 +494,7 @@ input[type=text] {
 			<br />
 			<hr />
 			<span>적립금 &nbsp; ${vo.stack }원 <i class="far fa-heart fa-lg"
-				style="float: right; height: 15px; color: red;" id="${vo.code }"></i>
+				style="float: right; height: 15px; color: red;" id="${vo.code }">${vo.good }</i>
 			</span> <input type="hidden" value="${vo.code }" id="cartCode" />
 			<c:if test="${goodVo.code eq vo.code }">
 				<script>

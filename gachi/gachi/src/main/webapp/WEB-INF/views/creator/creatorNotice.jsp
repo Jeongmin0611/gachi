@@ -1,40 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style>
-#cr_notice_lst{
-	border:3px solid #437299;
-	border-radius:10px;
-	overflow: auto;
-}
-#cr_notice_lst li {
+#ad_notice_lst li {
 	vertical-align: middle;
 	line-height: 50px;
 }
+
 #search_area {
-	margin:20px 0px;
+	text-align:right;
+	margin-bottom: 10px;
 }
+
 select {
 	height: 30px;
 }
 </style> 
-<div class="container text-center ad_font">
+<script type="text/javascript">
+	$(()=>{
+		$("#creatorNotice").submit(()=>{
+			if($("#option").val()=='전체'){
+				$("#option").val(null);	
+			}
+			if($("#date1").val()!=''&& $("#date2").val()==''){
+				alert("시작/종료일자를 입력하여주십시오.");
+				return false;
+			}
+			if($("#date1").val()==''&& $("#date2").val()!=''){
+				alert("시작/종료일자를 입력하여주십시오.");
+				return false;
+			}
+			if($("#date1").val()>$("#date2").val()){
+				alert("시작일보다 종료일이 더 빠릅니다.\n다시 입력하여 주십시오.");
+				return false;
+			}
+			return true;
+		});
+	});
+
+
+</script>
+<div class="container ad_font">
 <h1>공지사항</h1>
 <!-- 1:1문의 영역 -->
 
 <!-- 검색영역 -->
 <div id="search_area">
-<form action="#">
-	<select id="searchType2" name="option2">
-			<option selected="selected">제목</option>
-			<option>작성자</option>
-			<option>등록일</option>
-			<option>답변여부</option>
-	</select>
-<input type="text" id="searchWord" placeholder="내용 입력"/>
-<input type="submit" class="btn" value="검색"/>
+<div>
+	총 레코드 수:${npvo.totalRecord}
+</div>
+<form method="post" id="creatorNotice" action="/gachi/creatorNotice">
+<div>
+	등록일 <input type="date" id="date1" name="date1"/>&nbsp;~
+	&nbsp;<input type="date" id="date2" name="date2"/>
+</div>
+	<div style="margin-top:10px;">
+		<select id="option" name="option">
+				<option value="전체">전체</option>
+				<option value="subject">제목</option>
+				<option value="content">내용</option>
+				<option value="writer">작성자닉네임</option>
+		</select>
+		<input type="text" id="searchWord" name="searchWord" placeholder="내용 입력" size="40"/>
+		<input type="submit" class="btn" value="검색"/>
+	</div>
 </form>
 </div>
-<ul id="cr_notice_lst">
+<ul id="ad_notice_lst">
 	<li>선택</li>
 	<li>번호</li>
 	<li>제목</li>
@@ -42,28 +73,40 @@ select {
 	<li>등록일</li>
 	<li>조회수</li>
 
-	<li><input type="checkbox" id="" name=""/></li>
-	<li>10</li>
-	<li><a href="/gachi/creatorNoticeView">동영상이 나오지 않을 때 해결방법</a></li>
-	<li>같이가치</li>
-	<li>2020-10-29</li>
-	<li>25</li>
+	<c:forEach var="vo" items="${list}">
+		<li><input type="checkbox" id="" name=""/></li>
+		<li>${vo.notice_num}</li>
+		<li><a href="/gachi/creatorNoticeView?notice_num=${vo.notice_num}&nowPage=${npvo.nowPage}">${vo.subject}</a></li>
+		<li>${vo.writer}</li>
+		<li>${vo.writedate}</li>
+		<li>${vo.hit}</li>
+	</c:forEach>
+
 </ul>
-<!-- 
-<div class="cr_list_menu">
+<div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/creatorNoticeWrite'">글쓰기</button>
 	<button class="btn">삭제</button> 
 </div>
- -->
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${npvo.nowPage>1}">
+				<li class="btn">
+					<a class="btn" href="/gachi/creatorNotice?nowPage=${npvo.nowPage-1}">Prev</a>
+				</li>
+			</c:if>
+			<c:forEach var="p" begin="${npvo.startPageNum}" end="${npvo.startPageNum + npvo.onePageRecord-1 }">
+				<c:if test="${p<=npvo.totalPage}">
+					<li <c:if test="${p==npvo.nowPage}"> style="color:#437299"</c:if>>
+						<a href="/gachi/creatorNotice?nowPage=${p}&date1=${date1}&date2=${date2}&
+							searchWord=${searchWord}&option=${option}" class="paging_num">${p}</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<c:if test="${npvo.nowPage<npvo.totalPage}">
+				<li class="btn">
+					<a class="btn" href="/gachi/creatorNotice?nowPage=${npvo.nowPage+1}">next</a>
+				</li>
+			</c:if>
 	</ul>
 </div>
 </div>

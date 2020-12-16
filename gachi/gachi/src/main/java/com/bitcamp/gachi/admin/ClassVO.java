@@ -37,6 +37,17 @@ public class ClassVO {
 	private String writedate;
 	private String ip;
 	
+	private String[] unitContent;
+	private int[] unitArray;
+	private int[] sectionIndex;
+	private String[] videoCode;
+	private String[] enrollDate;
+	private double[] videoLength;
+	private String[] videoName;
+	private String[] videoFileName;
+	private String[] sectionCode;
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -205,5 +216,61 @@ public class ClassVO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String[] getUnitContent() {
+		return unitContent;
+	}
+	public void setUnitContent(String[] unitContent) {
+		this.unitContent = unitContent;
+	}
+	public int[] getUnitArray() {
+		return unitArray;
+	}
+	public void setUnitArray(int[] unitArray) {
+		this.unitArray = unitArray;
+	}
+	public int[] getSectionIndex() {
+		return sectionIndex;
+	}
+	public void setSectionIndex(int[] sectionIndex) {
+		this.sectionIndex = sectionIndex;
+	}
+	public String[] getVideoCode() {
+		return videoCode;
+	}
+	public void setVideoCode(String[] videoCode) {
+		this.videoCode = videoCode;
+	}
+	public String[] getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(String[] enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+	public double[] getVideoLength() {
+		return videoLength;
+	}
+	public void setVideoLength(double[] videoLength) {
+		this.videoLength = videoLength;
+	}
+	public String[] getVideoName() {
+		return videoName;
+	}
+	public void setVideoName(String[] videoName) {
+		this.videoName = videoName;
+	}
+	public String[] getVideoFileName() {
+		return videoFileName;
+	}
+	public void setVideoFileName(String[] videoFileName) {
+		this.videoFileName = videoFileName;
+	}
+	public String[] getSectionCode() {
+		return sectionCode;
+	}
+	public void setSectionCode(String[] sectionCode) {
+		this.sectionCode = sectionCode;
+	}
+	
+	
 	
 }

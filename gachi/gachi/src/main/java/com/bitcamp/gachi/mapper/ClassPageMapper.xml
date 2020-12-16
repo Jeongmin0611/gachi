@@ -160,8 +160,11 @@
 		insert into class_review (num, code, userid, subject,
 		content, writedate, grade, ip)
 		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
-		'${grade}', '${ip}')
+		${grade}, '${ip}')
 	</insert>
+	<update id="updateReview" parameterType="com.bitcamp.gachi.admin.AllVO">
+		update class_review set grade='${grade}', subject='${subject}', content='${content}' where num=${num}
+	</update>
 	<insert id="insertQna"
 		parameterType="com.bitcamp.gachi.admin.AllVO">
 		insert into qna (code, num, subject, content, writedate,
@@ -169,4 +172,7 @@
 		values ('${code}', a_sq.nextval,
 		'${subject}','${content}',sysdate, '${ip}', '${userid}')
 	</insert>
+	<update id="updateQna" parameterType="com.bitcamp.gachi.admin.AllVO">
+		update qna set subject='${subject}', content='${content}' where num=${num}
+	</update>
 </mapper>

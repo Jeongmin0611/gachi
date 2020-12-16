@@ -99,11 +99,20 @@ public interface ClassDaoImp {
 	
 	//비디오리스트
 	public List<ClassVideoVO> getClassVideoList(Map<String,String> map);
+	
+	//클래스 목록가져오기
+	public List<ClassVO> selectClassList();
+	
+	//클래스 총 레코드수 구하기
+	public int getClassAllRecordCount(Map<String, String> map);
+	
+	//클래스 목록구하기
+	public List<ClassVO> getClassRecord(Map<String, String> map);
 
 	public int selectCntAllReview(Map<String, String> dbParam); // 리뷰 카운트 
 
 	public List<ClassVO> selectAllReview(Map<String, String> dbParam); // 리뷰 리스트 
 
 	public ClassVO selectReviewView(int num);  // 리뷰 내용보기 
-	
+
 }

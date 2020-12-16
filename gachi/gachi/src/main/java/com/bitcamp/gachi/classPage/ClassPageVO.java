@@ -24,6 +24,7 @@ public class ClassPageVO {
 	private String class_img;
 	private String class_name;
 	private String nickname;
+	private int good;
 	private String signup;
 
 	public String getSearchKey() {
@@ -188,6 +189,12 @@ public class ClassPageVO {
 		this.nickname = nickname;
 	}
 
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
+	}
 	public String getSignup() {
 		return signup;
 	}
@@ -195,5 +202,4 @@ public class ClassPageVO {
 	public void setSignup(String signup) {
 		this.signup = signup;
 	}
-
 }
