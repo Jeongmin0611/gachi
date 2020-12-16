@@ -17,13 +17,18 @@ public class OrderListVO {
 	private int amount;
 	private int stack;
 	private String orderdate;
+	private int grade;
 	
 	private String[] orderClassCode;
 	private String[] orderGoodsCode;
 	
 	private String userid;	
 	private String finished;
+	private int delivery;
+	private String state;
 	
+	private String startdate;
+	private String enddate;
 	public String getUserid() {
 		return userid;
 	}
@@ -126,6 +131,12 @@ public class OrderListVO {
 	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
 	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	public String[] getOrderClassCode() {
 		return orderClassCode;
 	}
@@ -143,5 +154,29 @@ public class OrderListVO {
 	}
 	public void setFinished(String finished) {
 		this.finished = finished;
+	}
+	public int getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(int delivery) {
+		this.delivery = delivery;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
 	}
 }

@@ -42,17 +42,18 @@
 		join orderlist on class_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -102,16 +103,18 @@
 		join orderlist on goods_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where goods.category='${category}'
+				and goods.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where goods.category='${category}' and member.username like
+				and goods.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -165,16 +168,18 @@
 		join orderlist on class_order.order_code =
 		orderlist.order_code
 		join member on orderlist.userid = member.userid
+		where to_char(orderlist.orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and
+		to_char(orderlist.orderdate, 'yyyy-mm-dd')&lt;=#{endDate}
 		<choose>
 			<when test='category==null and username==null'></when>
 			<when test='category!=null and username==null'>
-				where class.category='${category}'
+				and class.category='${category}'
 			</when>
 			<when test='category==null and username!=null'>
-				where member.username like '%${username}%'
+				and member.username like '%${username}%'
 			</when>
 			<when test='category!=null and username!=null'>
-				where class.category='${category}' and member.username like
+				and class.category='${category}' and member.username like
 				'%${username}%'
 			</when>
 			<otherwise></otherwise>
@@ -1056,6 +1061,142 @@
 		</choose>
 	</select>
 	
+	<!-- QNA  -->
 	
+		<select id="selectAllQna" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
+		(SELECT
+		qna.num , goods.code ,goods.category , goods.goods_name , qna.subject,qna.content ,
+        member.username ,to_char(qna.writedate,'yyyy-mm-dd') writedate, to_char(answer_writedate,'yyyy-mm-dd') answer_writedate from qna
+		join goods on qna.code = goods.code
+        join member on qna.userid = member.userid
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A WHERE ROWNUM &lt;= ${endNum} ) WHERE RNUM &gt;=${startNum}
+	</select>
+	<select id="selectCntAllQna" parameterType="map" resultType="_int">
+		select count(*) as cnt from qna join member on member.userid = qna.userid
+        join goods on goods.code = qna.code
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+
 	
+	<select id="selectAllReply" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(select num , goods.code , goods.goods_name, category,subject,goods_review.grade ,member.username,to_char(goods_review.writedate, 'yyyy-mm-dd') writedate 
+		from goods_review
+		join goods on goods.code = goods_review.code
+		join member on goods_review.userid = member.userid
+       	where to_char(goods_review.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(goods_review.writedate, 'yyyy-mm-dd')&lt;=#{endDate}	
+		<choose>
+			<when test='category==null and grade==null and search==null'></when>
+			<when test='category!=null and grade==null and search==null'>
+				and category='${category}'
+			</when>
+			<when test='category==null and grade!=null and search==null'>
+				and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade==null and search!=null'>
+				and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')		
+			</when> 						
+			<when test='category!=null and grade!=null and search==null'>
+					and category='${category}' and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade!=null and search!=null'>
+				 and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>
+			<when test='category!=null and grade==null and search!=null'>
+				 and category='${category}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				 and category='${category}' and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')			
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A
+		WHERE
+		ROWNUM &lt;= ${endNum}
+		)
+		WHERE
+		RNUM &gt;= ${startNum}
+	</select>
+
+<select id="selectCntAllReply" parameterType="map" resultType="_int">
+		select count(*) as cnt from goods_review
+		join member on goods_review.userid = member.userid
+		join goods on goods.code = goods_review.code
+       	where to_char(goods_review.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(goods_review.writedate, 'yyyy-mm-dd')&lt;=#{endDate}	
+		<choose>
+			<when test='category==null and grade==null and search==null'></when>
+			<when test='category!=null and grade==null and search==null'>
+				and category='${category}'
+			</when>
+			<when test='category==null and grade!=null and search==null'>
+				and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade==null and search!=null'>
+				and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')		
+			</when> 						
+			<when test='category!=null and grade!=null and search==null'>
+					and category='${category}' and goods_review.grade='${grade}'
+			</when>
+			<when test='category==null and grade!=null and search!=null'>
+				 and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>
+			<when test='category!=null and grade==null and search!=null'>
+				 and category='${category}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')	
+			</when>					
+			<when test='state!=null and payment_type!=null and search!=null'>
+				 and category='${category}' and goods_review.grade='${grade}' and (goods.code like '%${search}%' or goods_review.userid like '%${search}%' or member.username like '%${search}%'or goods.goods_name like '%${search}%')			
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectReplyView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate from goods_review
+            join member on member.userid= goods_review.userid
+            where num = #{num}
+	</select>
+	<select id="selectAnswerView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate ,    
+			answer, to_char(answer_writedate,'yyyy-mm-dd HH:MI')answer_writedate , writer from qna            
+			join member on member.userid= qna.userid
+            where num = #{num}
+	</select>
+	<update id="UpdateAnswer" parameterType="map">
+			update qna set answer=#{answer}, writer=#{writer}, answer_writedate=sysdate
+				where num=${num}
+	</update>
 </mapper>

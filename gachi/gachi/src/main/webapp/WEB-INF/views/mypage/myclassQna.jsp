@@ -6,6 +6,95 @@
 </style>
 <script>
 	$(function(){
+		CKEDITOR.replace('content', {
+			//allowedContent:true,
+			toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar']]
+			//,imageUploadUrl:'/gachi/clientImgUpload',
+			//extraPlugins:'uploadimage'
+				
+		});
+		
+		//qna작성
+		$("#myclassQnaFrm").click(function(){
+			$("select[name=code]").parent().css("display","block");
+			$("#qnaForm").css("display","block");
+			$("#qnaUpdateForm").css("display","none");
+		});
+	  	$('#qnaForm').click(function(){
+	  		if($('#qnaSubject').val()==null || $('#qnaSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;	
+	  		}
+	  		if(CKEDITOR.instances.qnaContent.getData()==null || CKEDITOR.instances.qnaContent.getData()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/qnaFormOk",
+	  			data:{	  				
+	  				code: $("select[name=code]").val(),
+	  				subject: $('#qnaSubject').val(),
+	  				content: CKEDITOR.instances.qnaContent.getData()},
+	  			success:function(){
+	  				swal({
+		  				  title: "질문이 등록 되었습니다.",
+		  				  icon: "success",
+		  				  buttons: true
+		  			}).then((result)=>{
+	  					location.href = location.href;
+	  				});
+	  			},error:function(){
+	  				swal('질문등록이 실패하였습니다.');
+	  			}
+	  		});
+			
+	  	});
+	  	
+		//수정
+		$(".qnaUpdate").click(function(){
+			$("#qnaSubject").val($(this).prev().prev().val());
+			CKEDITOR.instances.qnaContent.setData($(this).prev().val());
+			$("select[name=code]").parent().css("display","none");
+			$("#qnaForm").css("display","none");
+			$("#qnaUpdateForm").css("display","block");
+			$("#numInput").val($(this).next().val());
+		});	
+		$("#qnaUpdateForm").click(function(){
+			if($('#qnaSubject').val()==null || $('#qnaSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;
+	  		}
+	  		if(CKEDITOR.instances.qnaContent.getData()==null || CKEDITOR.instances.qnaContent.getData()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		//var num = $(this).next().val();
+			$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/qnaUpdateFormOk",
+	  			data:{	  				
+	  				num: $(this).next().val(),
+	  				subject: $('#qnaSubject').val(),
+	  				content: CKEDITOR.instances.qnaContent.getData()},
+	  			success:function(){
+	  				swal({
+		  				  title: "질문이 수정 되었습니다.",
+		  				  icon: "success",
+		  				  buttons: true
+		  				}).then((result)=>{
+		  					location.href = location.href;
+		  				});
+	  			},error:function(){
+	  				swal('질문수정이 실패하였습니다.');
+	  			}
+	  		});
+			
+		});
+		
+		
+		//삭제
 		$(".qnaDelete").click(function(){
 			swal({
 				title: "질문/답변 삭제",
@@ -57,6 +146,7 @@
 			});
 			
 		});
+
 	});
 </script>
 <div class="container cfont">
@@ -67,16 +157,7 @@
 			<label style="font-size:1.1em"><b>질문/답변</b></label>
 			<hr class="userHr"/>
 			<div style="text-align:right">
-				<button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#myclassReviewModal">질문작성</button>
-				<select>
-					<option>질문최신순</option>
-					<option>답변최신순</option>
-				</select>
-				<select>
-					<option>전체</option>
-					<option>답변완료</option>
-					<option>미답변</option>
-				</select>
+				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
 			<c:forEach var="vo" items="${list }">
 				<p><b>${vo.class_name }</b>
@@ -85,16 +166,18 @@
 		        <div class="card" style="margin-bottom:50px">
 		        	<div class="row no-gutters">
 		            	<div class="col-3" style="margin:auto 0">
-		                	<img src="upload/classImg/${vo.class_img }" alt="" class="card-img"/>
+		                	<img src="/gachi/upload/classImg/${vo.class_img }" alt="" class="card-img"/>
 		                </div>
 		            	<div class="col-9">
 		                	<div class="card-body">
 		                  		<p class="card-text">
 		                  			<div>
 		                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em"><b>${vo.subject }</b> 
-		                  				<div style="margin:10px;font-size:0.9em">${vo.content }</div>
+		                  				<div style="margin:10px;font-size:0.9em">${vo.content }</div>      
 		                  				<div style="text-align:right"><label class="badge badge-pill badge-light">${vo.writedate }</label>
-		                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a>
+		                  				<input type="hidden" value="${vo.subject }"/>
+		                  				<input type="hidden" value="${vo.content }"/>
+		                  				<a href="#" class="qnaUpdate" style="font-size:0.9em;margin:0 5px" data-toggle="modal" data-target="#exampleModal">수정</a>
 		                  				<input type="hidden" value="${vo.num }"/>
 		                  				<a href="#" class="qnaDelete" style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
 				                  		<c:if test="${vo.answer ne null }">
@@ -113,20 +196,42 @@
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="myclassReviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal 제목</h4>
-      </div>
-      <div class="modal-body">
-        Modal 내용
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
+
+<!-- Qna 등록모달 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">질문작성</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div>
+					<select name="code">
+						<option value="">클래스 선택</option>
+						<c:forEach var="vo" items="${cList }">
+							<option value="${vo.code }">${vo.class_name }</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="recipient-name" class="col-form-label">제목</label> 
+					<input type="text" class="form-control" id="qnaSubject" name="subject" style="text-align:left">
+				</div>
+				<div class="form-group">
+					<label for="message-text" class="col-form-label">내용</label>
+					<textarea class="form-control" id="qnaContent" name="content"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type='button' class='btn btn-primary' id='qnaForm'>등록</button>
+				<button type='button' class='btn btn-primary' id='qnaUpdateForm'>수정</button>
+				<input type="hidden" id="numInput"/>
+			</div>
+		</div>
+	</div>
 </div>

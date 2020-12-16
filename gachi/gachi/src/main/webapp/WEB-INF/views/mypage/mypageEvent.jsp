@@ -26,17 +26,17 @@
 					}
 				}
 			}).then((result)=>{
-				var num = $(this).prev().val();
+				var reply_num = $(this).prev().val();
 				if(result){
 					$.ajax({
 						url: "/gachi/eventReplyDelete",
-						data: "num="+num,
+						data: "reply_num="+reply_num,
 						type: "GET",
 						success: function(result){
 							if(result>0){
 								swal({
 									title: "완료",
-									text: "삭제가 완료되었습니다!",
+									text: "댓글 삭제가 완료되었습니다!",
 									icon: "success",
 									closeOnClickOutside: false,
 									buttons: {
@@ -47,7 +47,7 @@
 										}
 									}
 								}).then((result)=>{
-									location.href = "/gachi/mypageEvent";
+									location.href = location.href;
 								});
 							}
 						}, error: function(){
@@ -69,11 +69,11 @@
 			<hr class="userHr"/>
 			<c:forEach var="vo" items="${list }">
 				<input type="hidden" value="${vo.reply_num }"/>
-				<p><b>${vo.subject }</b></p>
-		        <div class="card">
+				<p><a href="/gachi/eventBoard"><b>${vo.subject }</b></a></p>
+		        <div class="card" style="margin-bottom:50px">
 		        	<div class="row no-gutters">
 		            	<div class="col-3" style="margin:auto 0">
-		                	<img src="/gachi/img/board/${vo.event_img }" style="object-fit: cover;height:150px" alt="" class="card-img" />
+		                	<a href="/gachi/eventBoard"><img src="/gachi/img/board/${vo.event_img }" style="object-fit: cover;height:150px" alt="" class="card-img" /></a>
 		                </div>
 		            	<div class="col-9">
 		                	<div class="card-body">
@@ -82,7 +82,6 @@
 		                  				<div style="padding:15px;border:2px solid #71a0c8;border-radius:1em">
 		                  				<div style="margin:10px;font-size:0.9em">${vo.content }</div>
 		                  				<div style="text-align:right"><label class="badge badge-pill badge-light">${vo.writedate }</label>
-		                  				<a href="#" style="font-size:0.9em;margin:0 5px">수정</a>
 		                  				<input type="hidden" value="${vo.reply_num }"/>
 		                  				<a href="#" class="eventReplyDelete" style="font-size:0.9em;margin:0 5px">삭제</a></div></div>
 			                  		</div>

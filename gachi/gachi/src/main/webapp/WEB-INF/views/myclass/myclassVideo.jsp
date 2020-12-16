@@ -46,7 +46,7 @@
 	#myclassVideoMain{
 		width:70%;
 		height:100vh;
-		overflow:auto;
+		overflow:;
 		float:left;	
 	}
 
@@ -62,7 +62,7 @@
 		height:100%;
 		margin:0;
 		width:15%;
-		background-color:#b8dbf0;
+		background-color:#ddd;
 		float:left;
 		text-align:center;
 	}
@@ -70,7 +70,7 @@
 		height:100%;
 		margin:0;
 		width:85%;
-		background-color:#e3eef6;
+		background-color:#eee;
 		float:left;
 		overflow:hidden;
 		padding-left:20px;
@@ -89,10 +89,8 @@
 	
 	/* 메인창 - 영상재생창 */
 	#myclassVideoView{
-		padding:10px;
 		height:85%;
 		overflow:hidden;
-		background-color:#f1f7fa;
 	}
 	#myclassVideoView img{
 		width:100%;
@@ -103,12 +101,12 @@
 	/* 메인창 하단 - 버튼 */
 	#myclassVideoBtm{
 		height:7.5%;
-		background-color:#f1f7fa;
+		background-color:#eee;
 		text-align:center;
 	}
 	#myclassVideoBtm>button{
 		margin:5px 10px;
-		background-color:#b8dbf0;
+		background-color:;
 	}
 	
 	/****************/
@@ -118,7 +116,7 @@
 		height:100vh;
 		overflow:auto;
 		border-left:1px solid gray;
-		overflow-x:hidden;
+		float:left;
 	}
 	#myclassVideoLst>label{
 		font-size:1.3em;
@@ -139,7 +137,8 @@
 		line-height:40px;
 		padding:0 20px;
 		width:100%;
-		background-color:#fde9e2;
+		background-color:#116487;
+		color:#fff;
 	}
 	#myclassVideoLst ol>li{
 		line-height:20px;
@@ -180,11 +179,11 @@
 <div class="cfont">
 	<div id="myclassVideoMain">
 		<div id="myclassVideoTop">
-			<div><a href="/gachi/myclassList">내 학습표</a></div>
-			<div>
+			<div style="font-size:0.9em"><a href="/gachi/myclassList">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
+			<div style="font-size:0.9em">
 				프랑스 자수 클래스를 소개합니다!
-				<button class="btn btn-light" id="videoLstClose"></button>
-				<button class="btn btn-light" id="videoLstOpen"></button>
+				<button class="btn btn-light" id="videoLstClose">></button>
+				<button class="btn btn-light" id="videoLstOpen"><</button>
 			</div>
 		</div>
 		<div id="myclassVideoView">
@@ -194,24 +193,23 @@
     				
 			</video>
 		</div>
-		<div id="myclassVideoBtm">
-			<button type="button" class="btn btn-light">이전 영상</button>
-			<button type="button" class="btn btn-light">다음 영상</button>
+		<div id="myclassVideoBtm" style="padding:5px">
+			<button type="button" class="btn btn-light">< 이전 영상</button>
+			<button type="button" class="btn btn-primary">다 봤어요!</button>
+			<button type="button" class="btn btn-light">다음 영상 ></button>
 		</div>
 	</div>
 	<div id="myclassVideoLst">
-		<label>목차</label>
-		<hr style="background:#000"/>
-		<ul>
-			<li>카모마일 프랑스 자수</li>
-			<li>진도율 : 0.00%</li>
-			<li>수강시간 : 0분</li>
-			<li>수강기한 : 20.11.01 ~ 21.01.31</li>
-			<li><progress value="50" max="100"></progress></li>
-		</ul>
+		<div style="padding:10px 20px">
+			<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
+			<div>진도율 : 50%</div>
+			<div>수강시간 : 0분</div>
+			<div>수강기한 : ${vo.startdate } ~ ${vo.enddate }</div>
+			<div class="progress" style="margin:20px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
+		</div>
 		<ul>
 			<li>
-				<label>프랑스 자수 클래스 소개</label>
+				<label><b>프랑스 자수 클래스 소개</b></label>
 				<ol>
 					<li><a href="/gachi/myclassVideo">프랑스 자수 클래스를 소개합니다!<label>02:00</label></a></li>
 					<li><a href="/gachi/myclassVideo">클래스 준비물과 주의사항에 대해 알아볼까요?<label>04:00</label></a></li>

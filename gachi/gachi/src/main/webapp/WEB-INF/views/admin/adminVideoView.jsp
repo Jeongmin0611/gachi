@@ -37,10 +37,8 @@
 	#ad_video_addList li:nth-child(7n+4){
 		width:15%;
 		overflow:hidden;
-	}
-	#ad_video_addList>li:last-child{
-		width:100%;
-	}
+	}	
+
 	#ad_video_addList li>input[type=text]{
 		width:95%;
 		line-height:0px;
@@ -95,7 +93,6 @@
 		$("#ad_video_addList>ul:last-child>li:eq(4)").text(durationStr);
 			$("#file_info li:nth-child(6)").text($("#videoSrc").attr("type"));
 		}); 
-
 	    $("#add_mov").on("dragenter dragover", function(event){
 	        event.preventDefault();
 	    }); 
@@ -128,7 +125,6 @@
 				}
 			});
 		});
-
 		function addVideoList(result){
 			let date=new Date();
 			let year=date.getFullYear();
@@ -344,7 +340,6 @@
 	</c:forEach>
 </ul>
 <script type="text/javascript">
-
 </script>
 <ul>
 	<li class="content_center">

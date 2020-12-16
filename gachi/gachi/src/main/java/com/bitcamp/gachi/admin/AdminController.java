@@ -540,66 +540,162 @@ public class AdminController {
 	
 
 	@RequestMapping("/adminClass")
-	public ModelAndView adminClass(TestVO vo,HttpServletRequest req) {
+	public ModelAndView adminClass(@RequestParam(value="now", required=false) String now) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
-		String nowPageRequest=req.getParameter("nowPage");
-		ModelAndView mav =new ModelAndView();
-		TestVO newVo=new TestVO();
-		if(nowPageRequest!=null) {
-			vo.setNowPage(Integer.parseInt(nowPageRequest));
-			String searchWord=req.getParameter("searchWord");
-			if(searchWord!=null) {
-				String option=req.getParameter("option");
-				vo.setOption(option);
-				vo.setSearchWord(searchWord);
-				List<ClassVO> wordList=dao.getClassListSearch(vo);
-				mav.addObject("list",wordList);
-			}else {
-				String dateOption=req.getParameter("dateOption");
-				String date1=req.getParameter("date1");
-				String date2=req.getParameter("date2");
-				String category=req.getParameter("category");
-				String classState=req.getParameter("class_state");
-			
-				vo.setDateOption(dateOption);
-				vo.setDate1(date1);
-				vo.setDate2(date2);
-				vo.setCategory(category);
-				vo.setClass_state(classState);
-				System.out.println("aaa");
-				List<ClassVO> lookup=dao.getClassListLookUp(vo);
-				mav.addObject("list",lookup);
-			}
-		}else if(nowPageRequest==null) {
-			List<ClassVO> lookup=dao.getClassListLookUp(vo);
-			mav.addObject("list",lookup);
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
 		}
-		int totalRecord=dao.getAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		mav.addObject("pvo",vo);
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		
+		dbParam.put("dateOption", null);
+		dbParam.put("category", null);
+		dbParam.put("startDate", null);
+		dbParam.put("endDate", null);
+		dbParam.put("search", null);
+		dbParam.put("class_state", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+				
+		int cntRecords = dao.getClassAllRecordCount(dbParam);		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		List<ClassVO> result = dao.getClassRecord(dbParam);
+		
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("result",result);
+		mav.addObject("cntData", result.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		dbParam.put("dateOption", null);
+		dbParam.put("startDate", null);
+		dbParam.put("endDate", null);
+		dbParam.put("search", null);
+		dbParam.put("catogory", null);
+		dbParam.put("class_state", null);
+
+
+		//mav.addObject("data", result);		//dao.get
 		mav.setViewName("admin/adminClass");
 		return mav;
 	}
-	@RequestMapping("/adminClass2")
-	public ModelAndView adminClass2(TestVO vo,HttpServletRequest req){
-		System.out.println(vo.getOption());
-		System.out.println(vo.getSearchWord());
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);	
+	@RequestMapping(value="/adminClass",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminClass(
+			@RequestParam(value="now", required=false) String now,
+			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="class_state", required=false) String class_state,
+			@RequestParam(value="dateOption", required=false) String dateOption,
+			@RequestParam(value="search", required=false) String search,
+			@RequestParam(value="startDate", required=false) String startDate,
+			@RequestParam(value="endDate", required=false) String endDate,
+			HttpServletResponse res){
+		System.out.println("category->"+category);
+		System.out.println("class_state->"+category);
+		System.out.println("search->"+search);
 		
-		System.out.println("date1===> "+vo.getDate1()+"date2===> "+vo.getDate2());
-		String nowPageRequest=req.getParameter("nowPage");
-		if(nowPageRequest!=null) {
-			vo.setNowPage(Integer.parseInt(nowPageRequest));
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
 		}
-		int totalRecord=dao.getAllRecordCount(vo);
-		vo.setTotalRecord(totalRecord);
-		List<ClassVO> list=dao.getClassListSearch(vo);
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
 		
 		ModelAndView mav =new ModelAndView();
-		mav.addObject("list",list);
-		mav.addObject("pvo",vo);
-		mav.setViewName("admin/adminClass");
-		return mav;
+		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(class_state.length() <= 0) class_state = null;
+		if(dateOption.length() <= 0) dateOption = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("dateOption", dateOption);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+				
+		int cntRecords = dao.getClassAllRecordCount(dbParam);		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		List<ClassVO> result = dao.getClassRecord(dbParam);
+		
+		
+		if(startDate != null && endDate != null && result != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("result",result);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", result.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("class_state", class_state);
+			mav.addObject("dateOption", dateOption);
+			mav.addObject("search", search);
+//			mav.addObject("data", result);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminClass");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				res.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+		return null;
 	}
 	@RequestMapping("/adminClassView")
 	public ModelAndView adminClassView(@RequestParam("code") String code) {
@@ -3398,15 +3494,15 @@ public class AdminController {
 		return "admin/adminReturn";
 	}
 	
-	@RequestMapping("/adminVideo")
+	@RequestMapping(value="/adminVideo" , method=RequestMethod.GET)
 	public ModelAndView adminVideo(@RequestParam(value="now", required=false) String now) {
 		
 		int nowPage = 1;
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
-		int startNum = 20 * (nowPage - 1) + 1;
-		int endNum = 20 * nowPage;
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
 		
 		ModelAndView mav =new ModelAndView();
 		
@@ -3429,10 +3525,10 @@ public class AdminController {
 		int cntRecords = dao.getVideoRecordCount(dbParam);
 		
 		int lastPage = 1;
-		if(cntRecords % 20 == 0) {
-			lastPage = cntRecords / 20;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
 		} else {
-			lastPage = cntRecords / 20 + 1;
+			lastPage = cntRecords / 10 + 1;
 		}
 		;
 		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
@@ -3470,8 +3566,8 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
-		int startNum = 20 * (nowPage - 1) + 1;
-		int endNum = 20 * nowPage;
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
 		
 		ModelAndView mav =new ModelAndView();
 		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);
@@ -3488,10 +3584,7 @@ public class AdminController {
 		} 
 		
 		if(category.length() <= 0) category = null;
-		if(searchWord.length() <= 0) searchWord = null;
-
-
-		
+		if(searchWord.length() <= 0) searchWord = null;		
 		Map<String, String> dbParam = new HashMap<String, String>();
 		dbParam.put("startDate", startDate);
 		dbParam.put("endDate", endDate);
@@ -3505,10 +3598,10 @@ public class AdminController {
 		int cntRecords = dao.getVideoRecordCount(dbParam);
 		
 		int lastPage = 1;
-		if(cntRecords % 20 == 0) {
-			lastPage = cntRecords / 20;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
 		} else {
-			lastPage = cntRecords / 20 + 1;
+			lastPage = cntRecords / 10 + 1;
 		}
 		;
 		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
@@ -3608,40 +3701,56 @@ public class AdminController {
 	}
 	@RequestMapping(value="/adminVideoWriteOk",method=RequestMethod.POST)
 	public ModelAndView adminVideoWriteOk(ClassVideoVO vo,HttpServletRequest req) {
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		String code=req.getParameter("code");
-		System.out.println("code=> "+vo.getCode());
+		ClassDaoImp dao =sqlSession.getMapper(ClassDaoImp.class);
+		int[] unitArray=vo.getUnitArray();
+		int[] sectionIndex=vo.getSectionIndex();
+		String[] enrollDate=vo.getEnrollDate();
+		String[] unitContent=vo.getUnitContent();
+		String[] videoName=vo.getVideoName();
+		String[] videoFileName=vo.getVideoFileName();
+		double[] videoLength=vo.getVideoLength();
+		List<String> sectionCode=new ArrayList<String>();
+		List<ClassVideoVO> list=new ArrayList<ClassVideoVO>();
+		
 		ClassvideoSort cvs=new ClassvideoSort();
-		//List<ClassVideoVO> list=vo.getList();
 		ModelAndView mav=new ModelAndView();
-//		if(list==null) {
-//			mav.addObject("msg","등록할 영상이 없습니다. 영상등록화면으로 돌아갑니다.");
-//			mav.setViewName("admin/adminResult");
-//		}else {
-//			Collections.sort(list,cvs);
-//			for (int i = 0; i < list.size(); i++) {
-//				ClassVideoVO vo1=list.get(i);
-//				vo1.setCode(code);
-//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
-//				String dateStr = null;
-//				try {
-//					Date date = sdf.parse(vo1.getEnroll_date());
-//					dateStr = sdf.format(date);
-//				} catch (java.text.ParseException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				vo1.setVideo_code("v"+dateStr);
-//				String sectionCode=dao.selectSectionCode(vo1.getUnit_content());
-//				vo1.setSection_code(sectionCode);
-//				int result=dao.videoInsert(vo1);
-//				if(result<=0){
-//					break;
-//				}
-//			}
-//			mav.setViewName("redirect:adminVideo");
-//		}
-		return mav;	
+		
+		
+		for(int i=0;i<unitContent.length;i++){
+			String section_code=dao.selectSectionCode(unitContent[i]);
+			sectionCode.add(section_code);
+		}
+		
+			for (int i = 0; i < unitArray.length; i++) {
+				ClassVideoVO vo1=new ClassVideoVO();
+				vo1.setCode(vo.getCode());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+				String dateStr = null;
+				try {
+					Date date = sdf.parse(enrollDate[i]);
+					dateStr = sdf.format(date);
+				} catch (java.text.ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				vo1.setVideo_code("v"+dateStr);
+				vo1.setSection_code(sectionCode.get(i));
+				vo1.setVideo_name(videoName[i]);
+				vo1.setVideo_length(videoLength[i]);
+				vo1.setSection_index(sectionIndex[i]);
+				vo1.setVideo_filename(videoFileName[i]);
+				list.add(vo1);
+			}
+			Collections.sort(list,cvs);
+			for (int i = 0; i < list.size(); i++) {
+				ClassVideoVO vo3=list.get(i);
+				int result=dao.videoInsert(vo3);
+				if(result<=0) {
+					break;
+				}
+			}
+			mav.setViewName("redirect:adminVideo");
+			return mav;
 	}
 	 public String byteCalculation(Long bytes) {
          String retFormat = null;
@@ -3695,10 +3804,6 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/adminReply")	
-	public String adminReply() {
-		return "admin/adminReply";
-	}
 	@RequestMapping("/adminClassReview")
 	public ModelAndView adminClassReview(@RequestParam(value="now", required=false) String now) {
 		int nowPage = 1;
@@ -3856,6 +3961,175 @@ public class AdminController {
 
 		return null;
 	}
+	@RequestMapping("/adminReply")
+	public ModelAndView adminReply(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("grade", null);
+		dbParam.put("category", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+//		dao = sqlSession.getMapper(ClassDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllReply(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.selectAllReply(dbParam);
+		ModelAndView mav =new ModelAndView();
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("list",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("grade", null);
+		mav.addObject("category", null);
+		mav.addObject("search", null);
+
+//		System.out.println("list"+list.get(0).getCategory());
+		System.out.println("list+"+list.size());
+		System.out.println("startDate"+startDate);
+		System.out.println("endDate"+endDate);
+//		mav.addObject("data", result);
+		mav.setViewName("admin/adminReply");
+	
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminReply", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminReply(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,
+																@RequestParam(value="category", required=false) String category, @RequestParam(value="grade", required=false) String grade , 
+																@RequestParam(value="search", required=false) String search,
+																@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		if(grade.length() <= 0) grade = null;
+		if(category.length() <= 0) category = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("grade", grade);
+		dbParam.put("category", category);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllReply(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.selectAllReply(dbParam);
+		
+		
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("list",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("grade", grade);
+			mav.addObject("category", category);
+			mav.addObject("search", search);
+
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminReply");
+				System.out.println("ajax success start");
+				System.out.println("list--post"+list);
+				System.out.println("list+"+list.size());
+				System.out.println("startDate"+startDate);
+				System.out.println("endDate"+endDate);
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	
+	@RequestMapping("/adminReplyView")
+	public ModelAndView adminReplyView(int num) {
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		QnaVO list = dao.selectReplyView(num);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("admin/adminReplyView");
+		return mav;
+	}
 		
 	@RequestMapping("/adminClassReviewView")
 	public ModelAndView adminClassReviewView(int num) {
@@ -3869,10 +4143,180 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("/adminAnswer")
-	public String adminAnswer() {
-		return "admin/adminAnswer";
+	public ModelAndView adminAnswer(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+//		dao = sqlSession.getMapper(ClassDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllQna(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.selectAllQna(dbParam);
+		ModelAndView mav =new ModelAndView();
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("list",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("search", null);
+
+		mav.setViewName("admin/adminAnswer");
+	
+		return mav;
 	}
 	
+	@RequestMapping(value="/adminAnswer", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView adminAnswer(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,
+																@RequestParam(value="category", required=false) String category, 
+																@RequestParam(value="search", required=false) String search,
+																@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+				
+		int cntRecords = dao.selectCntAllQna(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.selectAllQna(dbParam);
+		
+		
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("list",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("search", search);
+
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminAnswer");
+				System.out.println("ajax success start");
+				System.out.println("list--post"+list);
+				System.out.println("list+"+list.size());
+				System.out.println("startDate"+startDate);
+				System.out.println("endDate"+endDate);
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	@RequestMapping("/adminAnswerView")
+	public ModelAndView adminAnswerView(int num) {
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		QnaVO list = dao.selectAnswerView(num);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("admin/adminAnswerView");
+		return mav;
+	}
+	@RequestMapping(value="/adminAnswerOk",method=RequestMethod.POST)
+	public ModelAndView adminAnswerOk(@RequestParam String num, HttpSession ses, @RequestParam String answer) {
+		String admin = (String)ses.getAttribute("userid");
+		ModelAndView mav = new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("num", num);
+		dbParam.put("answer", answer);
+		dbParam.put("writer", admin);
+		
+		int result = dao.UpdateAnswer(dbParam);
+			mav.setViewName("redirect:adminAnswerView?num="+num);	
+		
+		return mav;
+	}
 	@RequestMapping("/adminGetClassList")
 	@ResponseBody
 	public List<ClassVO> adminGetClassList(HttpServletRequest req){

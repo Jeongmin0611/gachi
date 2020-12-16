@@ -53,7 +53,7 @@
 						<div><span class="badge badge-info">${vo.category }</span></div>
 						<div><h5><a href="/gachi/myclassView?code=${vo.code }">${vo.class_name }</a></h5></div>
 						<div style="font-size:0.9em">${vo.nickname }</div>
-						<div style="margin-top:20px;font-size:0.9em">20.11.01 ~ 21.01.31</div>
+						<div style="margin-top:20px;font-size:0.9em">${vo.startdate } ~ ${vo.enddate }</div>
 						<div class="progress" style="width:50%"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
 					</div>
 					<div class="col-md-2"><button type="button" class="btn btn-light btn-sm" onclick="location.href='/gachi/myclassVideo'">▶ 이어서보기</button></div>

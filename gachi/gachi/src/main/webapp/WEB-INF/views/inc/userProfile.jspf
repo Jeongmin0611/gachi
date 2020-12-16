@@ -212,7 +212,7 @@
 				<hr class="cobaltblue"/>
 				<div><a href="/gachi/mypageStoreQna">스토어 문의</a></div>
 				<div><a href="/gachi/mypageStoreReview">스토어 리뷰</a></div>
-				<div><a href="/gachi/mypage1on1">1:1 문의</a></div>
+				<!-- <div><a href="/gachi/mypage1on1">1:1 문의</a></div>-->
 				<div><a href="/gachi/mypageEvent">이벤트</a></div>
 			</div>
 		</li>

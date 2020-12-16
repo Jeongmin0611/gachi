@@ -8,7 +8,7 @@ import com.bitcamp.gachi.admin.QnaVO;
 
 public interface ClassPageDaoImp {
 	//클래스 리스트
-	public List<AllVO> classPageAllRecord(ClassPageVO vo);
+	public List<AllVO> classPageAllRecord(ClassPageVO vo); 
 	//클래스 view
 	public AllVO classView(String code);
 	//클래스 총 레코드 개수
@@ -31,12 +31,17 @@ public interface ClassPageDaoImp {
 	public List<QnaVO> qnaListSearch(AllVO vo);
 	//클래스 review 등록
 	public int insertReview(AllVO vo);
+	//클래스 review 수정
+	public int updateReview(AllVO vo);
 	//클래스 qnq 등록
 	public int insertQna(AllVO vo);
+	//클래스 qna 수정
+	public int updateQna(AllVO vo);
 	public int classPageCategoryRecordCount(ClassPageVO vo);
 	//클래스 수강여부 확인 (수강평 등록 버튼 클릭시 필요)
 	public int courseCheck(@Param("code") String code, @Param("userid") String userid);
 	//크리에이터가 개설한 클래스인지 확인
 	public int creatorCheck(@Param("code") String code, @Param("userid") String userid);
 	
+
 }

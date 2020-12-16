@@ -18,6 +18,16 @@
 		background-color: ;
 		margin-top: 100px;
 	}	
+
+#cr_leave_board {
+	border: 2px solid #437299;
+	border-radius:10px;	
+	width: 100%;
+	height: 300px;
+	padding: 10px;
+	margin-top: 50px;
+	text-align: center;
+}
 	
 </style>
 <script>
@@ -32,23 +42,18 @@
 		});
 	});
 </script>
-<div class="container cfont"><%-- 
-	<%@ include file="../inc/userProfile.jspf"%> --%>
-	<div class="userMainDiv">
-		<div class="mypageContent col-md-10">
+<div class="container cfont">
+		
+		<div id="cr_leave_board" >
+			<img src="/gachi/img/mainlogo.png" style="width:20%"/>
+			<br/><br/>
 			<label style="color:gray">회원탈퇴 ></label>
 			<label style="font-size:1.1em"><b>비밀번호확인</b></label>
 			<hr class="userHr"/>
 			<form method="post" id="frm" action="/gachi/creatorLeaveOk">
-				<input type="hidden" name="userid" value="${userid }"/>
-				<div class="row">	
-					<div class="col-md-4">비밀번호</div>
-					<div class="col-md-8"><input type="password" name="userpwd" id="userpwd" size="20"/></div>
-				</div>
-				<div style="vertical-align:middle">
+					<input type="hidden" name="userid" value="${userid }"/>				
+					<input type="password" name="userpwd" id="userpwd" size="30" style="margin-right:10px;"/>
 					<button type="submit" id="frm"class="btn btn-outline-light">확인</button>
-				</div>
 			</form>
 		</div>
-	</div>
 </div>

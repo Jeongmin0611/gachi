@@ -53,7 +53,7 @@
 					<c:forEach var="cvo" items="${cList }">
 						<div class="col-md-4">
 							<div class="card focusEffectSm moreContent" style="margin:20px 0;border-radius:1em">
-								<a href="/gachi/myclassView"><img src="upload/classImg/${cvo.class_img }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
+								<a href="/gachi/myclassView"><img src="/gachi/upload/classImg/${cvo.class_img }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
 								<div class="card-body" style="height:120px">
 									<div><span class="badge badge-info">${cvo.category }</span></div>
 									<i class="fas fa-heart fa-lg p-2 focusEffect" id="${cvo.code }" style="float:right"></i>
@@ -66,7 +66,7 @@
 					<c:forEach var="gvo" items="${gList }">
 						<div class="col-md-4">
 							<div class="card focusEffectSm moreContent" style="margin:20px 0;border-radius:1em">
-								<a href="/gachi/myclassView"><img src="/gachi/img/store/${gvo.goods_img1 }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
+								<a href="/gachi/myclassView"><img src="/gachi/upload/storeImg/${gvo.goods_img1 }" alt="" class="card-img-top" style="width:100%;height:180px;object-fit: cover;border-top-left-radius:1em;border-top-right-radius:1em"/></a>
 								<div class="card-body" style="height:120px">
 									<div><span class="badge badge-info">${gvo.category }</span></div>
 									<i class="fas fa-heart fa-lg p-2 focusEffect" id="${gvo.code }" style="float:right"></i>
