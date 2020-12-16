@@ -1008,9 +1008,14 @@ public class CreatorController {
 	 @RequestMapping("/creatorGetClassList")
 	@ResponseBody
 	public List<ClassVO> adminGetClassList(HttpServletRequest req){
-		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);
+		String userid=(String)req.getSession().getAttribute("userid");
 		String category=req.getParameter("value");
-		List<ClassVO> list=dao.getClassAllList(category);
+		
+		Map<String,String> map= new HashMap<String, String>();
+		map.put("userid",userid);
+		map.put("category",category);
+		List<ClassVO> list=dao.getcreClassList(map);
 		return list;
 	}
 }

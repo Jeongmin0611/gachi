@@ -295,4 +295,9 @@
 		WHERE
 		RNUM &gt;=${startNum}
 	</select>
+	
+	<select id="getcreClassList" resultType="com.bitcamp.gachi.admin.ClassVO" parameterType="map">
+		select class_name,code from class join member on class.userid=member.userid 
+		where class.userid='${userid}' and category='${category}'
+	</select>
 </mapper>
