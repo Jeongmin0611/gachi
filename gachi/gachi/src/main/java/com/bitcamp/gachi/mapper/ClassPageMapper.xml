@@ -49,6 +49,18 @@
 			<when test='category==null and selectval.equals("Ipopular")'>
 			order by good desc 
 			</when>
+			<when test="category!=null and selectval==null">
+				order by signup asc
+			</when>
+			<when test='category!=null and selectval.equals("Iall")'>
+				order by signup asc
+			</when>
+			<when test='category!=null and selectval.equals("Inew")'>
+				order by signup asc
+			</when>			
+			<when test='category!=null and selectval.equals("Ipopular")'>
+				order by good desc 
+			</when>
 		</choose>
 	</select>
 	<select id="classView" parameterType="String"
@@ -70,22 +82,22 @@
 	</select>
 	<select id="homeClassPopular"
 		resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price,
+		select * from (select code,class_state, category, class_name, real_price,
 		nickname, class_img, good from class join member on
-		class.userid=member.userid
-		order by good desc ) where rownum<![CDATA[<=3]]>
+		class.userid=member.userid 
+		order by good desc ) where rownum<![CDATA[<=3]]> and class_state='판매중'
 	</select>
 	<select id="homeClassNew"
 		resultType="com.bitcamp.gachi.admin.AllVO">
-		select * from (select code, category, class_name, real_price,
+		select * from (select code,class_state, category, class_name, real_price,
 		nickname, class_img, good from class join member on
-		class.userid=member.userid
-		order by allow desc ) where rownum<![CDATA[<=3]]>
+		class.userid=member.userid 
+		order by allow desc ) where rownum<![CDATA[<=3]]> and class_state='판매중'
 	</select>
 	<select id="homeClassRecommand" resultType="com.bitcamp.gachi.admin.AllVO">
-		select code, category, class_name, real_price,
+		select code,class_state, category, class_name, real_price,
 		nickname, class_img, good from class join member on
-		class.userid=member.userid  where rownum<![CDATA[<=3]]>
+		class.userid=member.userid  where rownum<![CDATA[<=3]]> and class_state='판매중'
 	</select>
 	<select id="homeClassInterestFind" resultType="String">
 		select interest from member where userid='${userid}'
@@ -160,11 +172,8 @@
 		insert into class_review (num, code, userid, subject,
 		content, writedate, grade, ip)
 		values(a_sq.nextval,'${code}','${userid}','${subject}','${content}',sysdate,
-		${grade}, '${ip}')
+		'${grade}', '${ip}')
 	</insert>
-	<update id="updateReview" parameterType="com.bitcamp.gachi.admin.AllVO">
-		update class_review set grade='${grade}', subject='${subject}', content='${content}' where num=${num}
-	</update>
 	<insert id="insertQna"
 		parameterType="com.bitcamp.gachi.admin.AllVO">
 		insert into qna (code, num, subject, content, writedate,
