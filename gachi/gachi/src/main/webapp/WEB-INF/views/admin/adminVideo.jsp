@@ -118,40 +118,52 @@ $(function(){
 	</div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
 			<c:if test="${method eq 'get' }">
-				<c:if test="${nowPage > 1}">
+				<c:if test="${startPage ne 1}">
 					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminVideo?now=${i }">${i }</a>
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
-				<c:if test="${nowPage > 1}">
+				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
+			
 	</ul>
 </div>
 </div>

@@ -1,6 +1,8 @@
 package com.bitcamp.gachi.creator;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.ClassDaoImp;
+import com.bitcamp.gachi.admin.ClassVO;
 import com.bitcamp.gachi.admin.ClassVideoVO;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
@@ -761,6 +764,99 @@ public class CreatorController {
 		return null;
 		
 	}
+	@RequestMapping(value="/creatorVideo", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView creatorVideo(HttpServletRequest req, HttpServletResponse resp, 
+			@RequestParam(value="startDate", required=false) String startDate, 
+			@RequestParam(value="endDate", required=false) String endDate,
+			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="searchWord", required=false) String searchWord,
+			@RequestParam(value="now", required=false) String now){
+		
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(searchWord.length() <= 0) searchWord = null;		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("searchWord", searchWord);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		dao = sqlSession.getMapper(ClassDaoImp.class);
+				
+		int cntRecords = dao.getVideoRecordCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
+		
+		
+		if(startDate != null && endDate != null && vlist != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("vlist",vlist);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", vlist.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("searchWord", searchWord);
+//			mav.addObject("data", result);
+			
+			System.out.println("category_____"+category);
+			System.out.println("searchWord________"+searchWord);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("admin/adminVideo");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		System.out.println("startDate"+startDate);
+		System.out.println("startDate"+endDate);
+		return null;
+	}
 	
 	@RequestMapping("/creator1on1")
 	public String creator1on1() {
@@ -775,8 +871,7 @@ public class CreatorController {
 		return "creator/creator1on1Write";
 	}
 	@RequestMapping("/creatorVideo")
-	public ModelAndView creatorVideo(
-			@RequestParam(value="now", required=false) String now,
+	public ModelAndView creatorVideo(@RequestParam(value="now", required=false) String now,
 			HttpSession session){
 		int nowPage = 1;
 		if(now != null && now.length() > 0){
@@ -800,16 +895,14 @@ public class CreatorController {
 		dbParam.put("startNum", startNum+"");
 		dbParam.put("endNum", endNum+"");
 		
-		ClassDaoImp dao = sqlSession.getMapper(ClassDaoImp.class);		
-		dao = sqlSession.getMapper(ClassDaoImp.class);
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);		
 		
 		String userid=String.valueOf(session.getAttribute("userid"));
+		dbParam.put("userid", userid);
 		
 		
 		
-		
-		int cntRecords = dao.getVideoRecordCount(dbParam);
-		
+		int cntRecords = dao.creVideoAllRecordCount(dbParam);		
 		int lastPage = 1;
 		if(cntRecords % 10 == 0) {
 			lastPage = cntRecords / 10;
@@ -817,7 +910,7 @@ public class CreatorController {
 			lastPage = cntRecords / 10 + 1;
 		}
 		;
-		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
+		List<ClassVideoVO> vlist = dao.creVideoList(dbParam);
 		
 		
 		mav.addObject("startDate", startDate);
@@ -861,5 +954,63 @@ public class CreatorController {
 	@RequestMapping("/creatorVideoWrite")
 	public String creatorVideoWrite() {
 		return "creator/creatorVideoWrite";
+	}
+	
+	@RequestMapping("/creatorVideoView")
+	public ModelAndView creatorVideoView(HttpServletRequest req) {
+		String code=req.getParameter("code");
+		String filename=req.getParameter("video_filename");
+		System.out.println("filename==>"+filename);
+		String path=req.getSession().getServletContext().getRealPath("/upload/class_video");
+		File file =new File(path, filename);
+		//String fullPath="/upload/class_video/"+filename;
+		ModelAndView mav=new ModelAndView();
+		if(file.exists()){
+			long fileSize=file.length();
+			System.out.println("fileSize==>"+fileSize);
+			String sizeStr=null;
+			if(fileSize!=0){
+				sizeStr=byteCalculation(fileSize);
+				System.out.println("sizeStr==>"+sizeStr);
+			}
+			mav.addObject("filesize",sizeStr);
+		}
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String category=dao.selectVideoCategory(code);
+		String className=dao.selectVideoClassName(code);
+		List<ClassVideoVO> videoList=dao.selectClassVideoList(code);
+		List<ClassVideoVO> unitList=dao.selectSection(code);
+		
+		mav.addObject("videoList", videoList);
+		mav.addObject("unitList", unitList);
+		mav.addObject("category",category);
+		mav.addObject("className",className);
+		mav.addObject("filename",filename);
+		mav.addObject("code",code);
+		mav.setViewName("creator/creatorVideoView");
+		return mav;
+	}
+	 public String byteCalculation(Long bytes) {
+         String retFormat = null;
+         Double size=bytes.doubleValue();
+         String[] s = { "bytes", "KB", "MB", "GB", "TB", "PB" };
+         if (bytes != 0) {
+               int idx = (int) Math.floor(Math.log(size) / Math.log(1024));
+               DecimalFormat df = new DecimalFormat("#,###.##");
+               double ret = ((size / Math.pow(1024, Math.floor(idx))));
+               retFormat = df.format(ret) + " " + s[idx];
+          } else {
+               retFormat += " " + s[0];
+          }
+
+          return retFormat;
+	 }
+	 @RequestMapping("/creatorGetClassList")
+	@ResponseBody
+	public List<ClassVO> adminGetClassList(HttpServletRequest req){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		String category=req.getParameter("value");
+		List<ClassVO> list=dao.getClassAllList(category);
+		return list;
 	}
 }
