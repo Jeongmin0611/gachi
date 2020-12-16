@@ -138,38 +138,38 @@ $(function(){
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/adminGoods?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/adminGoods?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminMember?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/adminGoods?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>

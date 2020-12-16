@@ -27,6 +27,7 @@ import com.bitcamp.gachi.admin.ClassVideoVO;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
 import com.bitcamp.gachi.admin.MemberVO;
+import com.bitcamp.gachi.admin.QnaVO;
 import com.bitcamp.gachi.admin.SettleDaoImp;
 import com.bitcamp.gachi.admin.SettleVO;
 import com.bitcamp.gachi.mypage.UserInfoDaoImp;
@@ -481,6 +482,185 @@ public class CreatorController {
 		}
 		return null;
 	}
+	
+	@RequestMapping("/creatorAnswer")
+	public ModelAndView creatorAnswer(@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", null);
+		dbParam.put("search", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+//		dao = sqlSession.getMapper(ClassDaoImp.class);
+				
+		int cntRecords = dao.creatorCntAllQna(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.creatorAllQna(dbParam);
+		ModelAndView mav =new ModelAndView();
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		
+		mav.addObject("method", "get");
+		mav.addObject("list",list);
+		mav.addObject("cntData", list.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("category", null);
+		mav.addObject("search", null);
+
+		mav.setViewName("creator/creatorAnswer");
+	
+		return mav;
+	}
+	
+	@RequestMapping(value="/creatorAnswer", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView creatorAnswer(HttpServletRequest req, HttpServletResponse resp, @RequestParam(value="startDate", required=false) String startDate, @RequestParam(value="endDate", required=false) String endDate,
+																@RequestParam(value="category", required=false) String category, 
+																@RequestParam(value="search", required=false) String search,
+																@RequestParam(value="now", required=false) String now) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 20 * (nowPage - 1) + 1;
+		int endNum = 20 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+//		SettleDaoImp sdao = sqlSession.getMapper(SettleDaoImp.class);
+
+		if(startDate==null || endDate == null) {
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("search", search);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		dao = sqlSession.getMapper(SettleDaoImp.class);
+				
+		int cntRecords = dao.creatorCntAllQna(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 20 == 0) {
+			lastPage = cntRecords / 20;
+		} else {
+			lastPage = cntRecords / 20 + 1;
+		}
+		
+		List<QnaVO> list = dao.creatorAllQna(dbParam);
+		
+		
+		if(startDate != null && endDate != null && list != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("list",list);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", list.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("search", search);
+
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("creator/creatorAnswer");
+				System.out.println("ajax success start");
+				System.out.println("list--post"+list);
+				System.out.println("list+"+list.size());
+				System.out.println("startDate"+startDate);
+				System.out.println("endDate"+endDate);
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	
+	@RequestMapping("/creatorAnswerView")
+	public ModelAndView creatorAnswerView(int num) {
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		QnaVO list = dao.creatorAnswerView(num);
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.addObject("list",list);		
+		mav.setViewName("creator/creatorAnswerView");
+		return mav;
+	}
+	
+	@RequestMapping(value="/creatorAnswerOk",method=RequestMethod.POST)
+	public ModelAndView creatorAnswerOk(@RequestParam String num, HttpSession ses, @RequestParam String answer) {
+		String creator = (String)ses.getAttribute("userid");
+		ModelAndView mav = new ModelAndView();
+		SettleDaoImp dao = sqlSession.getMapper(SettleDaoImp.class);
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("num", num);
+		dbParam.put("answer", answer);
+		dbParam.put("writer", creator);
+		
+		int result = dao.UpdateAnswer(dbParam);
+			mav.setViewName("redirect:creatorAnswer?num="+num);	
+		
+		return mav;
+	}
+	
 	@RequestMapping ("/creatorApproval")
 	public String creatorApproval() {
 		return "creator/creatorApproval";

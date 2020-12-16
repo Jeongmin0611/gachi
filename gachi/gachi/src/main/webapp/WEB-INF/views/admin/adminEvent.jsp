@@ -23,66 +23,138 @@ select {
 }
 </style> 
 <script type="text/javascript">
-	$(()=>{
-		$("#ad_event_lst li:lt(7)").css("height","40px").css("line-height","40px").css("overflow","visible");
+/* 	$(()=>{
+		$("#ad_event_lst li:lt(5)").css("height","40px").css("line-height","40px").css("overflow","visible");
+	}); */
+	$(function(){
+		
+		$("#startDate").val("${startDate}");
+		$("#endDate").val("${endDate}");
+		$("#search").val("${search}");
+		$('.ad_event_searchForm').css("text-align","right").css("margin","5px 0px");
+		
+		$("#frm_submit").click(function(){
+			var url = "/adminEvent";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+			$.ajax({
+				url : url,
+				data : data,
+				type : "POST",
+				dataType : "json",
+				success: function(data){
+					var result = data.result;
+					console.log(result);
+				},error:function(){
+					var result = data.result;
+					console.log(result);
+				}
+			});
+			
+		});
+		
 	});
+		function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/adminEvent";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&search=" + $("#search").val().trim(); + "&now=" + now;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+	}	
+	
 </script>
 <div class="container text-center ad_font">
 <h1>이벤트관리</h1>
 <div id="search_area">
-	<form method="get" action="">
+	<form method="post" action="adminEvent">
 		<ul class="ad_list_menu">
 			<li>
-				<select name="dateOption">
-					<option value="startdate">시작일</option>
-					<option value="enddate">종료일</option>
-				</select> 
-				<input type="date" id="ad_event_date1" name="date1"/>~
-				<input type="date" id="ad_event_date2" name="date2"/>
+			<input type="date" name="startDate" id="startDate" value=""/>~<input type="date" name="endDate" id="endDate" value=""/>
 			</li>
 			<li>
-				<select name="option">
-					<option value="전체">전체</option>	
-					<option value="subject">제목</option>
-					<option value="content">내용</option>
-				</select>
-				<input type="text" id="searchWord" name="searchWord" size="30"/>
-				<input type="submit" class="btn" value="검색"/>
+				<input type="text" id="search" name="search" size="30"/>
+				<input type="submit" class="btn" id="frm_submit" value="검색"/>
 			</li>
 			
 		</ul>
 	</form>
 </div>
 <ul id="ad_event_lst">
-	<li>선택</li>
 	<li>번호</li>
-	<li>이미지</li>
 	<li>제목</li>
+	<li>작성일</li>
 	<li>시작일</li>
 	<li>종료일</li>
-	<li>조회수</li>
-	
-	<li><input type="checkbox" id="" name=""/></li>
-	<li>10</li>
-	<li><img src="img/musicEx/musicEx01.png"></li>
-	<li class="wordCut"><a href="/gachi/adminEventView">신규회원 이벤트 3만원할인!</a></li>
-	<li>2020-10-21</li>
-	<li>2020-10-29</li>
-	<li>123</li>
+	<c:forEach var="list" items="${list }">
+	<li>${list.event_num }</li>
+	<li class="wordCut"><a href="/gachi/adminEventView?event_num=${list.event_num }">${list.subject }</a></li>
+	<li>${list.writedate }</li>
+	<li>${list.startdate }</li>
+	<li>${list.enddate }</li>
+	</c:forEach>
 </ul>
 <div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
 	<button class="btn">삭제</button> 
 </div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
+			<c:if test="${method eq 'get' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminEvent?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>		
 	</ul>
 </div>
 </div>

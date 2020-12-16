@@ -143,7 +143,7 @@ a, h1, li {
 			<ul class="submenu">
 				<li><a href="/gachi/adminNotice">공지사항</a></li>
 	            <li><a href="/gachi/adminEvent">이벤트</a></li>
-	            <li><a href="/gachi/admin1on1">1:1문의</a></li>
+	            <!-- <li><a href="/gachi/admin1on1">1:1문의</a></li> -->
 			</ul>
 		</div>	
 		<li data-target="#menu3" data-toggle="collapse"><a href="#">리뷰/댓글관리</a>

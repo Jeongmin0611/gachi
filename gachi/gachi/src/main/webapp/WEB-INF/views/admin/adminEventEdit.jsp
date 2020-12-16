@@ -13,13 +13,12 @@ $(function(){
 	        xhr = fileLoader.xhr;
 	    xhr.open( 'POST', fileLoader.uploadUrl, true );
 	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','EventWrite');
+	    formData.append('type','eventEdit');
 	    fileLoader.xhr.send( formData );
 	    evt.stop();
 	}, null, null, 4 ); 
 	
 	CKEDITOR.config.height=500;
-	$("#ad_event_writeForm").css("height","500px");
 	$("#ad_event_writeForm>li").slice(2).css("width","100%");
 	$("#ad_event_writeForm>li:first-child li").css("margin","7px 0px");
 	$("#ad_event_write li").css("margin-top","10px");
@@ -28,32 +27,24 @@ $(function(){
 	$(".ad_box>div").css("margin","20px 0px;");
 	$(".ad_box>div").css("float","left");
 	let imgCount=2;
-	
-	$('#mainImg').on('change', handleImgFileSelect(mainImg));
-	$('#detailImg1').on('change', handleImgFileSelect(detailImg1));
-	$('#detailImg2').on('change', handleImgFileSelect(detailImg2));
-	$('#detailImg3').on('change', handleImgFileSelect(detailImg3));
-	$('#eventInfo').on('change', handleImgFileSelect(eventInfo));
-	
 	 $(".add_img").on("dragenter dragover", function(event){
 	        event.preventDefault();
 	    });
 	
 	$(document).on("drop",".add_img",(event)=>{
+		// 삭제
 		event.preventDefault();
 		var files =event.originalEvent.dataTransfer.files;
 		var file=files[0];
-		console.log('file:' + file);
-
+		console.log(file);
 		let code=$("#code").val();
 		var formData= new FormData();
 		formData.append("file",file);
 		formData.append("code",code);
-		console.log(formData.file);
-		  $.ajax({
+		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
-			url:"/gachi/EventimgThumbnail",
+			url:"/gachi/StoreimgThumbnail",
 			//ajax로 넘길경우 form-data 형식
 			processData: false,
 			contentType: false,
@@ -76,8 +67,8 @@ $(function(){
 			let imageName=$(event.target).prev().text();
 			let code=$("#code").val();
 			$.ajax({
-				url:'/gachi/EventimageDelete?imageName='+imageName+"&code="+code,
-				type:'post',
+				url:'/gachi/StoreimageDelete?imageName='+imageName+"&code="+code,
+				type:'get',
 				success:(result)=>{
 					$(event.target).parent().parent().remove();
 				},error:(e)=>{
@@ -86,63 +77,40 @@ $(function(){
 			});
 		});	
 		
-	$("#adminEventWrite").submit(()=>{
+	$("#admineventEdit").submit(()=>{
 		let grpl = $("input[name=imgList]").length;
 		if(grpl==0){
 			alert("이벤트 이미지를 최소 1개 이상 선택하여야 합니다.");
 			return false;
 		}
 		if($("#subject").val()==null||$("#subject").val()==""){
-			alert("상품명을 입력하여 주세요.");
+			alert("이벤트명을 입력하여 주세요.");
 			return false;
 		}
 		return true;
 	});	
 });
-
-
-/* function handleImgFileSelect(inputName, e) {
-	
-	var inputName = inputName;
-
-	let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
-	tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
-	tagTxt+='<div style="text-align:center">';
-	tagTxt+='<img id=' + inputName + ' name= ' + inputName + 'src="'+result+'" width=200 height=200 /></div>';
-	tagTxt+='<div style="padding:0 auto;">';
-	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
-	$(".ad_box").append(tagTxt);
-} */
+function eventDel(){
+	if(confirm("해당 이벤트 삭제하시겠습니까?")){
+		
+	}
+}
 </script>
 <div class="container">
-<h1>이벤트 등록</h1>
-<form method="post" action="adminEventWriteOk" id="adminEventWriteOk" enctype="multipart/form-data">
-<ul id="ad_Event_writeForm">
-	<li>
-		<ul>
-			<li class="content_center">이벤트 번호</li>
-			<li><input type="text" id="event_num" name="event_num" value=""/></li>
-			<li class="content_center">제목</li>
-			<li><input type="text" id="subject" name="subject" size="40" value=""/></li>
-			<li class="content_center">시작 기간</li>
-			<li><input type="text" id="startdate" name="startdate" value=""/></li>
-			<li class="content_center">종료 기간</li>
-			<li><input type="text" id="enddate" name="enddate" value=""/></li>
-			<li class="content_center">메인 이미지</li>
-			<li><input type="file" name="mainImg" id="mainImg" /></li>
-			<li class="content_center">슬라이드 이미지1</li>
-			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
-			<li class="content_center">슬라이드 이미지2</li>
-			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
-			<li class="content_center">슬라이드 이미지3</li>
-			<li><input type="file" name="detailImg3" id="detailImg3" /></li>
-			<li class="content_center">이벤트설명 이미지</li>
-			<li><input type="file" name="eventInfo" id="eventInfo" /></li>
+<h1>상품수정</h1>
+<form method="post" action="adminEventEditOk" id="adminEventEditOk" enctype="multipart/form-data">
+<ul id="ad_event_writeForm">
+		<li>
+			<ul>
+				<li class="content_center">상품번호</li><li><input type="text" name="event_num" value="${vo.event_num }" readonly/></li>
+				<li class="content_center">제목</li><li><input type="text" name="subject" value="${vo.subject }" /></li>
+				<li class="content_center">시작날짜</li><li><input type="text" name="startdate" value="${vo.startdate }" /></li>
+				<li class="content_center">종료 기간</li><li><input type="text" id="enddate" name="enddate" value="${vo.enddate }"/></li>
 		</ul>
 	</li>
 	<li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
-			이벤트 이미지 추가
+			클래스 이미지 추가
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
@@ -156,7 +124,7 @@ $(function(){
 		<div style="text-align:center;height:24px;">이미지${status.index+1}		
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/eventImg/${imgList}"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${imgList}"/>
 		</div>
 		<div>
 			<input type="hidden" name="imgList" value="${imgList}"/> 
@@ -165,13 +133,14 @@ $(function(){
 	</div>
 </c:forEach>
 </div>
-		<ul id="ad_goods_write">
-			<li>상품설명</li>
-			<li><textarea name="event_info" id="event_info"></textarea></li>
+		<ul id="ad_event_write">
+			<li>이벤트설명</li>
+			<li><textarea name="event_info" id="event_info">${vo.event_info }</textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li>
 			<li class="content_center">
-				<input type="submit" class="btn" value="등록하기"/>
+				<input type="submit" class="btn" value="수정"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
+				<button class="btn" onclick="eventDel()">삭제</button>
 			</li>
 		</ul>
 	</form>

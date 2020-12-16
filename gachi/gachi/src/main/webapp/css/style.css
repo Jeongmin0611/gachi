@@ -593,21 +593,27 @@ input{text-align:center;}
 		float: left;
 		width:10%;
 		border-bottom:1px solid gray;
-		line-height:100px;
-		height:120px;
+		line-height:50px;
+		height:50px;
 	}
 	#ad_event_lst img{
 		width:100%;
 		height:100%;
 	}
-	#ad_event_lst li:nth-of-type(7n+1){
-		width:5%;
+	#ad_event_lst li:nth-of-type(5n+1){
+		width:10%;
 	}
-	#ad_event_lst li:nth-of-type(7n+3){
-		width:15%;
+	#ad_event_lst li:nth-of-type(5n+2){
+		width:60%;
 	}
-	#ad_event_lst li:nth-of-type(7n+4){
-		width:40%;
+	#ad_event_lst li:nth-of-type(5n+3){
+		width:10%;
+	}
+	#ad_event_lst li:nth-of-type(5n+3){
+		width:10%;
+	}
+	#ad_event_lst li:nth-of-type(5n+4){
+		width:10%;
 	}
 	/*愿�由ъ옄 �씠踰ㅽ듃 由ъ뒪�듃 end*/
 	
@@ -877,6 +883,28 @@ input{text-align:center;}
 	}
 	
 	/*愿�由ъ옄 �뒪�넗�뼱愿�由� end*/
+	
+	
+	#ad_Event_writeForm{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
+	}
+	#ad_Event_writeForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	#ad_Event_writeForm>li{
+		height:300px;
+		width:50%;
+	}
+	#ad_Event_writeForm ul>li:nth-child(2n+1){
+		width:40%;
+	}
+	#ad_Event_writeForm ul>li:nth-child(2n){
+		width:60%;
+	}
 	
 	/*愿�由ъ옄 由ъ뒪�듃 �럹�씠吏� start*/
 	#paging{

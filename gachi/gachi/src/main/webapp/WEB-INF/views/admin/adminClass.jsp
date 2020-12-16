@@ -52,7 +52,7 @@
 			$.ajax({
 				url : url,
 				data : data,
-				type : "POST",
+				type : "get",
 				dataType : "json",
 				success: function(data){
 					var result = data.result;
@@ -70,7 +70,7 @@
 		console.log(now);
 		return false;
 		var url = "/adminClass";
-		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
 		$.ajax({
 			url : url,
 			data : data,
@@ -84,7 +84,7 @@
 				console.log(result);
 			}
 		});
-	});
+	}
 </script>
 <div class="container ad_font">
 	<h1>클래스관리</h1>
@@ -98,7 +98,7 @@
 						<option value="allow">등록일</option>
 						<option value="signup">등록신청일</option>
 					</select>	
-					<input type="date" id="startDate" name="startDate">&nbsp;~&nbsp;<input type="date" name="endDate">
+					<input type="date" id="startDate" name="startDate">&nbsp;~&nbsp;<input type="date" name="endDate" id="endDate">
 				</li>
 				<li>카테고리</li>
 				<li>
@@ -139,53 +139,65 @@
 		<li>등록일</li>
 		<li>상태</li>
 		
-		<c:forEach var="vo" items="${result}">
-		<li>${vo.code }</li>
-		<li>${vo.category }</li>
-		<li class="wordCut"><a href="/gachi/adminClassView?code=${vo.code}">${vo.class_name}</a></li>
-		<li class="wordCut">${vo.nickname }</li>
-		<li>${vo.total_student }</li>
-		<li>${vo.signup }</li>
-		<li>${vo.allow }</li>
-		<li>${vo.class_state }</li>
+		<c:forEach var="result" items="${result}">
+		<li>${result.code }</li>
+		<li>${result.category }</li>
+		<li class="wordCut"><a href="/gachi/adminClassView?code=${result.code}">${result.class_name}</a></li>
+		<li class="wordCut">${result.nickname }</li>
+		<li>${result.total_student }</li>
+		<li>${result.signup }</li>
+		<li>${result.allow }</li>
+		<li>${result.class_state }</li>
 		</c:forEach>	
 	</ul>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
 			<c:if test="${method eq 'get' }">
-				<c:if test="${nowPage > 1}">
+				<c:if test="${startPage ne 1}">
 					<li class="btn">
 						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<li>
-						<a class="btn" href="/gachi/adminClass?now=${i }">${i }</a>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
 						<a class="btn" href="/gachi/adminClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
-				<c:if test="${nowPage > 1}">
-					<li>
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage+1});">Prev</a>
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<li>
-						<a href="javascript:void(0);" onClick="postPageMove(${i });">${i }</a>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
+					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage < lastPage}">
-					<li>
-						<a class="btn" href="javascript:void(0);" onClick="postPageMove(${nowPage}-1);">Next</a>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
-			</c:if>	
+			</c:if>
+			
 	</ul>
 </div>
 	
