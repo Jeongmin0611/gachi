@@ -189,14 +189,14 @@ a, h1, li,h3 {
 			</ul>
 		</div>
 		</li>
-		<!-- <li data-target="#menu3" data-toggle="collapse"><a href="/gachi/creatorNotice">공지사항</a>
-		<div id="menu3" class="collapse">
+		 <li data-target="#menu3" data-toggle="collapse"><a href="/gachi/creatorAnswer">클래스 질문/답변</a>
+		<!-- <div id="menu3" class="collapse">
 			<ul class="submenu">
 				<li><a href="/gachi/creatorNotice">공지사항 </a></li>
 	            <li><a href="/gachi/creator1on1">1:1문의 </a></li>
 			</ul>
-		</div>
-		</li> -->
+		</div> -->
+		</li>
 		<li><a href="/gachi/creatorGuide">이용안내</a></li>
 	</ul>
 </div>

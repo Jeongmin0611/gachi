@@ -13,8 +13,14 @@ public class QnaVO {
 	private String nickname;
 	private String writer;
 	private String goods_name;
+	private String class_name;
 	private String username;
 	private String category;
+	
+	private int event_num;
+	private String startdate;
+	private String enddate;
+	private String event_img;
 	private int grade;
 	
 	public String getCode() {
@@ -106,6 +112,36 @@ public class QnaVO {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public String getClass_name() {
+		return class_name;
+	}
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+	public int getEvent_num() {
+		return event_num;
+	}
+	public void setEvent_num(int event_num) {
+		this.event_num = event_num;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getEvent_img() {
+		return event_img;
+	}
+	public void setEvent_img(String event_img) {
+		this.event_img = event_img;
 	}
 	
 }

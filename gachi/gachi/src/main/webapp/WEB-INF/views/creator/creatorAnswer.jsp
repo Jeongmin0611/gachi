@@ -24,7 +24,7 @@ $(function(){
 	
 	
 	$("#frm_submit").click(function(){
-		var url = "/adminAnswer";
+		var url = "/creatorAnswer";
 		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&search=" + $("#search").val().trim(); + "&now=" + now +1;
 		$.ajax({
 			url : url,
@@ -46,7 +46,7 @@ $(function(){
 	function postPageMove(now) {
 	console.log(now);
 	return false;
-	var url = "/adminAnswer";
+	var url = "/creatorAnswer";
 	var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() +"&search=" + $("#search").val().trim(); + "&now=" + now;
 	$.ajax({
 		url : url,
@@ -66,7 +66,7 @@ $(function(){
 <div class="container ad_font">
 	<h1>질문/답변관리</h1>
 	<div id="ad_video_searchArea">
-		<form method="post" id="frm" action="adminAnswer">
+		<form method="post" id="frm" action="creatorAnswer">
 		<ul id="ad_video_searchList">
 			<li>
 				카테고리
@@ -100,8 +100,8 @@ $(function(){
 	<ul id="ad_video_lstArea">
 		<li>문의번호</li>
 		<li>카테고리</li>
-		<li>상품코드</li>
-		<li>상품명</li>
+		<li>클래스코드</li>
+		<li>클래스명</li>
 		<li>제목</li>
 		<li>작성자</li>
 		<li>작성일</li>
@@ -111,8 +111,8 @@ $(function(){
 		<li>${list.num }</li>
 		<li>${list.category }</li>
 		<li>${list.code }</li>
-		<li class="wordCut">${list.goods_name }</li>
-		<li class="wordCut"><a href="/gachi/adminAnswerView?num=${list.num}">${list.subject }</a></li>
+		<li class="wordCut">${list.class_name }</li>
+		<li class="wordCut"><a href="/gachi/creatorAnswerView?num=${list.num}">${list.subject }</a></li>
 		<li>${list.username }</li>
 		<li>${list.writedate }</li>
 		<li>${list.answer_writedate }</li>
@@ -130,38 +130,38 @@ $(function(){
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminAnswer?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/creatorAnswer?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>

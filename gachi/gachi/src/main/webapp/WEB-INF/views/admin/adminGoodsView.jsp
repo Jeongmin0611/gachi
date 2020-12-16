@@ -38,58 +38,8 @@
 			<img src="/gachi/img/147.jpg"/>
 		</li> 
 	</ul>
-<div>
-<h3>상품상세정보</h3>
-<div id="ad_goods_info">
-
-</div>
-<div class="text-center">
-		<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
-		<button  class="btn" onclick="goodsDel()">삭제</button>
-</div>
-<h3>상품문의</h3>
-	<ul id="ad_goods_inquiry" class="text-center">
-		<li>선택</li>
-		<li>번호</li>
-		<li>제목</li>
-		<li>작성자</li>
-		<li>작성일</li>
-		<li>조회수</li>
-		<li>답변여부</li>
-		
-		<li><input type="checkbox"/></li>
-		<li>10</li>
-		<li>재입고는 언제쯤인가요?</li>
-		<li>홍길동</li>
-		<li>2020-10-29</li>
-		<li>224</li>
-		<li><a href="#">답변하기</a></li>
-	</ul>	
-</div>
-<div style="text-align:right">
-	<button class="btn" onclick="goodsInquiryDel()">삭제</button>
-</div>
-<h3>상품리뷰</h3>
-	<ul id="ad_goods_review" class="text-center">
-		<li>선택</li>
-		<li>번호</li>
-		<li>제목</li>
-		<li>평점</li>
-		<li>작성자</li>
-		<li>작성일</li>
-		<li>조회수</li>
-		<li>답변여부</li>
-		
-		<li><input type="checkbox"/></li>
-		<li>10</li>
-		<li>재입고는 언제쯤인가요?</li>
-		<li>★★★★</li>
-		<li>홍길동</li>
-		<li>2020-10-29</li>
-		<li>224</li>
-		<li><a href="#">답변하기</a></li>
-	</ul>
-<div style="text-align:right">
-	<button class="btn" onclick="goodsInquiryDel()">삭제</button>
-</div>	
+	<div class="text-center">
+			<button class="btn" onclick="location.href='/gachi/adminGoodsEdit'">수정</button>
+			<button  class="btn" onclick="goodsDel()">삭제</button>
+	</div>
 </div>

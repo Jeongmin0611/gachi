@@ -141,6 +141,17 @@ public interface SettleDaoImp {
 
 	public int UpdateAnswer(Map<String, String> dbParam);  //어드민 답변 !
 
+	public List<QnaVO> creatorAllQna(Map<String, String> dbParam);  //크리에이터 질문답변 리스트
+
+	public int creatorCntAllQna(Map<String, String> dbParam);  //크리에이터 질문답변 카운트
+
+	public QnaVO creatorAnswerView(int num);  // 크리에이터 질문답변 1개 리스트 
+
+	public int creatorUpdateAnswer(Map<String, String> dbParam); //크리에이터 답변 업데이트
+	
+	
+	
+
 
 	
 	

@@ -30,6 +30,8 @@ $(function(){
 		});
 		
 	});
+	
+});
 	function postPageMove(now) {
 		console.log(now);
 		return false;
@@ -49,7 +51,6 @@ $(function(){
 			}
 		});
 	}
-});
 </script>
 
 <div class="container ad_font">

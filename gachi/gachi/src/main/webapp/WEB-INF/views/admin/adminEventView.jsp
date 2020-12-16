@@ -1,127 +1,179 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-#adminEvent_View_Title{
-	margin-top:50px;
-}
+<link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
+<script type="text/javascript">
+$(function(){
+	var editor=CKEDITOR.replace('event_info',{
+		imageUploadUrl:'/gachi/EventimageUpload',
+		extraPlugins:'uploadimage'
+	});
+	editor.on('fileUploadRequest', function( evt ) {
+	    var fileLoader = evt.data.fileLoader,
+	        formData = new FormData(),
+	        xhr = fileLoader.xhr;
+	    xhr.open( 'POST', fileLoader.uploadUrl, true );
+	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+	    formData.append('type','EventWrite');
+	    fileLoader.xhr.send( formData );
+	    evt.stop();
+	}, null, null, 4 ); 
+	
+	CKEDITOR.config.height=500;
+	$("#ad_Event_writeForm").css("height","400px");
+	$("#ad_Event_writeForm>li").slice(2).css("width","100%");
+	$("#ad_Event_writeForm>li:first-child li").css("margin","7px 0px");
+	$("#ad_Event_write li").css("margin-top","10px");
+	$("textarea").css("height","800px");
+	$(".ad_box img").css("width","200px").css("height","200px");
+	$(".ad_box>div").css("margin","20px 0px;");
+	$(".ad_box>div").css("float","left");
+	let imgCount=2;
+	
+	$('#mainImg').on('change', handleImgFileSelect(mainImg));
+	$('#detailImg1').on('change', handleImgFileSelect(detailImg1));
+	$('#detailImg2').on('change', handleImgFileSelect(detailImg2));
+	$('#detailImg3').on('change', handleImgFileSelect(detailImg3));
+	$('#eventInfo').on('change', handleImgFileSelect(eventInfo));
+	
+	 $(".add_img").on("dragenter dragover", function(event){
+	        event.preventDefault();
+	    });
+	
+	$(document).on("drop",".add_img",(event)=>{
+		event.preventDefault();
+		var files =event.originalEvent.dataTransfer.files;
+		var file=files[0];
+		console.log('file:' + file);
 
-/* 이벤트 상단 제목, 날짜 */
-#adminEvent_View_Div{
-	border-top:2px solid black;
-	border-bottom:1px solid #E5E5E5;
-}
-#adminEvent_View_Subject{
-	border-bottom:1px solid #E5E5E5;
-}
-#adminEvent_View_DateDiv{
-	margin: 10px 0;
-}
-/* 이벤트 상단 제목, 날짜 끝*/
-
-/* 이벤트 상세 내용*/
-#adminEvent_View_Content{
-	min-height: 500px;
-	overflow:auto;
-	text-align:center;
-	padding: 20px;
-}
-/* 이벤트 상세 내용 끝*/
-/* 댓글 입력 폼*/
-#adminEvent_View_ReplyForm{
-	width:100%;
-	margin: 20px 0; 
-	float: left;
-}
-#adminEvent_View_ReplyForm>textarea{
-	width:100%;
-	resize:none;
-}
-#adminEvent_View_ReplyForm>div{
-	float:right;
-}
-/* 댓글 입력 폼 끝*/
-/*버튼*/
-#adminEvent_View_BtnDiv{
-	clear: both;
-	margin: 20px 0;
-	background-color: oragin;
-}
-/*댓글 리스트*/
-#adminEvent_View_ReplyDiv{
-	clear: both;
-	overflow: auto;
-	margin-bottom: 50px;
-}
-#adminEvent_View_ReplyDiv li{
-	float:left;
-	line-height: 50px;
-	border-bottom: 1px solid gray;
-	margin-bottom: 10px;
-}
-#adminEvent_View_ReplyDiv li:nth-child(4n+1){
-	padding-left:5px;
-	width: 13%;
-}
-#adminEvent_View_ReplyDiv li:nth-child(4n+3){
-	width: 10%;
-}
-#adminEvent_View_ReplyDiv li:nth-child(4n+4){
-	width: 7%;
-}
-#adminEvent_View_ReplyDiv li:nth-child(4n+2){
-	width: 70%;
-}
-</style>
-<div class="container ad_font">
-	<div >
-		<h3 id="adminEvent_View_Title">신규 이벤트</h3>
-		<div id="adminEvent_View_Div">
-			<div id="adminEvent_View_Subject">
-				<p style="color:red; margin: 20px 0px;">신규 이벤트 3만원 할인 !</p>
-				<h3>신규 이벤트 3만원 할인 !</h3>
-				<div id="adminEvent_View_DateDiv"><span>같이가치</span> <span style="float:right;">2020-10-30</span></div>
-			</div>
-			<!-- 이벤트 내용 -->
-			<div id="adminEvent_View_Content">
-				<img src="/gachi/img/event_sample.png"/>
-			</div>
-		</div>
+		let code=$("#code").val();
+		var formData= new FormData();
+		formData.append("file",file);
+		formData.append("code",code);
+		console.log(formData.file);
+		  $.ajax({
+			type:"post",
+			enctype: 'multipart/form-data',
+			url:"/gachi/EventimgThumbnail",
+			//ajax로 넘길경우 form-data 형식
+			processData: false,
+			contentType: false,
+			//////////////////////////
+			data: formData,
+			success:function(result){					
+				var filename=result.slice(result.lastIndexOf("/")+1);
+				console.log(filename);
+				let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
+				tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
+				tagTxt+='<div style="text-align:center">';
+				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
+				tagTxt+='<div style="padding:0 auto;">';
+				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
+				$(".ad_box").append(tagTxt);
+			}
+		});
+	});
+		$(document).on('click','b',(event)=>{
+			let imageName=$(event.target).prev().text();
+			let code=$("#code").val();
+			$.ajax({
+				url:'/gachi/EventimageDelete?imageName='+imageName+"&code="+code,
+				type:'post',
+				success:(result)=>{
+					$(event.target).parent().parent().remove();
+				},error:(e)=>{
+					alert("이미지파일 삭제를 실패하였습니다.");
+				}
+			});
+		});	
 		
-	</div>
-	<!-- 버튼 -->
-	<div id="adminEvent_View_BtnDiv">
-		<button type="button" class="btn">이전</button>
-		<button type="button" class="btn">다음</button>
-		<button type="button" class="btn">목록</button>
-	</div>
-	<!-- 댓글 -->
-	<form id="adminEvent_View_ReplyForm">
-		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn">등록</button></div>
-	</form>
-	<!-- 댓글 리스트 -->
-	<div>
-		<ul id="adminEvent_View_ReplyDiv">
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용 이벤트 댓글</li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
+	$("#adminEventWrite").submit(()=>{
+		let grpl = $("input[name=imgList]").length;
+		if(grpl==0){
+			alert("이벤트 이미지를 최소 1개 이상 선택하여야 합니다.");
+			return false;
+		}
+		if($("#subject").val()==null||$("#subject").val()==""){
+			alert("상품명을 입력하여 주세요.");
+			return false;
+		}
+		return true;
+	});	
+});
+
+
+/* function handleImgFileSelect(inputName, e) {
+	
+	var inputName = inputName;
+
+	let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
+	tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
+	tagTxt+='<div style="text-align:center">';
+	tagTxt+='<img id=' + inputName + ' name= ' + inputName + 'src="'+result+'" width=200 height=200 /></div>';
+	tagTxt+='<div style="padding:0 auto;">';
+	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
+	$(".ad_box").append(tagTxt);
+} */
+</script>
+<div class="container">
+<h1>이벤트 수정</h1>
+<form method="post" action="adminEventEditOk" id="adminEventEditOk" enctype="multipart/form-data">
+<ul id="ad_Event_writeForm">
+	<li>
+		<ul>
+			<li class="content_center">이벤트 번호</li>
+			<li><input type="text" id="event_num" name="event_num" value="${list.event_num }"/></li>
+			<li class="content_center">제목</li>
+			<li><input type="text" id="subject" name="subject" size="40" value="${list.subject }"/></li>
+			<li class="content_center">시작 기간</li>
+			<li><input type="text" id="startdate" name="startdate" value="${list.startdate }"/></li>
+			<li class="content_center">종료 기간</li>
+			<li><input type="text" id="enddate" name="enddate" value="${list.enddate }"/></li>
+			<li class="content_center">메인 이미지</li>
+			<li><input type="file" name="mainImg" id="mainImg" /></li>
+			<li class="content_center">슬라이드 이미지1</li>
+			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
+			<li class="content_center">슬라이드 이미지2</li>
+			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
+			<li class="content_center">슬라이드 이미지3</li>
+			<li><input type="file" name="detailImg3" id="detailImg3" /></li>
+			<li class="content_center">이벤트설명 이미지</li>
+			<li><input type="file" name="eventInfo" id="eventInfo" /></li>
 		</ul>
+	</li>
+	<li class="content_center">
+		<div style="height:24px;margin:7px 0px;">
+			이벤트 이미지 추가
+		</div>
+		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
+			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
+		</div>
+	</li>
+</ul>
+<h3>이벤트 이미지 목록</h3>
+<div class="text_center ad_box">
+<c:forEach var="imgList" items="${list.imgList}" varStatus="status">
+	<div style="margin:0 15px; width:230px;height:100%;">
+		<div style="text-align:center;height:24px;">이미지${status.index+1}		
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/eventImg/${imgList}"/>
+		</div>
+		<div>
+			<input type="hidden" name="imgList" value="${imgList}"/> 
+			<span class="wordCut">${imgList}</span><b>  x  </b>
+		</div>
+	</div>
+</c:forEach>
+</div>
+		<ul id="ad_goods_write">
+			<li>상품설명</li>
+			<li><textarea name="event_info" id="event_info"></textarea></li>
+			<li>첨부파일 <input type="file" name="no"/> </li>
+			<li class="content_center">
+				<input type="submit" class="btn" value="등록하기"/>
+				<input type="reset" class="btn" value="다시쓰기"/>
+			</li>
+		</ul>
+	</form>
 	</div>
 </div>

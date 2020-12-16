@@ -1107,6 +1107,65 @@
 		</choose>
 	</select>
 
+	<!--  크리에이터 QNA  -->
+	
+		<select id="creatorAllQna" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM 
+		(SELECT
+		qna.num , class.code ,class.category , class.class_name , qna.subject,qna.content ,
+        member.username ,ANSWER,to_char(qna.writedate,'yyyy-mm-dd') writedate, to_char(answer_writedate,'yyyy-mm-dd') answer_writedate from qna
+		join class on qna.code = class.code
+        join member on qna.userid = member.userid
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		) A WHERE ROWNUM &lt;= ${endNum} ) WHERE RNUM &gt;=${startNum}
+	</select>
+	<select id="creatorCntAllQna" parameterType="map" resultType="_int">
+		select count(*) as cnt from qna join member on member.userid = qna.userid
+        join class on class.code = qna.code
+		where to_char(qna.writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(qna.writedate, 'yyyy-mm-dd')&lt;=#{endDate}
+		<choose>
+			<when test='category==null and search==null'></when>
+			<when test='category!=null and search==null'>
+				and class.category='${category}'
+			</when>
+			<when test='category==null and search!=null'>
+				and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<when test='category!=null and search!=null'>
+				and class.category='${category}' and member.username like '%${search}%' or subject like '%${search}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="creatorAnswerView" resultType="com.bitcamp.gachi.admin.QnaVO">
+			select num , subject , member.username, content, to_char(writedate,'yyyy-mm-dd HH:MI')writedate ,    
+			answer, to_char(answer_writedate,'yyyy-mm-dd HH:MI')answer_writedate , writer from qna            
+			join member on member.userid= qna.userid
+            where num = #{num}
+	</select>
+	
+	<update id="creatorUpdateAnswer" parameterType="map">
+			update qna set answer=#{answer}, writer=#{writer}, answer_writedate=sysdate
+			where num=${num}
+	</update>
+	
+	<!--  크리에이터 QNA 끝 -->
 	
 	<select id="selectAllReply" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
 

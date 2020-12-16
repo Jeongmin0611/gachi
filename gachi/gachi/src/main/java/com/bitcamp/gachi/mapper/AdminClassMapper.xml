@@ -220,6 +220,7 @@
 		</choose>
 		) A
 		WHERE
+
 		ROWNUM &lt;=${endNum}
 		)
 		WHERE
@@ -312,65 +313,66 @@
 
 	<select id="getClassAllRecordCount" parameterType="map" resultType="_int">
 			select count(*) from class join member on class.userid=member.userid 
+			where to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
 			<choose> 
 				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
 				<when test="category!=null and dateOption==null and search==null and class_state==null">
-					where category='${category}'
+					and category='${category}'
 				</when>
 				<when test="category!=null and dateOption!=null and search==null and class_state==null">
-					where category='${category}' and ${dateOption} between '${startDate}' and '${endDate}'
+					and category='${category}' and dateOption='${dateOption}'
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					where category='${category}' and ${dateOption} between '${startDate}' and '${endDate}' and
-						code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%'
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
-					where class_state='${class_state}'and category='${category}' and ${dateOption} between '${startDate}' 
-					and '${endDate}' and code like '%${search}%' or class_name like '%${search}%' 
-					or nickname like '%${search}%'
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					and class_state='${class_state}' 
 				</when>
 				
 				<when test="category==null and dateOption!=null and search==null and class_state==null">
-					where ${dateOption} between '${startDate}' and '${endDate}'
+					and dateOption='${dateOption}'
 				</when>
 				<when test="category==null and dateOption!=null and search==null and class_state!=null">
-					 where category='${category}'and ${dateOption} between '${startDate}' and '${endDate}'
-					 and class_state='${class_state}'
+					and dateOption='${dateOption}' and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption!=null and search!=null and class_state==null">
-					 where ${dateOption} between '${startDate}' and '${endDate}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
+					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
-				
-				<when test="category==null and dateOption==null and search!=null and class_state==null">
-					 where code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%'
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}'and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption==null and search!=null and class_state==null">
-					 where class_state='${class_state}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
+				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
+					 and class_state='${class_state}'  
+					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when> 
 				<when test="category!=null and dateOption==null and search!=null and class_state==null">
-					 where category='${category}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
-				</when>
-				
-				<when test="category!=null and dateOption==null and search==null and class_state!=null">
-					where category='${category}' and class_state='${class_state}'
+					 and category='${category}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
-					where category='${category}' and class_state='${class_state}' and
-					${dateOption} between '${startDate}' and '${endDate}'  
+					and category='${category}' and class_state='${class_state}' 
+					and dateOption='${dateOption}'
 				</when>
 				
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
-					where category='${category}' and class_state='${class_state}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'  
+					and category='${category}' and class_state='${class_state}'  
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
-					where ${dateOption} between '${startDate}' and '${endDate}' and class_state='${class_state}' 
-					or code like '%${search}%'  or class_name like '%${search}%' or nickname like '%${search}%'  
+					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					  and dateOption='${dateOption}' and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 			</choose>
 	</select>
@@ -381,72 +383,74 @@
 		FROM
 		(select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,   
 		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid
+		where to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
+		
 		<choose> 
 				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
 				<when test="category!=null and dateOption==null and search==null and class_state==null">
-					where category='${category}'
+					and category='${category}'
 				</when>
 				<when test="category!=null and dateOption!=null and search==null and class_state==null">
-					where category='${category}' and ${dateOption} between '${startDate}' and '${endDate}'
+					and category='${category}' and dateOption='${dateOption}'
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					where category='${category}' and ${dateOption} between '${startDate}' and '${endDate}' and
-						code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%'
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
-					where class_state='${class_state}'and category='${category}' and ${dateOption} between '${startDate}' 
-					and '${endDate}' and code like '%${search}%' or class_name like '%${search}%' 
-					or nickname like '%${search}%'
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					and class_state='${class_state}' 
 				</when>
 				
 				<when test="category==null and dateOption!=null and search==null and class_state==null">
-					where ${dateOption} between '${startDate}' and '${endDate}'
+					and dateOption='${dateOption}'
 				</when>
 				<when test="category==null and dateOption!=null and search==null and class_state!=null">
-					 where category='${category}'and ${dateOption} between '${startDate}' and '${endDate}'
-					 and class_state='${class_state}'
+					and dateOption='${dateOption}' and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption!=null and search!=null and class_state==null">
-					 where ${dateOption} between '${startDate}' and '${endDate}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
+					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
-				
-				<when test="category==null and dateOption==null and search!=null and class_state==null">
-					 where code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%'
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}'and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption==null and search!=null and class_state==null">
-					 where class_state='${class_state}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
+				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
+					 and class_state='${class_state}'  
+					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when> 
 				<when test="category!=null and dateOption==null and search!=null and class_state==null">
-					 where category='${category}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'
-				</when>
-				
-				<when test="category!=null and dateOption==null and search==null and class_state!=null">
-					where category='${category}' and class_state='${class_state}'
+					 and category='${category}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
-					where category='${category}' and class_state='${class_state}' and
-					${dateOption} between '${startDate}' and '${endDate}'  
+					and category='${category}' and class_state='${class_state}' 
+					and dateOption='${dateOption}'
 				</when>
 				
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
-					where category='${category}' and class_state='${class_state}' or code like '%${search}%' 
-					 or class_name like '%${search}%' or nickname like '%${search}%'  
+					and category='${category}' and class_state='${class_state}'  
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
-					where ${dateOption} between '${startDate}' and '${endDate}' and class_state='${class_state}' 
-					or code like '%${search}%'  or class_name like '%${search}%' or nickname like '%${search}%'  
+					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					  and dateOption='${dateOption}' and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 			</choose>
 		order by code desc)A
 		WHERE
-		ROWNUM &gt;= ${startNum}
+		ROWNUM &lt;= ${endNum}
 		)
 		WHERE
-		RNUM &lt;=${endNum}
+		RNUM &gt;=${startNum}
 	</select>
 </mapper>
