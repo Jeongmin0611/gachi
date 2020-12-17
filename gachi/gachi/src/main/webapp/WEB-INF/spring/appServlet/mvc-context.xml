@@ -16,10 +16,5 @@
 	
 	 		
 	 -->
-	 <mvc:interceptors>
-	 	<mvc:interceptor>
-	 		<mvc:mapping path="/eventReplyFormOk"/>
-	 		<bean class="com.bitcamp.gachi.interceptor.LoginInterceptor"/>
-	 	</mvc:interceptor>
-	 </mvc:interceptors>
+	 
 </beans>

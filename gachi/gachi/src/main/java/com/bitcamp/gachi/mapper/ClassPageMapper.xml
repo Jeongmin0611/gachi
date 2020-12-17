@@ -126,7 +126,7 @@
 	</select>
 	<select id="reviewList"
 		resultType="com.bitcamp.gachi.admin.AllVO">
-		select num, code, nickname, subject, content,
+		select num, code, c.userid, nickname, subject, content,
 		to_char(c.writedate, 'YY.MM.DD') writedate, c.grade from class_review c
 		join member m on c.userid=m.userid
 		where code='${param1}' order by num desc
