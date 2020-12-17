@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container ad_font">
 <script type="text/javascript">
@@ -96,22 +96,29 @@ function eventDel(){
 		
 	}
 }
+function onlyNumber(){
+
+    if((event.keyCode<48)||(event.keyCode>57))
+
+       event.returnValue=false;
+
+}
 </script>
 <div class="container">
-<h1>상품수정</h1>
+<h1>이벤트 수정</h1>
 <form method="post" action="adminEventEditOk" id="adminEventEditOk" enctype="multipart/form-data">
 <ul id="ad_Event_editForm">
 		<li>
 			<ul>
-				<li class="content_center">상품번호</li><li><input type="text" name="event_num" value="${list.event_num }" readonly/></li>
+				<li class="content_center">이벤트번호</li><li><input type="text" name="event_num" value="${list.event_num }" readonly/></li>
 				<li class="content_center">제목</li><li><input type="text" name="subject" value="${list.subject }" /></li>
-				<li class="content_center">시작날짜</li><li><input type="text" name="startdate" value="${list.startdate }" /></li>
-				<li class="content_center">종료 기간</li><li><input type="text" id="enddate" name="enddate" value="${list.enddate }"/></li>
+				<li class="content_center">시작날짜</li><li><input type="text" name="startdate" onkeypress="onlyNumber();" maxlength="8" value="${list.startdate }" /></li>
+				<li class="content_center">종료 기간</li><li><input type="text" id="enddate" name="enddate" onkeypress="onlyNumber();" maxlength="8" value="${list.enddate }"/></li>
 		</ul>
 	</li>
 	<li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
-			클래스 이미지 추가
+			이벤트 대표이미지
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
@@ -146,4 +153,4 @@ function eventDel(){
 		</ul>
 	</form>
 	</div>
-</div>
+</div> --%>

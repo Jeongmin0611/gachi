@@ -3,7 +3,7 @@
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
 <script type="text/javascript">
 $(function(){
-	var editor=CKEDITOR.replace('event_info',{
+	var editor=CKEDITOR.replace('event_Wordinfo',{
 		imageUploadUrl:'/gachi/EventimageUpload',
 		extraPlugins:'uploadimage'
 	});
@@ -19,7 +19,8 @@ $(function(){
 	}, null, null, 4 ); 
 	
 	CKEDITOR.config.height=500;
-	$("#ad_Event_writeForm").css("height","400px");
+	$("#ad_Event_writeForm").css("height","300px");
+	$("#ad_Event_writeForm").css("overflow","hidden");
 	$("#ad_Event_writeForm>li").slice(2).css("width","100%");
 	$("#ad_Event_writeForm>li:first-child li").css("margin","7px 0px");
 	$("#ad_Event_write li").css("margin-top","10px");
@@ -45,10 +46,10 @@ $(function(){
 		var file=files[0];
 		console.log('file:' + file);
 
-		let code=$("#code").val();
+		let code=$("#event_num").val();
 		var formData= new FormData();
 		formData.append("file",file);
-		formData.append("code",code);
+		formData.append("event_num",code);
 		console.log(formData.file);
 		  $.ajax({
 			type:"post",
@@ -107,7 +108,7 @@ function onlyNumber(){
        event.returnValue=false;
 
 }
-/* function handleImgFileSelect(inputName, e) {
+ function handleImgFileSelect(inputName, e) {
 	
 	var inputName = inputName;
 
@@ -118,7 +119,7 @@ function onlyNumber(){
 	tagTxt+='<div style="padding:0 auto;">';
 	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
 	$(".ad_box").append(tagTxt);
-} */
+} 
 </script>
 <div class="container">
 <h1>이벤트 수정</h1>
@@ -136,19 +137,13 @@ function onlyNumber(){
 			<li><input type="text" id="enddate" name="enddate" maxlength="8" oninput="maxLengthCheck(this)" onkeypress="onlyNumber();" value="${vo.enddate }"/></li>
 			<li class="content_center">메인 이미지</li>
 			<li><input type="file" name="mainImg" id="mainImg" /></li>
-			<li class="content_center">슬라이드 이미지1</li>
-			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
-			<li class="content_center">슬라이드 이미지2</li>
-			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
-			<li class="content_center">슬라이드 이미지3</li>
-			<li><input type="file" name="detailImg3" id="detailImg3" /></li>
 			<li class="content_center">이벤트설명 이미지</li>
 			<li><input type="file" name="eventInfo" id="eventInfo" /></li>
 		</ul>
 	</li>
 	<li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
-			이벤트 이미지 추가
+			이벤트 대표 이미지
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
@@ -173,9 +168,10 @@ function onlyNumber(){
 </div>
 		<ul id="ad_event_write">
 			<li>상품설명</li>
-			<li><textarea name="event_info" id="event_info"></textarea></li>
+			<li><textarea name="event_Wordinfo" id="event_Wordinfo"></textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li>
 			<li class="content_center">
+				<button class="btn" value="삭제하기">삭제하기</button> 
 				<input type="submit" class="btn" value="등록하기"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
 			</li>

@@ -18,19 +18,12 @@ public class QnaVO {
 	private String class_name;
 	private String username;
 	private String category;
-	private List<String> imgList; // 임시로 넣어둠 
 	private int event_num;
 	private String startdate;
 	private String enddate;
 	private String event_img;
 	private int grade;
 	
-	public List<String> getImgList() {
-		return imgList;
-	}
-	public void setImgList(List<String> imgList) {
-		this.imgList = imgList;
-	}
 	public String getCode() {
 		return code;
 	}
