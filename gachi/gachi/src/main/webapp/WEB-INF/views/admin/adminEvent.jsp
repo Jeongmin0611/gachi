@@ -108,7 +108,6 @@ select {
 </ul>
 <div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
-	<button class="btn">삭제</button> 
 </div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

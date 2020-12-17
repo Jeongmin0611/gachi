@@ -5,7 +5,7 @@
   
 <mapper namespace="com.bitcamp.gachi.admin.EventDaoImp">
 
-<select id="selectEventList" parameterType="map" resultType="com.bitcamp.gachi.admin.QnaVO">
+<select id="selectEventList" parameterType="map" resultType="com.bitcamp.gachi.admin.EventVO">
 
 		SELECT * FROM
 		(SELECT A.*,
@@ -41,16 +41,21 @@
 		</choose>
 		
 	</select>
-	<select id="selectEvent" parameterType="String" resultType="com.bitcamp.gachi.admin.QnaVO">
+	<select id="selectEvent" parameterType="String" resultType="com.bitcamp.gachi.admin.EventVO">
 	  select event_num , subject,to_char(writedate, 'yyyy-mm-dd')writedate ,to_char(startdate, 'yyyy-mm-dd')startdate ,
 		to_char(enddate, 'yyyy-mm-dd')enedate from event
 	  where event_num = #{event_num}
 	</select>
 	
-	<update id="updateEvent" parameterType="com.bitcamp.gachi.admin.QnaVO">
+	<update id="updateEvent" parameterType="com.bitcamp.gachi.admin.EventVO">
 		update event set subject='${subject}',startdate='${startdate}',enddate='${enddate}'
 		 where event_num='${event_num}'  
 	</update>
-	
+		<select id="selectEventImg" parameterType="String" resultType="String">
+		select event_img,content from event where event_num='${event_num}'
+	</select>
+	<update id="updateEventImg" parameterType="String">
+		update event set event_img='${event_img}',content='${content}' where event_num='${event_num}'
+	</update>
 
 </mapper>

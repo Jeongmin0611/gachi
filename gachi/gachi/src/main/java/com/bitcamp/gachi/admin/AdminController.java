@@ -1193,7 +1193,7 @@ public class AdminController {
 		}
 //		List<SettleVO> list = sdao.selectStoreList(dbParam); // �쟾泥� �긽�뭹 由ъ뒪�듃
 		
-		List<QnaVO> list = dao.selectEventList(dbParam);
+		List<EventVO> list = dao.selectEventList(dbParam);
 		dao = sqlSession.getMapper(EventDaoImp.class);
 		
 		mav.addObject("method", "get");
@@ -1217,6 +1217,7 @@ public class AdminController {
 	
 		return mav;
 	}
+	
 	
 	@RequestMapping(value="/adminEvent", method=RequestMethod.POST)
 	@ResponseBody
@@ -1262,7 +1263,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 20 + 1;
 		}
-		List<QnaVO> list = dao.selectEventList(dbParam);
+		List<EventVO> list = dao.selectEventList(dbParam);
 		dao = sqlSession.getMapper(EventDaoImp.class);
 		
 		if(startDate != null && endDate != null && list != null) {
@@ -1302,7 +1303,7 @@ public class AdminController {
 	public ModelAndView adminEventView(String event_num) {
 		
 		EventDaoImp dao = sqlSession.getMapper(EventDaoImp.class);
-		QnaVO vo = dao.selectEvent(event_num);
+		EventVO vo = dao.selectEvent(event_num);
 		ModelAndView mav = new ModelAndView();	
 		
 		mav.addObject("vo",vo);		
@@ -1311,7 +1312,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/adminEventEditOk",method = RequestMethod.POST)
-	public ModelAndView adminEventEditOk(QnaVO vo,HttpSession session) {
+	public ModelAndView adminEventEditOk(EventVO vo,HttpSession session) {
 		EventDaoImp dao=sqlSession.getMapper(EventDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/eventImg");
 		int result=dao.updateEvent(vo);
@@ -1327,7 +1328,7 @@ public class AdminController {
 		return "admin/adminEventWrite";
 	}
 	@RequestMapping(value="/adminEventWriteOk",method = RequestMethod.POST)
-	public ModelAndView adminEventWriteOk(QnaVO vo,HttpSession session) {
+	public ModelAndView adminEventWriteOk(EventVO vo,HttpSession session) {
 		EventDaoImp dao=sqlSession.getMapper(EventDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/eventImg");
 		int result=dao.updateEvent(vo);
@@ -1337,6 +1338,106 @@ public class AdminController {
 			mav.setViewName("redirect:adminEvent");
 		}
 		return mav;
+	}
+	
+	@RequestMapping(value="/EventimgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String EventimgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+			@RequestParam("event_num") String event_num, Object event_img, Object txt) {
+		EventDaoImp dao=sqlSession.getMapper(EventDaoImp.class);
+		MultipartFile file=mhsr.getFile("file");
+		OutputStream ops=null;
+		String path=session.getServletContext().getRealPath("/upload/eventImg");
+		boolean isc=file.isEmpty();
+		String filePath=null;
+		if(!isc){
+			String fName=file.getOriginalFilename();
+			if(fName!=null&&!fName.equals("")) {
+				String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+				String oriExt=fName.substring(fName.lastIndexOf("."));
+				File newFile=new File(path,event_num+"_"+fName);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=event_num+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							fName=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					file.transferTo(newFile);
+					System.out.println("newFile:" + newFile);
+					String eventImg=dao.selectEventImg(event_num);
+					eventImg=eventImg+newFile.getName()+",";
+					dao.updateEventImg(txt, event_num);
+					filePath="/gachi/upload/eventImg/"+newFile.getName();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}//if
+		}
+		System.out.println("filePath:" + filePath);
+		return filePath;
+	}
+	
+	@RequestMapping(value="EventimageDelete",method = RequestMethod.POST)
+	@ResponseBody
+	public void EventimageDelete(HttpServletRequest req,HttpSession session) throws UnsupportedEncodingException {
+		req.setCharacterEncoding("UTF-8");
+		
+		EventDaoImp dao=sqlSession.getMapper(EventDaoImp.class);
+		String path=session.getServletContext().getRealPath("/upload/eventImg");
+		String imageName=req.getParameter("imageName");
+		System.out.println(imageName);
+		String event_num=req.getParameter("event_num");
+		System.out.println(event_num);
+		File file=new File(path,imageName);
+		if(file.exists()) {
+			file.delete();
+			String eventImg=dao.selectEventImg(event_num);
+			StringTokenizer st=new StringTokenizer(eventImg,",");
+			String txt="";
+			while (st.hasMoreTokens()) {
+				String img=st.nextToken();
+				if(img.equals(imageName)) {
+					continue;
+				}
+				txt+=img+",";
+			}
+			Map<String, String> dbParam = new HashMap<String, String>();
+			dao.updateEventImg(txt, event_num);
+		}
+	} 
+	
+	
+	@RequestMapping(value="/EventimageUpload",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonObject EventimageUpload(HttpServletRequest req,@RequestParam MultipartFile upload,
+			@RequestParam("type") String type) {
+		HttpSession session=req.getSession();
+		String path = null;
+		if(type.equals("EventEdit")) {
+			path=session.getServletContext().getRealPath("/upload/eventImg");
+		}
+		else if(type.equals("EventWrite")) {
+			path=session.getServletContext().getRealPath("/upload/eventImg");
+		}
+		JsonObject json=new JsonObject();
+		OutputStream ops=null;
+		try {
+			ops=new FileOutputStream(new File(path,upload.getOriginalFilename()));
+			ops.write(upload.getBytes());
+			json.addProperty("uploaded",1);
+			json.addProperty("filename",upload.getOriginalFilename());
+			json.addProperty("url","/gachi/upload/eventImg/"+upload.getOriginalFilename());
+			ops.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	@RequestMapping("/admin1on1")
 	public String admin1on1() {
