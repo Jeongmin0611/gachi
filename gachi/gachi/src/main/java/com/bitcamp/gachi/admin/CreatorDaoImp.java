@@ -70,8 +70,14 @@ public interface CreatorDaoImp {
 	//크리에이터 동영상 목록 구하기 
 	public List<ClassVideoVO> creVideoList(Map<String, String> map);
 	
-	//크리에이터가 등록한 강의 리스트만 구하기
+	//크리에이터가 등록한 동영상 리스트만 구하기
 	public List<ClassVO> getcreClassList(Map<String, String> map);
+	
+	//크리에이터 클래스 총 레코드수
+	public int  selectcreClassAllCount(Map<String, String> map);
+	
+	//크리에이터 클래스 목록구하기
+	public List<ClassVO>  selectcreClassList(Map<String, String> map);
 	
 }
 

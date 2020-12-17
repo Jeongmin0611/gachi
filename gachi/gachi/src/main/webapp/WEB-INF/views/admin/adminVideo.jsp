@@ -102,15 +102,15 @@ $(function(){
 			<li>등록일</li>
 			
 			<c:forEach var="vlist" items="${vlist}">
-				<li>${vlist.video_code}</li>
-				<li>${vlist.class_name}</li>
-				<li>${vlist.unit_content}</li>
-				<li>${vlist.section_index}</li>
-				<li><a href="/gachi/adminVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
+				<li class="wordCut">${vlist.video_code}</li>
+				<li class="wordCut">${vlist.class_name}</li>
+				<li class="wordCut">${vlist.unit_content}</li>
+				<li class="wordCut">${vlist.section_index}</li>
+				<li class="wordCut"><a href="/gachi/adminVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
 				<li class="wordCut">${vlist.video_filename}</li>
-				<li>${vlist.nickname}</li>
-				<li>${vlist.lengthStr}</li>
-				<li>${vlist.enroll_date}</li>
+				<li class="wordCut">${vlist.nickname}</li>
+				<li class="wordCut">${vlist.lengthStr}</li>
+				<li class="wordCut">${vlist.enroll_date}</li>
 			</c:forEach>
 		</ul>
 	</div>
