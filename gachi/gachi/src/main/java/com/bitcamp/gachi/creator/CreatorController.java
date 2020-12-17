@@ -668,9 +668,174 @@ public class CreatorController {
 	public String creatorApproval() {
 		return "creator/creatorApproval";
 	}
-	@RequestMapping ("/creatorMyClass")
-	public String creatorMyClass() {
-		return "creator/creatorMyClass";
+	@RequestMapping(value="/creatorMyClass",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView creatorMyClass(@RequestParam(value="now", required=false) String now,
+			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="class_state", required=false) String class_state,
+			@RequestParam(value="dateOption", required=false) String dateOption,
+			@RequestParam(value="search", required=false) String search,
+			@RequestParam(value="startDate", required=false) String startDate,
+			@RequestParam(value="endDate", required=false) String endDate,
+			HttpServletRequest req, HttpServletResponse resp){
+		
+		
+		System.out.println("POST 드가자");
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(class_state.length() <= 0) class_state = null;
+		if(dateOption.length() <= 0) dateOption = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("dateOption", dateOption);
+		dbParam.put("search", search);
+		dbParam.put("class_state", class_state);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		String userid=(String)req.getSession().getAttribute("userid");
+		dbParam.put("userid",userid);
+		
+		int cntRecords = dao.selectcreClassAllCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVO> result = dao.selectcreClassList(dbParam);
+		
+		
+		if(startDate != null && endDate != null && result != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("result",result);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", result.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("class_state", class_state);
+			mav.addObject("dateOption", dateOption);
+			mav.addObject("search", search);
+			
+			System.out.println("startDate>>>>>"+startDate);
+			System.out.println("endDate>>>>>"+endDate);
+			System.out.println("category>>>>>"+category);
+			System.out.println("class_state>>>>>"+class_state);
+			System.out.println("dateOption>>>>>"+dateOption);
+			System.out.println("search>>>>>"+search);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("creator/creatorMyClass");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	@RequestMapping("/creatorMyClass")
+	public ModelAndView creatorMyClass(@RequestParam(value="now", required=false) String now,
+			HttpServletRequest req) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("dateOption", null);
+		dbParam.put("category", null);
+		dbParam.put("search", null);
+		dbParam.put("class_state", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);		
+				
+		String userid=(String)req.getSession().getAttribute("userid");
+		dbParam.put("userid",userid);
+		
+		int cntRecords = dao.selectcreClassAllCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVO> result = dao.selectcreClassList(dbParam);
+
+		mav.addObject("method", "get");
+		mav.addObject("result",result);
+		mav.addObject("cntData", result.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("dateOption",null);
+		mav.addObject("category",null);
+		mav.addObject("search",null);
+		mav.addObject("class_state",null);
+
+
+
+//		mav.addObject("data", result);
+		mav.setViewName("creator/creatorMyClass");
+	
+		return mav;
 	}
 	@RequestMapping ("/creatorMyClassWrite")
 	public String creatorMyClassWrite() {

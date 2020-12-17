@@ -300,4 +300,148 @@
 		select class_name,code from class join member on class.userid=member.userid 
 		where class.userid='${userid}' and category='${category}'
 	</select>
+	<select id="selectcreClassAllCount" parameterType="map" resultType="int">
+		select count(*) from class join member on class.userid=member.userid 
+		where member.userid='${userid}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} 
+		and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
+			<choose> 
+				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
+				<when test="category!=null and dateOption==null and search==null and class_state==null">
+					and category='${category}'
+				</when>
+				<when test="category!=null and dateOption!=null and search==null and class_state==null">
+					and category='${category}' and dateOption='${dateOption}'
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					and class_state='${class_state}' 
+				</when>
+				
+				<when test="category==null and dateOption!=null and search==null and class_state==null">
+					and dateOption='${dateOption}'
+				</when>
+				<when test="category==null and dateOption!=null and search==null and class_state!=null">
+					and dateOption='${dateOption}' and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption!=null and search!=null and class_state==null">
+					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}'and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption==null and search!=null and class_state==null">
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
+					 and class_state='${class_state}'  
+					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when> 
+				<when test="category!=null and dateOption==null and search!=null and class_state==null">
+					 and category='${category}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				
+				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
+					and category='${category}' and class_state='${class_state}' 
+					and dateOption='${dateOption}'
+				</when>
+				
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}' and class_state='${class_state}'  
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				
+				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
+					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					  and dateOption='${dateOption}' and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+			</choose>
+	</select>
+	<select id="selectcreClassList" resultType="com.bitcamp.gachi.admin.ClassVO" parameterType="map">
+	SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,   
+		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid
+		where m.userid='${userid}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} 
+		and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
+		<choose> 
+				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
+				<when test="category!=null and dateOption==null and search==null and class_state==null">
+					and category='${category}'
+				</when>
+				<when test="category!=null and dateOption!=null and search==null and class_state==null">
+					and category='${category}' and dateOption='${dateOption}'
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
+					and category='${category}' and dateOption='${dateOption}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					and class_state='${class_state}' 
+				</when>
+				
+				<when test="category==null and dateOption!=null and search==null and class_state==null">
+					and dateOption='${dateOption}'
+				</when>
+				<when test="category==null and dateOption!=null and search==null and class_state!=null">
+					and dateOption='${dateOption}' and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption!=null and search!=null and class_state==null">
+					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}'and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption==null and search!=null and class_state==null">
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
+					 and class_state='${class_state}'  
+					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when> 
+				<when test="category!=null and dateOption==null and search!=null and class_state==null">
+					 and category='${category}'
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				
+				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
+					and category='${category}' and class_state='${class_state}' 
+					and dateOption='${dateOption}'
+				</when>
+				
+				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
+					and category='${category}' and class_state='${class_state}'  
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				
+				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
+					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
+					  and dateOption='${dateOption}' and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+			</choose>
+		order by code desc)A
+		WHERE
+		ROWNUM &lt;= ${endNum}
+		)
+		WHERE
+		RNUM &gt;=${startNum}
+	
+	</select>
 </mapper>
