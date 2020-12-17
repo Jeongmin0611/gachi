@@ -565,7 +565,12 @@ input[type=text] {
 							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
-							<li>${r.writedate }</li>
+							<li>${r.writedate } 
+								<!-- 수정 삭제 -->
+								<c:if test=" ${sessionScope.userid eq r.userid }">
+									같다
+								</c:if>
+							</li>
 							<li>${r.content }</li>
 						</ul>
 						<hr class="reviewMoreContent" />

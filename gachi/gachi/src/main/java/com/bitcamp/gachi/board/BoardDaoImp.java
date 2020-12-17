@@ -2,8 +2,6 @@ package com.bitcamp.gachi.board;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.bitcamp.gachi.admin.PagingVO;
 
 public interface BoardDaoImp {
