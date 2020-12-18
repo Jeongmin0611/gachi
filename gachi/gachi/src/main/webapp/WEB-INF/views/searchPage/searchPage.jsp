@@ -86,7 +86,7 @@
 		<div class="row">
 		<c:forEach var="result" items="${result }">
 				<div class="col-sm-4">
-					<a href="/gachi/classView?code=${result.code }"><img src="img/${result.class_img }" class="homeClassListImg"/></a><br/>
+					<a href="/gachi/classView?code=${result.code }"><img src="/gachi/upload/classImg/${result.class_img }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
 							<p><span class="badge badge-info" style="font-size:0.9em">${result.category }</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 							<a href="/gachi/classView?code=${result.code }"><span>${result.class_name }</span><br/>
@@ -109,7 +109,7 @@
 		<div class="row">
 		<c:forEach var="result2" items="${result2 }">
 				<div class="col-sm-4">
-					<a href="/gachi/storeView?code=${result2.code }"><img src="img/store/${result2.goods_img1 }" class="homeClassListImg"/></a><br/>
+					<a href="/gachi/storeView?code=${result2.code }"><img src="/gachi/upload/storeImg/${result2.goods_img1 }" class="homeClassListImg"/></a><br/>
 						<div class="homeClassListTxt">
 							<p><span class="badge badge-info" style="font-size:0.9em">${result2.category }</span><i class="far fa-heart fa-lg p-2" style="float:right; height: 15px;"></i></p>
 							<a href="/gachi/classView?code=${result2.code }"><span>${result2.goods_name }</span><br/>			

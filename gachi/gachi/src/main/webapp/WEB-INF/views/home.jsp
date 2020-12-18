@@ -192,7 +192,12 @@
 		<!-- 추천 -->
 		<h3 class="homeClassListTitle" style="margin-top: 50px;">추천 클래스</h3>
 		<p style="text-align: right">
+		<c:if test="${empty sessionScope.userid}"><!-- 로그인 안 한경우  -->
+			<a href="/gachi/classList">more</a>
+		</c:if>
+		<c:if test="${!empty sessionScope.userid}">
 			<a href="/gachi/classPage">more</a>
+		</c:if>
 		</p>
 		<div class="row" style="margin-bottom: 50px;">
 			<c:forEach var="nlist" items="${rlist }">

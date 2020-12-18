@@ -27,6 +27,16 @@ public class ClassPageVO {
 	private int good;
 	private String signup;
 	private int stack;
+	
+	private String interest;
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
 
 	public String getSearchKey() {
 		return searchKey;
