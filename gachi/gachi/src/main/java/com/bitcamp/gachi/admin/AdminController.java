@@ -534,8 +534,9 @@ public class AdminController {
 			@RequestParam(value="startDate", required=false) String startDate,
 			@RequestParam(value="endDate", required=false) String endDate,
 			HttpServletResponse res, HttpServletResponse resp){
-		
-		
+		System.out.println("dateOption==>"+dateOption);
+		System.out.println("startDate==>"+startDate);
+		System.out.println("endDate==>"+endDate);
 		System.out.println("POST 드가자");
 		int nowPage = 1;
 		if(now != null && now.length() > 0){
@@ -712,15 +713,15 @@ public class AdminController {
 	public ModelAndView adminClassEdit(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		ClassVO vo=dao.selectClass(code);
-		StringTokenizer st=new StringTokenizer(vo.getClass_img(),",");
-		List<String> list=new ArrayList<String>();
-		while(st.hasMoreTokens()) {
-			list.add(st.nextToken());
-		}
-		vo.setImgList(list);
-		
 		List<ClassVideoVO> sectionList=dao.selectSection(code);
-		
+		List<String> list=new ArrayList<String>();
+		String text=vo.getClass_img2();
+			StringTokenizer st=new StringTokenizer(text,",");
+			while (st.hasMoreTokens()) {
+				String img=st.nextToken();
+				list.add(img);
+			}
+			vo.setImgList(list);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("vo",vo);
 		mav.addObject("sectionList",sectionList);
@@ -729,13 +730,54 @@ public class AdminController {
 	}
 
 	@RequestMapping(value="/adminClassEditOk",method = RequestMethod.POST)
-	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session) {
+	public ModelAndView adminClassEditOk(ClassVO vo,HttpSession session,
+			MultipartHttpServletRequest mhsr) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
-		List<ClassVO> unitList=vo.getUnitList();
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String[] codes=vo.getCodes();
+		int[] unitArray=vo.getUnitArray();
+		String[] sectionCode=vo.getSectionCode();
+		String[] unitContent=vo.getUnitContent();
+		String[] imgNames=vo.getImgNames();
+		for (int i = 0; i < imgNames.length; i++) {
+			String fullName=path+imgNames[i];
+			String img=dao.selectClassImg2(codes[0]);
+			StringTokenizer st=new StringTokenizer(img,",");
+			while(st.hasMoreTokens()) {
+				if(fullName==st.nextToken()){
+					File file=new File(path,st.nextToken());
+					if(file.exists()){
+						file.delete();
+					}
+				}
+			}
+		}
+		List<MultipartFile> files=mhsr.getFiles("mainImg");
+		System.out.println("bfdsgds"+files.get(0).getOriginalFilename());
+		if(files.get(0).getName()!=null) {
+			vo.setClass_img(files.get(0).getOriginalFilename());
+			File mainImg=new File(path, files.get(0).getOriginalFilename());
+			try {
+				files.get(0).transferTo(mainImg);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+	
+		List<ClassVO> list =new ArrayList<ClassVO>();
+		for(int i=0;i<codes.length;i++){
+			ClassVO vo2=new ClassVO();
+			vo2.setCode(codes[i]);
+			vo2.setUnit(unitArray[i]);
+			vo2.setSection_code(sectionCode[i]);
+			vo2.setUnit_content(unitContent[i]);
+			list.add(vo2);
+		}
 		ClassUnitSort cus=new ClassUnitSort();
-		Collections.sort(unitList,cus);
-		for (int i = 0; i < unitList.size(); i++) {
-				ClassVO vo1=unitList.get(i);
+		Collections.sort(list,cus);
+		for (int i = 0; i < list.size(); i++) {
+				ClassVO vo1=list.get(i);
 				if(vo1.getCode()!=null) {
 					if(vo1.getSection_code().equals(",null")) {
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
@@ -764,7 +806,6 @@ public class AdminController {
 			@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		MultipartFile file=mhsr.getFile("file");
-		OutputStream ops=null;
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		boolean isc=file.isEmpty();
 		String filePath=null;
@@ -787,9 +828,9 @@ public class AdminController {
 				}//if
 				try {
 					file.transferTo(newFile);
-					String classImg=dao.selectClassImg(code);
-					classImg=classImg+newFile.getName()+",";
-					dao.updateClassImg(classImg, code);
+					String classImg=dao.selectClassImg2(code);
+					classImg=classImg+fName+",";
+					dao.updateClassImg2(classImg, code);
 					filePath="/gachi/upload/classImg/"+newFile.getName();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -805,11 +846,12 @@ public class AdminController {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		String imageName=req.getParameter("imageName");
+		System.out.println("imageName=>"+imageName);
 		String code=req.getParameter("code");
 		File file=new File(path,imageName);
 		if(file.exists()) {
 			file.delete();
-			String classImg=dao.selectClassImg(code);
+			String classImg=dao.selectClassImg2(code);
 			StringTokenizer st=new StringTokenizer(classImg,",");
 			String txt="";
 			while (st.hasMoreTokens()) {
@@ -819,10 +861,49 @@ public class AdminController {
 				}
 				txt+=img+",";
 			}
-			dao.updateClassImg(txt, code);
+			System.out.println(txt);
+			dao.updateClassImg2(txt, code);
 		}
 	} 
 
+	@RequestMapping(value="/mainImgUpdate",method=RequestMethod.POST,produces="application/text;charset=utf8")
+	@ResponseBody
+	public String mainImgUpdate(HttpSession session,HttpServletRequest req,
+			MultipartHttpServletRequest mhsr){
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		System.out.println("Aaaaaaa");
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String code=req.getParameter("code");
+		String imageName=req.getParameter("imageName");
+		String delFile=req.getParameter("delFile");
+		System.out.println("code=>"+code);
+		System.out.println("imgName=>"+imageName);
+		System.out.println("delFile=>"+delFile);
+		MultipartHttpServletRequest mr=(MultipartHttpServletRequest)req;
+		
+		File oldFile=new File(path,delFile);
+		File newFile=new File(path,imageName);
+		String filename=newFile.getName();
+		if(filename!=null&&!filename.equals("")) {
+			String oriFileName=filename.substring(0,filename.lastIndexOf("."));
+			String oriExt=filename.substring(filename.lastIndexOf("."));
+			File newFile1=new File(path,filename);
+			if(newFile1.exists()) {
+				for (int renameNum=1;;renameNum++) {
+					String renameFile=oriFileName+"("+renameNum+")"+oriExt;
+					System.out.println("filename==> "+renameFile);
+					newFile=new File(path,renameFile);
+					if(!newFile.exists()) {
+						filename=renameFile;
+						break;
+					}
+				}
+	}
+}
+		return filename;
+}
+	
+	
 	@RequestMapping("/adminClassStateUpdate")
 	public ModelAndView adminClassStateUpdate(@RequestParam("code") String code) {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
@@ -4052,6 +4133,7 @@ public class AdminController {
 		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
 		String category=dao.selectVideoCategory(code);
 		String className=dao.selectVideoClassName(code);
+		String videoName=dao.getVideoName(filename);
 		List<ClassVideoVO> videoList=dao.selectClassVideoList(code);
 		List<ClassVideoVO> unitList=dao.selectSection(code);
 		
@@ -4061,6 +4143,7 @@ public class AdminController {
 		mav.addObject("className",className);
 		mav.addObject("filename",filename);
 		mav.addObject("code",code);
+		mav.addObject("videoName",videoName);
 		mav.setViewName("admin/adminVideoView");
 		return mav;
 	} 
@@ -4675,7 +4758,7 @@ public class AdminController {
 			dao.videoInsert(vo3);
 		}
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:adminVideo");
+		mav.setViewName("admin/adminResult");
 		return mav;
 	}
 	

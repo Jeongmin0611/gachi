@@ -10,8 +10,12 @@ $(function(){
 	$("#category").val("${category}").attr("selected", "selected");
 	$("#payment_type").val("${payment_type}").attr("selected", "selected");	
 	$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
-	
+	var now=${nowPage};
 	$("#searchBtn").click(function(){
+		if($('#startDate').val()>=$('#endDate').val()){
+			alert("시작일보다 종료일이 더 빠릅니다.\n다시입력해주세요.");
+			return false;
+		}
 		var url = "/adminVideo";
 		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&category=" + $("#category").val() + "&searchWord=" + $("#searchWord").val().trim(); + "&now=" + now +1;
 		$.ajax({

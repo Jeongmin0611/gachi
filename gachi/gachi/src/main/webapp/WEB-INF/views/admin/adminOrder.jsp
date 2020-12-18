@@ -104,7 +104,7 @@ $(function(){
 	</div>
 </form>
 </div>
-<ul id="ad_order_lst" class="text-center">
+<ul id="ad_order_lst" class="text-center" style="margin-top:20px;">
 	<li>주문번호</li>
 	<li>회원아이디</li>
 	<li>구매자</li>
