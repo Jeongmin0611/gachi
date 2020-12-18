@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+	#ad_class_lstArea{
+		border:3px solid #437299; 
+		margin-top:20px;
+		overflow: auto;
+		border-radius: 10px;
+	}
 	#ad_class_lstArea li{
 		float:left;
 		width:10%;
@@ -133,7 +139,7 @@ $(function(){
 	</form>
 	</div>
 
-	<ul id="ad_class_lstArea">
+	<ul id="ad_class_lstArea" >
 		<li>번호</li>
 		<li>카테고리</li>
 		<li>클래스 코드</li>

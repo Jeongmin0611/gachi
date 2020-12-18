@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="count" value="0"/> 
 <style>
 	#ad_unit_box{
 		overflow: auto;
@@ -28,6 +27,9 @@
 	#ad_unit_box>li:last-child{
 		width:100%;
 		text-align: center;
+	}
+	#del_file{
+		display: none;
 	}
 </style>
 <div class="container ad_font">
@@ -87,13 +89,14 @@
 					tagTxt+='<div style="text-align:center">';
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
-					tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>x</b></div>';
-					$(".ad_box").append(tagTxt);
+					tagTxt+='<input type="hidden" name="imgNames" value="'+filename+'"/>'+filename+'<b class="img_del">x</b></div>';
+					$("#sub_img").append(tagTxt);
 				}
 			});
 		});
 			$(document).on('click','.img_del',(event)=>{
 				let imageName=$(event.target).prev().text();
+				console.log(imageName);
 				let code=$("#code").val();
 				$.ajax({
 					url:'/gachi/imageDelete?imageName='+imageName+"&code="+code,
@@ -106,11 +109,6 @@
 				});
 			});	
 		$("#adminClassEditOk").submit(()=>{
-			let grpl = $("input[name=imgList]").length;
-			if(grpl==0){
-				alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
-				return false;
-			}
 			if($("#class_name").val()==null||$("#class_name").val()==""){
 				alert("클래스명을 입력하여 주세요.");
 				return false;
@@ -125,9 +123,11 @@
 			}
 			
 			let array=new Array();
-			for (var i = 0; i < count; i++) {
-				var unit=document.getElementsByName("unitList["+i+"].unit");
-				array.push(unit[0].value);
+			var ulCount=$("#ad_unit_box>ul").length;
+			
+			for (var i = 0; i <ulCount-1; i++) {
+				var unit=document.getElementsByName("unitArray");
+				array.push(unit[i].value);
 			}
 			const set = new Set(array);
 			if(array.length !== set.size) {
@@ -137,7 +137,46 @@
 			
 			return true;
 		});	
-	});
+		$(document).on('click','#add_btn',()=>{
+			let txt='<ul><li>목차</li>';
+			txt+='<li><input type="text" name="unitArray"style="width:30%"/></li>'; 
+			txt+='<li>목차명<input type="hidden" name="codes" value="${vo.code}"/></li>'; 
+			txt+='<li><input type="text" name="unitContent" style="width:30%"/>'; 
+			txt+='<input type="hidden" name="sectionCode" value="null"/></li>';
+			txt+='<li><b class="unit_del">x</b></li></ul>';
+			$("#ad_unit_box>li:last-child").before(txt);
+		});
+		$(document).on('click','.unit_del',(event)=>{
+			let section_code=$(event.target).attr("title");
+			if(section_code!=null){
+				$.ajax({
+					url:'/gachi/unitDel?section_code='+section_code,
+					type:'get',
+					success:(result)=>{
+						$(event.target).parent().parent().remove();
+					},error:(e)=>{
+						alert("이미지파일 삭제를 실패하였습니다.");
+					}
+				});
+			}else{
+				$(event.target).parent().parent().remove();
+			}
+		});	
+		
+		$("#a").click(()=>{
+			console.log($("#class_img")[0].files[0].name);
+		});
+		
+		$("#class_img").change((event)=>{
+			 if($(event.target)[0].files && $(event.target)[0].files[0]) {
+			    var reader = new FileReader();
+			    reader.onload = function(data) {
+			     $("#mainImg").attr("src", data.target.result).width(200);        
+			    }
+			    reader.readAsDataURL($(event.target)[0].files[0]);
+			   }
+		});
+});
 </script>
 <div class="container">
 <h1>클래스수정</h1>
@@ -149,7 +188,7 @@
 			<li><input type="hidden" id="code" name="code" value="${vo.code}"/>${vo.code}</li>
 			<li class="content_center">카테고리</li>
 			<li>
-				<select id="category" name="category">
+				<select id="category" name="category" disabled>
 					<option  value="공예/창작" 
 						<c:if test="${vo.category eq '공예/창작'}"> selected</c:if>>공예/창작</option>
 					<option value="요리" 
@@ -200,15 +239,23 @@
 			</li>
 		</ul>
 	</li>
-	<li class="content_center">
+	<li id="bb" class="content_center" style="height:100%;margin:15px 0px;">
 		<div style="height:24px;margin:7px 0px;">
-			클래스 이미지 추가
+			클래스 대표이미지
 		</div>
-		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
-			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
+		<div style="height:100%;">
+			<img id="mainImg" src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}" style="width:200px;height:200px;">			
+		</div>
+		<div>
+			<span id="del_file">${vo.class_img}</span>
+			<input type="file" name="mainImg" id="class_img"/>
 		</div>
 	</li>
 </ul>
+<h3>서브이미지 추가</h3>
+<div id="sub_img" class="content-center add_img" style="height:200px; border:3px solid #437299; text-align:center;">
+		<h3 style="margin-top:70px;">이미지를 끌어주세요.</h3>
+</div>
 <h3>클래스 이미지 목록</h3>
 <div class="text_center ad_box">
 <c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
@@ -219,59 +266,27 @@
 			<img src="<%=request.getContextPath()%>/upload/classImg/${imgList}"/>
 		</div>
 		<div>
-			<input type="hidden" name="imgList" value="${imgList}"/> 
+			<input type="hidden" name="imgNames" value="${imgList}"/> 
 			<span class="wordCut">${imgList}</span><b class="img_del">x</b>
 		</div>
 	</div>
 </c:forEach>
 </div>
-<div>
-
-</div>
 <h3>목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
 	<c:forEach var="section" items="${sectionList}">
 		<ul>
-			<li>목차<input type="hidden" name="unitList[${count}].section_code" value="${section.section_code}"/></li>
-			<li><input type="text" name="unitList[${count}].unit" value="${section.unit}" style="width:30%"/></li>
-			<li>목차명<input type="hidden" name="unitList[${count}].code" value="${section.code}"/></li>
-			<li><input type="text" name="unitList[${count}].unit_content" value="${section.unit_content}" style="width:30%"/></li>
+			<li>목차<input type="hidden" name="sectionCode" value="${section.section_code}"/></li>
+			<li><input type="text" name="unitArray" value="${section.unit}" style="width:30%"/></li>
+			<li>목차명<input type="hidden" name="codes" value="${section.code}"/></li>
+			<li><input type="text" name="unitContent" value="${section.unit_content}" style="width:30%"/></li>
 			<li><b class="unit_del" title="${section.section_code}">x</b></li>
 		</ul>	
-		<c:set var="count" value="${count+1}"/>
 	</c:forEach>
 			<li><button type="button" id="add_btn" class="btn">+</button></li>
 </ul>
 <script type="text/javascript">
-let count=${count};
-$(document).on('click','#add_btn',()=>{
-	let txt='<ul><li>목차<input type="hidden" name="unitList['+count+'].section_code"/></li>';
-	txt+='<li><input type="text" name="unitList['+count+'].unit"'; 
-	txt+='style="width:30%"/></li><li>목차명<input type="hidden"'; 
-	txt+='name="unitList['+count+'].code" value="${vo.code}"/></li>';
-	txt+='<li><input type="text" name="unitList['+count+'].unit_content"'; 
-	txt+='style="width:30%"/><input type="hidden" name="unitList['+count+'].section_code"';
-	txt+='value="null" /></li>';
-	txt+='<li><b class="unit_del">x</b></li></ul>';
-	$("#ad_unit_box>li:last-child").before(txt);
-	count++;
-});
-$(document).on('click','.unit_del',(event)=>{
-	let section_code=$(event.target).attr("title");
-	if(section_code!=null){
-		$.ajax({
-			url:'/gachi/unitDel?section_code='+section_code,
-			type:'get',
-			success:(result)=>{
-				$(event.target).parent().parent().remove();
-			},error:(e)=>{
-				alert("이미지파일 삭제를 실패하였습니다.");
-			}
-		});
-	}else{
-		$(event.target).parent().parent().remove();
-	}
-});	
+
 </script>
 <h3>클래스정보</h3>
 <ul id="ad_goods_write">

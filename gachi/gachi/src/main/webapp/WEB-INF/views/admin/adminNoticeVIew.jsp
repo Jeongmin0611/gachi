@@ -116,34 +116,4 @@
 		<a href="/gachi/adminNoticeEdit?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">수정</button></a>
 		<a href="/gachi/adminNoticeDel?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">삭제</button></a>
 	</div>
-	<!-- 
-	<form id="adminNoticeView_ReplyForm">
-		댓글<br/> <textarea rows="3" cols="90%"></textarea>
-		<div><button class="btn">등록</button></div>
-	</form>
-	<!-- 댓글 리스트 -->
-		<!-- 
-	<div>
-		<ul id="adminNoticeView_ReplyDiv">
-			<li>홍길동</li>
-			<li>댓글 내용 </li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			
-			
-			<li>홍길동</li>
-			<li>댓글 내용 </li>
-			<li>2020-10-11</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용</li>
-			<li>2020-10-15</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-			<li>홍길동</li>
-			<li>댓글 내용</li>
-			<li>2020-10-19</li>
-			<li><a href="#">수정</a> <a href="#">삭제</a></li>
-		</ul>
-	</div>
-	 -->
 </div>

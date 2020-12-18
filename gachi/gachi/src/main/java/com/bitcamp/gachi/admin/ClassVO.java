@@ -23,12 +23,12 @@ public class ClassVO {
 	private Date signup;
 	private String class_state;
 	private String class_img;
+	private String class_img2;
 	private String nickname;
 	private List<String> imgList;
 	private int unit;
 	private String unit_content;
 	private String section_code;
-	private List<ClassVO> unitList;
 	
 	private int num;
 	private String username;
@@ -37,6 +37,7 @@ public class ClassVO {
 	private String writedate;
 	private String ip;
 	
+	private String[] codes;
 	private String[] unitContent;
 	private int[] unitArray;
 	private int[] sectionIndex;
@@ -46,7 +47,7 @@ public class ClassVO {
 	private String[] videoName;
 	private String[] videoFileName;
 	private String[] sectionCode;
-	
+	private String[] imgNames;
 	
 	public String getCode() {
 		return code;
@@ -174,12 +175,6 @@ public class ClassVO {
 	public void setSection_code(String section_code) {
 		this.section_code = section_code;
 	}
-	public List<ClassVO> getUnitList() {
-		return unitList;
-	}
-	public void setUnitList(List<ClassVO> unitList) {
-		this.unitList = unitList;
-	}
 	public int getNum() {
 		return num;
 	}
@@ -269,6 +264,24 @@ public class ClassVO {
 	}
 	public void setSectionCode(String[] sectionCode) {
 		this.sectionCode = sectionCode;
+	}
+	public String[] getCodes() {
+		return codes;
+	}
+	public void setCodes(String[] codes) {
+		this.codes = codes;
+	}
+	public String getClass_img2() {
+		return class_img2;
+	}
+	public void setClass_img2(String class_img2) {
+		this.class_img2 = class_img2;
+	}
+	public String[] getImgNames() {
+		return imgNames;
+	}
+	public void setImgNames(String[] imgNames) {
+		this.imgNames = imgNames;
 	}
 	
 	
