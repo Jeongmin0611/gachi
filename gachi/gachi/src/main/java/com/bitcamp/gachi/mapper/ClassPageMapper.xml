@@ -108,21 +108,40 @@
 		class.userid=member.userid
 		where category='${interest1}'
 		<choose>
-			<when test="!interest2.equals('')">
+			<when test="interest2!=null and interest3==null">
 				or category='${interest2}'
 				 order by good desc ) where rownum<![CDATA[<=3]]>
 			</when>
-			<when test="!interest3.equals('')">
+			<when test="interest2!=null and interest3!=null">
 				or category='${interest2}'
-				or category=='${interest3}'
+				or category='${interest3}'
 				 order by good desc ) where rownum<![CDATA[<=3]]>
 			</when>
 			<otherwise>			
 				 order by good desc ) where rownum<![CDATA[<=3]]>
 			</otherwise>
-		</choose>
-		
-		
+		</choose>		
+	</select>
+	
+	<select id="classRecommandUser" resultType="com.bitcamp.gachi.admin.AllVO">
+		select code, category, class_name, real_price,
+		nickname, class_img, good from class join member on
+		class.userid=member.userid
+		where category='${interest1}'
+		<choose>
+			<when test="!interest2.equals('') and interest3.equals('')">
+				or category='${interest2}'
+				 order by good desc 
+			</when>
+			<when test="interest2!=null and interest3!=null">
+				or category='${interest2}'
+				or category='${interest3}'
+				 order by good desc 
+			</when>
+			<otherwise>			
+				 order by good desc 
+			</otherwise>
+		</choose>		
 	</select>
 	<select id="reviewList"
 		resultType="com.bitcamp.gachi.admin.AllVO">
@@ -188,7 +207,6 @@
 	<select id="creatorCheck" resultType="int">
 		select count(*) from creator c join class m on c.userid=m.userid where m.userid='${userid}' and code='${code}'
 	</select>
-
 	<update id="updateQna" parameterType="com.bitcamp.gachi.admin.AllVO">
 		update qna set subject='${subject}', content='${content}' where num=${num}
 	</update>

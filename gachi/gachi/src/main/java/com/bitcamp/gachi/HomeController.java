@@ -83,7 +83,7 @@ public class HomeController {
 			//관심사 찾기
 			String interest = dao.homeClassInterestFind(userid);
 			//관심사, 구분
-			String[] interestArr = interest.split(",");
+			String[] interestArr = interest.replace(" ","").split(",");
 			String interest1="";
 			String interest2="";
 			String interest3="";

@@ -398,6 +398,50 @@ input[type=text] {
 	  			
 	  		});
 	  	});
+	  	//리뷰 수정
+		$(".reviewUpdate").click(function(){
+			$("#reviewSubject").val($(this).prev().prev().val());
+			CKEDITOR.instances.reviewContent.setData($(this).prev().val());
+			$("select[name=code]").parent().css("display","none");
+			$("#reviewForm").css("display","none");
+			$("#reviewUpdateForm").css("display","block");
+			$("#numInput").val($(this).next().next().val());
+			$("#classRating").raty("score",$(this).next().val());
+		});
+		$('#reviewUpdateForm').click(function(){
+	  		if($('#reviewSubject').val()==null || $('#reviewSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;
+	  		}
+	  		if(CKEDITOR.instances.reviewContent.getData()==null || CKEDITOR.instances.reviewContent.getData()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/reviewUpdateFormOk",
+	  			data:{
+	  				subject : $('#reviewSubject').val(),
+	  				content: CKEDITOR.instances.reviewContent.getData(),
+	  				grade: $('#classRating').raty('score'),
+	  				num: $(this).next().val()
+	  			},
+	  			success:function(){
+	  				swal({
+	  				  title: "수강평이 수정 되었습니다.",
+	  				  icon: "success",
+	  				  buttons: true
+	  				}).then((result)=>{
+	  					location.href = location.href;
+	  				});
+	  			},error:function(){
+	  				swal('수강평 수정이 실패하였습니다. ');
+	  			}
+	  			
+	  		});
+	  	});
+	  	
 
 	  	//질문답변 검색
 	  	$('#qnaSearchBtn').on('click',function(){
@@ -565,12 +609,16 @@ input[type=text] {
 							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
-							<li>${r.writedate } 
-								<!-- 수정 삭제 -->
-								<c:if test=" ${sessionScope.userid eq r.userid }">
-									같다
-								</c:if>
+							<li>${r.writedate }
+							<!-- 수정 삭제 -->
+								<c:choose>
+									<c:when test="${sessionScope.userid eq r.userid }">
+										<a href="#" class="reviewUpdate" style="font-size:0.9em;margin:0 5px" data-toggle="modal" data-target="#reviewModal">수정</a>
+		                  				<a href="#" class="classReviewDelete" style="font-size:0.9em;margin:0 5px">삭제</a>		
+									</c:when>
+								</c:choose>
 							</li>
+							
 							<li>${r.content }</li>
 						</ul>
 						<hr class="reviewMoreContent" />
@@ -670,6 +718,7 @@ input[type=text] {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="reviewForm">등록</button>
+				<button type='button' class='btn btn-primary' id='reviewUpdateForm'>수정</button>
 			</div>
 		</div>
 	</div>
