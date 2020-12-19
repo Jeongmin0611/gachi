@@ -18,20 +18,20 @@
  <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
 <script>
 
-window.GitpleConfig = {"appCode":"j2vNGCZzc42igrnPe6ofouihLQ2se3"};
+window.GitpleConfig = {"appCode":"u1mJX8wdS2egkDr685qJnvBQMH2ys3"};
 !function(){function e(){function e(){var e=t.contentDocument,a=e.createElement("script");a.type="text/javascript",a.async=!0,a.src=window[n]&&window[n].url?window[n].url+"/inapp-web/gitple-loader.js":"https://app.gitple.io/inapp-web/gitple-loader.js",a.charset="UTF-8",e.head&&e.head.appendChild(a)}var t=document.getElementById(a);t||((t=document.createElement("iframe")).id=a,t.style.display="none",t.style.width="0",t.style.height="0",t.addEventListener?t.addEventListener("load",e,!1):t.attachEvent?t.attachEvent("onload",e):t.onload=e,document.body.appendChild(t))}var t=window,n="GitpleConfig",a="gitple-loader-frame";if(!window.Gitple){document;var i=function(){i.ex&&i.ex(arguments)};i.q=[],i.ex=function(e){i.processApi?i.processApi.apply(void 0,e):i.q&&i.q.push(e)},window.Gitple=i,t.attachEvent?t.attachEvent("onload",e):t.addEventListener("load",e,!1)}}();
 Gitple('boot');
 
 window.GitpleConfig = {
-		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  appCode: 'u1mJX8wdS2egkDr685qJnvBQMH2ys3',
 		  userLang: 'ko'
 		};
 window.GitpleConfig = {
-		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  appCode: 'u1mJX8wdS2egkDr685qJnvBQMH2ys3',
 		  showFileUpload: false
 		};
 window.GitpleConfig = {
-		  appCode: 'j2vNGCZzc42igrnPe6ofouihLQ2se3',
+		  appCode: 'u1mJX8wdS2egkDr685qJnvBQMH2ys3',
 		  enableCookie: false
 		};
 if (window.Gitple) {
@@ -165,7 +165,6 @@ a, h1, li,h3 {
 <div id="creatortop" style="background-color:#2d383f">
 		<div style="overflow:auto"><a href="/gachi">고객센터</a>
 		<a href="/gachi">홈페이지 이동</a>
-		<a href="/gachi">마이페이지</a>
 		<a href="/gachi">로그아웃</a></div>
 </div>
 <div id="headerDiv">
@@ -190,12 +189,6 @@ a, h1, li,h3 {
 		</div>
 		</li>
 		 <li data-target="#menu3" data-toggle="collapse"><a href="/gachi/creatorAnswer">클래스 질문/답변</a>
-		<!-- <div id="menu3" class="collapse">
-			<ul class="submenu">
-				<li><a href="/gachi/creatorNotice">공지사항 </a></li>
-	            <li><a href="/gachi/creator1on1">1:1문의 </a></li>
-			</ul>
-		</div> -->
 		</li>
 		<li><a href="/gachi/creatorGuide">이용안내</a></li>
 	</ul>

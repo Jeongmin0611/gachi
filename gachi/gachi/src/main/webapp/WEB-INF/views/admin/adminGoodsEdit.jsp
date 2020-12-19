@@ -136,7 +136,9 @@ function goodsDel(){
 			<li class="content_center">재고</li>
 			<li><input type="text" id="stock" name="stock" value="${vo.stock }"/></li>
 			<li class="content_center">판매금액</li>
-			<li><input type="text" id="real_price" name="real_price" value="${vo.real_price }"/></li>
+			<li><input type="text" id="real_price" name="real_price" value="${vo.real_price } "/>
+			
+			</li>
 			<li class="content_center">판매상태</li>
 			<li>
 				<select id="sale_state" name="sale_state">
@@ -152,7 +154,7 @@ function goodsDel(){
 	</li>
 	<li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
-			클래스 이미지 추가
+			상품 이미지 추가
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">

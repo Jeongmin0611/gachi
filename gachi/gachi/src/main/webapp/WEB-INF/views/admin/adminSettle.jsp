@@ -168,7 +168,7 @@
 					<li class="wordCut">${data.class_name }</li>
 					<li>${data.userid}</li>
 					<li>${data.username}</li>
-					<li>${data.real_price }</li>
+					<li><fmt:formatNumber value="${data.real_price }" pattern="#,###"/>원</li>
 					<!-- <li>0</li> -->
 					<li><c:if test="${data.payday eq null}"></c:if>
 						<c:if test="${data.payday ne null }">${data.payday }</c:if></li>

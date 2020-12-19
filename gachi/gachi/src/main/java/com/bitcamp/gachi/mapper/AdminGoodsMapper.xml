@@ -100,5 +100,11 @@
 		real_price='${real_price}',sale_state='${sale_state}',stock='${stock}',
 		goods_info='${goods_info}' where code='${code}'  
 	</update>
-
+	<insert id="insertStore" parameterType="com.bitcamp.gachi.admin.GoodsVO">
+		insert into goods(code, category, goods_name, prime_cost, real_price, stock, stack, writedate, startdate, enddate, sale_state, goods_info, good, grade, goods_img1, goods_img2)
+		values(#{code}, #{category}, #{goods_name}, #{prime_cost}, ${real_price}, ${stock}, ${stack}, sysdate, #{startdate}, #{enddate}, #{sale_state}, #{goods_info}, 0, 0, #{goods_img1}, #{goods_img2})
+	</insert>
+	<select id="selectTodayGoodsCnt" parameterType="String" resultType="int">
+		select count(*) as cnt from goods where to_char(writedate, 'yyyy-mm-dd') = #{writedate}
+	</select>
 </mapper>
