@@ -31,6 +31,12 @@
 	#del_file{
 		display: none;
 	}
+	h3{
+		margin:20px;
+	}
+	#ad_goods_writeForm{
+		height:400px;
+	}
 </style>
 <div class="container ad_font">
 <script type="text/javascript">
@@ -90,12 +96,12 @@
 					tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
 					tagTxt+='<div style="padding:0 auto;">';
 					tagTxt+='<input type="hidden" name="imgNames" value="'+filename+'"/>'+filename+'<b class="img_del">x</b></div>';
-					$("#sub_img").append(tagTxt);
+					$("#sub_imgArea").append(tagTxt);
 				}
 			});
 		});
 			$(document).on('click','.img_del',(event)=>{
-				let imageName=$(event.target).prev().text();
+				let imageName=$(event.target).prev().val();
 				console.log(imageName);
 				let code=$("#code").val();
 				$.ajax({
@@ -121,13 +127,24 @@
 				alert("판매가를 입력하여 주세요.");
 				return false;
 			}
-			
 			let array=new Array();
 			var ulCount=$("#ad_unit_box>ul").length;
-			
-			for (var i = 0; i <ulCount-1; i++) {
-				var unit=document.getElementsByName("unitArray");
-				array.push(unit[i].value);
+			if(ulCount<=0){
+				alert("목차정보는 필수사항입니다.\n입력 후 등록버튼을 눌러주세요.");
+			}else{
+				for (var i = 0; i<=ulCount-1; i++) {
+					var unit=document.getElementsByName("unitArray");
+					var unitContent=document.getElementsByName("unitContent");
+					console.log(unit[i].value);
+					console.log(unitContent[i].value);
+					if(unit[i].value==null||unit[i].value==''||
+						unitContent[i].value==null||unitContent[i].value==''){
+						alert("목차 정보가 부재입니다.\n입력 후 등록버튼을 눌러주세요.");
+						return false;
+					}
+					array.push(unit[i].value);
+				}	
+				
 			}
 			const set = new Set(array);
 			if(array.length !== set.size) {
@@ -142,7 +159,7 @@
 			txt+='<li><input type="text" name="unitArray"style="width:30%"/></li>'; 
 			txt+='<li>목차명<input type="hidden" name="codes" value="${vo.code}"/></li>'; 
 			txt+='<li><input type="text" name="unitContent" style="width:30%"/>'; 
-			txt+='<input type="hidden" name="sectionCode" value="null"/></li>';
+			txt+='<input type="hidden" name="sectionCode" value="abc"/></li>';
 			txt+='<li><b class="unit_del">x</b></li></ul>';
 			$("#ad_unit_box>li:last-child").before(txt);
 		});
@@ -171,7 +188,7 @@
 			 if($(event.target)[0].files && $(event.target)[0].files[0]) {
 			    var reader = new FileReader();
 			    reader.onload = function(data) {
-			     $("#mainImg").attr("src", data.target.result).width(200);        
+			     $("#mainImg").attr("src", data.target.result).width(500).height(300);
 			    }
 			    reader.readAsDataURL($(event.target)[0].files[0]);
 			   }
@@ -182,7 +199,7 @@
 <h1>클래스수정</h1>
 <form method="post" id="adminClassEditOk" action="/gachi/adminClassEditOk" enctype="multipart/form-data">
 <ul id="ad_goods_writeForm">
-	<li>
+	<li style="margin-top:25px;">
 		<ul>
 			<li class="content_center">클래스코드</li>
 			<li><input type="hidden" id="code" name="code" value="${vo.code}"/>${vo.code}</li>
@@ -221,16 +238,18 @@
 				</select>
 			</li>
 			<li class="content_center">원가격</li>
-			<li><input type="text" id="full_price" name="full_price" value="${vo.full_price}"/></li>
+			<li><input type="number" id="full_price" name="full_price" value="${vo.full_price}"/></li>
 			<li class="content_center">가격</li>
-			<li><input type="text" id="real_price" name="real_price" value="${vo.real_price}"/></li>
+			<li><input type="number" id="real_price" name="real_price" value="${vo.real_price}"/></li>
+			<li class="content_center">수강기간</li>
+			<li><input type="number" id="class_term" name="class_term" value="${vo.class_term}"/>일</li>
 			<li class="content_center">클래스상태</li>
 			<li>
 				<select id="stage" name="class_state">
 					<option value="미승인" 
 						<c:if test="${vo.class_state eq '미승인'}"> selected</c:if>>미승인</option>
-					<option value="등록승인" 
-						<c:if test="${vo.class_state eq '등록승인'}"> selected</c:if>>등록승인</option>
+					<option value="영상승인대기" 
+						<c:if test="${vo.class_state eq '영상승인대기'}"> selected</c:if>>영상승인대기</option>
 					<option value="판매중" 
 						<c:if test="${vo.class_state eq '판매중'}"> selected</c:if>>판매중</option>
 					<option value="판매종료" 
@@ -239,12 +258,12 @@
 			</li>
 		</ul>
 	</li>
-	<li id="bb" class="content_center" style="height:100%;margin:15px 0px;">
+	<li id="bb" class="content_center" style="margin:10px 0px;">
 		<div style="height:24px;margin:7px 0px;">
 			클래스 대표이미지
 		</div>
 		<div style="height:100%;">
-			<img id="mainImg" src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}" style="width:200px;height:200px;">			
+			<img id="mainImg" src="<%=request.getContextPath()%>/upload/classImg/${vo.class_img}" style="width:500px;height:300px;">			
 		</div>
 		<div>
 			<span id="del_file">${vo.class_img}</span>
@@ -256,8 +275,8 @@
 <div id="sub_img" class="content-center add_img" style="height:200px; border:3px solid #437299; text-align:center;">
 		<h3 style="margin-top:70px;">이미지를 끌어주세요.</h3>
 </div>
-<h3>클래스 이미지 목록</h3>
-<div class="text_center ad_box">
+<h3>서브 이미지 목록</h3>
+<div id="sub_imgArea"class="text_center ad_box">
 <c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
 		<div style="text-align:center;height:24px;">이미지${status.index+1}		
@@ -267,7 +286,7 @@
 		</div>
 		<div>
 			<input type="hidden" name="imgNames" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b class="img_del">x</b>
+			${imgList}<b class="img_del">x</b>
 		</div>
 	</div>
 </c:forEach>
