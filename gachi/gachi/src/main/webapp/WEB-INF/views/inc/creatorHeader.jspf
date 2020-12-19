@@ -163,9 +163,9 @@ a, h1, li,h3 {
 <body style="background-color:#E4E6DA">
 
 <div id="creatortop" style="background-color:#2d383f">
-		<div style="overflow:auto"><a href="/gachi">고객센터</a>
+		<!--  <div style="overflow:auto"><a href="/gachi">고객센터</a>-->
+		<a href="/gachi/logout">로그아웃</a>
 		<a href="/gachi">홈페이지 이동</a>
-		<a href="/gachi">로그아웃</a></div>
 </div>
 <div id="headerDiv">
 	<ul id="creatorMenu">

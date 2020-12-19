@@ -27,6 +27,11 @@
 	}
 </style>
 <script type="text/javascript">
+$(()=>{
+	$(".ad_box img").css("width","200px").css("height","200px");
+	$(".ad_box>div").css("margin","20px 0px;");
+	$(".ad_box>div").css("float","left");
+	$("#sub_imgArea").css("height","250px");
 	function classDel(){
 		if(confirm("해당 클래스를 삭제하시겠습니까?")){
 			location.href='/gachi/adminClassDel?code=${vo.code}';	
@@ -43,6 +48,7 @@
 		CKEDITOR.config.readOnly = true;
 		$('#ad_goods_viewForm>li:first-child').css("borderRight","1px solid gray");
 	});
+});
 </script>
 <div class="container ad_font">
 	<h1>클래스 조회</h1>
@@ -64,13 +70,23 @@
 		<ul style="margin:auto; text-align: center;">
 			<li>대표이미지</li>
 			<li>
-			<c:forEach var="imgList" items="${vo.imgList}">
+			<c:forEach var="imgList" items="${vo.class_img}">
 				<img src="upload/classImg/${imgList}" style="width:300px;height:300px;"/>
 			</c:forEach>
 			</li>
 		</ul>
 	</li>
 </ul>
+<div id="sub_imgArea" class="text_center ad_box">
+<c:forEach var="list" items="${list}" varStatus="status">
+	<div style="margin:0 15px; width:230px;height:100%;">
+		<div style="text-align:center;height:24px;">이미지</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/classImg/${list}"/>
+		</div>
+	</div>
+</c:forEach>
+</div>
 <h3>클래스목차정보</h3>
 <ul class="ad_box" id="ad_unit_box">
 	<li>목차순서</li>
@@ -85,10 +101,6 @@
 	<textarea name="class_info">${vo.class_info }</textarea>
 </div>
 <div class="text-center">
-		<c:if test="${vo.class_state ne '등록승인'}">
-			<button class="btn" onclick="updateClassState()">등록처리</button>
-		</c:if>
-		<button class="btn" onclick="location.href='/gachi/adminClassEdit?code=${vo.code}'">수정</button>
-		<button class="btn" onclick="classDel()">삭제</button>
+		<button class="btn" onclick="history.back()">뒤로가기</button>
 </div>
 </div>

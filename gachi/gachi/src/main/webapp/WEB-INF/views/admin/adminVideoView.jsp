@@ -300,6 +300,7 @@
 	</c:forEach>
 </ul>
 <h3>영상등록정보</h3>
+<p style="color:red">*영상 추가 시 수정버튼을 꼭 눌러주세요.(버튼 미입력 시 저장되지 않습니다.)</p> 
 <form method="post" id="adminVideoUpdate" action="/gachi/adminVideoUpdate">
 <ul class="text_center ad_box" id="ad_video_addList">
 	<li>목차명</li>
