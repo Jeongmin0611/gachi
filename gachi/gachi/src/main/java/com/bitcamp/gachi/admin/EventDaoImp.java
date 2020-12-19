@@ -17,6 +17,10 @@ public interface EventDaoImp {
 
 	void updateEventImg(Object event_img, String event_num);
 	
+	void insertEvent(EventVO vo);
+
+	void deleteOne(String event_num);
+	
 	
 
 }

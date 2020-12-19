@@ -119,7 +119,7 @@ $(function(){
 	<li>${result.order_code }</li>
 	<li>${result.userid }</li>
 	<li>${result.username }</li>
-	<li>${result.price }</li>
+	<li><fmt:formatNumber value="${result.price }" pattern="#,###"/>원</li>
 	<li>${result.payment_type }</li>
 	<li>${result.card_type }</li>
 	<li>${result.orderdate }</li>
