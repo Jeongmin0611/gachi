@@ -32,7 +32,7 @@ var business_numberChk= RegExp(/^[0-9]+$/);
 var banknameChk=RegExp(/^[가-힣a-zA-Z]+$/);
 var accountChk=RegExp(/^[0-9]+$/);
 
-	$(()=>{
+$(function(){
 		
 		$("#creator_editForm2>li:nth-child(2n+1)").css("width","15%").css("text-align","center");
 		$("#creator_editForm2>li:nth-child(2n)").css("width","85%");
@@ -126,8 +126,8 @@ var accountChk=RegExp(/^[0-9]+$/);
 			</ul>
 			<ul id="creator_editForm2" class="form-group" style="overflow:auto">
 				<li>아이디</li><li><input type="text" id ="userid" name="userid" value="${vo.userid }" size="30" readonly/></li>
-				<li>비밀번호</li><li><input type="password" id="userpwd" name="userpwd" size="30" value=""/></li>
-				<li>비밀번호확인</li><li><input type="password" id="userpwdchk" name="userpwdchk" size="30" value=""/></li>
+				<li>비밀번호</li><li><input type="password" id="userpwd" name="userpwd" size="30" /></li>
+				<li>비밀번호확인</li><li><input type="password" id="userpwdchk" name="userpwdchk" size="30" /></li>
 				<li>크리에이터명</li><li><input type="text" id="nickname" name="nickname" size="30" value="${vo.nickname }"/></li>
 				<li>생년월일</li><li><input type="text" id="birthdate" name="birthdate" size="30" value="${vo.birthdate }" readonly/></li>
 				<li>연락처</li>
@@ -162,7 +162,7 @@ var accountChk=RegExp(/^[0-9]+$/);
 			<textarea name="creator_info" id="creator_info" >${vo.creator_info }</textarea>
 			<div style="text-align:center;margin-top:20px;">
 				<button type="button" class="btn" onclick="location.href='/gachi/creatorDashboard'">돌아가기</button>
-				<input type="submit" class="btn" id="frm" value="수정"/>
+				<input type="submit" class="btn" value="수정"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
 			</div>
 		</form>

@@ -160,11 +160,13 @@ var now=${nowPage};
 	</div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<c:if test="${nowPage % 5 eq 0}">
+
+			<c:if test="${(nowPage % 5) eq 0}">
 				<c:set var="startPage" value="${nowPage-4 }"/>
 			</c:if>
-			<c:if test="${nowPage % 5 ne 0}">
-				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			<c:if test="${(nowPage % 5) ne 0}">
+				<fmt:parseNumber var="tmp" integerOnly="true" value="${nowPage/5}"/>
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${tmp*5+1}"/>
 			</c:if>
 			
 			<c:if test="${method eq 'get' }">
@@ -174,7 +176,7 @@ var now=${nowPage};
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
-					<c:if test="${startPage+i <= lastPage }">
+					<c:if test="${(startPage+i) <= lastPage }">
 					<li class="btn">
 						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
@@ -193,7 +195,7 @@ var now=${nowPage};
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
-					<c:if test="${startPage+i <= lastPage }">
+					<c:if test="${(startPage+i) <= lastPage }">
 					<li class="btn">
 						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
@@ -205,7 +207,6 @@ var now=${nowPage};
 					</li>
 				</c:if>
 			</c:if>
-			
 	</ul>
 </div>
 </div>

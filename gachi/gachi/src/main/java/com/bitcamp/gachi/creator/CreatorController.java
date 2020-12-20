@@ -963,7 +963,7 @@ public class CreatorController {
 //		mav.addObject("result1", result1);
 //		mav.setViewName("creator/creatorEditOk");
 		mav.addObject("vo", vo);
-		mav.setViewName("creator/creatorEdit");
+		mav.setViewName("redirect:creatorEdit");
 		
 	return mav;
 	}
