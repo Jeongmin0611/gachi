@@ -109,6 +109,10 @@
 		    }
 		});
 	}
+	//3자리 콤마
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
 	$(function(){
 		// 주문자정보와 배송지정보가 같을때
@@ -133,10 +137,14 @@
 		$("#mileageBtn").click(function(){
 			if($("#mileageInput").val()>${mileage}){
 				alert("보유한 마일리지를 초과하였습니다. 다시 입력해주세요.");
+				$("#mileageInput").val(0);
 			}else{
-				$("#mileageLbl").val($("#mileageInput").val());
+				$("#mileageLbl").text(numberWithCommas($("#mileageInput").val()));
 				$("#mileageUse").val($("#mileageInput").val()*-1);
-				$("#finalPrice").val($("#sumPrice").val()*1+$("#shipLbl").val()*1+$("#mileageUse").val()*1);
+				$("#mileageUseLbl").text(numberWithCommas($("#mileageInput").val()*-1));
+				$("#finalPrice").val($("#sumPrice").val()*1+$("#shipLbl").val()*1-$("#mileageInput").val()*1);
+				$("#finalPriceLbl").text(numberWithCommas($("#sumPrice").val()*1+$("#shipLbl").val()*1-$("#mileageInput").val()*1));
+				$("#mileageInput").val(0);
 			}
 		});
 		//빈칸검사
@@ -304,7 +312,7 @@
 				<div class="col-md-4">마일리지사용</div>
 				<div class="col-md-8">
 					<div class="row">
-						<div class="col-md-8"><input type="text" id="mileageLbl" value="0" style="border:none;outline:none" readonly/></div>
+						<div class="col-md-8"><label id="mileageLbl" style="margin-left:20px"><fmt:formatNumber value="0" pattern="#,###" /></label></div>
 						<div class="col-md-2">원</div>
 					</div>
 					<div class="row">
@@ -315,13 +323,13 @@
 			</div>
 			<label>결제금액</label>
 			<hr class="userHr"/>
-			<div><b>합계</b><input type="text" value="<fmt:formatNumber value="${sum }" pattern="#,###" />" id="sumPrice" style="border:none;outline:none;width:15%" readonly/>원</div>	
+			<div><b>합계</b><input type="hidden" value="${sum }" id="sumPrice"/><label id="sumPriceLbl" style="margin:0 20px"><fmt:formatNumber value="${sum }" pattern="#,###" /></label>원</div>	
 			<c:set var="ship" value="0"/>
 			<!-- ------------------- -->
 			<c:if test="${result eq 1 }">
 				<c:if test="${sum lt 50000}"><!-- 50000원 미만 -->
 					<c:set var="ship" value="2500"/>
-					<div><b>배송비</b><label style="margin:0 25px">+<fmt:formatNumber value="${ship }" pattern="#,###" /></label>원</div>
+					<div><b>배송비</b><label style="margin:0 20px">+<fmt:formatNumber value="${ship }" pattern="#,###" /></label>원</div>
 				</c:if>
 				<c:if test="${sum ge 50000}"><!-- 50000원 이상 -->
 					<c:set var="ship" value="0"/>
@@ -330,9 +338,9 @@
 			</c:if>
 			<!-- ------------------ -->
 			<input type="hidden" id="shipLbl" value="${ship }"/>
-			<div><b>마일리지</b><input type="text" id="mileageUse" value="0" style="border:none;outline:none;width:10%" readonly/>원</div>
+			<div><b>마일리지</b><input type="hidden" id="mileageUse" value="0"/><label id="mileageUseLbl" style="margin:0 20px"><fmt:formatNumber value="0" pattern="#,###" /></label>원</div>
 			<hr class="userHr"/>
-			<div style="font-size:1.2em"><b>총 금액</b><input type="text" value="<fmt:formatNumber value="${sum+ship }" pattern="#,###" />" id="finalPrice" style="border:none;outline:none;width:15%" readonly/>원</div>
+			<div style="font-size:1.2em"><b>총 금액</b><input type="hidden" value="${sum+ship }" id="finalPrice"/><label id="finalPriceLbl" style="margin:0 20px"><fmt:formatNumber value="${sum+ship }" pattern="#,###" /></label>원</div>
 			<div>
 				<div><input type="checkbox" id="orderAgree"/>구매진행에 동의합니다.</div>
 				<button type="button" class="btn btn-outline-light" id="payBtn" style="width:20%">결제하기</button>
