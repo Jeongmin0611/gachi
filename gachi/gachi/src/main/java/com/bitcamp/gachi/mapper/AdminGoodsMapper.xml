@@ -10,7 +10,8 @@
 	  where to_char(writedate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(writedate, 'yyyy-mm-dd')&lt;=#{endDate}	   
 </select>
 <select id="selectGoods" parameterType="String" resultType="com.bitcamp.gachi.admin.GoodsVO">
-	  select code , category, goods_name, prime_cost, real_price , stock, sale_count,to_char(writedate , 'yyyy-mm-dd')writedate, sale_state, goods_info from goods
+	  select code, category, goods_name, prime_cost, real_price , stock, sale_count, to_char(writedate , 'yyyy-mm-dd')writedate, 
+	  sale_state, goods_info, goods_img1, goods_img2 from goods
 	  where code = #{code}
 </select>
 <select id="selectStoreList" parameterType="map" resultType="com.bitcamp.gachi.admin.GoodsVO">
@@ -96,9 +97,11 @@
 		update goods set goods_img1='${param1}' where code='${param2}'
 	</update>
 	<update id="updateStore" parameterType="com.bitcamp.gachi.admin.GoodsVO">
-		update goods set category='${category}',goods_name='${goods_name}',prime_cost='${prime_cost}',
-		real_price='${real_price}',sale_state='${sale_state}',stock='${stock}',
-		goods_info='${goods_info}' where code='${code}'  
+		update goods set category='${category}', goods_name='${goods_name}', prime_cost='${prime_cost}',
+		real_price='${real_price}', sale_state='${sale_state}', stock='${stock}',
+		goods_info='${goods_info}', goods_img1='${goods_img1}', goods_img2='${goods_img2}'
+		
+		where code='${code}'  
 	</update>
 	<insert id="insertStore" parameterType="com.bitcamp.gachi.admin.GoodsVO">
 		insert into goods(code, category, goods_name, prime_cost, real_price, stock, stack, writedate, startdate, enddate, sale_state, goods_info, good, grade, goods_img1, goods_img2)
@@ -107,4 +110,7 @@
 	<select id="selectTodayGoodsCnt" parameterType="String" resultType="int">
 		select count(*) as cnt from goods where to_char(writedate, 'yyyy-mm-dd') = #{writedate}
 	</select>
+	<delete id="deleteOne" parameterType="String">
+		delete from goods where code=#{code}
+	</delete>
 </mapper>

@@ -97,13 +97,19 @@ var accountChk=RegExp(/^[0-9]+$/);
 		});
 		
 	});
+	
     function onlyNumber(){
 
         if((event.keyCode<48)||(event.keyCode>57))
 
            event.returnValue=false;
-}
-
+	}
+    
+    function pictureDel(){
+    	if(confirm("크리에이터 이미지를 삭제 하시겠습니까?")){
+    		location.href="creatorPictureDelete";
+    	}
+    }
 </script>
 <div class="container ad_font">
 	<h1>프로필 수정</h1>
@@ -111,8 +117,10 @@ var accountChk=RegExp(/^[0-9]+$/);
 		<form method="post" id="frm" action="creatorEditOk" enctype="multipart/form-data">
 			<ul id="cre_profile_imgArea" style="border:3px solid #437299;border-radius:10px;text-align:center;margin:10px 0px">
 				<li>프로필 사진</li>
-				<li><img src="/gachi/img/147.jpg"></li>
-				<li style="text-align:center;"><input type="file" value="${vo.picture }"/></li>
+				<c:if test="${vo.picture eq null}"><li><img src="/gachi/img/147.jpg"></li></c:if>
+				<c:if test="${vo.picture ne null}"><li><img src="/gachi/upload/creatorImg/${vo.picture }" style="width:200px; height:200px;"></li>
+				<button type="button" onclick="pictureDel();">삭제</button></c:if>
+				<li style="text-align:center;"><input type="file" accept="image/*" name="imgFile" id=imgFile value="" /></li>
 			</ul>
 			<ul id="creator_editForm2" class="form-group" style="overflow:auto">
 				<li>아이디</li><li><input type="text" id ="userid" name="userid" value="${vo.userid }" size="30" readonly/></li>

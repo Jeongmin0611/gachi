@@ -78,6 +78,8 @@ public interface CreatorDaoImp {
 	
 	//크리에이터 클래스 목록구하기
 	public List<ClassVO>  selectcreClassList(Map<String, String> map);
+
+	public int updateCreatorPictureNone(String userid);
 	
 	//클래스 시퀀스 현재값 구하기
 	public int selectClassSeqCurrval(); 

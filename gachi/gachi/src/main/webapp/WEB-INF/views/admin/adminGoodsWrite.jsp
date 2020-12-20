@@ -42,6 +42,10 @@ $(function(){
 			alert("판매가를 입력하여 주세요.");
 			return false;
 		}
+		if($("#goods_info").val()==null || $("#goods_info").val()=="") {
+			alert("상품 설명 이미지를 선택해주세요.");
+			return false;
+		}
 		if($("#goods_img1").val()==null || $("#goods_img1").val()=="") {
 			alert("메인 이미지를 선택해주세요.");
 			return false;

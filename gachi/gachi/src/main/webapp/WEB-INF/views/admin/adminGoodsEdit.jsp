@@ -3,88 +3,17 @@
 <div class="container ad_font">
 <script type="text/javascript">
 $(function(){
-	var editor=CKEDITOR.replace('goods_info',{
-		imageUploadUrl:'/gachi/StoreimageUpload',
-		extraPlugins:'uploadimage'
-	});
-	editor.on('fileUploadRequest', function( evt ) {
-	    var fileLoader = evt.data.fileLoader,
-	        formData = new FormData(),
-	        xhr = fileLoader.xhr;
-	    xhr.open( 'POST', fileLoader.uploadUrl, true );
-	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','GoodsEdit');
-	    fileLoader.xhr.send( formData );
-	    evt.stop();
-	}, null, null, 4 ); 
-	
-	CKEDITOR.config.height=500;
-	$("#ad_goods_writeForm>li").slice(2).css("width","100%");
-	$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
-	$("#ad_goods_write li").css("margin-top","10px");
-	$("textarea").css("height","800px");
-	$(".ad_box img").css("width","200px").css("height","200px");
-	$(".ad_box>div").css("margin","20px 0px;");
-	$(".ad_box>div").css("float","left");
-	let imgCount=2;
-	 $(".add_img").on("dragenter dragover", function(event){
-	        event.preventDefault();
-	    });
-	
-	$(document).on("drop",".add_img",(event)=>{
-		// 삭제
-		event.preventDefault();
-		var files =event.originalEvent.dataTransfer.files;
-		var file=files[0];
-		console.log(file);
-		let code=$("#code").val();
-		var formData= new FormData();
-		formData.append("file",file);
-		formData.append("code",code);
-		$.ajax({
-			type:"post",
-			enctype: 'multipart/form-data',
-			url:"/gachi/StoreimgThumbnail",
-			//ajax로 넘길경우 form-data 형식
-			processData: false,
-			contentType: false,
-			//////////////////////////
-			data: formData,
-			success:function(result){					
-				var filename=result.slice(result.lastIndexOf("/")+1);
-				console.log(filename);
-				let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
-				tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
-				tagTxt+='<div style="text-align:center">';
-				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
-				tagTxt+='<div style="padding:0 auto;">';
-				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
-				$(".ad_box").append(tagTxt);
-			}
-		});
-	});
-		$(document).on('click','b',(event)=>{
-			let imageName=$(event.target).prev().text();
-			let code=$("#code").val();
-			$.ajax({
-				url:'/gachi/StoreimageDelete?imageName='+imageName+"&code="+code,
-				type:'get',
-				success:(result)=>{
-					$(event.target).parent().parent().remove();
-				},error:(e)=>{
-					alert("이미지파일 삭제를 실패하였습니다.");
-				}
-			});
-		});	
-		
 	$("#adminGoodsEdit").submit(()=>{
-		let grpl = $("input[name=imgList]").length;
-		if(grpl==0){
-			alert("클래스 이미지를 최소 1개 이상 선택하여야 합니다.");
+		if($("#goods_name").val()==null||$("#goods_name").val()==""){
+			alert("상품명을 입력하여 주세요.");
 			return false;
 		}
-		if($("#store_name").val()==null||$("#store_name").val()==""){
-			alert("클래스명을 입력하여 주세요.");
+		if($("#startdate").val()==null||$("#startdate").val()==""){
+			alert("판매시작일을 입력하여 주세요.");
+			return false;
+		}
+		if($("#enddate").val()==null||$("#enddate").val()==""){
+			alert("판매종료일을 입력하여 주세요.");
 			return false;
 		}
 		if($("#stock").val()==null||$("#stock").val()==""){
@@ -95,12 +24,20 @@ $(function(){
 			alert("판매가를 입력하여 주세요.");
 			return false;
 		}
+		/* if($("#goods_img1").val()==null || $("#goods_img1").val()=="") {
+			alert("메인 이미지를 선택해주세요.");
+			return false;
+		} */
+		/* if($("#detailImg1").val()==null || $("#detailImg1").val()=="") {
+			alert("슬라이드 이미지1을  선택해주세요.");
+			return false;
+		} */
 		return true;
 	});	
 });
 function goodsDel(){
 	if(confirm("해당 상품을 삭제하시겠습니까?")){
-		
+		location.href = "adminGoodsDelete?code=" + "${vo.code}";
 	}
 }
 </script>
@@ -150,41 +87,81 @@ function goodsDel(){
 						<c:if test="${vo.sale_state eq '판매종료'}"> selected</c:if>>판매종료</option>
 				</select>
 			</li>
+			<li class="content_center">상품 설명 이미지</li>
+			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
+			<li class="content_center">메인 이미지</li>
+			<li><input type="file" name="img_main" accept="image/*" id="goods_img1" /></li>
+			<li class="content_center">슬라이드 이미지1</li>
+			<li><input type="file" name="img_detail1" accept="image/*" id="detailImg1" /></li>
+			<li class="content_center">슬라이드 이미지2</li>
+			<li><input type="file" name="img_detail2" accept="image/*" id="detailImg2" /></li>
+			<li class="content_center">슬라이드 이미지3</li>
+			<li><input type="file" name="img_detail3" accept="image/*" id="detailImg3" /></li>
 		</ul>
 	</li>
-	<li class="content_center">
-		<div style="height:24px;margin:7px 0px;">
-			상품 이미지 추가
-		</div>
-		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
-			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
-		</div>
-	</li>
+	
 </ul>
 <h3>스토어 이미지 목록</h3>
 <div class="text_center ad_box">
-<c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
-		<div style="text-align:center;height:24px;">이미지${status.index+1}		
+		<div style="text-align:center;height:24px;">상품 설명 이미지	
 		</div>
-		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${imgList}"/>
+		<div style="text-align:center; width:200px; height: 200px;">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_info}" style="width:200px; height:200px;"/>
 		</div>
 		<div>
-			<input type="hidden" name="imgList" value="${imgList}"/> 
-			<span class="wordCut">${imgList}</span><b>  x  </b>
+			<input type="hidden" name="goods_info" value="${vo.goods_info }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
 		</div>
+		<div style="text-align:center;height:24px;">메인 이미지	
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_img1}" style="width:200px; height:200px;"/>
+		</div>
+		<div>
+			<input type="hidden" name="goods_img1" value="${vo.goods_img1 }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
+		</div>
+		<c:if test="${detail1 ne 'null' and detail1 ne null}">
+		<div style="text-align:center;height:24px;">슬라이드 이미지1	
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail1}" style="width:200px; height:200px;"/>
+		</div>
+		<div>
+			<input type="hidden" name="detail1" value="${detail1 }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
+		</div>
+		</c:if>
+		<c:if test="${detail2 ne 'null' and detail2 ne null }">
+		<div style="text-align:center;height:24px;">슬라이드 이미지2	
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail2}" style="width:200px; height:200px;"/>
+		</div>
+		<div>
+			<input type="hidden" name="detail2" value="${detail2 }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
+		</div>
+		</c:if>
+		<c:if test="${detail3 ne 'null' and detail3 ne null}">
+		<div style="text-align:center;height:24px;">슬라이드 이미지3	
+		</div>
+		<div style="text-align:center">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail3}" style="width:200px; height:200px;"/>
+		</div>
+		<div>
+			<input type="hidden" name="detail3" value="${detail3 }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
+		</div>
+		</c:if>
 	</div>
-</c:forEach>
 </div>
 		<ul id="ad_goods_write">
-			<li>상품설명</li>
-			<li><textarea name="goods_info" id="goods_info">${vo.goods_info }</textarea></li>
-			<li>첨부파일 <input type="file" name="no"/> </li>
 			<li class="content_center">
 				<input type="submit" class="btn" value="수정"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
-				<button class="btn" onclick="goodsDel()">삭제</button>
+				<button type="button" class="btn" onclick="goodsDel();">삭제</button>
 			</li>
 		</ul>
 	</form>
