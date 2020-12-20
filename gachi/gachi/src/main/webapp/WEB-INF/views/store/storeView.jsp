@@ -749,14 +749,6 @@ function CKupdate(){
 		<div id="myclassQna">
 			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
-				<select name="searchKey" id="qnaSearchKey">
-					<option value="작성자">작성자</option>
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select> 
-				<input type="text" name="searchWord" id="qnaSearchWord" />
-				<button type="button" class="btn btn-outline-light btn-sm"
-					id="qnaSearchBtn">검색</button>
 				<button type="button" class="btn btn-outline-light"
 					data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
