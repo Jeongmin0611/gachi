@@ -866,6 +866,8 @@ input{text-align:center;}
 		border:3px solid #437299;
 		border-radius:10px;
 		overflow:auto;
+		width : 80%;
+		margin :0 auto;
 	}
 	#ad_goods_writeForm li{
 		float:left;
@@ -873,14 +875,14 @@ input{text-align:center;}
 		margin-bottom:5px;
 	}
 	#ad_goods_writeForm>li{
-		height:300px;
-		width:50%;
+		height:550px;
+		width:100%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n+1){
-		width:40%;
+		width:50%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n){
-		width:60%;
+		width:50%;
 	}
 	
 	/*愿�由ъ옄 �뒪�넗�뼱愿�由� end*/
