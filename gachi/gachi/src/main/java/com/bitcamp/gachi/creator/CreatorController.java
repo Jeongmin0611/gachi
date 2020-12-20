@@ -1125,6 +1125,7 @@ public class CreatorController {
 			nowPage = Integer.parseInt(now);
 			System.out.println(nowPage);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 20 * (nowPage - 1) + 1;
 		int endNum = 20 * nowPage;
 
@@ -1183,6 +1184,8 @@ public class CreatorController {
 			mav.addObject("nowPage", nowPage);
 			mav.addObject("cntData", list.size());
 			mav.addObject("lastPage", lastPage);
+			mav.addObject("startPageNum", startPageNum);
+			
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
@@ -1226,6 +1229,7 @@ public class CreatorController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -1276,6 +1280,7 @@ public class CreatorController {
 			mav.addObject("nowPage", nowPage);
 			mav.addObject("cntData", vlist.size());
 			mav.addObject("lastPage", lastPage);
+			mav.addObject("startPageNum", startPageNum);
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
@@ -1328,6 +1333,7 @@ public class CreatorController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -1372,6 +1378,8 @@ public class CreatorController {
 		mav.addObject("cntData", vlist.size());
 		mav.addObject("lastPage", lastPage);
 		mav.addObject("nowPage", nowPage);
+		mav.addObject("startPageNum", startPageNum);
+		
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
