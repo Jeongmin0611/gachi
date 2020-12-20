@@ -25,5 +25,7 @@ public interface GoodsDaoImp {
 
 	void insertStore(GoodsVO vo);
 
+	void deleteOne(String code);
+
 
 }

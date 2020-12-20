@@ -16,14 +16,6 @@ $(function(){
 		return true;
 	});	
 	
-	$("#remove").click(function(){
-		var confirmflag = alert("해당 이벤트를 정말로 삭제하시겠습니까?");
-	
-		if (confirmflag){
-			window.location.href="adminEventDelete?event_num=" + ${vo.event_num};
-		}
-
-	});
 });
 
 function onlyNumber(){
@@ -32,6 +24,12 @@ function onlyNumber(){
 
        event.returnValue=false;
 
+}
+
+function EventDel(){
+	if(confirm("해당 상품을 삭제하시겠습니까?")){
+		location.href="adminEventDelete?event_num=" + "${vo.event_num}";
+	}
 }
 </script>
 <div class="container">
@@ -49,9 +47,9 @@ function onlyNumber(){
 			<li class="content_center">종료 기간</li>
 			<li><input type="date" id="enddate" name="enddate" maxlength="8" oninput="maxLengthCheck(this)" onkeypress="onlyNumber();" value="${vo.enddate }"/></li>
 			<li class="content_center">메인 이미지</li>
-			<li><input type="file" name="img_event" id="img_event" /></li>
+			<li><input type="file" name="img_event" accept="image/*" id="img_event" /></li>
 			<li class="content_center">이벤트설명 이미지</li>
-			<li><input type="file" name="img_content" id="img_content" /></li>
+			<li><input type="file" name="img_content" accept="image/*" id="img_content" /></li>
 		</ul>
 	</li>
 	<li class="content_center">
@@ -92,9 +90,9 @@ function onlyNumber(){
 			<li><textarea name="event_Wordinfo" id="event_Wordinfo"></textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li>-->
 			<li class="content_center">
-				<button type="button" class="btn" value="삭제하기" id="remove">삭제하기</button>
 				<input type="submit" class="btn" value="수정하기"/>
 				<input type="reset" class="btn" value="다시쓰기"/>
+				<button type="button" class="btn" value="삭제하기" id="remove" onClick="EventDel();">삭제하기</button>
 			</li>
 		</ul> 
 	</form>

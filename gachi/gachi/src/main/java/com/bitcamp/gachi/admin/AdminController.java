@@ -1446,8 +1446,8 @@ public class AdminController {
 						e.printStackTrace();
 					}
 				}//if
-			}
-		}
+			}//isc
+		}//null
 		
 		MultipartFile content = mhsr.getFile("img_content");
 		if(!event_img.equals(null) && event_img != null) {
@@ -1497,8 +1497,8 @@ public class AdminController {
 						e.printStackTrace();
 					}
 				}//if
-			}
-		}
+			}//isc
+		}//null
 		
 		EventDaoImp dao=sqlSession.getMapper(EventDaoImp.class);
 		int result=dao.updateEvent(vo);
@@ -1511,8 +1511,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/adminEventWrite")
-	public String adminEventWrite() {
-		return "admin/adminEventWrite";
+	public ModelAndView adminEventWrite() {
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		
+		mav.addObject("todate", todate);
+		mav.setViewName("admin/adminEventWrite");
+		return mav;
 	}
 	
 	@RequestMapping(value="/adminEventWriteOk",method = RequestMethod.POST)
@@ -1561,7 +1568,7 @@ public class AdminController {
 					e.printStackTrace();
 				}
 			}//if
-		}
+		}//isc
 		
 		boolean isc2 = content.isEmpty();
 		String filePath2 = null;
@@ -1597,7 +1604,7 @@ public class AdminController {
 					e.printStackTrace();
 				}
 			}//if
-		}
+		}//isc
 		
 		dao.insertEvent(vo);
 		ModelAndView mav=new ModelAndView();
@@ -2247,30 +2254,343 @@ public class AdminController {
 	        }
 		}
 
-		
 		return null;
 	}
 	@RequestMapping("/adminGoodsEdit")
 	public ModelAndView adminGoodsEdit(String code) {
+		ModelAndView mav = new ModelAndView();	
 		
 		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
 		GoodsVO vo = dao.selectGoods(code);
-		ModelAndView mav = new ModelAndView();	
-		
-		mav.addObject("vo",vo);		
+		String detail1=null, detail2=null, detail3=null;
+		if(vo.getGoods_img2() != null) {
+			if(vo.getGoods_img2().contains(", ")) {
+				String[] details = (vo.getGoods_img2()).split(", ");
+				for(int i=0; i<details.length; i++) {
+					if(i==0) detail1 = details[i];
+					if(i==1) detail2 = details[i];
+					if(i==2) detail3 = details[i];
+				}
+			} else {
+				detail1 = vo.getGoods_img2();
+			}
+			System.out.println(detail1);
+			System.out.println(detail2);
+			System.out.println(detail3);
+		}
+		mav.addObject("vo",vo);
+		mav.addObject("detail1", detail1);
+		mav.addObject("detail2", detail2);
+		mav.addObject("detail3", detail3);
 		mav.setViewName("admin/adminGoodsEdit");
 		return mav;
 	}
 	
 	@RequestMapping(value="/adminGoodsEditOk",method = RequestMethod.POST)
-	public ModelAndView adminGoodsEditOk(GoodsVO vo,HttpSession session) {
+	public ModelAndView adminGoodsEditOk(GoodsVO vo, HttpSession session, MultipartHttpServletRequest mhsr, 
+			Object img_goodsInfo, Object img_main, Object img_detail1, Object img_detail2, Object img_detail3,
+			String detail1, String detail2, String detail3) {
+		
+		System.out.println("detail1:"+detail1);
+		System.out.println("detail2:"+detail2);
+		System.out.println("detail3:"+detail3);
 		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		// 마일리지 = 판매금액 * 0.1
+		vo.setStack((int)(vo.getReal_price()*0.1));
+		
+		
+		// goods_img2
+		String goods_img2 = "";
+		
+		MultipartFile goodsInfo = mhsr.getFile("img_goodsInfo");
+		if(!goodsInfo.equals(null) && goodsInfo != null) {
+			boolean isc = goodsInfo.isEmpty();
+
+			if(!isc){
+//				원래 img_event 삭제.
+				String imageName=vo.getGoods_info();
+				System.out.println(imageName);
+				
+				File file=new File(path,imageName);
+				if(file.exists()) {
+					file.delete();
+				}
+//				그리고 새로운 event_img upload.
+				
+//				OutputStream ops = null;
+				String filePath = null;
+				
+				String fName=goodsInfo.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					vo.setGoods_info(newFile.getName());
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						goodsInfo.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						vo.setGoods_info(newFile.getName());
+						
+						filePath="/gachi/upload/storeImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}//isc
+		}//null
+		
+		MultipartFile main = mhsr.getFile("img_main");
+		if(!main.equals(null) && main != null) {
+			boolean isc = main.isEmpty();
+
+			if(!isc){
+//				원래 img_event 삭제.
+				String imageName=vo.getGoods_img1();
+				System.out.println(imageName);
+				
+				File file=new File(path,imageName);
+				if(file.exists()) {
+					file.delete();
+				}
+//				그리고 새로운 event_img upload.
+				
+//				OutputStream ops = null;
+				String filePath = null;
+				
+				String fName=main.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					vo.setGoods_img1(newFile.getName());
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						main.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						vo.setGoods_img1(newFile.getName());
+						
+						filePath="/gachi/upload/storeImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}//isc
+		}//null
+		
+		MultipartFile detailImg1 = mhsr.getFile("img_detail1");
+		if(!detailImg1.equals(null) && detailImg1 != null) {
+			boolean isc = detailImg1.isEmpty();
+			String tmp = "";
+			if(!isc){
+//				원래 img_event 삭제.
+				if(detail1 != null && detail1.length() > 0) {
+					String imageName=detail1;
+					System.out.println(imageName);
+					File file=new File(path,imageName);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+//				그리고 새로운 event_img upload.
+
+				String filePath = null;
+				
+				String fName=detailImg1.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					tmp = newFile.getName();
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						detailImg1.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						tmp = newFile.getName();
+						
+						filePath="/gachi/upload/storeImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+				goods_img2 = tmp;
+				System.out.println("GOODS_IMG2:" + goods_img2);
+			}//isc
+			else {
+				if(detail1 != null && detail1.length() > 0)
+					goods_img2 = detail1;
+				
+				System.out.println("goods_img2:" + goods_img2);
+			}
+			
+		}//null
+		
+		
+		MultipartFile detailImg2 = mhsr.getFile("img_detail2");
+		if(!detailImg2.equals(null) && detailImg2 != null) {
+			boolean isc = detailImg2.isEmpty();
+			String tmp = "";
+			if(!isc){
+//				원래 img_event 삭제.
+				if(detail2 != null &&  detail2.length() > 0) {
+					String imageName=detail2;
+					System.out.println(imageName);
+					File file=new File(path,imageName);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+//				그리고 새로운 event_img upload.
+
+				String filePath = null;
+				
+				String fName=detailImg2.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					tmp = newFile.getName();
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						detailImg2.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						tmp = newFile.getName();
+						
+						filePath="/gachi/upload/storeImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+				goods_img2 = goods_img2 + ", " + tmp;
+				System.out.println("GOODS_IMG2:" + goods_img2);
+			}//isc
+			else {
+				if(detail2 != null && detail2.length() > 0)
+					goods_img2 = goods_img2 + ", " + detail2;
+				
+				System.out.println("goods_img2:" + goods_img2);
+			}
+		}//null
+		MultipartFile detailImg3 = mhsr.getFile("img_detail3");
+		if(!detailImg3.equals(null) && detailImg3 != null) {
+			boolean isc = detailImg3.isEmpty();
+			String tmp = "";
+			if(!isc){
+//				원래 img_event 삭제.
+				if(detail3 != null &&  detail3.length() > 0) {
+					String imageName = detail3;
+					System.out.println(imageName);
+					File file=new File(path,imageName);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+//				그리고 새로운 event_img upload.
+
+				String filePath = null;
+				
+				String fName=detailImg3.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					tmp = newFile.getName();
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						detailImg3.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						tmp = newFile.getName();
+						
+						filePath="/gachi/upload/storeImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+				goods_img2 = goods_img2 +  ", " + tmp;
+				System.out.println("GOODS_IMG2:" + goods_img2);
+			}//isc
+			else {
+				if(detail3 != null && detail3.length() > 0)
+					goods_img2 = goods_img2 + ", " + detail3;
+				
+				System.out.println("goods_img2:" + goods_img2);
+			}
+			
+		}//null
+		
+		
+		vo.setGoods_img2(goods_img2);
+		
 		int result=dao.updateStore(vo);
 		ModelAndView mav=new ModelAndView();
 		if(result>0) {
-			mav.addObject("code",vo.getCode());
-			mav.setViewName("redirect:adminGoods");
+			mav.setViewName("redirect:adminGoodsEdit?code="+vo.getCode());
 		}
 		return mav;
 	}
@@ -2480,6 +2800,75 @@ public class AdminController {
 		
 		mav.setViewName("redirect:adminGoods");
 	
+		return mav;
+	}
+	
+	@RequestMapping(value="/adminGoodsDelete", method=RequestMethod.GET)
+	public ModelAndView adminGoodsDelete(String code, HttpSession session) {
+		System.out.println("adminGoodsDelete");
+		
+		ModelAndView mav = new ModelAndView();
+		GoodsDaoImp dao = sqlSession.getMapper(GoodsDaoImp.class);
+		GoodsVO vo = dao.selectGoods(code);
+		String detail1=null, detail2=null, detail3=null;
+		if(vo.getGoods_img2() != null) {
+			if(vo.getGoods_img2().contains(", ")) {
+				String[] details = (vo.getGoods_img2()).split(", ");
+				for(int i=0; i<details.length; i++) {
+					if(i==0) detail1 = details[i];
+					if(i==1) detail2 = details[i];
+					if(i==2) detail3 = details[i];
+				}
+			} else {
+				detail1 = vo.getGoods_img2();
+			}
+			System.out.println(detail1);
+			System.out.println(detail2);
+			System.out.println(detail3);
+		}
+		
+		// 관련 이미지 삭제
+		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		String goodsInfo = vo.getGoods_info();
+		System.out.println(goodsInfo);
+		
+		File file=new File(path, goodsInfo);
+		if(file.exists()) {
+			file.delete();
+		}
+		
+		String goods_img1 = vo.getGoods_img1();
+		System.out.println(goods_img1);
+		
+		File file2=new File(path,goods_img1);
+		if(file2.exists()) {
+			file2.delete();
+		}
+		
+		if(detail1 != null && detail1.length() > 0) {
+			File file3=new File(path, detail1);
+			if(file3.exists()) {
+				file3.delete();
+			}
+		}
+		
+		if(detail2 != null && detail2.length() > 0) {
+			File file4=new File(path, detail2);
+			if(file4.exists()) {
+				file4.delete();
+			}
+		}
+		
+		if(detail3 != null && detail3.length() > 0) {
+			File file5=new File(path, detail3);
+			if(file5.exists()) {
+				file5.delete();
+			}
+		}
+		
+		dao.deleteOne(code);
+
+		mav.setViewName("redirect:adminGoods");
 		return mav;
 	}
 	@RequestMapping(value="/StoreimgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )

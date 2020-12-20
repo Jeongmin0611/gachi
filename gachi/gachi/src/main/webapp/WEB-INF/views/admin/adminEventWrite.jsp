@@ -36,13 +36,13 @@ function onlyNumber(){
 			<li class="content_center">제목</li>
 			<li><input type="text" id="subject" name="subject" size="40" value=""placeholder=" 제목을 입력하세요"/></li>
 			<li class="content_center">시작 기간</li>
-			<li><input type="date" id="startdate" name="startdate" onkeypress="onlyNumber();" maxlength="8" value="" placeholder="예:20200101"/></li>
+			<li><input type="date" id="startdate" name="startdate" onkeypress="onlyNumber();" maxlength="8" value="${todate }" placeholder="예:20200101"/></li>
 			<li class="content_center">종료 기간</li>
 			<li><input type="date" id="enddate" name="enddate"  onkeypress="onlyNumber();" maxlength="8" value="" placeholder="예:20200131"/></li>
 			<li class="content_center">메인 이미지</li>
-			<li><input type="file" name="img_event" id="event_img" /></li>
+			<li><input type="file" name="img_event" accept="image/*" id="event_img" /></li>
 			<li class="content_center">이벤트 설명 이미지</li>
-			<li><input type="file" name="img_content" id="content" /></li>
+			<li><input type="file" name="img_content" accept="image/*" id="content" /></li>
 		</ul>
 	</li>
 

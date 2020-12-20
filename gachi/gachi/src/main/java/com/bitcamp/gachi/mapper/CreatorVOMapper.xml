@@ -128,7 +128,7 @@
 	<select id="selectCreator" resultType="com.bitcamp.gachi.admin.AllVO">
 		select u.userid, grade , username, nickname, tel, to_char(birthdate, 'yyyy-mm-dd')
 	  	 birthdate, gender, zipcode, addr, detailaddr, to_char(signupdate, 'yyyy-mm-dd') signupdate, to_char(withdrawdate, 'yyyy-mm-dd') withdrawdate,
-	  	 deleted ,creator_state from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
+	  	 deleted ,creator_state, picture from member u full outer join creator c on u.userid = c.userid where u.userid = #{userid}
 	</select>
 	<update id="creatorMemberUpdate" parameterType="com.bitcamp.gachi.admin.AllVO"> 
 		update member set nickname =#{nickname}, username=#{username}, tel=#{tel} ,gender=#{gender},  zipcode=#{zipcode},
@@ -215,12 +215,12 @@
 	</select>
 	
 	<update id="UpdateCreatorlist" parameterType="com.bitcamp.gachi.admin.AllVO"> 
-		update member set userpwd=#{userpwd} , nickname = #{nickname} , tel =#{tel}
+		update member set userpwd=#{userpwd} , nickname = #{nickname} , tel = #{tel}
 		where userid = #{userid}
 	</update>
 	<update id="UpdateCreatorlist1" parameterType="com.bitcamp.gachi.admin.AllVO"> 
 		update creator set business_number =#{business_number}, bankname=#{bankname} ,account =#{account} ,
-		sns_addr =#{sns_addr}, creator_info =#{creator_info}
+		picture = #{picture}, sns_addr =#{sns_addr}, creator_info =#{creator_info}
 		where userid = #{userid}
 	</update>
 	
@@ -444,4 +444,7 @@
 		RNUM &gt;=${startNum}
 	
 	</select>
+	<update id="updateCreatorPictureNone" parameterType="String">
+		update creator set picture=null where userid=#{userid}
+	</update>
 </mapper>
