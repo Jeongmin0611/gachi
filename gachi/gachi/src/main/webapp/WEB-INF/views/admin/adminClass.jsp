@@ -46,13 +46,19 @@
 		$("#category").val("${category}").attr("selected", "selected");
 		$("#search").val("${search}");
 		
+		var now=${nowPage};
+		
 		$("#searchBtn").click(function(){
+			if($('#startDate').val()>=$('#endDate').val()){
+				alert("시작일보다 종료일이 더 빠릅니다.\n다시입력해주세요.");
+				return false;
+			}
 			var url = "/adminClass";
 			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
 			$.ajax({
 				url : url,
 				data : data,
-				type : "get",
+				type : "POST",
 				dataType : "json",
 				success: function(data){
 					var result = data.result;
@@ -117,7 +123,8 @@
 				<li>
 					<select id="class_state" name="class_state">
 						<option value="">전체</option>
-						<option value="등록대기">등록대기</option>
+						<option value="미승인">미승인</option>
+						<option value="영상승인대기">영상승인대기</option>
 						<option value="판매중">판매중</option>
 						<option value="종료">종료</option>
 					</select>
@@ -181,9 +188,7 @@
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-
 						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
-
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">

@@ -162,7 +162,7 @@
 								});
 							}
 						}, error: function(){
-							console.log("질문 삭제 실패");
+							console.log("리뷰 삭제 실패");
 						}
 					});
 				}

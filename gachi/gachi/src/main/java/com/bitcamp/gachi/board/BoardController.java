@@ -8,11 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -119,10 +117,10 @@ public class BoardController {
 	public ModelAndView eventBoardView(HttpServletRequest req, PagingVO pvo) {
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		int event_num = Integer.parseInt((String) req.getParameter("event_num"));
-		String event = req.getParameter("event");
+		String event_category = req.getParameter("event_category");
 		EventBoardVO vo = dao.eventBoardSelect(event_num);
 		List<EventBoardVO> list = dao.replyAllRecord(event_num);
-		vo.setEvent_category(event);
+		vo.setEvent_category(event_category);
 
 		String nowPage=req.getParameter("nowPage");
 		pvo.setNowPage(Integer.parseInt(nowPage));
@@ -135,18 +133,24 @@ public class BoardController {
 		return mav;
 	}
 	
-	//이벤트 댓글 리스트
+	//이벤트 댓글 추가
 	@RequestMapping(value= "/eventReplyFormOk", method=RequestMethod.POST)
 	public ModelAndView eventReplyFormOk(EventBoardVO vo, HttpServletRequest req, HttpSession ses, PagingVO pvo) {
+		System.out.println("qerqw");
+		int event_num=vo.getEvent_num();
+		System.out.println("event num "+event_num);
+		vo.setEvent_num(Integer.parseInt(req.getParameter("event_num")));
 		vo.setIp(req.getRemoteAddr());
 		vo.setUserid((String) ses.getAttribute("userid"));
+		vo.setContent(req.getParameter("content"));
 		
 		BoardDaoImp dao = sqlSession.getMapper(BoardDaoImp.class);
 		dao.insertReply(vo);
-		int event_num=vo.getEvent_num();
-		String event=req.getParameter("event");
+		
+		String event_category=vo.getEvent_category();
+		System.out.println("이벤트카테= "+event_category);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:eventBoardView?event_num="+event_num+"&event="+event+"&nowPage="+pvo.getNowPage());
+		mav.setViewName("redirect:eventBoardView?event_num="+event_num+"&event_category="+event_category+"&nowPage="+pvo.getNowPage());
 		return mav;
 	}
 	//이벤트 댓글 삭제

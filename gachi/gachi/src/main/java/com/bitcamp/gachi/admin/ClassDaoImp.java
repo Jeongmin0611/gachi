@@ -1,10 +1,7 @@
 package com.bitcamp.gachi.admin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.bitcamp.gachi.store.StorePageVO;
 
 public interface ClassDaoImp {
 	
@@ -48,7 +45,9 @@ public interface ClassDaoImp {
 	public String selectClassImg(String code);
 	
 	//�씠誘몄��뙆�씪 �닔�젙
-	public int updateClassImg(String classImg,String code);
+	public int updateClassImg2(String classImg,String code);
+	
+	public int mainImgUpdate(String classImg,String code);
 	
 	//�겢�옒�뒪 紐⑹감媛��졇�삤湲�
 	public List<ClassVideoVO> selectSection(String code);
@@ -59,6 +58,9 @@ public interface ClassDaoImp {
 	//�겢�옒�뒪 肄붾뱶援ы븯湲�
 	public String getCode(String class_name);
 
+	
+	public String selectClassImg2(String code);
+	
 	
 	//紐⑹감紐� 援ы븯湲�
 	public List<String> getUnitContent(String code);
@@ -115,4 +117,9 @@ public interface ClassDaoImp {
 
 	public ClassVO selectReviewView(int num);  // 리뷰 내용보기 
 
+	public String getVideoName(String videoFlieName);
+	
+	public int creVideoInsert(ClassVideoVO vo);
+	
+	public int classStateUpdate(String code);
 }

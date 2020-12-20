@@ -146,19 +146,23 @@ button:focus, button:active{
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
 		<div class="col-sm-4">
-			<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event=종료이벤트&nowPage=${pvo.nowPage}" id="eventThumbnail">
+			<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event_category=종료이벤트&nowPage=${pvo.nowPage}" id="eventThumbnail">
 			<img src="/gachi/img/board/${vo.event_img}"/></a><br/>
 			<div class="homeClassListTxt">
 				<!-- <span class="badge " id="eventNew">new</span>&nbsp; -->
 				<p> <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>
-				<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event=종료이벤트&nowPage=${pvo.nowPage}">${vo.subject }</a>
+				<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event_category=종료이벤트&nowPage=${pvo.nowPage}">${vo.subject }</a>
 			</div>				
 		</div>
 		</c:forEach>
 	</div>	
 	<!-- paging -->
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="/gachi/eventBoardEnd?nowPage=${pvo.nowPage-1 }">Prev</a></li>
+			<c:if test="${pvo.nowPage>1}">
+				<li class="page-item">
+					<a class="page-link" href="/gachi/eventBoardEnd?nowPage=${pvo.nowPage-1 }">Prev</a>
+				</li>
+			</c:if>
 			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
 				<c:if test="${p<=pvo.totalPage }">
 					<li class="page-item"><a class="page-link" href="/gachi/eventBoardEnd?nowPage=${p }"<c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>${p }</a></li>

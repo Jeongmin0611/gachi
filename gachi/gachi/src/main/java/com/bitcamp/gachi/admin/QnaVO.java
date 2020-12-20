@@ -1,5 +1,7 @@
 package com.bitcamp.gachi.admin;
 
+import java.util.List;
+
 public class QnaVO {
 	private String code;
 	private int num;
@@ -16,7 +18,6 @@ public class QnaVO {
 	private String class_name;
 	private String username;
 	private String category;
-	
 	private int event_num;
 	private String startdate;
 	private String enddate;

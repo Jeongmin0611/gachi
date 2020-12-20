@@ -12,14 +12,139 @@
 		Interceptor 처리를 위해서는 beans시작태그에 context, mvc추가
 		Interceptor할 매핑주소를 기록한다.
 		DispacherServlet 알아서 접속이 이뤄지면 interceptor한다.
-		web.xml에 mvc-context.xml파일을 등록한다.
-	
-	 		
+		web.xml에 mvc-context.xml파일을 등록한다.	
 	 -->
 	 <mvc:interceptors>
-	 	<mvc:interceptor>
-	 		<mvc:mapping path="/eventReplyFormOk"/>
-	 		<bean class="com.bitcamp.gachi.interceptor.LoginInterceptor"/>
-	 	</mvc:interceptor>
-	 </mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/adminDashboard"/>
+			<mvc:mapping path="/adminCreator"/>
+			<mvc:mapping path="/adminCreatorView"/>
+			<mvc:mapping path="/adminCreatorEditOk"/>
+			<mvc:mapping path="/adminCreatorLeaveEditOk"/>
+			<mvc:mapping path="/adminCreatorStateEditOk"/>
+			<mvc:mapping path="/adminClass"/>
+			<mvc:mapping path="/adminClassView"/>
+			<mvc:mapping path="/adminClassEdit"/>
+			<mvc:mapping path="/adminClassEditOk"/>
+			<mvc:mapping path="/adminCreatorEditOk"/>
+			<mvc:mapping path="/adminClassStateUpdate"/>
+			<mvc:mapping path="/adminMember"/>
+			<mvc:mapping path="/adminMemberView"/>
+			<mvc:mapping path="/adminMemberEditOk"/>
+			<mvc:mapping path="/adminMemberLeaveEditOk"/>
+			<mvc:mapping path="/adminNotice"/>
+			<mvc:mapping path="/adminNoticeView"/>
+			<mvc:mapping path="/adminNoticeEdit"/>
+			<mvc:mapping path="/adminNoticeEditOk"/>
+			<mvc:mapping path="/adminNoticeDel"/>
+			<mvc:mapping path="/adminNoticeWrite"/>
+			<mvc:mapping path="/adminNoticeWriteOk"/>
+			<mvc:mapping path="/adminEvent"/>
+			<mvc:mapping path="/adminEventView"/>
+			<mvc:mapping path="/adminEventEditOk"/>
+			<mvc:mapping path="/adminEventWrite"/>
+			<mvc:mapping path="/adminEventWriteOk"/>
+			<mvc:mapping path="/adminOrder"/>
+			<mvc:mapping path="/adminOrderView"/>
+			<mvc:mapping path="/adminStore"/>
+			<mvc:mapping path="/adminDelivery"/>
+			<mvc:mapping path="/adminDeliveryView"/>
+			<mvc:mapping path="/adminDeliveryEditOk"/>
+			<mvc:mapping path="/adminGoods"/>
+			<mvc:mapping path="/adminGoodsEdit"/>
+			<mvc:mapping path="/adminGoodsEditOk"/>
+			<mvc:mapping path="/adminGoodsWriteOk"/>
+			<mvc:mapping path="/adminGoodsWrite"/>
+			<mvc:mapping path="/adminStatStore"/>
+			<mvc:mapping path="/adminStatClass"/>
+			<mvc:mapping path="/adminStatCreator"/>
+			<mvc:mapping path="/adminStatMember"/>
+			<mvc:mapping path="/adminSettle"/>
+			<mvc:mapping path="/adminSettleEditOk"/>
+			<mvc:mapping path="/adminStoreEditOk"/>
+			<mvc:mapping path="/adminPaymentStore"/>
+			<mvc:mapping path="/adminPaymentClass"/>
+			<mvc:mapping path="/adminReturn"/>
+			<mvc:mapping path="/adminVideo"/>
+			<mvc:mapping path="/adminVideoWrite"/>
+			<mvc:mapping path="/adminVideoWriteOk"/>
+			<mvc:mapping path="/adminVideoView"/>
+			<mvc:mapping path="/adminClassReview"/>
+			<mvc:mapping path="/adminReply"/>
+			<mvc:mapping path="/adminReplyView"/>
+			<mvc:mapping path="/adminAnswer"/>
+			<mvc:mapping path="/adminAnswerView"/>
+			<mvc:mapping path="/adminAnswerOk"/>
+			
+			
+			<mvc:mapping path="/creatorDashboard"/>
+			<mvc:mapping path="/creatorStatClass"/>
+			<mvc:mapping path="/creatorAnswer"/>
+			<mvc:mapping path="/creatorAnswerView"/>
+			<mvc:mapping path="/creatorAnswerOk"/>
+			<mvc:mapping path="/creatorMyClass"/>
+			<mvc:mapping path="/creatorMyClassWrite"/>
+			<mvc:mapping path="/creatorClassQuestion"/>
+			<mvc:mapping path="/creatorGuide"/>
+			<mvc:mapping path="/creatorNotice"/>
+			<mvc:mapping path="/creatorMyClass"/>
+			<mvc:mapping path="/creatorNoticeView"/>
+			<mvc:mapping path="/creatorNoticeWrite"/>
+			<mvc:mapping path="/creatorEdit"/>
+			<mvc:mapping path="/creatorEditOk"/>
+			<mvc:mapping path="/creatorLeave"/>
+			<mvc:mapping path="/creatorEditOk"/>
+			<mvc:mapping path="/creatorLeaveChk"/>
+			<mvc:mapping path="/creatorLeaveOk"/>
+			<mvc:mapping path="/creatorConfirmed"/>
+			<mvc:mapping path="/creatorEditOk"/>
+			<mvc:mapping path="/creatorSettle"/>
+			<mvc:mapping path="/creatorEditOk"/>
+			<mvc:mapping path="/creatorVideo"/>
+			<mvc:mapping path="/creatorEditOk"/>
+			<mvc:mapping path="/creatorVideo"/>
+			<mvc:mapping path="/creatorVideoWrite"/>
+			<mvc:mapping path="/creatorVideoRequest"/>
+			<mvc:mapping path="/creatorVideoView"/>
+			<mvc:mapping path="/creatorMyClassWriteOk"/>
+			<mvc:mapping path="/creatorMyClassView"/>
+			
+			<mvc:mapping path="/mypage"/>
+			<mvc:mapping path="/userOrderFix"/>
+			<mvc:mapping path="/userInfoView"/>
+			<mvc:mapping path="/userInfoEditChk"/>
+			<mvc:mapping path="/userInfoEditOk"/>
+			<mvc:mapping path="/userInfoEditFormOk"/>
+			<mvc:mapping path="/userLeave"/>
+			<mvc:mapping path="/ModelAndView"/>
+			<mvc:mapping path="/userLeaveOk"/>
+			<mvc:mapping path="/userLeaveConfirmed"/>
+			<mvc:mapping path="/userCart"/>
+			<mvc:mapping path="/userCartInsert"/>
+			<mvc:mapping path="/userCartDelete"/>
+			<mvc:mapping path="/userCartDeleteAll"/>
+			<mvc:mapping path="/cartUpdate"/>
+			<mvc:mapping path="/orderSheet"/>
+			<mvc:mapping path="/orderChk"/>
+			<mvc:mapping path="/orderConfirmed"/>
+			<mvc:mapping path="/myclassList"/>
+			<mvc:mapping path="/myclassView"/>
+			<mvc:mapping path="/myclassVideo"/>
+			<mvc:mapping path="/userMileage"/>
+			<mvc:mapping path="/userWishList"/>
+			<mvc:mapping path="/delWishList"/>
+			<mvc:mapping path="/myclassQna"/>
+			<mvc:mapping path="/qnaDelete"/>
+			<mvc:mapping path="/myclassReview"/>
+			<mvc:mapping path="/classReviewDelete"/>
+			<mvc:mapping path="/mypageStoreQna"/>
+			<mvc:mapping path="/mypageStoreReview"/>
+			<mvc:mapping path="/goodsReviewDelete"/>
+			<mvc:mapping path="/mypage1on1"/>
+			<mvc:mapping path="/mypageEvent"/>
+			<mvc:mapping path="/eventReplyDelete"/>
+			
+			<bean class="com.bitcamp.gachi.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

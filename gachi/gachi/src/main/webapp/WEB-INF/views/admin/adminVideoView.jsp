@@ -57,7 +57,7 @@
 		width:70%;
 	}
 	#video_sample{
-		margin:0 auto;
+		margin:20px;
 	}
 	#file_info li:nth-child(2n){
 		text-align:left;
@@ -66,7 +66,7 @@
 		border:none;
 	}
 	#ad_videoFile_list{
-		height:300px;
+		height:375px;
 	}
 	#ad_video_addList{
 		overflow: auto;
@@ -75,7 +75,7 @@
 <script type="text/javascript">
 	var newStr=null;
 	$(()=>{
-		$("#file_info>li:lt(6)").css("borderBottom","1px solid gray");
+		$("#file_info>li:lt(8)").css("borderBottom","1px solid gray");
 		var video_sample=videojs('video_sample');
 		 video_sample.on("loadedmetadata", function() {
 		let fileIndex=video_sample.currentSrc().lastIndexOf("/")+1;
@@ -86,12 +86,12 @@
 		var min = parseInt((duration%3600)/60);
 		var sec = floor%60;
 		var durationStr=hour+":"+min+":" + sec;
-		$("#file_info li:nth-child(2)").text(filename);
-		$("#file_info li:nth-child(4)").text(durationStr);
+		$("#file_info li:nth-child(4)").text(filename);
+		$("#file_info li:nth-child(6)").text(durationStr);
 		$('#ad_video_addList>ul:last-child>li:last>input:nth-of-type(1)').val(duration);
 		//$('#ad_video_addList>ul:last-child>li:eq(7)>input:hidden:first-child').trigger('change');
 		$("#ad_video_addList>ul:last-child>li:eq(4)").text(durationStr);
-			$("#file_info li:nth-child(6)").text($("#videoSrc").attr("type"));
+			$("#file_info li:nth-child(8)").text($("#videoSrc").attr("type"));
 		}); 
 	    $("#add_mov").on("dragenter dragover", function(event){
 	        event.preventDefault();
@@ -120,6 +120,7 @@
 				//////////////////////////
 				data: formData,
 				success:function(result){
+					$("#file_info li:nth-child(2)").text("");
 					addVideoList(result);
 					
 				}
@@ -146,7 +147,7 @@
 				tagTxt+='<option value="'+i+'">'+i+'</option>';
 			}
 			tagTxt+='</select></li>';
-			tagTxt+='<li><input type="text" name="videoName"/></li>';
+			tagTxt+='<li><input type="text" name="videoName" class="videoName"/></li>';
 			tagTxt+='<li class="wordCut"><input type="hidden" name="videoFileName"'; 
 			tagTxt+='value="'+filename+'"/>'+filename+'</li>';
 			tagTxt+='<li></li>';
@@ -155,7 +156,6 @@
 			tagTxt+='<li><b class="video_del">x</b><input type="hidden" name="videoLength"/>';
 			tagTxt+='<input type="hidden" name="videoCode"/></li></ul>';
 			$("#ad_video_addList>ul:last-child").after(tagTxt);
-			$("#video_sample").attr("src","/gachi/upload/class_video/test2.mp4");
 			if(!video_sample.paused){
 				video_sample.pause();
 			}
@@ -230,8 +230,7 @@
 					alert("목차정보(목차명+순서)가 중복되었습니다.\n동영상 정보를 다시입력해주세요.");
 					return false;
 				}
-				if($(".videoList>li:eq(2) input:last-child").val()==''||
-				$(".videoList>li:eq(3)>input:first-child").val()==null){
+				if($(".videoName").val()==''||$(".videoName").val()==null){
 					alert("영상정보에 공란이 있습니다.\n수정하기 전, 확인 부탁드립니다.");
 					return false;
 				}	
@@ -257,7 +256,7 @@
 			<li style="height:35px; line-height:30px">해당영상</li>
 			<li>
 			<video  id="video_sample" class="video-js vjs-default-skin vjs-controls-enabled vjs-big-play-centered" controls preload="metadata"
-	    		width="450" height="250" data-setup="{}">
+	    		width="500" height="280" data-setup="{}">
 	    		<source id="videoSrc" src="<%=request.getContextPath() %>/upload/class_video/${filename}" type="video/mp4" />		
 			</video> 
 			</li>
@@ -265,6 +264,12 @@
 	</li>
 	<li style="border-left:3px solid #437299;">
 		<ul id="file_info">
+			<li>영상제목</li>
+			<li>
+				<c:if test="${videoName!=null}">
+					${videoName}
+				</c:if>
+			</li>
 			<li>파일명</li>
 			<li></li>
 			<li>영상길이</li>
@@ -280,7 +285,7 @@
 		</ul>
 	</li>
 </ul>
-<div class="ad_box" id="add_mov" style="height:300px; text-align:center; padding:auto; "> 
+<div class="ad_box" id="add_mov" style="height:300px; text-align:center; padding:auto; margin-top:30px; "> 
 	<div style="margin-top:60px">
 		<h3 style="line-height:150px;">영상을 여기에 끌어주세요.</h3>
 	</div>
@@ -295,6 +300,7 @@
 	</c:forEach>
 </ul>
 <h3>영상등록정보</h3>
+<p style="color:red">*영상 추가 시 수정버튼을 꼭 눌러주세요.(버튼 미입력 시 저장되지 않습니다.)</p> 
 <form method="post" id="adminVideoUpdate" action="/gachi/adminVideoUpdate">
 <ul class="text_center ad_box" id="ad_video_addList">
 	<li>목차명</li>

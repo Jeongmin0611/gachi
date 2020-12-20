@@ -151,6 +151,16 @@
 input[type=text] {
 	text-align: left;
 }
+/*수정삭제 a버튼*/
+a:link, a:visited{
+		text-decoration: none;
+		color: #000;
+	}
+	a:hover{
+		text-decoration: none;
+		font-weight:bold;
+		color: #00498c;
+	}
 </style>
 <script>
 		function reviewMoreContent(){
@@ -181,7 +191,7 @@ input[type=text] {
 	$(function() {
 		CKEDITOR.replace('content', {
 			//allowedContent:true,
-			toolbar :[['Bold','Italic','-','Image','Smiley','SpecialChar']]
+			toolbar :[['Bold','Italic','-','Smiley','SpecialChar']]
 			//,imageUploadUrl:'/gachi/clientImgUpload',
 			//extraPlugins:'uploadimage'
 				
@@ -200,7 +210,6 @@ input[type=text] {
             }
 		});
 		/*$("#myclassStars"+$('div[data-num=${r.grade}]')).raty({
-
 			
 			score : function(){
 				return $('div[data-score=${r.grade}]');
@@ -349,7 +358,7 @@ input[type=text] {
 	  		});
 	  		}
 	  	});
-	  	//수강평 버튼 클릭시 로그인 확인, 구매여부 확인
+	  	//===================================================== 수강평 버튼 클릭시 로그인 확인, 구매여부 확인
 	  	$('#myclassReviewFrm').on('click',function(){
 	  		if(id == 'null'){
 	  			swal({
@@ -362,6 +371,14 @@ input[type=text] {
 					icon:"warning"});
 	  			return false;
 	  		}else{
+	  			//버튼
+				$("#reviewForm").css("display","none");
+				$("#reviewUpdateForm").css("display","block");
+				//수정이후 수강평 등록 눌렀을 시 내용 지우기
+				$("#reviewSubject").val(""); 
+				CKEDITOR.instances.reviewContent.setData(""); 
+				$("#numInput").val("");
+				$(".classRating").raty("score",5);
 				  return true;
 			  }
 	  	});
@@ -398,8 +415,103 @@ input[type=text] {
 	  			
 	  		});
 	  	});
+	  	//리뷰 수정
+		$(".reviewUpdate").click(function(){
+			$("#reviewSubject").val($(this).parent().prev().prev().html());
+			CKEDITOR.instances.reviewContent.setData($(this).parent().next().html()); 
+			$("#reviewForm").css("display","none");
+			$("#reviewUpdateForm").css("display","block");
+			$("#numInput").val($(this).parent().prev().prev().prev().find('div').attr('data-num'));
+			$(".classRating").raty("score",$(this).parent().prev().prev().prev().find('div').attr('data-score'));
+		});
+		$('#reviewUpdateForm').click(function(){
+	  		CKupdate();
+	  		if($('#reviewSubject').val()==null || $('#reviewSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;
+	  		}
+	  		if($('#reviewContent').val()==null||$('#reviewContent').val()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		
+	  		$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/reviewUpdateFormOk",
+	  			data:{
+	  				subject : $('#reviewSubject').val(),
+	  				content:$('#reviewContent').val(),
+	  				grade: point,
+	  				num: $(this).next().val()
+	  			},
+	  			success:function(){
+	  				swal({
+	  				  title: "수강평이 수정 되었습니다.",
+	  				  icon: "success",
+	  				  buttons: true
+	  				}).then((result)=>{
+	  					location.reload();
+	  				});
+	  			},error:function(){
+	  				swal('수강평 수정이 실패하였습니다. ');
+	  			}
+	  			
+	  		});
+	  	});
+		//리뷰 삭제
+		$(".classReviewDelete").click(function(){
+			swal({
+				title: "수강평 삭제",
+				text: "선택하신 수강평을 삭제하시겠습니까?",
+				icon: "warning",
+				closeOnClickOutside: false,
+				buttons: {
+					cancle : {
+						text: "취소",
+						value: false,
+						className: "btn btn-outline-light"
+					},
+					confirm : {
+						text: "확인",
+						value: true,
+						className: "btn btn-outline-light"
+					}
+				}
+			}).then((result)=>{
+				var num = $(this).parent().prev().prev().prev().find('div').attr('data-num');
+				if(result){
+					$.ajax({
+						url: "/gachi/classReviewDelete",
+						data: "num="+num,
+						type: "GET",
+						success: function(result){
+							if(result>0){
+								swal({
+									title: "완료",
+									text: "삭제가 완료되었습니다!",
+									icon: "success",
+									closeOnClickOutside: false,
+									buttons: {
+										confirm : {
+											text: "확인",
+											value: true,
+											className: "btn btn-outline-light"
+										}
+									}
+								}).then((result)=>{
+									location.reload();
+								});
+							}
+						}, error: function(){
+							console.log("수강평 삭제 실패");
+						}
+					});
+				}
+			});
+			
+		});
 
-	  	//질문답변 검색
+	  	//===================================================== qna 검색
 	  	$('#qnaSearchBtn').on('click',function(){
 	  		$.ajax({
 	  			type:"GET",
@@ -410,6 +522,7 @@ input[type=text] {
 	  				searchWord:$('#qnaSearchWord').val()
 	  			},
 	  			success:function(result){
+	  				$('.qnaMoreContent').
 	  				console.log("성공= "+result);
 	  			},error:function(error){
 	  				console.log("에러"+error);
@@ -417,7 +530,7 @@ input[type=text] {
 	  		})
 	  	});
 	  	
-	  	//질문답변 버튼 클릭시 로그인 확인
+	  	//qna 버튼 클릭시 로그인 확인
 	  	$('#myclassQnaFrm').on('click',function(){
 			  if(id == 'null'){
 				swal({
@@ -425,11 +538,17 @@ input[type=text] {
 					icon:"warning"});
 				return false;
 			  }else{
+				$("#qnaForm").css("display","block");
+				$("#qnaUpdateForm").css("display","none");
+				//수정이후 수강평 등록 눌렀을 시 내용 지우기
+				$("#qnaSubject").val(""); 
+				$("#numInputQna").val("");				
 				  return true;
 			  }
 		  });
 	  	//qna작성
 	  	$('#qnaForm').click(function(){
+
 	  		$.ajax({
 	  			type:"POST",
 	  			url:"/gachi/qnaFormOk",
@@ -439,7 +558,7 @@ input[type=text] {
 	  				content:$('#qnaContent').val()},
 	  			success:function(){
 	  				swal({
-		  				  title: "수강평이 등록 되었습니다.",
+		  				  title: "질문이 등록 되었습니다.",
 		  				  icon: "success",
 		  				  buttons: true
 	  				}).then((result)=>{
@@ -448,9 +567,99 @@ input[type=text] {
 	  			},error:function(){
 	  				swal('질문등록이 실패하였습니다.');
 	  			}
+	  		});			
+	  	});
+	  //qna수정
+		$(".qnaUpdate").click(function(){
+			$("#qnaSubject").val( $(this).parent().prev().prev().find("span").html()); 
+			$('#qnaContent').val( $(this).parent().next().html());
+			$("#qnaForm").css("display","none");
+			$("#qnaUpdateForm").css("display","block");
+			$("#numInputQna").val($(this).next().next().val()); 
+		});	
+		$("#qnaUpdateForm").click(function(){
+			if($('#qnaSubject').val()==null || $('#qnaSubject').val()==''){
+	  			swal('제목을 입력해주세요');
+	  			return false;
+	  		}
+	  		if($('#qnaContent').val()==null || $('#qnaContent').val()==''){
+	  			swal('내용을 입력해주세요');
+	  			return false;
+	  		}
+	  		//var num = $(this).next().val();
+			$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/qnaUpdateFormOk",
+	  			data:{	  				
+	  				num: $(this).next().val(),
+	  				subject: $('#qnaSubject').val(),
+	  				content: $('#qnaContent').val()},
+	  			success:function(){
+	  				swal({
+		  				  title: "질문이 수정 되었습니다.",
+		  				  icon: "success",
+		  				  buttons: true
+		  				}).then((result)=>{
+							location.reload();
+		  				});
+	  			},error:function(){
+	  				swal('질문수정이 실패하였습니다.');
+	  			}
 	  		});
 			
-	  	});
+		});
+		//qna삭제
+		$(".qnaDelete").click(function(){
+			swal({
+				title: "질문/답변 삭제",
+				text: "선택하신 질문을 삭제하시겠습니까?",
+				icon: "warning",
+				closeOnClickOutside: false,
+				buttons: {
+					cancle : {
+						text: "취소",
+						value: false,
+						className: "btn btn-outline-light"
+					},
+					confirm : {
+						text: "확인",
+						value: true,
+						className: "btn btn-outline-light"
+					}
+				}
+			}).then((result)=>{
+				var num = $(this).next().val();
+				if(result){
+					$.ajax({
+						url: "/gachi/qnaDelete",
+						data: "num="+num,
+						type: "GET",
+						success: function(result){
+							if(result>0){
+								swal({
+									title: "완료",
+									text: "질문삭제가 완료되었습니다!",
+									icon: "success",
+									closeOnClickOutside: false,
+									buttons: {
+										confirm : {
+											text: "확인",
+											value: true,
+											className: "btn btn-outline-light"
+										}
+									}
+								}).then((result)=>{
+									location.reload();
+								});
+							}
+						}, error: function(){
+							console.log("질문 삭제 실패");
+						}
+					});
+				}
+			});			
+		});	  	
+	  	
 	  	reviewMoreContent();
 	  	qnaMoreContent();
 	});
@@ -565,7 +774,15 @@ input[type=text] {
 							</li>
 							<li>${r.subject }</li>
 							<li>${r.nickname }</li>
-							<li>${r.writedate }</li>
+							<li>${r.writedate }
+							<!-- 수정 삭제 -->
+								<c:choose>
+									<c:when test="${sessionScope.userid eq r.userid }">
+										<a href="#" class="reviewUpdate" style="margin:0 5px" data-toggle="modal" data-target="#reviewModal" data-num="${r.num }">수정	</a>
+		                  				<a href="#" class="classReviewDelete" style="margin:0 5px">삭제</a>		
+									</c:when>
+								</c:choose>
+							</li>
 							<li>${r.content }</li>
 						</ul>
 						<hr class="reviewMoreContent" />
@@ -581,18 +798,10 @@ input[type=text] {
 		</div>
 
 
-		<!-- 클래스 문의 -->
+		<!-- ================================= 클래스 질문답변 ================================= -->
 		<div id="myclassQna">
 			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
-				<select name="searchKey" id="qnaSearchKey">
-					<option value="작성자">작성자</option>
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select> 
-				<input type="text" name="searchWord" id="qnaSearchWord" />
-				<button type="button" class="btn btn-outline-light btn-sm"
-					id="qnaSearchBtn">검색</button>
 				<button type="button" class="btn btn-outline-light"
 					data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>
@@ -606,9 +815,18 @@ input[type=text] {
 				<c:otherwise>
 					<c:forEach var="qna" items="${qnaList }">
 						<ul class="qnaMoreContent">
-							<li><label class="badge badge-light">Q</label>${qna.subject }</li>
+							<li><label class="badge badge-light">Q</label><span>${qna.subject }</span></li>
 							<li>${qna.nickname }</li>
-							<li>${qna.writedate }</li>
+							<li>${qna.writedate }
+							<!-- 수정 삭제 -->
+								<c:choose>
+									<c:when test="${sessionScope.userid eq qna.userid }">
+										<a href="#" class="qnaUpdate" style="margin:0 5px" data-toggle="modal" data-target="#exampleModal" data-num="${r.num }">수정	</a>
+		                  				<a href="#" class="qnaDelete" style="margin:0 5px">삭제</a>
+		                  				<input type="hidden" value="${qna.num }"/>	
+									</c:when>
+								</c:choose>
+							</li>
 							<li>${qna.content }</li>
 							<li>
 								<hr />
@@ -665,6 +883,8 @@ input[type=text] {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="reviewForm">등록</button>
+				<button type='button' class='btn btn-primary' id='reviewUpdateForm'>수정</button>
+				<input type="hidden" id="numInput"/>
 			</div>
 		</div>
 	</div>
@@ -697,6 +917,8 @@ input[type=text] {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="qnaForm">등록</button>
+				<button type='button' class='btn btn-primary' id='qnaUpdateForm' >수정</button>
+				<input type="hidden" id="numInputQna"/>
 			</div>
 		</div>
 	</div>

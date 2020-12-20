@@ -51,7 +51,7 @@
 }
 #createClass li img{
 	width: 100%;
-	height: 150px;
+	height: 160px;
 }
 #createClass li:nth-child(1), #createClass li:nth-child(2), #createClass li:nth-child(3){
 	height: 30px;
@@ -62,7 +62,7 @@
 <div class="container cfont" style="height: auto;">
 	<div id="createDetailDiv" class="row">
 		<ul id="createDetailSub1" class="col-sm-4">
-			<li><img src="/gachi/img/creator/${vo.picture }"/></li>
+			<li><img src="<%=request.getContextPath()%>/upload/creatorImg/${vo.picture }"/></li>
 			<li style="text-align: center; border-bottom: 1px solid #bbb; margin:2px 0;">${vo.nickname }</li>
 			<li style="word-wrap:break-word">
 				<a href="${vo.sns_addr }" target="_blank">
@@ -90,8 +90,8 @@
 			<li>클래스명</li>
 			<li>가격</li>
 			<c:forEach var ="list" items="${list}">
-				<li><a href="/gachi/classMain"><img src="/gachi/upload/classImg/${list.class_img }"/></a></li>
-				<li><a href="/gachi/classMain">${list.class_name }</a></li>				
+				<li><a href="/gachi/classView?code=${list.code }"><img src="/gachi/upload/classImg/${list.class_img }"/></a></li>
+				<li><a href="/gachi/classView?code=${list.code }">${list.class_name }</a></li>				
 				<li><fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</li>
 			</c:forEach>
 		</ul>

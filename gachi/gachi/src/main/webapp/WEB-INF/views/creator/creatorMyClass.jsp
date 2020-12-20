@@ -2,36 +2,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="<c:url value="/css/style.css" />" rel="stylesheet" type=text/css>
  <style>
-	 #cr_MyClass_area{
-	 	margin-bottom:20px;
-	 	border:1px solid gray;
-	 	border-radius:10px;
-	 	padding:5px;
-	 	overflow:auto;
-	 }
-	 .cr_MyClass_header{
-	 	margin-top:20px;
-	 	border-top:3px solid #437299;
-	 	border-left:3px solid #437299;
-	 	border-right:3px solid #437299;
-	 	border-radius:10px;
- 		line-height:50px;
- 		overflow: auto;
-	 }
-	 .cr_Classlist_menu{
-		border:3px solid #437299;	
-		border-radius: 10px; 
-		margin:20px 0px;
-	 }
-	 .cr_Classlist_menu li{
-		margin-top:5px;
-		margin-bottom:5px;	 	
-	 }
-	 .cr_MyClass_list_menu{
-	 	height:50px;
-	 	margin-top:15px;
-		margin-bottom:5px;
-	 }
+	#search_area{
+		margin-top:20px;
+		margin-bottom:20px;
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow: auto;
+	}
+	#search_area{
+		padding-left:0px;
+		overflow: auto;
+	}
+	#search_area h3{
+		margin-top:20px;
+		text-align:center;
+	}
+	#search_area li{
+		margin:5px 0px;
+		float:left;
+	}
+	#search_area>li:nth-child(2n+1){
+		width:20%;
+		text-align:center;
+	}
+	#search_area>li:nth-child(2n){
+		width:80%;
+		text-align:left;
+	}
 	 #paging{
 	 	overflow: auto;
 	 }
@@ -41,102 +38,174 @@
  </style> 
  <script>
  	$(()=>{
- 		$(".cr_MyClass_lst li:nth-child(3)").css("padding","0");
- 		$(".cr_MyClass_lst li:lt(8)").css("height","55px").css("lineHeight","50px");
+ 		$("#startDate").val('${startDate}');
+		$("#endDate").val("${endDate}");
+		$("#class_state").val("${class_state}").attr("selected", "selected");
+		$("#dateOption").val("${dateOption}").attr("selected", "selected");
+		$("#category").val("${category}").attr("selected", "selected");
+		$("#search").val("${search}");
+		
+var now=${nowPage};
+		
+		$("#searchBtn").click(function(){
+			if($('#startDate').val()>=$('#endDate').val()){
+				alert("시작일보다 종료일이 더 빠릅니다.\n다시입력해주세요.");
+				return false;
+			}
+			var url = "/creatorMyClass";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+			$.ajax({
+				url : url,
+				data : data,
+				type : "POST",
+				dataType : "json",
+				success: function(data){
+					var result = data.result;
+					console.log(result);
+				},error:function(){
+					var result = data.result;
+					console.log(result);
+				}
+			});
+			
+		});
+		function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/creatorMyClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+	}
  		
  	});
  </script>
  <div class="container text-center ad_font">
  	<h1>클래스 관리</h1>
-		<form method="get" action="">
-			<ul class="cr_Classlist_menu">
-				<li>클래스검색</li>
-				<li>
-					<select>
-						<option>클래스코드</option>
-						<option>카테고리</option>
-						<option>클래스명</option>
-					</select>
-					<input type="text" />		
+	<form method="post" action="creatorMyClass">
+	<h3>검색옵션</h3>
+			<ul id="search_area">
+				<li>날짜옵션</li>
+				<li>	
+					<select id="dateOption" name="dateOption">
+						<option value="">전체</option>
+						<option value="allow">등록일</option>
+						<option value="signup">등록신청일</option>
+					</select>	
+					<input type="date" id="startDate" name="startDate">&nbsp;~&nbsp;<input type="date" name="endDate" id="endDate">
 				</li>
-				<li>등록기간</li>
+				<li>카테고리</li>
 				<li>
-					<select>
-						<option>등록일</option>
-						<option>신청일</option>
-					</select>
-					 <button class="btn">오늘</button>
-					 <button class="btn">어제</button>
-					 <button class="btn">3일</button>
-					 <button class="btn">1주일</button>
-					 <button class="btn">15일</button>
-					 <button class="btn">1개월</button>
-					 <button class="btn">3개월</button>
-					 <button class="btn">6개월</button>
-					 <input type="date"/>~
-					 <input type="date"/>
+					<select id="category" name="category">	
+						<option value="">전체</option>
+						<option value="공예/창작">공예/창작</option>
+						<option value="요리">요리</option>
+						<option value="미술">미술</option>
+						<option value="음악">음악</option>
+						<option value="라이프스타일">라이프스타일</option>
+						<option value="운동">운동</option>
+						<option value="사진/영상">사진/영상</option>
+					</select>			
 				</li>
 				<li>클래스상태</li>
 				<li>
-					<input type="radio" name="" checked/>전체
-					<input type="radio" name=""/>승인대기
-					<input type="radio" name=""/>승인검토
-					<input type="radio" name=""/>개설완료
-					<input type="radio" name=""/>강의종료
+					<select id="class_state" name="class_state">
+						<option value="">전체</option>
+						<option value="등록대기">등록대기</option>
+						<option value="판매중">판매중</option>
+						<option value="종료">종료</option>
+					</select>
 				</li>
-				<li>
-					<input type="submit" class="btn" value="검색">
-					<input type="reset" class="btn" value="초기화">
-				</li>
-			</ul>
-			<div style="text-align:center">
-				
-			</div>
-		</form>
-	<ul class="cr_MyClass_lst">
-		<li>선택</li>
-		<li>클레스코드</li>
-		<li>이미지</li>
+				<li>검색</li>
+				<li><input type="text" id="search" name="search"/></li>
+				<li style="width:100%;text-align:center">
+					<input type="submit" id="searchBtn" class="btn" value="조회"/>
+				</li>	
+			</ul>	
+</form>
+	<ul id="ad_class_lst">
+		<li>클래스코드</li>
 		<li>카테고리</li>
 		<li>클래스명</li>
-		<li>신청일</li>
+		<li>크리에이터명</li>
+		<li>누적수강생</li>
+		<li>등록신청일</li>
 		<li>등록일</li>
 		<li>상태</li>
-	
-	
-	
-	
-		<li><input type="checkbox" id="" name=""/></li>
-		<li>cla1546484</li>
-		<li><img src="img/artEx/artEx03.PNG"></li>
-		<li>미술</li>
-		<li>초보자도 하기 쉬운 미술</li>
-		<li>2020-10-22</li>
-		<li>2020-10-29</li>
-		<li>승인대기</li>
 		
-		<li><input type="checkbox" id="" name=""/></li>
-		<li>cla1546484</li>
-		<li><img src="img/artEx/artEx04.PNG"></li>
-		<li>미술</li>
-		<li>초보자는 하기 어려운 미술</li>
-		<li>2020-10-08</li>
-		<li>2020-10-15</li>
-		<li>개설완료</li>
+		<c:forEach var="result" items="${result}">
+		<li>${result.code }</li>
+		<li>${result.category }</li>
+		<li class="wordCut"><a href="/gachi/creatorMyClassView?code=${result.code}">${result.class_name}</a></li>
+		<li class="wordCut">${result.nickname }</li>
+		<li>${result.total_student }</li>
+		<li>${result.signup }</li>
+		<li>${result.allow }</li>
+		<li>${result.class_state }</li>
+		</c:forEach>	
 	</ul>
 	<div class="cr_MyClass_list_menu">
 		<button onclick="location.href='/gachi/creatorMyClassWrite'" class="btn">강좌개설신청</button>
-		<button class="btn">종료신청</button>
 	</div>
-<div id="paging">
+	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
+			<c:if test="${method eq 'get' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			
 	</ul>
 </div>
 </div>

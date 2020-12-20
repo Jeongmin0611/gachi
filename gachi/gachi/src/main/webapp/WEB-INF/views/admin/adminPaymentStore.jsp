@@ -165,7 +165,7 @@
 		<li class="wordCut">${data.goods_name}</li>
 		<li>${data.userid}</li>
 		<li>${data.username}</li>
-		<li>${data.real_price }</li>
+		<li><fmt:formatNumber value="${data.real_price }" pattern="#,###"/>원</li>
 		<!-- <li>0</li> -->
 		<li>${data.orderdate}</li>
 		<li><c:if test="${data.finished eq '미확정'}">미확정</c:if><c:if test="${data.finished eq '확정'}">구매확정</c:if></li>

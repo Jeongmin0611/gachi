@@ -2,97 +2,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container ad_font">
 <script type="text/javascript">
+var detailImgSize = 1;
 $(function(){
-	var editor=CKEDITOR.replace('goods_info',{
-		imageUploadUrl:'/gachi/StoreimageUpload',
-		extraPlugins:'uploadimage'
-	});
-	editor.on('fileUploadRequest', function( evt ) {
-	    var fileLoader = evt.data.fileLoader,
-	        formData = new FormData(),
-	        xhr = fileLoader.xhr;
-	    xhr.open( 'POST', fileLoader.uploadUrl, true );
-	    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
-	    formData.append('type','GoodsWrite');
-	    fileLoader.xhr.send( formData );
-	    evt.stop();
-	}, null, null, 4 ); 
-	
-	CKEDITOR.config.height=500;
-	$("#ad_goods_writeForm").css("height","500px");
-	$("#ad_goods_writeForm>li").slice(2).css("width","100%");
-	$("#ad_goods_writeForm>li:first-child li").css("margin","7px 0px");
-	$("#ad_goods_write li").css("margin-top","10px");
-	$("textarea").css("height","800px");
-	$(".ad_box img").css("width","200px").css("height","200px");
-	$(".ad_box>div").css("margin","20px 0px;");
-	$(".ad_box>div").css("float","left");
-	let imgCount=2;
-	
-	$('#mainImg').on('change', handleImgFileSelect(mainImg));
-	$('#detailImg1').on('change', handleImgFileSelect(detailImg1));
-	$('#detailImg2').on('change', handleImgFileSelect(detailImg2));
-	$('#detailImg3').on('change', handleImgFileSelect(detailImg3));
-	
-	 $(".add_img").on("dragenter dragover", function(event){
-	        event.preventDefault();
-	    });
-	
-	$(document).on("drop",".add_img",(event)=>{
-		event.preventDefault();
-		var files =event.originalEvent.dataTransfer.files;
-		var file=files[0];
-		console.log('file:' + file);
+	var todate = "${todate}";
+	var cnt = "${cnt}";
+	if(cnt < 10) cnt = "0" + cnt;
 
-		let code=$("#code").val();
-		var formData= new FormData();
-		formData.append("file",file);
-		formData.append("code",code);
-		console.log(formData.file);
-		  $.ajax({
-			type:"post",
-			enctype: 'multipart/form-data',
-			url:"/gachi/StoreimgThumbnail",
-			//ajax로 넘길경우 form-data 형식
-			processData: false,
-			contentType: false,
-			//////////////////////////
-			data: formData,
-			success:function(result){					
-				var filename=result.slice(result.lastIndexOf("/")+1);
-				console.log(filename);
-				let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
-				tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
-				tagTxt+='<div style="text-align:center">';
-				tagTxt+='<img src="'+result+'" width=200 height=200 /></div>';
-				tagTxt+='<div style="padding:0 auto;">';
-				tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
-				$(".ad_box").append(tagTxt);
-			}
-		});
-	});
-		$(document).on('click','b',(event)=>{
-			let imageName=$(event.target).prev().text();
-			let code=$("#code").val();
-			$.ajax({
-				url:'/gachi/StoreimageDelete?imageName='+imageName+"&code="+code,
-				type:'post',
-				success:(result)=>{
-					$(event.target).parent().parent().remove();
-				},error:(e)=>{
-					alert("이미지파일 삭제를 실패하였습니다.");
-				}
-			});
-		});	
+	var code = "g" + todate.substr(0,4) + todate.substr(5,2) + todate.substr(8,2) + cnt;
+	$("#code").val(code);
+
+		/* $(document).on('click', '.detailImgAdd', function(){
+			detailImgSize = detailImgSize + 1;
+			
+			var detailImg  = "<li class='content_center'>슬라이드 이미지"+(detailImgSize)+"</li><li><input type='file' name='img_detail"+(detailImgSize)+"' class='goods_img2' id='detailImg"+(detailImgSize)+"' /><button type='button' class='detailImgAdd'>상세이미지추가</button></li>";
+			$(this).parent().after($(detailImg));
+			$(this).remove();
+			
+		});// detailImgAdd clicks */
 		
-	$("#adminGoodsWrite").submit(()=>{
-		let grpl = $("input[name=imgList]").length;
-		if(grpl==0){
-			alert("스토어 이미지를 최소 1개 이상 선택하여야 합니다.");
+			
+	$("#adminGoodsWriteOk").submit(()=>{
+		if($("#goods_name").val()==null||$("#goods_name").val()==""){
+			alert("상품명을 입력하여 주세요.");
 			return false;
 		}
-		if($("#store_name").val()==null||$("#store_name").val()==""){
-			alert("상품명을 입력하여 주세요.");
+		if($("#startdate").val()==null||$("#startdate").val()==""){
+			alert("판매시작일을 입력하여 주세요.");
+			return false;
+		}
+		if($("#enddate").val()==null||$("#enddate").val()==""){
+			alert("판매종료일을 입력하여 주세요.");
 			return false;
 		}
 		if($("#stock").val()==null||$("#stock").val()==""){
@@ -101,6 +40,18 @@ $(function(){
 		}
 		if($("#real_price").val()==null||$("#real_price").val()==""){
 			alert("판매가를 입력하여 주세요.");
+			return false;
+		}
+		if($("#goods_info").val()==null || $("#goods_info").val()=="") {
+			alert("상품 설명 이미지를 선택해주세요.");
+			return false;
+		}
+		if($("#goods_img1").val()==null || $("#goods_img1").val()=="") {
+			alert("메인 이미지를 선택해주세요.");
+			return false;
+		}
+		if($("#detailImg1").val()==null || $("#detailImg1").val()=="") {
+			alert("슬라이드 이미지1을  선택해주세요.");
 			return false;
 		}
 		return true;
@@ -112,18 +63,6 @@ function goodsDel(){
 	}
 }
 
-/* function handleImgFileSelect(inputName, e) {
-	
-	var inputName = inputName;
-
-	let tagTxt='<div style="margin:0px 15px;width:230px;height:100%;float:left">';
-	tagTxt+='<div style="text-align:center;height:24px;">이미지'+ imgCount++ +'</div>';
-	tagTxt+='<div style="text-align:center">';
-	tagTxt+='<img id=' + inputName + ' name= ' + inputName + 'src="'+result+'" width=200 height=200 /></div>';
-	tagTxt+='<div style="padding:0 auto;">';
-	tagTxt+='<input type="hidden" name="imgList" value="'+filename+'"/>'+filename+'<b>  x  </b></div>';
-	$(".ad_box").append(tagTxt);
-} */
 </script>
 <div class="container">
 <h1>상품등록</h1>
@@ -131,8 +70,8 @@ function goodsDel(){
 <ul id="ad_goods_writeForm">
 	<li>
 		<ul>
-			<li class="content_center">상품코드</li>
-			<li><input type="text" id="code" name="code" value=""/> 생성시 시퀀스로 자동생성</li>
+			<!-- <li class="content_center">상품코드</li>
+			<li><input type="text" id="code" name="code" value=""/> 생성시 시퀀스로 자동생성</li> -->
 			<li class="content_center">카테고리</li>
 			<li>
 				<select id="category" name="category">
@@ -145,12 +84,16 @@ function goodsDel(){
 					<option value="사진/영상">사진/영상</option>
 				</select>
 			</li>
+			<li class="content_center">판매시작일</li>
+			<li><input type="date" id="startdate" name="startdate" value="${todate }"/></li>
+			<li class="content_center">판매종료일</li>
+			<li><input type="date" id="enddate" name="enddate" value=""/></li>
 			<li class="content_center">상품명</li>
-			<li><input type="text" id="goods_name" name="goods_name" size="40" value=""/></li>
+			<li><input type="text" id="goods_name" name="goods_name" size="70" value=""/></li>
 			<li class="content_center">재고</li>
 			<li><input type="text" id="stock" name="stock" value=""/></li>
 			<li class="content_center">원가금액</li>
-			<li><input type="text" id="prime_coast" name="prime_coast" size="40" value=""/></li>
+			<li><input type="text" id="prime_cost" name="prime_cost" value=""/></li>
 			<li class="content_center">판매금액</li>
 			<li><input type="text" id="real_price" name="real_price" value=""/></li>
 			<li class="content_center">판매상태</li>
@@ -161,26 +104,29 @@ function goodsDel(){
 					<option value="판매종료">판매종료</option>
 				</select>
 			</li>
+			<li class="content_center">상품 설명 이미지</li>
+			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">메인 이미지</li>
-			<li><input type="file" name="mainImg" id="mainImg" /></li>
-			<li class="content_center">상세 이미지1</li>
-			<li><input type="file" name="detailImg1" id="detailImg1" /></li>
-			<li class="content_center">상세 이미지2</li>
-			<li><input type="file" name="detailImg2" id="detailImg2" /></li>
-			<li class="content_center">상세 이미지3</li>
-			<li><input type="file" name="detailImg3" id="detailImg2" /></li>
+			<li><input type="file" name="img_main" accept="image/*" id="goods_img1" /></li>
+			<li class="content_center">슬라이드 이미지1</li>
+			<li><input type="file" name="img_detail1" accept="image/*" id="detailImg1" /></li>
+			<li class="content_center">슬라이드 이미지2</li>
+			<li><input type="file" name="img_detail2" accept="image/*" id="detailImg2" /></li>
+			<li class="content_center">슬라이드 이미지3</li>
+			<li><input type="file" name="img_detail3" accept="image/*" id="detailImg3" /></li>
+			<input type="hidden" name="code" id="code" value=""/>
 		</ul>
 	</li>
-	<li class="content_center">
+	<%-- <li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
 			스토어 이미지 추가
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
 		</div>
-	</li>
+	</li> --%>
 </ul>
-<h3>스토어 이미지 목록</h3>
+<%-- <h3>스토어 이미지 목록</h3>
 <div class="text_center ad_box">
 <c:forEach var="imgList" items="${vo.imgList}" varStatus="status">
 	<div style="margin:0 15px; width:230px;height:100%;">
@@ -195,11 +141,11 @@ function goodsDel(){
 		</div>
 	</div>
 </c:forEach>
-</div>
+</div> --%>
 		<ul id="ad_goods_write">
-			<li>상품설명</li>
+			<!-- <li>상품설명</li>
 			<li><textarea name="goods_info" id="goods_info"></textarea></li>
-			<li>첨부파일 <input type="file" name="no"/> </li>
+			<li>첨부파일 <input type="file" name="no"/> </li> -->
 			<li class="content_center">
 				<input type="submit" class="btn" value="등록하기"/>
 				<input type="reset" class="btn" value="다시쓰기"/>

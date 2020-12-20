@@ -10,10 +10,12 @@
 	overflow: auto;
 	border:3px solid #437299;
 	border-radius: 10px;
+	over-flow:hidden;
 }
 #ad_event_lst li {
 	vertical-align: middle;
 	border-bottom:1px solid gray;
+	over-flow:hidden;
 }
 #ad_event_header{
 	overflow:auto;
@@ -106,7 +108,6 @@ select {
 </ul>
 <div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/adminEventWrite'">글쓰기</button>
-	<button class="btn">삭제</button> 
 </div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

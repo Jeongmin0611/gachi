@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.ClassDaoImp;
 import com.bitcamp.gachi.admin.ClassVO;
 import com.bitcamp.gachi.admin.ClassVideoVO;
+import com.bitcamp.gachi.admin.ClassvideoSort;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
 import com.bitcamp.gachi.admin.MemberVO;
@@ -668,13 +673,188 @@ public class CreatorController {
 	public String creatorApproval() {
 		return "creator/creatorApproval";
 	}
-	@RequestMapping ("/creatorMyClass")
-	public String creatorMyClass() {
-		return "creator/creatorMyClass";
+	@RequestMapping(value="/creatorMyClass",method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView creatorMyClass(@RequestParam(value="now", required=false) String now,
+			@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="class_state", required=false) String class_state,
+			@RequestParam(value="dateOption", required=false) String dateOption,
+			@RequestParam(value="search", required=false) String search,
+			@RequestParam(value="startDate", required=false) String startDate,
+			@RequestParam(value="endDate", required=false) String endDate,
+			HttpServletRequest req, HttpServletResponse resp){
+		
+		
+		System.out.println("POST 드가자");
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		
+		if(startDate==null || endDate == null) {
+			System.out.println("startMonth is null");
+			
+			SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String todate =  yyyymmdd.format(new Date());
+			
+			startDate = todate.substring(0, 8) + "01";
+			endDate = todate;
+		} 
+		
+		if(category.length() <= 0) category = null;
+		if(class_state.length() <= 0) class_state = null;
+		if(dateOption.length() <= 0) dateOption = null;
+		if(search.length() <= 0) search = null;
+
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("category", category);
+		dbParam.put("dateOption", dateOption);
+		dbParam.put("search", search);
+		dbParam.put("class_state", class_state);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		String userid=(String)req.getSession().getAttribute("userid");
+		dbParam.put("userid",userid);
+		
+		int cntRecords = dao.selectcreClassAllCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVO> result = dao.selectcreClassList(dbParam);
+		
+		
+		if(startDate != null && endDate != null && result != null) {
+			
+			mav.addObject("method", "post");
+			mav.addObject("result",result);
+			mav.addObject("nowPage", nowPage);
+			mav.addObject("cntData", result.size());
+			mav.addObject("lastPage", lastPage);
+			
+			mav.addObject("startDate", startDate);
+			mav.addObject("endDate", endDate);
+			mav.addObject("category", category);
+			mav.addObject("class_state", class_state);
+			mav.addObject("dateOption", dateOption);
+			mav.addObject("search", search);
+			
+			System.out.println("startDate>>>>>"+startDate);
+			System.out.println("endDate>>>>>"+endDate);
+			System.out.println("category>>>>>"+category);
+			System.out.println("class_state>>>>>"+class_state);
+			System.out.println("dateOption>>>>>"+dateOption);
+			System.out.println("search>>>>>"+search);
+	
+			try {
+				//resp.getWriter().write("{\"result\":\"success\"}");
+				mav.setViewName("creator/creatorMyClass");
+				System.out.println("ajax success start");
+				return mav;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ajax failed.");
+			try{
+				resp.getWriter().write("{\"result\":\"fail\"}");
+			} catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+
+		return null;
+	}
+	@RequestMapping("/creatorMyClass")
+	public ModelAndView creatorMyClass(@RequestParam(value="now", required=false) String now,
+			HttpServletRequest req) {
+		int nowPage = 1;
+		if(now != null && now.length() > 0){
+			nowPage = Integer.parseInt(now);
+		}
+		int startNum = 10 * (nowPage - 1) + 1;
+		int endNum = 10 * nowPage;
+		
+		ModelAndView mav =new ModelAndView();
+		
+		SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+		String todate =  yyyymmdd.format(new Date());
+		String startDate = todate.substring(0, 8) + "01";
+		String endDate = todate;
+		
+		Map<String, String> dbParam = new HashMap<String, String>();
+		dbParam.put("startDate", startDate);
+		dbParam.put("endDate", endDate);
+		dbParam.put("dateOption", null);
+		dbParam.put("category", null);
+		dbParam.put("search", null);
+		dbParam.put("class_state", null);
+		dbParam.put("startNum", startNum+"");
+		dbParam.put("endNum", endNum+"");
+		
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);		
+				
+		String userid=(String)req.getSession().getAttribute("userid");
+		dbParam.put("userid",userid);
+		
+		int cntRecords = dao.selectcreClassAllCount(dbParam);
+		
+		int lastPage = 1;
+		if(cntRecords % 10 == 0) {
+			lastPage = cntRecords / 10;
+		} else {
+			lastPage = cntRecords / 10 + 1;
+		}
+		;
+		List<ClassVO> result = dao.selectcreClassList(dbParam);
+
+		mav.addObject("method", "get");
+		mav.addObject("result",result);
+		mav.addObject("cntData", result.size());
+		mav.addObject("lastPage", lastPage);
+		mav.addObject("nowPage", nowPage);
+		
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("dateOption",null);
+		mav.addObject("category",null);
+		mav.addObject("search",null);
+		mav.addObject("class_state",null);
+
+
+
+//		mav.addObject("data", result);
+		mav.setViewName("creator/creatorMyClass");
+	
+		return mav;
 	}
 	@RequestMapping ("/creatorMyClassWrite")
-	public String creatorMyClassWrite() {
-		return "creator/creatorMyClassWrite";
+	public ModelAndView creatorMyClassWrite() {
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);
+		int cur=dao.selectClassSeqCurrval();
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("YYYYMMdd");
+		String dateStr=sdf.format(date);
+		String code="c"+dateStr+cur;
+		System.out.println("code===>"+code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("code",code);
+		mav.setViewName("creator/creatorMyClassWrite");
+		return mav;
 	}
 	@RequestMapping("/creatorClassQuestion")
 	public String creatorClassQuestion() {
@@ -712,10 +892,66 @@ public class CreatorController {
 		return mav;
 	}
 	@RequestMapping(value="/creatorEditOk",method=RequestMethod.POST)
-	public ModelAndView creatorEditOk(HttpSession ses,AllVO vo) {
+	public ModelAndView creatorEditOk(HttpSession ses, AllVO vo, MultipartHttpServletRequest mhsr, Object imgFile) {
+		
 		String userid = (String)ses.getAttribute("userid");
-
+		
+		String path=ses.getServletContext().getRealPath("/upload/creatorImg");
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
+		
+		MultipartFile image = mhsr.getFile("imgFile");
+		if(!image.equals(null) && image != null) {
+			boolean isc = image.isEmpty();
+
+			if(!isc){
+//				원래 img_event 삭제.
+				String imageName=vo.getPicture();
+				System.out.println(imageName);
+				
+				if(imageName != null && imageName.length() > 0) {
+					File file=new File(path, imageName);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+				
+//				그리고 새로운 event_img upload.
+				
+//				OutputStream ops = null;
+				String filePath = null;
+				
+				String fName=image.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					vo.setPicture(newFile.getName());
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						image.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						vo.setPicture(newFile.getName());
+						
+						filePath="/gachi/upload/creatorImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}//isc
+		}//null
 		
 		int result = dao.UpdateCreatorlist(vo);	
 		int result1 = dao.UpdateCreatorlist1(vo);
@@ -726,6 +962,35 @@ public class CreatorController {
 		mav.setViewName("creator/creatorEditOk");
 		
 	return mav;
+	}
+	
+	/* 크리에이터 picture 삭제 */
+	@RequestMapping(value="/creatorPictureDelete", method=RequestMethod.GET)
+	public ModelAndView creatorPictureDelete (HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String path=ses.getServletContext().getRealPath("/upload/creatorImg");
+		
+		String userid = (String) ses.getAttribute("userid");
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		AllVO vo = dao.selectCreator(userid);	
+		
+		String picture = vo.getPicture();
+		System.out.println("picture:" + picture);
+		
+		if(picture != null && picture.length() > 0) {
+			File file=new File(path, picture);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		
+		int result = dao.updateCreatorPictureNone(userid);
+		System.out.println("result:" + result);
+		
+		mav.addObject(vo);
+		mav.setViewName("redirect:creatorEdit");
+		return mav;
 	}
 	
 	/* 회원탈퇴 */
@@ -1135,6 +1400,63 @@ public class CreatorController {
 	public String creatorVideoWrite() {
 		return "creator/creatorVideoWrite";
 	}
+	@RequestMapping(value="/creatorVideoWriteOk",method = RequestMethod.POST)
+	public ModelAndView creatorVideoWriteOk(ClassVideoVO vo) {
+		ClassDaoImp dao =sqlSession.getMapper(ClassDaoImp.class);
+		int[] unitArray=vo.getUnitArray();
+		int[] sectionIndex=vo.getSectionIndex();
+		String[] enrollDate=vo.getEnrollDate();
+		String[] unitContent=vo.getUnitContent();
+		String[] videoName=vo.getVideoName();
+		String[] videoFileName=vo.getVideoFileName();
+		double[] videoLength=vo.getVideoLength();
+		List<String> sectionCode=new ArrayList<String>();
+		List<ClassVideoVO> list=new ArrayList<ClassVideoVO>();
+		
+		ClassvideoSort cvs=new ClassvideoSort();
+		ModelAndView mav=new ModelAndView();
+		
+		
+		for(int i=0;i<unitContent.length;i++){
+			String section_code=dao.selectSectionCode(unitContent[i]);
+			sectionCode.add(section_code);
+		}
+		
+			for (int i = 0; i < unitArray.length; i++) {
+				ClassVideoVO vo1=new ClassVideoVO();
+				vo1.setCode(vo.getCode());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+				String dateStr = null;
+				try {
+					Date date = sdf.parse(enrollDate[i]);
+					dateStr = sdf.format(date);
+				} catch (java.text.ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				vo1.setVideo_code("v"+dateStr);
+				vo1.setSection_code(sectionCode.get(i));
+				vo1.setVideo_name(videoName[i]);
+				vo1.setVideo_length(videoLength[i]);
+				vo1.setSection_index(sectionIndex[i]);
+				vo1.setVideo_filename(videoFileName[i]);
+				list.add(vo1);
+			}
+			Collections.sort(list,cvs);
+			for (int i = 0; i < list.size(); i++) {
+				ClassVideoVO vo3=list.get(i);
+				int result=dao.videoInsert(vo3);
+				if(result<=0) {
+					break;
+				}
+			}
+			
+			dao.classStateUpdate(vo.getCode());
+			
+			mav.setViewName("redirect:creatorVideo");
+			return mav;
+	}
+	
 	
 	@RequestMapping("/creatorVideoView")
 	public ModelAndView creatorVideoView(HttpServletRequest req) {
@@ -1197,5 +1519,150 @@ public class CreatorController {
 		map.put("category",category);
 		List<ClassVO> list=dao.getcreClassList(map);
 		return list;
+	}
+		@RequestMapping(value="/creImgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+		@ResponseBody
+		public String creImgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+				@RequestParam("code") String code) {
+			ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+			MultipartFile file=mhsr.getFile("file");
+			String path=session.getServletContext().getRealPath("/upload/classImg");
+			boolean isc=file.isEmpty();
+			String filePath=null;
+			if(!isc){
+				String fName=file.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,code+"_"+fName);
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						file.transferTo(newFile);
+						filePath="/gachi/upload/classImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}
+			return filePath;
+		}
+	
+	@RequestMapping(value = "/creatorMyClassWriteOk",method = RequestMethod.POST)
+	public ModelAndView creatorMyClassWriteOk(ClassVO vo,HttpSession session,
+			MultipartHttpServletRequest mhsr) {
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		ModelAndView mav=new ModelAndView();
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);
+		String[] codes=vo.getCodes();
+		
+		dao.classCodeInsert(vo.getCode());
+		String[] imgNames=vo.getImgNames();
+		String fullName="";
+		if(imgNames!=null) {
+			for (int i = 0; i < imgNames.length; i++) {
+				fullName+=imgNames[i]+",";
+			}
+			vo.setClass_img2(fullName);
+		}
+		System.out.println("fullName==>"+fullName);
+		String userid=(String)session.getAttribute("userid");
+		vo.setUserid(userid);
+		MultipartFile mainImg=mhsr.getFile("mainImg");
+		if(!mainImg.isEmpty()){
+			String filename=mainImg.getOriginalFilename();
+			if(filename!=null&&!filename.equals("")) {
+				String oriFileName=filename.substring(0,filename.lastIndexOf("."));
+				String oriExt=filename.substring(filename.lastIndexOf("."));
+				File newFile=new File(path,codes[0]+"_"+filename);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=codes[0]+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							filename=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					mainImg.transferTo(newFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				vo.setClass_img(newFile.getName());
+			}//if
+		}
+		
+		int[] unitArray=vo.getUnitArray();
+		String[] unitContent=vo.getUnitContent();	
+		for (int i = 0; i < unitContent.length; i++) {
+			ClassVO vo2=new ClassVO();
+			int seq=dao.selectSectionSeq();
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("YYYYMMdd");
+			String dateStr=sdf.format(date);
+			String sectionCode="sc"+dateStr+seq;
+			vo2.setCode(codes[0]);
+			vo2.setSection_code(sectionCode);
+			vo2.setUnit(unitArray[i]);
+			vo2.setUnit_content(unitContent[i]);
+			int result1=dao.sectionInsert(vo2);
+			if(result1<=0){
+				mav.setViewName("creator/creatorResult");
+			}else {
+				mav.setViewName("redirect:creatorMyClass");
+			}
+		}
+		int result2=dao.creClassInsert(vo);
+		if(result2<=0) {
+			mav.setViewName("creator/creatorResult");
+		}else {
+			dao.selectClassNextSeq();
+			mav.setViewName("redirect:creatorMyClass");
+		}
+		return mav;
+}
+	@RequestMapping(value="creImageDelete",method = RequestMethod.GET)
+	@ResponseBody
+	public void creImageDelete(HttpServletRequest req,HttpSession session) {
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String imageName=req.getParameter("imageName");
+		System.out.println("imageName=>"+imageName);
+		File file=new File(path,imageName);
+		if(file.exists()) {
+			file.delete();
+		}
+	} 
+	@RequestMapping("/creatorMyClassView")
+	public ModelAndView creatorMyClassView(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		List<String> list=new ArrayList<String>();
+		if(vo.getClass_img2()!=null) {
+			StringTokenizer st=new StringTokenizer(vo.getClass_img2(),",");
+			
+			while(st.hasMoreTokens()) {
+				list.add(st.nextToken());
+			}
+			vo.setImgList(list);
+		}
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("list",list);
+		mav.addObject("sectionList",sectionList);
+		mav.setViewName("creator/creatorMyClassView");
+		return mav;
 	}
 }

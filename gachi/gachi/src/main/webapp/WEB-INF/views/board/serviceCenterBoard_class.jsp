@@ -1,116 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<style>
-
-#CserviceSearchDiv {
-	float: right;
-	margin:50px 0 10px;
-}
-
-#CserviceSearchTxt {
-	border: 0;
-	border-bottom: 1px solid black;
-	outline: none;
-}
-
-#CserviceSearchDiv button {
-	background-color: white;
-	color: black;
-	border: 0;
-}
-
-#CserviceSearchDiv button:focus {
-	outline: none;
-	color: #888;
-}
-
-/* ============== 내용 표시 ============== */
-#CserviceContentDiv{
-}
-#CserviceContentDiv ul li{ /* 글자 속성 */
-	line-height: 40px;
-}
-#CserviceContentDiv ul li:nth-child(4n+1){	/* 카테고리 */
-	width:15%;
-	height: 40px;
-	background-color: #F1F7FA;
-	margin-right: 5%;
-	text-align: center;
-	float: left;
-}
-
-#CserviceContentDiv ul li:nth-child(4n+2){	/* 제목 */
-	width:100%;
-	height: 40px;
-}
-
-#CserviceContentDiv ul li:nth-child(4n+3){	/* A */
-	width:20%;
-	min-height:150px;
-	color:#FB5000;
-	font-size:100px;
-	line-height:150px;
-	text-align:center;
-	background-color: #eee;
-	paddin:0px;
-	margin: 20px 0;
-	float: left;
-}
-#CserviceContentDiv ul li:nth-child(4n+4){	/* 답변 */
-	width:100%;
-	min-height:150px;
-	background-color: #eee;
-	margin: 20px 0;
-}
-/* ============== 내용 표시 끝 ============== */
-#CservicePaging{
-	margin: 40px 0;
-}
-</style>
 
 <div class="container">
-	<div id="CserviceSearchDiv">
-		<select name="CserviceSelect">
-			<option value="CSall">전체</option>
-			<option value="CSSubject">질문</option>
-			<option value="CSContent">답변</option>			
-		</select>
-		<input type="text" name="CserviceSearchTxt" id="CserviceSearchTxt" />
-			<button name="CserviceSearchBtn">검색하기</button>
-	</div>	
 	<!-- 자주묻는 질문, 배송정책 메뉴 -->
 	<%@ include file="../inc/serviceboardMenu.jspf" %>
 	<!-- 내용표시 -->
 	<div id ="CserviceContentDiv">
 		<ul>
 			<li>클래스/스토어</li>
-			<li>지금 주문하면 언제 배송오나요?</li>
+			<li>DIY 스토어에서 산 상품은 영상이 있나요?</li>
 			<li>A</li>
-			<li>오후 2시 이전 주문 시에는 영업일 기준 당일출고, 2시 이후 주문 시에는 영업일 기준 익일에 출고됩니다.
-			공휴일과 주말인 경우 다음 영업일에 배송 출발하며, 상품 수령까지는 영업일 기준 1-3일정도 소요됩니다.
+			<li>입점된 업체마다 상이하여 해당 상품 상세페이지 내용 확인 부탁드립니다.
 			</li>
 			
 			<li>클래스/스토어</li>
-			<li>질문</li>
+			<li>클래스 내용 중 모르는게 생겼어요.</li>
 			<li>A</li>
-			<li>내용</li>
+			<li>클래스 내용 중 궁금한 사항이 생기시면 사이트 내 1:1문의 또는 채팅상담으로 남겨주세요.
+				하비풀에서 작가님 확인 후 고객님께 답변드립니다.</li>
 			<li>클래스/스토어</li>
-			<li>질문</li>
+			<li>스타터키트가 무엇인가요?</li>
 			<li>A</li>
-			<li>내용</li>
+			<li>스타터키트는 취미를 즐기기 위해 꼭 필요하면서 반복적으로 사용되는 기초 도구 키트입니다.
+				프랑스자수라면 수틀, 수채화라면 물감 등이 계속해서 사용하는 도구이겠죠?
+				모든 취미에 스타터키트가 필요한 것은 아니라서, 
+				취미 클래스를 신청하실 때, 스타터키트 구매 유무를 선택하실 수 있습니다.
+				스타터키트 구성품을 확인하시고, 필요하다면 취미 클래스와 함께 꼭 구매해주세요!</li>
 		</ul>
 	</div>
-	<!-- paging -->
-	<div id="CservicePaging">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul>
-	</div>
+	
 
 </div>

@@ -62,9 +62,9 @@
 		insert into event_reply values(${event_num}, a_sq.nextval, '${userid}', '${content}', sysdate, '${ip}')
 	</insert>
 	<select id="replyAllRecord" resultType="com.bitcamp.gachi.board.EventBoardVO">
-		select e.userid userid, reply_num, nickname, content, to_char(sysdate, 'YYYY-MM-DD') writedate, ip 
+		select e.userid userid, reply_num, nickname, content, to_char(writedate, 'YYYY-MM-DD') writedate, ip 
 		from event_reply e join member m on e.userid = m.userid 
-		where event_num=${param1} order by writedate desc
+		where event_num=${param1} order by reply_num desc
 	</select>
 	<delete id="replyDel" parameterType="com.bitcamp.gachi.board.EventBoardVO">
 		delete from event_reply where reply_num=${reply_num} and userid='${userid}'

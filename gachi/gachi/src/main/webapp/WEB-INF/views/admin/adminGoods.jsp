@@ -114,8 +114,8 @@ $(function(){
 		<li>${list.code }</li>
 		<li>${list.category }</li>
 		<li class="wordCut"><a href="/gachi/adminGoodsEdit?code=${list.code}">${list.goods_name }</a></li>
-		<li>${list.prime_cost }</li>
-		<li>${list.real_price } </li>
+		<li><fmt:formatNumber value="${list.prime_cost }" pattern="#,###"/>원</li>
+		<li><fmt:formatNumber value="${list.real_price }" pattern="#,###"/>원</li>
 		<li>${list.stock }</li>
 		<li>${list.writedate }</li>
 		<li><c:if test="${list.sale_state eq '판매대기'}">판매대기</c:if><c:if test="${list.sale_state eq '판매중'}">판매중</c:if>

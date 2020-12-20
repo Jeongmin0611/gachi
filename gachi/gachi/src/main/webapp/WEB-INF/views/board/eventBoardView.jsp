@@ -4,7 +4,6 @@
 #eventTitle{
 	margin-top:50px;
 }
-
 /* 이벤트 상단 제목, 날짜 */
 #eventDetailDiv{
 	border-top:2px solid black;
@@ -17,7 +16,6 @@
 	margin: 10px 0;
 }
 /* 이벤트 상단 제목, 날짜 끝*/
-
 /* 이벤트 상세 내용*/
 #eventDetailContent{
 	min-height: 500px;
@@ -28,7 +26,6 @@
 }
 #eventDetailContent img{
 	width: 100%;
-
 }
 /* 이벤트 상세 내용 끝*/
 /* 댓글 입력 폼*/
@@ -38,7 +35,7 @@
 	float: left;
 }
 #eventReplyForm>textarea{
-	width:100%;
+	width:90%;
 	resize:none;
 }
 #eventReplyForm>div{
@@ -77,7 +74,6 @@
 #eventDetailReplyDiv li:nth-child(4n+4){
 	width: 5%;
 }
-
 </style>
 <script>
 	function delCheck(no){
@@ -86,7 +82,39 @@
 			location.href="/gachi/eventReplyDel?no=${vo.event_num}&reply_num="+a;
 		}
 	}
-
+	$(function(){
+		var id = '<%=(String) session.getAttribute("userid")%>';
+		$('#replyFromOk').click(function(){
+			if (id == null || id == 'null') {
+				swal({
+					title:'로그인 후 이용가능한 기능입니다.',
+					icon:"warning"});
+				return false;
+			}else{
+			$.ajax({
+	  			type:"POST",
+	  			url:"/gachi/eventReplyFormOk",
+	  			data:{
+	  				event_num:${vo.event_num },
+	  				event_category : '${vo.event_category }',
+	  				nowPage: ${pvo.nowPage },
+	  				content:$('textarea[name=content]').val()
+	  			},
+	  			success:function(){
+	  				swal({
+	  				  title: "댓글이 등록 되었습니다.",
+	  				  icon: "success"
+  					}).then((result)=>{
+						location.reload();
+	  				});
+	  			},error:function(){
+	  				swal('댓글 등록이 실패하였습니다. ');
+	  			}
+	  			
+	  		});
+			}
+		});
+	});
 </script>
 <div class="container cfont">
 	<div >
@@ -99,7 +127,7 @@
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				<img src="/gachi/img/board/${vo.content }"/>
+				<img src="<%=request.getContextPath()%>/upload/eventImg/${vo.content }"/>
 			</div>
 		</div>
 		
@@ -109,11 +137,15 @@
 		<a href="/gachi/eventBoard?nowPage=${pvo.nowPage }"><button type="button" class="btn btn-light">목록</button></a>
 	</div>
 	<!-- 댓글 -->
-	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk?event_num=${vo.event_num }">
+	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk?event_num=${vo.event_num }&event_category=${vo.event_category }">
 		<input type="hidden" value="${vo.event_num }" name="event_num"/>
 		<input type="hidden" value="${pvo.nowPage }" name="nowPage"/>
-		댓글<br/> <textarea rows="3" cols="90%" name="content"></textarea>
-		<div><input type="submit" class="btn btn-outline-primary" value="등록"></div>
+		<input type="hidden" value="${vo.event_category }" name="event_category"/>
+		
+		댓글<br/> 
+		
+		<textarea rows="3" cols="80%" name="content"></textarea>
+		<button type="button" class="btn btn-primary" id="replyFromOk" style="margin-bottom: 22px">등록</button>
 	</form>
 	<!-- 댓글 리스트 -->
 	<div>

@@ -88,6 +88,66 @@ public class ClassPageController {
 		mav.setViewName("classPage/classList");
 		return mav;
 	}
+	
+
+	@RequestMapping("/classPage")
+	public ModelAndView classPage(HttpServletRequest req, HttpSession ses,ClassPageVO vo) throws Exception{
+		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
+		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		//아이디
+		String userid=(String)ses.getAttribute("userid");
+		
+		//관심사 찾기
+		String interest = dao.homeClassInterestFind(userid);
+		System.out.println("interest = "+interest);
+		
+		//관심사, 구분
+		String[] interestArr = interest.replace(" ", "").split(",");
+		
+		String interest1="";
+		String interest2="";
+		String interest3="";
+		
+		switch(interestArr.length) {
+		case 1:
+			interest1 = interestArr[0];
+			break;
+		case 2:
+			interest1 = interestArr[0];
+			interest2 = interestArr[1];
+			break;
+		case 3:
+			interest1 = interestArr[0];
+			interest2 = interestArr[1];
+			interest3 = interestArr[2];
+			break;
+		}
+		System.out.println("1,2,3 = "+interest1+ interest2+interest3);
+		List<AllVO> list = dao.classRecommandUser(interest1, interest2, interest3);			
+		
+		String msg="";//좋아요 업데이트시 취소, 선택 알게 해주는 문자
+
+			if(req.getParameter("good_add")!=null) {//좋아요 추가
+				msg="add";
+				String goodCode = req.getParameter("good_add");
+				uDao.wishListAdd(userid, goodCode);
+				uDao.goodClassUpdate(goodCode, msg);			
+			}
+			if(req.getParameter("good_del")!=null) {//좋아요 삭제
+				msg="del";
+				String goodCode = req.getParameter("good_del");
+				uDao.wishListDel(userid, goodCode);	
+				uDao.goodClassUpdate(goodCode, msg);			
+			}
+			//좋아요 클래스
+			List<OrderListVO> cgoodList = uDao.classWishList(userid);
+			mav.addObject("cgoodList", cgoodList);	
+		mav.addObject("list", list);
+		mav.setViewName("classPage/classPage");
+		return mav;
+	}
+	
 	@RequestMapping("/classView")
 	public ModelAndView classMain(HttpServletRequest req, HttpSession ses) {
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
@@ -225,7 +285,8 @@ public class ClassPageController {
 	
 	//클래스 View에서 검색
 	@RequestMapping("/qnaSearch")
-	public void qnaSearch(AllVO vo, HttpServletRequest req) {
+	@ResponseBody
+	public List<QnaVO> qnaSearch(AllVO vo, HttpServletRequest req) {
 		vo.setCode(req.getParameter("code"));
 		vo.setSearchKey(req.getParameter("searchKey"));
 		vo.setSearchWord(req.getParameter("searchWord"));
@@ -234,8 +295,8 @@ public class ClassPageController {
 		System.out.println("Word= "+req.getParameter("searchWord"));
 		
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		dao.qnaListSearch(vo);
-		
+		List<QnaVO> list = dao.qnaListSearch(vo);
+		return list;
 	}
 	
 	@RequestMapping(value="/clientImgUpload",method=RequestMethod.POST)
@@ -264,6 +325,4 @@ public class ClassPageController {
 		return json;
 	}
 	
-	
-
 }

@@ -104,7 +104,7 @@ $(function(){
 	</div>
 </form>
 </div>
-<ul id="ad_order_lst" class="text-center">
+<ul id="ad_order_lst" class="text-center" style="margin-top:20px;">
 	<li>주문번호</li>
 	<li>회원아이디</li>
 	<li>구매자</li>
@@ -119,7 +119,7 @@ $(function(){
 	<li>${result.order_code }</li>
 	<li>${result.userid }</li>
 	<li>${result.username }</li>
-	<li>${result.price }</li>
+	<li><fmt:formatNumber value="${result.price }" pattern="#,###"/>원</li>
 	<li>${result.payment_type }</li>
 	<li>${result.card_type }</li>
 	<li>${result.orderdate }</li>
