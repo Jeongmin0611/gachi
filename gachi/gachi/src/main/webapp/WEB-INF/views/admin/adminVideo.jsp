@@ -59,7 +59,6 @@ $(function(){
 
 <div class="container ad_font">
 	<h1>동영상 관리</h1>
-	<div>총 레코드 수 :${pvo.totalRecord}</div>
 	<div id="ad_video_searchArea">
 		<form method="post" action="adminVideo">
 		<ul id="ad_video_searchList">
@@ -168,7 +167,6 @@ $(function(){
 					</li>
 				</c:if>
 			</c:if>
-			
 	</ul>
 </div>
 </div>

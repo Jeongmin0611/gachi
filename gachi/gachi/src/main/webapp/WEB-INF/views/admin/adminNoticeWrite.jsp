@@ -37,9 +37,6 @@ $(function(){
 		<li>
 			<textarea name="content" id="content" style="width:70%; height:300px"></textarea> 
 		</li>
-		<li>
-			첨부파일 <input type="file" name="input_file"/> 
-		</li>
 	</ul>
 	<div class="content_center">
 		<input type="submit" class="btn" value="등록">

@@ -109,6 +109,6 @@
 		</c:if>
 		<button class="btn" onclick="location.href='/gachi/adminClassEdit?code=${vo.code}'">수정</button>
 		<button class="btn" id="del_btn">삭제</button>	
-		<button class="btn" onclick="history.back()">뒤로가기</button>
+		<button class="btn" onclick="location.href='/gachi/adminClass'">전체목록</button>
 </div>
 </div>

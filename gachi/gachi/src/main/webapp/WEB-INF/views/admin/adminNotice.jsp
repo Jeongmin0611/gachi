@@ -45,9 +45,6 @@ select {
 
 <!-- 검색영역 -->
 <div id="search_area">
-<div>
-	총 레코드 수:${npvo.totalRecord}
-</div>
 <form method="post" id="adminNotice" action="/gachi/adminNotice">
 <div>
 	등록일 <input type="date" id="date1" name="date1"/>&nbsp;~
@@ -55,7 +52,7 @@ select {
 </div>
 	<div style="margin-top:10px;">
 		<select id="option" name="option">
-				<option value="전체">전체</option>
+				<option value="">전체</option>
 				<option value="subject">제목</option>
 				<option value="content">내용</option>
 				<option value="writer">작성자닉네임</option>
@@ -66,7 +63,6 @@ select {
 </form>
 </div>
 <ul id="ad_notice_lst">
-	<li>선택</li>
 	<li>번호</li>
 	<li>제목</li>
 	<li>작성자</li>
@@ -74,7 +70,6 @@ select {
 	<li>조회수</li>
 
 	<c:forEach var="vo" items="${list}">
-		<li><input type="checkbox" id="" name=""/></li>
 		<li>${vo.notice_num}</li>
 		<li><a href="/gachi/adminNoticeView?notice_num=${vo.notice_num}&nowPage=${npvo.nowPage}">${vo.subject}</a></li>
 		<li>${vo.writer}</li>
@@ -85,7 +80,6 @@ select {
 </ul>
 <div class="ad_list_menu">
 	<button class="btn" onclick="location.href='/gachi/adminNoticeWrite'">글쓰기</button>
-	<button class="btn">삭제</button> 
 </div>
 	<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">

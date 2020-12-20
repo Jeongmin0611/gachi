@@ -22,6 +22,16 @@
 			extraPlugins:'uploadimage'
 		});
 		CKEDITOR.config.height=800;
+		editor.on('fileUploadRequest', function( evt ) {
+		    var fileLoader = evt.data.fileLoader,
+		        formData = new FormData(),
+		        xhr = fileLoader.xhr;
+		    xhr.open( 'POST', fileLoader.uploadUrl, true );
+		    formData.append( 'upload', fileLoader.file, fileLoader.fileName );
+		    formData.append('type','notice');
+		    fileLoader.xhr.send( formData );
+		    evt.stop();
+		}, null, null, 4 ); 
 	});
 </script>
 <div class="container">

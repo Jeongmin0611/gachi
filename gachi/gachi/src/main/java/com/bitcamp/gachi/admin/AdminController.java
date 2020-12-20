@@ -946,7 +946,7 @@ public class AdminController {
 		}else if(type.equals("eventWrite")){
 			path=session.getServletContext().getRealPath("/upload/event_img");
 		}else if(type.equals("notice")){
-			path=session.getServletContext().getRealPath("/upload/notice");
+			path=session.getServletContext().getRealPath("/upload/notice_img");
 		}
 		JsonObject json=new JsonObject();
 		OutputStream ops=null;
@@ -1160,6 +1160,11 @@ public class AdminController {
 		
 		System.out.println("option==>"+npvo.getOption());
 		System.out.println("searchWord==>"+npvo.getSearchWord());
+		if(npvo.getSearchWord()==null||npvo.getSearchWord().length() <= 0) npvo.setSearchWord(null);
+		if(npvo.getOption()==null||npvo.getOption().length() <= 0) npvo.setOption(null);
+		if(npvo.getDate1()==null||npvo.getDate1().length() <= 0) npvo.setDate1(null);
+		if(npvo.getDate2()==null||npvo.getDate2().length() <= 0) npvo.setDate2(null);
+		
 		int totalRecord=dao.getAllRecord(npvo);
 		npvo.setTotalRecord(totalRecord);
 		
@@ -1234,7 +1239,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/adminNoticeWriteOk",method = RequestMethod.POST)
 	public ModelAndView adminNoticeWriteOk(NoticeVO vo,MultipartFile file) {
-		vo.setFilename(vo.getInput_file().getOriginalFilename());
 		NoticeDaoImp dao=sqlSession.getMapper(NoticeDaoImp.class);
 		int result=dao.insertNotice(vo);
 		ModelAndView mav=new ModelAndView();
@@ -5579,7 +5583,7 @@ public class AdminController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("code",vo.getCode());
 		mav.addObject("video_filename", list.get(0).getVideo_filename());
-		mav.setViewName("admin/adminVideoView");
+		mav.setViewName("redirect:adminVideoView");
 		return mav;
 	}
 	
