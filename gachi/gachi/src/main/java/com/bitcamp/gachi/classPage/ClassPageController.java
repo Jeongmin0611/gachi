@@ -284,7 +284,8 @@ public class ClassPageController {
 	
 	//클래스 View에서 검색
 	@RequestMapping("/qnaSearch")
-	public void qnaSearch(AllVO vo, HttpServletRequest req) {
+	@ResponseBody
+	public List<QnaVO> qnaSearch(AllVO vo, HttpServletRequest req) {
 		vo.setCode(req.getParameter("code"));
 		vo.setSearchKey(req.getParameter("searchKey"));
 		vo.setSearchWord(req.getParameter("searchWord"));
@@ -293,8 +294,8 @@ public class ClassPageController {
 		System.out.println("Word= "+req.getParameter("searchWord"));
 		
 		ClassPageDaoImp dao = sqlSession.getMapper(ClassPageDaoImp.class);
-		dao.qnaListSearch(vo);
-		
+		List<QnaVO> list = dao.qnaListSearch(vo);
+		return list;
 	}
 	
 	@RequestMapping(value="/clientImgUpload",method=RequestMethod.POST)

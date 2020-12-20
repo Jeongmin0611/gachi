@@ -358,7 +358,7 @@ a:link, a:visited{
 	  		});
 	  		}
 	  	});
-	  	//수강평 버튼 클릭시 로그인 확인, 구매여부 확인
+	  	//===================================================== 수강평 버튼 클릭시 로그인 확인, 구매여부 확인
 	  	$('#myclassReviewFrm').on('click',function(){
 	  		if(id == 'null'){
 	  			swal({
@@ -522,6 +522,7 @@ a:link, a:visited{
 	  				searchWord:$('#qnaSearchWord').val()
 	  			},
 	  			success:function(result){
+	  				$('.qnaMoreContent').
 	  				console.log("성공= "+result);
 	  			},error:function(error){
 	  				console.log("에러"+error);
