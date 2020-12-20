@@ -2308,8 +2308,13 @@ public class AdminController {
 		System.out.println("detail3:"+detail3);
 		GoodsDaoImp dao=sqlSession.getMapper(GoodsDaoImp.class);
 		String path=session.getServletContext().getRealPath("/upload/storeImg");
+		
 		// 마일리지 = 판매금액 * 0.1
+	
+		System.out.println("real_price:" + vo.getReal_price());
 		vo.setStack((int)(vo.getReal_price()*0.1));
+		System.out.println(vo.getStack());
+
 		
 		
 		// goods_img2
@@ -2614,7 +2619,9 @@ public class AdminController {
 		String path=session.getServletContext().getRealPath("/upload/storeImg");
 		
 		// 마일리지 = 판매금액 * 0.1
+		System.out.println("real_price:" + vo.getReal_price());
 		vo.setStack((int)(vo.getReal_price()*0.1));
+		System.out.println(vo.getReal_price()*0.1);
 
 		MultipartFile goodsInfo = mhsr.getFile("img_goodsInfo");
 		MultipartFile main = mhsr.getFile("img_main");
