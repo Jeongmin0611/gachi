@@ -543,6 +543,7 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -597,6 +598,8 @@ public class AdminController {
 			mav.addObject("nowPage", nowPage);
 			mav.addObject("cntData", result.size());
 			mav.addObject("lastPage", lastPage);
+			mav.addObject("startPageNum", startPageNum);
+			
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
@@ -638,6 +641,7 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -669,6 +673,7 @@ public class AdminController {
 		} else {
 			lastPage = cntRecords / 10 + 1;
 		}
+		System.out.println("lastPage====>"+lastPage);
 		List<ClassVO> result = dao.getClassRecord(dbParam);
 
 		mav.addObject("method", "get");
@@ -676,14 +681,15 @@ public class AdminController {
 		mav.addObject("cntData", result.size());
 		mav.addObject("lastPage", lastPage);
 		mav.addObject("nowPage", nowPage);
+		mav.addObject("startPageNum", startPageNum);
 		
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
 		mav.addObject("dateOption",null);
 		mav.addObject("category",null);
 		mav.addObject("search",null);
-		mav.addObject("class_state",null);
-
+		mav.addObject("startNum",startNum);
+		mav.addObject("endNum",endNum);
 
 
 //		mav.addObject("data", result);
@@ -4675,6 +4681,7 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -4715,6 +4722,11 @@ public class AdminController {
 		mav.addObject("vlist",vlist);
 		mav.addObject("cntData", vlist.size());
 		mav.addObject("lastPage", lastPage);
+		mav.addObject("startNum", startNum);
+		mav.addObject("startPageNum", startPageNum);
+		System.out.println("startNum----->"+startNum);
+		System.out.println("lastPage----->"+lastPage);
+		
 		mav.addObject("nowPage", nowPage);
 		
 		mav.addObject("startDate", startDate);
@@ -4740,6 +4752,7 @@ public class AdminController {
 		if(now != null && now.length() > 0){
 			nowPage = Integer.parseInt(now);
 		}
+		int startPageNum=((nowPage-1)/10*10)+1;
 		int startNum = 10 * (nowPage - 1) + 1;
 		int endNum = 10 * nowPage;
 		
@@ -4788,6 +4801,7 @@ public class AdminController {
 			mav.addObject("nowPage", nowPage);
 			mav.addObject("cntData", vlist.size());
 			mav.addObject("lastPage", lastPage);
+			mav.addObject("startPageNum", startPageNum);
 			
 			mav.addObject("startDate", startDate);
 			mav.addObject("endDate", endDate);
