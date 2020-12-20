@@ -3,6 +3,9 @@
 <div class="container ad_font">
 <script type="text/javascript">
 $(function(){
+	
+	
+	
 	$("#adminGoodsEdit").submit(()=>{
 		if($("#goods_name").val()==null||$("#goods_name").val()==""){
 			alert("상품명을 입력하여 주세요.");
@@ -44,7 +47,7 @@ function goodsDel(){
 <div class="container">
 <h1>상품수정</h1>
 <form method="post" action="adminGoodsEditOk" id="adminGoodsEditOk" enctype="multipart/form-data">
-<ul id="ad_goods_writeForm">
+<ul id="ad_goods_writeForm" style="height: 500px;">
 	<li>
 		<ul>
 			<li class="content_center">상품코드</li>
@@ -87,10 +90,10 @@ function goodsDel(){
 						<c:if test="${vo.sale_state eq '판매종료'}"> selected</c:if>>판매종료</option>
 				</select>
 			</li>
-			<li class="content_center">상품 설명 이미지</li>
-			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">메인 이미지</li>
 			<li><input type="file" name="img_main" accept="image/*" id="goods_img1" /></li>
+			<li class="content_center">상품 설명 이미지</li>
+			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">슬라이드 이미지1</li>
 			<li><input type="file" name="img_detail1" accept="image/*" id="detailImg1" /></li>
 			<li class="content_center">슬라이드 이미지2</li>
@@ -101,32 +104,32 @@ function goodsDel(){
 	</li>
 	
 </ul>
-<h3>스토어 이미지 목록</h3>
-<div class="text_center ad_box">
+<h3 style="text-align:center;">스토어 이미지 목록</h3>
+<div class="text_center ad_box" style="margin :0 auto ; text-align:center; width : 850px;">
 	<div style="margin:0 15px; width:230px;height:100%;">
-		<div style="text-align:center;height:24px;">상품 설명 이미지	
-		</div>
-		<div style="text-align:center; width:200px; height: 200px;">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_info}" style="width:200px; height:200px;"/>
-		</div>
-		<div>
-			<input type="hidden" name="goods_info" value="${vo.goods_info }"/> 
-			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
-		</div>
 		<div style="text-align:center;height:24px;">메인 이미지	
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_img1}" style="width:200px; height:200px;"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_img1}" style="width:200px; height:200px; text-align:center;"/>
 		</div>
 		<div>
 			<input type="hidden" name="goods_img1" value="${vo.goods_img1 }"/> 
+			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
+		</div>
+		<div style="text-align:center;height:24px;">상품 설명 이미지	
+		</div>
+		<div style="text-align:center; width:200px; height: 200px;">
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${vo.goods_info}" style="width:200px; height:200px; text-align:center;"/>
+		</div>
+		<div>
+			<input type="hidden" name="goods_info" value="${vo.goods_info }"/> 
 			<%-- <span class="wordCut">${imgList}</span><b>  x  </b> --%>
 		</div>
 		<c:if test="${detail1 ne 'null' and detail1 ne null}">
 		<div style="text-align:center;height:24px;">슬라이드 이미지1	
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail1}" style="width:200px; height:200px;"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail1}" style="width:200px; height:200px; text-align:center;"/>
 		</div>
 		<div>
 			<input type="hidden" name="detail1" value="${detail1 }"/> 
@@ -137,7 +140,7 @@ function goodsDel(){
 		<div style="text-align:center;height:24px;">슬라이드 이미지2	
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail2}" style="width:200px; height:200px;"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail2}" style="width:200px; height:200px;text-align:center;"/>
 		</div>
 		<div>
 			<input type="hidden" name="detail2" value="${detail2 }"/> 
@@ -148,7 +151,7 @@ function goodsDel(){
 		<div style="text-align:center;height:24px;">슬라이드 이미지3	
 		</div>
 		<div style="text-align:center">
-			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail3}" style="width:200px; height:200px;"/>
+			<img src="<%=request.getContextPath()%>/upload/storeImg/${detail3}" style="width:200px; height:200px;text-align:center;"/>
 		</div>
 		<div>
 			<input type="hidden" name="detail3" value="${detail3 }"/> 

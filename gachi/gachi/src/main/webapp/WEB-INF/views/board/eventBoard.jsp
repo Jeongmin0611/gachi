@@ -127,7 +127,7 @@ button:focus, button:active{
 		<c:forEach var="vo" items="${list }">
 		<div class="col-sm-4">
 			<a href="/gachi/eventBoardView?event_num=${vo.event_num }&event_category=진행이벤트&nowPage=${pvo.nowPage}" id="eventThumbnail">
-			<img src="/gachi/img/board/${vo.event_img}"/></a><br/>
+			<img src="<%=request.getContextPath()%>/upload/eventImg/${vo.event_img}"/></a><br/>
 			<div class="homeClassListTxt">
 				<!-- <span class="badge " id="eventNew">new</span>&nbsp; -->
 				<p> <span id="eventdate">${vo.startdate }~${vo.enddate }</span></p>

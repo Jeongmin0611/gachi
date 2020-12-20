@@ -1647,7 +1647,7 @@ public class AdminController {
 		
 		ModelAndView mav = new ModelAndView();	
 		
-		mav.setViewName("admin/adminEvent");
+		mav.setViewName("redirect:adminEvent");
 		return mav;
 	}
 	

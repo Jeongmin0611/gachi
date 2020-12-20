@@ -110,7 +110,7 @@
 		<c:forEach var="vo" items="${list }">
 			<div class="col-sm-4">
 				<a href="/gachi/introCreatorView?userid=${vo.userid }" id="introCreatorThumbnail">
-				<img src="/gachi/img/creator/${vo.picture }"/></a><br/>
+				<img src="<%=request.getContextPath()%>/upload/creatorImg/${vo.picture }"/></a><br/>
 				<div class="homeClassListTxt">
 					<p><span>${vo.category }</span></p>
 					<a href="/gachi/introCreatorView?userid=${vo.userid }">${vo.nickname }</a>

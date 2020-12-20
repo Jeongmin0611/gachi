@@ -35,7 +35,7 @@ function EventDel(){
 <div class="container">
 <h1>이벤트 수정</h1>
 <form method="post" action="adminEventEditOk" id="adminEventEditOk" enctype="multipart/form-data">
-<ul id="ad_Event_writeForm">
+<ul id="ad_Event_viewForm">
 	<li>
 		<ul>
 			<li class="content_center">이벤트 번호</li>
@@ -52,14 +52,14 @@ function EventDel(){
 			<li><input type="file" name="img_content" accept="image/*" id="img_content" /></li>
 		</ul>
 	</li>
-	<li class="content_center">
+	<%-- <li class="content_center">
 		<div style="height:24px;margin:7px 0px;">
 			이벤트 대표 이미지
 		</div>
 		<div class="content-center add_img" style="width:80%; height:80%; margin:0 auto">
 			<img src="<%=request.getContextPath()%>/img/add.png" style="width:100px;height:100px;margin-top:70px;">
 		</div>
-	</li>
+	</li> --%>
 </ul>
 <!--  --><h3>이벤트 이미지 목록</h3>
 <div class="text_center ad_box">

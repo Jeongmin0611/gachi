@@ -118,7 +118,7 @@ var accountChk=RegExp(/^[0-9]+$/);
 			<ul id="cre_profile_imgArea" style="border:3px solid #437299;border-radius:10px;text-align:center;margin:10px 0px">
 				<li>프로필 사진</li>
 				<c:if test="${vo.picture eq null}"><li><img src="/gachi/img/147.jpg"></li></c:if>
-				<c:if test="${vo.picture ne null}"><li><img src="/gachi/upload/creatorImg/${vo.picture }" style="width:200px; height:200px;"></li>
+				<c:if test="${vo.picture ne null}"><li><img src="<%=request.getContextPath()%>/upload/creatorImg/${vo.picture }" style="width:200px; height:200px;"></li>
 				<button type="button" onclick="pictureDel();">삭제</button></c:if>
 				<li style="text-align:center;"><input type="file" accept="image/*" name="imgFile" id=imgFile value="" /></li>
 			</ul>

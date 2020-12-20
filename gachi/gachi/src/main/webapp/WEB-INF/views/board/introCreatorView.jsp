@@ -62,7 +62,7 @@
 <div class="container cfont" style="height: auto;">
 	<div id="createDetailDiv" class="row">
 		<ul id="createDetailSub1" class="col-sm-4">
-			<li><img src="/gachi/img/creator/${vo.picture }"/></li>
+			<li><img src="<%=request.getContextPath()%>/upload/creatorImg/${vo.picture }"/></li>
 			<li style="text-align: center; border-bottom: 1px solid #bbb; margin:2px 0;">${vo.nickname }</li>
 			<li style="word-wrap:break-word">
 				<a href="${vo.sns_addr }" target="_blank">
