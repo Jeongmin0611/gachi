@@ -152,7 +152,7 @@
 			</when>
 			<otherwise></otherwise>
 		</choose>
-		order BY enroll_date desc,section.unit_content desc,section.unit desc
+		order BY enroll_date desc,section.unit asc
 		) A
 		WHERE
 		ROWNUM &lt;=${endNum}

@@ -32,10 +32,30 @@
 		display: none;
 	}
 	h3{
-		margin:20px;
+		margin-top:20px;
 	}
 	#ad_goods_writeForm{
 		height:400px;
+	}
+	#ad_goods_writeForm{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:auto;
+	}
+	#ad_goods_writeForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	#ad_goods_writeForm>li{
+		height:300px;
+		width:50%;
+	}
+	#ad_goods_writeForm ul>li:nth-child(2n+1){
+		width:40%;
+	}
+	#ad_goods_writeForm ul>li:nth-child(2n){
+		width:60%;
 	}
 </style>
 <div class="container ad_font">
