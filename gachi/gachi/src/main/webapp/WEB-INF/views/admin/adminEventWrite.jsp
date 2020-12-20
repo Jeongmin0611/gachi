@@ -48,7 +48,7 @@ function onlyNumber(){
 
 </ul>
 
-		<ul id="ad_goods_write">
+		<ul id="ad_goods_write" style="margin-top: 50px;">
 			<!-- <li>상품설명</li>
 			<li><textarea name="content_textarea" id="content_textarea"></textarea></li>
 			<li>첨부파일 <input type="file" name="no"/> </li> -->
