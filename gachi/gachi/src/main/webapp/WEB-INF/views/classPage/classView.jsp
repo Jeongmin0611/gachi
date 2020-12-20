@@ -358,7 +358,7 @@ a:link, a:visited{
 	  		});
 	  		}
 	  	});
-	  	//수강평 버튼 클릭시 로그인 확인, 구매여부 확인
+	  	//===================================================== 수강평 버튼 클릭시 로그인 확인, 구매여부 확인
 	  	$('#myclassReviewFrm').on('click',function(){
 	  		if(id == 'null'){
 	  			swal({
@@ -522,6 +522,7 @@ a:link, a:visited{
 	  				searchWord:$('#qnaSearchWord').val()
 	  			},
 	  			success:function(result){
+	  				$('.qnaMoreContent').
 	  				console.log("성공= "+result);
 	  			},error:function(error){
 	  				console.log("에러"+error);
@@ -801,14 +802,6 @@ a:link, a:visited{
 		<div id="myclassQna">
 			<label>질문&amp;답변</label>
 			<div id="myclassQnaSearch">
-				<select name="searchKey" id="qnaSearchKey">
-					<option value="작성자">작성자</option>
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select> 
-				<input type="text" name="searchWord" id="qnaSearchWord" />
-				<button type="button" class="btn btn-outline-light btn-sm"
-					id="qnaSearchBtn">검색</button>
 				<button type="button" class="btn btn-outline-light"
 					data-toggle="modal" data-target="#exampleModal" id="myclassQnaFrm">질문작성</button>
 			</div>

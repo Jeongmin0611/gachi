@@ -3,13 +3,17 @@
 <style>
 #introCreateTopDiv{
 	margin-top:50px;
+	margin-bottom:30px;
 	height: 300px;
 	line-height:300px;
 	width:100%;
 	text-align:center;
-	background-color: #ABCEE3;
 	font-size: 100px;
 	color:white;
+}
+#introCreateTopDiv img{
+	width: 100%;
+	height: 300px;
 }
 
 /*======= 검색 ==========*/
@@ -84,7 +88,7 @@
 </script>
 <div class="container cfont">
 	<div id="introCreateTopDiv">
-		크리에이터 소개
+		<img src="/gachi/img/introCreatorLogo.png"/>
 	</div>
 	
 	<!-- 검색 -->
