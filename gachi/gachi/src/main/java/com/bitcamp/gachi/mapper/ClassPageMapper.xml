@@ -153,7 +153,7 @@
 	<select id="qnaList" resultType="com.bitcamp.gachi.admin.QnaVO">
 		select num, subject, content,
 		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname
-		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate
+		writer, answer, to_char(answer_writedate,'YY.MM.DD') answer_writedate, q.userid
 		from qna q, member a, member b
 		where q.userid=a.userid
 		and writer=b.userid(+)
@@ -207,6 +207,9 @@
 	<select id="creatorCheck" resultType="int">
 		select count(*) from creator c join class m on c.userid=m.userid where m.userid='${userid}' and code='${code}'
 	</select>
+	<update id="updateReview" parameterType="com.bitcamp.gachi.admin.AllVO">	
+		update class_review set subject='${subject}', content='${content}' where num=${num}
+	</update>
 	<update id="updateQna" parameterType="com.bitcamp.gachi.admin.AllVO">
 		update qna set subject='${subject}', content='${content}' where num=${num}
 	</update>
