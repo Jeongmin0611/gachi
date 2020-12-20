@@ -81,9 +81,8 @@
 			$("#file_info li:nth-child(2)").text(filename);
 			$("#file_info li:nth-child(4)").text(durationStr);
 			$('#ad_video_addList>ul:last-child>li:last>input:nth-of-type(1)').val(duration);
-			//$('#ad_video_addList>ul:last-child>li:eq(7)>input:hidden:first-child').trigger('change');
-			$("#ad_video_addList>ul:last-child>li:eq(4)").text(durationStr);
-				$("#file_info li:nth-child(6)").text($("#videoSrc").attr("type"));
+			$("#ad_video_addList>ul:last>li:eq(4)").text(durationStr);
+			$("#file_info li:nth-child(6)").text($("#videoSrc").attr("type"));
 			}); 
 		    $("#add_mov").on("dragenter dragover", function(event){
 		        event.preventDefault();
@@ -145,9 +144,14 @@
 				tagTxt+='<li></li>';
 				tagTxt+='<li><input type="hidden" name="enrollDate" value="'+year+'-'+month+'-'+day+'"/>';
 				tagTxt+=year+'-'+month+'-'+day+'</li>';
-				tagTxt+='<li><b class="video_del">x</b><input type="hidden" name="videoLength"/>';
+				tagTxt+='<li><b class="video_del" title="'+filename+'">x</b><input type="hidden" name="videoLength"/>';
 				tagTxt+='<input type="hidden" name="videoCode"/></li></ul>';
-				$("#ad_video_addList>li:last").after(tagTxt);
+				var ulCount=$("#ad_video_addList>ul").length;
+				if(ulCount<=0){
+					$("#ad_video_addList>li:last").after(tagTxt);
+				}else{
+					$("#ad_video_addList>ul:last").after(tagTxt);
+				}
 				$("#video_sample").attr("src","/gachi/upload/class_video/test2.mp4");
 				if(!video_sample.paused){
 					video_sample.pause();
@@ -240,7 +244,7 @@
 				}
 			});
 			
-			$("#adminVideoWriteOk").submit(()=>{
+			$("#creatorVideoWriteOk").submit(()=>{
 				let array=new Array();
 				let num=$("#ad_video_addList>ul").length;
 				
@@ -258,11 +262,14 @@
 					alert("목차정보(목차명+순서)가 중복되었습니다.\n동영상 정보를 다시입력해주세요.");
 					return false;
 				}
-				if($(".videoList>li:eq(2) input:last-child").val()==''||
-				$(".videoList>li:eq(3)>input:first-child").val()==null){
-					alert("영상정보에 공란이 있습니다.\n수정하기 전, 확인 부탁드립니다.");
-					return false;
-				}	
+				var videoName=document.getElementsByName("videoName");
+				videoName.forEach((ele)=>{
+					console.log("uc==>"+ele.value);
+					if(ele.value==''||ele.value==null){
+						alert("영상제목이 누락되었습니다\n확인 후 다시 등록을 시도하여 주십시오.");
+						return false;
+					}
+				});
 				return true;
 			});
 			$(document).on('change','#ad_video_addList>ul>li:first-child select',(event)=>{
@@ -336,7 +343,7 @@
 		<h3 style="line-height:80px;">영상을 여기에 끌어주세요.</h3>
 	</div>
 </div>
-<form method="post" id="adminVideoWriteOk" action="/gachi/adminVideoWriteOk">
+<form method="post" id="creatorVideoWriteOk" action="/gachi/creatorVideoWriteOk">
 <h3>영상등록정보</h3>
 <ul class="text_center ad_box" id="ad_video_addList">
 		<li>목차명</li>

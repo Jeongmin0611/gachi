@@ -84,17 +84,16 @@ function goodsDel(){
 					<option value="사진/영상">사진/영상</option>
 				</select>
 			</li>
-			<input type="hidden" name="code" id="code" value=""/>
 			<li class="content_center">판매시작일</li>
 			<li><input type="date" id="startdate" name="startdate" value="${todate }"/></li>
 			<li class="content_center">판매종료일</li>
 			<li><input type="date" id="enddate" name="enddate" value=""/></li>
 			<li class="content_center">상품명</li>
-			<li><input type="text" id="goods_name" name="goods_name" size="40" value=""/></li>
+			<li><input type="text" id="goods_name" name="goods_name" size="70" value=""/></li>
 			<li class="content_center">재고</li>
 			<li><input type="text" id="stock" name="stock" value=""/></li>
 			<li class="content_center">원가금액</li>
-			<li><input type="text" id="prime_cost" name="prime_cost" size="40" value=""/></li>
+			<li><input type="text" id="prime_cost" name="prime_cost" value=""/></li>
 			<li class="content_center">판매금액</li>
 			<li><input type="text" id="real_price" name="real_price" value=""/></li>
 			<li class="content_center">판매상태</li>
@@ -105,16 +104,17 @@ function goodsDel(){
 					<option value="판매종료">판매종료</option>
 				</select>
 			</li>
-			<li class="content_center">상품 설명 이미지</li>
-			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">메인 이미지</li>
 			<li><input type="file" name="img_main" accept="image/*" id="goods_img1" /></li>
+			<li class="content_center">상품 설명 이미지</li>
+			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">슬라이드 이미지1</li>
 			<li><input type="file" name="img_detail1" accept="image/*" id="detailImg1" /></li>
 			<li class="content_center">슬라이드 이미지2</li>
 			<li><input type="file" name="img_detail2" accept="image/*" id="detailImg2" /></li>
 			<li class="content_center">슬라이드 이미지3</li>
 			<li><input type="file" name="img_detail3" accept="image/*" id="detailImg3" /></li>
+			<input type="hidden" name="code" id="code" value=""/>
 		</ul>
 	</li>
 	<%-- <li class="content_center">

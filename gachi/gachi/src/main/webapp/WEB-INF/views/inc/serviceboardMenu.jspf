@@ -80,13 +80,60 @@
 	background-color: white;  
 }
 /* ============== 고객센터 - 자주묻는 질문, 배송정책 메뉴 ============== */
+/* ============== 내용 표시 ============== */
+#CserviceContentDiv {
+	margin-bottom:50px;
+}
+
+#CserviceContentDiv ul li { /* 글자 속성 */
+	line-height: 40px;
+}
+
+#CserviceContentDiv ul li:nth-child(4n+1) { /* 카테고리 */
+	width: 15%;
+	height: 40px;
+	background-color: #F1F7FA;
+	margin-right: 5%;
+	text-align: center;
+	float: left;
+	font-weight: bold;
+}
+
+#CserviceContentDiv ul li:nth-child(4n+2) { /* 제목 */
+	width: 100%;
+	height: 40px;
+	font-weight: bold;
+}
+
+#CserviceContentDiv ul li:nth-child(4n+3) { /* A */
+	width: 20%;
+	min-height: 150px;
+	color: #FB5000;
+	font-size: 100px;
+	line-height: 150px;
+	text-align: center;
+	background-color: #eee;
+	paddin: 0px;
+	margin: 20px 0;
+	float: left;
+}
+
+#CserviceContentDiv ul li:nth-child(4n+4) { /* 답변 */
+	width: 100%;
+	min-height: 150px;
+	background-color: #eee;
+	margin: 20px 0;
+}
+/* ============== 내용 표시 끝 ============== */
+
+
 </style>
 <!-- 자주묻는 질문, 배송정책 메뉴 -->
 <div id = "CservicemenuDiv">
 		<ul>
-			<li class="CservicetopMenuLi"><a href="/gachi/serviceCenterBoard" class="CservicemenuLink">자주 묻는 질문</a>
+			<li class="CservicetopMenuLi"><a href="/gachi/serviceCenterBoard_TopFAQ" class="CservicemenuLink">자주 묻는 질문</a>
 				<ul class="CserviceSubmenu"><!-- 서브메뉴 -->
-					<li><a href="/gachi/serviceCenterBoard_TopFAQ?" class="CserviceSubmenuLink longLink">TOP FAQ </a></li>
+					<li><a href="/gachi/serviceCenterBoard_TopFAQ" class="CserviceSubmenuLink longLink">TOP FAQ </a></li>
 					<li><a href="/gachi/serviceCenterBoard_order" class="CserviceSubmenuLink longLink">주문/결제</a></li>
 					<li><a href="/gachi/serviceCenterBoard_refund" class="CserviceSubmenuLink longLink">취소/환불</a></li>
 					<li><a href="/gachi/serviceCenterBoard_class" class="CserviceSubmenuLink longLink">클래스/스토어</a></li>

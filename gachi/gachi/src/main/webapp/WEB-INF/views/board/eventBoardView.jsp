@@ -127,7 +127,7 @@
 			</div>
 			<!-- 이벤트 내용 -->
 			<div id="eventDetailContent">
-				<img src="/gachi/img/board/${vo.content }"/>
+				<img src="<%=request.getContextPath()%>/upload/eventImg/${vo.content }"/>
 			</div>
 		</div>
 		

@@ -65,8 +65,7 @@ function numberWithCommas(x) {
 	<br/>	
 	<div style="height:200px;">
 	<form action="adminStatStore" method="post" id="frm">
-		<div class="cr_Dashboard_searchForm">
-			
+		<div class="cr_Dashboard_searchForm" style="margin-bottom:20px;">	
 		<input type="date" name="startDate" id="startDate" value=""/> ~ <input type="date" name="endDate" id="endDate" value=""/>
 		<input type ="submit" class="btn btn-outline-dark btn-sm" id="frm" value="조회"/>
 		</div>

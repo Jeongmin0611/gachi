@@ -77,9 +77,32 @@ public interface CreatorDaoImp {
 	public int  selectcreClassAllCount(Map<String, String> map);
 	
 	//크리에이터 클래스 목록구하기
-	public List<ClassVO>  selectcreClassList(Map<String, String> map);
 
+	public List<ClassVO> selectcreClassList(Map<String, String> map);
+  
 	public int updateCreatorPictureNone(String userid);
+
+	
+	//클래스 시퀀스 현재값 구하기
+	public int selectClassSeqCurrval(); 
+	
+	//크리에이터 클래스 등록
+	public int creClassInsert(ClassVO vo);
+	
+	//클래스 코드 생성
+	public int classCodeInsert(String code);
+	
+	//클래스 시퀀스 증가
+	public int selectClassNextSeq();
+	
+	//섹션 코드 증가
+	public int selectSectionSeq();
+	
+	//섹션 인서트
+	public int sectionInsert(ClassVO vo);
+	
+	//섹션 인서트
+	public int creVideoInsert(ClassVO vo);
 	
 }
 

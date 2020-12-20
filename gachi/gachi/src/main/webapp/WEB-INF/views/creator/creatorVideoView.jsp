@@ -25,16 +25,16 @@
 		overflow:auto;
 		border-bottom:1px solid gray;
 	}
-	#ad_video_addList li:nth-child(7n+2),#ad_video_addList li:nth-child(7n+7){
+	#ad_video_addList li:nth-child(6n+2){
 		width:5%;
 	}
-	#ad_video_addList li:nth-child(7n+1){
+	#ad_video_addList li:nth-child(6n+1){
 		width:20%;
 	}
-	#ad_video_addList li:nth-child(7n+3){
-		width:35%;
+	#ad_video_addList li:nth-child(6n+3){
+		width:40%;
 	}
-	#ad_video_addList li:nth-child(7n+4){
+	#ad_video_addList li:nth-child(6n+4){
 		width:15%;
 		overflow:hidden;
 	}	
@@ -152,9 +152,7 @@
 			tagTxt+='value="'+filename+'"/>'+filename+'</li>';
 			tagTxt+='<li></li>';
 			tagTxt+='<li><input type="hidden" name="enrollDate" value="'+year+'-'+month+'-'+day+'"/>';
-			tagTxt+=year+'-'+month+'-'+day+'</li>';
-			tagTxt+='<li><b class="video_del">x</b><input type="hidden" name="videoLength"/>';
-			tagTxt+='<input type="hidden" name="videoCode"/></li></ul>';
+			tagTxt+=year+'-'+month+'-'+day+'</li></ul>';
 			$("#ad_video_addList>ul:last-child").after(tagTxt);
 			if(!video_sample.paused){
 				video_sample.pause();
@@ -298,7 +296,6 @@
 	<li>파일명</li>
 	<li>영상길이</li>
 	<li>등록일</li>
-	<li>취소</li>
 	<c:forEach var="vo" items="${videoList}">
 		<ul class="videoList">
 			<li class="wordCut">
@@ -323,13 +320,9 @@
 				${vo.lengthStr}
 			</li>
 			<li>
+				<input type="hidden" name="videoCode" value="${vo.video_code}"/>
 				<input type="hidden" name="enrollDate" value="${vo.enroll_date}"/>
 				${vo.enroll_date}
-			</li>
-			<li>
-				<b class="video_del" title="${vo.video_code}">x</b>
-				<input type="hidden" name="videoLength" value="${vo.video_length}"/>
-				<input type="hidden" name="videoCode" value="${vo.video_code}"/>
 			</li>
 		</ul>	
 	</c:forEach>

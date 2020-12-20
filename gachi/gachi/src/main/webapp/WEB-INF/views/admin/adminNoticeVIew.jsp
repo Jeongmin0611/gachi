@@ -77,6 +77,15 @@
 	width: 70%;
 }
 </style>
+<script type="text/javascript">
+	$(()=>{
+		$("#del").click(()=>{
+			if(confirm('해당 공지사항을 정말로 삭제하시겠습니까?')){
+				location.href='/gachi/adminNoticeDel?notice_num='+${vo.notice_num}+'&nowPage='+${nowPage}	
+			}
+		});
+	});
+</script>
 <div class="container ad_font">
 	<div >
 		<h3>공지사항</h3>
@@ -87,20 +96,6 @@
 			</div>
 			<!-- 1:1문의 내용 -->
 			<div id="adminNoticeView_Content">
-			<!-- <img src="/gachi/img/event_sample.png"/> -->			
-			<!-- <p>	
-				<b>1. 영상출력방식이 맞지 않아 발생할 수 있습니다.</b><br/>
-				재생화면에 마우스를 올려 놓으시고 마우스 오른쪽 버튼을 누르면 메뉴가 나옵니다.<br/>
-				메뉴중 [비디오]->[출력방식]->[VMR9] 순으로 변경해 보시기 바랍니다.<br/><br/>
-				
-				<b>2. 그래픽카드 드라이브 문제일 수 있습니다.</b><br/>
-				3DP 프로그램을 통해 그래픽카드를 검색하여 설치하시기 바랍니다.<br/>
-				3DP는여기를 통해 다운받아 설치하시고 프로그램을 실행하면 이용하는<br/>
-				PC의 그래픽카드에 맞춰 드라이브를 찾아 다운 받을 수 있습니다.<br/><br/>
-				
-				잘 안되시거나 어려우시면 고객센터(1500-0000)으로 연락주세요.<br/>
-				원격지원을 통해 도움 드리도록 하겠습니다. 감사합니다. </p>
-				 -->
 				${vo.content}
 			</div>
 		</div>
@@ -108,12 +103,10 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="adminNoticeView_BtnDiv" style="width:50%;float:left;">
-		<button type="button" class="btn">이전</button>
-		<button type="button" class="btn">다음</button>
 		<a href="/gachi/adminNotice?nowPage=${nowPage}"><button type="button" class="btn">목록</button></a>
 	</div>
 	<div style="text-align: right;width:50%;float:left; margin-top:10px;">
 		<a href="/gachi/adminNoticeEdit?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">수정</button></a>
-		<a href="/gachi/adminNoticeDel?notice_num=${vo.notice_num}&nowPage=${nowPage}"><button type="button" class="btn">삭제</button></a>
+	<button type="button" id="del" class="btn">삭제</button>
 	</div>
 </div>

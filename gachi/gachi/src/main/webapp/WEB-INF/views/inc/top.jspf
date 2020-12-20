@@ -397,6 +397,19 @@ a {
        $(".nav-item a").css({ 'pointer-events': 'auto' });
     });
   //회원가입모달창 띄우기
+  	$('#logbtm > a').click(function(){
+    	$(".nav-item a").css({ 'pointer-events': 'none' });
+    	$("#md").css({'display':'none'});
+		$("#mdJ").css({
+           "top": (($(window).height()-$("#mdJ").outerHeight())/2+$(window).scrollTop())+"px",
+           "left": (($(window).width()-$("#mdJ").outerWidth())/2+$(window).scrollLeft())+"px"
+        });
+        $("#mdJ").fadeIn();
+    });
+    $("#mdJClose, .mdJ_layer").click(function(){
+       $("#mdJ").fadeOut();
+       $(".nav-item a").css({ 'pointer-events': 'auto' });
+    });
     $("#joinFormBtn").click(function(){
     	$(".nav-item a").css({ 'pointer-events': 'none' });
 		$("#mdJ").css({
@@ -1217,7 +1230,7 @@ $(document).ready(function() {
 	        </c:if> 
 		</c:if>	          
 			<li class="nav-item"><a class="nav-link" href="/gachi/noticeBoard">공지사항</a></li>
-	        <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard">고객센터</a></li>   
+	        <li class="nav-item"><a class="nav-link" href="/gachi/serviceCenterBoard_TopFAQ">고객센터</a></li>   
         </ul>
        		<!-- 검색버튼 -->
 		<form class="form-inline d-flex justify-content-center md-form form-sm" id="searchSubmit" action="/gachi/searchTextChk">

@@ -4,63 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.gachi.admin.NoticeDaoImp">
 	<insert id="insertNotice" parameterType="com.bitcamp.gachi.admin.NoticeVO">
-		insert into notice(notice_num,subject,content,writer,writedate,target,input_file
-		) values(a_sq.nextval,'${subject}','${content}','같이가치',sysdate,'${target}'
-		<choose>
-			<when test="filename==null"></when>
-			<when test="filename!=null">
-			,'${filename}'
-			</when>
-		</choose>
-		)
+		insert into notice(notice_num,subject,content,writer,writedate,target
+		) values(a_sq.nextval,'${subject}','${content}','같이가치',sysdate,'${target}')
 	</insert>
 	<select id="selectList" parameterType="com.bitcamp.gachi.admin.NoticePageVO" resultType="com.bitcamp.gachi.admin.NoticeVO">
 		select * from (select * from (select notice_num,subject,writer,to_char(writedate,'YYYY-MM-DD') writedate,hit 
 		from notice 
 		<choose>
 			<when test="option==null and date1==null and date2==null and searchWord==null"></when>
-			<when test='!date1.equals("") and !date2.equals("") and option!=null and !searchWord.equals("")'>
+			<when test='date1!=null and date2!=null and option!=null and searchWord!=null'>
 				where writedate between '${date1}' and '${date2}' and ${option} like '%${searchWord}%'
 			</when>
-			<when test='option==null and !date1.equals("") and !date2.equals("") and !searchWord.equals("")'>
-				where writedate between '${date1}' and '${date2}' and subject like '%${searchWord}%'
-				or content like '%${searchWord}%' or writer like '${searchWord}'  
+			<when test='option==null and date1!=null and date2!=null and searchWord!=null'>
+				where writedate between '${date1}' and '${date2}' and (subject like '%${searchWord}%'
+				or content like '%${searchWord}%' or writer like '%${searchWord}%')  
 			</when>
-			<when test='option!=null and date1.equals("") and date2.equals("") and !searchWord.equals("")'>
+			<when test='option!=null and date1==null and date2==null and searchWord!=null'>
 				where ${option} like '%${searchWord}%'
 			</when>
-			<when test='!date1.equals("") and !date2.equals("") and option==null and searchWord.equals("")'>
+			<when test='date1!=null and date2!=null and option==null and searchWord==null'>
 				where writedate between '${date1}' and '${date2}'
 			</when>
-			<when test='option==null and date1.equals("") and date2.equals("") and !searchWord.equals("")'>
-				where subject like '%${searchWord}%' or content like '%${searchWord}%' 
-				or writer like '${searchWord}'
+			<when test='option==null and date1==null and date2==null and searchWord!=null'>
+				where subject like '%${searchWord}%' or content like '%${searchWord}%' or writer like '%${searchWord}%'
 			</when>
 		</choose> 
-		order by notice_num desc)
+		order by notice_num desc,writedate desc)
 		where <![CDATA[rownum<=(${nowPage}*${onePageRecord})]]>order by notice_num asc)
 		where <![CDATA[rownum<=${lastPageRecordCount} ]]>order by notice_num desc
 	</select>
 	<select id="getAllRecord" resultType="int">
-		select count(notice_num) from notice
+		select count(*) from notice
 		<choose>
 			<when test="option==null and date1==null and date2==null and searchWord==null"></when>
-			<when test='!date1.equals("") and !date2.equals("") and option!=null and !searchWord.equals("")'>
+			<when test='date1!=null and date2!=null and option!=null and searchWord!=null'>
 				where writedate between '${date1}' and '${date2}' and ${option} like '%${searchWord}%'
 			</when>
-			<when test='option==null and !date1.equals("") and !date2.equals("") and !searchWord.equals("")'>
-				where writedate between '${date1}' and '${date2}' and subject like '%${searchWord}%'
-				or content like '%${searchWord}%' or writer like '${searchWord}'  
+			<when test='option==null and date1!=null and date2!=null and searchWord!=null'>
+				where writedate between '${date1}' and '${date2}' and (subject like '%${searchWord}%'
+				or content like '%${searchWord}%' or writer like '%${searchWord}%') 
 			</when>
-			<when test='option!=null and date1.equals("") and date2.equals("") and !searchWord.equals("")'>
+			<when test='option!=null and date1==null and date2==null and searchWord!=null'>
 				where ${option} like '%${searchWord}%'
 			</when>
-			<when test='!date1.equals("") and !date2.equals("") and option==null and searchWord.equals("")'>
+			<when test='date1!=null and date2!=null and option==null and searchWord==null'>
 				where writedate between '${date1}' and '${date2}'
 			</when>
-			<when test='option==null and date1.equals("") and date2.equals("") and !searchWord.equals("")'>
+			<when test='option==null and date1==null and date2==null and searchWord!=null'>
 				where subject like '%${searchWord}%' or content like '%${searchWord}%' 
-				or writer like '${searchWord}'
+				or writer like '%${searchWord}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>

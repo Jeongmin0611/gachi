@@ -1,10 +1,7 @@
 package com.bitcamp.gachi.admin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.bitcamp.gachi.store.StorePageVO;
 
 public interface ClassDaoImp {
 	
@@ -121,4 +118,14 @@ public interface ClassDaoImp {
 	public ClassVO selectReviewView(int num);  // 리뷰 내용보기 
 
 	public String getVideoName(String videoFlieName);
+	
+	public int creVideoInsert(ClassVideoVO vo);
+	
+	public int classStateUpdate(String code);
+
+	//크리에이터 비디오 구하기
+	public List<ClassVideoVO> getcreClassVideoList(Map<String, String> dbParam);
+	
+	//크리에이터 비디오 갯수 구하기
+	public int getcreVideoRecordCount(Map<String, String> dbParam);
 }

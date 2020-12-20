@@ -117,7 +117,7 @@ var accountChk=RegExp(/^[0-9]+$/);
 		<form method="post" id="frm" action="creatorEditOk" enctype="multipart/form-data">
 			<ul id="cre_profile_imgArea" style="border:3px solid #437299;border-radius:10px;text-align:center;margin:10px 0px">
 				<li>프로필 사진</li>
-				<c:if test="${vo.picture eq null}"><li><img src="/gachi/img/147.jpg"></li></c:if>
+				<c:if test="${vo.picture eq null}"><li><img src="/gachi/img/add.png" style="width:100px; height:100px;"></li></c:if>
 				<c:if test="${vo.picture ne null}"><li><img src="/gachi/upload/creatorImg/${vo.picture }" style="width:200px; height:200px;"></li>
 				<button type="button" onclick="pictureDel();">삭제</button>
 				<input type="hidden" name="picture" value="${vo.picture }" />

@@ -38,20 +38,62 @@
  </style> 
  <script>
  	$(()=>{
- 		$("#startDate").val("${startDate}");
+ 		$("#startDate").val('${startDate}');
 		$("#endDate").val("${endDate}");
 		$("#class_state").val("${class_state}").attr("selected", "selected");
 		$("#dateOption").val("${dateOption}").attr("selected", "selected");
 		$("#category").val("${category}").attr("selected", "selected");
 		$("#search").val("${search}");
 		
+var now=${nowPage};
 		
+		$("#searchBtn").click(function(){
+			if($('#startDate').val()>=$('#endDate').val()){
+				alert("시작일보다 종료일이 더 빠릅니다.\n다시입력해주세요.");
+				return false;
+			}
+			var url = "/creatorMyClass";
+			var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now +1;
+			$.ajax({
+				url : url,
+				data : data,
+				type : "POST",
+				dataType : "json",
+				success: function(data){
+					var result = data.result;
+					console.log(result);
+				},error:function(){
+					var result = data.result;
+					console.log(result);
+				}
+			});
+			
+		});
+		function postPageMove(now) {
+		console.log(now);
+		return false;
+		var url = "/creatorMyClass";
+		var data = "startDate=" + $('#startDate').val() + "&endDate=" + $('#endDate').val() + "&class_state=" + $("#class_state").val() + "&category=" + $("#category").val()+ "&dateOption=" + $("#dateOption").val()+ "&search=" + $("#search").val().trim(); + "&now=" + now;
+		$.ajax({
+			url : url,
+			data : data,
+			type : "POST",
+			dataType : "json",
+			success: function(data){
+				var result = data.result;
+				console.log(result);
+			},error:function(){
+				var result = data.result;
+				console.log(result);
+			}
+		});
+	}
  		
  	});
  </script>
  <div class="container text-center ad_font">
  	<h1>클래스 관리</h1>
-	<form method="post" action="adminClass">
+	<form method="post" action="creatorMyClass">
 	<h3>검색옵션</h3>
 			<ul id="search_area">
 				<li>날짜옵션</li>
@@ -105,7 +147,7 @@
 		<c:forEach var="result" items="${result}">
 		<li>${result.code }</li>
 		<li>${result.category }</li>
-		<li class="wordCut"><a href="/gachi/adminClassView?code=${result.code}">${result.class_name}</a></li>
+		<li class="wordCut"><a href="/gachi/creatorMyClassView?code=${result.code}">${result.class_name}</a></li>
 		<li class="wordCut">${result.nickname }</li>
 		<li>${result.total_student }</li>
 		<li>${result.signup }</li>
@@ -128,40 +170,38 @@
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminClass?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminClass?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
 					<li class="btn">
-
-						<a class="btn" href="/gachi/adminClass?now=${nowPage-1}">Prev</a>
-
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${startPage+i <= lastPage }">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminClass?now=${startPage+i }">${startPage+i }</a>
+						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
 					<li class="btn">
-						<a class="btn" href="/gachi/adminClass?now=${nowPage+1}">Next</a>
+						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
