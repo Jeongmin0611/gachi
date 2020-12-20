@@ -119,7 +119,7 @@ $(function(){
 	<div class="ad_list_menu">
 		<button class="btn" onclick="location.href='/gachi/adminVideoWrite'">등록</button>
 	</div>
-	<div id="paging">
+<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 
 			<c:if test="${(nowPage % 5) eq 0}">
@@ -132,40 +132,38 @@ $(function(){
 			
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
-					<li>
+					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-
-				<c:forEach var="i" begin="${startPageNum}" end="${startPageNum +10-1 }">
-					<c:if test="${i <= lastPage }">
-					<li>
-						<a class="btn" href="/gachi/adminVideo?now=${i}">${i}</a>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${(startPage+i) <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage<lastPage}">
-					<li>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
-					<li>
+					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-
-				<c:forEach var="i" begin="${startPageNum}" end="${startPageNum +10-1 }">
-					<c:if test="${i <= lastPage }">
-					<li>
-						<a class="btn" href="/gachi/adminVideo?now=${i}">${i}</a>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${(startPage+i) <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage<lastPage}">
-					<li>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
 						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
