@@ -27,7 +27,7 @@ function onlyNumber(){
 }
 
 function EventDel(){
-	if(confirm("해당 상품을 삭제하시겠습니까?")){
+	if(confirm("해당 이벤트를 삭제하시겠습니까?")){
 		location.href="adminEventDelete?event_num=" + "${vo.event_num}";
 	}
 }

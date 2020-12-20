@@ -104,10 +104,10 @@ function goodsDel(){
 					<option value="판매종료">판매종료</option>
 				</select>
 			</li>
-			<li class="content_center">상품 설명 이미지</li>
-			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">메인 이미지</li>
 			<li><input type="file" name="img_main" accept="image/*" id="goods_img1" /></li>
+			<li class="content_center">상품 설명 이미지</li>
+			<li><input type="file" name="img_goodsInfo" accept="image/*" id="goods_info" /></li>
 			<li class="content_center">슬라이드 이미지1</li>
 			<li><input type="file" name="img_detail1" accept="image/*" id="detailImg1" /></li>
 			<li class="content_center">슬라이드 이미지2</li>

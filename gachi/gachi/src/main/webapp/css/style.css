@@ -866,7 +866,7 @@ input{text-align:center;}
 		border:3px solid #437299;
 		border-radius:10px;
 		overflow:auto;
-		width : 80%;
+		width : 100%;
 		margin :0 auto;
 	}
 	#ad_goods_writeForm li{
@@ -874,6 +874,7 @@ input{text-align:center;}
 		margin-top:5px;
 		margin-bottom:5px;
 	}
+	
 	#ad_goods_writeForm>li{
 		height:550px;
 		width:100%;
@@ -882,6 +883,30 @@ input{text-align:center;}
 		width:50%;
 	}
 	#ad_goods_writeForm ul>li:nth-child(2n){
+		width:50%;
+	}
+	
+	#ad_goods_editForm{
+		border:3px solid #437299;
+		border-radius:10px;
+		overflow:hidden;
+		width : 100%;
+		margin :0 auto;
+	}
+	#ad_goods_editForm li{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	
+	#ad_goods_editForm>li{
+		height:500px;
+		width:100%;
+	}
+	#ad_goods_editForm ul>li:nth-child(2n+1){
+		width:50%;
+	}
+	#ad_goods_editForm ul>li:nth-child(2n){
 		width:50%;
 	}
 	
