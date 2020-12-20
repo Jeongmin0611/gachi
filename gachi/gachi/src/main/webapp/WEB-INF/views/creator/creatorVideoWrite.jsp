@@ -270,7 +270,7 @@
 						return false;
 					}
 				});
-				return false;
+				return true;
 			});
 			$(document).on('change','#ad_video_addList>ul>li:first-child select',(event)=>{
 				let unit_content=$(event.target).val();

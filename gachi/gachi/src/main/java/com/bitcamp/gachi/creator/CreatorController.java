@@ -1163,10 +1163,12 @@ public class CreatorController {
 		dbParam.put("searchWord", searchWord);
 		dbParam.put("startNum", startNum+"");
 		dbParam.put("endNum", endNum+"");
+		String userid=(String)req.getSession().getAttribute("userid");
+		dbParam.put("userid", userid);
 		
 		dao = sqlSession.getMapper(ClassDaoImp.class);
 				
-		int cntRecords = dao.getVideoRecordCount(dbParam);
+		int cntRecords = dao.getcreVideoRecordCount(dbParam);
 		
 		int lastPage = 1;
 		if(cntRecords % 10 == 0) {
@@ -1175,7 +1177,7 @@ public class CreatorController {
 			lastPage = cntRecords / 10 + 1;
 		}
 		;
-		List<ClassVideoVO> vlist = dao.getClassVideoList(dbParam);
+		List<ClassVideoVO> vlist = dao.getcreClassVideoList(dbParam);
 		
 		
 		if(startDate != null && endDate != null && vlist != null) {
@@ -1197,7 +1199,7 @@ public class CreatorController {
 	
 			try {
 				//resp.getWriter().write("{\"result\":\"success\"}");
-				mav.setViewName("admin/adminVideo");
+				mav.setViewName("creator/creatorVideo");
 				System.out.println("ajax success start");
 				return mav;
 			} catch (Exception e) {

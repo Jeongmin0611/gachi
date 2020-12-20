@@ -172,18 +172,56 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<div style="margin:10px 0px; text-align:center">
-			<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
-		</div>
+<div style="margin:10px 0px; text-align:center">
+		<button class="btn" onclick="location.href='/gachi/creatorVideoWrite'">클래스영상등록</button>
+</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
-			<li class="btn"><a class="btn" href="#">Prev</a></li>
-			<li><a href="#" class="paging_num">1</a></li>
-			<li><a href="#" class="paging_num">2</a></li>
-			<li><a href="#" class="paging_num">3</a></li>
-			<li><a href="#" class="paging_num">4</a></li>
-			<li><a href="#" class="paging_num">5</a></li>
-			<li class="btn"><a class="btn" href="#">Next</a></li>
+			<c:if test="${nowPage % 5 eq 0}">
+				<c:set var="startPage" value="${nowPage-4 }"/>
+			</c:if>
+			<c:if test="${nowPage % 5 ne 0}">
+				<fmt:parseNumber var="startPage" integerOnly="true" value="${(nowPage/5)*5}"/>
+			</c:if>
+			
+			<c:if test="${method eq 'get' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
+			<c:if test="${method eq 'post' }">
+				<c:if test="${startPage ne 1}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage-1}">Prev</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${startPage+i <= lastPage }">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${startPage+i }">${startPage+i }</a>
+					</li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${(lastPage - startPage) > 5}">
+					<li class="btn">
+						<a class="btn" href="/gachi/adminVideo?now=${nowPage+1}">Next</a>
+					</li>
+				</c:if>
+			</c:if>
 	</ul>
 </div>
 </div>

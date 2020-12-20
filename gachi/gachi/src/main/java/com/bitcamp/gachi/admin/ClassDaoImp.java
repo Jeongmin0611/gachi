@@ -122,4 +122,10 @@ public interface ClassDaoImp {
 	public int creVideoInsert(ClassVideoVO vo);
 	
 	public int classStateUpdate(String code);
+
+	//크리에이터 비디오 구하기
+	public List<ClassVideoVO> getcreClassVideoList(Map<String, String> dbParam);
+	
+	//크리에이터 비디오 갯수 구하기
+	public int getcreVideoRecordCount(Map<String, String> dbParam);
 }

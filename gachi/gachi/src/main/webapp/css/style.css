@@ -483,13 +483,13 @@ input{text-align:center;}
 		line-height:30px;
 		height:50px;
 	}
-	#ad_notice_lst>li:nth-of-type(6n+1){
+	#ad_notice_lst>li:nth-of-type(5n+1){
 		width:7%;
 	}
-	#ad_notice_lst>li:nth-of-type(6n+3){
-		width:50%;
+	#ad_notice_lst>li:nth-of-type(5n+2){
+		width:60%;
 	}
-	#ad_notice_lst>li:nth-of-type(6n+5){
+	#ad_notice_lst>li:nth-of-type(5n+5){
 		width:13%;
 	}
 	.ad_list_menu{

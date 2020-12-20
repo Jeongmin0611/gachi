@@ -77,7 +77,7 @@ public interface CreatorDaoImp {
 	public int  selectcreClassAllCount(Map<String, String> map);
 	
 	//크리에이터 클래스 목록구하기
-	public List<ClassVO>  selectcreClassList(Map<String, String> map);
+	public List<ClassVO> selectcreClassList(Map<String, String> map);
 	
 	//클래스 시퀀스 현재값 구하기
 	public int selectClassSeqCurrval(); 

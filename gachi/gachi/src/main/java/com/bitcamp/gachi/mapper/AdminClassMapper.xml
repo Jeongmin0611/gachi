@@ -134,7 +134,7 @@
 		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video join section 
 		on class_video.section_code=section.section_code join class on class.code=class_video.code
 		join member on member.userid=class.userid
-		where to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}' 
+		where to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}'
 		<choose>
 			<when test="category==null and searchWord==null"></when>
 			<when test="category!=null and searchWord==null">
@@ -150,16 +150,74 @@
 				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
 				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
 			</when>
-			
 			<otherwise></otherwise>
 		</choose>
+		order BY enroll_date desc,section.unit_content desc,section.unit desc
 		) A
 		WHERE
-
 		ROWNUM &lt;=${endNum}
 		)
 		WHERE
 		RNUM &gt;=${startNum}
+	</select>
+	
+	<select id="getcreClassVideoList" parameterType="map" resultType="com.bitcamp.gachi.admin.ClassVideoVO">
+		SELECT * FROM
+		(SELECT A.*,
+		ROWNUM AS RNUM
+		FROM
+		(select class.code,video_code,class_video.section_code,unit,unit_content,section_index,video_name,class_name,
+		substr(to_char(NUMTODSINTERVAL(video_length, 'second')),12,8) lengthStr,video_filename,nickname,
+		to_char(enroll_date,'YYYY-MM-DD') enroll_date from class_video join section 
+		on class_video.section_code=section.section_code join class on class.code=class_video.code
+		join member on member.userid=class.userid
+		where class.userid='${userid}' and
+		to_char(enroll_date,'yyyy-mm-dd')&gt;='${startDate}' and to_char(enroll_date,'yyyy-mm-dd')&lt;='${endDate}'
+		<choose>
+			<when test="category==null and searchWord==null"></when>
+			<when test="category!=null and searchWord==null">
+				and class.category='${category}'
+			</when>
+			<when test="category!=null and searchWord!=null">
+				and class.category='${category}' and (class_video.video_code like '%${searchWord}%' or 
+				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
+			</when>
+			<when test="category==null and searchWord!=null">
+				and (class_video.video_code like '%${searchWord}%' or 
+				class_video.video_name like '%${searchWord}%' or class.class_name like '%${searchWord}%' or 
+				class_video.video_filename like '%${searchWord}%' or member.nickname like '%${searchWord}%')
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order BY enroll_date desc,section.unit_content desc,section.unit desc
+		) A
+		WHERE
+		ROWNUM &lt;=${endNum}
+		)
+		WHERE
+		RNUM &gt;=${startNum}
+	</select>
+	<select id="getcreVideoRecordCount" parameterType="map" resultType="_int">
+		select count(video_code) from class_video cv join class c on cv.code=c.code
+		join member m on c.userid=m.userid where enroll_date between '${startDate}' and '${endDate}'   
+		and c.userid='${userid}'
+		<choose>
+			<when test="category!=null and searchWord==null ">
+				and category='${category}'
+			</when>
+			<when test="category!=null and searchWord!=null">
+				and category='${category}' and cv.video_code like '%${searchWord}%' or 
+				cv.video_name like '%${searchWord}%' or c.class_name like '%${searchWord}%' or 
+				cv.video_filename like '%${searchWord}%' or m.nickname like '%${searchWord}%'
+			</when>
+			<when test="category==null and searchWord!=null">
+				and cv.video_code like '%${searchWord}%' or cv.video_name like '%${searchWord}%' or 
+				c.class_name like '%${searchWord}%' or cv.video_filename like '%${searchWord}%' or
+				 m.nickname like '%${searchWord}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
 	</select>
 	
 	<!-- Review  -->
