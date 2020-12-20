@@ -119,7 +119,9 @@ var accountChk=RegExp(/^[0-9]+$/);
 				<li>프로필 사진</li>
 				<c:if test="${vo.picture eq null}"><li><img src="/gachi/img/147.jpg"></li></c:if>
 				<c:if test="${vo.picture ne null}"><li><img src="/gachi/upload/creatorImg/${vo.picture }" style="width:200px; height:200px;"></li>
-				<button type="button" onclick="pictureDel();">삭제</button></c:if>
+				<button type="button" onclick="pictureDel();">삭제</button>
+				<input type="hidden" name="picture" value="${vo.picture }" />
+				</c:if>
 				<li style="text-align:center;"><input type="file" accept="image/*" name="imgFile" id=imgFile value="" /></li>
 			</ul>
 			<ul id="creator_editForm2" class="form-group" style="overflow:auto">

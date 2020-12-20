@@ -882,6 +882,7 @@ public class CreatorController {
 	public ModelAndView creatorEditOk(HttpSession ses, AllVO vo, MultipartHttpServletRequest mhsr, Object imgFile) {
 		
 		String userid = (String)ses.getAttribute("userid");
+		System.out.println(vo);
 		
 		String path=ses.getServletContext().getRealPath("/upload/creatorImg");
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
@@ -897,6 +898,7 @@ public class CreatorController {
 				
 				if(imageName != null && imageName.length() > 0) {
 					File file=new File(path, imageName);
+					
 					if(file.exists()) {
 						file.delete();
 					}
@@ -944,9 +946,11 @@ public class CreatorController {
 		int result1 = dao.UpdateCreatorlist1(vo);
 		ModelAndView mav = new ModelAndView();	
 		
-		mav.addObject("result", result);
-		mav.addObject("result1", result1);
-		mav.setViewName("creator/creatorEditOk");
+//		mav.addObject("result", result);
+//		mav.addObject("result1", result1);
+//		mav.setViewName("creator/creatorEditOk");
+		mav.addObject("vo", vo);
+		mav.setViewName("creator/creatorEdit");
 		
 	return mav;
 	}

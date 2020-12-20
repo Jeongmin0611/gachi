@@ -207,8 +207,8 @@
 	</select>
 	
 	<select id="selectCreatorlist" resultType="com.bitcamp.gachi.admin.AllVO">
-		select  picture,member.userid, nickname, to_char(birthdate, 'yyyy-mm-dd') birthdate, tel,
-		business_number,bankname , account, sns_addr , creator_info
+		select picture, member.userid, nickname, to_char(birthdate, 'yyyy-mm-dd') birthdate, tel,
+		business_number,bankname , account, sns_addr, creator_info
 		from member 
 		join creator on member.userid = creator.userid 
 		where creator.userid = #{userid}

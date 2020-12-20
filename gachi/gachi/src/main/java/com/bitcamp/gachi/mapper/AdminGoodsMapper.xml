@@ -98,7 +98,7 @@
 	</update>
 	<update id="updateStore" parameterType="com.bitcamp.gachi.admin.GoodsVO">
 		update goods set category='${category}', goods_name='${goods_name}', prime_cost='${prime_cost}',
-		real_price='${real_price}', sale_state='${sale_state}', stock='${stock}',
+		real_price='${real_price}', sale_state='${sale_state}', stock='${stock}', stack='${stack}',
 		goods_info='${goods_info}', goods_img1='${goods_img1}', goods_img2='${goods_img2}'
 		
 		where code='${code}'  

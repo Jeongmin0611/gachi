@@ -412,7 +412,23 @@ public class AllVO {
 	public void setSignup(String signup) {
 		this.signup = signup;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "AllVO [rownum=" + rownum + ", userid=" + userid + ", userpwd=" + userpwd + ", grade=" + grade
+				+ ", username=" + username + ", nickname=" + nickname + ", birthdate=" + birthdate + ", tel=" + tel
+				+ ", gender=" + gender + ", zipcode=" + zipcode + ", addr=" + addr + ", detailaddr=" + detailaddr
+				+ ", profile=" + profile + ", signupdate=" + signupdate + ", interest=" + interest + ", deleted="
+				+ deleted + ", withdrawdate=" + withdrawdate + ", category=" + category + ", business_number="
+				+ business_number + ", bankname=" + bankname + ", account=" + account + ", license_img1=" + license_img1
+				+ ", license_img2=" + license_img2 + ", ilcense_img3=" + ilcense_img3 + ", sns_addr=" + sns_addr
+				+ ", creator_info=" + creator_info + ", creator_state=" + creator_state + ", picture=" + picture
+				+ ", class_name=" + class_name + ", real_price=" + real_price + ", class_img=" + class_img
+				+ ", class_img2=" + class_img2 + ", searchKey=" + searchKey + ", searchWord=" + searchWord
+				+ ", class_info=" + class_info + ", num=" + num + ", ip=" + ip + ", subject=" + subject + ", content="
+				+ content + ", code=" + code + ", goods_name=" + goods_name + ", goods_img1=" + goods_img1
+				+ ", goods_img2=" + goods_img2 + ", writedate=" + writedate + ", stock=" + stock + ", stack=" + stack
+				+ ", good=" + good + ", goods_info=" + goods_info + ", nowPage=" + nowPage + ", totalRecord="
+				+ totalRecord + ", selectval=" + selectval + ", signup=" + signup + "]";
+	}
 	
 }
