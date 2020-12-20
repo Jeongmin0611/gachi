@@ -27,10 +27,22 @@
 	}
 </script>
 <style>
+/* 데스크탑에서 사용될 스타일을 먼저 작성합니다. */
 .carousel-item img {
 	height: 550px;
 	width: 100%;
 }
+@media screen and (max-width: 768px) {    /* 모바일에 사용될 스트일 시트를 여기에 작성합니다. */
+	.carousel-item a{
+		height: 350px;
+	}
+	.carousel-item img {
+		height: 350px;
+		width: 100%;
+	}
+}
+
+
 </style>	
     <div id="slideimage" class="carousel slide" data-ride="carousel" data-interval="5000" 
     data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000"><!-- carousel -->

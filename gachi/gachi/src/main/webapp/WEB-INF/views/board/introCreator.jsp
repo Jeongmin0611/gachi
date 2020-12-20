@@ -123,11 +123,25 @@
 		</c:forEach>
 	</div>
 	
-	<!-- 페이징 -->
-	<ul class="pagination justify-content-center" id="mypageMainPage">
-		<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
-	</ul>
+	<!-- paging -->
+	<div id="introCreatorPaging">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pvo.nowPage>1 }">
+				<li class="page-item">
+					<a class="page-link" href="/gachi/introCreator?nowPage=${pvo.nowPage-1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Prev</a>
+				</li>
+			</c:if>
+			<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1}">
+				<c:if test="${p<=pvo.totalPage }">
+					<li class="page-item">
+						<a class="page-link" href="/gachi/introCreator?nowPage=${p }<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>" <c:if test="${p==pvo.nowPage }">style="background-color:lightblue; color:white"</c:if>>${p}</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<c:if test="${pvo.nowPage<pvo.totalPage }">
+				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/introCreator?nowPage=${pvo.nowPage+1}<c:if test="${pvo.searchWord!=null }">&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">Next</a></li>
+			</c:if>
+		</ul>
+	</div>
 
 </div>

@@ -66,15 +66,24 @@
 			<li style="text-align: center; border-bottom: 1px solid #bbb; margin:2px 0;">${vo.nickname }</li>
 			<li style="word-wrap:break-word">
 				<a href="${vo.sns_addr }" target="_blank">
-					<c:set var="sns_addr" value="${vo.sns_addr }"></c:set>
-						<c:if test="${fn:contains(sns_addr,'instagram.com') }">
-							<img src="/gachi/img/instagram.png" style="height: 30px;"/>
-						</c:if>
-						<c:if test="${fn:contains(sns_addr,'facebook.com') }">
-							<img src="/gachi/img/facebook.png" style="height: 30px;"/>
-						</c:if>
-					<c:set var="sns" value="${fn:substringAfter(sns_addr,'.com/') }"></c:set>
-					 ${sns}
+					<c:choose>						
+						<c:when test='${empty vo.sns_addr }'>						
+						</c:when>
+						<c:otherwise>
+							<c:set var="sns_addr" value="${vo.sns_addr }"></c:set>
+								<c:when test="${fn:contains(sns_addr,'instagram.com') }">
+									<img src="/gachi/img/instagram.png" style="height: 30px;"/>
+								</c:when>
+								<c:when test="${fn:contains(sns_addr,'facebook.com') }">
+									<img src="/gachi/img/facebook.png" style="height: 30px;"/>
+								</c:when>														
+								<c:otherwise>
+									<c:set var="sns" value="${fn:substringAfter(sns_addr,'.com/') }"></c:set>
+								 	${sns}
+								 </c:otherwise>
+						 </c:otherwise>
+					 </c:choose>
+					 
 			 	</a>
 			</li>
 		</ul>
