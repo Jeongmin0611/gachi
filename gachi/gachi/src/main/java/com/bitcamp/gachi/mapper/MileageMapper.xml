@@ -7,7 +7,7 @@
 		select count(mileage) from mileage where userid='${userid}'	
 	</select>
 	<select id="mileageAllRecord" resultType="com.bitcamp.gachi.mypage.MileageVO">
-		select userid, mileage, breakdown, to_char(occurence_date, 'YYYY-MM-DD') occurence_date from mileage where userid='${userid}' order by occurence_date desc	
+		select userid, mileage, breakdown, to_char(occurence_date, 'YY-MM-DD HH24:MI') occurence_date from mileage where userid='${userid}' order by occurence_date desc	
 	</select>
 	<select id="mileageAllSum" resultType="int">
 		select sum(mileage) from mileage where userid='${userid}'
@@ -24,5 +24,9 @@
 		 from goods g, goods_order go
 		 where g.code = go.code
 		 and goods_order_code = '${goods_order_code}'), '구매금액 적립')
+	</insert>
+	<insert id="mileageUse">
+		insert into mileage(userid, mileage, breakdown)
+		 values('${userid}', ${mileage}, '마일리지 사용')
 	</insert>
 </mapper>

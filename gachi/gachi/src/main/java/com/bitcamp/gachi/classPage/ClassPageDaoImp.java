@@ -37,6 +37,7 @@ public interface ClassPageDaoImp {
 	public int insertQna(AllVO vo);
 	//클래스 qna 수정
 	public int updateQna(AllVO vo);
+	
 	public int classPageCategoryRecordCount(ClassPageVO vo);
 	//클래스 수강여부 확인 (수강평 등록 버튼 클릭시 필요)
 	public int courseCheck(@Param("code") String code, @Param("userid") String userid);

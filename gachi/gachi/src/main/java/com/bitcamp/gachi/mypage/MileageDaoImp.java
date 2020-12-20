@@ -17,4 +17,6 @@ public interface MileageDaoImp {
 	public int mileageNegaSum(String userid);
 	//마일리지 적립
 	public int mileageInsert(@Param("userid") String userid, @Param("goods_order_code") String goods_order_code);
+	//마일리지 적립
+	public int mileageUse(@Param("userid") String userid, @Param("mileage") int mileage);
 }

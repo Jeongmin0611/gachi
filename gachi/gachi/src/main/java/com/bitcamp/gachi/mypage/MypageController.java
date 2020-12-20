@@ -345,7 +345,7 @@ public class MypageController {
 	}
 	/* 주문내역 넣기 */
 	@RequestMapping(value="/orderChk", method=RequestMethod.POST)
-	public @ResponseBody void orderChk(@RequestBody Map<String, String> order) {
+	public @ResponseBody void orderChk(@RequestBody Map<String, String> order, HttpSession ses) {
 		//System.out.println(order);
 		
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
@@ -363,6 +363,10 @@ public class MypageController {
 		vo.setDetailaddr((String)order.get("detailaddr"));
 		vo.setEtc((String)order.get("etc"));
 		int result = dao.orderInsert(vo);
+		
+		MileageDaoImp mDao = sqlSession.getMapper(MileageDaoImp.class);
+		mDao.mileageUse((String)ses.getAttribute("userid"), Integer.parseInt(order.get("discount")));
+		
 	}
 	/* 주문완료 페이지 */
 	@RequestMapping(value="/orderConfirmed", method=RequestMethod.POST)
