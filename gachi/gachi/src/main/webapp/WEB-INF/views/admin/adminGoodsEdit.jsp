@@ -47,7 +47,7 @@ function goodsDel(){
 <div class="container">
 <h1>상품수정</h1>
 <form method="post" action="adminGoodsEditOk" id="adminGoodsEditOk" enctype="multipart/form-data">
-<ul id="ad_goods_writeForm" style="height: 500px;">
+<ul id="ad_goods_editForm" style="height: 500px;">
 	<li>
 		<ul>
 			<li class="content_center">상품코드</li>
