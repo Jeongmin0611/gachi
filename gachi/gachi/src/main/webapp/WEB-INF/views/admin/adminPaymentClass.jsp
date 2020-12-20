@@ -179,7 +179,7 @@
 		<li class="wordCut">${data.class_name}</li>
 		<li>${data.userid}</li>
 		<li>${data.username}</li>
-		<li>${data.real_price }</li>
+		<li><fmt:formatNumber value="${data.real_price }" pattern="#,###"/>원</li>
 		<!-- <li>0</li> -->
 		<li>${data.orderdate}</li>
 		<li><c:if test="${data.settlement eq 'n'  or data.settlement eq 'N'}">미정산</c:if><c:if test="${data.settlement eq 'y'  or data.settlement eq 'Y'}">정산완료</c:if></li>

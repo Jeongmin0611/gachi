@@ -60,7 +60,7 @@ public class HomeController {
 		String msg="";//좋아요 업데이트시 추가, 취소 알게 해주는 문자
 		if(ses.getAttribute("logStatus")!=null) {//로그인 한 상태
 			String userid=(String)ses.getAttribute("userid");
-			/*if(req.getParameter("good_add")!=null) {//좋아요 추가
+			if(req.getParameter("good_add")!=null) {//좋아요 추가
 				msg="add";
 
 				String goodCode = req.getParameter("good_add");
@@ -73,8 +73,8 @@ public class HomeController {
 				String goodCode = req.getParameter("good_del");
 				uDao.wishListDel(userid, goodCode);	
 				uDao.goodClassUpdate(goodCode, msg);			
-			}*/
-			//좋아요 클래스
+			}
+			//좋아요 클
 			List<OrderListVO> cgoodList = uDao.classWishList(userid);			
 			//醫뗭븘�슂 �긽�뭹
 			List<OrderListVO> ggoodList = uDao.goodsWishList(userid);

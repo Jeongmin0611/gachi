@@ -19,5 +19,13 @@ public interface GoodsDaoImp {
 
 	int updateStore(GoodsVO vo);
 
+	int selectTodayGoodsCnt();
+
+	int selectTodayGoodsCnt(String writedate);
+
+	void insertStore(GoodsVO vo);
+
+	void deleteOne(String code);
+
 
 }

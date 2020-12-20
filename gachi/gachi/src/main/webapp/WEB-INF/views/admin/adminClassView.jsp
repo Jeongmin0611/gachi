@@ -61,8 +61,8 @@
 			<li>카테고리 ${vo.category}</li>
 			<li>클래스명 ${vo.class_name}</li>
 			<li>난이도 ${vo.stage}</li>
-			<li>원가 ${vo.full_price}</li>
-			<li>가격 ${vo.real_price}</li>
+			<li>원가 <fmt:formatNumber value="${vo.full_price }" pattern="#,###"/>원</li>
+			<li>가격 <fmt:formatNumber value="${vo.real_price }" pattern="#,###"/>원</li>
 			<li>좋아요 ${vo.good}</li>
 			<li>등록일 ${vo.allow}</li>
 			<li>상태 ${vo.class_state}</li>

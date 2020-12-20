@@ -3,8 +3,6 @@ package com.bitcamp.gachi.admin;
 import java.util.List;
 
 public class GoodsVO {
-
-	
 	
 	private String code;
 	private String category; //카테고리
@@ -23,18 +21,6 @@ public class GoodsVO {
 	private int grade; // 평점
 	private String goods_img1; //상품이미지 
 	private String goods_img2; //상품이미지 
-	private String goods_img3; //상품이미지 
-	private String goods_img4; //상품이미지 
-	private List<String> imgList;
-	
-	
-	
-	public List<String> getImgList() {
-		return imgList;
-	}
-	public void setImgList(List<String> imgList) {
-		this.imgList = imgList;
-	}
 	public String getCode() {
 		return code;
 	}
@@ -137,27 +123,14 @@ public class GoodsVO {
 	public void setGoods_img2(String goods_img2) {
 		this.goods_img2 = goods_img2;
 	}
-	public String getGoods_img3() {
-		return goods_img3;
-	}
-	public void setGoods_img3(String goods_img3) {
-		this.goods_img3 = goods_img3;
-	}
-	public String getGoods_img4() {
-		return goods_img4;
-	}
-	public void setGoods_img4(String goods_img4) {
-		this.goods_img4 = goods_img4;
-	}
+	
 	@Override
 	public String toString() {
 		return "GoodsVO [code=" + code + ", category=" + category + ", goods_name=" + goods_name + ", prime_cost="
 				+ prime_cost + ", real_price=" + real_price + ", stock=" + stock + ", stack=" + stack + ", writedate="
 				+ writedate + ", startdate=" + startdate + ", enddate=" + enddate + ", sale_count=" + sale_count
 				+ ", sale_state=" + sale_state + ", goods_info=" + goods_info + ", good=" + good + ", grade=" + grade
-				+ ", goods_img1=" + goods_img1 + ", goods_img2=" + goods_img2 + ", goods_img3=" + goods_img3
-				+ ", goods_img4=" + goods_img4 + "]";
+				+ ", goods_img1=" + goods_img1 + ", goods_img2=" + goods_img2 + "]";
 	}
-	
-	
+
 }

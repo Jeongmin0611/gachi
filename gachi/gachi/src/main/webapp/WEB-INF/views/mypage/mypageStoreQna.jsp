@@ -155,7 +155,7 @@
 			<label style="font-size:1.1em"><b>질문/답변</b></label>
 			<hr class="userHr"/>
 			<div style="text-align:right">
-				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">질문작성</button>
+				<button type="button" id="myclassQnaFrm" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">질문작성</button>
 			</div>
 			<c:if test="${empty list }">
 				<div style="text-align:center"><img src="/gachi/img/icon_eventReply.png" style="width:10%;margin:40px 0"/>

@@ -892,10 +892,66 @@ public class CreatorController {
 		return mav;
 	}
 	@RequestMapping(value="/creatorEditOk",method=RequestMethod.POST)
-	public ModelAndView creatorEditOk(HttpSession ses,AllVO vo) {
+	public ModelAndView creatorEditOk(HttpSession ses, AllVO vo, MultipartHttpServletRequest mhsr, Object imgFile) {
+		
 		String userid = (String)ses.getAttribute("userid");
-
+		
+		String path=ses.getServletContext().getRealPath("/upload/creatorImg");
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);	
+		
+		MultipartFile image = mhsr.getFile("imgFile");
+		if(!image.equals(null) && image != null) {
+			boolean isc = image.isEmpty();
+
+			if(!isc){
+//				원래 img_event 삭제.
+				String imageName=vo.getPicture();
+				System.out.println(imageName);
+				
+				if(imageName != null && imageName.length() > 0) {
+					File file=new File(path, imageName);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+				
+//				그리고 새로운 event_img upload.
+				
+//				OutputStream ops = null;
+				String filePath = null;
+				
+				String fName=image.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					SimpleDateFormat  yyyymmdd = new SimpleDateFormat("yyyyMMddhhmmss");
+					String todate =  yyyymmdd.format(new Date());
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,todate + "_" + fName);
+					vo.setPicture(newFile.getName());
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile= todate + "_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						image.transferTo(newFile);
+						System.out.println("newFile:" + newFile);
+
+						vo.setPicture(newFile.getName());
+						
+						filePath="/gachi/upload/creatorImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}//isc
+		}//null
 		
 		int result = dao.UpdateCreatorlist(vo);	
 		int result1 = dao.UpdateCreatorlist1(vo);
@@ -906,6 +962,35 @@ public class CreatorController {
 		mav.setViewName("creator/creatorEditOk");
 		
 	return mav;
+	}
+	
+	/* 크리에이터 picture 삭제 */
+	@RequestMapping(value="/creatorPictureDelete", method=RequestMethod.GET)
+	public ModelAndView creatorPictureDelete (HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		String path=ses.getServletContext().getRealPath("/upload/creatorImg");
+		
+		String userid = (String) ses.getAttribute("userid");
+		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);
+		AllVO vo = dao.selectCreator(userid);	
+		
+		String picture = vo.getPicture();
+		System.out.println("picture:" + picture);
+		
+		if(picture != null && picture.length() > 0) {
+			File file=new File(path, picture);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		
+		int result = dao.updateCreatorPictureNone(userid);
+		System.out.println("result:" + result);
+		
+		mav.addObject(vo);
+		mav.setViewName("redirect:creatorEdit");
+		return mav;
 	}
 	
 	/* 회원탈퇴 */
