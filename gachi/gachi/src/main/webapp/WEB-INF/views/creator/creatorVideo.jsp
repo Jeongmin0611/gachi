@@ -168,7 +168,7 @@
 				<li class="wordCut">${vlist.class_name}</li>
 				<li class="wordCut">${vlist.unit_content}</li>
 				<li class="wordCut">${vlist.section_index}</li>
-				<li><a href="/gachi/creatorVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
+				<li class="wordCut"><a href="/gachi/creatorVideoView?code=${vlist.code}&video_filename=${vlist.video_filename}">${vlist.video_name}</a></li>
 				<li class="wordCut">${vlist.video_filename}</li>
 				<li class="wordCut">${vlist.nickname}</li>
 				<li class="wordCut">${vlist.lengthStr}</li>
@@ -189,21 +189,21 @@
 				<fmt:parseNumber var="tmp" integerOnly="true" value="${nowPage/5}"/>
 				<fmt:parseNumber var="startPage" integerOnly="true" value="${tmp*5+1}"/>
 			</c:if>
+			
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
-
 					<li>
 						<a class="btn" href="/gachi/creatorVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${startPageNum+10-1 }">
-					<c:if test="${i <= lastPage }">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${(startPage+i) <= lastPage }">
 					<li>
-						<a class="btn" href="/gachi/creatorVideo?now=${i}">${i}</a>
+						<a class="btn" href="/gachi/creatorVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage<lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li>
 						<a class="btn" href="/gachi/creatorVideo?now=${nowPage+1}">Next</a>
 					</li>
@@ -211,25 +211,23 @@
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
-
 					<li>
 						<a class="btn" href="/gachi/creatorVideo?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${startPageNum+10-1 }">
-					<c:if test="${i <= lastPage }">
+				<c:forEach var="i" begin="0" end="4">
+					<c:if test="${(startPage+i) <= lastPage }">
 					<li>
-						<a class="btn" href="/gachi/creatorVideo?now=${i }">${i }</a>
+						<a class="btn" href="/gachi/creatorVideo?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
-				<c:if test="${nowPage<lastPage}">
+				<c:if test="${(lastPage - startPage) > 5}">
 					<li>
 						<a class="btn" href="/gachi/creatorVideo?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
-			
 	</ul>
 </div>
 </div>

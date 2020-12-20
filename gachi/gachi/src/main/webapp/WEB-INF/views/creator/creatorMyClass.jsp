@@ -158,7 +158,7 @@ var now=${nowPage};
 	<div class="cr_MyClass_list_menu">
 		<button onclick="location.href='/gachi/creatorMyClassWrite'" class="btn">강좌개설신청</button>
 	</div>
-	<div id="paging">
+<div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 
 			<c:if test="${(nowPage % 5) eq 0}">
@@ -171,38 +171,38 @@ var now=${nowPage};
 			
 			<c:if test="${method eq 'get' }">
 				<c:if test="${startPage ne 1}">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${(startPage+i) <= lastPage }">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
 			</c:if>
 			<c:if test="${method eq 'post' }">
 				<c:if test="${startPage ne 1}">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage-1}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
 					<c:if test="${(startPage+i) <= lastPage }">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${startPage+i }">${startPage+i }</a>
 					</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${(lastPage - startPage) > 5}">
-					<li class="btn">
+					<li>
 						<a class="btn" href="/gachi/creatorMyClass?now=${nowPage+1}">Next</a>
 					</li>
 				</c:if>
