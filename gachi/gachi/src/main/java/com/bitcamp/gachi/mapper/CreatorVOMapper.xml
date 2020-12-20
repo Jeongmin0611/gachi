@@ -298,128 +298,201 @@
 	
 	<select id="getcreClassList" resultType="com.bitcamp.gachi.admin.ClassVO" parameterType="map">
 		select class_name,code from class join member on class.userid=member.userid 
-		where class.userid='${userid}' and category='${category}'
+		where class.userid='${userid}' and category='${category}' and class_state='미승인'
 	</select>
-	<select id="selectcreClassAllCount" parameterType="map" resultType="int">
-		select count(*) from class join member on class.userid=member.userid 
-		where member.userid='${userid}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} 
-		and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
+	<select id="selectClassSeqCurrval" resultType="int">
+		SELECT last_number FROM USER_SEQUENCES where sequence_name='CLASS_SQ'
+	</select>
+	<insert id="creClassInsert" parameterType="com.bitcamp.gachi.admin.ClassVO">
+		insert into class(code,category,class_name,full_price,real_price,class_term,class_info,class_img,userid,class_img2)
+		values('${code}','${category}','${class_name}',${full_price},${real_price},${class_term},
+		'${class_info}','${class_img}','${userid}','${class_img2}')
+	</insert>
+	<insert id="classCodeInsert" parameterType="String">
+		insert into code values('${param}')
+	</insert>
+	<select id="selectClassNextSeq" resultType="int"> 
+	  	select class_sq.NEXTVAL from dual
+	</select>
+	<select id="selectSectionSeq" resultType="int">
+		select section_sq.NEXTVAL from dual
+	</select>
+	<insert id="sectionInsert" parameterType="com.bitcamp.gachi.admin.ClassVO">
+		insert into section values('${section_code}','${code}',${unit},'${unit_content}')
+	</insert>
+	
+	
+	<select id="selectcreClassAllCount" parameterType="map" resultType="_int">
+			select count(*) from class join member on class.userid=member.userid 
+			where class.userid='${userid}' 
 			<choose> 
 				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
 				<when test="category!=null and dateOption==null and search==null and class_state==null">
-					and category='${category}'
+					and category='${category}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category!=null and dateOption!=null and search==null and class_state==null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 					and class_state='${class_state}' 
 				</when>
 				
 				<when test="category==null and dateOption!=null and search==null and class_state==null">
-					and dateOption='${dateOption}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category==null and dateOption!=null and search==null and class_state!=null">
-					and dateOption='${dateOption}' and class_state='${class_state}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate} and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption!=null and search!=null and class_state==null">
-					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					 and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate} and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
-					and category='${category}'and class_state='${class_state}'
+					and category='${category}'and class_state='${class_state}' 
+					and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category==null and dateOption==null and search!=null and class_state==null">
+					and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
+					 and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					 and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 					 and class_state='${class_state}'  
 					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when> 
 				<when test="category!=null and dateOption==null and search!=null and class_state==null">
-					 and category='${category}'
+					 and category='${category}' and 
+					 to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
 					and category='${category}' and class_state='${class_state}' 
-					and dateOption='${dateOption}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
 					and category='${category}' and class_state='${class_state}'  
+					and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				
 				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
-					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and class_state='${class_state}'
 					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					  and dateOption='${dateOption}' and  category='${category}'
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption==null and search==null and class_state!=null">
+					  and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and  category='${category}'
+					  and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption==null and search!=null and class_state!=null">
+					  and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and class_state='${class_state}'
 					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 			</choose>
 	</select>
-	<select id="selectcreClassList" resultType="com.bitcamp.gachi.admin.ClassVO" parameterType="map">
-	SELECT * FROM
+	<select id="selectcreClassList" parameterType="map" resultType="com.bitcamp.gachi.admin.ClassVO">
+		SELECT * FROM
 		(SELECT A.*,
 		ROWNUM AS RNUM
 		FROM
 		(select code,category,class_name,nickname,total_student,to_char(signup,'YYYY-MM-DD') signup,   
-		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid
-		where m.userid='${userid}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate} 
-		and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}	
+		to_char(allow,'YYYY-MM-DD') allow,class_state from class c join member m on c.userid=m.userid	
+		where c.userid='${userid}'
 		<choose> 
 				<when test="category==null and dateOption==null and search==null and class_state==null"></when>
 				<when test="category!=null and dateOption==null and search==null and class_state==null">
-					and category='${category}'
+					and category='${category}' and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category!=null and dateOption!=null and search==null and class_state==null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state!=null">
-					and category='${category}' and dateOption='${dateOption}'
+					and category='${category}' and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 					and class_state='${class_state}' 
 				</when>
 				
 				<when test="category==null and dateOption!=null and search==null and class_state==null">
-					and dateOption='${dateOption}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				<when test="category==null and dateOption!=null and search==null and class_state!=null">
-					and dateOption='${dateOption}' and class_state='${class_state}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate} and class_state='${class_state}'
 				</when>
 				<when test="category==null and dateOption!=null and search!=null and class_state==null">
-					 and dateOption='${dateOption}' and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					 and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
+					   and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
-					and category='${category}'and class_state='${class_state}'
+					and category='${category}'and class_state='${class_state}' 
+					and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category==null and dateOption==null and search!=null and class_state==null">
+					and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				 <when test="category==null and dateOption==null and search!=null and class_state!=null">
 					 and class_state='${class_state}'  
 					 and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					 and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when> 
 				<when test="category!=null and dateOption==null and search!=null and class_state==null">
 					 and category='${category}'
 					and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+					 and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				
 				<when test="category!=null and dateOption!=null and search==null and class_state!=null">
 					and category='${category}' and class_state='${class_state}' 
-					and dateOption='${dateOption}'
+					and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
 				</when>
 				
 				<when test="category!=null and dateOption==null and search!=null and class_state!=null">
@@ -428,11 +501,26 @@
 				</when>
 				
 				<when test="category==null and dateOption!=null and search!=null and class_state!=null">
-					  and dateOption='${dateOption}' and class_state='${class_state}'
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}
+					   and class_state='${class_state}'
 					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 				<when test="category!=null and dateOption!=null and search!=null and class_state==null">
-					  and dateOption='${dateOption}' and  category='${category}'
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(${dateOption}, 'yyyy-mm-dd')&lt;=#{endDate}' and  category='${category}'
+					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
+				</when>
+				<when test="category!=null and dateOption==null and search==null and class_state!=null">
+					  and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and  category='${category}'
+					  and class_state='${class_state}'
+				</when>
+				<when test="category==null and dateOption==null and search!=null and class_state!=null">
+					  and to_char(signup, 'yyyy-mm-dd')&gt;=#{startDate}
+					  and to_char(signup, 'yyyy-mm-dd')&lt;=#{endDate}
+					  and class_state='${class_state}'
 					  and (code like '%${search}%' or class_name like '%${search}%' or nickname like '%${search}%')
 				</when>
 			</choose>
@@ -442,7 +530,6 @@
 		)
 		WHERE
 		RNUM &gt;=${startNum}
-	
 	</select>
 	<update id="updateCreatorPictureNone" parameterType="String">
 		update creator set picture=null where userid=#{userid}

@@ -123,7 +123,8 @@
 				<li>
 					<select id="class_state" name="class_state">
 						<option value="">전체</option>
-						<option value="등록대기">등록대기</option>
+						<option value="미승인">미승인</option>
+						<option value="영상승인대기">영상승인대기</option>
 						<option value="판매중">판매중</option>
 						<option value="종료">종료</option>
 					</select>

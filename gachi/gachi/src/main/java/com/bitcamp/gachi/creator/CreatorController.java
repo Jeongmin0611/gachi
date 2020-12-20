@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,7 @@ import com.bitcamp.gachi.admin.AllVO;
 import com.bitcamp.gachi.admin.ClassDaoImp;
 import com.bitcamp.gachi.admin.ClassVO;
 import com.bitcamp.gachi.admin.ClassVideoVO;
+import com.bitcamp.gachi.admin.ClassvideoSort;
 import com.bitcamp.gachi.admin.CreatorDaoImp;
 import com.bitcamp.gachi.admin.MemberDaoImp;
 import com.bitcamp.gachi.admin.MemberVO;
@@ -840,8 +843,18 @@ public class CreatorController {
 		return mav;
 	}
 	@RequestMapping ("/creatorMyClassWrite")
-	public String creatorMyClassWrite() {
-		return "creator/creatorMyClassWrite";
+	public ModelAndView creatorMyClassWrite() {
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);
+		int cur=dao.selectClassSeqCurrval();
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("YYYYMMdd");
+		String dateStr=sdf.format(date);
+		String code="c"+dateStr+cur;
+		System.out.println("code===>"+code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("code",code);
+		mav.setViewName("creator/creatorMyClassWrite");
+		return mav;
 	}
 	@RequestMapping("/creatorClassQuestion")
 	public String creatorClassQuestion() {
@@ -1387,6 +1400,63 @@ public class CreatorController {
 	public String creatorVideoWrite() {
 		return "creator/creatorVideoWrite";
 	}
+	@RequestMapping(value="/creatorVideoWriteOk",method = RequestMethod.POST)
+	public ModelAndView creatorVideoWriteOk(ClassVideoVO vo) {
+		ClassDaoImp dao =sqlSession.getMapper(ClassDaoImp.class);
+		int[] unitArray=vo.getUnitArray();
+		int[] sectionIndex=vo.getSectionIndex();
+		String[] enrollDate=vo.getEnrollDate();
+		String[] unitContent=vo.getUnitContent();
+		String[] videoName=vo.getVideoName();
+		String[] videoFileName=vo.getVideoFileName();
+		double[] videoLength=vo.getVideoLength();
+		List<String> sectionCode=new ArrayList<String>();
+		List<ClassVideoVO> list=new ArrayList<ClassVideoVO>();
+		
+		ClassvideoSort cvs=new ClassvideoSort();
+		ModelAndView mav=new ModelAndView();
+		
+		
+		for(int i=0;i<unitContent.length;i++){
+			String section_code=dao.selectSectionCode(unitContent[i]);
+			sectionCode.add(section_code);
+		}
+		
+			for (int i = 0; i < unitArray.length; i++) {
+				ClassVideoVO vo1=new ClassVideoVO();
+				vo1.setCode(vo.getCode());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+				String dateStr = null;
+				try {
+					Date date = sdf.parse(enrollDate[i]);
+					dateStr = sdf.format(date);
+				} catch (java.text.ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				vo1.setVideo_code("v"+dateStr);
+				vo1.setSection_code(sectionCode.get(i));
+				vo1.setVideo_name(videoName[i]);
+				vo1.setVideo_length(videoLength[i]);
+				vo1.setSection_index(sectionIndex[i]);
+				vo1.setVideo_filename(videoFileName[i]);
+				list.add(vo1);
+			}
+			Collections.sort(list,cvs);
+			for (int i = 0; i < list.size(); i++) {
+				ClassVideoVO vo3=list.get(i);
+				int result=dao.videoInsert(vo3);
+				if(result<=0) {
+					break;
+				}
+			}
+			
+			dao.classStateUpdate(vo.getCode());
+			
+			mav.setViewName("redirect:creatorVideo");
+			return mav;
+	}
+	
 	
 	@RequestMapping("/creatorVideoView")
 	public ModelAndView creatorVideoView(HttpServletRequest req) {
@@ -1449,5 +1519,150 @@ public class CreatorController {
 		map.put("category",category);
 		List<ClassVO> list=dao.getcreClassList(map);
 		return list;
+	}
+		@RequestMapping(value="/creImgThumbnail",method=RequestMethod.POST,produces="application/text;charset=UTF-8" )
+		@ResponseBody
+		public String creImgThumbnail(HttpSession session,MultipartHttpServletRequest mhsr,
+				@RequestParam("code") String code) {
+			ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+			MultipartFile file=mhsr.getFile("file");
+			String path=session.getServletContext().getRealPath("/upload/classImg");
+			boolean isc=file.isEmpty();
+			String filePath=null;
+			if(!isc){
+				String fName=file.getOriginalFilename();
+				if(fName!=null&&!fName.equals("")) {
+					String oriFileName=fName.substring(0,fName.lastIndexOf("."));
+					String oriExt=fName.substring(fName.lastIndexOf("."));
+					File newFile=new File(path,code+"_"+fName);
+					if(newFile.exists()) {
+						for (int renameNum=1;;renameNum++) {
+							String renameFile=code+"_"+oriFileName+"("+renameNum+")"+oriExt;
+							System.out.println("filename==> "+renameFile);
+							newFile=new File(path,renameFile);
+							if(!newFile.exists()) {
+								fName=renameFile;
+								break;
+							}//if
+						}//for
+					}//if
+					try {
+						file.transferTo(newFile);
+						filePath="/gachi/upload/classImg/"+newFile.getName();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}//if
+			}
+			return filePath;
+		}
+	
+	@RequestMapping(value = "/creatorMyClassWriteOk",method = RequestMethod.POST)
+	public ModelAndView creatorMyClassWriteOk(ClassVO vo,HttpSession session,
+			MultipartHttpServletRequest mhsr) {
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		ModelAndView mav=new ModelAndView();
+		CreatorDaoImp dao=sqlSession.getMapper(CreatorDaoImp.class);
+		String[] codes=vo.getCodes();
+		
+		dao.classCodeInsert(vo.getCode());
+		String[] imgNames=vo.getImgNames();
+		String fullName="";
+		if(imgNames!=null) {
+			for (int i = 0; i < imgNames.length; i++) {
+				fullName+=imgNames[i]+",";
+			}
+			vo.setClass_img2(fullName);
+		}
+		System.out.println("fullName==>"+fullName);
+		String userid=(String)session.getAttribute("userid");
+		vo.setUserid(userid);
+		MultipartFile mainImg=mhsr.getFile("mainImg");
+		if(!mainImg.isEmpty()){
+			String filename=mainImg.getOriginalFilename();
+			if(filename!=null&&!filename.equals("")) {
+				String oriFileName=filename.substring(0,filename.lastIndexOf("."));
+				String oriExt=filename.substring(filename.lastIndexOf("."));
+				File newFile=new File(path,codes[0]+"_"+filename);
+				if(newFile.exists()) {
+					for (int renameNum=1;;renameNum++) {
+						String renameFile=codes[0]+"_"+oriFileName+"("+renameNum+")"+oriExt;
+						System.out.println("filename==> "+renameFile);
+						newFile=new File(path,renameFile);
+						if(!newFile.exists()) {
+							filename=renameFile;
+							break;
+						}//if
+					}//for
+				}//if
+				try {
+					mainImg.transferTo(newFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				vo.setClass_img(newFile.getName());
+			}//if
+		}
+		
+		int[] unitArray=vo.getUnitArray();
+		String[] unitContent=vo.getUnitContent();	
+		for (int i = 0; i < unitContent.length; i++) {
+			ClassVO vo2=new ClassVO();
+			int seq=dao.selectSectionSeq();
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("YYYYMMdd");
+			String dateStr=sdf.format(date);
+			String sectionCode="sc"+dateStr+seq;
+			vo2.setCode(codes[0]);
+			vo2.setSection_code(sectionCode);
+			vo2.setUnit(unitArray[i]);
+			vo2.setUnit_content(unitContent[i]);
+			int result1=dao.sectionInsert(vo2);
+			if(result1<=0){
+				mav.setViewName("creator/creatorResult");
+			}else {
+				mav.setViewName("redirect:creatorMyClass");
+			}
+		}
+		int result2=dao.creClassInsert(vo);
+		if(result2<=0) {
+			mav.setViewName("creator/creatorResult");
+		}else {
+			dao.selectClassNextSeq();
+			mav.setViewName("redirect:creatorMyClass");
+		}
+		return mav;
+}
+	@RequestMapping(value="creImageDelete",method = RequestMethod.GET)
+	@ResponseBody
+	public void creImageDelete(HttpServletRequest req,HttpSession session) {
+		String path=session.getServletContext().getRealPath("/upload/classImg");
+		String imageName=req.getParameter("imageName");
+		System.out.println("imageName=>"+imageName);
+		File file=new File(path,imageName);
+		if(file.exists()) {
+			file.delete();
+		}
+	} 
+	@RequestMapping("/creatorMyClassView")
+	public ModelAndView creatorMyClassView(@RequestParam("code") String code) {
+		ClassDaoImp dao=sqlSession.getMapper(ClassDaoImp.class);
+		ClassVO vo=dao.selectClass(code);
+		List<String> list=new ArrayList<String>();
+		if(vo.getClass_img2()!=null) {
+			StringTokenizer st=new StringTokenizer(vo.getClass_img2(),",");
+			
+			while(st.hasMoreTokens()) {
+				list.add(st.nextToken());
+			}
+			vo.setImgList(list);
+		}
+		List<ClassVideoVO> sectionList=dao.selectSection(code);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("vo",vo);
+		mav.addObject("list",list);
+		mav.addObject("sectionList",sectionList);
+		mav.setViewName("creator/creatorMyClassView");
+		return mav;
 	}
 }
