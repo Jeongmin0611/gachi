@@ -372,8 +372,8 @@ a:link, a:visited{
 	  			return false;
 	  		}else{
 	  			//버튼
-				$("#reviewForm").css("display","none");
-				$("#reviewUpdateForm").css("display","block");
+				$("#reviewForm").css("display","block");
+				$("#reviewUpdateForm").css("display","none");
 				//수정이후 수강평 등록 눌렀을 시 내용 지우기
 				$("#reviewSubject").val(""); 
 				CKEDITOR.instances.reviewContent.setData(""); 

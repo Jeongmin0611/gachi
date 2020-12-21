@@ -156,6 +156,16 @@
 input[type=text] {
 	text-align: left;
 }
+/*수정삭제 a버튼*/
+a:link, a:visited{
+	text-decoration: none;
+	color: #000;
+}
+a:hover{
+	text-decoration: none;
+	font-weight:bold;
+	color: #00498c;
+}
 </style>
 <script>
 function reviewMoreContent(){

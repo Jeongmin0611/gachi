@@ -28,7 +28,7 @@
 		select count(notice_num) from notice
 		<choose>
 			<when test="searchWord!=null">
-				where target ='사용자' or target='전체'  ${searchKey} like '%${searchWord}%'
+				where target ='사용자' or target='전체' and ${searchKey} like '%${searchWord}%'
 			</when>
 		</choose>
 	</select>
