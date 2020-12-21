@@ -45,7 +45,7 @@
 		$("#category").val("${category}").attr("selected", "selected");
 		$("#search").val("${search}");
 		
-var now=${nowPage};
+		var now=${nowPage};
 		
 		$("#searchBtn").click(function(){
 			if($('#startDate').val()>=$('#endDate').val()){
@@ -94,7 +94,6 @@ var now=${nowPage};
  <div class="container text-center ad_font">
  	<h1>클래스 관리</h1>
 	<form method="post" action="creatorMyClass">
-	<h3>검색옵션</h3>
 			<ul id="search_area">
 				<li>날짜옵션</li>
 				<li>	

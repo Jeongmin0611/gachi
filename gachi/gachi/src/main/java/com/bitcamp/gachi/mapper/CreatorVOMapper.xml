@@ -240,7 +240,8 @@
 	<select id="creVideoAllRecordCount" parameterType="map" resultType="_int">
 		select count(video_code) from class_video cv join class c on cv.code=c.code
 		join member m on c.userid=m.userid where c.userid='${userid}' and
-		enroll_date between '${startDate}' and '${endDate}'   
+		enroll_date between to_date('${startDate}','YYYY-MM-DD') 
+		and to_date('${endDate}','YYYY-MM-DD')+1   
 		<choose>
 			<when test="category!=null and searchWord==null ">
 				and category='${category}'

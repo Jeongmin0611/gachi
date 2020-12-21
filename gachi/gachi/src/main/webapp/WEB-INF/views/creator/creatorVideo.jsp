@@ -65,13 +65,14 @@
 <script>
 	$(()=>{
 		$(function(){
-			var now=${nowPage};
 			$("#startDate").val("${startDate}");
 			$("#endDate").val("${endDate}");
 			$("#searchWord").val("${searchWord}");
 			$("#category").val("${category}").attr("selected", "selected");
 			$("#payment_type").val("${payment_type}").attr("selected", "selected");	
 			$('.ad_goods_searchForm').css("text-align","right").css("margin","5px 0px");
+			
+			var now=${nowPage};
 			
 			$("#searchBtn").click(function(){
 				var url = "/creatorVideo";
