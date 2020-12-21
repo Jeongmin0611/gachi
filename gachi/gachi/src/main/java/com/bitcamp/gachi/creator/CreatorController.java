@@ -1353,6 +1353,7 @@ public class CreatorController {
 		dbParam.put("endNum", endNum+"");
 		
 		CreatorDaoImp dao = sqlSession.getMapper(CreatorDaoImp.class);		
+		dao = sqlSession.getMapper(CreatorDaoImp.class);
 		
 		String userid=String.valueOf(session.getAttribute("userid"));
 		dbParam.put("userid", userid);
