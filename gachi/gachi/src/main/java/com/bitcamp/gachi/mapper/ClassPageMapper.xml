@@ -207,7 +207,8 @@
 		update qna set subject='${subject}', content='${content}' where num=${num}
 	</update>
 	<select id="courseCheck" resultType="int">
-		select count(*) from course where code='${code}' and userid='${userid}'
+		select count(*) from course 
+		where code='${code}' and userid='${userid}'
 	</select>
 	<select id="creatorCheck" resultType="int">
 		select count(*) from creator c join class m on c.userid=m.userid where m.userid='${userid}' and code='${code}'
