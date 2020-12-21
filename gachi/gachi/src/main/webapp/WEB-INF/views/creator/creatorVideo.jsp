@@ -65,7 +65,6 @@
 <script>
 	$(()=>{
 		$(function(){
-			alert(${startPageNum});
 			var now=${nowPage};
 			$("#startDate").val("${startDate}");
 			$("#endDate").val("${endDate}");

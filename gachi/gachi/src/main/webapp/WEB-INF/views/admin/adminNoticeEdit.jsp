@@ -17,7 +17,7 @@
 </style>
 <script type="text/javascript">
 	$(function(){
-		CKEDITOR.replace('content',{
+		var editor=CKEDITOR.replace('content',{
 			imageUploadUrl:'/gachi/imageUpload',
 			extraPlugins:'uploadimage'
 		});
