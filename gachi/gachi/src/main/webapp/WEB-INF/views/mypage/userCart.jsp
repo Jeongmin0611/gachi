@@ -158,8 +158,8 @@
 								<input type="number" min="1" max="99" value="${gvo.amount }" style="width:15%;border:1px solid #ddd;text-align:right"/>개
 								<button type="button" class="btn btn-primary btn-sm amountChange">수정</button>
 								<input type="hidden" value="${gvo.code }"/>
-								<input type="text" value="${gvo.stack }" style="width:15%;text-align:right" readonly/>p
-								<input type="text" value="<fmt:formatNumber value="${gvo.real_price }" pattern="#,###" />" style="width:30%;text-align:right" readonly/>원
+								<input type="text" value="${gvo.stack*gvo.amount }" style="width:15%;text-align:right" readonly/>p
+								<input type="text" value="<fmt:formatNumber value="${gvo.real_price*gvo.amount }" pattern="#,###" />" style="width:30%;text-align:right" readonly/>원
 								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDelete?code=${gvo.code}'" style="float:right">X</button>
 							</div>
 						</div>
@@ -167,7 +167,6 @@
 						<c:set var="sum" value="${sum+gvo.real_price*gvo.amount }"/>
 						<c:set var="cnt" value="${cnt+1 }"/>
 					</c:forEach>
-					<button type="button" id="selectDel" class="btn btn-info btn-sm">선택상품삭제</button>
 					<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/gachi/userCartDeleteAll'">전체삭제</button>
 					<label style="font-size:0.7em;margin:10px">*주문 시 상품 합계 금액이 50,000원 이상은 무료배송이며, 미만일 경우 2,500원의 배송비가 추가 됩니다.</label>
 					<hr/>
@@ -186,7 +185,6 @@
 						<div style="font-size:1.2em;"><b>총 금액</b> <fmt:formatNumber value="${sum+ship }" pattern="#,###" />원</div>
 					</div>
 					<div>
-						<button type="button" class="btn btn-light" onclick="history.go(-2)">쇼핑계속하기</button>
 						<button type="button" class="btn btn-light submitOrder">선택상품주문</button>
 						<button type="button" id="allOrder" class="btn btn-light submitOrder">전체상품주문</button>
 					</div>

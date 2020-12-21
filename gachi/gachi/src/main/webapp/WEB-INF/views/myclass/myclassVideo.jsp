@@ -260,7 +260,8 @@
 	<div id="myclassVideoLst">
 		<div style="padding:10px 20px">
 			<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
-			<div>진도율 : <fmt:formatNumber value="${vo.progress }" pattern=".00" />%</div>
+			<div>진도율 : <c:if test="${vo.progress eq 0 }">${vo.progress }</c:if>
+						<c:if test="${vo.progress ne 0 }"><fmt:formatNumber value="${vo.progress }" pattern=".00" /></c:if>%</div>
 			<div>수강시간 : 0분</div>
 			<div>수강기한 : ${vo.startdate } ~ ${vo.enddate }</div>
 			<c:if test="${vo.progress eq 0 }">
