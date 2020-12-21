@@ -537,7 +537,11 @@ public class MypageController {
 		int mileagePosiSum = 0;
 		int mileageNegaSum = 0;
 		
-		if(dao.countMileage(userid)!=0) { //한번이라도 마일리지 받은적 있으면 합계 구해서 저장
+		if(dao.countMileage(userid)==1) { //회원가입해서 처음 마일리지받음
+			mileageAllSum = dao.mileageAllSum(userid);
+			mileagePosiSum = dao.mileagePosiSum(userid);
+			mileageNegaSum = 0;
+		}else if(dao.countMileage(userid)>1) {
 			mileageAllSum = dao.mileageAllSum(userid);
 			mileagePosiSum = dao.mileagePosiSum(userid);
 			mileageNegaSum = dao.mileageNegaSum(userid);

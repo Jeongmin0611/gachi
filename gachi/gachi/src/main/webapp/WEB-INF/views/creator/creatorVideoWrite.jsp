@@ -319,11 +319,11 @@
 	<li style="border-left:3px solid #437299;">
 		<ul id="file_info">
 			<li>파일명</li>
-			<li></li>
+			<li class="wordCut"></li>
 			<li>영상길이</li>
-			<li></li>
+			<li class="wordCut"></li>
 			<li>확장자</li>
-			<li></li>
+			<li class="wordCut"></li>
 			<li>파일용량</li>
 			<li>
 				<c:if test="${filesize!=null}">

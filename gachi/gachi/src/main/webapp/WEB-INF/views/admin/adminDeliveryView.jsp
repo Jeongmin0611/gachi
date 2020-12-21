@@ -46,6 +46,6 @@ function onlyNumber(){
 		<div style="margin:10px 0px; float : right;">
 		<button type="button" class="btn" onclick="location.href='/gachi/adminDelivery'">목록</button>
 			<input type="submit" class="btn" value="배송정보수정"/>		
-		</div>s
+		</div>
 	</form>	
 </div>

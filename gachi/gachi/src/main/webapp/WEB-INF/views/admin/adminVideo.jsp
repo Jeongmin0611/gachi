@@ -116,9 +116,6 @@ $(function(){
 			</c:forEach>
 		</ul>
 	</div>
-	<div class="ad_list_menu">
-		<button class="btn" onclick="location.href='/gachi/adminVideoWrite'">등록</button>
-	</div>
 <div id="paging">
 	<ul class="pagination justify-content-center" style="margin-top: 50px;">
 
