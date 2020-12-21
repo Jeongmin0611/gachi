@@ -152,7 +152,10 @@ button:focus, button:active{
 					</li>
 				</c:if>
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="/gachi/eventBoard?nowPage=${pvo.nowPage+1 }">Next</a></li>
+			<c:if test="${pvo.nowPage<pvo.totalPage }">
+				<li class="page-item"><a class="page-link" href="/gachi/eventBoard?nowPage=${pvo.nowPage+1 }">Next</a></li>
+			</c:if>
+			
 		</ul>
 	</div>
 </div>
