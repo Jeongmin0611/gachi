@@ -29,6 +29,9 @@ public class OrderListVO {
 	
 	private String startdate;
 	private String enddate;
+	private String course_code;
+	private double progress;
+	private String first_video;
 	public String getUserid() {
 		return userid;
 	}
@@ -178,5 +181,23 @@ public class OrderListVO {
 	}
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+	public String getCourse_code() {
+		return course_code;
+	}
+	public void setCourse_code(String course_code) {
+		this.course_code = course_code;
+	}
+	public double getProgress() {
+		return progress;
+	}
+	public void setProgress(double progress) {
+		this.progress = progress;
+	}
+	public String getFirst_video() {
+		return first_video;
+	}
+	public void setFirst_video(String first_video) {
+		this.first_video = first_video;
 	}
 }

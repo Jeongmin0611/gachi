@@ -355,6 +355,7 @@ public class MypageController {
 		vo.setFull_price(Integer.parseInt(order.get("full_price")));
 		vo.setShipping_fee(Integer.parseInt(order.get("shipping_fee")));
 		vo.setDiscount(Integer.parseInt(order.get("discount")));
+		System.out.println(vo.getDiscount());
 		vo.setPrice(Integer.parseInt(order.get("price")));
 		vo.setPayment_type("신용카드");
 		vo.setCard_type((String)order.get("card_type"));
@@ -413,7 +414,19 @@ public class MypageController {
 	@RequestMapping("/myclassList")
 	public ModelAndView myclassList(HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		List<OrderListVO> list = dao.myclassList((String)ses.getAttribute("userid"));
+		String userid = (String)ses.getAttribute("userid");
+		List<OrderListVO> list = dao.myclassList(userid);
+		for(int i=0;i<list.size();i++) {
+			if(dao.playtimeCheck(list.get(i).getCourse_code())==0) {
+				list.get(i).setProgress(0);
+			}else {
+				double full_playtime = dao.fullPlaytime(userid, list.get(i).getCourse_code());
+				double full_video_length = dao.fullVideoLength(list.get(i).getCode());
+				list.get(i).setProgress(full_playtime/full_video_length*100);
+			}
+			list.get(i).setFirst_video(dao.firstVideo(list.get(i).getCode()));
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("mypage/myclassList");
@@ -423,7 +436,17 @@ public class MypageController {
 	@RequestMapping("/myclassView")
 	public ModelAndView myclassView(String code, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
+		String userid = (String)ses.getAttribute("userid");
+		OrderListVO vo = dao.myclassView(userid, code);
+		if(dao.playtimeCheck(vo.getCourse_code())==0) {
+			vo.setProgress(0);
+		}else {
+			double full_playtime = dao.fullPlaytime(userid, vo.getCourse_code());
+			double full_video_length = dao.fullVideoLength(vo.getCode());
+			vo.setProgress(full_playtime/full_video_length*100);
+			System.out.println(vo.getProgress());
+		}
+		
 		
 		List<ClassVideoVO> section = dao.sectionList(code);
 		LinkedHashMap<String,List<ClassVideoVO>> map = new LinkedHashMap<String,List<ClassVideoVO>>();
@@ -434,13 +457,15 @@ public class MypageController {
 		ClassPageDaoImp cDao = sqlSession.getMapper(ClassPageDaoImp.class);
 		List<AllVO> reviewList = cDao.reviewList(code);
 		List<QnaVO> qnaList = dao.qnaList(code);
-		
+		String firstVideo = dao.firstVideo(code);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("code", code);
 		mav.addObject("map", map);
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("qnaList", qnaList);
+		mav.addObject("firstVideo", firstVideo);
 		mav.setViewName("mypage/myclassView");
 		return mav;
 	}
@@ -448,13 +473,56 @@ public class MypageController {
 	@RequestMapping("/myclassVideo")
 	public ModelAndView myclassVideo(String code, String video_code, HttpSession ses) {
 		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
-		OrderListVO vo = dao.myclassView((String)ses.getAttribute("userid"), code);
+		String userid = (String)ses.getAttribute("userid");
+		OrderListVO vo = dao.myclassView(userid, code);
+		if(dao.playtimeCheck(vo.getCourse_code())==0) {
+			vo.setProgress(0);
+		}else {
+			double full_playtime = dao.fullPlaytime(userid, vo.getCourse_code());
+			double full_video_length = dao.fullVideoLength(vo.getCode());
+			vo.setProgress(full_playtime/full_video_length*100);
+			System.out.println(vo.getProgress());
+		}
 		ClassVideoVO vVO = dao.myclassVideoView(code, video_code);
+		
+		List<ClassVideoVO> section = dao.sectionList(code);
+		LinkedHashMap<String,List<ClassVideoVO>> map = new LinkedHashMap<String,List<ClassVideoVO>>();
+		for(int i=0;i<section.size();i++) {
+			map.put(section.get(i).getUnit_content(), dao.classVideoList(code, section.get(i).getSection_code()));
+		}
+		
+		String video_name = dao.selectVideoName(video_code).getVideo_name();
+		String course_code = dao.selectCourseCode(code, (String)ses.getAttribute("userid"));
+		String firstVideo = dao.firstVideo(code);
+		String lastVideo = dao.lastVideo(code);
+		int count = dao.progressCheck(video_code, course_code);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
 		mav.addObject("vVO", vVO);
+		mav.addObject("map", map);
+		mav.addObject("code", code);
+		mav.addObject("video_code", video_code);
+		mav.addObject("video_name", video_name);
+		mav.addObject("firstVideo", firstVideo);
+		mav.addObject("lastVideo", lastVideo);
+		mav.addObject("count", count);
 		mav.setViewName("myclass/myclassVideo");
 		return mav;
+	}
+	/* 다봤어요 */
+	@RequestMapping("/progressInsert")
+	@ResponseBody
+	public int progressInsert(String code, String video_code, HttpSession ses) {
+		UserInfoDaoImp dao = sqlSession.getMapper(UserInfoDaoImp.class);
+		String course_code = dao.selectCourseCode(code, (String)ses.getAttribute("userid"));
+		System.out.println(course_code);
+		ClassVideoVO vo = dao.selectVideoName(video_code);
+		vo.setVideo_code(video_code);
+		vo.setCourse_code(course_code);
+		vo.setUserid((String)ses.getAttribute("userid"));
+		int result = dao.insertProgress(vo);
+		return result;
 	}
 	/* 마일리지 */
 	@RequestMapping("/userMileage")

@@ -1,19 +1,40 @@
 package com.bitcamp.gachi.mypage;
 
 public class ClassVideoVO {
-	private String section_code;
-	private String code;
-	private int unit;
-	private String unit_content;
+	private String userid; /* 아이디(이메일) */
+	private String course_code; /* 수강코드 */
+	private String section_code; /* 목차코드 */
+	private String code; /* 코드 */
+	private int unit; /* 목차순서 */
+	private String unit_content; /* 파트명 */
 	private String[] unit_conArr;
 	
-	private int section_index;
+	private int section_index; /* 영상순서 */
 	private int[] countVideo;
-	private String video_code;
-	private String video_name;
-	private String video_filename;
-	private int video_length;
-	private String enroll_date;
+	private String video_code; /* 동영상코드 */
+	private String video_name; /* 영상제목 */
+	private String video_filename; /* 파일명 */
+	private int video_length; /* 영상길이 */
+	private int playtime; /* 재생시간 */
+	private String enroll_date; /* 등록일자 */
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getCourse_code() {
+		return course_code;
+	}
+	public void setCourse_code(String course_code) {
+		this.course_code = course_code;
+	}
+	public int getPlaytime() {
+		return playtime;
+	}
+	public void setPlaytime(int playtime) {
+		this.playtime = playtime;
+	}
 	public String getSection_code() {
 		return section_code;
 	}
