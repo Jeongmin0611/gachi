@@ -16,8 +16,9 @@
 		(SELECT A.*,
 		ROWNUM AS RNUM
 		FROM
-		(select  order_code , orderlist.userid, member.username, full_price, discount, price , payment_type, card_type ,to_char(orderdate , 'yyyy-mm-dd')orderdate, 
-       	state, fix_state from orderlist join member on orderlist.userid= member.userid 
+		(select  goods_order.order_code , orderlist.userid, member.username, full_price, discount, price , payment_type, card_type ,to_char(orderdate , 'yyyy-mm-dd')orderdate, 
+       	state, goods_order.finished from orderlist join member on orderlist.userid= member.userid
+       	join goods_order on goods_order.order_code=orderlist.order_code  
        	where to_char(orderdate, 'yyyy-mm-dd')&gt;=#{startDate} and to_char(orderdate, 'yyyy-mm-dd')&lt;=#{endDate}	
 		<choose>
 			<when test='state==null and payment_type==null and search==null'></when>

@@ -18,6 +18,15 @@ public class OrderVO {
 	private String detailaddr;
 	private String zipcode;
 	private String etc;
+	private String finished;
+	
+	
+	public String getFinished() {
+		return finished;
+	}
+	public void setFinished(String finished) {
+		this.finished = finished;
+	}
 	public String getUserid() {
 		return userid;
 	}
