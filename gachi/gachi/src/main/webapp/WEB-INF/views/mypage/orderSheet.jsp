@@ -96,7 +96,7 @@
 		                etc: $("#orderMsg").val()
 		                }),
 		          }).done(function(data){
-		        	  alert(msg);
+		        	  alert($("#mileageUse").val());
 		        	  $("#order_code").val(order_code);
 				      $("#orderFrm").submit();
 		          });
@@ -137,15 +137,14 @@
 		$("#mileageBtn").click(function(){
 			if($("#mileageInput").val()>${mileage}){
 				alert("보유한 마일리지를 초과하였습니다. 다시 입력해주세요.");
-				$("#mileageInput").val(0);
 			}else{
 				$("#mileageLbl").text(numberWithCommas($("#mileageInput").val()));
 				$("#mileageUse").val($("#mileageInput").val()*-1);
 				$("#mileageUseLbl").text(numberWithCommas($("#mileageInput").val()*-1));
 				$("#finalPrice").val($("#sumPrice").val()*1+$("#shipLbl").val()*1-$("#mileageInput").val()*1);
 				$("#finalPriceLbl").text(numberWithCommas($("#sumPrice").val()*1+$("#shipLbl").val()*1-$("#mileageInput").val()*1));
-				$("#mileageInput").val(0);
 			}
+			$("#mileageInput").val(0);
 		});
 		//빈칸검사
 		$("#payBtn").click(function inputChk(){

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,6 +160,37 @@
 	}
 </style>
 <script>
+	//초를 시분초로
+	function getTimeStringSeconds(seconds){
+		var hour, min, sec
+		hour = parseInt(seconds/3600);
+		min = parseInt((seconds%3600)/60);
+		sec = seconds%60;
+	
+		if (hour.toString().length==1) hour = "0" + hour;
+		if (min.toString().length==1) min = "0" + min;
+		if (sec.toString().length==1) sec = "0" + sec;
+		
+		if(hour=="00"){
+			return min + ":" + sec;
+		}else{
+			return hour + ":" + min + ":" + sec;
+		}
+	}
+	//이전영상
+	function prevVideo(){
+		var video_code = "${video_code}";
+		var video_code_num = video_code.substr(1)*1;
+		var prevNum = video_code_num-1;
+		return location.href='/gachi/myclassVideo?code=${code}&video_code=v'+prevNum;
+	}
+	//다음영상
+	function nextVideo(){
+		var video_code = "${video_code}";
+		var video_code_num = video_code.substr(1)*1;
+		var nextNum = video_code_num+1;
+		return location.href='/gachi/myclassVideo?code=${code}&video_code=v'+nextNum;
+	}
 	$(function(){
 		$('#videoLstClose').click(function(){
 			$('#myclassVideoLst').hide();
@@ -172,6 +204,23 @@
 			$('#videoLstOpen').hide();
 			$('#videoLstClose').show();
 		});
+		$(".video_length").each(function(){
+			$(this).text(getTimeStringSeconds($(this).text()));
+		});
+		$("#progressBtn").click(function(){
+			$.ajax({
+				url: "/gachi/progressInsert",
+				data: "code=${vo.code}&video_code=${video_code}",
+				type: "GET",
+				success: function(result){
+					if(result>0){
+						location.href=location.href;
+					}
+				}, error: function(){
+					console.log("progress 실패");
+				}
+			});
+		});
 	});
 </script>
 </head>
@@ -181,7 +230,7 @@
 		<div id="myclassVideoTop">
 			<div style="font-size:0.9em"><a href="/gachi/myclassView?code=${vo.code }">나가기<img src="/gachi/img/icon_back.png" style="width:15%;margin-bottom:3%;margin-left:3%"/></a></div>
 			<div style="font-size:0.9em">
-				프랑스 자수 클래스를 소개합니다!
+				${video_name }
 				<button class="btn btn-light" id="videoLstClose">></button>
 				<button class="btn btn-light" id="videoLstOpen"><</button>
 			</div>
@@ -194,58 +243,49 @@
 			</video>
 		</div>
 		<div id="myclassVideoBtm" style="padding:2px">
-			<button type="button" class="btn btn-light">< 이전 영상</button>
-			<button type="button" class="btn btn-primary">다 봤어요!</button>
-			<button type="button" class="btn btn-light">다음 영상 ></button>
+			<c:if test="${video_code ne firstVideo }">	
+				<button type="button" class="btn btn-light" onclick="prevVideo()">< 이전 영상</button>
+			</c:if>
+			<c:if test="${count eq 0 }">
+				<button type="button" class="btn btn-primary" id="progressBtn">다 봤어요!</button>
+			</c:if>
+			<c:if test="${count ne 0 }">
+				<button type="button" class="btn btn-secondary" disabled>수강완료</button>
+			</c:if>
+			<c:if test="${video_code ne lastVideo }">
+				<button type="button" class="btn btn-light" onclick="nextVideo()">다음 영상 ></button>
+			</c:if>
 		</div>
 	</div>
 	<div id="myclassVideoLst">
 		<div style="padding:10px 20px">
 			<div><label class="badge badge-info" style="font-size:0.9em">${vo.category }</label><h4>${vo.class_name }</h4></div>
-			<div>진도율 : 50%</div>
+			<div>진도율 : <fmt:formatNumber value="${vo.progress }" pattern=".00" />%</div>
 			<div>수강시간 : 0분</div>
 			<div>수강기한 : ${vo.startdate } ~ ${vo.enddate }</div>
-			<div class="progress" style="margin:20px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:50%">50%</div></div>
+			<c:if test="${vo.progress eq 0 }">
+				<div class="progress" style="height:30px;margin:10px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:${vo.progress}%">${vo.progress }%</div></div>
+			</c:if>
+			<c:if test="${vo.progress ne 0 }">
+				<div class="progress" style="height:30px;margin:10px 0"><div class="progress-bar progress-bar-striped bg-info" style="width:${vo.progress}%"><fmt:formatNumber value="${vo.progress }" pattern=".00" />%</div></div>
+			</c:if>
 		</div>
 		<ul>
-			<li>
-				<label><b>프랑스 자수 클래스 소개</b></label>
-				<ol>
-					<li><a href="/gachi/myclassVideo">프랑스 자수 클래스를 소개합니다!<label>02:00</label></a></li>
-					<li><a href="/gachi/myclassVideo">클래스 준비물과 주의사항에 대해 알아볼까요?<label>04:00</label></a></li>
-				</ol>
-			</li>
-			<li>
-				<label>01 프랑스 자수의 기초</label>
-				<ol>
-					<li><a href="#">실을 다루는 방법과 매듭짓는 방법<label>00:00</label></a></li>
-					<li><a href="#">작품에 사용될 5가지 스티치 연습하기<label>00:00</label></a></li>
-				</ol>
-			</li>
-			<li>
-				<label>02 베개 커버에 수놓기</label>
-				<ol>
-					<li><a href="#">곰돌이 수놓기1<label>00:00</label></a></li>
-					<li><a href="#">곰돌이 수놓기2<label>00:00</label></a></li>
-				</ol>
-			</li>
-			<li>
-				<label>03 자수 블랭킷 만들기</label>
-				<ol>
-					<li><a href="#">블랭킷 도안선 그리고 위치잡기<label>00:00</label></a></li>
-					<li><a href="#">달모양 수놓기<label>00:00</label></a></li>
-					<li><a href="#">가글 보틀 수놓기<label>00:00</label></a></li>
-					<li><a href="#">잠옷입은 곰돌이 수놓기<label>00:00</label></a></li>
-					<li><a href="#">탁상조명 수놓기<label>00:00</label></a></li>
-				</ol>
-			</li>
-			<li>
-				<label>04 완성</label>
-				<ol>
-					<li><a href="#">세탁방법 알아보기<label>00:00</label></a></li>
-					<li><a href="#">상쾌한 아침을 기다려요!<label>00:00</label></a></li>
-				</ol>
-			</li>
+			<c:forEach var="map" items="${map}">
+				<li>
+					<label>${map.key }</label>
+					<ol>
+						<c:forEach var="list" items="${map.value }">
+							<c:if test="${list.video_code eq video_code }">
+								<li style="font-weight:bold"><a href="/gachi/myclassVideo?code=${list.code }&video_code=${list.video_code }">${list.video_name }<label class="video_length">${list.video_length }</label></a></li>
+							</c:if>
+							<c:if test="${list.video_code ne video_code }">
+								<li><a href="/gachi/myclassVideo?code=${list.code }&video_code=${list.video_code }">${list.video_name }<label class="video_length">${list.video_length }</label></a></li>
+							</c:if>
+						</c:forEach>
+					</ol>
+				</li>
+			</c:forEach>
 		</ul>
 	</div>
 </div>

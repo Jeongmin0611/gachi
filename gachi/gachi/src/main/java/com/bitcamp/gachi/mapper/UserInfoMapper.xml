@@ -140,15 +140,26 @@
 		select count(code) from course where userid = '${userid}'
 	</select>
 	<select id="myclassList" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
+		select course_code, cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
 		 from course cou, class c, member m
 		 where cou.code = c.code
 		 and c.userid = m.userid
 		 and cou.userid = '${userid}'
 		 order by enddate desc
 	</select>
+	<select id="playtimeCheck" resultType="int">
+		select count(video_code) from progress where course_code='${course_code}'
+	</select>
+	<select id="fullPlaytime" resultType="int">
+		select sum(playtime) playtime from progress
+		 where userid='${userid}' and course_code='${course_code}'
+	</select>
+	<select id="fullVideoLength" resultType="int">
+		select sum(video_length) video_length from class_video
+		 where code='${code}'
+	</select>
 	<select id="myclassView" resultType="com.bitcamp.gachi.mypage.OrderListVO">
-		select cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
+		select course_code, cou.code, class_img, category, class_name, nickname, to_char(startdate, 'YYYY.MM.DD') startdate, to_char(enddate, 'YYYY.MM.DD')enddate
 		 from course cou, class c, member m
 		 where cou.code = c.code
 		 and c.userid = m.userid
@@ -172,6 +183,25 @@
 		 and cv.code='${code}'
 		 and cv.section_code='${section_code}'
 	</select>
+	<select id="selectCourseCode" resultType="String">
+		select course_code from course where code='${code}' and userid='${userid}'
+	</select>
+	<select id="selectVideoName" resultType="com.bitcamp.gachi.mypage.ClassVideoVO">
+		select video_name, video_length from class_video where video_code='${video_code}'
+	</select>
+	<select id="firstVideo" resultType="String">
+		select min(video_code) from class_video where code='${code}'
+	</select>
+	<select id="lastVideo" resultType="String">
+		select max(video_code) from class_video where code='${code}'
+	</select>
+	<select id="progressCheck" resultType="int">
+		select count(video_code) from progress where video_code='${video_code}' and course_code='${course_code}'
+	</select>
+	<insert id="insertProgress">
+		insert into progress(video_code, course_code, userid, video_name, video_length, playtime)
+	 	 values('${video_code}', '${course_code}', '${userid}', '${video_name}', ${video_length}, ${video_length})
+	</insert>
 	<select id="qnaList" resultType="com.bitcamp.gachi.mypage.QnaVO">
 		select subject, content,
 		a.nickname, to_char(writedate, 'YY.MM.DD') writedate, b.nickname

@@ -71,6 +71,12 @@ public interface UserInfoDaoImp {
 	public int countClass(String userid);
 	//내 클래스 목록
 	public List<OrderListVO> myclassList(String userid);
+	//재생시간 null검사
+	public int playtimeCheck(String course_code);
+	//재생시간
+	public int fullPlaytime(@Param("userid") String userid, @Param("course_code") String course_code);
+	//전체 길이
+	public int fullVideoLength(String code);
 	//내 클래스 보기
 	public OrderListVO myclassView(@Param("userid") String userid, @Param("code") String code);
 	//내 클래스 영상
@@ -79,6 +85,18 @@ public interface UserInfoDaoImp {
 	public List<ClassVideoVO> sectionList(String code);
 	//동영상 목록
 	public List<ClassVideoVO> classVideoList(@Param("code") String code, @Param("section_code") String section_code);
+	//수강코드
+	public String selectCourseCode(@Param("code") String code, @Param("userid") String userid);
+	//동영상 제목
+	public ClassVideoVO selectVideoName(String video_code);
+	//첫번쨰 동영상
+	public String firstVideo(String code);
+	//마지막 동영상
+	public String lastVideo(String code);
+	//진도율 중복검사
+	public int progressCheck(@Param("video_code") String video_code, @Param("course_code") String course_code);
+	//진도율 넣기
+	public int insertProgress(ClassVideoVO vo);
 	//클래스 qna 리스트
 	public List<QnaVO> qnaList(String code);
 	//좋아요(클래스)
