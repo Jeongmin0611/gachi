@@ -536,7 +536,8 @@
 					<c:if test="${endDate lt nowDate}"><label class="badge badge-pill badge-secondary" style="margin-left:10px;font-size:0.7em">기간만료</label></c:if>
 					</h4></div>
 				<div>${vo.nickname }</div>
-				<div><label>진도율 : <fmt:formatNumber value="${vo.progress }" pattern=".00" />%</label></div>
+				<div><label>진도율 : <c:if test="${vo.progress eq 0 }">${vo.progress }</c:if>
+								   <c:if test="${vo.progress ne 0 }"><fmt:formatNumber value="${vo.progress }" pattern=".00" /></c:if>%</label></div>
 				<div><label>기한 : ${vo.startdate } ~ ${vo.enddate }</label></div>
 				<c:if test="${vo.progress eq 0 }">
 					<div class="progress" style="height:30px;margin-bottom:10px"><div class="progress-bar progress-bar-striped bg-info" style="width:${vo.progress}%">${vo.progress }%</div></div>

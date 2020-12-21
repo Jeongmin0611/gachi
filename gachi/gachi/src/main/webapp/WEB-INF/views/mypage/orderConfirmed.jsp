@@ -18,9 +18,9 @@
 	<%@ include file="../inc/userProfile.jspf"%>
 	<div class="userMainDiv">
 		<div class="mypageContent col-md-10">
-			<label style="font-size:1.1em"><b>장바구니</b></label>
+			<label style="color:gray">장바구니</label>
 			<label style="color:gray">> 주문/결제 ></label>
-			<label style="color:gray">주문완료</label>
+			<label style="font-size:1.1em"><b>주문완료</b></label>
 			<hr class="userHr"/>
 			<div style="margin-bottom:50px">
 				<img src="/gachi/img/icon_check.png" style="width:100px;margin:30px 0"/>

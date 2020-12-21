@@ -366,7 +366,9 @@ public class MypageController {
 		int result = dao.orderInsert(vo);
 		
 		MileageDaoImp mDao = sqlSession.getMapper(MileageDaoImp.class);
-		mDao.mileageUse((String)ses.getAttribute("userid"), Integer.parseInt(order.get("discount")));
+		if(Integer.parseInt(order.get("discount"))!=0) {
+			mDao.mileageUse((String)ses.getAttribute("userid"), Integer.parseInt(order.get("discount")));
+		}
 		
 	}
 	/* 주문완료 페이지 */

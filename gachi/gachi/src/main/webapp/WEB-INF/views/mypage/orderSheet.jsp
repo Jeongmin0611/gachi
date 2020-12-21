@@ -96,7 +96,7 @@
 		                etc: $("#orderMsg").val()
 		                }),
 		          }).done(function(data){
-		        	  alert($("#mileageUse").val());
+					  //alert(msg);
 		        	  $("#order_code").val(order_code);
 				      $("#orderFrm").submit();
 		          });
@@ -202,7 +202,7 @@
 					<input type="hidden" name="orderClassCode" value="${cvo.code}"/>
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/upload/classImg/${cvo.class_img }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${cvo.class_name }<br/>${cvo.nickname }</div>
-					<div class="col-md-5"><label style="width:20%">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
+					<div class="col-md-5"><label style="width:20%;visibility:hidden">${cvo.amount }개</label><input type="hidden" name="amount" value="${cvo.amount }"/>
 										  <label style="width:20%">${cvo.stack }p</label>
 										  <label style="width:50%"><fmt:formatNumber value="${cvo.real_price }" pattern="#,###" />원</label></div>
 				</div>
@@ -218,8 +218,8 @@
 						<div class="col-md-2" style="overflow:hidden"><img src="/gachi/upload/storeImg/${gvo.goods_img1 }" style="width:100%;height:100%;object-fit: cover"/></div>
 						<div class="col-md-5">${gvo.goods_name }</div>
 					<div class="col-md-5"><label style="width:20%">${gvo.amount }개</label>
-										  <label style="width:20%">${gvo.stack }p</label>
-										  <label style="width:50%"><fmt:formatNumber value="${gvo.real_price }" pattern="#,###" />원</label></div>
+										  <label style="width:20%">${gvo.stack*gvo.amount }p</label>
+										  <label style="width:50%"><fmt:formatNumber value="${gvo.real_price*gvo.amount }" pattern="#,###" />원</label></div>
 				</div>
 				<hr/>
 				<c:set var="sum" value="${sum+gvo.real_price*gvo.amount }"/>
