@@ -1242,7 +1242,7 @@ $(document).ready(function() {
 <div class="container" style="overflow: visible;">
   <nav class="navbar navbar-expand-lg"  style=" padding:16px 16px 0; border-bottom: 1px solid #eee" id="navbarContent">
     <ul class="navbar-nav mr-auto" data-hover="dropdown"  data-animations="fadeIn  fadeInUp fadeInRight">
-      <li class="nav-item dropdown"><a href="/gachi/classList" class="nav-link font-weight-bold text-uppercase">클래스</a>
+      <li class="nav-item dropdown"><a href="/gachi/classList?selectval=Iall" class="nav-link font-weight-bold text-uppercase">클래스</a>
          <ul class="dropdown-menu">
            <li class="dropdown-item"><a href="/gachi/classList?category=공예/창작" class="nav-link text-small pb-0">공예/창작</a></li>
            <li class="dropdown-item"><a href="/gachi/classList?category=미술" class="nav-link text-small pb-0 ">미술</a></li>
