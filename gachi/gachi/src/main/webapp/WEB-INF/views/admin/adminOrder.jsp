@@ -124,7 +124,7 @@ $(function(){
 	<li>${result.card_type }</li>
 	<li>${result.orderdate }</li>
 	<li>${result.state }</li>
-	<li><c:if test="${result.fix_state eq 'n' or result.fix_state eq 'N'}">미확정</c:if><c:if test="${result.fix_state eq 'y' or result.fix_state eq 'Y'}">구매확정</c:if></li>
+	<li><c:if test="${result.finished eq '미확정'}">미확정</c:if><c:if test="${result.finished eq '구매확정'}">구매확정</c:if></li>
 	</c:forEach>
 </ul>	
 	<div id="paging">

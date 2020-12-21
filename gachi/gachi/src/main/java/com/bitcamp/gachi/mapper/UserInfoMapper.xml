@@ -29,7 +29,7 @@
 		 and o.order_code='${order_code}'
 	</select>
 	<update id="userOrderFix">
-		update goods_order set finished = '확정' 
+		update goods_order set finished = '구매확정' 
 		 where goods_order_code = '${goods_order_code}'
 	</update>
 	<select id="userInfoView" parameterType="String" resultType="com.bitcamp.gachi.mypage.MemberVO">
