@@ -71,16 +71,14 @@
 						</c:when>
 						<c:otherwise>
 							<c:set var="sns_addr" value="${vo.sns_addr }"></c:set>
-								<c:when test="${fn:contains(sns_addr,'instagram.com') }">
+								<c:if test="${fn:contains(sns_addr,'instagram.com') }">
 									<img src="/gachi/img/instagram.png" style="height: 30px;"/>
-								</c:when>
-								<c:when test="${fn:contains(sns_addr,'facebook.com') }">
+								</c:if>
+								<c:if test="${fn:contains(sns_addr,'facebook.com') }">
 									<img src="/gachi/img/facebook.png" style="height: 30px;"/>
-								</c:when>														
-								<c:otherwise>
+								</c:if>		
 									<c:set var="sns" value="${fn:substringAfter(sns_addr,'.com/') }"></c:set>
 								 	${sns}
-								 </c:otherwise>
 						 </c:otherwise>
 					 </c:choose>
 					 
