@@ -239,7 +239,7 @@ $(function(){
 
 	<!-- 검색 -->
 	<div id="CintroCreateSearch">
-		<span> <a href="/gachi/classList" id="aAll">전체</a> &nbsp; 
+		<span> <a href="/gachi/classList?selectval=Iall" id="aAll">전체</a> &nbsp; 
 			<a href="/gachi/classList?category=공예/창작" id="aCrafts">공예/창작</a> &nbsp; 
 			<a href="/gachi/classList?category=요리" id="aFood">요리</a> &nbsp; 
 			<a href="/gachi/classList?category=미술" id="aArt">미술</a>&nbsp; 
