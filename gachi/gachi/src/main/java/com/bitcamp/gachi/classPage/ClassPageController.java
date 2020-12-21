@@ -158,15 +158,16 @@ public class ClassPageController {
 		List<QnaVO> qnaList = dao.qnaList(code);
 		UserInfoDaoImp uDao = sqlSession.getMapper(UserInfoDaoImp.class);
 		
-		//스토어 bxslide이미지 , 구분
-		/*
+		//클래스 bxslide이미지 , 구분
 		String[] bxImg= {};
-		String class_img2 = vo.getClass_img2();
-		System.out.println("class_img2: "+class_img2);
-		if(class_img2!=null) {
-			bxImg = class_img2.replace(" ","").split(",");
+		if(vo.getClass_img2()!=null) {
+			String class_img2 = vo.getClass_img2();
+			System.out.println("class_img2: "+class_img2);
+			if(class_img2!=null) {
+				bxImg = class_img2.replace(" ","").split(",");
+			}
 		}
-		*/
+		
 		ModelAndView mav = new ModelAndView();
 		
 		String msg="";
@@ -203,7 +204,7 @@ public class ClassPageController {
 			
 		}//로그인 상태 if문 end
 
-		//mav.addObject("bxImg", bxImg);
+		mav.addObject("bxImg", bxImg);
 		mav.addObject("creatorCheck", creatorCheck);//크리에이터의 개설여부 확인
 		mav.addObject("courseCheck", courseCheck);//수강확인
 		mav.addObject("reviewList", reviewList);

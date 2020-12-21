@@ -99,11 +99,13 @@ public class StoreController {
 		
 		//스토어 bxslide이미지 , 구분
 		String[] bxImg= {};
-		String store_img2 = vo.getGoods_img2();
-		System.out.println("store_img2: "+store_img2);
-		if(store_img2!=null) {
-			bxImg = store_img2.replace(" ","").split(",");
-			System.out.println("배열길이: "+bxImg.length);
+		if(vo.getGoods_img2()!=null) {
+			String store_img2 = vo.getGoods_img2();
+			System.out.println("store_img2: "+store_img2);
+			if(store_img2!=null) {
+				bxImg = store_img2.replace(" ","").split(",");
+				System.out.println("배열길이: "+bxImg.length);
+			}
 		}
 		ModelAndView mav = new ModelAndView();
 		
