@@ -134,7 +134,14 @@
 	</div>
 	<!-- 버튼 -->
 	<div id="eventDetailBtnDiv">
-		<a href="/gachi/eventBoard?nowPage=${pvo.nowPage }"><button type="button" class="btn btn-light">목록</button></a>
+	<c:choose>
+		<c:when test='${vo.event_category =="진행이벤트"}'>
+			<a href="/gachi/eventBoard?nowPage=${pvo.nowPage }"><button type="button" class="btn btn-light">목록</button></a>	
+		</c:when>
+		<c:otherwise>
+			<a href="/gachi/eventBoardEnd?nowPage=${pvo.nowPage }"><button type="button" class="btn btn-light">목록</button></a>	
+		</c:otherwise>
+	</c:choose>
 	</div>
 	<!-- 댓글 -->
 	<form id="eventReplyForm"  method="post" action="/gachi/eventReplyFormOk?event_num=${vo.event_num }&event_category=${vo.event_category }">
