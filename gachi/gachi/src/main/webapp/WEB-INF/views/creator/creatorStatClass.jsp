@@ -63,7 +63,7 @@ function numberWithCommas(x) {
 <div class="container cr_StatClass_center text-center ad_font">
 	<h1 style="text-align:center;"> 클래스시청 회원 통계 </h1>
 	<br/>
-		<form action="adminStatStore" method="post" id="frm">
+		<form action="creatorStatClass" method="post" id="frm">
 		<div class="cr_Dashboard_searchForm">
 			
 			<input type="date" name="startDate" id="startDate" value=""/> ~ <input type="date" name="endDate" id="endDate" value=""/>
