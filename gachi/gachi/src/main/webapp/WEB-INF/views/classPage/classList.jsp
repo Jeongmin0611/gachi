@@ -85,6 +85,7 @@ $(function(){
 	//주소에서 파라미터 값 가져오기
 	var url = decodeURI(document.location.href);// http://localhost:9090/gachi/classList
 	var param = url.substring(url.indexOf('?')+1).split('&');
+	
 	if(url.indexOf('?')==-1){
 		$('#aAll').attr('style','font-weight:bold');
 	}else{
@@ -284,6 +285,7 @@ $(function(){
 	</div>
 
 	<!-- 페이징 -->
+	<input type="hidden" value="${init_selectVal}"/>
 	<ul class="pagination justify-content-center" id="mypageMainPage">
 	<c:if test="${pvo.nowPage>1}">
 		<li class="page-item">
@@ -293,7 +295,7 @@ $(function(){
 		<c:forEach var="p" begin="${pvo.startPageNum }" end="${pvo.startPageNum+pvo.onePageRecord-1 }">
 			<c:if test="${p<=pvo.totalPage }">
 				<li class="page-item">
-					<a class="page-link" href="/gachi/classList?nowPage=${p }">${p }</a>
+					<a class="page-link" href="/gachi/classList?nowPage=${p }<c:if test="${init_selectVal != null} ">&selectval=${init_selectVal}</c:if>">${p }</a>
 				</li>
 			</c:if>
 		</c:forEach>

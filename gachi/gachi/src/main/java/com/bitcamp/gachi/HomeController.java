@@ -81,6 +81,8 @@ public class HomeController {
 			mav.addObject("cgoodList", cgoodList);
 			mav.addObject("ggoodList", ggoodList);	
 			//관심사 찾기
+			if(dao.homeClassInterestFind(userid)!=null) {//관심사가 null이 아닐 때				
+			
 			String interest = dao.homeClassInterestFind(userid);
 			//관심사, 구분
 			String[] interestArr = interest.replace(" ","").split(",");
@@ -102,7 +104,10 @@ public class HomeController {
 				interest3 = interestArr[2];
 				break;
 			}
-			rlist = dao.homeClassRecommandUser(interest1, interest2, interest3);			
+			rlist = dao.homeClassRecommandUser(interest1, interest2, interest3);	
+			}else {//관심사가 null일 때
+				rlist= dao.homeClassRecommand();
+			}
 		}else {//로그인 안 한 상태
 			rlist = dao.homeClassRecommand();
 		}		
