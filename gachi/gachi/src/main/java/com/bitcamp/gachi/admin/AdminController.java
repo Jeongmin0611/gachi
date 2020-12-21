@@ -747,19 +747,23 @@ public class AdminController {
 		String path=session.getServletContext().getRealPath("/upload/classImg");
 		String[] codes=vo.getCodes();
 		String[] imgNames=vo.getImgNames();
-		for (int i = 0; i < imgNames.length; i++) {
-			String fullName=path+imgNames[i];
-			String img=dao.selectClassImg2(codes[0]);
-			StringTokenizer st=new StringTokenizer(img,",");
-			while(st.hasMoreTokens()) {
-				if(fullName==st.nextToken()){
-					File file=new File(path,st.nextToken());
-					if(file.exists()){
-						file.delete();
+		if(imgNames!=null) {
+			for (int i = 0; i < imgNames.length; i++) {
+				String fullName=path+imgNames[i];
+				System.out.println(fullName);
+				String img=dao.selectClassImg2(codes[0]);
+				StringTokenizer st=new StringTokenizer(img,",");
+				while(st.hasMoreTokens()) {
+					if(fullName==st.nextToken()){
+						File file=new File(path,st.nextToken());
+						if(file.exists()){
+							file.delete();
+						}
 					}
 				}
 			}
 		}
+		
 		List<MultipartFile> files=mhsr.getFiles("mainImg");
 		System.out.println("bfdsgds"+files.get(0).getOriginalFilename());
 		if(files.get(0).getName()!=null&&!files.get(0).getName().equals("")) {
@@ -841,7 +845,11 @@ public class AdminController {
 				try {
 					file.transferTo(newFile);
 					String classImg=dao.selectClassImg2(code);
+					if(classImg==null){
+						classImg="";
+					}
 					classImg=classImg+newFile.getName()+",";
+					System.out.println("classimg=>"+classImg);
 					dao.updateClassImg2(classImg, code);
 					filePath="/gachi/upload/classImg/"+newFile.getName();
 				} catch (Exception e) {
