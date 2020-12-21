@@ -1254,7 +1254,7 @@ $(document).ready(function() {
          </ul>
       </li>
 
-      <li class="nav-item dropdown"><a href="/gachi/storeList" class="nav-link font-weight-bold text-uppercase">스토어</a>
+      <li class="nav-item dropdown"><a href="/gachi/storeList?selectval=Iall" class="nav-link font-weight-bold text-uppercase">스토어</a>
 
 		<ul class="dropdown-menu">
             <li class="dropdown-item"><a href="/gachi/storeList?category=공예/창작" class="nav-link text-small pb-0 ">공예/창작</a></li>
